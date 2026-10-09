@@ -71,16 +71,27 @@ Byte-level scans of the new-data stream show:
   - Bulbasaur 妙蛙种子 = `09 86 0D 44 10 A7 11 0B` → 妙=`09 86`, 蛙=`0D 44`, 种=`10 A7`, 子=`11 0B`.
   - Charizard 喷火龙 = `0A 44 05 7D 08 CD`; 火=`05 7D`, 龙=`08 CD` recur in Charmeleon/Charizard (deterministic per character).
   - Indices run ~`0x0000`–`0x11xx`, i.e. a ~4–8k-glyph custom font.
-- **Vanilla Latin font is gone.** `latin_normal.fwlatfont` (4 copies in base) and
-  `latin_small.hwlatfont` are absent from the patched ROM — the hack replaced
-  them with its CJK font.
+- **The vanilla Latin font is intact** (CORRECTED — an earlier "Latin font gone"
+  claim was a false negative from searching the full 32 KiB blob). A–Z, a–z,
+  0–9 and punctuation glyphs are all byte-identical to base. The hack modified
+  only ~2% of the font region: some accented chars (`0x1B`–`0x1F`) and the kana
+  block (`0x50`–`0x77`). **English text can be rendered with the stock 1-byte
+  charmap + Latin font — no new font needs to be drawn.**
+- **The CJK font is a GB2312-ordered subset, not stored in the vanilla font
+  region.** Its glyph data lives elsewhere (expanded 16–32 MiB area, still to be
+  located). The 2-byte code equals the character's **rank** among used characters
+  sorted by GB2312 (verified: hack codes are monotonic in the GB2312 linear index
+  across 妙蛙草花火龙喷恐小种子).
 - **Vanilla Japanese font is untouched** (`japanese_normal.fwjpnfont` byte-identical).
+- **Renderer font pointers are unchanged** — the hack still points at the vanilla
+  font addresses; only the font *contents* (kana/accented glyphs) shifted slightly.
 - **Table structures are preserved.** The hack kept vanilla pointer-table layouts
   and only swapped the string bytes (e.g. `SPECIES_NONE` "??????????" unchanged).
 
-Open items still to resolve: (1) does the CJK font contain Latin/digit glyphs,
-(2) the full 2-byte charmap (index → character), (3) dialogue/script pointer
-tables vs vanilla.
+Open items still to resolve: (1) locate the CJK font glyph data and its format,
+(2) build the full 2-byte charmap (index → character) via glyph-matching against
+a reference GB2312 bitmap font, (3) enumerate all dialogue/script pointer tables
+vs vanilla.
 
 ## 3. Complexity assessment
 
