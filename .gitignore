@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Copyrighted ROMs and patch inputs (not redistributable; re-fetch as needed)
+roms/
+*.gba
+*.bps
+*.ips
+*.ups
+*.nds
+
+# Vendored third-party tooling (pokefirered decomp, flips) — re-fetch/build as needed
+utilities/
+
+# Build artifacts
+*.o
+*.a
