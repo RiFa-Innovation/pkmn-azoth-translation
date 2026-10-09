@@ -15,3 +15,5 @@ utilities/
 # Build artifacts
 *.o
 *.a
+__pycache__/
+*.pyc
