@@ -46,24 +46,41 @@ ground truth independent of any ROM.
   ~5–7 KiB uniform blocks per region. Uniform block sizes are the classic
   signature of **LZ77-compressed content** (maps/graphics/text).
 
-### Evidence that text is NOT plaintext in the ROM
+### Evidence that text is NOT ASCII/GBK/UTF (corrected 2026-10-09)
 
 Byte-level scans of the new-data stream show:
 
 1. **No readable strings.** 54,962 "ASCII" runs found, every one garbage
-   (`sO;3{`, `3U4DSE`, `oUjn`…). Nothing human-readable anywhere.
-2. **Flat byte histogram.** In the dense 0x700000–0x850000 block the top bytes
-   are `0x07, 0x00, 0xFF, 0x10, 0x01, 0x08, 0x20, 0x06` — a near-flat
-   distribution dominated by low control bytes.
-3. A first-pass scan for GB2312/GBK code pairs produced ~961k hits, but decoding
-   the longest run yields semantically random characters (`奸嘀菡`, `晚嚓巽忡`),
-   i.e. a **false positive**.
+   (`sO;3{`, `3U4DSE`, `oUjn`…).
+2. A first-pass scan for GB2312/GBK pairs produced ~961k hits, but decoding the
+   longest run yields semantically random characters (`奸嘀菡`, `晚嚓巽忡`), i.e.
+   a **false positive** (binary data coincidentally forms valid GBK pairs).
+3. UTF-16LE and UTF-8 scans are likewise garbage.
 
-Conclusion: the modified content is **LZ77-compressed** (the native Fire Red
-storage format for maps, graphics and text). You cannot hex-search the ROM for
-text; every string must be decompressed before it is readable. The actual
-character encoding/font is **undetermined** and can only be resolved after
-reconstructing the patched ROM.
+### Phase 0 — confirmed findings (from patched ROM, 2026-10-09)
+
+- **Text is stored RAW, not LZ77.** Species/move/item name tables are plain byte
+  arrays read directly from the ROM (verified by reading `gSpeciesNames`
+  verbatim). Only graphics/maps are LZ77-compressed. (My earlier "LZ77 text"
+  hypothesis was wrong — it was based on the flat histogram of graphics-heavy
+  diff fragments.)
+- **Encoding is a custom 2-byte font-index scheme.** Each Chinese character is a
+  big-endian 2-byte index into the hack's custom font — NOT GBK/GB2312/UTF-8/
+  UTF-16. Verified against `gSpeciesNames` (base `0x245EE0`, 11-byte stride,
+  `name + 0xFF + 0x00` padding):
+  - Bulbasaur 妙蛙种子 = `09 86 0D 44 10 A7 11 0B` → 妙=`09 86`, 蛙=`0D 44`, 种=`10 A7`, 子=`11 0B`.
+  - Charizard 喷火龙 = `0A 44 05 7D 08 CD`; 火=`05 7D`, 龙=`08 CD` recur in Charmeleon/Charizard (deterministic per character).
+  - Indices run ~`0x0000`–`0x11xx`, i.e. a ~4–8k-glyph custom font.
+- **Vanilla Latin font is gone.** `latin_normal.fwlatfont` (4 copies in base) and
+  `latin_small.hwlatfont` are absent from the patched ROM — the hack replaced
+  them with its CJK font.
+- **Vanilla Japanese font is untouched** (`japanese_normal.fwjpnfont` byte-identical).
+- **Table structures are preserved.** The hack kept vanilla pointer-table layouts
+  and only swapped the string bytes (e.g. `SPECIES_NONE` "??????????" unchanged).
+
+Open items still to resolve: (1) does the CJK font contain Latin/digit glyphs,
+(2) the full 2-byte charmap (index → character), (3) dialogue/script pointer
+tables vs vanilla.
 
 ## 3. Complexity assessment
 
@@ -74,8 +91,8 @@ human translation volume once tooling exists.
 
 | Risk driver | Impact | Notes |
 |-------------|--------|-------|
-| Text engine is custom/unknown | Very high | Chinese FR hacks replace FR's font + renderer with a CJK font and a custom charmap; must be identified |
-| Text is LZ77-compressed in-ROM | High | Needs a dump/rebuild toolchain, not hex editing |
+| Text engine is custom (confirmed) | Very high | Custom 2-byte font-index encoding; must map index→glyph before any string can be read |
+| Text is RAW, not LZ77 (confirmed) | Low | Plain byte arrays in preserved tables — dump/rebuild is straightforward; only graphics are LZ77 |
 | CJK font likely replaced the Latin font | High | If the font has no Latin glyphs, an English font must be added (biggest engineering risk) |
 | Text volume | Medium | Unknown until dumped; a full hack = tens to hundreds of thousands of chars |
 | Length changes | Medium | English strings must fit in fixed-size buffers/line widths; needs pointer-table rebuild |
