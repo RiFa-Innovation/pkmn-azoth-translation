@@ -24,8 +24,13 @@ ANCHOR_CHARMAP = {
 
 class CharMap:
     def __init__(self, mapping=None):
-        self.map = dict(mapping or {})
-        self.map.update(ANCHOR_CHARMAP)
+        self.map = dict(ANCHOR_CHARMAP)
+        if mapping:
+            for k, v in mapping.items():
+                # accept int codes or hex-string codes ("0986") from JSON
+                if isinstance(k, str):
+                    k = int(k, 16)
+                self.map[k] = v
 
     def decode(self, codes):
         return "".join(self.map.get(c, f"{{{c:04X}}}") for c in codes)
