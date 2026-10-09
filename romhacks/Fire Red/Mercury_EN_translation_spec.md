@@ -93,6 +93,26 @@ Open items still to resolve: (1) locate the CJK font glyph data and its format,
 a reference GB2312 bitmap font, (3) enumerate all dialogue/script pointer tables
 vs vanilla.
 
+### Phase 0 — charmap & dumper (2026-10-09)
+
+- **Glyph format is a compressed half-row lookup**, not raw bitmap
+  (`DecompressGlyphTile`: each 8-pixel half-row is an 8-bit index into
+  `sFontHalfRowLookupTable`/`sFontHalfRowOffsets`). Font-matching is therefore the
+  hard path for building the charmap.
+- **Charmap bootstrapped instead by cross-referencing the standard Chinese
+  Pokémon names** (species names are the official translations). `scripts/dump_text.py`
+  dumps the species-name table; `scripts/charmap.json` holds 315 code→char entries
+  from species 1–251, verified against hand-read anchors (妙蛙种子, 喷火龙, …) with
+  zero conflicts. Proof: 杰尼龟/波波/比比鸟/烈雀/皮卡丘/超梦 all decode correctly.
+- **Table relocation:** the hack moved `gSpeciesNames` from `0x245EE0` (vanilla) to
+  `0x141B350` (expanded area) and re-pointed the renderer. Note: at the new location,
+  species 252+ (Hoenn) do **not** follow the 11-byte stride — Hoenn names appear to
+  use a different/unfinished encoding (old table holds `?` placeholders there). To
+  investigate before a complete species-name dump.
+- Remaining for a full `strings.zh.json`: extend the charmap via move/item/ability
+  names (also standard Chinese), then enumerate and dump every text table + map
+  dialogue.
+
 ## 3. Complexity assessment
 
 **Overall: HIGH (7/10).** Not because translation is hard, but because the
