@@ -1,0 +1,15 @@
+{
+ "_doc": "Plain code/data patches applied by insert.py (orig bytes asserted against the source ROM). Offsets are ROM offsets.",
+ "naming_abc_default": {
+  "why": "The name-entry screen opened on the pinyin page (CHN), where letters only build pinyin for Chinese candidates; confirming then left the name empty and the game picked a random default name (e.g. 'Roak'). Open on the ABC page instead. Init (0x9FF505C) zeroes currentPage (struct+0x2622, sNamingScreen at 0x203998C); the keyboard draw (0x9FF5A00) loads page 0's tilemap and preloads page 1's. Select still cycles CHN -> symbols -> ABC.",
+  "patch": [
+   {"at": "1FF50A2", "orig": "8352cd4a8352cd4a8152cd4a8352cd4ace49",
+    "new": "8218138053809180d38049001181c046ce49",
+    "asm": "r2=base+0x261A; strh 0,1,0 at +0x261A/C/E... (same stores as before) then 0x2620=0, page(0x2622)=2; ldr r1,=0x262C kept",
+    "_note": "orig: ldr r2 / strh r3,[r0,r2] pairs for 0x261A..0x2622 (ldr r2,=0x261A at 0x1FF50A0 kept)"},
+   {"at": "1FF50B4", "orig": "8352", "new": "c046", "asm": "strh r3,[r0,0x2622] -> nop"},
+   {"at": "1FF5CF0", "orig": "e094ff09", "new": "b0a4ff09", "asm": "shown page tilemap: page 0 -> page 2 (ABC)"},
+   {"at": "1FF5CF8", "orig": "a89cff09", "new": "e094ff09", "asm": "preloaded next page: page 1 -> page 0 (CHN)"}
+  ]
+ }
+}

@@ -292,6 +292,14 @@ def main():
     rom[logo.TILES:logo.TILES + len(lt)] = lt
     rom[logo.MAP:logo.MAP + len(lm)] = lm
     report["gfx"] += 1
+    # plain code/data patches (data/code_patches.json)
+    for name, blk in json.load(open("data/code_patches.json")).items():
+        if name.startswith("_"):
+            continue
+        for p in blk["patch"]:
+            at, orig, new = int(p["at"], 16), bytes.fromhex(p["orig"]), bytes.fromhex(p["new"])
+            assert src[at:at + len(orig)] == orig, f"code patch {name}: bytes at {p['at']} differ"
+            rom[at:at + len(new)] = new
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)
