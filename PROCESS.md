@@ -1,6 +1,6 @@
 # Mercury (水银) 1.3.3 — translation process state
 
-> Updated 2026-10-10 (checkpoint 13). Resume from here. Everything below is
+> Updated 2026-10-10 (checkpoint 16). Resume from here. Everything below is
 > ground truth from the repo; see git log for checkpoints.
 
 ## Goal
@@ -73,6 +73,39 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 ## Status
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
+
+## Resume point (2026-10-10, checkpoint 16) — intro, start menu, items fixed
+
+`tm_batch.py stats` → **20,347/20,347 strings, 447,015 hanzi**; `insert.py`
+missing 0 / errors 0 / too_long 0. Play-tested in mGBA from boot through the
+Oak intro, Buena's radio show, Mom, New Bark Town and Elm's lab: all English.
+
+New since checkpoint 15:
+- Dump: battle scripts load messages via `setword 0x0203E020, ptr` (CFRU
+  string loader) → ref kind `battlestr`; `<>¥` allowed; item description
+  fields trusted. +522 strings (quest banners templated from TM quest names).
+- **Live item table is `items2` at `0x7C7E00` (750 × 44 B)**; the old
+  `0x3DB028` table is a stale copy. Names: veekun + `tables_manual/items2.json`.
+- **Code-anchored text**: the hack's C code (intro at `0x775xxx`, start menu
+  at `0x1FF6xxx`) reaches strings as literal base + `adds imm8` (GCC section
+  anchors), so pointer scans never see them. Either translate in place within
+  the byte budget (`manual_strings.json`, no `refs`) or relocate with a Thumb
+  patch (`code_text.json`: literal + patched instructions, orig bytes
+  asserted). Tools: scratch `lituse.py` / `anchors.py` (capstone in `.venv`).
+- `width_override.json`: per-string window width (intro window ≈ 25 chars).
+- `DIALOGUE_PX` 204 → 198: full-width lines collided with the ▼ arrow.
+
+Next:
+1. Graphics text (unchanged): title logo, character select, name-entry
+   buttons, settings header/footer 更改设定 / 选择 切换 应用.
+2. Play-test further: first battle (battle messages), Bag, Pokédex, Mart.
+   Expect more code-anchored strings in hack UI; find them by searching the
+   ROM for the on-screen hanzi (`char_to_code`) and listing the FF block.
+3. `find_leftover_zh.py`: what remains is noise, link/Mystery Gift texts and
+   3 copies of one trainer line (`09D82FA`) with an unrecognised ref.
+4. ~1,250 old width warnings; fullwidth `；` gap.
+
+## Checkpoint 15 notes
 
 ## Resume point (2026-10-10, checkpoint 15) — all dumped text translated, ROM boots
 

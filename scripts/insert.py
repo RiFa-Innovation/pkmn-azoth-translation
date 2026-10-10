@@ -26,7 +26,7 @@ import mercury_text as mt  # noqa: E402
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
 DIALOGUE_KINDS = ("loadpointer", "message", "trainerbattle")
-DIALOGUE_PX = 204
+DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
 HELP_PX = 222
 MIN_FREE_RUN = 512
 FREE_MARGIN = 16
