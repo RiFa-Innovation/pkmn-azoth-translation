@@ -26,6 +26,9 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 30-bag | bag open on Route 29 |
 | 31-cherrygrove | Cherrygrove beach, just arrived from Route 29 |
 | 32-pc | Cherrygrove Pokémon Center, facing the birthday-month girl |
+| 37-route30 | Route 30 entrance from Cherrygrove |
+| 38-mrpokemon | inside Mr. Pokémon's house |
+| 40-oak | after Oak gives the Pokédex |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -62,3 +65,4 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 27 | Cherrygrove PC girl | birthday-month prompt reset the game: the hack calls DoNamingScreen with template 0 (and at hook+2) and writes hack-only fields; FireRed's screen can't serve it | fixed (dispatcher data/naming_dispatch.s: intro + templates 1-4 -> FireRed screen, template 0/5+ and hook+2 callers -> hack screen, which keeps its English buttons and ABC default) |
 | 28 | dump | 297 'strings' that are Thumb code (function pointers decoded as text) | fixed (dump skips targets inside code) |
 | 29 | Cherrygrove PC girl | birthday month: typing "12" (ABC or symbol-page digits) is rejected and the prompt reopens - same in the Chinese ROM. Parser 0x09D5D7CC accepts FR digits 0xA1-0xAA into VAR_RESULT; the girl's script may use another routine. Her lines so far are English | open (hack behaviour; investigate which routine she uses) |
+| 30 | dialogue name box | "Mr. Pokém" cut: the box is 6 tiles (fits 4 hanzi) | fixed (all 84 box setups widened to 8 tiles; names trimmed of centring spaces; 5 long ones shortened) |

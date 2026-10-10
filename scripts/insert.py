@@ -372,10 +372,16 @@ def main():
     for name, blk in json.load(open("data/code_patches.json")).items():
         if name.startswith("_"):
             continue
-        for p in blk["patch"]:
+        for p in blk.get("patch", []):
             at, orig, new = int(p["at"], 16), bytes.fromhex(p["orig"]), bytes.fromhex(p["new"])
             assert src[at:at + len(orig)] == orig, f"code patch {name}: bytes at {p['at']} differ"
             rom[at:at + len(new)] = new
+        for rp in blk.get("replace_all", []):   # every occurrence in the source ROM
+            f, w = bytes.fromhex(rp["find"]), bytes.fromhex(rp["with"])
+            hits = [m.start() for m in re.finditer(re.escape(f), src)]
+            assert len(hits) == rp["count"], f"code patch {name}: {len(hits)} != {rp['count']}"
+            for at in hits:
+                rom[at:at + len(w)] = w
         for a, b, _ in blk.get("vanilla", []):
             a, b = int(a, 16), int(b, 16)
             rom[a:b] = base[a:b]

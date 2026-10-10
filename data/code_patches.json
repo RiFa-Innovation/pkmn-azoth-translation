@@ -131,5 +131,15 @@
     "asm": "preloaded next page: page 1 -> page 0 (CHN)"
    }
   ]
+ },
+ "namebox_width": {
+  "why": "Dialogue name box: scripts set VAR 0x8000-0x8003 = x 2, y 12, width 6, height 2 tiles and callasm 0x08FB0001 (window). 6 tiles fit four hanzi; English names need more ('Mr. Pokémon' 65px). The hack itself uses width 8 once. All 84 width-6 setups -> 8 tiles (64px).",
+  "replace_all": [
+   {
+    "find": "16008002001601800c0016028006001603800200230100fb08",
+    "with": "16008002001601800c0016028008001603800200230100fb08",
+    "count": 84
+   }
+  ]
  }
 }
