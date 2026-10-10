@@ -73,5 +73,51 @@
     "asm": "hack 'Enter a number' template: initialPage upper -> others (digits page)"
    }
   ]
+ },
+ "vanilla_battle_text": {
+  "why": "Live vanilla battle strings the hack half-overwrote in place (broken 2-byte codes such as 07 FE, leftover English like '…with its opponent!', 的/是/果 suffixes the dump skips as single characters). Restored to FireRed's English; each range was checked to be untouched by our build.",
+  "patch": [],
+  "vanilla": [
+   [
+    "03FC439",
+    "03FC461",
+    "sText_PkmnSwappedAbilities"
+   ],
+   [
+    "03FC4AB",
+    "03FC4D6",
+    "sText_PkmnLostPPGrudge"
+   ],
+   [
+    "03FCC07",
+    "03FCC33",
+    "sText_123Poof"
+   ],
+   [
+    "03FE860",
+    "03FE864",
+    "gText_BattleTowerBan_Is1"
+   ],
+   [
+    "03FE864",
+    "03FE868",
+    "gText_BattleTowerBan_Is2"
+   ],
+   [
+    "03FE88F",
+    "03FE892",
+    "sText_ApostropheS"
+   ],
+   [
+    "03FE88B",
+    "03FE88F",
+    "sText_SpaceIs"
+   ],
+   [
+    "03FD8AF",
+    "03FD8B6",
+    "sText_BerrySuffix"
+   ]
+  ]
  }
 }

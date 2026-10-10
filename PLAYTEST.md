@@ -19,6 +19,9 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 16-machine | lab, Elm back; starter machine is up-right of the player |
 | 17-starter | starter-choice screen (map 43.7) |
 | 19-afterstarter | got Chikorita, Elm sends you to Mr. Pokémon |
+| 24-route29 | Route 29 entrance, tall grass to the south-west |
+| 25-battle | wild Sentret (Frisk) battle start |
+| 26-fight | battle, action menu |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -40,3 +43,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 12 | New Bark triggers | "喂，{FD:01}！" and 16 other one-hanzi lines never dumped (filter needed 2 hanzi) | fixed (dump accepts short script lines) |
 | 13 | lab aide | item pop-up: "It restores the HP of one Pokémon" runs into the arrow | open (minor) |
 | 14 | Mom (Running Shoes) | "Oh, right" printed as "Oh ▯ht": a false pointer (text bytes 0E 9E 08 inside 红色的火球 at 0xABEAE0) was repointed into recycled space holding this line. 284 such refs | fixed (dump drops refs inside script text; build reserves every repointed word) |
+| 15 | battle move info | type icons 一般/火/… (hack's menu-info sheet 0xEFD4C0) | fixed (3-letter codes NOR/FIR/…, TYPE/POWER/ACCURACY/PP/EFFECT labels from FireRed; scripts/typeicons.py) |
+| 16 | battle strings | live FireRed battle strings the hack half-overwrote ('…与对手{broken}换了特性！ with its opponent!', 的/是/果 suffixes) | fixed (restored FireRed English for 8 symbols) |
+| 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored, unchanged on screen), not in RAM buffers, no pointer to a 的 string; text is drawn into the pop-up sprite (gfx raw at 0x1E9F814). Needs the pop-up print routine traced | open |
+| 18 | wild battle | "Wild Sentret used Growl!" spacing correct | ok |

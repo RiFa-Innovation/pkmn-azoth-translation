@@ -26,6 +26,7 @@ import gfx_text  # noqa: E402
 import logo  # noqa: E402
 import maptext  # noqa: E402
 import sprtext  # noqa: E402
+import typeicons  # noqa: E402
 import anchored  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
@@ -313,6 +314,10 @@ def main():
             for r in refs:
                 rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
         report["gfx"] += 1
+    # type icons + TYPE/POWER/... labels (hack's menu-info sheet, raw, in place)
+    ti = typeicons.build(src, base)
+    rom[typeicons.SHEET:typeicons.SHEET + len(ti)] = ti
+    report["gfx"] += 1
     # title logo (raw 8bpp BG): fits in the original tile area, so in place
     lt, lm = logo.build(src)
     assert len(lt) <= 162 * 64
