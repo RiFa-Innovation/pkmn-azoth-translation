@@ -116,6 +116,7 @@ def main():
             contains_other.add(a)
             contains_other.add(b)  # b's tail is shared too; never write either in place
     table_px = layout.table_widths(strings)
+    dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
     pending = []
     for t in starts:
@@ -126,7 +127,7 @@ def main():
         if en is None:
             report["missing"] += 1
             continue
-        dialogue = any(r.split(":")[1] in DIALOGUE_KINDS for r in v["refs"])
+        dialogue = t in dialogue_addrs
         single_line = not dialogue and not re.search(r"\n|\{FA\}|\{FB\}", v["zh"])
         max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), table_px.get(t, 0), 48)
         if "{F9:0A}" in v["zh"]:  # help-system pages use the full-width window

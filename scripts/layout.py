@@ -40,3 +40,38 @@ def table_widths(strings, gap=16):
         for t in members:
             out[t] = max(out.get(t, 0), w)
     return out
+
+
+def _max_para_lines(zh):
+    return max(len(p.split("\n")) for p in re.split(r"\{FB\}", zh))
+
+
+def dialogue_set(strings, gap=16):
+    """Addresses whose text is shown in a 2-line message box (scrolls with {FA}).
+    Script-referenced strings always are. Table-referenced strings are, unless
+    some member of their table has a paragraph of 3+ lines (descriptions,
+    Pokédex, quest log) or the string itself does."""
+    script = {t for t, v in strings.items()
+              if any(not r.endswith(":aligned") for r in v["refs"])}
+    refs = sorted((int(r.split(":")[0], 16), t) for t, v in strings.items()
+                  for r in v["refs"] if r.endswith(":aligned"))
+    groups, cur = [], []
+    for ro, t in refs:
+        if cur and ro - cur[-1][0] > gap:
+            groups.append(cur)
+            cur = []
+        cur.append((ro, t))
+    if cur:
+        groups.append(cur)
+    tall = set()
+    for g in groups:
+        members = {t for _, t in g}
+        if len(members) >= 3 and any(_max_para_lines(strings[t]["zh"]) > 2 for t in members):
+            tall |= members
+    out = set(script)
+    for t, v in strings.items():
+        if t in script or t in tall:
+            continue
+        if _max_para_lines(v["zh"]) <= 2 and re.search(r"[一-鿿]", v["zh"]):
+            out.add(t)
+    return out

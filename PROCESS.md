@@ -73,3 +73,15 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 ## Status
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
+
+## Resume point (2026-10-09, checkpoint 12)
+
+- Workflow: `python3 scripts/tm_batch.py next 200` → write `{id: english|null}` JSON →
+  `python3 scripts/tm_batch.py add <file>` (warns on width/line/token issues) → repeat.
+- Done: queue ids up to ~6423 (help, quest log, New Bark → Mahogany, Goldenrod).
+  Next batch starts at id 6424 (Goldenrod shops / Pokégear charms).
+- Names glossary: `text/en/glossary.json` (add Kris, Dawn, Looker, Yellow, Otto/Nell,
+  Rowan, Sanka, Amphy, Kumi/Lumi as used). Trainer names table (745) still untranslated.
+- `layout.dialogue_set` decides 2-line message-box wrapping; quest log / descriptions
+  are fixed-width (≈31 chars × source line count).
+- Not yet tested in an emulator.

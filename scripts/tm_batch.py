@@ -61,7 +61,8 @@ def main():
                 break
     elif cmd == "add":
         zs = {int(k, 16): v for k, v in json.load(open("text/zh.json", encoding="utf-8"))["strings"].items()}
-        dialogue_zh = {v["zh"] for v in zs.values() if any(not r.endswith(":aligned") for r in v["refs"])}
+        dset = layout.dialogue_set(zs)
+        dialogue_zh = {v["zh"] for a, v in zs.items() if a in dset}
         tw = layout.table_widths(zs)
         budget = {}
         for a, v in zs.items():
