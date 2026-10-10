@@ -56,4 +56,4 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 23 | summary skills | ability descriptions cut at ~134px | fixed (2-line wrap at 134px; 103 long ones shortened) |
 | 24 | battle | "Chikorita gained  17 Exp. Points!" double space | open (minor) |
 | 25 | bag | pocket tabs cut: Training It…, Battle Item…, Evolution I…, Special Gem…, Materials &… | fixed (Training/Battle/Evolution/Gems/Materials) |
-| 26 | bag | item descriptions run into the arrow / past 3 lines (box ~176px, starts after the icon) | in progress (all item descriptions wrap at 176px; 129 four-line ones being shortened) |
+| 26 | bag | item descriptions run into the arrow / past 3 lines (box ~176px, starts after the icon) | fixed (wrap at 176px; 129 long ones shortened; 0 over 3 lines) |
