@@ -25,6 +25,7 @@ import mercury_text as mt  # noqa: E402
 import gfx_text  # noqa: E402
 import logo  # noqa: E402
 import maptext  # noqa: E402
+import sprtext  # noqa: E402
 import anchored  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
@@ -280,6 +281,14 @@ def main():
     report["gfx"] = 0
     for spec in sorted(glob.glob("gfx/*.json")):
         if os.path.basename(spec).startswith("font"):
+            continue
+        if os.path.basename(spec).startswith("spr_"):
+            data, refs = sprtext.apply(spec, src)   # text-only sprite, redrawn
+            a = pool.alloc_aligned(len(data))
+            rom[a:a + len(data)] = data
+            for r in refs:
+                rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
+            report["gfx"] += 1
             continue
         if os.path.basename(spec).startswith("map_"):
             # text baked into a map's tileset: metatiles/blocks in place,

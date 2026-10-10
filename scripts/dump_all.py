@@ -57,6 +57,14 @@ def is_single(s):
     return len(HANZI.findall(s2)) == 1 and len(s2) <= 2 and all(HANZI.match(c) or c in OK for c in s2)
 
 
+def short_line(s):
+    """One hanzi plus punctuation/placeholders, e.g. 喂，{FD:01}！ (is_textlike
+    needs 2 hanzi, is_single allows no punctuation)."""
+    s2 = re.sub(r"\{[^}]*\}", "", s)
+    return (len(HANZI.findall(s2)) == 1 and len(s2) <= 6
+            and all(HANZI.match(c) or c in "，。！？…!?. " for c in s2))
+
+
 def is_ptr(rom, o):
     return 0 <= o <= len(rom) - 4 and rom[o + 3] in (0x08, 0x09)
 
@@ -157,9 +165,12 @@ def scan_strings(rom, base):
             continue
         # long texts (intro disclaimer, credits) may be mostly Latin/punctuation
         single = is_single(s)
-        if not (single or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
+        short = short_line(s)
+        if not (single or short or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
             continue
         trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
+        if short and not (single or is_textlike(s)):  # 喂，{FD:01}！: script text only
+            trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table
             trusted = [(r, k) for r, k in trusted
                        if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4))]

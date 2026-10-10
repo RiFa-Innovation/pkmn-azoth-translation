@@ -15314,6 +15314,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "017E902": {
+   "zh": "噢，{FD:01}{FD:05}！",
+   "cap": 9,
+   "refs": [
+    "016631B:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "017E90C": {
    "zh": "能够赶上你真高兴。\n我是大木博士的助手。{FB}给。\n我被叮嘱要把这件东西带给你。",
    "cap": 70,
@@ -24775,6 +24784,15 @@
     "01AC71D:trainerbattle"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "018BE9B": {
+   "zh": "嗯……",
+   "cap": 5,
+   "refs": [
+    "01AC721:trainerbattle"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "018BEA0": {
@@ -84418,6 +84436,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "07B4954": {
+   "zh": "桀！！",
+   "cap": 5,
+   "refs": [
+    "07B4610:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "07B495E": {
    "zh": "小碎钻用自己身上的钻石边缘，\n努力地摩擦勾魂眼抱着的宝石。{FB}…… …… …… ……{FB}…… …… …… ……{FB}灰尘褪去，勾魂眼的宝石\n露出了璀璨夺目的光泽！",
    "cap": 124,
@@ -98789,6 +98816,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09C1F1E": {
+   "zh": "喂，{FD:01}！",
+   "cap": 7,
+   "refs": [
+    "09C1D4E:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09C1F27": {
    "zh": "你在干什么呢？",
    "cap": 14,
@@ -98853,6 +98889,15 @@
    "untrusted": 1,
    "suspect": true
   },
+  "09C2372": {
+   "zh": "喂，{FD:01}！",
+   "cap": 7,
+   "refs": [
+    "09C21BB:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09C237B": {
    "zh": "你在干什么呢？",
    "cap": 14,
@@ -98913,6 +98958,15 @@
    "refs": [
     "09C22FD:loadpointer",
     "09CC9EB:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09C27D7": {
+   "zh": "喂，{FD:01}！",
+   "cap": 7,
+   "refs": [
+    "09C2607:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -100522,6 +100576,15 @@
    "cap": 32,
    "refs": [
     "09C73B5:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09C73E9": {
+   "zh": "咦……？",
+   "cap": 6,
+   "refs": [
+    "09C73B9:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -124523,6 +124586,17 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AA54D1": {
+   "zh": "……唔。",
+   "cap": 6,
+   "refs": [
+    "0AA54A3:trainerbattle",
+    "0F57ED3:trainerbattle",
+    "0F57F06:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AA54D9": {
    "zh": "你直勾勾地盯着我看，\n还以为你会{FA}做什么坏事呢！",
    "cap": 45,
@@ -127914,6 +127988,98 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AB3704": {
+   "zh": "   爱",
+   "cap": 6,
+   "refs": [
+    "07B087F:loadpointer",
+    "07B0A71:loadpointer",
+    "07B0B06:loadpointer",
+    "07B0CE4:loadpointer",
+    "07B0D06:loadpointer",
+    "0AB2800:loadpointer",
+    "0AB2C10:loadpointer",
+    "0AB313A:loadpointer",
+    "0AB3164:loadpointer",
+    "0AB3186:loadpointer",
+    "0AB31A5:loadpointer",
+    "0AB31C5:loadpointer",
+    "0AB31EF:loadpointer",
+    "0AB5026:loadpointer",
+    "0AB59DB:loadpointer",
+    "0ABEEF2:loadpointer",
+    "0ABEF1D:loadpointer",
+    "0ABEF94:loadpointer",
+    "0ABF0FA:loadpointer",
+    "0ABF398:loadpointer",
+    "0AC12F1:loadpointer",
+    "0AC1322:loadpointer",
+    "0AC1984:loadpointer",
+    "0AC1EF8:loadpointer",
+    "0AC1F72:loadpointer",
+    "0AC229E:loadpointer",
+    "0AC233F:loadpointer",
+    "0AC4376:loadpointer",
+    "0AC8928:loadpointer",
+    "0AC8940:loadpointer",
+    "0ECA4B7:loadpointer",
+    "0ECA4E3:loadpointer",
+    "0ECA82B:loadpointer",
+    "0ECB66E:loadpointer",
+    "0ECB729:loadpointer",
+    "0ECB8BB:loadpointer",
+    "0ECBD6C:loadpointer",
+    "0ECBD98:loadpointer",
+    "0ECC29E:loadpointer",
+    "0ECC2CB:loadpointer",
+    "0ECC333:loadpointer",
+    "0ECE48F:loadpointer",
+    "0ECE4C0:loadpointer",
+    "0ECED0C:loadpointer",
+    "0ECED86:loadpointer",
+    "0ECEE2E:loadpointer",
+    "0ECEE6E:loadpointer",
+    "0ECEEC5:loadpointer",
+    "0ECEF25:loadpointer",
+    "0ECEF56:loadpointer",
+    "0ECF91F:loadpointer",
+    "0ECFB83:loadpointer",
+    "0ECFDA8:loadpointer",
+    "0ECFDFD:loadpointer",
+    "0ECFE3D:loadpointer",
+    "0ECFEE1:loadpointer",
+    "0ED005D:loadpointer",
+    "0ED00D4:loadpointer",
+    "0ED0132:loadpointer",
+    "0ED01A9:loadpointer",
+    "0ED01F3:loadpointer",
+    "0ED02E9:loadpointer",
+    "0ED0347:loadpointer",
+    "0ED03BE:loadpointer",
+    "0ED0408:loadpointer",
+    "0ED0509:loadpointer",
+    "0ED0571:loadpointer",
+    "0ED05B1:loadpointer",
+    "0ED1272:loadpointer",
+    "0ED1831:loadpointer",
+    "0F4BA38:loadpointer",
+    "0F4BA65:loadpointer",
+    "0F4BA8D:loadpointer",
+    "0F4BE22:loadpointer",
+    "0F4C06C:loadpointer",
+    "0F4C0F4:loadpointer",
+    "0F4C14B:loadpointer",
+    "0F4C247:loadpointer",
+    "0F4C8BA:loadpointer",
+    "0F4C8DE:loadpointer",
+    "0F4C92A:loadpointer",
+    "0F4CC0E:loadpointer",
+    "0F56C92:loadpointer",
+    "0F58455:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AB370C": {
    "zh": "好吧，我再自己找找吧……",
    "cap": 22,
@@ -130565,6 +130731,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE0CB1": {
+   "zh": "呜……",
+   "cap": 5,
+   "refs": [
+    "0AE0C77:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE0CB8": {
    "zh": "我迷路了……{FB}出不去倒是无所谓，\n但是我肚子饿了啊！",
    "cap": 47,
@@ -131446,6 +131621,15 @@
    "cap": 46,
    "refs": [
     "0AE3099:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AE3324": {
+   "zh": "哎？！  ",
+   "cap": 7,
+   "refs": [
+    "0AE30B5:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -138233,6 +138417,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AFA364": {
+   "zh": "喂，{FD:01}！",
+   "cap": 7,
+   "refs": [
+    "0AF9D8A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AFA36D": {
    "zh": "真是的，{FD:01}！\n你到哪里去了呢？{FA}夏日祭都开始一段时间了，{FA}我们还以为是出了什么事……",
    "cap": 76,
@@ -140504,6 +140697,15 @@
    ],
    "untrusted": 0,
    "suspect": true
+  },
+  "0C34696": {
+   "zh": "  曹  {FC:FF}",
+   "cap": 9,
+   "refs": [
+    "19A8142:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
   },
   "0C34CBC": {
    "zh": "呆呆兽之井",
@@ -158705,6 +158907,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0ED112D": {
+   "zh": "诶……？",
+   "cap": 6,
+   "refs": [
+    "0ED0352:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0ED1138": {
    "zh": "偷？\n呵呵……哈哈哈哈！{FB}你以为我是\n为了偷那个东西吗？{FB}那是假的！\n你们根本什么都不知道！{FB}一开始的红宝石和蓝宝石\n……全部是火箭队用玻璃做的假货！",
    "cap": 134,
@@ -158877,6 +159088,15 @@
    "cap": 33,
    "refs": [
     "0ED1F7F:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0ED21F6": {
+   "zh": "……啊？",
+   "cap": 6,
+   "refs": [
+    "0ED1F83:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -167806,6 +168026,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F33331": {
+   "zh": "嗯……？",
+   "cap": 6,
+   "refs": [
+    "0F3302B:loadpointer",
+    "0F3336F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F33339": {
    "zh": "难不成……\n你帮我找到玩偶了吗？{FA}唔……我看看。",
    "cap": 41,
@@ -168939,6 +169169,15 @@
    "cap": 120,
    "refs": [
     "0F36176:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F36646": {
+   "zh": "…诶？",
+   "cap": 5,
+   "refs": [
+    "0F36142:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -172260,6 +172499,17 @@
    "cap": 16,
    "refs": [
     "0F4053B:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F40B48": {
+   "zh": "否    ",
+   "cap": 7,
+   "refs": [
+    "0F40AD5:loadpointer",
+    "0F40AE3:loadpointer",
+    "0F40AF1:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -216495,6 +216745,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DACE73": {
+   "zh": "哼……",
+   "cap": 5,
+   "refs": [
+    "1CD6695:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DACE78": {
    "zh": "怎么可能！？",
    "cap": 11,
@@ -217838,6 +218097,15 @@
    "cap": 85,
    "refs": [
     "1CD858A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DAF6E6": {
+   "zh": "哇……",
+   "cap": 5,
+   "refs": [
+    "1CD8663:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -226849,6 +227117,15 @@
    "cap": 124,
    "refs": [
     "1CE26FC:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DBF62B": {
+   "zh": "桀！！",
+   "cap": 5,
+   "refs": [
+    "1CE2748:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false

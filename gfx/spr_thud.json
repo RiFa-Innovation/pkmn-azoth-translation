@@ -1,0 +1,9 @@
+{
+ "_doc": "Sound-effect picture 咕咚!! (entry 13 of the 64x64 picture table at 0x1DE5A08), shown when Chikorita pops out of its ball outside Elm's lab.",
+ "ref": "1DE5A70",
+ "w": 64, "h": 64,
+ "text": "Thud!",
+ "scale": 2,
+ "x": 4, "y": 36,
+ "ink": 2, "shadow": 1
+}
