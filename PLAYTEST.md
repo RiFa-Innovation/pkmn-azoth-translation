@@ -23,6 +23,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 25-battle | wild Sentret (Frisk) battle start |
 | 26-fight | battle, action menu |
 | 28-afterbattle | Route 29 after the first wild battle |
+| 30-bag | bag open on Route 29 |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -52,5 +53,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 20 | party menu | "What will you do with t…" overflows | fixed ("Do what with it?") |
 | 21 | summary info | "Relaxed (+Defense -Sp…" + " nature." overflow | fixed (natures abbreviated +Def -Spe; templates drop " nature.") |
 | 22 | summary skills | page header "✚换页" (lone struct-field string) | fixed ("Page") |
-| 23 | summary skills | ability descriptions cut at ~134px | in progress (2-line wrap applied; 103 long ones being shortened) |
+| 23 | summary skills | ability descriptions cut at ~134px | fixed (2-line wrap at 134px; 103 long ones shortened) |
 | 24 | battle | "Chikorita gained  17 Exp. Points!" double space | open (minor) |
+| 25 | bag | pocket tabs cut: Training It…, Battle Item…, Evolution I…, Special Gem…, Materials &… | fixed (Training/Battle/Evolution/Gems/Materials) |
+| 26 | bag | item descriptions run into the arrow / past 3 lines (box ~176px, starts after the icon) | in progress (all item descriptions wrap at 176px; 129 four-line ones being shortened) |

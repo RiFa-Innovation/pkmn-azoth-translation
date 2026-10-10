@@ -33,6 +33,7 @@ BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
 DIALOGUE_KINDS = ("loadpointer", "message", "trainerbattle")
 DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
+ITEM_DESC_PX = 176  # bag description box: starts after the item icon, ends before the arrow
 HELP_PX = 222
 MIN_FREE_RUN = 512
 FREE_MARGIN = 16
@@ -145,6 +146,11 @@ def main():
             contains_other.add(a)
             contains_other.add(b)  # b's tail is shared too; never write either in place
     table_px = layout.table_widths(strings)
+    # strings referenced from an item table's description field (+0x14)
+    item_desc = set()
+    for tb, n in ((0x3DB028, 378), (0x7C7E00, 750)):
+        for i in range(n):
+            item_desc.add(int.from_bytes(src[tb + 44 * i + 0x14:tb + 44 * i + 0x18], "little") - 0x08000000)
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
     # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
@@ -168,6 +174,8 @@ def main():
         max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), table_px.get(t, 0), 48)
         if "{F9:0A}" in v["zh"]:  # help-system pages use the full-width window
             max_px = HELP_PX
+        if t in item_desc:  # bag description box (3 lines, ~176px before the arrow)
+            max_px, dialogue, single_line = ITEM_DESC_PX, False, False
         if f"{t:07X}" in width_override:
             wo = width_override[f"{t:07X}"]
             max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
