@@ -253,4 +253,10 @@ def wrap_en(text, widths, max_px, dialogue):
         else:
             s = "\n".join(lines)
         out_paras.append(s)
-    return "{FB}".join(out_paras)
+    # keep a one-line text's own leading/trailing spaces: prefixes such as
+    # "Wild " and "Foe " are joined straight onto a Pokémon name by the code
+    if len(paras) > 1 or re.search(r"\n|\{FA\}", text):
+        return "{FB}".join(out_paras)
+    lead = text[:len(text) - len(text.lstrip(" "))]
+    trail = text[len(text.rstrip(" ")):]
+    return lead + "{FB}".join(out_paras).strip(" ") + trail
