@@ -357,5 +357,11 @@
    "1DE6570"
   ],
   "_why": "start menu label for the trainer card is the player-name code, which this menu prints blank (also in the Chinese ROM); only the menu's pointer gets the new label"
+ },
+ "1DA36A1": {
+  "zh": "{F8:0B}换页",
+  "cap": 7,
+  "en": "{F8:0B}Page",
+  "_why": "skills-page header; only ref is a lone struct field (0x1D633D8) the dump does not trust"
  }
 }

@@ -22,6 +22,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 24-route29 | Route 29 entrance, tall grass to the south-west |
 | 25-battle | wild Sentret (Frisk) battle start |
 | 26-fight | battle, action menu |
+| 28-afterbattle | Route 29 after the first wild battle |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -47,3 +48,9 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 16 | battle strings | live FireRed battle strings the hack half-overwrote ('…与对手{broken}换了特性！ with its opponent!', 的/是/果 suffixes) | fixed (restored FireRed English for 8 symbols) |
 | 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored, unchanged on screen), not in RAM buffers, no pointer to a 的 string; text is drawn into the pop-up sprite (gfx raw at 0x1E9F814). Needs the pop-up print routine traced | open |
 | 18 | wild battle | "Wild Sentret used Growl!" spacing correct | ok |
+| 19 | start-menu hint | "Go through Yoshino City to Mr." (Japanese name, cut) | fixed ("Find Mr. Pokémon past Cherrygrove.", width override) |
+| 20 | party menu | "What will you do with t…" overflows | fixed ("Do what with it?") |
+| 21 | summary info | "Relaxed (+Defense -Sp…" + " nature." overflow | fixed (natures abbreviated +Def -Spe; templates drop " nature.") |
+| 22 | summary skills | page header "✚换页" (lone struct-field string) | fixed ("Page") |
+| 23 | summary skills | ability descriptions cut at ~134px | in progress (2-line wrap applied; 103 long ones being shortened) |
+| 24 | battle | "Chikorita gained  17 Exp. Points!" double space | open (minor) |

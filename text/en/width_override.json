@@ -4,5 +4,1265 @@
   "px": 144,
   "dialogue": true,
   "note": "intro Marill pages, hack intro window ~25 chars"
+ },
+ "1FFFB44": {
+  "px": 210,
+  "dialogue": false,
+  "note": "start-menu hint (one line, box ~216px)"
+ },
+ "024F9D0": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F3C4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F3D8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F3F2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F40A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F422": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F438": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F452": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F46D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F481": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F49D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F4B3": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F4CE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F4E5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F4FA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F513": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F524": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F534": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F550": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F564": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F57E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F596": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F5AA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F5C3": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F5DC": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F5F7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F607": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F61F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F63A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F654": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F66F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F68B": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F6A5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F6BD": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F6D5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F6EB": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E688": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F71F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F737": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F746": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F75E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F785": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F795": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F7AF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F7C9": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F7E5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F7FA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F811": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F82B": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F847": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E6B0": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F878": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F893": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F8AE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F8C1": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F8DD": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F8F8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F90F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F925": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F93A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F954": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F969": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F985": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F99E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F9B8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024F9EC": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FA07": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FA23": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FA3D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FA55": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FA71": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E5E2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E5CA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E567": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "024FABE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E59A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D207": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D226": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D24C": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D270": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D28C": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D2AF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D2CE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D2E6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D302": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D320": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D336": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D355": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D36D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D388": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D3AC": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D3D0": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D3EB": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D40F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D439": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D45A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D47F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D4A4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E5B2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D4C5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D4E6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D4FE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D519": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D533": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D54D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D56E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D58A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D5A5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D5BF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D5DB": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D5F5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D611": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D62D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D64F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D667": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D67D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D69A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D6B4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D6D4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D6EF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D70F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E5FA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D752": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D769": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D787": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D7A4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D7C3": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D7E0": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D7F8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D813": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D835": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D84B": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D861": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D87D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D89A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D8B7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D8D4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D8F1": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D909": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D917": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D933": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D951": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D96F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D98B": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D9A6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D9C8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8D9EA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA00": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA16": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA37": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA4A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E614": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E62F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA62": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DA80": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DAA2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DAC4": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DAE5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DAF6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DB14": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E4DA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E4F7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E51E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DB4D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DB6B": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DB8F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DBAD": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DBC9": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DBE5": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DBFC": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DC1E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DC35": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DC4D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DC63": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DC87": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DCAD": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DCCC": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DCF2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD09": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD20": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD37": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD4E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD69": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD84": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DD9F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DDBA": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DDD8": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DDF6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE0A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE28": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE48": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE60": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE78": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DE8F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DEA7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DEC3": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DEE7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DF0D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DF32": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DF58": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DF76": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DF84": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DFA6": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DFBE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DFDB": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8DFF3": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E014": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E031": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E045": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E05C": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E076": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E545": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E08D": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E0A7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E0BB": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E64A": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E0F7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E113": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E130": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E14F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E16F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E183": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E1A2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E1B2": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E1D7": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E1F9": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E221": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E23C": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E25E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E284": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E29F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E662": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E2CF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E2EF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E30C": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E31F": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E332": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E351": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E378": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E397": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E3AF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E3CE": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E3EF": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E417": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E42E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E449": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E462": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E483": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E49E": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E4BD": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
+ },
+ "1D8E582": {
+  "px": 134,
+  "dialogue": false,
+  "note": "ability description (summary box ~134px, 2 lines)"
  }
 }
