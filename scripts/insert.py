@@ -107,6 +107,10 @@ def main():
     # --- pointer-referenced strings
     tm = load_tm()
     strings = {int(k, 16): v for k, v in dump["strings"].items()}
+    # debugging: INSERT_SKIP=<json list of hex addrs> leaves those strings untouched
+    if os.environ.get("INSERT_SKIP"):
+        for a in json.load(open(os.environ["INSERT_SKIP"])):
+            strings.pop(int(a, 16), None)
     starts = sorted(strings)
     contains_other = set()
     for i, a in enumerate(starts):
@@ -118,6 +122,10 @@ def main():
     table_px = layout.table_widths(strings)
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
+    # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
+    keep = set()
+    if os.environ.get("INSERT_NORECYCLE"):
+        keep = {int(a, 16) for a in json.load(open(os.environ["INSERT_NORECYCLE"]))}
     pending = []
     for t in starts:
         v = strings[t]
@@ -140,11 +148,11 @@ def main():
             continue
         if len(b) <= v["cap"] and t not in contains_other:
             rom[t:t + v["cap"]] = b + b"\xff" * (v["cap"] - len(b))
-            pool.add(t + len(b) + 1, t + v["cap"]) if v["untrusted"] == 0 else None
+            pool.add(t + len(b) + 1, t + v["cap"]) if v["untrusted"] == 0 and t not in keep else None
             report["inplace"] += 1
         else:
             pending.append((t, b))
-            if v["untrusted"] == 0 and t not in contains_other:
+            if v["untrusted"] == 0 and t not in contains_other and t not in keep:
                 pool.add(t + 1, t + v["cap"])  # keep byte 0 so stray reads hit text
     report["free_before_reloc"] = pool.total()
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
@@ -154,9 +162,38 @@ def main():
             ro = int(r.split(":")[0], 16)
             rom[ro:ro + 4] = (0x08000000 + a).to_bytes(4, "little")
         report["relocated"] += 1
+    # --- manual strings (text/en/manual_strings.json): unfindable by the scan
+    manual = json.load(open("text/en/manual_strings.json", encoding="utf-8"))
+    for addr, m in manual.items():
+        if addr.startswith("_"):
+            continue
+        t = int(addr, 16)
+        assert mt.decode(src, t, m["cap"])[0] == m["zh"], f"manual {addr}: source text moved"
+        b = mt.encode_en(m["en"])
+        if len(b) <= m["cap"]:
+            rom[t:t + m["cap"]] = b + b"\xff" * (m["cap"] - len(b))
+            report["inplace"] += 1
+        if m.get("ref_en") or (len(b) > m["cap"] and m.get("refs")):
+            # ref_en: a different (longer) text for what the pointers show,
+            # e.g. a list label, while code-computed reads see the in-place text
+            b = mt.encode_en(m.get("ref_en", m["en"]))
+            a = pool.alloc(len(b))
+            rom[a:a + len(b)] = b
+            for r in m["refs"]:
+                ro = int(r, 16)
+                assert int.from_bytes(src[ro:ro + 4], "little") == 0x08000000 + t, f"manual ref {r}"
+                rom[ro:ro + 4] = (0x08000000 + a).to_bytes(4, "little")
+            report["relocated"] += 1
+        elif len(mt.encode_en(m["en"])) > m["cap"]:
+            report["too_long"].append(f"manual {addr} {m['en']!r} ({len(b)}>{m['cap']})")
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)
+    out = os.environ.get("INSERT_OUT")  # debugging: write only this ROM
+    if out:
+        open(out, "wb").write(rom)
+        print({k: (v if not isinstance(v, list) else len(v)) for k, v in report.items()})
+        return
     open("build/Mercury_EN.gba", "wb").write(rom)
     open("build/Mercury_EN.bps", "wb").write(bps.create(base, bytes(rom)))
     json.dump(report, open("build/insert_report.json", "w"), indent=1, ensure_ascii=False)

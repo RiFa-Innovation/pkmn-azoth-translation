@@ -74,6 +74,49 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
 
+## Resume point (2026-10-10, checkpoint 15) — all dumped text translated, ROM boots
+
+`tm_batch.py stats` → **19,893/19,893 strings, 440,656/440,656 hanzi**.
+`insert.py` → missing 0, errors 0, too_long 0; BPS round-trips byte-exact.
+Verified in mGBA (`EMULATOR.md`): boot, intro disclaimer, name entry and the
+full settings screen render in English.
+
+How the remaining ~63% got done (checkpoint 14 → 15):
+- `vanilla_align.py` had the same `{FA}/{FB}` filter bug; fixed, plus a second
+  route (the hack overwrote FR's text area in place, so base ROM at the *same
+  address* is the official line). +1,969 official strings.
+- Hack reused FR slots for new content, so every official pair was checked by
+  Haiku agents (17 × ~400): 85 rejected and retranslated.
+- ~7,500 strings translated by parallel Sonnet agents (brief + `tm_batch.py
+  check` / `lookup` / `export`), merged with `tm_batch.py add`.
+- `scripts/name_fix.py` + `text/en/name_canon.json`: one English name per
+  character/place across agents (Dawn, Buena, Whitney, Silph Co., Sprout Tower…).
+- `text/en/manual_strings.json`: strings no pointer scan can find (settings
+  menu labels the code addresses directly), written in place or relocated with
+  explicit refs (`ref_en` = different text for pointer readers).
+
+Dump fixes found by the emulator:
+- **Boot crash**: a "pointer" inside Thumb code (`0x1E4074` → `0x89C1B00`) was
+  repointed. Rule: a ref whose 4 bytes equal vanilla FR cannot point at text
+  the hack put into vanilla free space (44 strings dropped).
+- Strings > 1000 bytes were skipped (the intro disclaimer is 1,856 B); now 4096.
+- Long mostly-Latin texts (credits) accepted at ≥30 hanzi / ratio ≥ 0.1.
+- One-hanzi labels (开/关/中…) accepted only when referenced from a pointer table.
+- `insert.py` debug hooks: `INSERT_SKIP`, `INSERT_OUT`, `INSERT_NORECYCLE`.
+
+Next:
+1. **Graphics text** (not in the text pipeline): title logo, character-select
+   prompt, name-entry mode buttons (拼音/返回/结束), settings header 更改设定
+   and footer hints.
+2. ~300 real strings (~5.6k hanzi) still reachable via *unaligned* refs in
+   code-adjacent tables (battle/contest messages, e.g. `1DA13F6`) — see
+   `find_leftover_zh.py`. Needs in-place-only handling, not repointing.
+3. Play-test deeper (first town, battle, bag, Pokédex, Poké Mart ¥).
+4. ~1,250 pre-existing width warnings (risk 2 below).
+5. Fullwidth `；` renders with a wide gap; consider `,` in UI lines.
+
+## Checkpoint 14 notes
+
 ## Resume point (2026-10-10, checkpoint 14) — translation is ~37%, not done
 
 The checkpoint-13 "done" below was measured against an incomplete dump.
@@ -104,6 +147,17 @@ plus:
    encoded text anywhere in the ROM, so they are probably images.
 6. 41 old strings became `suspect` because they are now *interior* tails
    of newly found parent dialogues — same class as risk 1.
+
+**Risk 1 re-assessed (checkpoint 14):** the Pokédex "page 2" pointer
+(`0x17D9AFC`) is FR's `unusedDescription` field — never read by the game —
+and it lands mid-character (`4基本…` starts on 己's trail byte). Most other
+interior pointers (1,850 pairs) also start mid-word (`思议的消息！`,
+`。有时会降低对…`): stale offsets, not shared suffixes. Treating
+character-boundary tails as real strings was tried and rejected (759 mostly
+meaningless fragments). `insert.py` never writes in place or recycles a parent
+that contains another string, so a live tail would still show intact Chinese,
+not garbage. Remaining action: in the emulator, check one move description
+and one battle message whose parent is translated.
 7. `find_leftover_zh.py` still reports ~3.5k reachable Chinese strings outside
    the dump (mostly noise or unrecognised script contexts); triage after the
    batches.

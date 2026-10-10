@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import mercury_text as mt  # noqa: E402
 
 ROM = "roms/Pokemon Mercury 1.3.3 (patched).gba"
+BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 OUT = "text/zh.json"
 
 # name, file offset, stride, field size, count  (counts from plausibility scan)
@@ -36,6 +37,7 @@ TABLES = [
 ]
 
 HANZI = re.compile(r"[一-鿿]")
+MAX_LEN = 4096  # the intro disclaimer is one 1,856-byte string
 OK = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 \n"
          ".,!?-'\"/:…♂♀é‘’“”%()&+=~·×") | set(mt.PUNCT.values())
 
@@ -46,6 +48,12 @@ def is_textlike(s, min_ratio=0.3):
         return False
     hz = len(HANZI.findall(s2))
     return hz >= 2 and hz / len(s2) >= min_ratio
+
+
+def is_single(s):
+    """A one-hanzi option label such as 开 / 关 / 中 (is_textlike needs 2)."""
+    s2 = re.sub(r"\{[^}]*\}", "", s)
+    return len(HANZI.findall(s2)) == 1 and len(s2) <= 2 and all(HANZI.match(c) or c in OK for c in s2)
 
 
 def is_ptr(rom, o):
@@ -85,7 +93,7 @@ def is_prose(s):
             and (body.rstrip()[-1:] in set("。！？…」）!?.") or "\n" in body))
 
 
-def scan_strings(rom):
+def scan_strings(rom, base):
     a = np.frombuffer(rom, np.uint8)
     n = len(a) - 3
     u = (a[:n].astype(np.uint32) | (a[1:n + 1].astype(np.uint32) << 8)
@@ -98,14 +106,25 @@ def scan_strings(rom):
     for t, rs in refs.items():
         if t >= len(rom) or rom[t] == 0xFF:
             continue
-        s, e = mt.decode(rom, t, 1000)
+        s, e = mt.decode(rom, t, MAX_LEN)
         # {XXXX} = undecodable 2-byte code (binary). Not {FA}/{FB}: those are
         # the scroll / new-box controls every multi-box dialogue contains.
-        if e - t >= 1000 or rom[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{4}\}", s):
+        if e - t >= MAX_LEN or rom[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{4}\}", s):
             continue
-        if not is_textlike(s):
+        # long texts (intro disclaimer, credits) may be mostly Latin/punctuation
+        single = is_single(s)
+        if not (single or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
             continue
         trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
+        if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table
+            trusted = [(r, k) for r, k in trusted
+                       if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4))]
+        # A word left exactly as in vanilla FR cannot point at text the hack put
+        # into space that was free (FF) in vanilla: it is code/data that merely
+        # looks like a pointer (e.g. Thumb code at 0x1E4074 -> crash if repointed).
+        if t + (e - t) <= len(base) and set(base[t:e]) == {0xFF}:
+            trusted = [(r, k) for r, k in trusted
+                       if not (r + 4 <= len(base) and base[r:r + 4] == rom[r:r + 4])]
         if not trusted:
             continue
         out[t] = {"zh": s, "cap": e - t,
@@ -161,7 +180,7 @@ def main():
         tables[name] = {"base": "%07X" % base, "stride": stride, "size": size,
                         "entries": ents}
         print(f"{name}: {len(ents)} entries")
-    strings = scan_strings(rom)
+    strings = scan_strings(rom, open(BASE, "rb").read())
     mark_suspects(strings)
     print(f"strings: {len(strings)} ({sum(v['suspect'] for v in strings.values())} suspect)")
     os.makedirs("text", exist_ok=True)

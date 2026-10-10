@@ -50,33 +50,45 @@ def tokens(s):
     return sorted(t for t in re.findall(r"\{F[7-9CD][^}]*\}", s))
 
 
+def candidate(base, p, zh):
+    """Official English at base-ROM offset p if it plausibly translates zh."""
+    if not 0 < p < len(base) or base[p - 1] not in (0xFF, 0x00):
+        return None
+    s, e = mt.decode_vanilla(base, p)
+    # {XX} = byte with no glyph; {FA}/{FB} are the scroll / new-box controls
+    if e - p >= 1000 or base[e - 1] != 0xFF or re.search(r"\{(?!F[AB]\})[0-9A-F]{2}\}", s):
+        return None
+    letters = len(re.findall(r"[A-Za-z]", s))
+    hz = len(HANZI.findall(zh))
+    if letters < 2 or not (0.8 <= letters / max(hz, 1) <= 8):
+        return None
+    if tokens(s) != tokens(zh):
+        return None
+    try:
+        mt.encode_en(s)
+    except ValueError:
+        return None
+    return s
+
+
 def main():
     base = open(BASE, "rb").read()
     d = json.load(open("text/zh.json", encoding="utf-8"))["strings"]
     cands = defaultdict(Counter)
-    for v in d.values():
+    for addr, v in d.items():
         if v.get("suspect"):
             continue
+        # 1) the vanilla pointer at each reference location
         for r in v["refs"]:
             ro = int(r.split(":")[0], 16)
             if ro + 4 > len(base):
                 continue
             p = struct.unpack_from("<I", base, ro)[0] - 0x08000000
-            if not 0 <= p < len(base):
-                continue
-            s, e = mt.decode_vanilla(base, p)
-            if e - p >= 1000 or base[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{2}\}", s):
-                continue
-            letters = len(re.findall(r"[A-Za-z]", s))
-            hz = len(HANZI.findall(v["zh"]))
-            if letters < 2 or not (0.8 <= letters / max(hz, 1) <= 8):
-                continue
-            if tokens(s) != tokens(v["zh"]):
-                continue
-            try:
-                mt.encode_en(s)
-            except ValueError:
-                continue
+            if (s := candidate(base, p, v["zh"])):
+                cands[v["zh"]][s] += 1
+        # 2) the hack overwrote FR's own text area in place: same address
+        t = int(addr, 16)
+        if t < len(base) and (s := candidate(base, t, v["zh"])):
             cands[v["zh"]][s] += 1
     out = {zh: modernize(c.most_common(1)[0][0]) for zh, c in cands.items()}
     json.dump(out, open("text/en/strings-vanilla.json", "w", encoding="utf-8"),

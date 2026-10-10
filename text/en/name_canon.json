@@ -1,0 +1,97 @@
+{
+ "小光": {
+  "en": "Dawn",
+  "variants": [
+   "Hikari",
+   "Guangguang"
+  ]
+ },
+ "光光": {
+  "en": "Dawn",
+  "variants": [
+   "Hikari",
+   "Guangguang"
+  ]
+ },
+ "山梨": {
+  "en": "Rowan",
+  "variants": [
+   "Yamanashi"
+  ]
+ },
+ "胡桃": {
+  "en": "Buena",
+  "variants": [
+   "Kurumi"
+  ]
+ },
+ "小椿": {
+  "en": "Clair",
+  "variants": [
+   "Tsubaki"
+  ]
+ },
+ "蜜柑": {
+  "en": "Jasmine",
+  "variants": [
+   "Mikan"
+  ]
+ },
+ "钢铁": {
+  "en": "Kurt",
+  "variants": [
+   "Mr. Steel"
+  ]
+ },
+ "莉拉": {
+  "en": "Anabel",
+  "variants": [
+   "Lila"
+  ]
+ },
+ "小茜": {
+  "en": "Whitney",
+  "variants": [
+   "Akane"
+  ]
+ },
+ "散华": {
+  "en": "Sange",
+  "variants": [
+   "Sanka"
+  ]
+ },
+ "岩铁": {
+  "en": "Gantetsu",
+  "variants": [
+   "Iwatetsu"
+  ]
+ },
+ "希鲁夫公司": {
+  "en": "Silph Co.",
+  "variants": [
+   "Sirufu Corp.",
+   "Sirufu Corp",
+   "Silph Corp."
+  ]
+ },
+ "精灵爷爷": {
+  "en": "Mr. Pokémon",
+  "variants": [
+   "Pokémon Grandpa",
+   "Grandpa Pokémon"
+  ]
+ },
+ "喇叭芽之塔": {
+  "en": "Sprout Tower",
+  "variants": [
+   "Bellsprout Tower"
+  ]
+ },
+ "喇叭芽塔": {
+  "en": "Sprout Tower",
+  "variants": [
+   "Bellsprout Tower"
+  ]
+ }
+}

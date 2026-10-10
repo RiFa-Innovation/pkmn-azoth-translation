@@ -1,0 +1,67 @@
+{
+ "_doc": "Strings the pointer scan cannot find (code computes their address, or only a literal-pool word points at them). cap = bytes incl. the FF terminator. Written in place when the English fits; otherwise relocated and every listed ref repointed.",
+ "E37728": {
+  "zh": "退出设置",
+  "cap": 9,
+  "en": "Exit"
+ },
+ "E372BC": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E37731": {
+  "zh": "请先开启虚拟时钟再设置倍率。",
+  "cap": 28,
+  "en": "Enable Virtual Clock first."
+ },
+ "E3774D": {
+  "zh": "边框",
+  "cap": 5,
+  "en": "Type",
+  "ref_en": "Frame",
+  "refs": [
+   "E37820"
+  ]
+ },
+ "E37755": {
+  "zh": "不可设置",
+  "cap": 9,
+  "en": "Disabled"
+ },
+ "459360": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "459368": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E37798": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E39FE4": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E3BB64": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E3E05C": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ },
+ "E473D0": {
+  "zh": "退出",
+  "cap": 5,
+  "en": "Exit"
+ }
+}
