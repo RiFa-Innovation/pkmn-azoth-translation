@@ -20,12 +20,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import bps  # noqa: E402
+import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
 DIALOGUE_KINDS = ("loadpointer", "message", "trainerbattle")
 DIALOGUE_PX = 204
+HELP_PX = 222
 MIN_FREE_RUN = 512
 FREE_MARGIN = 16
 
@@ -113,6 +115,7 @@ def main():
                 break
             contains_other.add(a)
             contains_other.add(b)  # b's tail is shared too; never write either in place
+    table_px = layout.table_widths(strings)
     pool = FreePool(src)
     pending = []
     for t in starts:
@@ -125,7 +128,9 @@ def main():
             continue
         dialogue = any(r.split(":")[1] in DIALOGUE_KINDS for r in v["refs"])
         single_line = not dialogue and not re.search(r"\n|\{FA\}|\{FB\}", v["zh"])
-        max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), 48)
+        max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), table_px.get(t, 0), 48)
+        if "{F9:0A}" in v["zh"]:  # help-system pages use the full-width window
+            max_px = HELP_PX
         try:
             text = en if single_line else mt.wrap_en(en, widths, max_px, dialogue)
             b = mt.encode_en(text)

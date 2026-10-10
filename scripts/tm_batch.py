@@ -11,12 +11,15 @@ that must never be inserted.
 """
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
+import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 
 QUEUE = "text/queue.json"
+WIDTHS = open("roms/Pokemon Mercury 1.3.3 (patched).gba", "rb").read()[mt.WIDTHS_OFF:mt.WIDTHS_OFF + 256]
 TM = "text/en/strings.json"
 
 
@@ -57,6 +60,13 @@ def main():
             if out >= n:
                 break
     elif cmd == "add":
+        zs = {int(k, 16): v for k, v in json.load(open("text/zh.json", encoding="utf-8"))["strings"].items()}
+        dialogue_zh = {v["zh"] for v in zs.values() if any(not r.endswith(":aligned") for r in v["refs"])}
+        tw = layout.table_widths(zs)
+        budget = {}
+        for a, v in zs.items():
+            b = max(layout.src_px(v["zh"]), tw.get(a, 0), 48)
+            budget[v["zh"]] = min(budget.get(v["zh"], b), b)
         new = json.load(open(sys.argv[2], encoding="utf-8"))
         bad = []
         for i, en in new.items():
@@ -73,6 +83,21 @@ def main():
             toks_en = sorted(x for x in __import__("re").findall(r"\{F[^}]*\}", en) if x not in ("{FA}", "{FB}"))
             if toks_zh != toks_en:
                 bad.append((i, f"control tokens differ: {toks_zh} vs {toks_en}"))
+            if zh not in dialogue_zh and "\n" in en and "\n" in zh:  # warn if wider than source
+                src = max(sum(12 if ord(c) >= 0x3000 else 6 for c in re.sub(r"\{[^}]*\}", "", ln))
+                          for ln in zh.split("\n"))
+                wide = [ln for ln in en.split("\n")
+                        if len(re.sub(r"\{[^}]*\}", "", ln)) * 6 > max(src, 48)]
+                if "{F9:0A}" in zh:
+                    wide = [ln for ln in en.split("\n") if len(re.sub(r"\{[^}]*\}", "", ln)) * 6 > 222]
+                if wide:
+                    bad.append((i, f"lines wider than source ({src}px): {wide}"))
+            if zh not in dialogue_zh and "\n" in zh and "{F9:0A}" not in zh:
+                src_px = budget[zh]
+                n_src = len(zh.split("\n"))
+                n_en = len(mt.wrap_en(en, WIDTHS, src_px, False).split("\n"))
+                if n_en > n_src:
+                    bad.append((i, f"needs {n_en} lines > {n_src} at {src_px}px ({len(en)} chars)"))
             t[zh] = en
         json.dump(t, open(TM, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
         print(f"added {len(new)}; TM now {len(t)}/{len(q)}")

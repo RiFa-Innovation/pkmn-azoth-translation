@@ -5711,7 +5711,7 @@
     "00B8AB4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "00B8AD4": {
    "zh": "递份",
@@ -5720,7 +5720,7 @@
     "00B8AB8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "00BC52C": {
    "zh": "芯恋",
@@ -6182,7 +6182,7 @@
     "016338C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "01684C4": {
    "zh": "(繁啊 粮辁斗凡啊 粮辁邓诩诩诩\n野",
@@ -16792,7 +16792,7 @@
     "15C3234:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "018A645": {
    "zh": "我正在想着\n专门为宝可梦建一个游泳池。",
@@ -18874,7 +18874,7 @@
     "0174898:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0190FC1": {
    "zh": "等等！\n拿着这个。",
@@ -23755,7 +23755,7 @@
     "01BDAC8:aligned"
    ],
    "untrusted": 4,
-   "suspect": false
+   "suspect": true
   },
   "01B0DE4": {
    "zh": "彩虹道馆",
@@ -25087,7 +25087,7 @@
     "0246E64:aligned"
    ],
    "untrusted": 3,
-   "suspect": false
+   "suspect": true
   },
   "01B1E24": {
    "zh": "请选择印刷的样式。",
@@ -33786,7 +33786,7 @@
     "0C2B000:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "03EED08": {
    "zh": "常青市",
@@ -39278,7 +39278,7 @@
     "013255C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "041630F": {
    "zh": "你不能在这里\n写信纸。",
@@ -46835,7 +46835,7 @@
     "1EDCDD8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0444F39": {
    "zh": "在把长长的脖子缩到\n龟壳中的时候能积蓄力量\n发射很有气势的水铁炮。",
@@ -46924,7 +46924,7 @@
     "17D9AFC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044527B": {
    "zh": "经常以集团出现。\n用很快的速度包围\n并用臀部处的毒针刺向对手。",
@@ -46943,7 +46943,7 @@
     "17D9B20:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04452E7": {
    "zh": "不喜欢战斗。\n躲在草丛中以捉些\n小虫子为生。",
@@ -46962,7 +46962,7 @@
     "17D9B44:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445348": {
    "zh": "脚上的爪子很发达。\n抓住猎物后会搬运到\n100公里外的窝里。",
@@ -46981,7 +46981,7 @@
     "17D9B68:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04453BA": {
    "zh": "展开美丽的翅膀威吓对手。\n以2马赫的速度在空中飞舞。",
@@ -47121,7 +47121,7 @@
     "1FB41EC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04458DA": {
    "zh": "发出的超声波\n具有迷惑对手的作用。",
@@ -47130,7 +47130,7 @@
     "17D9D60:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445920": {
    "zh": "坚硬的针状鳞片\n覆盖着身体，兴奋起来\n鳞片便会如针般竖起。",
@@ -47149,7 +47149,7 @@
     "17D9D84:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445989": {
    "zh": "耳朵很大。听到远处的声音的时候\n耳朵便会像翅膀一样扇动，\n如果生气的话会发射毒针。",
@@ -47168,7 +47168,7 @@
     "17D9DA8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04459FD": {
    "zh": "非常容易被激怒的性格，\n将发达的角四处挥舞\n连钻石都能刺穿。",
@@ -47187,7 +47187,7 @@
     "17D9DCC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445A64": {
    "zh": "特征是如同岩石般坚硬的\n皮肤和长长的角，\n角上有毒，必须注意。",
@@ -47206,7 +47206,7 @@
     "17D9DF0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445AD2": {
    "zh": "因为有着可爱的外貌\n而作为宠物很有人气，\n但是很难找到。",
@@ -47225,7 +47225,7 @@
     "17D9E14:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445B31": {
    "zh": "耳朵很灵敏，\n连在1公里外掉落的羽毛的声音\n也能分辨出来。",
@@ -47274,7 +47274,7 @@
     "17D9EA4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445CAA": {
    "zh": "毛发很精细并且\n毛皮如梦幻般的柔软。\n毛皮是高级品。",
@@ -47303,7 +47303,7 @@
     "17D9EEC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445D7B": {
    "zh": "用锋利的牙齿\n咬住对手，一次会吸收\n300CC的血液。",
@@ -47370,7 +47370,7 @@
     "17D9F7C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445F23": {
    "zh": "虫子的背上长着被称为\n冬虫夏草的蘑菇，蘑菇会\n随着虫子的成长而长大。",
@@ -47389,7 +47389,7 @@
     "17D9FA0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445F88": {
    "zh": "从蘑菇的伞中散播出\n有毒的孢子，但是在中国\n这种孢子会被作为汉方药使用。",
@@ -47408,7 +47408,7 @@
     "17D9FC4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0445FEB": {
    "zh": "在黑暗中通过眼睛起到\n雷达的作用而活动，\n能从眼中发出光束。",
@@ -47437,7 +47437,7 @@
     "17DA00C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04460BA": {
    "zh": "在地下较浅的地方活动，\n在挖掘之后地面会鼓起，\n所以能轻易被发现。",
@@ -47456,7 +47456,7 @@
     "17DA030:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446129": {
    "zh": "对于在地下挖掘的对手，\n会趁对手不注意，\n从别的方向袭击对手。",
@@ -47475,7 +47475,7 @@
     "17DA054:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044618F": {
    "zh": "白天一直在睡觉，\n到了晚上便会眼睛发光\n在地盘中四处游荡。",
@@ -47494,7 +47494,7 @@
     "17DA078:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04461F1": {
    "zh": "性格多变，当把尾巴\n伸直竖起时必须注意，\n这是准备跳过来咬住你的前兆。",
@@ -47513,7 +47513,7 @@
     "17DA09C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044626B": {
    "zh": "一直被头痛所困扰，\n当头痛变剧烈的时候\n就能使用不可思议的力量。",
@@ -47532,7 +47532,7 @@
     "17DA0C0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04462D8": {
    "zh": "手掌上长着蹼，很擅长\n游泳。常被目击到湖水中\n优雅的游泳的姿态。",
@@ -47551,7 +47551,7 @@
     "17DA0E4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446348": {
    "zh": "身体活动很灵活，\n性格很凶暴，如果被惹火\n而暴走将无法停止。",
@@ -47570,7 +47570,7 @@
     "17DA108:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04463BA": {
    "zh": "一直都处于狂怒状态，\n无论对方逃到哪里\n都会一直追击对手。",
@@ -47639,7 +47639,7 @@
     "17DA204:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044662C": {
    "zh": "一天有18个小时在睡觉，\n在睡着的时候也会\n使用各种各样的超能力。",
@@ -47658,7 +47658,7 @@
     "17DA228:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446687": {
    "zh": "这是某天早晨的事情，\n超能力少年从床上醒来\n发现变身成了勇吉拉。",
@@ -47837,7 +47837,7 @@
     "17DA48C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446D74": {
    "zh": "在空中靠漂浮移动，\n从左右两边的部件中\n发射出电磁波。",
@@ -47856,7 +47856,7 @@
     "17DA4B0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446DDB": {
    "zh": "数个小磁怪组合起来\n发射出强烈的磁力线\n和高电压。",
@@ -47875,7 +47875,7 @@
     "17DA4D4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446E41": {
    "zh": "为了造自己的窝\n一直将一根植物的树枝\n带在身上行动。",
@@ -47894,7 +47894,7 @@
     "17DA4F8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446EA9": {
    "zh": "因为突然变异而被发现的\n有2个脑袋的宝可梦，\n能以时速100公里奔跑。",
@@ -47913,7 +47913,7 @@
     "17DA51C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446F16": {
    "zh": "很少被发现的稀有种，\n3个脑袋分别表现\n喜悦、悲伤和愤怒的感情。",
@@ -47932,7 +47932,7 @@
     "17DA540:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446F7C": {
    "zh": "被水色的体毛覆盖的皮肤\n又厚又强固，零下40度\n也可以活动。",
@@ -47951,7 +47951,7 @@
     "17DA564:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0446FF3": {
    "zh": "全身被纯白的毛覆盖，\n很耐寒，甚至是\n越冷越精神。",
@@ -47980,7 +47980,7 @@
     "17DA5AC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04470B7": {
    "zh": "平时和地面融为一体\n不会被发现，接触到身体的话\n就会被猛毒侵袭。",
@@ -48029,7 +48029,7 @@
     "17DA63C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447265": {
    "zh": "黑夜中什么人都没有的地方\n仿佛能看到什么，如果察觉到的话\n就会看到鬼斯通在那里。",
@@ -48058,7 +48058,7 @@
     "17DA684:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447321": {
    "zh": "平时生活在草丛中，\n在地下以时速80公里的速度\n边挖边寻找猎物。",
@@ -48077,7 +48077,7 @@
     "17DA6A8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447393": {
    "zh": "据说能吃梦的\n传说中的生物，\n貘的祖先。擅长催眠术。",
@@ -48096,7 +48096,7 @@
     "17DA6CC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04473F8": {
    "zh": "拿着类似钟摆的东西\n到处行动，发生过使用催眠术\n把小孩子拐走的事件。",
@@ -48125,7 +48125,7 @@
     "17DA714:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04474C7": {
    "zh": "坚硬的钳子拥有\n一万马力的力量，\n但因为太大而行动缓慢。",
@@ -48154,7 +48154,7 @@
     "17DA75C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044758A": {
    "zh": "因为一点点的刺激而自爆，\n被称为炸弹球\n而让大家害怕着。",
@@ -48183,7 +48183,7 @@
     "17DA7A4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044765B": {
    "zh": "被称为移动的热带雨林，\n每个果实上都有眼睛\n并且有着自己的意识。",
@@ -48202,7 +48202,7 @@
     "17DA7C8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04476BF": {
    "zh": "将死去的母亲的头骨\n戴在头上，在寂寞的时候\n会大声哭泣。",
@@ -48221,7 +48221,7 @@
     "17DA7EC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447727": {
    "zh": "身体很小，原本很弱，\n学会使用骨头后\n性格变得凶暴化了。",
@@ -48260,7 +48260,7 @@
     "17DA858:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447800": {
    "zh": "&击手的\n灵魂附身，拳击的速度\n比新干线还要快。",
@@ -48269,7 +48269,7 @@
     "0146B64:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447865": {
    "zh": "舌头有身高的两倍，\n能熟练的操作舌头像手一样\n捕食猎物，攻击对手。",
@@ -48288,7 +48288,7 @@
     "17DA87C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04478CF": {
    "zh": "透明的气球状的身体\n被猛毒的气体所充满，\n接近的话会觉得很难闻。",
@@ -48367,7 +48367,7 @@
     "17DA978:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0447B90": {
    "zh": "长着和薇菜一样\n卷起来的尾巴，靠它保持\n平衡。能从嘴里喷出墨水。",
@@ -48496,7 +48496,7 @@
     "1BDD6E4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044805A": {
    "zh": "在准备冲撞的时候\n会用3根尾巴\n啪啪地敲打自己的身体。",
@@ -48675,7 +48675,7 @@
     "17DADB0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448760": {
    "zh": "传说中的鸟类宝可梦之一，\n飞的时候会发出\n爆裂的啪啪声。",
@@ -48694,7 +48694,7 @@
     "17DADD4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04487C0": {
    "zh": "传说中的鸟类宝可梦之一，\n橙色的像在燃烧的羽毛，\n凌驾于看到的一切。",
@@ -48713,7 +48713,7 @@
     "17DADF8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448831": {
    "zh": "小孩子的时候\n体长就超过2米，\n随着不断的旅行而成长。",
@@ -48732,7 +48732,7 @@
     "17DAE1C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044888D": {
    "zh": "生活在海或者湖中，\n虽然没有翅膀\n但被目击到偶尔会飞在空中。",
@@ -48751,7 +48751,7 @@
     "17DAE40:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04488F7": {
    "zh": "巨大的身躯飞行在空中，\n能在16小时左右的时间内\n绕地球飞一圈。",
@@ -48770,7 +48770,7 @@
     "17DAE64:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448952": {
    "zh": "为了研究而大量地\n改变遗传因子而导致\n性格变得非常凶暴。",
@@ -48789,7 +48789,7 @@
     "17DAE88:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04489B7": {
    "zh": "生活在南美的本应已经\n绝种的宝可梦，\n智商非常高，什么都能记住。",
@@ -48808,7 +48808,7 @@
     "17DAEAC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448A26": {
    "zh": "香气怡人的叶子\n有着探测周围\n温湿度的能力。",
@@ -48827,7 +48827,7 @@
     "17DAED0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448A7E": {
    "zh": "颈部周围散发出的\n香料般的气味，\n经常嗅嗅会有保健的效果。",
@@ -48846,7 +48846,7 @@
     "17DAEF4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448ADD": {
    "zh": "菊叶龙呼出的气体中\n隐含着使干枯的草木\n复苏的神奇力量。",
@@ -48865,7 +48865,7 @@
     "17DAF18:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448B3F": {
    "zh": "一直都将身体缩成球形，\n生气时和舞蹈时\n会从背上喷出火焰。",
@@ -48884,7 +48884,7 @@
     "17DAF3C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448B9E": {
    "zh": "覆盖身体的毛皮\n是绝对不会烧起来的，\n所以可以抵抗任何火焰攻击。",
@@ -48903,7 +48903,7 @@
     "17DAF60:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448BFC": {
    "zh": "一直隐藏着摩擦自己\n激烈燃烧的体毛来引起\n爆炸气浪的终极杀手锏。",
@@ -48922,7 +48922,7 @@
     "17DAF84:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448C5B": {
    "zh": "小时候就是爱捣蛋的家伙，\n要是眼前有会动的东西，\n不管是什么都要咬住。",
@@ -48941,7 +48941,7 @@
     "17DAFA8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448CBA": {
    "zh": "张开大嘴进行攻击，\n啃咬时脱落的牙齿\n会一个接一个地长出来。",
@@ -49010,7 +49010,7 @@
     "17DB080:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0448F1D": {
    "zh": "变冷之后从各地而来的\n芭瓢虫大群地集中在一起\n相互靠紧来取暖。",
@@ -49099,7 +49099,7 @@
     "17DB1A0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044924F": {
    "zh": "流星很多的夜晚，\n会看到的皮宝宝的体形\n也会不可思议地变大。",
@@ -49118,7 +49118,7 @@
     "17DB1C4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04492A8": {
    "zh": "拥有充满弹性的身体，\n不管何时何地\n都一直在弹跳。",
@@ -49287,7 +49287,7 @@
     "17DB3E0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "04498E9": {
    "zh": "生活在高高的大树顶端，\n在枝条间跳跃移动时\n能靠尾巴巧妙地保持平衡。",
@@ -49327,7 +49327,7 @@
     "17DB44C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449A20": {
    "zh": "用大大的双眼360度\n环视四周来寻找\n可以作为食物的虫子。",
@@ -49356,7 +49356,7 @@
     "17DB494:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449AD7": {
    "zh": "由于性格优哉游哉的，\n游泳时头会撞上\n河底的石头或船底。",
@@ -49385,7 +49385,7 @@
     "17DB4DC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449B9E": {
    "zh": "为了使捕食者恐惧，\n身上的环状花纹在天黑时\n会自然地发出诡异的光芒。",
@@ -49414,7 +49414,7 @@
     "17DB524:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449C72": {
    "zh": "由于在被啃咬时渗入大脑中的毒素\n起了作用，导致自己非凡能力的觉醒\n而成为呆呆兽中的首领。",
@@ -49473,7 +49473,7 @@
     "17DB5D8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449E5B": {
    "zh": "一边倒吊着一边等待\n作为食物的虫子飞过，\n自己本身却很少活动。",
@@ -49492,7 +49492,7 @@
     "17DB5FC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449EBC": {
    "zh": "紧紧地贴着树不动，\n会在地面上散布坚硬外壳的碎片\n来让天敌无法靠近。",
@@ -49511,7 +49511,7 @@
     "17DB620:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449F26": {
    "zh": "被谁发现行踪时\n便用尾巴挖洞逃走，\n翅膀也稍微能飞一点点高。",
@@ -49530,7 +49530,7 @@
     "17DB644:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449F86": {
    "zh": "一直都贴在崖壁上，\n发现猎物时便张开翅膀\n乘着风猛扑过去。",
@@ -49549,7 +49549,7 @@
     "17DB668:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0449FEC": {
    "zh": "据说大岩蛇活了一百年以上，\n身体的成分就会发生变化，\n成为金刚石一般。",
@@ -49568,7 +49568,7 @@
     "17DB68C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A052": {
    "zh": "有着活泼喜欢玩乐的性格，\n所以有很多的女性\n争相与其玩耍。",
@@ -49597,7 +49597,7 @@
     "17DB6D4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A120": {
    "zh": "全身的小针是由鳞片变化而来的，\n被刺中时便会因中毒\n而慢慢失去意识。",
@@ -49677,7 +49677,7 @@
     "17DB7D0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A3DB": {
    "zh": "大量出现在火山地带，\n为寻找温暖的地方\n而慢吞吞地爬来爬去。",
@@ -49716,7 +49716,7 @@
     "17DB83C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A4F2": {
    "zh": "朝着对手直冲上去时，\n背上的毛会倒竖起来，\n对声音极度敏感。",
@@ -49735,7 +49735,7 @@
     "17DB860:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A556": {
    "zh": "在南部的海之国度里，\n人们都生活在大群的\n太阳珊瑚形成的珊瑚礁之上。",
@@ -49754,7 +49754,7 @@
     "17DB884:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A5B8": {
    "zh": "会用变化成吸盘状的背鳍\n吸附在巨翅飞鱼身上，\n然后分食其吃剩的东西。",
@@ -49773,7 +49773,7 @@
     "17DB8A8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A61E": {
    "zh": "有着生活在岩洞中的习性，\n想睡觉时便会夺取\n其它章鱼桶的巢穴。",
@@ -49792,7 +49792,7 @@
     "17DB8CC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A686": {
    "zh": "为了在峭壁顶端\n巢穴里的雏鸟们不被饿着，\n一整天都在寻找并运送食物。",
@@ -49821,7 +49821,7 @@
     "17DB914:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A751": {
    "zh": "喜欢在荆棘丛里筑巢，\n因为被刺弄伤而锻炼出的\n雏鸟的翅膀会变得更硬。",
@@ -49840,7 +49840,7 @@
     "17DB938:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A7AF": {
    "zh": "用只有同伴能理解的叫声\n相互确定位置，\n并一起追击猎物。",
@@ -49869,7 +49869,7 @@
     "17DB980:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A870": {
    "zh": "好像为了积蓄力量\n而沉睡在深深的海底，\n据说觉醒之时会引起强烈的龙卷风。",
@@ -49888,7 +49888,7 @@
     "17DB9A4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A8D3": {
    "zh": "用碰鼻子来表达爱意，\n但因为力道过大\n而一不小心便会将对方推倒。",
@@ -49917,7 +49917,7 @@
     "17DB9EC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044A99E": {
    "zh": "随着研究的不断深入，\n能力得到了提高，不过有时会\n展现出程序里没有设定的行为。",
@@ -49936,7 +49936,7 @@
     "17DBA10:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AA04": {
    "zh": "看着其角的造型\n会感觉变得奇怪，然后会发现\n自己渐渐连站都站不住了。",
@@ -49955,7 +49955,7 @@
     "17DBA34:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AA68": {
    "zh": "有着成年之后\n就会让同伴在身上\n画下特殊标记的习性。",
@@ -49974,7 +49974,7 @@
     "17DBA58:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AAC7": {
    "zh": "发现可以欺负的对手便会\n马上扑上去殴打一顿，所以\n它身体很小也千万不能掉以轻心。",
@@ -49993,7 +49993,7 @@
     "17DBA7C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AB2C": {
    "zh": "不断旋转身体使出踢击，\n能保持高速旋转的状态\n潜入地面之下。",
@@ -50012,7 +50012,7 @@
     "17DBAA0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AB8F": {
    "zh": "一直做出接吻的样子，\n随着舒畅的节奏\n不停地摇晃脑袋。",
@@ -50052,7 +50052,7 @@
     "17DBB0C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044ACB3": {
    "zh": "在产仔时期\n挤出的牛奶的营养\n比平时更加丰富。",
@@ -50081,7 +50081,7 @@
     "17DBB54:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AD78": {
    "zh": "能吼出如落雷般的叫声，\n在大地上四处奔跑的\n传说中的宝可梦之一。",
@@ -50100,7 +50100,7 @@
     "17DBB78:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044ADD3": {
    "zh": "据说是在新火山形成时出生的，\n在大地上四处奔跑的\n传说中的宝可梦之一。",
@@ -50119,7 +50119,7 @@
     "17DBB9C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AE38": {
    "zh": "据说其现身之时会莫名地吹起北风，\n在大地上四处奔跑的\n传说中的宝可梦之一。",
@@ -50138,7 +50138,7 @@
     "17DBBC0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AEA0": {
    "zh": "在地下深处诞生，\n不将周围的土地整平\n就不会到地上来。",
@@ -50157,7 +50157,7 @@
     "17DBBE4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AF01": {
    "zh": "虽然被甲壳覆盖，\n却能够自由地跳来跳去，\n既有超群的硬度也有超群的破坏力。",
@@ -50176,7 +50176,7 @@
     "17DBC08:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044AF65": {
    "zh": "拥有轻而易举将周围地形\n改变的力量，有着毫不在意\n周边一切事物的目中无人的性格。",
@@ -50205,7 +50205,7 @@
     "17DBC50:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B033": {
    "zh": "身体闪耀着七色光芒，\n飞过之后便形成彩虹，\n神话传说中的宝可梦。",
@@ -50224,7 +50224,7 @@
     "17DBC74:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B09A": {
    "zh": "雪拉比消失踪迹后的森林深处\n所留下的蛋据说是\n从未来带过来的东西。",
@@ -50253,7 +50253,7 @@
     "17DBCBC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B16E": {
    "zh": "发达的大腿肌肉中\n蕴含着惊人的爆发力\n和跳跃力。",
@@ -50302,7 +50302,7 @@
     "17DBD4C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B2F4": {
    "zh": "遇到强敌时会从臂端\n放出火焰。拥有能够\n跳跃过大厦的跳跃力。",
@@ -50331,7 +50331,7 @@
     "17DBD94:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B3D0": {
    "zh": "在泥泞的场地会发挥出\n自身的本领。一口气就能\n接近身体无法移动的对手。",
@@ -50350,7 +50350,7 @@
     "17DBDB8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B439": {
    "zh": "两腕像岩石一样坚硬，\n一挥就能将对手击倒在地。\n喜欢在美丽的沙滩上筑巢。",
@@ -50369,7 +50369,7 @@
     "17DBDDC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B4A8": {
    "zh": "嗅觉敏锐，绝对不会\n放走盯上的猎物。\n很麻烦的性格。",
@@ -50388,7 +50388,7 @@
     "17DBE00:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B519": {
    "zh": "绝对服从于优秀训练师的命令。\n很久很久以前\n有群体活动的习性。",
@@ -50407,7 +50407,7 @@
     "17DBE24:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B590": {
    "zh": "好奇心很旺盛的宝可梦。\n不论对什么都感兴趣，\n所以总是在不停地跑动着。",
@@ -50436,7 +50436,7 @@
     "17DBE6C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B664": {
    "zh": "生存在草原森林里。\n被敌人攻击时，\n用毒刺直指对手进行反抗。",
@@ -50455,7 +50455,7 @@
     "17DBE90:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044B6D6": {
    "zh": "尽可能保持静止来积蓄能量。\n在丝茧中等待着\n进化时刻的到来。",
@@ -50584,7 +50584,7 @@
     "17DC040:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BBDF": {
    "zh": "迎着海风像滑翔机一样滑翔。\n到了冬天会把食物\n储藏在巢的附近。",
@@ -50654,7 +50654,7 @@
     "17DC118:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BE36": {
    "zh": "作为特征的触角上\n有眼珠模样的花纹，\n沾上雨水变重后无法再飞起来。",
@@ -50673,7 +50673,7 @@
     "17DC13C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BEAD": {
    "zh": "喜欢潮湿的场所，白天的时候\n一直藏在森林的树荫里。\n能从头顶喷出毒粉。",
@@ -50692,7 +50692,7 @@
     "17DC160:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BF1B": {
    "zh": "尾巴上的种子会放出毒孢子。\n会以几乎看不见的快速拳击\n击倒敌人。",
@@ -50711,7 +50711,7 @@
     "17DC184:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BF88": {
    "zh": "一天要睡20小时。\n能够诱出对手的睡意\n也是自身的能力之一。",
@@ -50730,7 +50730,7 @@
     "17DC1A8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044BFE4": {
    "zh": "一直处在暴走状态，\n很快肚子就饿了。\n吃东西的时候也总是安静不下来。",
@@ -50759,7 +50759,7 @@
     "17DC1F0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C0C2": {
    "zh": "由于长年住在地下，\n眼睛几乎什么都看不见。\n用触角触探外界。",
@@ -50808,7 +50808,7 @@
     "17DC280:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C246": {
    "zh": "用脚踩踏地面发出很大的声音，\n产生的超声波具有\n能够吹飞一栋房子的威力。",
@@ -50827,7 +50827,7 @@
     "17DC2A4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C2A7": {
    "zh": "使用体内的孔能够发出\n各种各样的声音。\n距离10公里开外也能听见叫声。",
@@ -50856,7 +50856,7 @@
     "17DC2EC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C382": {
    "zh": "用双足踩踏地面积蓄力量。\n用双手一推就能推开\n10吨的卡车。",
@@ -50885,7 +50885,7 @@
     "17DC334:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C459": {
    "zh": "磁石的鼻子总是朝向北方。\n出门在外的游客\n经常通过它来确定方向。",
@@ -50934,7 +50934,7 @@
     "17DC3C4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C5E9": {
    "zh": "用可爱的脸让对手失去警惕后，\n用大嘴咬住对手。\n一旦咬住绝对不会放开。",
@@ -50963,7 +50963,7 @@
     "17DC40C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C6C6": {
    "zh": "有用钢的铠甲去撞击岩石的习性，\n以溅出火花的大小\n来表现自身的强大。",
@@ -50982,7 +50982,7 @@
     "17DC430:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C738": {
    "zh": "占据大山的一处作为自己的地盘。\n对于擅自进入的外来者\n绝对不会放过，直接击倒。",
@@ -51001,7 +51001,7 @@
     "17DC454:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C7A1": {
    "zh": "每天都坚持进行瑜伽的修行。\n通过冥想来提升\n自己的精神力。",
@@ -51020,7 +51020,7 @@
     "17DC478:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C7FE": {
    "zh": "用像舞蹈一样优雅的动作\n躲避攻击并发出强力一击\n来使对手晕眩。",
@@ -51049,7 +51049,7 @@
     "17DC4C0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C8CD": {
    "zh": "几乎看不到他出现在\n人群面前的姿态。\n据说居住在雷电落下的地方。",
@@ -51068,7 +51068,7 @@
     "17DC4E4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C91E": {
    "zh": "从身体散发出火花\n来协助伙伴。有时会\n爬上电柱吸收电力。",
@@ -51087,7 +51087,7 @@
     "17DC508:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044C98D": {
    "zh": "很害怕水。当下雨的时候\n会在屋檐躲雨。\n会散放出火花来鼓励伙伴。",
@@ -51216,7 +51216,7 @@
     "17DC6DC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044CE9F": {
    "zh": "甲壳里燃烧着石炭。\n受到敌人攻击的时候\n会散发出黑色的烟雾逃走。",
@@ -51245,7 +51245,7 @@
     "17DC724:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044CF5A": {
    "zh": "拥有用不可思议的舞步\n操控对手的能力。\n额头上的黑珍珠是珍贵的宝石。",
@@ -51264,7 +51264,7 @@
     "17DC748:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044CFC7": {
    "zh": "据说身上的花纹绝对不会重复。\n毫无章法的步伐\n能够迷惑对手。",
@@ -51283,7 +51283,7 @@
     "17DC76C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D028": {
    "zh": "生存在干燥的沙漠中。\n一直在沙漏形的巢穴中\n等待着猎物落网。",
@@ -51302,7 +51302,7 @@
     "17DC790:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D087": {
    "zh": "激烈地震动羽翅会发出超声波。\n能用消化液溶解掉\n失去意识的猎物。",
@@ -51321,7 +51321,7 @@
     "17DC7B4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D101": {
    "zh": "用翅膀扬起沙漠中的沙砾\n隐藏起自己的身躯。眼睛外层\n红色的护膜可以防御沙砾。",
@@ -51360,7 +51360,7 @@
     "17DC820:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D234": {
    "zh": "绝对不会忽视棉花一般\n翅膀的护理。弄脏的时候\n会到水中冲洗干净。",
@@ -51389,7 +51389,7 @@
     "17DC868:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D300": {
    "zh": "遇到饭匙蛇时浑身的毛发\n都会竖立起来，变成攻击状态。\n尖锐的爪子是最大的武器。",
@@ -51408,7 +51408,7 @@
     "17DC88C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D375": {
    "zh": "在坚硬的岩石上磨尾巴。\n藏在茂密的草木中，\n等到猎物靠近时用毒牙发起攻击。",
@@ -51467,7 +51467,7 @@
     "17DC940:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D581": {
    "zh": "来自外国的宝可梦。就算是在\n被污染的河流中也会不断繁殖，\n生命力很强的家伙。",
@@ -51486,7 +51486,7 @@
     "17DC964:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D5EE": {
    "zh": "挥舞着巨夹的\n狂暴的家伙。据说是\n很难培育的宝可梦。",
@@ -51515,7 +51515,7 @@
     "17DC9AC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044D6BE": {
    "zh": "似乎是古代的泥人偶\n变成的宝可梦。能够使用念力\n漂浮在空中移动。",
@@ -51684,7 +51684,7 @@
     "17DCC10:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DD5C": {
    "zh": "具有群体行动的习性。\n在洞穴中睡觉的时候\n喜欢和伙伴挤靠在一起。",
@@ -51703,7 +51703,7 @@
     "17DCC34:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DDB7": {
    "zh": "据说有它居住的人家\n会变得富有。\n就算零下100度也无所谓。",
@@ -51722,7 +51722,7 @@
     "0E76E5C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DE29": {
    "zh": "具有火焰也无法融化的\n冰结的躯体。能够让\n空气中的水分在一瞬间冻结。",
@@ -51741,7 +51741,7 @@
     "17DCC7C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DE94": {
    "zh": "厚厚的体毛覆盖着身体，\n所以就算在冰面上打转\n也不会觉得冷。",
@@ -51760,7 +51760,7 @@
     "17DCCA0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DEF7": {
    "zh": "用鼻子接触对方来记住\n触感和味道。会把海狮球\n顶在鼻子上转来转去地玩耍。",
@@ -51779,7 +51779,7 @@
     "17DCCC4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044DF61": {
    "zh": "用巨大的牙齿击碎浮冰，\n在海中游水。厚厚的脂肪\n保护着身体。",
@@ -51818,7 +51818,7 @@
     "17DCD30:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E09B": {
    "zh": "游泳的身形非常优雅。\n用细细的嘴巴吃掉\n岩石的缝隙中生长的海草。",
@@ -51847,7 +51847,7 @@
     "17DCD78:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E16C": {
    "zh": "处于繁殖期的它们会\n大量聚集在珊瑚礁附近，\n海面都会变成粉红的颜色。",
@@ -51876,7 +51876,7 @@
     "17DCDC0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E22E": {
    "zh": "会反弹所有的攻击。\n但因为太结实了，身体\n变得太重，行动有些迟钝。",
@@ -51895,7 +51895,7 @@
     "17DCDE4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E2A6": {
    "zh": "一发起怒根本不允许靠近。\n用爪子切裂所有的东西，\n喷出火焰将全部燃烧破坏掉。",
@@ -51994,7 +51994,7 @@
     "17DCF28:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E653": {
    "zh": "据说会通过降下大雨\n来扩大海洋的宝可梦。\n具有操控水的力量。",
@@ -52013,7 +52013,7 @@
     "17DCF4C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "044E6BE": {
    "zh": "传闻它和盖欧卡的殊死战斗\n结束后进入长眠。被称为\n大地的化身的传说中的宝可梦。",
@@ -52093,7 +52093,7 @@
     "0456534:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "045422A": {
    "zh": "( ( ( ( ( ( ( 一个人用的\n小桌子。",
@@ -52102,7 +52102,7 @@
     "0456554:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "045422C": {
    "zh": "( ( ( ( ( ( 一个人用的\n小桌子。",
@@ -52111,7 +52111,7 @@
     "0456574:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "045422E": {
    "zh": "( ( ( ( ( 一个人用的\n小桌子。",
@@ -52120,7 +52120,7 @@
     "0456594:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454230": {
    "zh": "( ( ( ( 一个人用的\n小桌子。",
@@ -52129,7 +52129,7 @@
     "04565B4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454232": {
    "zh": "( ( ( 一个人用的\n小桌子。",
@@ -52138,7 +52138,7 @@
     "04565D4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454234": {
    "zh": "( ( 一个人用的\n小桌子。",
@@ -52147,7 +52147,7 @@
     "04565F4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454236": {
    "zh": "( 一个人用的\n小桌子。",
@@ -52156,7 +52156,7 @@
     "0456614:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454238": {
    "zh": "一个人用的\n小桌子。",
@@ -52166,7 +52166,7 @@
     "0455730:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0454254": {
    "zh": "按照精灵球\n外型来设计\n的小桌子。",
@@ -54196,7 +54196,7 @@
     "0459A20:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0459A00": {
    "zh": "9表啊   ",
@@ -59350,7 +59350,7 @@
     "0EEABCC:aligned"
    ],
    "untrusted": 5,
-   "suspect": false
+   "suspect": true
   },
   "07B061A": {
    "zh": "……嗯～\n这里真是不可思议啊。",
@@ -60025,7 +60025,7 @@
     "0376800:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "07B5574": {
    "zh": "雅典娜大人，\n已经可以撤退了。",
@@ -63544,7 +63544,7 @@
     "1A45F00:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "08F84F3": {
    "zh": "远方朋友的约定",
@@ -64489,7 +64489,7 @@
     "1088FC8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "08F9CB3": {
    "zh": "脬交朋友或许没那么难.",
@@ -64498,7 +64498,7 @@
     "1088FB4:aligned"
    ],
    "untrusted": 4,
-   "suspect": false
+   "suspect": true
   },
   "08F9CC9": {
    "zh": "同一片天空 · 续",
@@ -73474,7 +73474,7 @@
     "017FE70:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "09E0CB7": {
    "zh": "豪力:哦哦哦哦哦！",
@@ -73501,7 +73501,7 @@
     "08F96A4:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "09E0D09": {
    "zh": "虽然很Sad，\n但是这里并不能冲浪……",
@@ -73556,7 +73556,7 @@
     "01ADF08:aligned"
    ],
    "untrusted": 4,
-   "suspect": false
+   "suspect": true
   },
   "09E0E0B": {
    "zh": "谢谢，\n那我就献丑了。",
@@ -73609,7 +73609,7 @@
     "023E5D0:aligned"
    ],
    "untrusted": 2,
-   "suspect": false
+   "suspect": true
   },
   "09E0E69": {
    "zh": "好吧，\n那我就不献丑了。",
@@ -73627,7 +73627,7 @@
     "01B037C:aligned"
    ],
    "untrusted": 5,
-   "suspect": false
+   "suspect": true
   },
   "09E0E81": {
    "zh": "谢谢，\n那我就献丑了。",
@@ -73647,7 +73647,7 @@
     "01B03F4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "09E0E88": {
    "zh": "C我就献丑了。",
@@ -75221,7 +75221,7 @@
     "0167CB8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "09ED03D": {
    "zh": "钱好像不够呢。",
@@ -80086,7 +80086,7 @@
     "1C8B07C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0AA6D36": {
    "zh": "请参加下次的\n捕虫大会吧！",
@@ -85299,7 +85299,7 @@
     "01B6A44:aligned"
    ],
    "untrusted": 15,
-   "suspect": false
+   "suspect": true
   },
   "0AF0E1A": {
    "zh": "电网",
@@ -88071,7 +88071,7 @@
     "0235294:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0D58AF9": {
    "zh": "一定没{F9:D3}问{F9:D3}题{F9:D3}的！\n我先出发啦！",
@@ -88509,7 +88509,7 @@
     "03D3DFC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E37A36": {
    "zh": "音乐速度随模拟器加速变化。",
@@ -88984,7 +88984,7 @@
     "0238D8C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E38642": {
    "zh": "超级皮可西",
@@ -89281,7 +89281,7 @@
     "0440110:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E38A70": {
    "zh": "拉多和盖欧卡。",
@@ -89290,7 +89290,7 @@
     "0235D74:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E38A7E": {
    "zh": "超级烈空坐",
@@ -89534,7 +89534,7 @@
     "0237214:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E38DAF": {
    "zh": "超级波士可多拉",
@@ -89804,7 +89804,7 @@
     "03D3E04:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E39172": {
    "zh": "破坏的本能被进一步激发，\n会毫不留情地摧毁一切。",
@@ -90182,7 +90182,7 @@
     "0440114:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3957C": {
    "zh": "魅力喵玩偶",
@@ -90209,7 +90209,7 @@
     "0235D7C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3959D": {
    "zh": "向尾喵玩偶",
@@ -91192,7 +91192,7 @@
     "0237FE4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3AE0E": {
    "zh": "洞穴深处的回响",
@@ -91345,7 +91345,7 @@
     "03D3E0C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3B0EA": {
    "zh": "失散的过动猿",
@@ -91570,7 +91570,7 @@
     "044011C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3B4D4": {
    "zh": "目标是虫属性大师",
@@ -91589,7 +91589,7 @@
     "023722C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3B4E5": {
    "zh": "我想要给我的恋人寄一封信，\n希望有人能来帮帮我，\n我现在正在道馆附近。",
@@ -91689,7 +91689,7 @@
     "0238DAC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3B695": {
    "zh": "姆克儿看着就感觉很治愈！\n有人可以把姆克儿给我摸摸吗？\n我在西侧的民居里哦！",
@@ -91707,7 +91707,7 @@
     "0235D94:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3B6DD": {
    "zh": "可爱的姆克儿",
@@ -92563,7 +92563,7 @@
     "03D3E1C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3CBAA": {
    "zh": "闪耀的电波",
@@ -92878,7 +92878,7 @@
     "0235DAC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3CFA3": {
    "zh": "抱住圆木的来客",
@@ -93022,7 +93022,7 @@
     "023724C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3D15A": {
    "zh": "帮助图书馆\n回收逾期的图书。",
@@ -93777,7 +93777,7 @@
     "03D3E24:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DBD4": {
    "zh": "是未知图腾之间\n以电波进行联络对话的\n强有力证明。",
@@ -93815,7 +93815,7 @@
     "0235DBC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DF78": {
    "zh": "已知未知图腾有与英文字母\n一样多的种类。已确认的\n字母有26个，而已确认的\n未知图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93834,7 +93834,7 @@
     "0E42784:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DF99": {
    "zh": "种类。已确认的\n字母有26个，而已确认的\n未知图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93843,7 +93843,7 @@
     "0E42780:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFA4": {
    "zh": "的\n字母有26个，而已确认的\n未知图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93852,7 +93852,7 @@
     "0E42778:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFAA": {
    "zh": "-有26个，而已确认的\n未知图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93861,7 +93861,7 @@
     "0E42774:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFBC": {
    "zh": "\n未知图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93870,7 +93870,7 @@
     "0E42768:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFC1": {
    "zh": "图腾种类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93879,7 +93879,7 @@
     "0E42764:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFC6": {
    "zh": "6类也是26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93888,7 +93888,7 @@
     "0E42760:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFCD": {
    "zh": "26种，\n也就是说未知图腾总共只有\n26种，能全部抓齐吗？",
@@ -93897,7 +93897,7 @@
     "0E4275C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFEE": {
    "zh": "种，能全部抓齐吗？",
@@ -93906,7 +93906,7 @@
     "0E4274C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3DFF5": {
    "zh": "部抓齐吗？",
@@ -93915,7 +93915,7 @@
     "0E42748:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3E9B8": {
    "zh": "用炽热沙土攻击。\n有时会灼伤对手。",
@@ -93933,7 +93933,7 @@
     "0237264:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3E9D8": {
    "zh": "{F9:08}146 热沙大地",
@@ -94230,7 +94230,7 @@
     "03D3E2C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3ECA0": {
    "zh": "{F9:08}130 铁滚轮",
@@ -95005,7 +95005,7 @@
     "03D3E30:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3F3DD": {
    "zh": "用坚硬尾巴拍打。\n连续攻击2至5次。",
@@ -95437,7 +95437,7 @@
     "0235DD4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3F7E2": {
    "zh": "{F9:08}064 加农水炮",
@@ -96266,7 +96266,7 @@
     "0235DDC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E3FF82": {
    "zh": "回复自身HP。\n天气会影响回复量。",
@@ -96473,7 +96473,7 @@
     "023727C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0E40154": {
    "zh": "用头撞击对手。\n有时使对手畏缩。",
@@ -103798,7 +103798,7 @@
     "0E71510:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0EE85D5": {
    "zh": "已为你关闭打击音效！",
@@ -105857,7 +105857,7 @@
     "1170308:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0F3D425": {
    "zh": "是啊～怎么办呢～？\n去搞个大新闻吧～",
@@ -110981,7 +110981,7 @@
     "018497C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0FFABE8": {
    "zh": "由于对宝可梦力量的恐惧，\n人类与宝可梦\n之间的距离变得越来越远。",
@@ -111008,7 +111008,7 @@
     "01B1FEC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "0FFAD29": {
    "zh": "，前行着的人...",
@@ -112353,7 +112353,7 @@
     "0F303C0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "141001B": {
    "zh": "据说，\n由克希的诞生给人类带来了\n令生活变得丰富多彩的智慧。",
@@ -112952,7 +112952,7 @@
     "01BFF08:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1411009": {
    "zh": "一旦被袭击就会从体内喷出棉花。\n趁着敌人把棉花错认为\n木棉球时逃之夭夭。",
@@ -118876,7 +118876,7 @@
     "131B614:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D8E417": {
    "zh": "受到攻击时，会刮起沙暴。",
@@ -120249,7 +120249,7 @@
     "13CBF30:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D90834": {
    "zh": "将爪子磨得更加锋\n利。提高自己的\n攻击和命中率。",
@@ -120322,7 +120322,7 @@
     "019244C:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "1D9093B": {
    "zh": "n\n高攻击和特攻。",
@@ -120336,7 +120336,7 @@
     "1DBCC34:aligned"
    ],
    "untrusted": 22,
-   "suspect": false
+   "suspect": true
   },
   "1D9093C": {
    "zh": "\n高攻击和特攻。",
@@ -120355,7 +120355,7 @@
     "0193354:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "1D90943": {
    "zh": "和特攻。",
@@ -120364,7 +120364,7 @@
     "01943F8:aligned"
    ],
    "untrusted": 13,
-   "suspect": false
+   "suspect": true
   },
   "1D9094B": {
    "zh": "轻巧地跳起神秘而\n又美丽的舞蹈。\n提高自己的特攻\n、特防和速度。",
@@ -120384,7 +120384,7 @@
     "0AEAFC0:aligned"
    ],
    "untrusted": 18,
-   "suspect": false
+   "suspect": true
   },
   "1D90963": {
    "zh": "请-蹈。\n提高自己的特攻\n、特防和速度。",
@@ -120396,7 +120396,7 @@
     "0EC54E8:aligned"
    ],
    "untrusted": 19,
-   "suspect": false
+   "suspect": true
   },
   "1D90965": {
    "zh": "-蹈。\n提高自己的特攻\n、特防和速度。",
@@ -120405,7 +120405,7 @@
     "01820EC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D90970": {
    "zh": "己的特攻\n、特防和速度。",
@@ -120414,7 +120414,7 @@
     "01750EC:aligned"
    ],
    "untrusted": 10,
-   "suspect": false
+   "suspect": true
   },
   "1D9097E": {
    "zh": "和速度。",
@@ -120423,7 +120423,7 @@
     "0AF62CC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D90986": {
    "zh": "用锋利的叶片包裹\n住对手进行攻击\n。有时会降低对\n手的命中率。",
@@ -120441,7 +120441,7 @@
     "017BFAC:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "1D909C0": {
    "zh": "以敏捷的动作瞄准\n对手的脚进行攻\n击。降低对手的\n速度。",
@@ -120459,7 +120459,7 @@
     "0ECB804:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D909DF": {
    "zh": "\n击。降低对手的\n速度。",
@@ -120468,7 +120468,7 @@
     "0194BD8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D909F4": {
    "zh": "没完没了地大声斥\n责,从而降低对\n手的特攻。",
@@ -120486,7 +120486,7 @@
     "0F57DE8:aligned"
    ],
    "untrusted": 25,
-   "suspect": false
+   "suspect": true
   },
   "1D909FE": {
    "zh": "大声斥\n责,从而降低对\n手的特攻。",
@@ -120504,7 +120504,7 @@
     "1DB6DC0:aligned"
    ],
    "untrusted": 96,
-   "suspect": false
+   "suspect": true
   },
   "1D909FF": {
    "zh": "Y声斥\n责,从而降低对\n手的特攻。",
@@ -120623,7 +120623,7 @@
     "0EEBB74:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D90C54": {
    "zh": "蓄力攻击。如果能\n在对手之后攻击,\n招式的威力会\n变成2倍。",
@@ -120672,7 +120672,7 @@
     "0F57E88:aligned"
    ],
    "untrusted": 8,
-   "suspect": false
+   "suspect": true
   },
   "1D90D9B": {
    "zh": "用烈焰包裹住对手\n进行攻击。让对\n手陷入灼伤状态\n。",
@@ -125097,7 +125097,7 @@
     "1FF3CF4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B319": {
    "zh": "\n超级{FD:34}！",
@@ -125106,7 +125106,7 @@
     "1FF3CF8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B322": {
    "zh": "{FD:39}热切的心愿\n传达给了{FD:00}！",
@@ -125124,7 +125124,7 @@
     "1FF3D00:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B342": {
    "zh": "9芒即将从\n{FD:13}体内爆发！",
@@ -125142,7 +125142,7 @@
     "1FF3D10:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B350": {
    "zh": "内爆发！",
@@ -125151,7 +125151,7 @@
     "1FF3D14:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B359": {
    "zh": "茯燥K究极爆发\n取回了真正的力量！",
@@ -125169,7 +125169,7 @@
     "1FF3D1C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B369": {
    "zh": "回了真正的力量！",
@@ -125178,7 +125178,7 @@
     "1FF3D20:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B426": {
    "zh": "X醒了！",
@@ -125205,7 +125205,7 @@
     "1FF3D98:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B457": {
    "zh": "愈之愿在\n{FD:0F}身上实现了！",
@@ -125223,7 +125223,7 @@
     "1FF3DA4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B472": {
    "zh": "神秘的月光\n包裹了！",
@@ -125241,7 +125241,7 @@
     "1FF3DB0:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1D9B487": {
    "zh": "雨停息了！",
@@ -128598,7 +128598,7 @@
     "018BE28:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DA027F": {
    "zh": "{FD:13}的\n挑衅效果解除了！",
@@ -141023,7 +141023,7 @@
     "1DC3640:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DC364C": {
    "zh": "块啊",
@@ -141898,7 +141898,7 @@
     "1DE47C8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DE4A6F": {
    "zh": "寝叉叉 曹埃",
@@ -141926,7 +141926,7 @@
     "1DE47B4:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DE670C": {
    "zh": " 倒F    犒j轮 噪    驶驶 轵 ",
@@ -143888,7 +143888,7 @@
     "1172260:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1FFF80D": {
    "zh": "前往龙穴深处吧!",

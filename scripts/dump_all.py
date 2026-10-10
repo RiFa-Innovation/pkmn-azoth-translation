@@ -109,7 +109,14 @@ def mark_suspects(strings):
     for t, v in strings.items():
         for r in v["refs"]:
             ref_at[int(r.split(":")[0], 16)] = t
-    for v in strings.values():
+    starts = sorted(strings)
+    interior = set()  # starts strictly inside another string's bytes
+    for i, a in enumerate(starts):
+        for b in starts[i + 1:]:
+            if b >= a + strings[a]["cap"]:
+                break
+            interior.add(b)
+    for t, v in strings.items():
         if any(not r.endswith(":aligned") for r in v["refs"]):
             v["suspect"] = False
             continue
@@ -118,7 +125,7 @@ def mark_suspects(strings):
         rare = sum(1 for c in hz if freq[c] < 2) / len(hz)
         in_table = any(int(r.split(":")[0], 16) - 4 in ref_at
                        and int(r.split(":")[0], 16) + 4 in ref_at for r in v["refs"])
-        v["suspect"] = (s.startswith("♂") or "缕曹" in s
+        v["suspect"] = (t in interior or s.startswith("♂") or "缕曹" in s
                         or sum(1 for c in hz if c in DATA_CHARS) >= 2
                         or (not in_table and (rare > 0.34 or (len(hz) <= 4 and rare > 0))))
 

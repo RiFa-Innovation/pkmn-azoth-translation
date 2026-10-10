@@ -172,6 +172,7 @@ _ENC = {v: k for k, v in VANILLA.items() if k >= 0x1F or k in (0x00, 0x1B, 0x06)
 _ENC.update({"\u2019": 0xB4, "\u2018": 0xB3, "\u201c": 0xB1, "\u201d": 0xB2,
              "'": 0xB4, '"': 0xB2, "\u2026": 0xB0})
 _ENC = {k: v for k, v in _ENC.items() if not 0x36 <= v <= 0x3E}
+_ENC.update({"~": 0x39, "\u2014": 0x38, ";": 0x36})  # hack-drawn ～ — ；
 _TOKEN = re.compile(r"\{(F[789AB-D]|FC):?([0-9A-F ]*)\}|\{(FA|FB)\}")
 
 
