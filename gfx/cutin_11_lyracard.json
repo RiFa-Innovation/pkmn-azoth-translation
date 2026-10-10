@@ -1,0 +1,62 @@
+{
+ "_doc": "Lyra intro card 琴音 / CV.千本木彩花",
+ "tiles": {
+  "lz": "1EC79A4",
+  "refs": [
+   "1DE4FAC"
+  ]
+ },
+ "map": {
+  "lz": "1EC8200",
+  "refs": [
+   "1DE4FB0"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 13,
+ "max_tiles": 900,
+ "edits": [
+  {
+   "erase": [
+    136,
+    62,
+    176,
+    77
+   ],
+   "erase_colors": [
+    1,
+    2
+   ],
+   "bg": 0,
+   "text": "Lyra",
+   "font": "normal",
+   "at": [
+    142,
+    61
+   ],
+   "ink": 2,
+   "shadow": 1
+  },
+  {
+   "erase": [
+    120,
+    79,
+    232,
+    93
+   ],
+   "erase_colors": [
+    1,
+    2
+   ],
+   "bg": 0,
+   "text": "CV. Ayaka Senbongi",
+   "at": [
+    130,
+    77
+   ],
+   "ink": 2,
+   "shadow": 1
+  }
+ ]
+}

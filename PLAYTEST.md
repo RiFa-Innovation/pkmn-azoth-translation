@@ -29,6 +29,8 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 37-route30 | Route 30 entrance from Cherrygrove |
 | 38-mrpokemon | inside Mr. Pokémon's house |
 | 40-oak | after Oak gives the Pokédex |
+| 42-elmcall | Route 30 after Elm's call (go back to the lab) |
+| 44-cutin | rival cut-in on the Cherrygrove/Route 29 border |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -44,7 +46,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 6 | start menu | trainer-card icon has no label (player-name code prints blank; also in the Chinese ROM) | fixed ("Trainer Card") |
 | 7 | Mom | "Obtained the PokéGear!" vs "Pokégear" elsewhere | open (minor) |
 | 8 | intro video page | Bilibili-style header + Evangelion title card (Japanese kanji) | ok (easter egg) |
-| 9 | Lyra intro | character card graphic still Chinese: 琴音 / CV.千本木彩花 (Lyra / CV. Ayaka Senbongi); likely one card per character | open (graphics) |
+| 9 | Lyra intro | character card graphic still Chinese: 琴音 / CV.千本木彩花 | fixed (cut-in 11: Lyra / CV. Ayaka Senbongi) |
 | 10 | starter choice | prompt 要选择哪一只精灵/作为你的搭档？ baked into the screen's map tileset | fixed (scripts/maptext.py, gfx/map_starter.json) |
 | 11 | leaving the lab | "咕咚!!" is a sound-effect picture (64x64 sprite, entry 13 of the picture table 0x1DE5A08) | fixed ("Thud!", scripts/sprtext.py) |
 | 12 | New Bark triggers | "喂，{FD:01}！" and 16 other one-hanzi lines never dumped (filter needed 2 hanzi) | fixed (dump accepts short script lines) |
@@ -66,3 +68,5 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 28 | dump | 297 'strings' that are Thumb code (function pointers decoded as text) | fixed (dump skips targets inside code) |
 | 29 | Cherrygrove PC girl | birthday month: typing "12" (ABC or symbol-page digits) is rejected and the prompt reopens - same in the Chinese ROM. Parser 0x09D5D7CC accepts FR digits 0xA1-0xAA into VAR_RESULT; the girl's script may use another routine. Her lines so far are English | open (hack behaviour; investigate which routine she uses) |
 | 30 | dialogue name box | "Mr. Pokém" cut: the box is 6 tiles (fits 4 hanzi) | fixed (all 84 box setups widened to 8 tiles; names trimmed of centring spaces; 5 long ones shortened) |
+| 31 | rival / Lyra cut-ins | captions baked into the cut-in pictures (table 0x1DE4F28): 不明白什么意思？…, 我的名字是？？？, 要成为世界最强…, 我对你……不！, 能遇见你，真是太好了！, B返回 | fixed (gfx/cutin_*.json, FireRed font) |
+| 32 | rival battle | "Passerby wants to battle!" for the unnamed rival | ok? (check what the Chinese says) |

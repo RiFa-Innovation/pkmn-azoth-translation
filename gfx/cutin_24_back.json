@@ -1,0 +1,41 @@
+{
+ "_doc": "Button hint B返回 in cut-in 24",
+ "tiles": {
+  "lz": "1ECCE54",
+  "refs": [
+   "1DE5048"
+  ]
+ },
+ "map": {
+  "lz": "1ECCEF0",
+  "refs": [
+   "1DE504C"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 13,
+ "max_tiles": 900,
+ "edits": [
+  {
+   "erase": [
+    198,
+    2,
+    224,
+    13
+   ],
+   "erase_colors": [
+    2,
+    3
+   ],
+   "bg": 1,
+   "text": "Back",
+   "at": [
+    200,
+    0
+   ],
+   "ink": 2,
+   "shadow": 3
+  }
+ ]
+}

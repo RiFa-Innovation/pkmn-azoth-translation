@@ -1,0 +1,43 @@
+{
+ "_doc": "Lyra cut-in caption 能遇见你，真是太好了！",
+ "tiles": {
+  "lz": "1ECFBCC",
+  "refs": [
+   "1DE50A8"
+  ]
+ },
+ "map": {
+  "lz": "1ED0A24",
+  "refs": [
+   "1DE50AC"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 13,
+ "max_tiles": 900,
+ "edits": [
+  {
+   "erase": [
+    0,
+    138,
+    240,
+    158
+   ],
+   "erase_colors": [
+    9,
+    10
+   ],
+   "bg": 1,
+   "text": "I’m so glad I met you!",
+   "font": "normal",
+   "align": "center",
+   "at": [
+    0,
+    140
+   ],
+   "ink": 9,
+   "shadow": 10
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "_doc": "Rival cut-in caption 不明白什么意思？那就让我来告诉你吧！ (cut-in table 0x1DE4F28 entry 17: tiles, map, palette)",
+ "tiles": {
+  "lz": "1EC9658",
+  "refs": [
+   "1DE4FF4"
+  ]
+ },
+ "map": {
+  "lz": "1ECA21C",
+  "refs": [
+   "1DE4FF8"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 13,
+ "max_tiles": 900,
+ "edits": [
+  {
+   "erase": [
+    0,
+    138,
+    240,
+    158
+   ],
+   "erase_colors": [
+    13,
+    14
+   ],
+   "bg": 15,
+   "text": "Don’t get it? Then let me show you!",
+   "font": "normal",
+   "align": "center",
+   "at": [
+    0,
+    140
+   ],
+   "ink": 13,
+   "shadow": 14
+  }
+ ]
+}

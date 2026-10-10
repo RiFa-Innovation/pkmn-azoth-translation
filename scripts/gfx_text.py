@@ -97,12 +97,21 @@ def edit(spec, tiles, tmap):
                                 img[dy + yy][x + xx] = c
                     x += sx1 - sx0
         if e.get("text"):
+            if e.get("font") == "normal":  # FireRed's 16px dialogue font
+                import maptext
+                import mercury_text as mt
+                nf = maptext.font()
+                width = sum(nf[1][c] for c in mt.encode_en(e["text"])[:-1])
+                draw = lambda t, x, y: maptext.draw(img, t, x, y, e["ink"], e.get("shadow"), nf)
+            else:
+                width = text_width(e["text"], font)
+                draw = lambda t, x, y: draw_text(img, t, x, y, e["ink"], e.get("shadow"), font)
             tx = e["at"][0]
             if e.get("align") == "center":
-                tx = (x0 + x1 - text_width(e["text"], font)) // 2
+                tx = (x0 + x1 - width) // 2
             elif e.get("align") == "right":
-                tx = x1 - text_width(e["text"], font)
-            draw_text(img, e["text"], tx, e["at"][1], e["ink"], e.get("shadow"), font)
+                tx = x1 - width
+            draw(e["text"], tx, e["at"][1])
     # re-tile every 8x8 cell touched by an edit into new tiles
     cells = set()
     for e in spec["edits"]:

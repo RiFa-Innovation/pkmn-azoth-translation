@@ -1,0 +1,43 @@
+{
+ "_doc": "Rival cut-in caption 要成为世界最强精灵训练师的男人！",
+ "tiles": {
+  "lz": "1ECBBE8",
+  "refs": [
+   "1DE500C"
+  ]
+ },
+ "map": {
+  "lz": "1ECC7BC",
+  "refs": [
+   "1DE5010"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 13,
+ "max_tiles": 900,
+ "edits": [
+  {
+   "erase": [
+    0,
+    138,
+    240,
+    158
+   ],
+   "erase_colors": [
+    13,
+    14
+   ],
+   "bg": 15,
+   "text": "The future world’s strongest Trainer!",
+   "font": "normal",
+   "align": "center",
+   "at": [
+    0,
+    140
+   ],
+   "ink": 13,
+   "shadow": 14
+  }
+ ]
+}
