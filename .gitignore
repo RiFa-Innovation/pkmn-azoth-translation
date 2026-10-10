@@ -18,3 +18,4 @@ utilities/
 __pycache__/
 *.pyc
 .venv/
+saves/

@@ -104,3 +104,10 @@ must be absolute (the bridge's cwd is `utilities/mcp-mgba/lua`).
    - Poké Mart → `¥` glyph.
 5. Optional: register `mcp-mgba` (`node utilities/mcp-mgba/dist/index.js`) as an
    omp MCP server; not required — drive via TCP directly (`scripts/emu.py`).
+
+## Loading a save (opt-in)
+
+`mgba-headless` is patched (gitignored `utilities/mgba`, see `headless-main.c`,
+search `rht:`) to load `ROM.sav` next to the ROM only when `RHT_LOAD_SAVE=1`,
+so scripted runs never write to a player's save. Copy the ROM and save to a
+scratch folder first. Playtest saves are backed up in `saves/` (gitignored).

@@ -61,8 +61,44 @@ def is_ptr(rom, o):
     return 0 <= o <= len(rom) - 4 and rom[o + 3] in (0x08, 0x09)
 
 
+_HM = None
+_FM = None
+
+
+def vanilla_text_symbol(t):
+    """Target is the start of a text symbol in vanilla FireRed (decomp map)."""
+    global _FM
+    if _FM is None:
+        import frmap
+        _FM = frmap.FRMap()
+    sym = _FM.symbol(t)
+    reg = _FM.region(t)
+    return bool(sym and sym[1] == t and reg and (reg[4] == "src/strings.o" or re.search(r"Text|String", sym[0])))
+
+
+def hack_map():
+    """Code map of the whole ROM (vanilla + hack), see hackmap.py."""
+    global _HM
+    if _HM is None:
+        import hackmap
+        _HM = hackmap.HackMap()
+    return _HM
+
+
 def ref_kind(rom, r, text=""):
     """Classify a pointer occurrence; None = untrusted."""
+    hm = hack_map()
+    if hm.is_code(r):            # instruction bytes that merely look like a pointer
+        return None
+    lit = hm.literal(r)
+    if lit is not None:          # a literal-pool word some code loads
+        if lit["anchor"] == "imm":
+            # code adds a constant (GCC section anchor / struct field): it is a
+            # base address, not a pointer to the bytes there
+            return None
+        if lit["anchor"] == "reg" and not vanilla_text_symbol(lit["value"] - 0x08000000):
+            return None          # indexed array/struct base, not a string
+        return "literal"
     if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4) or r < 0x250000):
         return "aligned"
     if rom[r - 2:r] == b"\x0f\x00":  # loadpointer, aligned or not

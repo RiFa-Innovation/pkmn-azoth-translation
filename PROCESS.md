@@ -74,6 +74,33 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
 
+## ROM structure maps (checkpoint 18) — use these before guessing
+
+- `scripts/frmap.py` + `data/fr_map.json`: the vanilla FireRed layout from the
+  pokefirered decomp build (byte-identical to our base ROM): every region's
+  section (code / script / data / gfx / song) and object file, and every
+  symbol. `python3 scripts/frmap.py 0x81C5C78` → `gOakSpeech_Text_...`.
+  Rebuild needs `utilities/pokefirered` built (`make firered`; Homebrew
+  arm-none-eabi-binutils + arm-none-eabi-gcc, agbcc from `utilities/agbcc`).
+- `scripts/hackmap.py` + `data/hack_code.json` (`.venv` for capstone): code map
+  of the whole ROM by recursive disassembly — vanilla functions from the
+  decomp symbols, hack/CFRU functions from plausible Thumb pointers; switch
+  tables via libgcc `__gnu_thumb1_case_*`; CFRU long calls (`_call_via_rX`).
+  Output: instruction ranges, every literal-pool word with its uses and
+  `anchor`: `imm` (code adds a constant — GCC section anchor or struct field)
+  or `reg` (indexed).
+- `dump_all.ref_kind` now asks the maps first: words inside instructions are
+  never pointers; `imm` anchors are never repointed (this was the Pokégear
+  hang: base `0x088EA828` at `0x8E9DD8` had been moved); `reg`-indexed bases
+  only when the decomp says the target is a text symbol. Removed 33 false
+  strings (anchors, table bases like trainer classes/types, in-game trade
+  structs, `0x5C`/`0x67` bytes inside code).
+- Mercury is built on CFRU (battle string loader `0x0203E020`).
+
+Next: text reached only through anchors (Pokégear, quest/notes UI, Continue
+screen 队伍/总时长/设置, intro credits) can now be enumerated exactly from
+`hack_code.json` (anchor value + each use's immediate) and translated in place.
+
 ## Resume point (2026-10-10, checkpoint 16) — intro, start menu, items fixed
 
 `tm_batch.py stats` → **20,347/20,347 strings, 447,015 hanzi**; `insert.py`

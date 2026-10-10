@@ -13668,5 +13668,8 @@
 "你支付了¥{FD:00}\n作为奖金…{FB}… … … …{FB}败北让你眼前一黑！{FC:09}": "You paid ¥{FD:00}\nas prize...{FB}... ... ...{FB}Whited out!{FC:09}",
 "{FD:23}放弃了比赛": "{FD:23} forfeited the match",
 "{FC:06 00}完成任务:<黑曜与钢铁>{FC:07}": "{FC:06 00}Quest complete: <Obsidian and Steel>{FC:07}",
-"{FC:06 00}完成任务:<满金CosPlay大会!?>{FC:07}": "{FC:06 00}Quest complete: <Goldenrod Cosplay Contest!?>{FC:07}"
+"{FC:06 00}完成任务:<满金CosPlay大会!?>{FC:07}": "{FC:06 00}Quest complete: <Goldenrod Cosplay Contest!?>{FC:07}",
+"坚硬岩石": "Solid Rock",
+"女王的威严": "QueenlyMajst",
+"王者咆哮": "King's Roar"
 }
