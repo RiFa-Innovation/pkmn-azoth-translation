@@ -113,6 +113,29 @@ vs vanilla.
   names (also standard Chinese), then enumerate and dump every text table + map
   dialogue.
 
+### Phase 1 — name tables & descriptions (2026-10-09)
+
+- **Charmap grown to ~906 entries** (cleaned: 850 in font range `0x0000–0x1400`).
+- **Name-table coverage**: species **100%** (381/381 — Hoenn resolved via the FR
+  species-enum `+25` offset + exact `species.h` enum), moves **99%**, abilities
+  **92%**, items **59%** (items use fan translations, e.g. 掌门球 for Master Ball).
+- **Relocated addresses** (file offsets): `gSpeciesNames`→`0x141B350`,
+  `gMoveNames`→`0x1D97378`, `gAbilityNames`→`0x1D8E858`; `gItems[].name` unmoved
+  at `0x3DB028` (stride 44). See `scripts/TABLES.md`.
+- **Descriptions are in-place, not relocated**: `gMoveDescriptionPointers` at
+  `0x4886E8` (unchanged) → English strings overwritten with Chinese at `0x482834+`.
+  Dumped 354 move descriptions into `strings.zh.json`. Text is a hybrid encoding:
+  2-byte font-index (lead `0x01–0x14`) + 1-byte controls (`0xFA–0xFF`) + 1-byte
+  punctuation. ~54% of description codes already mapped; the rest need a
+  **Gen 3-specific Chinese source** (veekun's flavor text is later-gen and differs).
+- Tools: `scripts/dump_text.py` (dumpers), `scripts/find_relocated.py`
+  (vanilla→relocated address), `scripts/recon_lz77.py` (LZ77 scan).
+
+Remaining Phase 1: `gStdStringPtrs`, dex entries, ability/item descriptions, and
+map dialogue (script-embedded) — all located the same way (vanilla address →
+`find_relocated.py` → dump). Descriptions/UI text need a Gen 3 Chinese reference
+or a human reader for the residual charmap.
+
 ## 3. Complexity assessment
 
 **Overall: HIGH (7/10).** Not because translation is hard, but because the
