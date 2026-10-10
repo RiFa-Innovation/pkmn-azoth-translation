@@ -97,9 +97,25 @@ See `git log` and `build/insert_report.json` (missing = untranslated count).
   structs, `0x5C`/`0x67` bytes inside code).
 - Mercury is built on CFRU (battle string loader `0x0203E020`).
 
-Next: text reached only through anchors (Pokégear, quest/notes UI, Continue
-screen 队伍/总时长/设置, intro credits) can now be enumerated exactly from
-`hack_code.json` (anchor value + each use's immediate) and translated in place.
+Anchor-reached text (`scripts/anchored.py`, `text/zh_anchored.json`,
+`text/en/anchored.json`): 145 strings found exactly from the code map (anchor
+value + each use's constants): Pokégear phone calls and radio, quest/notes UI,
+trainer card, Ecruteak legend pages. Written in place within the original
+bytes (`anchored.py check` enforces the budget). A string may be relocated
+(anchor literal repointed to new - offset) only when every anchor literal has
+one use and one offset AND every string start within 256 bytes after the base
+is itself a known anchored string — code can also index from the base by
+computed offsets the scan cannot see (repointing 设置's base broke the
+Continue-screen labels next to it). insert.py reserves all in-place targets
+(anchored, manual, code_text) in the free pool before allocating.
+Continue screen labels + trainer-card money/time are manual in-place strings.
+Map-section names (`sMapsecName_*`) were given vanilla English by address
+matching although the hack put Johto names there; fixed in strings.json.
+Audit idea: other vanilla_align route-2 matches can be checked per decomp
+symbol the same way.
+
+Open: Pokégear charm screen header (L R 切换挂件 选择 应用) — graphics or text;
+¥ glyph draws as 元 (font); radio not yet reachable in the playtest save.
 
 ## Resume point (2026-10-10, checkpoint 16) — intro, start menu, items fixed
 

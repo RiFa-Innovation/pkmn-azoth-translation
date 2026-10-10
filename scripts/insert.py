@@ -187,6 +187,15 @@ def main():
     anc_en = json.load(open(anchored.EN, encoding="utf-8")) if os.path.exists(anchored.EN) else {}
     for k, v in anc_zh.items():
         pool.reserve(int(k, 16) - 1, int(k, 16) + v["cap"])
+    # in-place manual strings and code-anchored text likewise
+    for k, v in json.load(open("text/en/manual_strings.json", encoding="utf-8")).items():
+        if not k.startswith("_"):
+            pool.reserve(int(k, 16) - 1, int(k, 16) + v["cap"])
+    for name, blk in json.load(open("text/en/code_text.json", encoding="utf-8")).items():
+        if not name.startswith("_"):
+            for st in blk["strings"]:
+                a = int(st["zh_at"], 16)
+                pool.reserve(a - 1, src.index(b"\xff", a) + 1)
     report["free_before_reloc"] = pool.total()
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
         a = pool.alloc(len(b))

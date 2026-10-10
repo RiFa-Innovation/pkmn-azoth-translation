@@ -66,17 +66,32 @@ def build():
 _HM = None
 
 
+_ROM = _KNOWN = None
+
+
 def relocatable(entry):
     """Every anchor reaching the string is a literal with exactly one use and
-    one offset: repointing it to (new address - offset) moves only this text."""
-    global _HM
+    one offset, AND every other string start within 256 bytes after the base
+    is itself a known anchored string (code may also index from the base by
+    computed offsets the scan cannot see, e.g. the Continue-screen labels
+    beside 设置 at base 0x08FA18C0). Then repointing the literal to
+    (new address - offset) moves only this text."""
+    global _HM, _ROM, _KNOWN
     if _HM is None:
         import hackmap
         _HM = hackmap.HackMap()
+        _ROM = open(ROM, "rb").read()
+        _KNOWN = {int(k, 16) for k in json.load(open(ZH, encoding="utf-8"))}
     for lit, off in entry["anchors"]:
         L = _HM.literal(int(lit, 16))
         if not L or L["offs"] != [off] or len(L["uses"]) != 1:
             return False
+        base = L["value"] - 0x08000000
+        for t in range(base, base + 0x100):
+            if _ROM[t - 1] == 0xFF and _ROM[t] != 0xFF and t not in _KNOWN:
+                s, e = mt.decode(_ROM, t, 256)
+                if HANZI.search(s):
+                    return False
     return True
 
 
