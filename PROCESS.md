@@ -105,7 +105,8 @@ Graphics text (checkpoint 17) — all known image text redrawn, applied by
   5x8 button capitals (`gfx/font5.json`); edited cells get fresh tiles, map
   patched, LZ77 recompressed + relocated. Specs: `settings` (header/footer),
   `charsel` (prompt), `nameentry` (OBJ sheet: CHN / BACK / DONE).
-- `scripts/logo.py`: title logo (raw 8bpp BG0) → POKéMON / Pokémon / MERCURY,
+- `scripts/logo.py`: title logo (raw 8bpp BG0) → POKéMON / MERCURY (small
+  "Pokémon" wordmark removed),
   macOS Impact + Arial Black, quantised to the logo's own 64 palette entries,
   written in place (150 ≤ 162 tiles).
 

@@ -103,10 +103,16 @@ def inpaint(img, box, bad):
 
 def build_image(rom):
     img = original(rom)
-    # 1. erase 口袋妖怪 and its Poké Ball (keep the plate, ® and the official
-    #    "Pokémon" wordmark below, rows 48+)
+    # 1. erase 口袋妖怪 and its Poké Ball (keep the plate and ®)
     bad = BLUES | {30, 21, 22, 24, 56, 57, 15, 60, 63, 62}
     inpaint(img, (34, 12, 164, 48), bad)
+    # 1b. erase the small "Pokémon" wordmark (the big title already says it):
+    #     each row is refilled from the plate pixels just outside the band
+    wx0, wy0, wx1, wy1 = 45, 47, 141, 59
+    for y in range(wy0, wy1):
+        left, right = img[y][wx0 - 1], img[y][wx1]
+        for x in range(wx0, wx1):
+            img[y][x] = left if x < (wx0 + wx1) // 2 else right
     # 2. erase 水银 entirely (it sits on the transparent background)
     for y in range(40, H):
         for x in range(146, 216):
@@ -123,10 +129,11 @@ def build_image(rom):
         for x in range(bw):
             if big[y][x] and (y == 0 or not big[y - 1][x]):
                 img[by + y][bx + x] = WHITE
-    # 4. MERCURY where 水银 was, italic, white rim + navy outer like 水银
+    # 4. MERCURY in the wordmark's place under the title, italic, white rim +
+    #    navy outer like 水银
     sub = mask_text("MERCURY", FONT_SUB, 15, shear=0.25, spacing=0)
     sw, sh = len(sub[0]), len(sub)
-    sx, sy = 216 - sw, 59
+    sx, sy = 99 - sw // 2, 49
     stamp(img, dilate(sub, 2), sx - 2, sy - 2, lambda x, y, h: NAVY)
     stamp(img, dilate(sub, 1), sx - 1, sy - 1, lambda x, y, h: WHITE)
     stamp(img, sub, sx, sy, lambda x, y, h: SUB_FILL[min(len(SUB_FILL) - 1, y * len(SUB_FILL) // h)])
