@@ -24,6 +24,8 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 26-fight | battle, action menu |
 | 28-afterbattle | Route 29 after the first wild battle |
 | 30-bag | bag open on Route 29 |
+| 31-cherrygrove | Cherrygrove beach, just arrived from Route 29 |
+| 32-pc | Cherrygrove Pokémon Center, facing the birthday-month girl |
 | 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
@@ -57,3 +59,5 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 24 | battle | "Chikorita gained  17 Exp. Points!" double space | open (minor) |
 | 25 | bag | pocket tabs cut: Training It…, Battle Item…, Evolution I…, Special Gem…, Materials &… | fixed (Training/Battle/Evolution/Gems/Materials) |
 | 26 | bag | item descriptions run into the arrow / past 3 lines (box ~176px, starts after the icon) | fixed (wrap at 176px; 129 long ones shortened; 0 over 3 lines) |
+| 27 | Cherrygrove PC girl | birthday-month prompt reset the game: the hack calls DoNamingScreen with template 0 (and at hook+2) and writes hack-only fields; FireRed's screen can't serve it | fixed (dispatcher data/naming_dispatch.s: intro + templates 1-4 -> FireRed screen, template 0/5+ and hook+2 callers -> hack screen, which keeps its English buttons and ABC default) |
+| 28 | dump | 297 'strings' that are Thumb code (function pointers decoded as text) | fixed (dump skips targets inside code) |

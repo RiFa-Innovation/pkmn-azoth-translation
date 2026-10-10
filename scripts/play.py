@@ -81,7 +81,7 @@ def walk(e, d, n):
     stuck = 0
     while (pos(e)[:2]) != target and stuck < 3:
         before = pos(e)[:2]
-        e.press(DIRS[d], hold=3, release=4)   # a tap starts one step (or turns)
+        e.press(DIRS[d], hold=6, release=4)   # a tap starts one step (or turns)
         e.wait(14)                            # a walking step is 16 frames
         if pos(e)[:2] == before:
             stuck += 1
@@ -199,3 +199,137 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def in_battle(e):
+    return struct.unpack("<I", e.read(0x030030F4, 4))[0] != OVERWORLD_CB2
+
+
+OVERWORLD_CB2 = 0x080565B5  # CB2_Overworld in this ROM
+
+
+def flee(e):
+    """Run from a wild battle: wait for the action menu, pick Run."""
+    for _ in range(40):
+        e.press("B", hold=3, release=6)
+        e.wait(30)
+        e.press("Down", hold=3, release=4); e.wait(6)
+        e.press("Right", hold=3, release=4); e.wait(6)
+        e.press("A", hold=3, release=6); e.wait(60)
+        if not in_battle(e):
+            e.wait(60)
+            return True
+    return False
+
+
+def travel(e, moves):
+    """moves like 'L20 U3': walk, fleeing any wild battle on the way."""
+    for m in moves.split():
+        d, n = m[0], int(m[1:])
+        for _ in range(n):
+            walk(e, d, 1)
+            if in_battle(e):
+                e.wait(240)
+                flee(e)
+
+
+def grid(e):
+    W, H, mp = struct.unpack("<iiI", e.read(VMAP, 12))
+    raw = e.read(mp, W * H * 2)
+    return W, H, [struct.unpack_from("<H", raw, 2 * i)[0] for i in range(W * H)]
+
+
+JUMP = {0x38: "R", 0x39: "L", 0x3A: "U", 0x3B: "D"}  # MB_JUMP_* ledges
+
+
+def behaviors(e):
+    """metatile id -> behaviour (attr & 0x1FF) for the current map's tilesets."""
+    lay = u32(e, MAPHDR)
+    pri, sec = struct.unpack("<II", e.read(lay + 16, 8))
+    out = {}
+    for base, ts in ((0, pri), (640, sec)):
+        attrs = struct.unpack("<I", e.read(ts + 20, 4))[0]
+        n = 640 if base == 0 else 384
+        raw = e.read(attrs, n * 4)
+        for i in range(n):
+            out[base + i] = struct.unpack_from("<I", raw, 4 * i)[0] & 0x1FF
+    return out
+
+
+def path_to(e, tx, ty, blocked=()):
+    """BFS over walkable blocks (collision bits clear); ledges are one-way
+    two-tile jumps -> moves like 'L3 U2'."""
+    from collections import deque
+    W, H, b = grid(e)
+    beh = behaviors(e)
+    x, y, _, _ = pos(e)
+    inside = lambda X, Y: 0 <= X + 7 < W and 0 <= Y + 7 < H
+    blk = lambda X, Y: b[(X + 7) + W * (Y + 7)]
+    ok = lambda X, Y: (inside(X, Y) and (X, Y) not in blocked and not (blk(X, Y) & 0x0C00)
+                       and beh.get(blk(X, Y) & 0x3FF) not in JUMP)
+    elev = lambda X, Y: blk(X, Y) >> 12
+    z0 = elev(x, y)
+    start = (x, y, z0)
+    prev = {start: None}
+    q = deque([start])
+    end = None
+    while q:
+        c = q.popleft()
+        if c[:2] == (tx, ty):
+            end = c
+            break
+        for d, (dx, dy) in DELTA.items():
+            n = (c[0] + dx, c[1] + dy)
+            hop = []
+            if inside(*n) and beh.get(blk(*n) & 0x3FF) in JUMP:
+                if JUMP[beh[blk(*n) & 0x3FF]] != d:
+                    continue
+                hop = [n]
+                n = (n[0] + dx, n[1] + dy)
+            if not (ok(*n) or n == (tx, ty)) or not inside(*n):
+                continue
+            zt = elev(*n)
+            # FR elevation rule: 0/15 tiles connect to anything; otherwise the
+            # tile must match the elevation the player is on (jumps excepted)
+            if zt not in (0, 15) and c[2] not in (0, 15) and zt != c[2] and not hop:
+                continue
+            nz = c[2] if zt in (0, 15) else zt
+            st = (n[0], n[1], nz)
+            if st not in prev:
+                prev[st] = (c, d * (1 + len(hop)))
+                q.append(st)
+    if end is None:
+        return None
+    steps, c = [], end
+    while prev[c]:
+        c, d = prev[c]
+        steps.extend(d)
+    steps.reverse()
+    out = []
+    for d in steps:
+        if out and out[-1][0] == d:
+            out[-1][1] += 1
+        else:
+            out.append([d, 1])
+    return " ".join(f"{d}{n}" for d, n in out)
+
+
+def goto(e, tx, ty, budget=400):
+    """Walk to (tx, ty) one step at a time, re-planning; a step that does not
+    move the player marks that tile blocked (NPCs, followers, odd collision)."""
+    blocked = set()
+    m0 = pos(e)[2:]
+    for _ in range(budget):
+        x, y, *m = pos(e)
+        if (x, y) == (tx, ty) or tuple(m) != m0:
+            return (x, y) == (tx, ty) or tuple(m) != m0
+        p = path_to(e, tx, ty, blocked)
+        if not p:
+            return False
+        d = p[0]
+        n = int(p.split()[0][1:])
+        travel(e, f"{d}1")
+        if pos(e)[:2] == (x, y):
+            dx, dy = DELTA[d]
+            blocked.add((x + dx, y + dy))
+    return False

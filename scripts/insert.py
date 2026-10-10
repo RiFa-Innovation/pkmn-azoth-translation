@@ -36,6 +36,7 @@ DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
 ITEM_DESC_PX = 176  # bag description box: starts after the item icon, ends before the arrow
 HELP_PX = 222
 MIN_FREE_RUN = 512
+NAMING_DISPATCH = "002813d0052811d2f0b5474680b488460006070e1204150c1b041e0c0a4cf22040010a4b00f00ef80949084700900948f7b51e0008ab1d780748084b01911700074c2047184700008c9903029d2b000873d90908b55eff0918270000b12b0008c55eff09"  # data/naming_dispatch.s (arm-none-eabi-as -mthumb; objcopy -O binary)
 FREE_MARGIN = 16
 
 
@@ -95,8 +96,43 @@ class FreePool:
         self.add(a + pad + n, a + n + align - 1)  # give back the unused tail
         return a + pad
 
+    def alloc_near(self, n, lo, hi, align=4):
+        """Aligned n bytes inside [lo, hi) (e.g. within Thumb BL range)."""
+        for r in self.runs:
+            a = max(r[0], lo)
+            a += -a % align
+            if a + n <= min(r[1], hi):
+                if a > r[0]:
+                    self.add(r[0], a)
+                r[0] = a + n
+                return a
+        raise MemoryError(f"no free space for {n} bytes in [{lo:#x}, {hi:#x})")
+
     def total(self):
         return sum(e - s for s, e in self.runs)
+
+
+def naming_dispatch(rom, src, pool):
+    """DoNamingScreen dispatcher (data/naming_dispatch.s, assembled with
+    arm-none-eabi-as; bytes checked in as NAMING_DISPATCH, entry points at
+    +0 / +8 vanilla / +0x2E hack_nostore).
+
+    FireRed's entry 0x0809D954: `b +12` to a Thumb->ARM long jump to the
+    dispatcher (in bytes FireRed's replayed prologue frees); the hack's old
+    hook stays at +2..+11 for the routines that call +2, its literal re-aimed
+    at hack_nostore. The hack's DoNamingScreen entry (only the intro's player
+    naming calls it) long-jumps to the dispatcher's FireRed path."""
+    VAN, HACK = 0x9D954, 0x1FF5EB4
+    assert src[VAN:VAN + 12] == bytes.fromhex("0090014800470000b55eff09")  # the hack's hook
+    assert src[HACK:HACK + 16] == bytes.fromhex("f7b51e0008ab1d781048114b01911700")
+    code = bytes.fromhex(NAMING_DISPATCH)
+    d = pool.alloc_aligned(len(code))
+    rom[d:d + len(code)] = code
+    jump = lambda t: bytes.fromhex("7847c046" "00c09fe5" "1cff2fe1") + (0x08000000 + t + 1).to_bytes(4, "little")
+    rom[VAN:VAN + 2] = bytes.fromhex("04e0")                       # b 0x0809D960
+    rom[VAN + 8:VAN + 12] = (0x08000000 + d + 0x2E + 1).to_bytes(4, "little")  # hook literal
+    rom[VAN + 12:VAN + 28] = jump(d)
+    rom[HACK:HACK + 16] = jump(d + 8)
 
 
 def main():
@@ -343,6 +379,7 @@ def main():
         for a, b, _ in blk.get("vanilla", []):
             a, b = int(a, 16), int(b, 16)
             rom[a:b] = base[a:b]
+    naming_dispatch(rom, src, pool)
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)

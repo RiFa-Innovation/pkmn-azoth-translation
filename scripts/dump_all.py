@@ -168,6 +168,8 @@ def scan_strings(rom, base):
         short = short_line(s)
         if not (single or short or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
             continue
+        if hack_map().is_code(t):  # Thumb code decoded as text (a function pointer)
+            continue
         trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
         if short and not (single or is_textlike(s)):  # 喂，{FD:01}！: script text only
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
