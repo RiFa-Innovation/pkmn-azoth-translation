@@ -24,6 +24,7 @@ import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 import gfx_text  # noqa: E402
 import logo  # noqa: E402
+import anchored  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
@@ -70,6 +71,19 @@ class FreePool:
         a = best[0]
         best[0] += n
         return a
+
+    def reserve(self, start, end):
+        """Never hand out [start, end) (in-place text lives there)."""
+        out = []
+        for a, b in self.runs:
+            if b <= start or a >= end:
+                out.append([a, b])
+                continue
+            if a < start:
+                out.append([a, start])
+            if b > end:
+                out.append([end, b])
+        self.runs = out
 
     def alloc_aligned(self, n, align=4):
         a = self.alloc(n + align - 1)
@@ -168,6 +182,11 @@ def main():
             pending.append((t, b))
             if v["untrusted"] == 0 and t not in contains_other and t not in keep:
                 pool.add(t + 1, t + v["cap"])  # keep byte 0 so stray reads hit text
+    # anchor-reached text is written in place below: keep it out of the pool
+    anc_zh = json.load(open(anchored.ZH, encoding="utf-8"))
+    anc_en = json.load(open(anchored.EN, encoding="utf-8")) if os.path.exists(anchored.EN) else {}
+    for k, v in anc_zh.items():
+        pool.reserve(int(k, 16) - 1, int(k, 16) + v["cap"])
     report["free_before_reloc"] = pool.total()
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
         a = pool.alloc(len(b))
@@ -226,6 +245,27 @@ def main():
             assert src[at:at + len(orig)] == orig, f"code_text {name}: code at {p['at']} differs"
             rom[at:at + len(new)] = new
         report["relocated"] += len(parts)
+    # --- anchor-reached text (anchored.py): in place, within the original bytes
+    report["anchored"] = 0
+    for k, en in anc_en.items():
+        if en is None:  # not text (e.g. the pinyin keyboard's character table)
+            continue
+        t, v = int(k, 16), anc_zh[k]
+        assert mt.decode(src, t, v["cap"])[0] == v["zh"], f"anchored {k}: source text moved"
+        b = anchored.layout(v["zh"], en, widths)
+        if len(b) > v["cap"]:
+            if not anchored.relocatable(v):
+                report["too_long"].append(f"anchored {k} ({len(b)}>{v['cap']})")
+                continue
+            a = pool.alloc(len(b))  # move it; point each anchor at (a - offset)
+            rom[a:a + len(b)] = b
+            for lit, off in v["anchors"]:
+                lo = int(lit, 16)
+                assert int.from_bytes(src[lo:lo + 4], "little") == 0x08000000 + t - off
+                rom[lo:lo + 4] = (0x08000000 + a - off).to_bytes(4, "little")
+        else:
+            rom[t:t + v["cap"]] = b + b"\xff" * (v["cap"] - len(b))
+        report["anchored"] += 1
     # --- image text (gfx/*.json): redrawn tileset + tilemap, LZ77, repointed
     report["gfx"] = 0
     for spec in sorted(glob.glob("gfx/*.json")):

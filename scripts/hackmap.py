@@ -18,6 +18,7 @@ literals (callbacks). Output data/hack_code.json:
     .venv/bin/python scripts/hackmap.py 0x8E9DD8   # classify an offset
 """
 import json
+import re
 import struct
 import sys
 
@@ -44,7 +45,8 @@ class Mapper:
         self.md.detail = True
         self.code = bytearray(len(self.rom))   # 1 = instruction byte
         self.lit = {}                          # word offset -> set(use offsets)
-        self.anchor = {}                       # literal -> 'imm' | 'reg' 
+        self.anchor = {}                       # literal -> 'imm' | 'reg'
+        self.anchor_offs = {}                  # literal -> {imm offsets seen}
         self.funcs = set()
         self.todo = []
         self.bad = 0
@@ -63,18 +65,27 @@ class Mapper:
                 return True
         return False
 
+    JUNK = re.compile(r"#0x20$|^ldm|^stm(?!ia sp)|^(ands|orrs|eors|bics) (r\d), \2$")
+
     def plausible(self, off):
-        """A function pointer found in data must decode cleanly (Thumb-1, no
-        32-bit except bl) up to its first return within 400 bytes."""
+        """A function pointer found in data (or an odd literal) must decode
+        like compiled Thumb-1: no 32-bit except bl, no junk signatures (shift
+        by #32, `ands rX, rX`, ldm/stm), and reach a return: within 200
+        instructions after a leading push, or `bx lr` within 24 (leaf)."""
         pc = off
-        for _ in range(200):
+        leaf = all(self.rom[off + 2 * k + 1] not in (0xB4, 0xB5) for k in range(3))
+        for n in range(24 if leaf else 200):
             if pc >= len(self.rom) - 4 or self.vanilla_code(pc):
                 return False
             ins = next(self.md.disasm(self.rom[pc:pc + 4], 0x08000000 + pc, 1), None)
             if ins is None or (ins.size == 4 and ins.mnemonic != "bl"):
                 return False
-            if ins.mnemonic == "bx" or (ins.mnemonic == "pop" and "pc" in ins.op_str):
-                return True
+            if self.JUNK.search(ins.op_str) or self.JUNK.search(f"{ins.mnemonic} {ins.op_str}"):
+                return False
+            if ins.mnemonic == "bx":
+                return not leaf or ins.op_str == "lr"
+            if ins.mnemonic == "pop" and "pc" in ins.op_str:
+                return not leaf
             if ins.mnemonic == "b":  # follow the branch, don't accept it as an end
                 pc = ins.operands[0].imm - 0x08000000
                 continue
@@ -121,9 +132,11 @@ class Mapper:
                         self.lit.setdefault(lit, set()).add(pc)
                         v = struct.unpack_from("<I", self.rom, lit)[0]
                         t = v - 0x08000001
-                        if v & 1 and self.in_rom(v) and self.rom[t + 1] in (0xB5, 0xB4) and self.plausible(t):
+                        if v & 1 and self.in_rom(v) and self.plausible(t):
                             self.add_func(t)  # odd literal: callback/long call
                         how = self.offsets_value(nxt, ops[0].reg)
+                        if self.last_imms:
+                            self.anchor_offs.setdefault(lit, set()).update(self.last_imms)
                         if how:
                             self.anchor[lit] = "imm" if "imm" in (how, self.anchor.get(lit)) else how
                 elif m == "bx" or (m == "pop" and any(o.reg == capstone.arm.ARM_REG_PC for o in ops)):
@@ -185,53 +198,59 @@ class Mapper:
             self.code[ret + k] = 0
 
     def offsets_value(self, pc, reg):
-        """How code after `ldr reg,=lit` uses the loaded value:
+        """How code after `ldr reg,=lit` uses the loaded value (scanned up to
+        the next unconditional branch/return, through calls; r0-r3 die at bl):
         'imm' = adds a constant / loads at a non-zero displacement (GCC
                 section anchor or struct field: lit is a base, not the data);
+                every constant seen is collected in self.last_imms;
         'reg' = adds a register (array or string indexing);
         False = used as is."""
         regs = {reg}
         A = capstone.arm
-        for _ in range(12):
+        kind = False
+        self.last_imms = set()
+        for _ in range(48):
             ins = next(self.md.disasm(self.rom[pc:pc + 4], 0x08000000 + pc, 1), None)
             if ins is None:
-                return False
+                break
             m, ops = ins.mnemonic, ins.operands
             dst = ops[0].reg if ops and ops[0].type == A.ARM_OP_REG else None
+            copied = False
             if m in ("adds", "add", "subs", "sub"):
-                srcs = [o for o in ops[1:]] if len(ops) == 3 else ops
+                srcs = ops[1:] if len(ops) == 3 else ops
                 uses = any(o.type == A.ARM_OP_REG and o.reg in regs for o in srcs)
                 imm = [o.imm for o in ops[1:] if o.type == A.ARM_OP_IMM]
                 regops = [o for o in ops[1:] if o.type == A.ARM_OP_REG and o.reg not in regs]
                 if uses:
                     if imm and imm[0]:
-                        return "imm"
-                    if regops or (len(ops) == 2 and dst not in regs):
-                        return "reg"
-                    if imm and not imm[0]:          # adds rd, rn, #0 == mov
+                        self.last_imms.add(imm[0] if m.startswith("add") else -imm[0])
+                        kind = "imm"
+                    elif regops or (len(ops) == 2 and dst not in regs):
+                        kind = kind or "reg"
+                    elif imm:                       # adds rd, rn, #0 == mov
                         regs.add(dst)
-                        pc += ins.size
-                        continue
+                        copied = True
             if m in ("mov", "movs") and len(ops) == 2 and ops[1].type == A.ARM_OP_REG and ops[1].reg in regs:
                 regs.add(dst)
-                pc += ins.size
-                continue
+                copied = True
             mem = [o for o in ops if o.type == A.ARM_OP_MEM]
             if mem and mem[0].mem.base in regs and m.startswith(("ldr", "str")):
                 if mem[0].mem.index:
-                    return "reg"
-                if mem[0].mem.disp:
-                    return "imm"
+                    kind = kind or "reg"
+                elif mem[0].mem.disp:
+                    self.last_imms.add(mem[0].mem.disp)
+                    kind = "imm"
             if m == "bl":
                 regs -= {A.ARM_REG_R0, A.ARM_REG_R1, A.ARM_REG_R2, A.ARM_REG_R3}
-            elif m in ("b", "bx", "pop") or m.startswith("b") and m not in ("bic", "bics"):
-                return False
-            elif dst in regs and m not in ("str", "strb", "strh", "cmp", "tst", "cmn", "push", "stm", "stmia"):
+            elif m in ("b", "bx", "pop") and not (m == "pop" and "pc" not in ins.op_str):
+                break
+            elif not copied and dst in regs and not m.startswith("b") and m not in (
+                    "str", "strb", "strh", "cmp", "tst", "cmn", "push", "stm", "stmia"):
                 regs.discard(dst)
             if not regs:
-                return False
+                break
             pc += ins.size
-        return False
+        return kind
 
     def jump_table(self, pc):
         """agbcc switch: lsls rI,rI,#2; ldr rT,=table; adds rI,rT; ldr rI,[rI];
@@ -296,7 +315,8 @@ class Mapper:
         ranges = edges.reshape(-1, 2).tolist()
         out = {"code": ranges,
                "literals": {str(k): {"value": struct.unpack_from("<I", self.rom, k)[0],
-                                     "uses": sorted(v), "anchor": self.anchor.get(k, False)}
+                                     "uses": sorted(v), "anchor": self.anchor.get(k, False),
+                                     "offs": sorted(self.anchor_offs.get(k, ()))}
                             for k, v in sorted(self.lit.items())},
                "funcs": sorted(self.funcs)}
         json.dump(out, open(OUT, "w"), separators=(",", ":"))

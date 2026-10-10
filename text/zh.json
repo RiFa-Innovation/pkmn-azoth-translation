@@ -5404,7 +5404,7 @@
     "0731874:aligned",
     "0737FCC:literal",
     "073AAAC:literal",
-    "073ABA4:literal",
+    "073ABA4:aligned",
     "073B934:literal",
     "0775448:literal",
     "0775A44:literal",
@@ -5417,18 +5417,18 @@
     "0DF078C:literal",
     "0DF1588:literal",
     "0DF17FC:aligned",
-    "0DF1D6C:literal",
+    "0DF1D6C:aligned",
     "0DF2FCC:literal",
-    "0DF40FC:literal",
+    "0DF40FC:aligned",
     "0DF5344:literal",
     "0DF5690:literal",
     "0DF5A10:literal",
-    "0DF5CB4:literal",
+    "0DF5CB4:aligned",
     "0DF5F14:literal",
-    "0DF743C:literal",
-    "0DF85D0:literal",
+    "0DF743C:aligned",
+    "0DF85D0:aligned",
     "0DF9CEC:literal",
-    "0DFC0E0:literal",
+    "0DFC0E0:aligned",
     "0DFD038:literal",
     "0DFD514:literal",
     "0DFE4F0:literal",
@@ -5438,12 +5438,12 @@
     "0FCC10C:literal",
     "0FCD77C:literal",
     "0FCE2CC:literal",
-    "1D1F070:literal",
-    "1D25C90:literal",
-    "1D2D590:literal",
-    "1D37E50:literal",
-    "1D5B518:literal",
-    "1D68F0C:literal",
+    "1D1F070:aligned",
+    "1D25C90:aligned",
+    "1D2D590:aligned",
+    "1D37E50:aligned",
+    "1D5B518:aligned",
+    "1D68F0C:aligned",
     "1FF44C4:aligned",
     "1FF543C:literal"
    ],
@@ -5454,7 +5454,7 @@
    "zh": "♂膏枕膏叵",
    "cap": 10,
    "refs": [
-    "0F002A4:aligned"
+    "0F002A4:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -5488,7 +5488,7 @@
     "1D5556C:literal",
     "1D56EB4:literal",
     "1D669D4:aligned",
-    "1D66ACC:literal",
+    "1D66ACC:aligned",
     "1D66BBC:aligned"
    ],
    "untrusted": 0,
@@ -5512,9 +5512,9 @@
     "0DF223C:literal",
     "0DF22BC:literal",
     "0DF233C:literal",
-    "0DF2B20:aligned",
+    "0DF2B20:literal",
     "0DF3614:literal",
-    "0DF36A0:literal",
+    "0DF36A0:aligned",
     "0DF7050:literal",
     "0DF7D04:literal",
     "0DF9A80:literal",
@@ -5534,10 +5534,10 @@
     "1D1E674:literal",
     "1D1EB7C:literal",
     "1D1EDBC:literal",
-    "1D1F820:literal",
+    "1D1F820:aligned",
     "1D20CAC:literal",
     "1D25944:literal",
-    "1D35924:aligned",
+    "1D35924:literal",
     "1D3626C:aligned",
     "1D36AE8:literal",
     "1D36BFC:aligned",
@@ -5566,11 +5566,12 @@
     "1D53E20:literal",
     "1D579CC:aligned",
     "1D5AFF4:literal",
-    "1D5B804:literal",
+    "1D5B804:aligned",
     "1D5ED08:literal",
     "1D5ED78:literal",
     "1D5FDAC:literal",
     "1D5FE40:aligned",
+    "1D63174:literal",
     "1D66440:aligned",
     "1D66574:aligned",
     "1D66640:literal",
@@ -5578,13 +5579,13 @@
     "1D67DCC:aligned",
     "1D68AA0:literal",
     "1DC21E8:literal",
-    "1DC22C8:aligned",
+    "1DC22C8:literal",
     "1FF4818:literal",
     "1FF5414:literal",
     "1FF59BC:literal",
     "1FF681C:literal"
    ],
-   "untrusted": 10,
+   "untrusted": 9,
    "suspect": true
   },
   "0008DA5": {
@@ -5599,7 +5600,7 @@
     "0DFD568:literal",
     "0FA0EC8:literal",
     "0FA0F70:literal",
-    "1D1F82C:literal",
+    "1D1F82C:aligned",
     "1D20CB8:literal",
     "1D40D18:literal",
     "1D421D4:literal",
@@ -5610,10 +5611,10 @@
     "1D5370C:literal",
     "1D53E2C:literal",
     "1D57320:literal",
-    "1D5B810:literal",
+    "1D5B810:aligned",
     "1D5CB70:aligned",
     "1D67DD0:aligned",
-    "1DC22CC:aligned"
+    "1DC22CC:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -57686,7 +57687,7 @@
    "refs": [
     "0042DA0:aligned",
     "03FE264:aligned",
-    "1D6317C:aligned"
+    "1D6317C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60008,7 +60009,7 @@
    "cap": 37,
    "refs": [
     "000C5E0:literal",
-    "0FA0B1C:aligned"
+    "0FA0B1C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60018,7 +60019,7 @@
    "cap": 16,
    "refs": [
     "000C5AC:literal",
-    "0FA0B14:aligned"
+    "0FA0B14:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60028,7 +60029,7 @@
    "cap": 21,
    "refs": [
     "000C630:aligned",
-    "0FA0B20:aligned"
+    "0FA0B20:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -61261,7 +61262,7 @@
     "1D57A04:literal",
     "1D58074:literal",
     "1D5817C:literal",
-    "1D59364:aligned",
+    "1D59364:literal",
     "1D595BC:literal",
     "1D59D54:literal"
    ],
@@ -61345,7 +61346,7 @@
    "cap": 30,
    "refs": [
     "01241FC:aligned",
-    "1D586EC:aligned",
+    "1D586EC:literal",
     "1DE4724:aligned"
    ],
    "untrusted": 0,
@@ -82953,31 +82954,11 @@
    "untrusted": 0,
    "suspect": false
   },
-  "07AAB80": {
-   "zh": ".... ......{FB}不对！\n现在不是收看\n大木博士讲座的时间！{FB}满金电台的\n网络直播马上\n就要开始了！{FB} ",
-   "cap": 89,
-   "refs": [
-    "07763E0:aligned",
-    "0776478:aligned",
-    "07767F8:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "07AAC00": {
-   "zh": "晴e",
-   "cap": 4,
-   "refs": [
-    "07763EC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "07AACB4": {
    "zh": "正在上传照片.....{FB}... ... ...\n... ... ...\n... ... ...{FB}成功上传照片！{FB}... ... ...\n... ... ...\n... ... ...\n... ... ...{FB}身份认证成功！\n在浏览网站前，\n请阅读以下注意事项。{FB}第一，“宝可梦 水银”\n是基于GameFreak\n官方正作“宝可梦 火红”\n制作的非官方同人\n改版游戏。\n本作中包含大量原创的\n剧情走向、世界观拓展\n及独立系统。{FB}请务必注意，切勿将\n本作中的任何同人设定、\n人物关系及机制代入或\n混淆至宝可梦官方\n设定中。{FB}第二，由于本作在剧情和\n设定上存在较多深度的\n彩蛋与联动，\n极不建议未接触过\n宝可梦系列官方正作的\n玩家将本作作为\n入坑首选。{FB}为获得最完整的\n剧情共鸣与情感体验，\n强烈建议您在游玩本作前，\n至少体验过以下\n官方作品：\n“宝可梦 金/银/水晶”\n或“宝可梦 心金/魂银”\n“宝可梦 钻石/珍珠/白金”{FB}此外，若您曾通关过\n“宝可梦传说 阿尔宙斯”、\n“宝可梦传说 Z-A”以及\n“宝可梦 欧米伽红宝石/\n阿尔法蓝宝石”，将会对\n本作的剧情有\n更深层次的理解。{FB}第三，“宝可梦 水银”\n为完全免费的非盈利性\n同人交流作品，\n仅供宝可梦爱好者\n学习与娱乐，\n严禁用于任何商业\n牟利行为。{FB}如果您在获取本作的\n任何渠道中支付了金钱，\n说明您已经遭遇了诈骗。{FB}第四，为确保游戏底层\n代码的稳定运行，\n请务必使用以下经过\n充分测试的推荐模拟器：\nPC端：mGBA\nAndroid端：\nMy Boy！ 或 Pizza Boy\niOS端：Delta{FB}烧录卡：EZ0烧录卡\n警告：强烈不建议使用\nVBA(VisualBoyAdvance)\n等其他老旧或兼容性欠佳的\n模拟器游玩，\n否则极易出现画面撕裂\n或卡死现象。{FB}第五，在游玩过程中，\n请务必养成勤存档的\n好习惯，且必须使用游戏内\n含的正常存档功能\n(即电池存档)。\n强烈不建议过度依赖\n模拟器的“即时存档\n(Save States)”功能。{FB}绝对禁止随意修改设备的\n系统时间。\n以上违规操作极易导致\n游戏内存数据读取混乱，\n进而引发不可控的恶性BUG\n甚至造成永久性坏档。{FB}第六，目前在引擎优化下，\n在上述提到的模拟器中，\n除Delta模拟器外，\n已全面支持BGM\n(背景音乐)随游戏倍速\n同步变化的功能。\n注，此功能需通过模拟器的\n倍速设置触发，{FB}单纯长按键盘空格键加速\n无法实现BGM同步。\n我们在本作的音乐编排上\n倾注了大量的心血，\n请尽情享受旅途中的\n音乐吧！{FB}当您按下START键，\n即视为您已阅读并知悉上述\n所有注意事项。\n祝您在“宝可梦 水银”的\n世界中，度过一段\n难忘的旅程!",
    "cap": 1856,
    "refs": [
-    "0776220:aligned"
+    "0776220:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -82995,7 +82976,7 @@
    "zh": "乔伊小姐：哎呀！\n大家快看...{FA}我们的样子也变了！{FB}君莎小姐：制服的细节\n全都不见了，{FA}变成了一个个小方格...{FB}须木佐：这个\n我最喜欢了啊！！{FA}Suki！ SuKi！{FA}Daisuki！！！{FB}胡桃：看来，这套\n不可思议的服装{FB}彻底唤醒了\n所有人心底的记忆！{FB}乔伊小姐：毫无悬念！{FB}君莎小姐：这场\n比赛的冠军！{FB}胡桃：就是带我们\n找回初心的你！{FB}须木佐：这个\n我最喜欢了啊！{FB}妈妈：恭喜你！{FB}岩铁：恭喜你，小鬼！{FB}千惠：恭喜啦!好厉害!{FB}露营少年(林克)：恭喜!{FB}波加曼人：波加波加!\n(恭喜!){FB}小茜：恭喜你哦!{FB}短裤少年：恭喜!\n(这句文本也是复用的){FB}谢谢大家！{FB}在所有人的\n祝福声中，{FB}恭喜！你赢得了满金\nCosplay大赛冠军！{FB} ",
    "cap": 527,
    "refs": [
-    "07761C4:aligned"
+    "07761C4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -83004,25 +82985,16 @@
    "zh": "口袋妖怪，简称精灵。{FB}在这个世界里，\n到处都生活着一种叫做{FA}口袋妖怪的生物！{FB}人们与精灵愉快地玩耍，\n或者一同战斗......{FA}互帮互助，{FA}共同生活。",
    "cap": 131,
    "refs": [
-    "07761C8:aligned"
+    "07761C8:literal"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "07AB686": {
-   "zh": "制作协力(排名不分先后)\n美术\n整理控\n虚空\n猫猫\n华雄5\n大姐姐姐\n安德鲁\n乐乐子\nOrigmal\nNaNa\n奈落叶腐\n断月\n新月\n我不污\n鸣微\n寄\n触龙\n闪耀白光的月亮\nRED\n天骷上人\n\n脚本\n华雄5\n会飞的鱼\nChaotix\n陆思维\n瓦吉\n\n地图\n华雄5\n会飞的鱼\n离个海\n二胖\n霸道胖虎\n河山水长\n小米饭\n\n剧情\n猫猫\n兔砸博士\n蛤蟆\n芥川君\n江不二\n雨野\n\n玩法\n百分之零点六\n\n程序\n幻魂小泡\n咖喱酱\n明雅\n\n音乐\n陆思维\nSKT\nLin Hooo\n\nCredit\nThe Pokemon Company\nGameFreak\nNintendo\nCreatures\nMonolith Soft\nSquare Enix\nFalcom\nBandai Namco\nKey\nAtlus\nSega\nCapcom\nType-Moon\nSkeli\nPret\nRh-hideout\nTeam Aqua’s Hideout\nworldlinkdeluxe-ame\nagsmgmaster64\nDizzyEggg\nPokemon Crystal Dust\nPokemon Gaia Project\nthedarkdragon11\nCoronis\nBulbapedia\nultrademise\nA.Somersault\nKyle-Dove\nIceJkai\nSylveonGives\nKleinStudio\nPurpleZaffre\nDestvoL\nPixelated-Dude\nLoveTails\nFlamejow\nmid117\nrayd12smitty\nZender1752\nart-56\nKatiablue\nAyrafeneres\njoojishibuki\nStellarFairy\nX-5-4-5-2\nWild Eyed Boy\nshinjistar\nAlucus\nPeekyChew\nPkmnAlexandrite\nphoenix\nPeachy-Fish-Studios\nWesleyFG\nLunaMaddalena\nJcFerggy\nShinkoNet\nFL.remix\nZumi Daxuya\nLukeeGD\nZermonious\nBurstXShadowzX\nBoonzeet\nPokeSonicMarioLover\nRappenem\nNephae\nMegaMew47\nhekigaHoge\nJoshR691\nGregarlink10\nWahooMario\nOth\nAprogergely\n\n特别感谢\n神SOK\n海的LUGIA\n绿叶枫\n卧看微尘\n摆烂\n鸽无安\n星夜之幻\nC型血\nXzonn\nCKN&DMG&口袋群星SP\n可达鸭汉化组\nACG汉化组",
-   "cap": 1301,
-   "refs": [
-    "0776A4C:aligned"
-   ],
-   "untrusted": 1,
    "suspect": false
   },
   "07ABB9B": {
    "zh": "{FD:01}：\n当你读到这封信的时候，\n我大概已经离开这个世界很久了。\n对你来说，也许只是前不久的事。\n但对我而言...\n却是一百五十年后的未来。{FB}我被时之笛带回了过去，\n送到了缘朱最黑暗的时代。\n这里的人类与宝可梦\n仍在恐惧中彼此疏远。{FB}但也正因如此，\n我终于明白，\n自己为什么会来到这里。\n我要继续吹奏...{FB}我要把大家\n交给我的信任与希望，\n传递给这个时代的\n每一个人和宝可梦。{FB}在遥远的时代，\n我遇见了许多不同的人...\n我有很多话想和你说..\n可是--再也没有机会\n亲口告诉你了。{FB}{FD:01}...我曾经以为，\n活着...\n就是不再失去任何东西。{FB}直到现在我才明白，\n活着...\n是即使知道终有一天会分别，\n也依然愿意\n去相遇、去相信、去珍惜。{FB}以及..\n在分别的那一天，\n带着对对方的信任，\n笑着挥手告别。{FB}嘿，{FD:01}...\n人类，还有宝可梦...\n大家互相帮助，互相关心，\n互相信任，一天天地生活着...\n这就是幸福...\n去分享这种幸福吧...{FB}也请连同我的那一份...\n好好地...活下去！\n{FD:01}！{FB}不要为我难过，\n我并没有真正消失。\n因为你还记得真正的我，\n你是我--存在过的证明。\n            --致150年后的你\n                       散华{FB} ",
    "cap": 906,
    "refs": [
-    "0776800:aligned"
+    "0776800:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -83031,7 +83003,7 @@
    "zh": "那竟是缘朱市夏日祭时，\n大家在夜空下的合照...！\n尽管照片饱受岁月侵蚀，\n画面模糊不清...\n但在绚烂的烟火下，\n她的笑容，\n依然如当初那般温柔。{FB}为什么一百五十年前\n的圣女遗物中，\n会有这个时代的照片?\n难道说...{FB}传闻中那位\n在废墟之上重建家园、\n用音乐安抚\n狂暴宝可梦的“缘朱圣女”...\n就是被时之笛传送回\n一百五十年前的散华!?{FB}跨越了一百五十年的时光...\n{FD:01}强忍着\n内心的震动与翻涌的思绪，\n缓缓展开了\n那张同样泛黄的信纸...{FB}",
    "cap": 395,
    "refs": [
-    "07767FC:aligned"
+    "07767FC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -83040,7 +83012,7 @@
    "zh": "灾厄平息后的一天...\n玉绪将一件特殊的遗物\n交给了{FD:01}。\n这是在整理缘朱圣女\n遗物时发现的一封信。{FB}信封微微发黄，\n布满了岁月侵蚀的痕迹，\n上面竟然写着：\n“{FD:01}亲启”。\n{FD:01}轻轻拆开发黄的信封，\n里面忽然掉出了\n一张古老的照片...{FB}",
    "cap": 206,
    "refs": [
-    "0776A74:aligned"
+    "0776A74:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -87770,318 +87742,11 @@
    "untrusted": 0,
    "suspect": false
   },
-  "08EAA28": {
-   "zh": " ...{FB}你见到我的助手了吗？\n他在桔梗市的商店里。{FB}那东西很重要，\n你一定要去拿！{FB}哔... ... ...{FB} ",
-   "cap": 89,
-   "refs": [
-    "08E68C8:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EAAA8": {
-   "zh": "r那个蛋，\n这的确是宝可梦的蛋，{FA}我再进一步调查看看！{FB}哔... ... ...{FB} ",
-   "cap": 65,
-   "refs": [
-    "08E68CC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EABA8": {
-   "zh": "东西\n你还没去拿啊，{FB}到商店里找邮递员，\n他会给你的。{FB}哔... ... ...{FB} ",
-   "cap": 65,
-   "refs": [
-    "08E68D4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EAC28": {
-   "zh": "庆n，{FA}好神奇的感觉啊...{FB}哔... ... ...{FB} ",
-   "cap": 39,
-   "refs": [
-    "08E68D8:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EADA8": {
-   "zh": "... ... ...{FB}喂？我是五郎...{FB}呀，你好！{FB}喂，你好像就在附近啊，\n直接找我说话吧！{FB}哔... ... ...{FB} ",
-   "cap": 89,
-   "refs": [
-    "08E6CAC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EAE28": {
-   "zh": "呀，你好！{FB}你就在附近吧？\n那就干脆来找我好了！{FB}哔... ... ...{FB} ",
-   "cap": 59,
-   "refs": [
-    "08E705C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EAEA8": {
-   "zh": "吗？{FB}我在31号道路。{FB}哔... ... ...{FB} ",
-   "cap": 34,
-   "refs": [
-    "08E706C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB028": {
-   "zh": "，我忘了。{FB}拜拜哈哈。{FB}哔... ... ...{FB} ",
-   "cap": 35,
-   "refs": [
-    "08E70B8:aligned",
-    "08E748C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB0A8": {
-   "zh": "{FB}都这么近了还要打电话？{FB}大叔我就...\n那么耀眼吗？{FB}哔... ... ...{FB} ",
-   "cap": 63,
-   "refs": [
-    "08E7498:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB328": {
-   "zh": "现在应该很强了吧，\n让我们再来比试比试怎么样！{FB}我现在在34号道路，\n来一场宝可梦对战吧。{FB}哔... ... ...{FB} ",
-   "cap": 98,
-   "refs": [
-    "08E78B4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB3A8": {
-   "zh": "r哪儿？\n难道就在附近？{FB}要是你到了的话\n就直接来找我吧！{FB}哔... ... ...{FB} ",
-   "cap": 68,
-   "refs": [
-    "08E78C0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB5A8": {
-   "zh": ".{FB}啊，你好！{FB}很高兴你能打电话给我！{FB}正好我现在也准备\n出去旅行了！{FA}我们还真是合得来啊！{FB}哔... ... ...{FB} ",
-   "cap": 98,
-   "refs": [
-    "08E7CD0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB628": {
-   "zh": "活跃表现后，\n我感到非常兴奋！{FB}哔... ... ...{FB} ",
-   "cap": 44,
-   "refs": [
-    "08E7CE0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB728": {
-   "zh": "{FB}你好害羞啊，\n都跑这附近来了，{FA}也不敢来直接来找我。{FB}哔... ... ...{FB} ",
-   "cap": 65,
-   "refs": [
-    "08E7D04:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB7A8": {
-   "zh": "等你！\n一定要来啊！{FB}哔... ... ...{FB} ",
-   "cap": 34,
-   "refs": [
-    "08E7D10:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB8A8": {
-   "zh": "怎么了？\n我们离得这么近，{FA}干嘛不直接来找我谈话啊！{FB}哔... ... ...{FB} ",
-   "cap": 64,
-   "refs": [
-    "08E80CC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EB9A8": {
-   "zh": "提升龙卷风的威力。{FB}哔... ... ...{FB} ",
-   "cap": 34,
-   "refs": [
-    "08E80E0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBAA8": {
-   "zh": "e就在附近？{FB}是我低头看书\n没有注意到吗？{FB}哔... ... ...{FB} ",
-   "cap": 54,
-   "refs": [
-    "08E80EC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBBA8": {
-   "zh": "刚才捡到好东西了！{FB}送给你吧！\n你能来36号道路拿吗？{FB}哔... ... ...{FB} ",
-   "cap": 64,
-   "refs": [
-    "08E810C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBDA8": {
-   "zh": "..{FB}话说，我现在\n就在38号道路，{FB}要是你来到这附近的话，\n我们再战一场好吗！{FA}我等着你！{FB}哔... ... ...{FB} ",
-   "cap": 95,
-   "refs": [
-    "08E84B8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBE28": {
-   "zh": "前答应过你的{FA}这个就送给你吧！{FB}呵呵，你要想要的话\n那就来38号道路拿吧！{FB}哔... ... ...{FB} ",
-   "cap": 83,
-   "refs": [
-    "08E84D4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBEA8": {
-   "zh": "\n不过这个我自己也要用，{FB}你就再等等吧！{FB}哔... ... ...{FB} ",
-   "cap": 53,
-   "refs": [
-    "08E84F0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EBFA8": {
-   "zh": "可梦\n也肯定会很喜欢的。{FB}哔... ... ...{FB} ",
-   "cap": 39,
-   "refs": [
-    "08E8514:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC028": {
-   "zh": "家看看它的可爱。{FB}哔... ... ...{FB} ",
-   "cap": 32,
-   "refs": [
-    "08E8518:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC0A8": {
-   "zh": "荣...{FB}你的宝可梦们最近还好吗？{FB}下次我们好好聊聊\n一些宝可梦的话题吧！{FB}哔... ... ...{FB} ",
-   "cap": 83,
-   "refs": [
-    "08E852C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC128": {
-   "zh": "虽然打电话也可以，\n不过你都来这么近了，{FA}干嘛不直接找我聊啊。{FB}哔... ... ...{FB} ",
-   "cap": 74,
-   "refs": [
-    "08E8534:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC4A8": {
-   "zh": "{FB}再和我来场对战吧？\n我会在这里待一段时间的！{FB}哔... ... ...{FB} ",
-   "cap": 59,
-   "refs": [
-    "08E8900:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC528": {
-   "zh": "u！\n被蚊香蝌蚪给逃了！{FB}别打电话给我，\n直接到我身边来和我聊天！{FB}哔... ... ...{FB} ",
-   "cap": 75,
-   "refs": [
-    "08E890C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC728": {
-   "zh": "..{FB}嗯，最近没钓到\n什么好东西，{FB}你耐心点等着吧。{FB}哔... ... ...{FB} ",
-   "cap": 61,
-   "refs": [
-    "08E8938:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC928": {
-   "zh": "i也是一种享受，\n但大叔还是想尽快开始对战！{FB}哔... ... ...{FB} ",
-   "cap": 57,
-   "refs": [
-    "08E8958:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08EC9A8": {
-   "zh": "r45号道路见面吧！{FB}哔... ... ...{FB} ",
-   "cap": 33,
-   "refs": [
-    "08E8968:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08ECA28": {
-   "zh": "+话？{FB}惠美不害怕啦，\n你直接来和惠美见面吧。{FB}哔... ... ...{FB} ",
-   "cap": 57,
-   "refs": [
-    "08E8978:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "08ECBA8": {
    "zh": "喂？我是惠美...{FB}那个那个，{FB}又被烈雀逃掉了...\n好讨厌的感觉啊！{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 81,
    "refs": [
-    "08E8C08:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08ECCA8": {
-   "zh": "...{FB}喂！你应该没忘记\n和我的对战吧！{FB}地点是灯塔！\n快来吧！我等好久了！{FB}哔... ... ...{FB} ",
-   "cap": 81,
-   "refs": [
-    "08E8C24:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08ECD28": {
-   "zh": ".次一样了！{FB}我在灯塔等你，\n给我快点过来！{FB}哔... ... ...{FB} ",
-   "cap": 55,
-   "refs": [
-    "08E8C30:aligned"
+    "08E8C08:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88506,7 +88171,7 @@
    "zh": "喂？我是琴音！{FB}呀，你好！{FB}上次带着玛力露出去走走，回头\n一看，发现进化成玛力露丽了！{FA}真是吓我一跳。{FA}哈哈，骗你的啦！{FB}拜拜啦！\n下次电话再联系。{FB}哔... ... ...{FB} ",
    "cap": 146,
    "refs": [
-    "08E6C68:aligned"
+    "08E6C68:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88515,7 +88180,7 @@
    "zh": "喂？我是琴音！{FB}呀，你好！{FB}我的爷爷说你一定\n能成为一名优秀的训练家的！{FB}既然是我爷爷说的，\n那我相信你肯定会成功的。{FB}你要加油哦！\n我们下次再聊。{FB}哔... ... ...{FB} ",
    "cap": 149,
    "refs": [
-    "08E6C58:aligned"
+    "08E6C58:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88524,7 +88189,7 @@
    "zh": "喂？我是太郎...{FB}大叔的河马兽\n在这一带已经无敌了！{FB}昨天大叔在为那只隆隆石\n是该抓还是该打{FA}而犹豫不决的时候...{FB}居然被一个路过的家伙给抓去了！{FB}下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 164,
    "refs": [
-    "08E8964:aligned"
+    "08E8964:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88533,7 +88198,7 @@
    "zh": "喂？我是太郎...{FB}大叔的河马兽\n在这一带已经无敌了！{FB}对了！\n前几天大叔还打败了隆隆石！{FB}不过，实际上我是想抓它的...{FB}下次电话再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 139,
    "refs": [
-    "08E8960:aligned"
+    "08E8960:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88542,7 +88207,7 @@
    "zh": "喂？我是卡内尔...{FB}和你这样的年轻人\n通电话就可以{FA}互相交换情报，{FB}而且通过宝可梦，\n人和人之间的距离{FA}也被拉近了。{FB}宝可梦真是一种\n神奇的生物啊...{FB}哔... ... ...{FB} ",
    "cap": 153,
    "refs": [
-    "08E8C58:aligned"
+    "08E8C58:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88551,7 +88216,7 @@
    "zh": "喂？我是卡内尔...{FB}我去抓\n野生宝可梦的时候，{FA}几乎都没有成功过。{FB}前几天又让\n小拉达给跑掉了...{FB}野生的小拉达\n真是没礼貌...{FB}哔... ... ...{FB} ",
    "cap": 132,
    "refs": [
-    "08E8C54:aligned"
+    "08E8C54:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88560,7 +88225,7 @@
    "zh": "喂？我是卡内尔...{FB}好奇怪啊，\n前几天和别人交换了猫头鹰之后，{FB}总感觉这个猫头鹰\n有似曾相识的感觉。{FB}可仔细一看，\n这个猫头鹰我完全不认识。{FB}哈哈，\n哪有这种离奇的事啊！{FB}哔... ... ...{FB} ",
    "cap": 170,
    "refs": [
-    "08E8C50:aligned"
+    "08E8C50:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88569,7 +88234,7 @@
    "zh": "喂？我是卡内尔...{FB}告诉你件很有意思的事。\n前段时间我和别人{FA}交换了猫头鹰，{FB}可那个猫头鹰居然是我很久以前\n和别的训练家交换掉的！{FB}它辗转地最后又回到了\n我的身边。{FB}这世界还真是小啊！{FB}哔... ... ...{FB} ",
    "cap": 186,
    "refs": [
-    "08E8C4C:aligned"
+    "08E8C4C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88578,7 +88243,7 @@
    "zh": "喂？我是劲源...{FB}你的宝可梦们\n现在还好吗？{FB}我的宝可梦有点精神过头了，\n搞得我有点不知所措了！{FB}特别是豪力，\n一看到训练家就要冲上去！{FB}那劲头势不可挡啊！\n拜拜！{FB}哔... ... ...{FB} ",
    "cap": 164,
    "refs": [
-    "08E8C2C:aligned"
+    "08E8C2C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88587,7 +88252,7 @@
    "zh": "喂？我是秀则...{FB}我的鲤鱼王\n已经成长得很强了！{FA}垂钓的技术也有长进了！{FB}不过，前段时间\n就差最后一下下的时候{FA}还是被金鱼王给逃掉了...{FB}还是那么大的！{FB}算了，再见。{FB}哔... ... ...{FB} ",
    "cap": 166,
    "refs": [
-    "08E8928:aligned"
+    "08E8928:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88596,7 +88261,7 @@
    "zh": "喂？我是秀则...{FB}我的鲤鱼王\n已经成长得很强了！{FA}垂钓的技术也有长进了！{FB}前段时间我刚把\n金鱼王给打败了...{FB}不过比起战斗的胜利\n我更享受垂钓的乐趣。{FB}下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 166,
    "refs": [
-    "08E892C:aligned"
+    "08E892C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88605,7 +88270,7 @@
    "zh": "喂？我是本弘...{FB}说起我的比比鸟，\n又比以前厉害了不少，{FA}简直就是气势如虹！{FB}不过还是让\n大嘴雀逃走了...{FB}我还在犹豫要不要去追它。{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 142,
    "refs": [
-    "08E88FC:aligned"
+    "08E88FC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88614,7 +88279,7 @@
    "zh": "喂？我是本弘...{FB}说起我的比比鸟，\n又比以前厉害了不少，{FA}简直就是气势如虹！{FB}大嘴雀之流\n很轻松就能搞定！{FB}..哎？你也是？\n啊哈哈，那就恭喜你了。{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 152,
    "refs": [
-    "08E88F8:aligned"
+    "08E88F8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88632,7 +88297,7 @@
    "zh": "喂？我是小诚...{FB}你还是那么闲啊，\n要不再来一场对战吧？{FB}你还能看到我那些\n很少见的宝可梦，{FA}绝对不会亏的。{FB}我就在43号道路，\n到了之后就来找我吧。{FB}哔... ... ...{FB} ",
    "cap": 150,
    "refs": [
-    "08E88C0:aligned"
+    "08E88C0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88758,7 +88423,7 @@
    "zh": "喂？我是千慧...{FB}之前我在满金市百货商店\n看到一个非常非常可爱的{FA}皮皮玩偶。{FB}我想把它送给你，\n我在43号道路，{FA}有空了就来拿吧。{FB}哔... ... ...{FB} ",
    "cap": 133,
    "refs": [
-    "08E8538:aligned"
+    "08E8538:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88767,7 +88432,7 @@
    "zh": "喂？我是千慧...{FB}你是不是觉得\n我的皮皮很可爱啊？{FB}我们一直睡在一起，\n软绵绵的，好暖和！{FB}还有，前段时间我和暴鲤龙\n大战了一场...{FB}结果小皮皮畏战了，\n一溜烟逃了！{FB}今后我一定要\n好好保护我的小皮皮，{FB}再见！{FB}哔... ... ...{FB} ",
    "cap": 204,
    "refs": [
-    "08E8550:aligned"
+    "08E8550:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88776,7 +88441,7 @@
    "zh": "喂？我是千慧...{FB}你是不是觉得\n我的皮皮很可爱啊？{FB}我们一直睡在一起，\n软绵绵的，好暖和！{FB}还有，前段时间我和暴鲤龙\n大战了一场...{FB}结果我的小皮皮\n差一点就挂掉了！{FB}太过分了！\n暴鲤龙什么的，人家最讨厌了！{FB}这次就聊这些了，拜拜！{FB}哔... ... ...{FB} ",
    "cap": 224,
    "refs": [
-    "08E854C:aligned"
+    "08E854C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88785,7 +88450,7 @@
    "zh": "喂？我是建荣...{FB}听我说，\n我的皮卡丘{FA}只要我轻轻捏一下它脸蛋，{FA}就会开心地笑起来！{FB}啊！对了，\n之前我看到了毒刺水母...{FB}但因为不怎么可爱\n所以放它走了...{FB}果然宝可梦一定要可爱才有人气啊。{FB}再见啦。{FB}哔... ... ...{FB} ",
    "cap": 198,
    "refs": [
-    "08E851C:aligned"
+    "08E851C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88794,7 +88459,7 @@
    "zh": "喂？我是建荣...{FB}听我说，\n我的皮卡丘{FA}只要我轻轻捏一下它脸蛋，{FA}就会开心地笑起来！{FB}啊！对了，\n前几天皮卡丘打败了呆呆兽！{FB}是不是很厉害啊！！\n我的皮卡丘天下第一！{FB}再见啦。{FB}哔... ... ...{FB} ",
    "cap": 172,
    "refs": [
-    "08E8520:aligned"
+    "08E8520:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88821,7 +88486,7 @@
    "zh": "喂？我是克里欧...{FB}喂，和我来场对战怎么样？{FB}长时间不进行对战的话，\n对战的感觉会慢慢变迟钝的！{FB}我在38号道路等你，\n到了就直接来找我吧。{FB}哔... ... ...{FB} ",
    "cap": 142,
    "refs": [
-    "08E84F4:aligned"
+    "08E84F4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88947,7 +88612,7 @@
    "zh": "喂？我是阿香...{FB}最近我的布鲁\n越来越可爱了。{FA}我现在有好多它的照片了！{FB}还有还有，\n肯泰罗又跑掉了，{FA}真是好可惜啊！{FB}真的就差那么一点点了！\n拜拜！{FB}哔... ... ...{FB} ",
    "cap": 150,
    "refs": [
-    "08E84D8:aligned"
+    "08E84D8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88956,7 +88621,7 @@
    "zh": "喂？我是阿香...{FB}最近我的布鲁\n越来越可爱了。{FA}我现在有好多它的照片了！{FB}还有还有，\n之前我瞬间就打倒了{FA}肯泰罗！{FB}这应该是因为我现在的对战技术\n越来越娴熟的缘故吧？{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 174,
    "refs": [
-    "08E84DC:aligned"
+    "08E84DC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88974,7 +88639,7 @@
    "zh": "喂？我是小实...{FB}我的角金鱼\n又长大了！{FB}我刚抓到它的时候\n它才那么一点，{FA}想不到现在长到这么大了！{FB}对了，我之前把金鱼王\n给打败了，{FA}它也有这么大！{FB}..算了，电话里\n跟你讲不明白，{FA}下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 191,
    "refs": [
-    "08E8130:aligned"
+    "08E8130:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88983,7 +88648,7 @@
    "zh": "喂？我是阿勉...{FB}啊，你好！{FB}我的蔓藤怪\n变得越来越强了！{FA}这一切都在我的计算之内！{FB}对了，前不久我把\n姆克鹰打败了！{FB}这对我的学习很有用！{FB}再见啦！{FB}哔... ... ...{FB} ",
    "cap": 149,
    "refs": [
-    "08E80F4:aligned"
+    "08E80F4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -88992,7 +88657,7 @@
    "zh": "喂？我是由纪...{FB}呀，你好！{FB}你收集的宝可梦们\n都存放在箱子里吗？{FB}我一般都会放他们走。{FB}对了，前不久\n让飞天螳螂给逃走了。{FB}那实在是太可惜了。{FB}哔... ... ...{FB} ",
    "cap": 145,
    "refs": [
-    "08E7D18:aligned"
+    "08E7D18:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89001,7 +88666,7 @@
    "zh": "喂？我是小爱...{FB}对了，我家老公\n拿回来了一些金珠...{FB}最近经常打扰你\n我觉得挺过意不去的，{FA}我想送你一颗作为谢礼！{FB}我在自然公园，\n你有空的就来拿吧。{FB}哔... ... ...{FB} ",
    "cap": 154,
    "refs": [
-    "08E7CF0:aligned"
+    "08E7CF0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89010,7 +88675,7 @@
    "zh": "喂？我是小爱...{FB}呀，你好！{FB}我把我的布鲁\n打扮了一下，{FA}发现它越来越可爱了！{FB}对了...\n前段时间遇到了{FA}一只野生的玛力露...{FB}仔细一看，原来是小锯鳄！{FB}太失望了！\n下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 173,
    "refs": [
-    "08E7CE8:aligned"
+    "08E7CE8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89019,7 +88684,7 @@
    "zh": "喂？我是小爱...{FB}呀，你好！{FB}我把我的布鲁\n打扮了一下，{FA}发现它越来越可爱了！{FB}对了...\n前段时间我遇到了{FA}一只野生的布鲁...{FB}虽然同样是布鲁，\n但明显我的布鲁要可爱多了！{FB}我们下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 186,
    "refs": [
-    "08E7CE4:aligned"
+    "08E7CE4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89028,7 +88693,7 @@
    "zh": "喂？我是纪阳...{FB}啊，你好！{FB}我想你应该知道\n宝可梦是有很多种属性的吧？{FB}各种属性都有各自的优点和缺点，\n所以不能一概而论地说{FA}某种属性是最强的。{FB}尽管如此...{FB}但我还是超级喜欢火属性的！\n噗噗噗噗噗噗噗！！{FB}哔... ... ...{FB} ",
    "cap": 205,
    "refs": [
-    "08E7910:aligned"
+    "08E7910:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89037,7 +88702,7 @@
    "zh": "喂？我是纪阳...{FB}噗噗噗噗噗噗噗！{FB}厉害吧？\n我发明了一种新的吐火方法！{FB}电话里看不到啊...{FB}不说这个了，我昨天抓到火球鼠了。{FB}我想以后好好培养它。{FB}哔... ... ...{FB} ",
    "cap": 150,
    "refs": [
-    "08E790C:aligned"
+    "08E790C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89046,7 +88711,7 @@
    "zh": "喂？我是纪阳...{FB}啊，你好！{FB}貌似我们经常被人给误会。\n因为我常听别人说，{FA}我们喷火的人{FA}会用火焰去虐待宝可梦。{FB}这是无中生有！\n我们都是用和平常人{FA}一样的训练方式去训练它们的！{FB}你知道吗？\n喷火只是我们的兴趣而已！{FB}哔... ... ...{FB} ",
    "cap": 212,
    "refs": [
-    "08E7908:aligned"
+    "08E7908:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89064,7 +88729,7 @@
    "zh": "喂？我是洋太...{FB}啊，你好！{FB}虽说我能为了虫宝可梦\n甘愿赴汤蹈火！{FB}但我还是会一直留在\n35号道路的。{FB}在这附近有池塘有草丛，\n而且到自然公园{FA}只要走28步就到了。{FA}我最喜欢这里了。{FB}哔... ... ...{FB} ",
    "cap": 177,
    "refs": [
-    "08E78F8:aligned"
+    "08E78F8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89073,7 +88738,7 @@
    "zh": "喂？我是洋太...{FB}啊，你好！{FB}我要永远和毛球在一起！\n因为它实在太可爱了。{FB}对了，前段时间我遇到了音箱蟀，\n还以为它会很强的，{FA}结果我很轻松就赢了！{FB}下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 161,
    "refs": [
-    "08E78F4:aligned"
+    "08E78F4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89082,7 +88747,7 @@
    "zh": "喂？我是洋太...{FB}啊，你好！{FB}我要永远和毛球在一起！\n因为它实在太可爱了。{FB}对了，你有蜻蜻蜓吗?{FB}感觉它根本抓不到啊，\n它到底有什么弱点呢？{FB}下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 153,
    "refs": [
-    "08E78F0:aligned"
+    "08E78F0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89091,7 +88756,7 @@
    "zh": "喂？我是麦克...{FB}你最近还好吗？{FB}你现在在干什么呢？{FB}现在你在哪？{FB}你得到多少个徽章了？{FB}你存了多少零花钱了？{FB}你妈妈身体还好吗？{FB}抓到很多宝可梦了吗？{FB}明天会是个大晴天吗？{FB}啊呀，想问的东西太多了，\n我都停不下来了！{FB}哔... ... ...{FB} ",
    "cap": 212,
    "refs": [
-    "08E7CD4:aligned"
+    "08E7CD4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89100,7 +88765,7 @@
    "zh": "喂？我是麦克...{FB}啊，你好！{FB}我在各个地方\n都能听到关于你的传闻！{FB}我由衷地赞叹你。\n为什么你会这么强？{FB}现在你的目标到底是什么呢！\n我会一直支持你的！{FB}我们下次...\n还能再聊吗？{FB}哔... ... ...{FB} ",
    "cap": 177,
    "refs": [
-    "08E7CCC:aligned"
+    "08E7CCC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89109,7 +88774,7 @@
    "zh": "喂？我是小瑞...{FB}呀，你好！{FB}我和毽子草\n最近觉得越来越合得来了！{FB}不过，\n我还是没抓到向尾喵。{FA}都有点不耐烦了！{FB}我们下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 133,
    "refs": [
-    "08E74C8:aligned"
+    "08E74C8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89118,7 +88783,7 @@
    "zh": "喂？我是小瑞...{FB}呀，你好！{FB}我和妙蛙种子\n最近觉得越来越合得来了！{FB}对了，还有！\n之前我们和阿速战斗，{FA}终于把它给打败了！{FB}我的状态越来越好了！\n下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 158,
    "refs": [
-    "08E74C4:aligned"
+    "08E74C4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89127,7 +88792,7 @@
    "zh": "喂？我是洋一...{FB}啊，你好！{FB}我的小拳石\n长得越来越可爱了，{FA}就像我一样！{FB}它的实力也变强了，\n像皮卡丘什么的，{FA}完全能轻松搞定！{FB}现在我也想去\n满金市道馆挑战一下了。{FB}再见了！{FB}哔... ... ...{FB} ",
    "cap": 174,
    "refs": [
-    "08E74EC:aligned"
+    "08E74EC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89136,7 +88801,7 @@
    "zh": "喂？我是洋一...{FB}啊，你好！{FB}我的可达鸭\n长得越来越可爱了，{FA}就像我一样！{FB}还有，前段时间...\n就差那么一点点{FA}我就能打赢昌平了。{FB}看来我训练还不够啊.{FB}再见了！{FB}哔... ... ...{FB} ",
    "cap": 159,
    "refs": [
-    "08E74E8:aligned"
+    "08E74E8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89145,7 +88810,7 @@
    "zh": "喂？我是昌平...{FB}啊，你好！{FB}听我说！{FB}前段时间，我还以为\n能抓到卷卷耳了，{FB}结果就在最后一刻被它给跑了。{FB}果然还是应该准备好\n大量的精灵球才行啊。{FB}哔... ... ...{FB} ",
    "cap": 149,
    "refs": [
-    "08E78D8:aligned"
+    "08E78D8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89154,7 +88819,7 @@
    "zh": "喂？我是昌平...{FB}啊，你好！{FB}我通过对你的战术进行参考后\n和洋一进行了一场练习。{FB}所以我现在才能有\n这么好的状态！{FB}不过在我们变强的这段时间，\n你们也一定变得更强了吧？{FB}...哎？那就是说，\n我们这辈子都无法战胜你了？{FB}哔... ... ...{FB} ",
    "cap": 212,
    "refs": [
-    "08E78D4:aligned"
+    "08E78D4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89163,7 +88828,7 @@
    "zh": "喂？我是昌平...{FB}啊，你好！{FB}我通过对你的战术\n进行参考后将小茜打败了！{FB}我的宝可梦也变得更强了！{FB}下次见面后\n请再教我一些要领吧！{FB}哔... ... ...{FB} ",
    "cap": 136,
    "refs": [
-    "08E78D0:aligned"
+    "08E78D0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89172,7 +88837,7 @@
    "zh": "喂？我是小勉...{FB}啊，你好！{FB}说起我为什么会如此喜欢山呢，{FB}喜欢栖息在山中的宝可梦\n的确是其中一点，{FA}但最为重要的，{FA}就是我喜欢山本身。{FB}我实在不理解为什么\n有那么多人喜欢大海...{FB}哔... ... ...{FB} ",
    "cap": 180,
    "refs": [
-    "08E74B0:aligned"
+    "08E74B0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89192,7 +88857,7 @@
    "zh": "喂？我是小勉...{FB}啊，你好！{FB}对了，前不久我在和\n无壳海兔战斗的时候，{FA}被一旁路过的{FA}成熟大姐吸引，{FA}结果被它给逃走了。{FB}你对战的时候一定要集中精神啊！\n请多保重！{FB}哔... ... ...{FB} ",
    "cap": 163,
    "refs": [
-    "08E74AC:aligned"
+    "08E74AC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89201,7 +88866,7 @@
    "zh": "喂？我是小勉...{FB}啊，你好！{FB}前段日子腕力给\n我找来了很多{FA}看起来很好吃的果实，{FA}于是，我就和它一起吃了！{FB}虽然不知道这东西能不能吃...\n但真的很好吃。{FB}你自己保重！{FB}哔... ... ...{FB} ",
    "cap": 165,
    "refs": [
-    "08E74A8:aligned"
+    "08E74A8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89219,7 +88884,7 @@
    "zh": "喂？我是康明...{FB}呀，你好{FB}！昨天我在孩子的面前\n让鲤鱼王给逃走了，{FA}我当时很失望，{FA}结果他给了我个精灵球！{FB}我感到很欣慰。{FB}你有空了也给你的妈妈\n多打打电话吧！{FB}哔... ... ...{FB} ",
    "cap": 162,
    "refs": [
-    "08E70CC:aligned"
+    "08E70CC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89228,7 +88893,7 @@
    "zh": "喂？我是康明...{FB}呀，你好！{FB}长翅鸥最近\n比我的孩子还更经常陪我！{FA}这真是有点悲哀啊。{FB}你有空了也给你的妈妈\n多打打电话吧！{FB}哔... ... ...{FB} ",
    "cap": 128,
    "refs": [
-    "08E70C8:aligned"
+    "08E70C8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89246,7 +88911,7 @@
    "zh": "喂？我是康明...{FB}呀，你好！{FB}你最近怎么样？{FB}我当然是巅峰状态了！{FB}哎？你问我的巅峰状态是指\n钓鱼的状态还是宝可梦的状态？{FB}哈哈哈！\n两个都是啦！{FB}哔... ... ...{FB} ",
    "cap": 146,
    "refs": [
-    "08E70C4:aligned"
+    "08E70C4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89310,7 +88975,7 @@
    "zh": "喂？我是康明...{FB}呀，你好！{FB}你已经好就没和\n我进行宝可梦对战了，{FA}怎么样？{FB}...要来一场吗！{FB}你真是个懂事的孩子！\n那我在32号道路等你！{FB}哔... ... ...{FB} ",
    "cap": 138,
    "refs": [
-    "08E70BC:aligned"
+    "08E70BC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89319,7 +88984,7 @@
    "zh": "喂？我是佳织...{FB}听我说听我说！{FB}我的尼多兰\n经常来和我蹭脸，{FA}真是可爱得受不了了！{FB}还有还有！\n之前它只一招就把{FA}波加曼给打倒了...{FA}感觉对方有点可怜。{FB}我们下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 171,
    "refs": [
-    "08E70B0:aligned"
+    "08E70B0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89328,7 +88993,7 @@
    "zh": "喂？我是佳织...{FB}听我说听我说！{FB}你去参加过自然公园的\n捕虫大赛吗？{FB}我也有去参加过一次...{FB}不过只抓到了绿毛虫。{FB}不过那只绿毛虫\n非常不错的！{FA}这也算很厉害啦！{FB}我们下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 179,
    "refs": [
-    "08E70A8:aligned"
+    "08E70A8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -89346,7 +89011,7 @@
    "zh": "喂？我是佳织...{FB}听我说听我说！{FB}满金市的小茜\n也是最近才开始{FA}宝可梦对战的！{FB}但是她这么快就被联盟\n选为道馆馆主，{FA}看来一定是有非凡的才能啊。{FB}下次再聊吧。{FB}哔... ... ...{FB} ",
    "cap": 160,
    "refs": [
-    "08E70A4:aligned"
+    "08E70A4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90467,7 +90132,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是光一...{FB}呀，你好！{FB}前几天在最后关头\n还是被喇叭芽给逃跑了...{FB}虽然那是个常见的宝可梦，\n但在你想抓它的时候{FA}逃走了，还是很不甘心啊...{FB}再见啦！{FB}哔... ... ...{FB} ",
    "cap": 181,
    "refs": [
-    "08E6CC0:aligned"
+    "08E6CC0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90476,7 +90141,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是光一...{FB}呀，你好！{FB}前几天我仅一招就把\n超音蝠给打倒了...{FB}看它这么不堪一击，\n感觉怪可怜的...{FB}下次再聊吧！{FB}哔... ... ...{FB} ",
    "cap": 147,
    "refs": [
-    "08E6CBC:aligned"
+    "08E6CBC:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90485,7 +90150,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是光一...{FB}呀，你好！{FB}你的宝可梦们在成长吗？{FB}我的宝可梦\n现在正在飞速成长！{FB}其中绿毛虫是\n成长得最快的，{FA}已经变得非常强了！{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 166,
    "refs": [
-    "08E6CB8:aligned"
+    "08E6CB8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90494,7 +90159,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是光一...{FB}呀，你好！{FB}来一场对战吧？\n我不会再输给你了！{FB}我在31号道路等你，\n来了就找我吧！{FB}哔... ... ...{FB} ",
    "cap": 128,
    "refs": [
-    "08E6CB0:aligned"
+    "08E6CB0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90503,7 +90168,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是五郎...{FB}呀，你好！{FB}前段时间我打败了波波！\n打得它满地找牙，{FB}哎，没办法啊，\n谁叫我这么强呢！{FA}下次再聊了！{FB}哔... ... ...{FB} ",
    "cap": 143,
    "refs": [
-    "08E6CA0:aligned"
+    "08E6CA0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90512,7 +90177,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是五郎...{FB}呀，你好！{FB}我那帅帅的大牙狸\n你还记得吗？{FA}我的大牙狸同其他大牙狸相比，{FA}是完全不同的大牙狸，{FA}大牙狸中的大牙狸。{FB}你知道我在说什么吗？{FB}哔... ... ...{FB} ",
    "cap": 179,
    "refs": [
-    "08E6C9C:aligned"
+    "08E6C9C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90521,7 +90186,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是五郎...{FB}呀，你好！{FB}前段时间我看到泳圈鼬了！\n想要去抓的...{FB}可惜失败了！\n哎，真是伤脑筋。{FB}谁叫我捉宝可梦\n这么不熟练呢。{FB}哔... ... ...{FB} ",
    "cap": 158,
    "refs": [
-    "08E6C98:aligned"
+    "08E6C98:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -90530,7 +90195,7 @@
    "zh": "... ... ...\n... ... ...{FB}喂？我是五郎...{FB}现在小拉达的技巧\n已经炉火纯青了！{FB}如果你想来场漂亮的战斗，\n就再来一次对战吧！{FA}再见了！{FB}哔... ... ...{FB} ",
    "cap": 138,
    "refs": [
-    "08E6C8C:aligned"
+    "08E6C8C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -142557,9 +142222,10 @@
    "zh": "已获得",
    "cap": 7,
    "refs": [
-    "0DF1B54:literal"
+    "0DF1D70:aligned",
+    "0DF2178:aligned"
    ],
-   "untrusted": 7,
+   "untrusted": 6,
    "suspect": false
   },
   "0E372BC": {
@@ -142742,10 +142408,9 @@
    "zh": "啊曹貉牛鳌！ 退出设置",
    "cap": 21,
    "refs": [
-    "0DF2A40:literal",
-    "0DF2BE4:literal"
+    "0DF2A40:literal"
    ],
-   "untrusted": 2,
+   "untrusted": 3,
    "suspect": true
   },
   "0E37868": {
@@ -143250,12 +142915,14 @@
    "zh": "已获得",
    "cap": 7,
    "refs": [
-    "0DF360C:literal",
-    "0DF3698:literal",
+    "0DF3698:aligned",
+    "0DF3D4C:aligned",
+    "0DF3E1C:aligned",
+    "0DF4100:aligned",
     "0DF4510:literal",
     "0DF48D0:aligned"
    ],
-   "untrusted": 4,
+   "untrusted": 2,
    "suspect": false
   },
   "0E3840C": {
@@ -145171,7 +144838,7 @@
    "zh": "已完成",
    "cap": 7,
    "refs": [
-    "0DF7048:literal"
+    "0DF7440:aligned"
    ],
    "untrusted": 2,
    "suspect": false
@@ -146334,12 +146001,11 @@
    "zh": "制服狂暴宝可梦",
    "cap": 15,
    "refs": [
-    "0DF7BA4:literal",
-    "0DF7C30:literal",
-    "0DF7CFC:literal",
+    "0DF7BA4:aligned",
+    "0DF8964:aligned",
     "0E3BE20:aligned"
    ],
-   "untrusted": 3,
+   "untrusted": 4,
    "suspect": false
   },
   "0E3BA5B": {
@@ -146358,6 +146024,24 @@
     "03D3E14:aligned"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0E3BACC": {
+   "zh": "一页还空着。\n等有了新的见闻，\n我再把它记下来吧。",
+   "cap": 46,
+   "refs": [
+    "0DF85D4:aligned"
+   ],
+   "untrusted": 2,
+   "suspect": false
+  },
+  "0E3BB4C": {
+   "zh": "埃 式 p阿嫌皂 {FC:01 FF}       退出",
+   "cap": 29,
+   "refs": [
+    "0DF8930:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0E3C424": {
@@ -148204,7 +147888,6 @@
    "zh": "未知图腾笔记",
    "cap": 13,
    "refs": [
-    "0DF9A74:literal",
     "0DF9F20:aligned",
     "0DFA0A0:aligned",
     "0DFA220:aligned",
@@ -148216,7 +147899,7 @@
     "0DFB8B0:aligned",
     "0DFBA90:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 2,
    "suspect": false
   },
   "0E3DA61": {
@@ -181997,7 +181680,7 @@
    "zh": "墙壁崩塌了！",
    "cap": 12,
    "refs": [
-    "0F64D8C:aligned"
+    "0F64D8C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -182006,7 +181689,7 @@
    "zh": "挖出了所有化石！",
    "cap": 16,
    "refs": [
-    "0F64D64:aligned"
+    "0F64D64:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -182107,7 +181790,7 @@
    "zh": "♂傲",
    "cap": 4,
    "refs": [
-    "0FA0420:aligned"
+    "0FA0420:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -182261,15 +181944,6 @@
    "cap": 52,
    "refs": [
     "0E3FFAC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0FF7240": {
-   "zh": "小姐。{FB}然后...{FB} ",
-   "cap": 16,
-   "refs": [
-    "0FCC118:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -182908,6 +182582,8 @@
     "107BD8C:aligned",
     "107BEBC:aligned",
     "107C274:aligned",
+    "107DAC0:aligned",
+    "10802DC:aligned",
     "1082038:aligned",
     "108319C:aligned",
     "10837F8:aligned",
@@ -182984,7 +182660,7 @@
     "10D07B4:aligned",
     "134CB68:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": true
   },
   "10D23C0": {
@@ -192369,7 +192045,7 @@
    "zh": "♂貉",
    "cap": 4,
    "refs": [
-    "1D68F3C:literal"
+    "1D68F3C:aligned"
    ],
    "untrusted": 0,
    "suspect": true
@@ -201276,7 +200952,7 @@
    "zh": "{FD:0F}将攻击和特攻的\n能力变化与{FD:10}互换了！",
    "cap": 37,
    "refs": [
-    "1CFBD6C:literal"
+    "1CFBD6C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -201294,7 +200970,7 @@
    "zh": "{FD:0F}和{FD:10}\n互换了速度！",
    "cap": 19,
    "refs": [
-    "1CFBD70:literal"
+    "1CFBD70:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -201303,7 +200979,7 @@
    "zh": "{FD:0F}和{FD:10}\n互换了能力变化！",
    "cap": 23,
    "refs": [
-    "1CFBD74:literal"
+    "1CFBD74:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -201312,7 +200988,7 @@
    "zh": "{FD:0F}和目标\n平分了力量！",
    "cap": 21,
    "refs": [
-    "1CFBD78:literal"
+    "1CFBD78:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -201321,7 +200997,7 @@
    "zh": "{FD:0F}和目标\n平分了守备！",
    "cap": 21,
    "refs": [
-    "1CFBD7C:literal"
+    "1CFBD7C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -202318,7 +201994,7 @@
    "zh": "水面",
    "cap": 5,
    "refs": [
-    "1D1F838:literal"
+    "1D1F838:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -202327,7 +202003,7 @@
    "zh": "陆地",
    "cap": 5,
    "refs": [
-    "1D1F834:literal"
+    "1D1F834:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -202336,7 +202012,7 @@
    "zh": "连锁: ",
    "cap": 7,
    "refs": [
-    "1D1F81C:literal"
+    "1D1F81C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -206084,7 +205760,7 @@
    "zh": "{FD:10}的能力变化被移除了！",
    "cap": 22,
    "refs": [
-    "1D60F5C:aligned"
+    "1D60F5C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -206093,7 +205769,7 @@
    "zh": "{FD:10}的{FD:16}\n被烧掉了",
    "cap": 16,
    "refs": [
-    "1D60F44:aligned"
+    "1D60F44:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -206683,7 +206359,7 @@
    "zh": "{FD:10}\n被捕兽夹困住了！",
    "cap": 19,
    "refs": [
-    "1D60B48:aligned"
+    "1D60B48:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -206692,7 +206368,7 @@
    "zh": "{FD:10}被{FD:0F}\n困住了！",
    "cap": 15,
    "refs": [
-    "1D60B4C:aligned"
+    "1D60B4C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -206701,7 +206377,7 @@
    "zh": "碎片扎进了\n{FD:11}！",
    "cap": 15,
    "refs": [
-    "1D61014:aligned"
+    "1D61014:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -208497,7 +208173,7 @@
    "zh": "获得了",
    "cap": 7,
    "refs": [
-    "1DC22C0:aligned"
+    "1DC22C0:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -208506,7 +208182,7 @@
    "zh": "背包满:",
    "cap": 8,
    "refs": [
-    "1DC22C4:aligned"
+    "1DC22C4:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -209178,7 +208854,7 @@
    "zh": "进入的宝可梦\n不能多于一只。{FC:09}",
    "cap": 29,
    "refs": [
-    "1D586E4:aligned",
+    "1D586E4:literal",
     "1DE471C:aligned"
    ],
    "untrusted": 0,
@@ -209999,7 +209675,7 @@
    "zh": "推荐等级: ",
    "cap": 11,
    "refs": [
-    "1D5B800:literal"
+    "1D5B800:aligned"
    ],
    "untrusted": 0,
    "suspect": true
@@ -210008,7 +209684,7 @@
    "zh": "{F8:0A}移动 {F8:00}选择 {F8:04}随机 {F8:01}退出",
    "cap": 28,
    "refs": [
-    "1D5B814:literal"
+    "1D5B814:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -210017,7 +209693,7 @@
    "zh": "战斗结束的条件:\n4只宝可梦倒下\n经过了10回合",
    "cap": 43,
    "refs": [
-    "1D5B7F4:literal"
+    "1D5B7F4:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -210026,7 +209702,7 @@
    "zh": "可以选择的伙伴",
    "cap": 15,
    "refs": [
-    "1D5B818:literal"
+    "1D5B818:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -230432,7 +230108,7 @@
    "zh": "脯缦熳",
    "cap": 7,
    "refs": [
-    "1D374CC:aligned"
+    "1D374CC:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -230655,15 +230331,6 @@
     "1DE47B0:aligned"
    ],
    "untrusted": 0,
-   "suspect": true
-  },
-  "1DE6308": {
-   "zh": "埃到鹤蕉萝缦扉é颟",
-   "cap": 18,
-   "refs": [
-    "1D60B40:battlestr"
-   ],
-   "untrusted": 2,
    "suspect": true
   },
   "1DE670C": {
