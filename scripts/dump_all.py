@@ -191,6 +191,35 @@ def scan_strings(rom, base):
 DATA_CHARS = set("块曹肤貉缕疆寝倒厕祷挨赫稻嫌迢驶噪")
 
 
+def prune_inner_refs(strings):
+    """A 'pointer' lying inside the bytes of script text is four text bytes
+    that merely look like one (e.g. 0E 9E 08 in 红色的火球 at 0xABEAE0). Writing
+    a repointed address there corrupts whatever the pool later puts in that
+    recycled space. Drop such refs, then strings left with none."""
+    import bisect
+    real = [(t, t + v["cap"]) for t, v in strings.items()
+            if any(is_script_ref(r) for r in v["refs"])]
+    real.sort()
+    starts = [a for a, _ in real]
+    dropped = 0
+    for t in list(strings):
+        v = strings[t]
+        keep = []
+        for ref in v["refs"]:
+            r = int(ref.split(":")[0], 16)
+            i = bisect.bisect_right(starts, r + 3) - 1
+            inside = any(a < r + 4 and r < b and a != t
+                         for a, b in real[max(0, i - 4):i + 1])
+            if inside:
+                dropped += 1
+            else:
+                keep.append(ref)
+        v["refs"] = keep
+        if not keep:
+            del strings[t]
+    print(f"pruned {dropped} refs inside script text")
+
+
 def mark_suspects(strings):
     """Flag aligned/literal-only strings that look like binary data decoded as text.
     Character frequencies come from strings with script-command refs (certainly
@@ -236,6 +265,7 @@ def main():
                         "entries": ents}
         print(f"{name}: {len(ents)} entries")
     strings = scan_strings(rom, open(BASE, "rb").read())
+    prune_inner_refs(strings)
     mark_suspects(strings)
     print(f"strings: {len(strings)} ({sum(v['suspect'] for v in strings.values())} suspect)")
     os.makedirs("text", exist_ok=True)

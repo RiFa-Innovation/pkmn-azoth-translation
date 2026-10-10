@@ -19,6 +19,7 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 16-machine | lab, Elm back; starter machine is up-right of the player |
 | 17-starter | starter-choice screen (map 43.7) |
 | 19-afterstarter | got Chikorita, Elm sends you to Mr. Pokémon |
+| 23-momtalk | outside home after Mom's Running Shoes |
 | 21-outlab2 | just outside the lab after getting the starter (Elm scene loads next step) |
 
 ## Findings
@@ -38,3 +39,4 @@ Status: **open** = to fix, **fixed** = fixed in the build noted, **ok** = checke
 | 11 | leaving the lab | "咕咚!!" is a sound-effect picture (64x64 sprite, entry 13 of the picture table 0x1DE5A08) | fixed ("Thud!", scripts/sprtext.py) |
 | 12 | New Bark triggers | "喂，{FD:01}！" and 16 other one-hanzi lines never dumped (filter needed 2 hanzi) | fixed (dump accepts short script lines) |
 | 13 | lab aide | item pop-up: "It restores the HP of one Pokémon" runs into the arrow | open (minor) |
+| 14 | Mom (Running Shoes) | "Oh, right" printed as "Oh ▯ht": a false pointer (text bytes 0E 9E 08 inside 红色的火球 at 0xABEAE0) was repointed into recycled space holding this line. 284 such refs | fixed (dump drops refs inside script text; build reserves every repointed word) |

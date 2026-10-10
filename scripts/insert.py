@@ -198,6 +198,11 @@ def main():
             for st in blk["strings"]:
                 a = int(st["zh_at"], 16)
                 pool.reserve(a - 1, src.index(b"\xff", a) + 1)
+    # every word that gets repointed below must not end up under new text
+    for v in strings.values():
+        for r in v["refs"]:
+            ro = int(r.split(":")[0], 16)
+            pool.reserve(ro, ro + 4)
     report["free_before_reloc"] = pool.total()
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
         a = pool.alloc(len(b))
