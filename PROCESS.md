@@ -95,9 +95,22 @@ New since checkpoint 15:
 - `width_override.json`: per-string window width (intro window ≈ 25 chars).
 - `DIALOGUE_PX` 204 → 198: full-width lines collided with the ▼ arrow.
 
+Graphics text (checkpoint 17) — all known image text redrawn, applied by
+`insert.py` from the base ROM each build:
+- `scripts/vram.py OUT` dumps VRAM/palette/OAM from the running emulator and
+  renders each BG + sprites; `scripts/gfx.py locate OUT <bg>` finds the LZ77
+  tileset/tilemap in the ROM.
+- `scripts/gfx_text.py` + `gfx/<screen>.json`: erase rects + English drawn
+  with the game's 6px font (`gfx/font6.json`, harvested from the screen) or
+  5x8 button capitals (`gfx/font5.json`); edited cells get fresh tiles, map
+  patched, LZ77 recompressed + relocated. Specs: `settings` (header/footer),
+  `charsel` (prompt), `nameentry` (OBJ sheet: CHN / BACK / DONE).
+- `scripts/logo.py`: title logo (raw 8bpp BG0) → POKéMON / Pokémon / MERCURY,
+  macOS Impact + Arial Black, quantised to the logo's own 64 palette entries,
+  written in place (150 ≤ 162 tiles).
+
 Next:
-1. Graphics text (unchanged): title logo, character select, name-entry
-   buttons, settings header/footer 更改设定 / 选择 切换 应用.
+1. (done — see above)
 2. Play-test further: first battle (battle messages), Bag, Pokédex, Mart.
    Expect more code-anchored strings in hack UI; find them by searching the
    ROM for the on-screen hanzi (`char_to_code`) and listing the FF block.

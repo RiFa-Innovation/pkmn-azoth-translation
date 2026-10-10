@@ -1,0 +1,42 @@
+{
+ "_doc": "Character select (BG2): prompt 请选择你的照片。",
+ "tiles": {
+  "lz": "1FFA760",
+  "refs": [
+   "1FF44D4"
+  ]
+ },
+ "map": {
+  "lz": "1FFAA28",
+  "refs": [
+   "1FF44DC"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 0,
+ "max_tiles": 512,
+ "preview_pal": "gfx/charsel_pal.bin",
+ "edits": [
+  {
+   "erase": [
+    12,
+    118,
+    200,
+    136
+   ],
+   "erase_colors": [
+    4,
+    10
+   ],
+   "bg": 3,
+   "text": "Please choose your photo.",
+   "at": [
+    17,
+    121
+   ],
+   "ink": 4,
+   "shadow": 10
+  }
+ ]
+}

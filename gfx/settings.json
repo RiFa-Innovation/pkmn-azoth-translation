@@ -1,0 +1,93 @@
+{
+ "_doc": "Settings screen panel (BG2): header 更改设定, footer hints.",
+ "tiles": {
+  "lz": "E04678",
+  "refs": [
+   "DF2FEC"
+  ]
+ },
+ "map": {
+  "lz": "E04A20",
+  "refs": [
+   "DF2FF8"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 1,
+ "max_tiles": 320,
+ "preview_pal": "gfx/settings_pal.bin",
+ "edits": [
+  {
+   "erase": [
+    8,
+    32,
+    64,
+    48
+   ],
+   "erase_colors": [
+    11,
+    12
+   ],
+   "bg": 1,
+   "text": "Settings",
+   "at": [
+    10,
+    33
+   ],
+   "ink": 11,
+   "shadow": 12
+  },
+  {
+   "erase": [
+    104,
+    149,
+    240,
+    160
+   ],
+   "erase_colors": [
+    11,
+    12,
+    13,
+    14
+   ],
+   "bg": 10,
+   "at": [
+    0,
+    147
+   ],
+   "align": "right",
+   "ink": 11,
+   "shadow": 12,
+   "parts": [
+    {
+     "blit": [
+      123,
+      149,
+      131,
+      160
+     ]
+    },
+    " Move ",
+    {
+     "blit": [
+      155,
+      149,
+      163,
+      160
+     ]
+    },
+    " Switch ",
+    {
+     "blit": [
+      189,
+      149,
+      206,
+      160
+     ]
+    },
+    " OK "
+   ]
+  }
+ ]
+}

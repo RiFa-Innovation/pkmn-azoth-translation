@@ -22,6 +22,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 import bps  # noqa: E402
 import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
+import gfx_text  # noqa: E402
+import logo  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
@@ -68,6 +70,12 @@ class FreePool:
         a = best[0]
         best[0] += n
         return a
+
+    def alloc_aligned(self, n, align=4):
+        a = self.alloc(n + align - 1)
+        pad = -a % align
+        self.add(a + pad + n, a + n + align - 1)  # give back the unused tail
+        return a + pad
 
     def total(self):
         return sum(e - s for s, e in self.runs)
@@ -218,6 +226,23 @@ def main():
             assert src[at:at + len(orig)] == orig, f"code_text {name}: code at {p['at']} differs"
             rom[at:at + len(new)] = new
         report["relocated"] += len(parts)
+    # --- image text (gfx/*.json): redrawn tileset + tilemap, LZ77, repointed
+    report["gfx"] = 0
+    for spec in sorted(glob.glob("gfx/*.json")):
+        if os.path.basename(spec).startswith("font"):
+            continue
+        for data, refs, _ in gfx_text.apply(spec, src):
+            a = pool.alloc_aligned(len(data))
+            rom[a:a + len(data)] = data
+            for r in refs:
+                rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
+        report["gfx"] += 1
+    # title logo (raw 8bpp BG): fits in the original tile area, so in place
+    lt, lm = logo.build(src)
+    assert len(lt) <= 162 * 64
+    rom[logo.TILES:logo.TILES + len(lt)] = lt
+    rom[logo.MAP:logo.MAP + len(lm)] = lm
+    report["gfx"] += 1
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)
