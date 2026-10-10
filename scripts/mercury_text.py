@@ -20,10 +20,10 @@ FONT_NORMAL = 0x7D0000
 CTRL_LEADS = {0x06, 0x1B}
 
 # Hack-redrawn 1-byte glyphs (vanilla: LV/=/; and the 0x37-0x3E block).
-# Identified from rendered glyphs + context; "?" suffix = tentative.
+# Identified from rendered glyphs + dialogue context. 0x36 is rare/tentative.
 PUNCT = {
-    0x36: "！", 0x37: "。", 0x38: "—", 0x39: "～", 0x3A: "、",
-    0x3B: "，", 0x3C: "“", 0x3D: "”", 0x3E: "：",
+    0x36: "；", 0x37: "。", 0x38: "—", 0x39: "～", 0x3A: "、",
+    0x3B: "，", 0x3C: "！", 0x3D: "？", 0x3E: "：",
 }
 
 # FR control codes: code -> number of argument bytes
@@ -112,8 +112,8 @@ def decode(rom, off, limit=4096):
             out.append("\n")
         elif b in (0xFA, 0xFB):
             out.append("{%02X}" % b)
-        elif b == 0xFD:
-            out.append("{FD:%02X}" % rom[i + 1])
+        elif b in (0xF7, 0xF8, 0xF9, 0xFD):
+            out.append("{%02X:%02X}" % (b, rom[i + 1]))
             i += 1
         elif b == 0xFC:
             c = rom[i + 1]
@@ -133,3 +133,81 @@ def decode(rom, off, limit=4096):
 
 def decode_fixed(rom, off, size):
     return decode(rom, off, size)[0]
+
+
+# ---------------------------------------------------------------- English ---
+
+# Hack font: Latin is fixed 6 px (a few narrower), hanzi 12 px (normal font).
+WIDTHS_OFF = 0x207300   # FONT_NORMAL width table (glyph id -> px)
+HANZI_PX = 12
+_ENC = {v: k for k, v in VANILLA.items() if k >= 0x1F or k in (0x00, 0x1B, 0x06)}
+_ENC.update({"\u2019": 0xB4, "\u2018": 0xB3, "\u201c": 0xB1, "\u201d": 0xB2,
+             "'": 0xB4, '"': 0xB2, "\u2026": 0xB0})
+_ENC = {k: v for k, v in _ENC.items() if not 0x36 <= v <= 0x3E}
+_TOKEN = re.compile(r"\{(F[789AB-D]|FC):?([0-9A-F ]*)\}|\{(FA|FB)\}")
+
+
+def tokenize(text):
+    """Yield (bytes, kind) units: kind in char/space/newline/scroll/para/ctrl."""
+    i = 0
+    while i < len(text):
+        c = text[i]
+        if c == "{":
+            j = text.index("}", i)
+            body = text[i + 1:j]
+            if body in ("FA", "FB"):
+                yield bytes([int(body, 16)]), ("scroll" if body == "FA" else "para")
+            else:
+                head, _, args = body.partition(":")
+                yield bytes([int(head, 16)]) + bytes.fromhex(args.replace(" ", "")), "ctrl"
+            i = j + 1
+            continue
+        if c == "\n":
+            yield b"\xFE", "newline"
+        elif c == " ":
+            yield b"\x00", "space"
+        elif c in _ENC:
+            yield bytes([_ENC[c]]), "char"
+        else:
+            raise ValueError(f"unencodable char {c!r} in {text!r}")
+        i += 1
+
+
+def encode_en(text):
+    return b"".join(b for b, _ in tokenize(text)) + b"\xFF"
+
+
+def ctrl_px(b):
+    # FD placeholders expand at runtime: budget a 7-char (42 px) name
+    return 42 if b[0] == 0xFD else 0
+
+
+def wrap_en(text, widths, max_px, dialogue):
+    """Re-wrap English. Existing \\n are treated as spaces; {FB} kept.
+    dialogue=True: 2-line box, lines 3+ joined with {FA} (scroll)."""
+    paras = re.split(r"\{FB\}", text)
+    out_paras = []
+    for para in paras:
+        words = para.replace("\n", " ").split(" ")
+        lines, cur, cur_px = [], "", 0
+        for w in words:
+            if not w:
+                continue
+            wpx = sum(widths[b[0]] if k == "char" else ctrl_px(b)
+                      for b, k in tokenize(w))
+            sp = widths[0] if cur else 0
+            if cur and cur_px + sp + wpx > max_px:
+                lines.append(cur)
+                cur, cur_px = w, wpx
+            else:
+                cur, cur_px = (cur + " " + w if cur else w), cur_px + sp + wpx
+        if cur:
+            lines.append(cur)
+        if dialogue:
+            s = ""
+            for n, ln in enumerate(lines):
+                s += ("" if n == 0 else "\n" if n == 1 else "{FA}") + ln
+        else:
+            s = "\n".join(lines)
+        out_paras.append(s)
+    return "{FB}".join(out_paras)
