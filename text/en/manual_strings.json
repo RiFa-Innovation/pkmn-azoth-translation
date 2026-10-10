@@ -347,5 +347,15 @@
   "refs": [
    "1DE4EF4"
   ]
+ },
+ "41628E": {
+  "zh": "{FD:01}",
+  "cap": 3,
+  "en": "{FD:01}",
+  "ref_en": "Trainer Card",
+  "refs": [
+   "1DE6570"
+  ],
+  "_why": "start menu label for the trainer card is the player-name code, which this menu prints blank (also in the Chinese ROM); only the menu's pointer gets the new label"
  }
 }
