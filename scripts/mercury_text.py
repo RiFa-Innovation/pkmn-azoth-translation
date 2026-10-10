@@ -135,6 +135,34 @@ def decode_fixed(rom, off, size):
     return decode(rom, off, size)[0]
 
 
+def decode_vanilla(rom, off, limit=1000):
+    """Decode vanilla FR English (no hanzi leads, stock 0x36-0x3E)."""
+    out, i, end = [], off, off + limit
+    while i < end:
+        b = rom[i]
+        if b == 0xFF:
+            return "".join(out), i + 1
+        if b == 0xFE:
+            out.append("\n")
+        elif b in (0xFA, 0xFB):
+            out.append("{%02X}" % b)
+        elif b in (0xF7, 0xF8, 0xF9, 0xFD):
+            out.append("{%02X:%02X}" % (b, rom[i + 1]))
+            i += 1
+        elif b == 0xFC:
+            c = rom[i + 1]
+            n = EXT_CTRL_ARGS.get(c, 0)
+            args = rom[i + 2:i + 2 + n].hex().upper()
+            out.append("{FC:%02X%s}" % (c, (" " + args) if args else ""))
+            i += 1 + n
+        elif b in VANILLA:
+            out.append(VANILLA[b])
+        else:
+            out.append("{%02X}" % b)
+        i += 1
+    return "".join(out), i
+
+
 # ---------------------------------------------------------------- English ---
 
 # Hack font: Latin is fixed 6 px (a few narrower), hanzi 12 px (normal font).
@@ -185,10 +213,24 @@ def ctrl_px(b):
 def wrap_en(text, widths, max_px, dialogue):
     """Re-wrap English. Existing \\n are treated as spaces; {FB} kept.
     dialogue=True: 2-line box, lines 3+ joined with {FA} (scroll)."""
+    def line_px(line):
+        return sum(widths[b[0]] if k in ("char", "space") else ctrl_px(b)
+                   for b, k in tokenize(line))
+
     paras = re.split(r"\{FB\}", text)
     out_paras = []
     for para in paras:
-        words = para.replace("\n", " ").split(" ")
+        given = re.split(r"\n|\{FA\}", para)
+        if len(given) > 1 and all(line_px(ln) <= max_px for ln in given):
+            lines = given
+            if dialogue:
+                s = given[0] + "".join(("\n" if n == 1 else "{FA}") + ln
+                                       for n, ln in enumerate(given[1:], 1))
+            else:
+                s = "\n".join(lines)
+            out_paras.append(s)
+            continue
+        words = re.findall(r"(?:\{[^}]*\}|[^ ])+", re.sub(r"\n|\{FA\}", " ", para))
         lines, cur, cur_px = [], "", 0
         for w in words:
             if not w:

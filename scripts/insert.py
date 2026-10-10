@@ -117,14 +117,18 @@ def main():
     pending = []
     for t in starts:
         v = strings[t]
+        if v.get("suspect") or tm.get(v["zh"], "") is None:
+            continue
         en = tm.get(v["zh"])
         if en is None:
             report["missing"] += 1
             continue
         dialogue = any(r.split(":")[1] in DIALOGUE_KINDS for r in v["refs"])
+        single_line = not dialogue and not re.search(r"\n|\{FA\}|\{FB\}", v["zh"])
         max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), 48)
         try:
-            b = mt.encode_en(mt.wrap_en(en, widths, max_px, dialogue))
+            text = en if single_line else mt.wrap_en(en, widths, max_px, dialogue)
+            b = mt.encode_en(text)
         except ValueError as e:
             report["errors"].append(f"{t:07X}: {e}")
             continue

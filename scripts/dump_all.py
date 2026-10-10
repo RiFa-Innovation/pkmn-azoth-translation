@@ -12,7 +12,7 @@ import json
 import os
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 import numpy as np
 
@@ -95,6 +95,34 @@ def scan_strings(rom):
     return out
 
 
+DATA_CHARS = set("块曹肤貉缕疆寝倒厕祷挨赫稻嫌迢驶噪")
+
+
+def mark_suspects(strings):
+    """Flag aligned-only strings that look like binary data decoded as text.
+    Character frequencies come from strings with script-command refs (certainly
+    real). Strings referenced from a pointer-table run are trusted more."""
+    real = [v["zh"] for v in strings.values()
+            if any(not r.endswith(":aligned") for r in v["refs"])]
+    freq = Counter(c for s in real for c in s if HANZI.match(c))
+    ref_at = {}
+    for t, v in strings.items():
+        for r in v["refs"]:
+            ref_at[int(r.split(":")[0], 16)] = t
+    for v in strings.values():
+        if any(not r.endswith(":aligned") for r in v["refs"]):
+            v["suspect"] = False
+            continue
+        s = v["zh"]
+        hz = HANZI.findall(s)
+        rare = sum(1 for c in hz if freq[c] < 2) / len(hz)
+        in_table = any(int(r.split(":")[0], 16) - 4 in ref_at
+                       and int(r.split(":")[0], 16) + 4 in ref_at for r in v["refs"])
+        v["suspect"] = (s.startswith("♂") or "缕曹" in s
+                        or sum(1 for c in hz if c in DATA_CHARS) >= 2
+                        or (not in_table and (rare > 0.34 or (len(hz) <= 4 and rare > 0))))
+
+
 def main():
     rom = open(ROM, "rb").read()
     tables = {}
@@ -108,7 +136,8 @@ def main():
                         "entries": ents}
         print(f"{name}: {len(ents)} entries")
     strings = scan_strings(rom)
-    print(f"strings: {len(strings)}")
+    mark_suspects(strings)
+    print(f"strings: {len(strings)} ({sum(v['suspect'] for v in strings.values())} suspect)")
     os.makedirs("text", exist_ok=True)
     json.dump({"tables": tables,
                "strings": {"%07X" % t: v for t, v in sorted(strings.items())}},
