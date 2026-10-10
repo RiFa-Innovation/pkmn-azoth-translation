@@ -28,7 +28,8 @@ TABLES = [
     ("species", 0x141B350, 11, 11, 1292),
     ("moves", 0x1D97378, 13, 13, 1000),
     ("abilities", 0x1D8E858, 13, 13, 302),
-    ("items", 0x3DB028, 44, 14, 378),
+    ("items", 0x3DB028, 44, 14, 378),  # old copy; the game reads items2
+    ("items2", 0x7C7E00, 44, 14, 750),
     ("types", 0x1DBBA70, 7, 7, 19),
     ("types_old", 0x24F1A0, 7, 7, 18),
     ("trainer_classes", 0x23E558, 13, 13, 107),
@@ -39,7 +40,7 @@ TABLES = [
 HANZI = re.compile(r"[一-鿿]")
 MAX_LEN = 4096  # the intro disclaimer is one 1,856-byte string
 OK = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 \n"
-         ".,!?-'\"/:…♂♀é‘’“”%()&+=~·×") | set(mt.PUNCT.values())
+         ".,!?-'\"/:…♂♀é‘’“”%()&+=~·×<>¥") | set(mt.PUNCT.values())
 
 
 def is_textlike(s, min_ratio=0.3):
@@ -68,6 +69,13 @@ def ref_kind(rom, r, text=""):
         return "loadpointer"
     if rom[r - 1] == 0x67:
         return "message"
+    # battle script: setword gBattleStringLoader (0x0203E020), ptr; printstring
+    if rom[r - 4:r] == b"\x20\xe0\x03\x02":
+        return "battlestr"
+    # item struct (44 B) description field at +0x14 (old table, live table)
+    for base, n in ((0x3DB028, 378), (0x7C7E00, 750)):
+        if base <= r < base + 44 * n and (r - base) % 44 == 0x14:
+            return "aligned"
     for back in (6, 10, 14):  # trainerbattle type,id,local,ptr,ptr,ptr
         if r - back >= 0 and rom[r - back] == 0x5C:
             return "trainerbattle"

@@ -17,3 +17,4 @@ utilities/
 *.a
 __pycache__/
 *.pyc
+.venv/

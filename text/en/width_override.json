@@ -1,0 +1,8 @@
+{
+ "_doc": "Per-string window overrides {addr: {px, dialogue}} for text drawn in a narrower box than its class implies (dialogue = 2-line box, lines 3+ scroll with {FA}).",
+ "07AB603": {
+  "px": 144,
+  "dialogue": true,
+  "note": "intro Marill pages, hack intro window ~25 chars"
+ }
+}

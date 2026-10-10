@@ -126,6 +126,9 @@ def main():
     keep = set()
     if os.environ.get("INSERT_NORECYCLE"):
         keep = {int(a, 16) for a in json.load(open(os.environ["INSERT_NORECYCLE"]))}
+    # window width in px for strings shown in narrower boxes than their class
+    width_override = {k: v for k, v in json.load(
+        open("text/en/width_override.json", encoding="utf-8")).items() if not k.startswith("_")}
     pending = []
     for t in starts:
         v = strings[t]
@@ -140,6 +143,9 @@ def main():
         max_px = DIALOGUE_PX if dialogue else max(src_max_px(v["zh"], widths), table_px.get(t, 0), 48)
         if "{F9:0A}" in v["zh"]:  # help-system pages use the full-width window
             max_px = HELP_PX
+        if f"{t:07X}" in width_override:
+            wo = width_override[f"{t:07X}"]
+            max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
         try:
             text = en if single_line else mt.wrap_en(en, widths, max_px, dialogue)
             b = mt.encode_en(text)
@@ -186,6 +192,32 @@ def main():
             report["relocated"] += 1
         elif len(mt.encode_en(m["en"])) > m["cap"]:
             report["too_long"].append(f"manual {addr} {m['en']!r} ({len(b)}>{m['cap']})")
+    # --- code-anchored text (text/en/code_text.json): code reaches it as
+    # literal base + adds imm8, so move the whole group and patch the code
+    code_text = json.load(open("text/en/code_text.json", encoding="utf-8"))
+    for name, blk in code_text.items():
+        if name.startswith("_"):
+            continue
+        lit = int(blk["literal"], 16)
+        assert src[lit:lit + 4] == int(blk["orig"], 16).to_bytes(4, "little"), f"code_text {name}: literal moved"
+        parts = []
+        for s in blk["strings"]:
+            assert mt.decode(src, int(s["zh_at"], 16), 1024)[0] == s["zh"], f"code_text {name}: source text moved"
+            parts.append((int(s["off"], 16), mt.encode_en(s["en"])))
+        lo = min(o for o, _ in parts)
+        hi = max(o + len(b) for o, b in parts)
+        for (o1, b1), (o2, _) in zip(sorted(parts), sorted(parts)[1:]):
+            assert o1 + len(b1) <= o2, f"code_text {name}: strings overlap"
+        a = pool.alloc(hi - lo)
+        base_addr = a - lo
+        for o, b in parts:
+            rom[base_addr + o:base_addr + o + len(b)] = b
+        rom[lit:lit + 4] = (0x08000000 + base_addr).to_bytes(4, "little")
+        for p in blk["patch"]:
+            at, orig, new = int(p["at"], 16), bytes.fromhex(p["orig"]), bytes.fromhex(p["new"])
+            assert src[at:at + len(orig)] == orig, f"code_text {name}: code at {p['at']} differs"
+            rom[at:at + len(new)] = new
+        report["relocated"] += len(parts)
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)

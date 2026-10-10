@@ -63,5 +63,209 @@
   "zh": "退出",
   "cap": 5,
   "en": "Exit"
+ },
+ "0415F0E": {
+  "zh": "编号模式：关都",
+  "cap": 14,
+  "en": "Mode: Kanto",
+  "refs": [
+   "0452024"
+  ]
+ },
+ "0415F24": {
+  "zh": "编号模式：全国",
+  "cap": 14,
+  "en": "Mode: National",
+  "refs": [
+   "045202C"
+  ]
+ },
+ "07AD823": {
+  "zh": "<游戏狂想家>",
+  "cap": 13,
+  "en": "<Game Freak>",
+  "refs": [
+   "07AD788"
+  ]
+ },
+ "07AD863": {
+  "zh": "<宝可梦 心金/魂银>",
+  "cap": 19,
+  "en": "<Pokémon HG/SS>",
+  "refs": [
+   "07AD7B8"
+  ]
+ },
+ "07AD879": {
+  "zh": "<宝可梦 金/银/水晶>",
+  "cap": 20,
+  "en": "<Pokémon G/S/C>",
+  "refs": [
+   "07AD7C0"
+  ]
+ },
+ "07AD89F": {
+  "zh": "<宝可梦 心金/魂银>",
+  "cap": 19,
+  "en": "<Pokémon HG/SS>",
+  "refs": [
+   "07AD7D0"
+  ]
+ },
+ "07AD8B2": {
+  "zh": "<宝可梦 金/银/水晶>",
+  "cap": 20,
+  "en": "<Pokémon G/S/C>",
+  "refs": [
+   "07AD7E8"
+  ]
+ },
+ "07AD8E4": {
+  "zh": "<宝可梦火红>",
+  "cap": 13,
+  "en": "<Pokémon FireRed>",
+  "refs": [
+   "07AD800"
+  ]
+ },
+ "07AAB7E": {
+  "zh": "...... ......{FB}不对！\n现在不是收看\n大木博士讲座的时间！{FB}满金电台的\n网络直播马上\n就要开始了！{FB} ",
+  "cap": 91,
+  "en": "......{FB}No, wait! This is\nno time for a lecture!{FB}Goldenrod Radio's\nstream starts soon!{FB}"
+ },
+ "07AABD9": {
+  "zh": "宝可梦 水银",
+  "cap": 12,
+  "en": "Mercury"
+ },
+ "07AABE8": {
+  "zh": "First Chapter：致150年后的你",
+  "cap": 28,
+  "en": "Ch.1: To You 150 Years On"
+ },
+ "07AAC04": {
+  "zh": "以及...",
+  "cap": 8,
+  "en": "And..."
+ },
+ "07AAC0C": {
+  "zh": "所有支持过水银、",
+  "cap": 16,
+  "en": "Our supporters,"
+ },
+ "07AAC1C": {
+  "zh": "参与过水银测试的人",
+  "cap": 19,
+  "en": "our playtesters,"
+ },
+ "07AAC2F": {
+  "zh": "还有...",
+  "cap": 8,
+  "en": "And..."
+ },
+ "07AAC37": {
+  "zh": "屏幕前的你!",
+  "cap": 12,
+  "en": "Yes, you!"
+ },
+ "07AAC5A": {
+  "zh": "And Thanks for your playing！",
+  "cap": 29,
+  "en": "Thanks for playing!"
+ },
+ "07AAC77": {
+  "zh": "作者",
+  "cap": 5,
+  "en": "By:"
+ },
+ "07AAC7C": {
+  "zh": "埋葬official(夏影)",
+  "cap": 19,
+  "en": "Maizang(Xiaying)"
+ },
+ "1FFF1C5": {
+  "zh": "任务",
+  "cap": 5,
+  "en": "Task"
+ },
+ "1FFF1CA": {
+  "zh": "背包",
+  "cap": 5,
+  "en": "Bag"
+ },
+ "1FFF1CF": {
+  "zh": "精灵齿轮",
+  "cap": 9,
+  "en": "Pokégear"
+ },
+ "1FFF1D8": {
+  "zh": "{F8:0B} 选择  {F8:00} 确定  {F8:05} 排序  {F8:01} 返回",
+  "cap": 35,
+  "en": "{F8:0B} Pick  {F8:00} OK  {F8:05} Sort  {F8:01} Back"
+ },
+ "1FFF1FB": {
+  "zh": "{F8:0B} 选择   {F8:00} 确定   {F8:01} 返回",
+  "cap": 28,
+  "en": "{F8:0B} Pick   {F8:00} OK   {F8:01} Back"
+ },
+ "1FFF217": {
+  "zh": "{F8:0B} 移动  {F8:00} 完成  {F8:05} 完成",
+  "cap": 26,
+  "en": "{F8:0B} Move  {F8:00} Done  {F8:05} Done"
+ },
+ "1FFF231": {
+  "zh": "{F8:0B}选择 {F8:00}确定 {F8:05}排序 {F8:01}返回 {F8:03}便携电脑",
+  "cap": 39,
+  "en": "{F8:0B}Pick {F8:00}OK {F8:05}Sort {F8:01}Back {F8:03}PC"
+ },
+ "1FFF258": {
+  "zh": "{F8:0B}移动 {F8:00}完成 {F8:05}完成 {F8:03}便携电脑",
+  "cap": 32,
+  "en": "{F8:0B}Move {F8:00}Done {F8:05}Done {F8:03}PC"
+ },
+ "1FFF278": {
+  "zh": "时",
+  "cap": 3,
+  "en": ":"
+ },
+ "1FFF27B": {
+  "zh": "分",
+  "cap": 3,
+  "en": ""
+ },
+ "1FFF27E": {
+  "zh": "星期日",
+  "cap": 7,
+  "en": "Sun"
+ },
+ "1FFF286": {
+  "zh": "星期一",
+  "cap": 7,
+  "en": "Mon"
+ },
+ "1FFF28E": {
+  "zh": "星期二",
+  "cap": 7,
+  "en": "Tue"
+ },
+ "1FFF296": {
+  "zh": "星期三",
+  "cap": 7,
+  "en": "Wed"
+ },
+ "1FFF29E": {
+  "zh": "星期四",
+  "cap": 7,
+  "en": "Thu"
+ },
+ "1FFF2A6": {
+  "zh": "星期五",
+  "cap": 7,
+  "en": "Fri"
+ },
+ "1FFF2AE": {
+  "zh": "星期六",
+  "cap": 7,
+  "en": "Sat"
  }
 }

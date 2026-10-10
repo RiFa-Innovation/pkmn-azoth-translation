@@ -1,0 +1,35 @@
+{
+ "_doc": "Text the hack's intro routine (0x775xxx) reaches as anchor+imm8 (GCC section anchors), so no pointer scan finds it and it cannot simply be repointed. Each block: allocate room for the strings, write them at base+off, set the literal word to base, and apply Thumb patches (orig bytes asserted).",
+ "oak_intro": {
+  "literal": "7761CC",
+  "orig": "087AAA80",
+  "strings": [
+   {
+    "zh_at": "7AAB2E",
+    "zh": "哎呀，久等了！{FB}欢迎来到\n口袋妖怪的世界！{FB}我叫大木，{FB}大家都亲切地称我为\n精灵博士。",
+    "off": "2E",
+    "en": "Oh, sorry to keep you\nwaiting!{FB}Welcome to the\nworld of Pokémon!{FB}My name is Oak.{FB}People fondly call me\nthe Pokémon Professor."
+   },
+   {
+    "zh_at": "7AAAB8",
+    "zh": "但是，我们并没有了解\n精灵的一切。{FB}精灵身上还有很多\n秘密等待我们解决！{FB}为了弄清这些谜团，\n我每天都要进行{FA}精灵的相关研究！{FB} ",
+    "off": "B0",
+    "en": "But we still don't know\neverything about them.{FB}Pokémon hold many\nsecrets yet to uncover!{FB}To unravel them, I\nresearch Pokémon{FA}every single day!{FB}"
+   }
+  ],
+  "patch": [
+   {
+    "at": "775F18",
+    "orig": "0a00",
+    "new": "ac4a",
+    "asm": "movs r2,r1 -> ldr r2,[pc,#0x2b0] (literal 7761CC); greeting = base+0x2E"
+   },
+   {
+    "at": "775F4E",
+    "orig": "3832",
+    "new": "b032",
+    "asm": "adds r2,#0x38 -> adds r2,#0xB0"
+   }
+  ]
+ }
+}

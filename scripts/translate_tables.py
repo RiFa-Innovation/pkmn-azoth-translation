@@ -17,6 +17,7 @@ REF = {
     "moves": ("move", "move_id"),
     "abilities": ("ability", "ability_id"),
     "items": ("item", "item_id"),
+    "items2": ("item", "item_id"),
     "types": ("type", "type_id"),
     "types_old": ("type", "type_id"),
 }
@@ -70,6 +71,9 @@ def main():
         manual_path = f"text/en/tables_manual/{name}.json"
         manual = json.load(open(manual_path, encoding="utf-8")) \
             if os.path.exists(manual_path) else {}
+        if name == "items2":  # reuse the old table's choices (manual + abbrev)
+            old = json.load(open("text/en/tables/items.json", encoding="utf-8"))
+            zh2en.update({dump["items"]["entries"][i]: e for i, e in old.items()})
         out, miss = {}, {}
         for idx, zh in t["entries"].items():
             en = manual.get(idx) or (fix_case(name, zh2en[zh]) if zh in zh2en else None)
