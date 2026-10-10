@@ -1,6 +1,6 @@
 # Mercury (水银) 1.3.3 — translation process state
 
-> Updated 2026-10-09 (checkpoint 10). Resume from here. Everything below is
+> Updated 2026-10-10 (checkpoint 13). Resume from here. Everything below is
 > ground truth from the repo; see git log for checkpoints.
 
 ## Goal
@@ -74,14 +74,33 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
 
-## Resume point (2026-10-09, checkpoint 12)
+## Resume point (2026-10-10, checkpoint 13)
 
-- Workflow: `python3 scripts/tm_batch.py next 200` → write `{id: english|null}` JSON →
-  `python3 scripts/tm_batch.py add <file>` (warns on width/line/token issues) → repeat.
-- Done: queue ids up to ~6423 (help, quest log, New Bark → Mahogany, Goldenrod).
-  Next batch starts at id 6424 (Goldenrod shops / Pokégear charms).
-- Names glossary: `text/en/glossary.json` (add Kris, Dawn, Looker, Yellow, Otto/Nell,
-  Rowan, Sanka, Amphy, Kumi/Lumi as used). Trainer names table (745) still untranslated.
-- `layout.dialogue_set` decides 2-line message-box wrapping; quest log / descriptions
-  are fixed-width (≈31 chars × source line count).
-- Not yet tested in an emulator.
+**Bulk translation is DONE.** `python3 scripts/tm_batch.py stats` reports
+12275/12275 strings, 163560/163560 hanzi. All fixed-stride name tables done:
+species 1290, moves 944, abilities 298, items 307, types, trainer_classes 105,
+trainer_names 699, dex_categories 1025. `python3 scripts/insert.py` builds
+`build/Mercury_EN.gba` + `build/Mercury_EN.bps` with `missing: 0, errors: 0,
+too_long: 0`; the BPS round-trips byte-exact against clean FR 1.0.
+
+Remaining (open risks, all need emulator testing):
+
+1. **Description-tail pointers are stale (the "junk filter" issue).** Long
+   texts — Pokédex flavour entries (`0x044xxxx`), move descriptions
+   (`0x1D90xxx`), battle messages (`0x1D9Bxxx`), tutor-move list lines
+   (`0x0E3Exxx`) — are stored as ONE string with a SECOND pointer into its
+   middle (a continuation/"page 2" offset in the species/move data table).
+   `dump_all.py` flags these interior pointers `suspect`, so `insert.py` skips
+   them. The parent is translated + relocated, but the continuation pointer is
+   never repointed → it still points at the original Chinese bytes. Confirmed
+   at `0x44520b` (parent, now English at `0xe53c8e`) vs `0x445233` (tail, still
+   Chinese "基本不能动。"), pointer table `0x17D9AF8`/`0x17D9AFC`. Fix =
+   translate the tails and repoint the continuation offsets to the English line
+   boundaries (or make the dex data single-pointer); verify in an emulator.
+2. Width assumptions for fixed-width boxes (the ~2,277 `tm_batch.py add` WARN
+   lines) — most are scrolling descriptions and likely benign, but menus must be
+   spot-checked in an emulator.
+3. Trainer-name transliterations (699) are hand work: official names for known
+   characters, best-effort romaji for the rest (`text/en/tables_manual/
+   trainer_names.json`). Spot-check in battle.
+4. The currency glyph (¥) rendering next to English — emulator check.
