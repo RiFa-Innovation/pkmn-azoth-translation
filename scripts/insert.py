@@ -33,6 +33,8 @@ BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
 DIALOGUE_KINDS = ("loadpointer", "message", "trainerbattle")
 DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
+MOVE_DESC_PX = 112  # move description box (summary / learn screen), 4 lines
+MOVE_DESC_TABLE, MOVE_DESC_COUNT = 0x1CC8EB0, 1273
 ITEM_DESC_PX = 176  # bag description box: starts after the item icon, ends before the arrow
 HELP_PX = 222
 MIN_FREE_RUN = 512
@@ -187,6 +189,9 @@ def main():
     for tb, n in ((0x3DB028, 378), (0x7C7E00, 750)):
         for i in range(n):
             item_desc.add(int.from_bytes(src[tb + 44 * i + 0x14:tb + 44 * i + 0x18], "little") - 0x08000000)
+    # strings referenced from the hack's move-description table (CFRU, 0x1CC8EB0)
+    move_desc = {int.from_bytes(src[MOVE_DESC_TABLE + 4 * i:MOVE_DESC_TABLE + 4 * i + 4], "little") - 0x08000000
+                 for i in range(MOVE_DESC_COUNT)}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
     # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
@@ -212,6 +217,8 @@ def main():
             max_px = HELP_PX
         if t in item_desc:  # bag description box (3 lines, ~176px before the arrow)
             max_px, dialogue, single_line = ITEM_DESC_PX, False, False
+        if t in move_desc:  # summary / move-learn description box (4 lines)
+            max_px, dialogue, single_line = MOVE_DESC_PX, False, False
         if f"{t:07X}" in width_override:
             wo = width_override[f"{t:07X}"]
             max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
