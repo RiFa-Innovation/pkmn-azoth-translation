@@ -33,7 +33,7 @@ from emu import Emu  # noqa: E402
 STATES = "saves/states"
 SHOTS = "saves/shots"
 PIDFILE = "saves/.emu.pid"
-SB1, MAPHDR, OBJ, VMAP = 0x03005008, 0x02036DFC, 0x02036E38, 0x03005040
+SB1, MAPHDR, OBJ, VMAP, AVATAR = 0x03005008, 0x02036DFC, 0x02036E38, 0x03005040, 0x02037078
 DIRS = {"U": "Up", "D": "Down", "L": "Left", "R": "Right"}
 DELTA = {"U": (0, -1), "D": (0, 1), "L": (-1, 0), "R": (1, 0)}
 
@@ -43,9 +43,13 @@ def u32(e, a):
 
 
 def pos(e):
+    """Live player tile (the player object event; the save block copy is
+    only refreshed on map changes) and the current map."""
     sb1 = u32(e, SB1)
-    x, y, grp, num = struct.unpack("<hhbb", e.read(sb1, 6))
-    return x, y, grp, num
+    _, _, grp, num = struct.unpack("<hhbb", e.read(sb1, 6))
+    oid = e.read(AVATAR + 5, 1)[0]
+    x, y = struct.unpack("<hh", e.read(OBJ + 0x24 * oid + 0x10, 4))
+    return x - 7, y - 7, grp, num
 
 
 def boot(rom):
@@ -77,13 +81,13 @@ def walk(e, d, n):
     stuck = 0
     while (pos(e)[:2]) != target and stuck < 3:
         before = pos(e)[:2]
-        e.press(DIRS[d], hold=8, release=0)
-        e.wait(10)
+        e.press(DIRS[d], hold=3, release=4)   # a tap starts one step (or turns)
+        e.wait(14)                            # a walking step is 16 frames
         if pos(e)[:2] == before:
             stuck += 1
         else:
             stuck = 0
-    e.wait(6)
+    e.wait(4)
 
 
 def where(e):
@@ -103,7 +107,7 @@ def where(e):
     blob = e.read(OBJ, 0x24 * 16)
     for i in range(16):
         o = blob[0x24 * i:0x24 * (i + 1)]
-        if o[0] & 1 and i != 0:
+        if o[0] & 1 and o[8] != 0xFF:  # active, not the player (localId 0xFF)
             cx, cy = struct.unpack_from("<hh", o, 0x10)
             objs.add((cx - 7, cy - 7))
     R, C = 6, 9

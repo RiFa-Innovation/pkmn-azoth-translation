@@ -1,0 +1,14 @@
+{
+ "_doc": "Starter-choice screen (map 43.7, layout 0x9A2A64): prompt 要选择哪一只精灵/作为你的搭档？ baked into the secondary tileset (only this layout uses it).",
+ "layout": "9A2A64",
+ "layouts_using_tileset": ["9A2A64"],
+ "rect": [0, 128, 240, 160],
+ "erase": [9, 128, 230, 159],
+ "bg": 15,
+ "ink": 2,
+ "shadow": 13,
+ "lines": [
+  {"text": "Which Pokémon will you choose", "x": 16, "y": 129},
+  {"text": "as your partner?", "x": 16, "y": 145}
+ ]
+}
