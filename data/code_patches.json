@@ -1,15 +1,77 @@
 {
- "_doc": "Plain code/data patches applied by insert.py (orig bytes asserted against the source ROM). Offsets are ROM offsets.",
- "naming_abc_default": {
-  "why": "The name-entry screen opened on the pinyin page (CHN), where letters only build pinyin for Chinese candidates; confirming then left the name empty and the game picked a random default name (e.g. 'Roak'). Open on the ABC page instead. Init (0x9FF505C) zeroes currentPage (struct+0x2622, sNamingScreen at 0x203998C); the keyboard draw (0x9FF5A00) loads page 0's tilemap and preloads page 1's. Select still cycles CHN -> symbols -> ABC.",
+ "_doc": "Plain code/data patches applied by insert.py. 'patch': bytes written over the source ROM (orig asserted). 'vanilla': [start, end) ranges copied back from clean FireRed. Offsets are ROM offsets.",
+ "naming_vanilla": {
+  "why": "Use FireRed's own name-entry screen instead of the hack's Chinese one (pinyin page, misplaced entry line). The hack hooked DoNamingScreen/CB2_LoadNamingScreen to its screen at 0x9FF5EB4/0x9FF505C, swapped the first key handler, the text-entry box template and the controls text, and redrew the buttons in Chinese. Restored here. Kept from the hack: its extended template table (literal at NamingScreen_Init 0x9DB58 -> 0x9DE4EC4: number/phrase/password/category inputs, initialPage=upper), the u16 player-avatar gfx id (0x9EF68), translated titles. Its intro calls its own screen directly (bl at 0x9FF4214, out of BL range of vanilla), so its entry becomes an ARM trampoline to vanilla DoNamingScreen; r0-r3 and stack args untouched.",
+  "vanilla": [
+   [
+    "009D954",
+    "009D960",
+    "DoNamingScreen hook"
+   ],
+   [
+    "009D9E0",
+    "009D9E8",
+    "CB2_LoadNamingScreen hook"
+   ],
+   [
+    "03E23D0",
+    "03E23D4",
+    "sKeyboardKeyHandlers[0]"
+   ],
+   [
+    "009F588",
+    "009F58C",
+    "DrawTextEntryBox: window template literal"
+   ],
+   [
+    "009FB64",
+    "009FB68",
+    "PrintControls: MOVE/OK/BACK text literal"
+   ],
+   [
+    "0E97FE4",
+    "0E98004",
+    "gNamingScreenKeyboard_Pal"
+   ],
+   [
+    "0E98858",
+    "0E98A38",
+    "gNamingScreenBackButton_Gfx"
+   ],
+   [
+    "0E98A38",
+    "0E98C18",
+    "gNamingScreenOKButton_Gfx"
+   ],
+   [
+    "0E98C18",
+    "0E98CB8",
+    "gNamingScreenPageSwapUpper_Gfx"
+   ],
+   [
+    "0E98CB8",
+    "0E98D58",
+    "gNamingScreenPageSwapLower_Gfx"
+   ],
+   [
+    "0E98D58",
+    "0E98DF8",
+    "gNamingScreenPageSwapOthers_Gfx"
+   ]
+  ],
   "patch": [
-   {"at": "1FF50A2", "orig": "8352cd4a8352cd4a8152cd4a8352cd4ace49",
-    "new": "8218138053809180d38049001181c046ce49",
-    "asm": "r2=base+0x261A; strh 0,1,0 at +0x261A/C/E... (same stores as before) then 0x2620=0, page(0x2622)=2; ldr r1,=0x262C kept",
-    "_note": "orig: ldr r2 / strh r3,[r0,r2] pairs for 0x261A..0x2622 (ldr r2,=0x261A at 0x1FF50A0 kept)"},
-   {"at": "1FF50B4", "orig": "8352", "new": "c046", "asm": "strh r3,[r0,0x2622] -> nop"},
-   {"at": "1FF5CF0", "orig": "e094ff09", "new": "b0a4ff09", "asm": "shown page tilemap: page 0 -> page 2 (ABC)"},
-   {"at": "1FF5CF8", "orig": "a89cff09", "new": "e094ff09", "asm": "preloaded next page: page 1 -> page 0 (CHN)"}
+   {
+    "at": "1FF5EB4",
+    "orig": "f7b51e0008ab1d781048114b01911700",
+    "new": "7847c04600c09fe51cff2fe155d90908",
+    "asm": "bx pc; nop; (ARM) ldr ip,[pc]; bx ip; .word 0x0809D955 (vanilla DoNamingScreen)"
+   },
+   {
+    "at": "1DE4F20",
+    "orig": "01",
+    "new": "00",
+    "asm": "hack 'Enter a number' template: initialPage upper -> others (digits page)"
+   }
   ]
  }
 }

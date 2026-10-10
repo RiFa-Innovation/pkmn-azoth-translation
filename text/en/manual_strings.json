@@ -322,5 +322,30 @@
   "zh": "{FC:06 00}时{FC:06 01}",
   "cap": 9,
   "en": "{FC:06 00}:{FC:06 01}"
+ },
+ "1DA2411": {
+  "zh": "输入短语",
+  "cap": 9,
+  "en": "Enter a phrase",
+  "refs": [
+   "1DE4F18"
+  ]
+ },
+ "1DA241A": {
+  "zh": "输入密码",
+  "cap": 9,
+  "en": "Enter password",
+  "refs": [
+   "1DE4F0C",
+   "1DE4F00"
+  ]
+ },
+ "1DA2423": {
+  "zh": "输入类别",
+  "cap": 9,
+  "en": "Enter a category",
+  "refs": [
+   "1DE4EF4"
+  ]
  }
 }

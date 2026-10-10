@@ -300,6 +300,9 @@ def main():
             at, orig, new = int(p["at"], 16), bytes.fromhex(p["orig"]), bytes.fromhex(p["new"])
             assert src[at:at + len(orig)] == orig, f"code patch {name}: bytes at {p['at']} differ"
             rom[at:at + len(new)] = new
+        for a, b, _ in blk.get("vanilla", []):
+            a, b = int(a, 16), int(b, 16)
+            rom[a:b] = base[a:b]
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)
