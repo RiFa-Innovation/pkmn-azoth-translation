@@ -74,7 +74,41 @@ python3 scripts/insert.py            # -> build/Mercury_EN.gba + build/Mercury_E
 
 See `git log` and `build/insert_report.json` (missing = untranslated count).
 
-## Resume point (2026-10-10, checkpoint 13)
+## Resume point (2026-10-10, checkpoint 14) — translation is ~37%, not done
+
+The checkpoint-13 "done" below was measured against an incomplete dump.
+Driving the ROM in mGBA (`EMULATOR.md`) and scanning the built ROM for
+Chinese text still reachable via pointers (`scripts/find_leftover_zh.py`)
+showed `dump_all.py` had missed thousands of strings:
+
+1. The junk regex `\{[0-9A-F]{2,4}\}` also matched `{FA}`/`{FB}`, so **every
+   multi-box dialogue was dropped** (old dump: 0 strings with `{FB}`). Now
+   `\{[0-9A-F]{4}\}` (undecodable 2-byte codes only).
+2. `ref_kind` returned `None` for 4-aligned pointers without pointer
+   neighbours *before* checking the `0F 00` loadpointer prefix. Now checked.
+3. Lone aligned pointers (item-struct description fields, Thumb literal pools
+   for battle messages) are kept as a new kind **`literal`**, but only when
+   the target is clearly prose (`is_prose`). `literal` is not a script kind:
+   `layout.dialogue_set` / `mark_suspects` treat it like `aligned`.
+
+Re-dump: 14,909 → 23,693 strings, nothing removed or changed. `text/queue.json`
+rebuilt (old IDs are void; TM is keyed by Chinese so nothing is lost).
+`tm_batch.py stats` → **12,234/19,776 strings, 162,838/439,607 hanzi**.
+`insert.py` → missing 7,915, errors 0, too_long 0.
+
+Next: continue `tm_batch.py next` / `add` batches. Then the open risks below,
+plus:
+
+5. **Graphics text** (not in the text pipeline): title-screen logo
+   (口袋妖怪 水银) and the character-select prompt 请选择你的照片 are not
+   encoded text anywhere in the ROM, so they are probably images.
+6. 41 old strings became `suspect` because they are now *interior* tails
+   of newly found parent dialogues — same class as risk 1.
+7. `find_leftover_zh.py` still reports ~3.5k reachable Chinese strings outside
+   the dump (mostly noise or unrecognised script contexts); triage after the
+   batches.
+
+## Checkpoint 13 notes (superseded figures)
 
 **Bulk translation is DONE.** `python3 scripts/tm_batch.py stats` reports
 12275/12275 strings, 163560/163560 hanzi. All fixed-stride name tables done:

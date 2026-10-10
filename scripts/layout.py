@@ -7,6 +7,8 @@ are often broken by sentence, not by the window edge).
 import re
 
 HANZI_PX, LATIN_PX = 12, 6
+# "literal" (lone aligned word: struct field / literal pool) is not a script ref
+SCRIPT_KINDS = ("loadpointer", "message", "trainerbattle")
 
 
 def line_px(zh_line):
@@ -52,7 +54,7 @@ def dialogue_set(strings, gap=16):
     some member of their table has a paragraph of 3+ lines (descriptions,
     Pokédex, quest log) or the string itself does."""
     script = {t for t, v in strings.items()
-              if any(not r.endswith(":aligned") for r in v["refs"])}
+              if any(r.split(":")[1] in SCRIPT_KINDS for r in v["refs"])}
     refs = sorted((int(r.split(":")[0], 16), t) for t, v in strings.items()
                   for r in v["refs"] if r.endswith(":aligned"))
     groups, cur = [], []

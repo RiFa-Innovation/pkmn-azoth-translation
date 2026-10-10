@@ -52,20 +52,37 @@ def is_ptr(rom, o):
     return 0 <= o <= len(rom) - 4 and rom[o + 3] in (0x08, 0x09)
 
 
-def ref_kind(rom, r):
+def ref_kind(rom, r, text=""):
     """Classify a pointer occurrence; None = untrusted."""
-    if r % 4 == 0:
-        if is_ptr(rom, r - 4) or is_ptr(rom, r + 4) or r < 0x250000:
-            return "aligned"
-        return None
-    if rom[r - 2:r] == b"\x0f\x00":
+    if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4) or r < 0x250000):
+        return "aligned"
+    if rom[r - 2:r] == b"\x0f\x00":  # loadpointer, aligned or not
         return "loadpointer"
     if rom[r - 1] == 0x67:
         return "message"
     for back in (6, 10, 14):  # trainerbattle type,id,local,ptr,ptr,ptr
         if r - back >= 0 and rom[r - back] == 0x5C:
             return "trainerbattle"
+    # lone aligned word (struct field, Thumb literal pool): only for text that
+    # is unmistakably prose, so a stray data word is never repointed
+    if r % 4 == 0 and is_prose(text):
+        return "literal"
     return None
+
+
+SCRIPT_KINDS = ("loadpointer", "message", "trainerbattle")
+
+
+def is_script_ref(r):
+    return r.split(":")[1] in SCRIPT_KINDS
+
+
+def is_prose(s):
+    if not is_textlike(s, 0.5):
+        return False
+    body = re.sub(r"\{[^}]*\}", "", s)
+    return (len(HANZI.findall(body)) >= 4
+            and (body.rstrip()[-1:] in set("。！？…」）!?.") or "\n" in body))
 
 
 def scan_strings(rom):
@@ -82,11 +99,13 @@ def scan_strings(rom):
         if t >= len(rom) or rom[t] == 0xFF:
             continue
         s, e = mt.decode(rom, t, 1000)
-        if e - t >= 1000 or rom[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{2,4}\}", s):
+        # {XXXX} = undecodable 2-byte code (binary). Not {FA}/{FB}: those are
+        # the scroll / new-box controls every multi-box dialogue contains.
+        if e - t >= 1000 or rom[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{4}\}", s):
             continue
         if not is_textlike(s):
             continue
-        trusted = [(r, k) for r in rs if (k := ref_kind(rom, r))]
+        trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
         if not trusted:
             continue
         out[t] = {"zh": s, "cap": e - t,
@@ -99,11 +118,11 @@ DATA_CHARS = set("块曹肤貉缕疆寝倒厕祷挨赫稻嫌迢驶噪")
 
 
 def mark_suspects(strings):
-    """Flag aligned-only strings that look like binary data decoded as text.
+    """Flag aligned/literal-only strings that look like binary data decoded as text.
     Character frequencies come from strings with script-command refs (certainly
     real). Strings referenced from a pointer-table run are trusted more."""
     real = [v["zh"] for v in strings.values()
-            if any(not r.endswith(":aligned") for r in v["refs"])]
+            if any(is_script_ref(r) for r in v["refs"])]
     freq = Counter(c for s in real for c in s if HANZI.match(c))
     ref_at = {}
     for t, v in strings.items():
@@ -117,7 +136,7 @@ def mark_suspects(strings):
                 break
             interior.add(b)
     for t, v in strings.items():
-        if any(not r.endswith(":aligned") for r in v["refs"]):
+        if any(is_script_ref(r) for r in v["refs"]):
             v["suspect"] = False
             continue
         s = v["zh"]
