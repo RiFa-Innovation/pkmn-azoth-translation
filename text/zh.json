@@ -87733,15 +87733,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "08EA69E": {
-   "zh": "P盎谗缠铲产阐颤崔J世治的宝可梦音乐频道！{FB}今天是星期二！{FB}大朋友们在怀念的{FB}经典宝可梦名曲歌集！",
-   "cap": 91,
-   "refs": [
-    "08E5BD8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "08ECBA8": {
    "zh": "喂？我是惠美...{FB}那个那个，{FB}又被烈雀逃掉了...\n好讨厌的感觉啊！{FB}拜拜！{FB}哔... ... ...{FB} ",
    "cap": 81,
@@ -142402,15 +142393,6 @@
     "0237204:aligned"
    ],
    "untrusted": 0,
-   "suspect": true
-  },
-  "0E3771C": {
-   "zh": "啊曹貉牛鳌！ 退出设置",
-   "cap": 21,
-   "refs": [
-    "0DF2A40:literal"
-   ],
-   "untrusted": 3,
    "suspect": true
   },
   "0E37868": {

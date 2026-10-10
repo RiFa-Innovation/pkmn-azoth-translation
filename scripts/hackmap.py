@@ -234,8 +234,9 @@ class Mapper:
                 regs.add(dst)
                 copied = True
             mem = [o for o in ops if o.type == A.ARM_OP_MEM]
-            if mem and mem[0].mem.base in regs and m.startswith(("ldr", "str")):
-                if mem[0].mem.index:
+            if mem and m.startswith(("ldr", "str")) and (
+                    mem[0].mem.base in regs or (mem[0].mem.index and mem[0].mem.index in regs)):
+                if mem[0].mem.index:  # [rA, rB]: either one may be the table
                     kind = kind or "reg"
                 elif mem[0].mem.disp:
                     self.last_imms.add(mem[0].mem.disp)

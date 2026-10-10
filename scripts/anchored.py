@@ -44,15 +44,25 @@ def build():
         if isinstance(blk, dict):
             handled |= {int(s["zh_at"], 16) for s in blk["strings"]}
     out = {}
+    targets = {L["value"] - 0x08000000 + o for L in hm.literals.values() if L["anchor"] == "imm"
+               for o in L["offs"]}
     for lit, L in hm.literals.items():
         if L["anchor"] != "imm":
             continue
         base = L["value"] - 0x08000000
         for o in L["offs"]:
             t = base + o
-            if not (0 < t < len(rom)) or rom[t - 1] not in (0xFF, 0x00) or t in handled:
+            if not (0 < t < len(rom)) or t in handled:
+                continue
+            if rom[t - 1] not in (0xFF, 0x00) and not any(
+                    u < t < mt.decode(rom, u, 1024)[1] for u in targets if t - 64 <= u < t):
                 continue
             s, e = mt.decode(rom, t, 1024)
+            # another anchor target inside this "string" means its head is
+            # data (e.g. the 3-byte colour array the Oak intro passes at
+            # base+0x7B beside its text at base+0x7E): the text starts there
+            if any(t < u < e - 1 for u in targets):
+                continue
             if rom[e - 1] != 0xFF or re.search(r"\{[0-9A-F]{4}\}", s):
                 continue
             if not (dump_all.is_textlike(s) or dump_all.is_single(s)) or JUNK_PREFIX.search(s):
