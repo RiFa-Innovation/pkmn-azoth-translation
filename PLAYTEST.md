@@ -147,10 +147,6 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 
 ### 4. Open work items
 - Ability pop-up "Sentret的" (finding 17) — CFRU popup draws its own 的; needs a ROM read watchpoint to find the string.
-- Pokédex UI labels still Chinese (finding 33): 图鉴/城都/发现数/捕捉数/菜单/搜索
-  are code-anchored (not pointer-referenced). 发现数 is at 0xEB3225, 搜索 at
-  0x415E8E, START at 0x43ECE1/0x43ED0E/0x43ED4F; the "编号模式" manual strings
-  0x415F0E/0x415F24 are the same screen. Add to manual_strings.json.
 - PokéGear charm-screen header (L R 切换挂件 选择 应用) still Chinese (finding 34).
 
 ## States
@@ -220,5 +216,5 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 | 30 | dialogue name box | "Mr. Pokém" cut: the box is 6 tiles (fits 4 hanzi) | fixed (all 84 box setups widened to 8 tiles; names trimmed of centring spaces; 5 long ones shortened) |
 | 31 | rival / Lyra cut-ins | captions baked into the cut-in pictures (table 0x1DE4F28): 不明白什么意思？…, 我的名字是？？？, 要成为世界最强…, 我对你……不！, 能遇见你，真是太好了！, B返回 | fixed (gfx/cutin_*.json, FireRed font) |
 | 32 | rival battle | "Passerby wants to battle!" for the unnamed rival (路过的少年) | ok |
-| 33 | Pokédex (start menu) | UI labels still Chinese: 图鉴/城都/发现数/捕捉数/菜单/搜索 (species names + HP/AT/DE/SA/SD/SP already English). Code-anchored, not in the dump | open (addresses in §4) |
-| 34 | PokéGear charm screen | header L R 切换挂件 选择 应用 still Chinese; the bottom hint 选择/切换/应用 is already English | open |
+| 33 | Pokédex (start menu) | UI labels "still Chinese": 图鉴/城都/发现数/捕捉数/菜单/搜索 | ok (false positive — all translated in the build: 图鉴->"Pokédex" 0x41B6E3, 发现数：->"Seen:" 0xEB3225, 收服数：->"Owned:" 0xEB323D, 搜索->"Search" 0x45942C, 关都/全国->"Kanto"/"National". The Chinese seen earlier was a stale cached screen from a pre-rebuild save state) |
+| 34 | PokéGear charm screen | header L R 切换挂件 选择 应用 still Chinese; the bottom hint 选择/切换/应用 is already English | open (graphics — 切换挂件 is not in the ROM as text (0 byte matches); it's baked into the tileset, needs gfx_text.py like the cut-ins) |
