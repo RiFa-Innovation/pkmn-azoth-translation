@@ -363,5 +363,95 @@
   "cap": 7,
   "en": "{F8:0B}Page",
   "_why": "skills-page header; only ref is a lone struct field (0x1D633D8) the dump does not trust"
+ },
+ "1D8FD12": {
+  "zh": "An attack that frees\nthe user from traps\nand hazards. Also\nraises Speed.",
+  "cap": 74,
+  "en": "Frees the user\nfrom traps and\nhazards. Raises\nSpeed."
+ },
+ "1D91C0E": {
+  "zh": "An attack which may\nleave the target\nfrozen. It is also\nsuper effective on\nWater types.",
+  "cap": 89,
+  "en": "May leave the\ntarget frozen.\nSuper effective on\nWater types."
+ },
+ "1D94F41": {
+  "zh": "The user attacks with\npsychic power that\nremoves 3 PP from\nthe foe’s last move.",
+  "cap": 81,
+  "en": "Psychic attack\nthat removes 3 PP\nfrom the foe's last\nmove."
+ },
+ "1D95067": {
+  "zh": "The user attacks by\nhurling a blizzard-\ncloaked icicle lance\nat opposing Pokémon.",
+  "cap": 83,
+  "en": "Hurles a blizzard-\ncloaked ice lance\nat the opponent."
+ },
+ "1D950B9": {
+  "zh": "A slash that may\npoison, paralyze, or\nsleep the foe. It\nhas a high crit ratio.",
+  "cap": 80,
+  "en": "A slash that may\npoison, paralyze,\nor sleep the foe.\nHigh crit ratio."
+ },
+ "1D95108": {
+  "zh": "The user slams into\nthe foe with psychic\nenergy. It raises the\nuser’s Defense too.",
+  "cap": 84,
+  "en": "Slams the foe with\npsychic energy and\nraises Defense."
+ },
+ "1D9518D": {
+  "zh": "The foe is hit with\nan axe that leaves\nbehind splinters. It\nhas a high crit ratio.",
+  "cap": 84,
+  "en": "Hits with an axe\nthat leaves\nsplinters. High\ncrit ratio."
+ },
+ "1D951E0": {
+  "zh": "After dealing damage,\nthe user raises the\nhigher stats of its\noffenses or defenses.",
+  "cap": 85,
+  "en": "After damaging,\nraises the higher\nof its offense or\ndefense."
+ },
+ "1D95277": {
+  "zh": "The user slams into\nthe target, hurting\nitself a little. This\nmove strikes first.",
+  "cap": 83,
+  "en": "Slams the target\nand hurts itself\na little. Strikes\nfirst."
+ },
+ "1D952C9": {
+  "zh": "The user launches its\namassed chlorophyll\nat the foe. This also\nhurts the user.",
+  "cap": 81,
+  "en": "Launches\nchlorophyll at the\nfoe, hurting\nitself too."
+ },
+ "1D953B1": {
+  "zh": "The user smashes into\nthe foe. This cuts\nthe user’s Defense\nand Sp. Def stats.",
+  "cap": 80,
+  "en": "Smashes the foe,\nlowering the user's\nDefense and Sp.\nDef."
+ },
+ "1D95400": {
+  "zh": "Barbs that may poison\nare shot at the foe.\nIts power doubles if\nthe foe is poisoned.",
+  "cap": 86,
+  "en": "Shoots barbs that\nmay poison. Power\ndoubles if the foe\nis poisoned."
+ },
+ "1D95455": {
+  "zh": "The foe is slashed\nwith wings of light.\nThis goes first and\nhas a high crit ratio.",
+  "cap": 84,
+  "en": "Slashes with light\nwings. Goes first\nwith a high crit\nratio."
+ },
+ "1D954A8": {
+  "zh": "Resentment that may\nfreeze hits the foe.\nIts power doubles if\nthe foe is frozen.",
+  "cap": 82,
+  "en": "A spiteful attack\nthat may freeze.\nPower doubles if\nfrozen."
+ },
+ "1D9553F": {
+  "zh": "The foe is shot with\narrows that raise the\ncrit ratio and lower\nthe foe’s Defense.",
+  "cap": 84,
+  "en": "Shoots arrows that\nraise crit ratio and\nlower Defense."
+ },
+ "1D95592": {
+  "zh": "Myriad fireballs that\nmay burn hit the foe.\nIts power doubles if\nthe foe is burned.",
+  "cap": 85,
+  "en": "Many fireballs that\nmay burn. Power\ndoubles if burned."
+ },
+ "1D95676": {
+  "zh": "The user savagely\nattacks with wind\nand lightning. This\nmay cause paralysis.",
+  "cap": 78,
+  "en": "A savage wind-\nand-lightning attack\nthat may\nparalyze."
+ },
+ "1D95757": {
+  "zh": "The user heals its\nown statuses and\nrestores HP. It also\nraises evasiveness.",
+  "cap": 78,
+  "en": "Heals status and\nrestores HP. Also\nraises evasiveness."
  }
 }
