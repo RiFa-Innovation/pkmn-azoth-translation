@@ -219,14 +219,22 @@ def main():
             max_px, dialogue, single_line = ITEM_DESC_PX, False, False
         if t in move_desc:  # summary / move-learn description box (4 lines)
             max_px, dialogue, single_line = MOVE_DESC_PX, False, False
+        max_lines = None
         if f"{t:07X}" in width_override:
             wo = width_override[f"{t:07X}"]
             max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
+            max_lines = wo.get("lines")
         try:
             text = en if single_line else mt.wrap_en(en, widths, max_px, dialogue)
             b = mt.encode_en(text)
         except ValueError as e:
             report["errors"].append(f"{t:07X}: {e}")
+            continue
+        # boxes that don't scroll: extra lines are drawn past the window's
+        # pixel buffer (heap overflow), so refuse them and keep the original
+        n_lines = text.count("\n") + 1
+        if max_lines and n_lines > max_lines:
+            report["too_long"].append(f"{t:07X} {n_lines} lines > {max_lines}: {en!r}")
             continue
         if len(b) <= v["cap"] and t not in contains_other:
             rom[t:t + v["cap"]] = b + b"\xff" * (v["cap"] - len(b))
