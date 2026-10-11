@@ -201,11 +201,11 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 | 10 | starter choice | prompt 要选择哪一只精灵/作为你的搭档？ baked into the screen's map tileset | fixed (scripts/maptext.py, gfx/map_starter.json) |
 | 11 | leaving the lab | "咕咚!!" is a sound-effect picture (64x64 sprite, entry 13 of the picture table 0x1DE5A08) | fixed ("Thud!", scripts/sprtext.py) |
 | 12 | New Bark triggers | "喂，{FD:01}！" and 16 other one-hanzi lines never dumped (filter needed 2 hanzi) | fixed (dump accepts short script lines) |
-| 13 | lab aide | item pop-up: "It restores the HP of one Pokémon" runs into the arrow | open (minor) |
+| 13 | lab aide | item pop-up: "It restores the HP of one Pokémon" runs into the arrow | ok (item descriptions wrap at 176px since finding 26; Potion now 3 lines ≤176px) |
 | 14 | Mom (Running Shoes) | "Oh, right" printed as "Oh ▯ht": a false pointer (text bytes 0E 9E 08 inside 红色的火球 at 0xABEAE0) was repointed into recycled space holding this line. 284 such refs | fixed (dump drops refs inside script text; build reserves every repointed word) |
 | 15 | battle move info | type icons 一般/火/… (hack's menu-info sheet 0xEFD4C0) | fixed (3-letter codes NOR/FIR/…, TYPE/POWER/ACCURACY/PP/EFFECT labels from FireRed; scripts/typeicons.py) |
 | 16 | battle strings | live FireRed battle strings the hack half-overwrote ('…与对手{broken}换了特性！ with its opponent!', 的/是/果 suffixes) | fixed (restored FireRed English for 8 symbols) |
-| 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored, unchanged on screen), not in RAM buffers, no pointer to a 的 string; text is drawn into the pop-up sprite (gfx raw at 0x1E9F814). Needs the pop-up print routine traced | open |
+| 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored, unchanged on screen), not in RAM buffers, no pointer to a 的 string; text is drawn into the pop-up sprite (gfx raw at 0x1E9F814). Needs the pop-up print routine traced | open (the 的 hanzi sits at 0x1EA0656, just past the pop-up gfx) |
 | 18 | wild battle | "Wild Sentret used Growl!" spacing correct | ok |
 | 19 | start-menu hint | "Go through Yoshino City to Mr." (Japanese name, cut) | fixed ("Find Mr. Pokémon past Cherrygrove.", width override) |
 | 20 | party menu | "What will you do with t…" overflows | fixed ("Do what with it?") |
