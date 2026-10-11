@@ -146,8 +146,7 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
   corruption: investigate with the build/source byte diff).
 
 ### 4. Open work items
-- Ability pop-up "Sentret的" (finding 17).
-- Birthday-month input rejects digits in both ROMs (finding 29).
+- Ability pop-up "Sentret的" (finding 17) — CFRU popup draws its own 的; needs a ROM read watchpoint to find the string.
 - Pokédex UI labels still Chinese (finding 33): 图鉴/城都/发现数/捕捉数/菜单/搜索
   are code-anchored (not pointer-referenced). 发现数 is at 0xEB3225, 搜索 at
   0x415E8E, START at 0x43ECE1/0x43ED0E/0x43ED4F; the "编号模式" manual strings
@@ -205,7 +204,7 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 | 14 | Mom (Running Shoes) | "Oh, right" printed as "Oh ▯ht": a false pointer (text bytes 0E 9E 08 inside 红色的火球 at 0xABEAE0) was repointed into recycled space holding this line. 284 such refs | fixed (dump drops refs inside script text; build reserves every repointed word) |
 | 15 | battle move info | type icons 一般/火/… (hack's menu-info sheet 0xEFD4C0) | fixed (3-letter codes NOR/FIR/…, TYPE/POWER/ACCURACY/PP/EFFECT labels from FireRed; scripts/typeicons.py) |
 | 16 | battle strings | live FireRed battle strings the hack half-overwrote ('…与对手{broken}换了特性！ with its opponent!', 的/是/果 suffixes) | fixed (restored FireRed English for 8 symbols) |
-| 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored to "'s" at 0x3FE88F, unchanged on screen — the pop-up ignores it), not in RAM buffers, no pointer to a 的 string; the pop-up draws its own 的 as text into the sprite | open (41 standalone 的 strings in ROM, none pointer-referenced as the pop-up source; trace the CFRU ability-popup routine) |
+| 17 | ability pop-up | "Sentret的" (Chinese possessive). Not sText_ApostropheS (restored to "'s" at 0x3FE88F, unchanged on screen — the pop-up ignores it), not in RAM buffers, no pointer to a 的 string; the pop-up draws its own 的 as text into the sprite | open (CFRU ability pop-up; 2 standalone 的 strings are pointer-referenced — 0x3FE88F sText_ApostropheS and 0x11B0E2F — both ruled out. The pop-up's 的 is code-anchored or part of a longer string; trace the CFRU popup routine via a ROM read watchpoint) |
 | 18 | wild battle | "Wild Sentret used Growl!" spacing correct | ok |
 | 19 | start-menu hint | "Go through Yoshino City to Mr." (Japanese name, cut) | fixed ("Find Mr. Pokémon past Cherrygrove.", width override) |
 | 20 | party menu | "What will you do with t…" overflows | fixed ("Do what with it?") |
@@ -217,7 +216,7 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 | 26 | bag | item descriptions run into the arrow / past 3 lines (box ~176px, starts after the icon) | fixed (wrap at 176px; 129 long ones shortened; 0 over 3 lines) |
 | 27 | Cherrygrove PC girl | birthday-month prompt reset the game: the hack calls DoNamingScreen with template 0 (and at hook+2) and writes hack-only fields; FireRed's screen can't serve it | fixed (dispatcher data/naming_dispatch.s: intro + templates 1-4 -> FireRed screen, template 0/5+ and hook+2 callers -> hack screen, which keeps its English buttons and ABC default) |
 | 28 | dump | 297 'strings' that are Thumb code (function pointers decoded as text) | fixed (dump skips targets inside code) |
-| 29 | Cherrygrove PC girl | birthday month: typing "12" (ABC or symbol-page digits) is rejected and the prompt reopens - same in the Chinese ROM. Parser 0x09D5D7CC accepts FR digits 0xA1-0xAA into VAR_RESULT; the girl's script may use another routine. Her lines so far are English | open (hack bug; reproduced: type "12" -> "Please enter a number from 1 to 12." Girl's script specials: 156=0x09D5E944 (naming trigger), 91=0x09D5EEC0 (result read), 179=0x09D5FBC8; validation msg 0x0ABA370. The correct digit parser 0x09D5D7CC is NOT the one the script's result path uses) |
+| 29 | Cherrygrove PC girl | birthday month: typing "12" rejected, prompt reopens | ok (not a bug — verified "12" is accepted: month "12" -> "So which day exactly?", day "15" -> VAR_RESULT 15. The earlier "rejection" was a test-navigation artifact: `go` D4/R1 tokens use overworld walk(), which in a menu presses the wrong count and types non-digit chars) |
 | 30 | dialogue name box | "Mr. Pokém" cut: the box is 6 tiles (fits 4 hanzi) | fixed (all 84 box setups widened to 8 tiles; names trimmed of centring spaces; 5 long ones shortened) |
 | 31 | rival / Lyra cut-ins | captions baked into the cut-in pictures (table 0x1DE4F28): 不明白什么意思？…, 我的名字是？？？, 要成为世界最强…, 我对你……不！, 能遇见你，真是太好了！, B返回 | fixed (gfx/cutin_*.json, FireRed font) |
 | 32 | rival battle | "Passerby wants to battle!" for the unnamed rival (路过的少年) | ok |
