@@ -6,6 +6,26 @@ from here with nothing else. Findings are numbered in the table at the bottom.
 Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
 **ok** = checked, fine.
 
+## Current status (2026-10-10)
+
+All pointer-reachable text is translated: `insert.py` → missing 0 / errors 0 /
+too_long 0; BPS round-trips byte-exact. Playable build at
+`dist/Pokemon Mercury (English).gba` (+ `.bps`, applies to clean FireRed US 1.0,
+CRC `0xDD88761C`). Exactly two Chinese remnants remain, both fully characterized:
+
+- **Finding 17** — ability pop-up `Sentret的` (shows in every battle when an
+  ability activates). Root cause: CFRU's `PrintBattlerOnAbilityPopUp`
+  (`ability_battle_effects.c`) hardcodes the possessive as `CHAR_SGL_QUOT_RIGHT`
+  + `0xE7` (`'s`); the hack rewrote it to `的` = `0x03 0x0B`. **Fix = patch
+  `0x03 0x0B` → `0xB4 0xE7`** in the compiled function. Remaining step: locate
+  that function's ROM offset — whole-ROM byte scans (`movs#3;strb`,
+  `strh`-of-`0x0B03`, both orders) found no match, so use the mGBA `-g` GDB stub
+  (break `AddTextPrinter` 0x08002CF4, read LR) — but first `brew install
+  arm-none-eabi-gdb` (no GDB client is currently installed).
+- **Finding 34** — PokéGear charm-screen header `切换挂件 选择 应用`. Baked into
+  the tileset (0 byte matches as text); fix via `scripts/vram.py` +
+  `scripts/gfx_text.py`, like the cut-ins (finding 31).
+
 ## How to continue (read all of this first)
 
 ### 0. Ground rules
@@ -146,8 +166,12 @@ Status: **open** = to fix, **fixed** = fixed (commit noted where useful),
   corruption: investigate with the build/source byte diff).
 
 ### 4. Open work items
-- Ability pop-up "Sentret的" (finding 17) — CFRU popup draws its own 的; needs a ROM read watchpoint to find the string.
-- PokéGear charm-screen header (L R 切换挂件 选择 应用) still Chinese (finding 34).
+- Ability pop-up "Sentret的" (finding 17) — root-caused to CFRU's
+  `PrintBattlerOnAbilityPopUp`; patch its hardcoded `的` (0x03 0x0B) to `'s`
+  (0xB4 0xE7). Locate the compiled function via the mGBA `-g` GDB stub
+  (break `AddTextPrinter` 0x08002CF4 and read LR) once a GDB client is installed.
+- PokéGear charm-screen header 切换挂件 (finding 34) — tileset graphics; use
+  `scripts/vram.py` + `scripts/gfx_text.py`.
 
 ## States
 
