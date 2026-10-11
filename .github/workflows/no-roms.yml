@@ -1,0 +1,22 @@
+name: no-roms
+
+# Fails if a ROM, patch, ROM backup, save file or emulator state is tracked.
+# ROMs are copyrighted; the patch is published only as a Release asset.
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No ROM / save / patch files in the tree
+        run: |
+          bad=$(git ls-files | grep -iE '\.(gba|agb|nds|bps|ips|ups|sav|srm|sgm|ss[0-9]*|state|bak)$|^(roms|saves|build|dist)/' || true)
+          if [ -n "$bad" ]; then echo "Forbidden files tracked:"; echo "$bad"; exit 1; fi
+      - name: No file carries a GBA ROM header
+        run: |
+          # Nintendo logo bytes at 0x04 of every GBA ROM
+          git ls-files -z | xargs -0 -I{} sh -c \
+            'head -c 8 "{}" 2>/dev/null | tail -c 4 | od -An -tx1 | tr -d " \n" | grep -qx "24ffae51" && echo "ROM header: {}"' \
+            | tee /tmp/hits
+          [ ! -s /tmp/hits ]

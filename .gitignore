@@ -4,12 +4,32 @@
 # Copyrighted ROMs and patch inputs (not redistributable; re-fetch as needed)
 roms/
 *.gba
+*.agb
+*.bin.gba
 *.bps
 *.ips
 *.ups
 *.nds
+*.zip
+*.7z
 
-# Vendored third-party tooling (pokefirered decomp, flips) — re-fetch/build as needed
+# ROM backups, saves and emulator states — never commit these
+*.bak
+*.gba.*
+*.sav
+*.srm
+*.sgm
+*.ss[0-9]*
+*.ss
+*.state
+*.sa1
+saves/
+
+# Build outputs (ROM + patch); patches are published as GitHub Release assets
+build/
+dist/
+
+# Vendored third-party tooling (pokefirered decomp, agbcc, mGBA, flips) — re-fetch/build as needed
 utilities/
 
 # Build artifacts
@@ -18,4 +38,3 @@ utilities/
 __pycache__/
 *.pyc
 .venv/
-saves/
