@@ -1,0 +1,76 @@
+{
+ "_doc": "PokeGear charm screen (BG0): top bar L R \u5207\u6362\u6302\u4ef6 \u271a\u9009\u62e9 \u24b6\u5e94\u7528.",
+ "tiles": {
+  "lz": "E0381C",
+  "refs": [
+   "8E979C"
+  ]
+ },
+ "map": {
+  "lz": "E03A34",
+  "refs": [
+   "8E97A8"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 1,
+ "max_tiles": 512,
+ "preview_pal": "gfx/charm_pal.bin",
+ "edits": [
+  {
+   "erase": [
+    88,
+    2,
+    238,
+    14
+   ],
+   "erase_colors": [
+    1,
+    2,
+    3
+   ],
+   "bg": 14,
+   "parts": [
+    {
+     "blit": [
+      92,
+      3,
+      123,
+      13
+     ]
+    },
+    " ",
+    "Switch",
+    "  ",
+    {
+     "blit": [
+      172,
+      3,
+      181,
+      13
+     ]
+    },
+    "Pick",
+    "  ",
+    {
+     "blit": [
+      209,
+      3,
+      217,
+      13
+     ]
+    },
+    " ",
+    "Use"
+   ],
+   "at": [
+    0,
+    1
+   ],
+   "align": "right",
+   "ink": 1,
+   "shadow": 2
+  }
+ ]
+}

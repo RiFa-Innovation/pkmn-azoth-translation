@@ -488,5 +488,10 @@
   "zh": "去吧! {FD:00}!",
   "cap": 10,
   "en": "Now! {FD:00}!"
+ },
+ "1DBB062": {
+  "zh": "宝可梦水银资料站\n请用浏览器访问：\nhttps://\nsum-light.github.io/\nazoth-wiki/",
+  "cap": 75,
+  "en": "Mercury Wiki\nOpen in a browser:\nhttps://\nsum-light.github.io/\nazoth-wiki/"
  }
 }
