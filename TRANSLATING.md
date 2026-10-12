@@ -35,7 +35,18 @@ CSV). The columns are:
 | `before` | the previous line of the same map, for context |
 | `zh` | the Chinese source (do not edit) |
 | `en` | the current English |
+| `limit` | what the line has to fit: box width in px and line cap (see below) |
+| `now` | what the current English uses: lines, widest line in px, bytes |
 | `new_en` | **your version.** Leave empty to keep `en` |
+
+**About the budget.** Almost every line here is *relocated* by the inserter, so
+its byte count is not a limit; the real limits are the box width (conversations
+are 198 px per line, about 33 letters) and, for boxes that don't scroll, the
+line cap. Compare `now` with `limit`: if the widest line is already near the
+width, your longer wording will simply wrap onto another line. A few lines
+(about 70) are also read in place by other code; for those `limit` says
+`ALSO READ IN PLACE` and gives a byte count to stay within, otherwise that
+other use still shows the Chinese.
 
 Rows are sorted by map and then by position, so a conversation reads top to
 bottom. `\n` in a cell is a line break.

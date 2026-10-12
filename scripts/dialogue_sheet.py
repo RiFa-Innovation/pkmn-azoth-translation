@@ -11,6 +11,10 @@ One row per unique Chinese line that the game's scripts print to a text box
   before   the previous line of the same conversation sheet, for context
   zh       Chinese source (the translation memory is keyed by this text)
   en       current English
+  limit    what the line must fit: box width in px and line cap. Bytes only
+           matter for the few lines something also reads at their original
+           address ("ALSO READ IN PLACE"); the rest are relocated ("free")
+  now      what the current English uses of that (lines, widest line, bytes)
   new_en   fill this in to propose a change (leave empty to keep `en`)
 
 `\\n` stands for a line break in every text column. The sheet imports with
@@ -39,6 +43,40 @@ WINDOW = 0x2000                # a script's text lives within this of its entry
 
 def _esc(s):
     return s.replace("\n", "\\n")
+
+
+def _budget(addr, e, en, widths, dialogue_addrs, table_px, width_override, ins, mt):
+    """(limit, now) strings, mirroring insert.py's per-string decision."""
+    t = int(addr, 16)
+    zh = e["zh"]
+    dialogue = t in dialogue_addrs
+    single = not dialogue and not re.search(r"\n|\{FA\}|\{FB\}", zh)
+    max_px = ins.DIALOGUE_PX if dialogue else max(ins.src_max_px(zh, widths), table_px.get(t, 0), 48)
+    max_lines = None
+    wo = width_override.get(f"{t:07X}")
+    if wo:
+        max_px, dialogue, single = wo["px"], wo.get("dialogue", dialogue), False
+        max_lines = wo.get("lines")
+    try:
+        text = en if single else mt.wrap_en(en, widths, max_px, dialogue)
+        n_bytes = len(mt.encode_en(text))
+    except ValueError:
+        return "", "unencodable"
+    lines = re.split(r"\n|\{FA\}|\{FB\}", text)
+    px = lambda ln: sum(widths[b[0]] for b, k in mt.tokenize(ln) if k in ("char", "space"))
+    widest = max(px(ln) for ln in lines)
+    n_lines = text.count("\n") + 1
+    if max_lines:
+        cap_lines = f"max {max_lines} lines"
+    elif dialogue:
+        cap_lines = "scrolls (2-line box)"
+    else:
+        cap_lines = f"max {zh.count(chr(10)) + 1} lines"
+    fixed = e["untrusted"] > 0
+    where = (f"ALSO READ IN PLACE: keep to {e['cap'] - 1} bytes or those uses stay Chinese"
+             if fixed else "free (relocated)")
+    return (f"{max_px}px wide; {cap_lines}; {where}",
+            f"{n_lines} lines; widest {widest}px; {n_bytes - 1} bytes")
 
 
 def map_entries(rom):
@@ -99,6 +137,15 @@ def main():
     starts = [s for s, _ in entries]
 
     import bisect
+    import insert as ins
+    import layout
+    import mercury_text as mt
+    widths = rom[mt.WIDTHS_OFF:mt.WIDTHS_OFF + 256]
+    zs = {int(k, 16): v for k, v in zh.items()}
+    dialogue_addrs = layout.dialogue_set(zs)
+    table_px = layout.table_widths(zs)
+    wo_all = {k: v for k, v in json.load(open("text/en/width_override.json", encoding="utf-8")).items()
+              if not k.startswith("_")}
 
     def map_of(r):
         i = bisect.bisect_right(starts, r) - 1
@@ -124,21 +171,23 @@ def main():
             continue
         seen.add(text)
         m = map_of(min(script_refs))
-        rows.append((m, int(addr, 16), addr, text, en))
+        rows.append((m, int(addr, 16), addr, text, en, _budget(addr, e, en, widths, dialogue_addrs,
+                                                              table_px, wo_all, ins, mt)))
 
     rows.sort(key=lambda r: (r[0] == "?", [int(x) for x in r[0].split(".")] if r[0] != "?" else [], r[1]))
     n = 0
     prev_en, prev_map = "", None
     with open(a.out, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["id", "map", "place", "before", "zh", "en", "new_en"])
-        for m, _, addr, text, en in rows:
+        w.writerow(["id", "map", "place", "before", "zh", "en", "limit", "now", "new_en"])
+        for m, _, addr, text, en, (limit, now) in rows:
             if a.map and m != a.map:
                 continue
             if a.match and a.match.lower() not in (en + text).lower():
                 continue
             before = "" if m != prev_map else prev_en
-            w.writerow([addr, m, names.get(m, ""), _esc(before)[:140], _esc(text), _esc(en), ""])
+            w.writerow([addr, m, names.get(m, ""), _esc(before)[:140], _esc(text), _esc(en),
+                        limit, now, ""])
             prev_en, prev_map = en, m
             n += 1
     print(f"{n} conversation lines -> {a.out}")
