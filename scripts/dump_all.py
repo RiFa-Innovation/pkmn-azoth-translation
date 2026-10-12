@@ -104,6 +104,68 @@ def hack_map():
     return _HM
 
 
+_LZ = None
+
+
+def lz77_blobs(rom):
+    """[start, end) of every valid GBA LZ77 stream a ROM pointer points at.
+    Compressed graphics are full of byte runs that look like a pointer or a
+    0x67 `message` opcode; repointing one corrupts the tiles (Goldenrod, the
+    Olivine lighthouse tileset). Streams are accepted only if they decode to
+    exactly their declared size with every back-reference in range."""
+    global _LZ
+    if _LZ is not None and _LZ[0] is rom:
+        return _LZ[1]
+    L = len(rom)
+    w = np.frombuffer(rom[:L // 4 * 4], "<u4")
+    tg = np.unique(w[(w >= 0x08000000) & (w < 0x0A000000)].astype(np.int64) - 0x08000000)
+    out = []
+    for t in tg.tolist():
+        if t >= L - 8 or rom[t] != 0x10:
+            continue
+        size = rom[t + 1] | rom[t + 2] << 8 | rom[t + 3] << 16
+        if not 0x20 <= size <= 0x30000:
+            continue
+        i, n, ok = t + 4, 0, True
+        while n < size and ok:
+            if i >= L:
+                ok = False
+                break
+            fl = rom[i]
+            i += 1
+            for k in range(8):
+                if n >= size:
+                    break
+                if fl & (0x80 >> k):
+                    if i + 1 >= L:
+                        ok = False
+                        break
+                    b0, b1 = rom[i], rom[i + 1]
+                    i += 2
+                    n += (b0 >> 4) + 3
+                    if ((b0 & 15) << 8 | b1) + 1 > n - ((b0 >> 4) + 3) or n > size:
+                        ok = False
+                        break
+                else:
+                    if i >= L:
+                        ok = False
+                        break
+                    i += 1
+                    n += 1
+        if ok and n == size:
+            out.append((t, i))
+    starts = [a for a, _ in out]
+    _LZ = (rom, (starts, out))
+    return _LZ[1]
+
+
+def in_lz77(rom, r):
+    import bisect
+    starts, blobs = lz77_blobs(rom)
+    i = bisect.bisect_right(starts, r) - 1
+    return i >= 0 and blobs[i][0] <= r < blobs[i][1]
+
+
 def ref_kind(rom, r, text=""):
     """Classify a pointer occurrence; None = untrusted."""
     hm = hack_map()
@@ -111,6 +173,8 @@ def ref_kind(rom, r, text=""):
         return None
     if r < 0x200:                # sGFRomHeader: pointers to data tables (gDecorations
         return None              # starts with a name field), never to strings
+    if in_lz77(rom, r):          # bytes inside compressed graphics only look like a pointer
+        return None
     lit = hm.literal(r)
     if lit is not None:          # a literal-pool word some code loads
         if lit["anchor"] == "imm":
@@ -145,6 +209,13 @@ def ref_kind(rom, r, text=""):
     # lone aligned word (struct field, Thumb literal pool): only for text that
     # is unmistakably prose, so a stray data word is never repointed
     if r % 4 == 0 and is_prose(text):
+        # `applymovement local, ptr` / `applymovementat local, ptr, ...`: the
+        # pointer leads to movement bytes (00 fe = face down; 0f x8 fe = walk),
+        # which decode as hanzi and sit right before the NPC's text. Repointing
+        # it hands text bytes to the movement engine ("jumped to invalid
+        # address", the Beautifly/Wurmple scene).
+        if r >= 3 and rom[r - 3] in (0x4F, 0x50) and not hm.near_code(r):
+            return None
         return "literal"
     return None
 

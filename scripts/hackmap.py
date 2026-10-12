@@ -342,6 +342,17 @@ class HackMap:
     def literal(self, off):
         return self.literals.get(off)
 
+    def near_code(self, off, slack=256):
+        """Within `slack` bytes of an instruction range: a literal pool the
+        recursive disassembly did not reach. Script data is never this close."""
+        i = self._b.bisect_right(self.starts, off) - 1
+        for j in (i, i + 1):
+            if 0 <= j < len(self.ranges):
+                a, b = self.ranges[j]
+                if a - slack <= off < b + slack:
+                    return True
+        return False
+
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
