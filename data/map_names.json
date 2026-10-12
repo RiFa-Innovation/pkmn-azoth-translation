@@ -1,0 +1,11 @@
+{
+ "_doc": "Human names for map ids (group.number) shown in the dialogue review sheet. Add more as you identify them; the game's own map names are not in the ROM text tables we extract.",
+ "3.66": "New Bark Town (outdoors)",
+ "42.3": "Intro / settings screen",
+ "42.4": "Player's room",
+ "43.0": "Player's house, 1F",
+ "43.5": "Lyra's house",
+ "43.6": "Prof. Elm's lab",
+ "43.7": "Starter choice screen",
+ "52.2": "Bellsprout Tower, top floor"
+}
