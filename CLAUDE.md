@@ -140,13 +140,15 @@ starters, the nickname screen and Elm's farewell were verified here.
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
 6. Refresh the user's `dist/` copy (alongside, never over).
 
-## Current state (2026-10-12, after beta-6)
+## Current state (2026-10-12, after beta-9)
 
-Open: #13 (parked, stray text after double-battle intro at mid text speed),
-#17 (Sprout Tower freeze, not reproduced), #19 (Ilex shrine / Beautifly crash,
-retest requested), #11 (~10 mid-block Chinese fragments), #2 (long achievement
-names clipped), #24 (human proofreading pass, ongoing). Not yet checked in game:
-the new BracerPoints/price/¥ lines and the Wobbuffet line from beta-6.
+Open: #11 (~10 mid-block Chinese fragments), #24 (human proofreading pass,
+ongoing). Beta 7-9 closed the freeze on talking to placeholder-script NPCs
+(#17), the Sprout Tower top-floor softlock (#37; the fix re-places the two exit
+sages on every map load, so stuck saves repair themselves), the Ilex shrine
+crash (#19), the achievements fit (#2), Ilex/route-sign/Help-Tips Chinese and the
+double-battle stray text (#13, parked). Not yet checked in game: the new
+BracerPoints/price/¥ lines and the Wobbuffet line from beta-6.
 
 Ideas for next sessions: play further than the recorded progress and log
 findings as `PLAYTEST.md` rows 57+; sweep remaining Chinese by grepping a fresh
