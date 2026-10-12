@@ -40,7 +40,10 @@ TABLES = [
 HANZI = re.compile(r"[一-鿿]")
 MAX_LEN = 4096  # the intro disclaimer is one 1,856-byte string
 OK = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 \n"
-         ".,!?-'\"/:…♂♀é‘’“”%()&+=~·×<>¥") | set(mt.PUNCT.values())
+         ".,!?-'\"/:…♂♀é‘’“”%()&+=~·×<>¥↑↓←→") | set(mt.PUNCT.values())
+
+
+ARROWS = set("↑↓←→")
 
 
 def is_textlike(s, min_ratio=0.3):
@@ -171,6 +174,8 @@ def scan_strings(rom, base):
         if hack_map().is_code(t):  # Thumb code decoded as text (a function pointer)
             continue
         trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
+        if ARROWS & set(s):  # arrow glyphs (signs): only from script refs, data decodes to them too
+            trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if short and not (single or is_textlike(s)):  # 喂，{FD:01}！: script text only
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table

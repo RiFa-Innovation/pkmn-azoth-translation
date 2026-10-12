@@ -90,6 +90,9 @@ def _load_vanilla_charmap(path="utilities/pokefirered/charmap.txt"):
 
 
 VANILLA = _load_vanilla_charmap()
+# 0x79-0x7C are FireRed's arrow glyphs (the decomp charmap names them with the
+# Japanese table's katakana); the hack uses them on signs (吉野市→若叶镇)
+VANILLA.update({0x79: "↑", 0x7A: "↓", 0x7B: "←", 0x7C: "→"})
 
 
 def decode(rom, off, limit=4096):
