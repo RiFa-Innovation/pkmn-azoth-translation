@@ -20,6 +20,10 @@ FireRed and apply the patch from the [latest release](../../releases/latest).
 | CRC32 | `DD88761C` |
 | SHA-1 | `41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc` |
 
+The common **"Squirrels" dump (#1636) is FireRed USA v1.0 and works**.
+FireRed **v1.1** does not. The patch stores the base ROM's CRC32, so BPS
+patchers refuse a ROM that doesn't match instead of producing a broken game.
+
 The patch is a **BPS** file that applies to *clean FireRed directly*. You do
 not need to apply the Chinese Mercury patch first. Use any BPS patcher:
 
