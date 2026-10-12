@@ -51,6 +51,20 @@ other use still shows the Chinese.
 Rows are sorted by map and then by position, so a conversation reads top to
 bottom. `\n` in a cell is a line break.
 
+### Using Google Sheets (or Excel)
+
+The file is a plain UTF-8 CSV, so no Excel file is needed. In Google Sheets:
+**File → Import → Upload**, choose *Replace spreadsheet*, and **untick
+"Convert text to numbers, dates and formulas"**. That setting matters: left on,
+Sheets turns map ids like `3.50` into `3.5` (a different map) and ids such as
+`01E3414` into numbers, which breaks the import later. Then freeze row 1,
+turn on text wrapping, and optionally protect every column except `new_en`.
+
+To send edits back, use **File → Download → Comma Separated Values (.csv)**
+with the header row unchanged. Only `id`, `zh`, `en` and `new_en` are read, so
+extra columns you add are ignored. Several people editing at once is fine as
+long as each works in their own range of rows (or their own tab).
+
 ### Rules for `new_en`
 
 - **Keep every code in `{braces}`** exactly as in `zh`: `{FD:01}` is the
