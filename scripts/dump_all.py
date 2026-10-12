@@ -68,6 +68,17 @@ def short_line(s):
             and all(HANZI.match(c) or c in "，。！？…!?. " for c in s2))
 
 
+def is_mixed(s):
+    """Mostly-Latin script text with a little Chinese: 果然翁：So~Nan~Su！,
+    获得了3点BracerPoints！, 木守宫:Treecko！, 2000元. is_textlike wants 30% hanzi;
+    these are 10-25%. Only characters real text uses (no kana/accented junk),
+    and the caller only takes it from script references."""
+    s2 = re.sub(r"\{[^}]*\}", "", s)
+    if len(s2) < 3 or any(not (HANZI.match(c) or c in OK) for c in s2):
+        return False
+    return len(HANZI.findall(s2)) >= 1
+
+
 def is_ptr(rom, o):
     return 0 <= o <= len(rom) - 4 and rom[o + 3] in (0x08, 0x09)
 
@@ -256,14 +267,15 @@ def scan_strings(rom, base):
         # long texts (intro disclaimer, credits) may be mostly Latin/punctuation
         single = is_single(s)
         short = short_line(s)
-        if not (single or short or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
+        mixed = is_mixed(s)
+        if not (single or short or mixed or is_textlike(s) or (len(HANZI.findall(s)) >= 30 and is_textlike(s, 0.1))):
             continue
         if hack_map().is_code(t):  # Thumb code decoded as text (a function pointer)
             continue
         trusted = [(r, k) for r in rs if (k := ref_kind(rom, r, s))]
         if ARROWS & set(s):  # arrow glyphs (signs): only from script refs, data decodes to them too
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
-        if short and not (single or is_textlike(s)):  # 喂，{FD:01}！: script text only
+        if (short or mixed) and not (single or is_textlike(s)):  # 喂，{FD:01}！ / 果然翁：So~Nan~Su！: script text only
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table,
             # or a vanilla data word aimed at a vanilla text symbol (the decomp
