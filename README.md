@@ -1,15 +1,17 @@
-# Pokémon Mercury — English translation
+# Pokémon Azoth — English translation
+
+*Also known as **Pokémon Mercury** (口袋妖怪 水银). Search either name.*
 
 [![Join the Discord](https://img.shields.io/badge/Discord-Join_the_community-5865F2?logo=discord&logoColor=white)](https://discord.gg/pWnawqhT5C)
 [![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/river8)
 
 > **Optional.** The patch is and stays free. The Ko-fi link only helps me spend
-> more time on this translation. It is not for the original Mercury hack or its
+> more time on this translation. It is not for the original hack or its
 > authors, and nothing here is paid or gated.
 
 Chat, ask questions and share screenshots on **[Discord](https://discord.gg/pWnawqhT5C)**. Bug reports still go on [GitHub Issues](../../issues/new/choose) so they can be tracked.
 
-A from-scratch English translation of **Pokémon Mercury (口袋妖怪 水银) 1.3.3**,
+A from-scratch English translation of **Pokémon Azoth (口袋妖怪 水银, "Mercury") 1.3.3**,
 a Chinese FireRed ROM hack that remakes Johto on top of the Complete FireRed
 Upgrade (CFRU) engine. No other English patch for this hack exists.
 
@@ -49,7 +51,7 @@ FireRed **v1.1** does not. The patch stores the base ROM's CRC32, so BPS
 patchers refuse a ROM that doesn't match instead of producing a broken game.
 
 The patch is a **BPS** file that applies to *clean FireRed directly*. You do
-not need to apply the Chinese Mercury patch first. Use any BPS patcher:
+not need to apply the Chinese Azoth/Mercury patch first. Use any BPS patcher:
 
 - [Rom Patcher JS](https://www.marcrobledo.com/RomPatcher.js/) (browser)
 - [Floating IPS (flips)](https://github.com/Alcaro/Flips)
@@ -154,9 +156,43 @@ More detail: [`PROCESS.md`](PROCESS.md) (pipeline and established facts),
 See [CONTRIBUTING.md](CONTRIBUTING.md). Bug reports with a screenshot and where
 in the game it happened are very welcome.
 
+## FAQ
+
+**What is it called, Azoth or Mercury?** The Chinese title is 口袋妖怪 水银
+("Pokémon Mercury"). The English name players and the authors' own wiki use is
+**Azoth** (an old alchemists' word for mercury). The game itself still says
+"Mercury" in places because that is what its Chinese text says; I'm keeping the
+literal translation until the authors confirm a preferred English name.
+
+**Which ROM do I need?** FireRed **USA v1.0**: the common "Squirrels" dump
+(#1636), CRC32 `DD88761C`. v1.1 and other languages won't patch. See
+[Download and patch](#download-and-patch).
+
+**Does it cover Kanto?** Yes: Kanto's towns, routes, signs and dialogue are
+translated along with Johto (about 20,000 strings in all). I haven't played
+the whole Kanto section end to end, so please report anything that looks wrong.
+
+**Is the translation finished?** It is complete in the sense that all text
+found in the ROM is in English, but it is machine-assisted and still being
+tested. Known rough edges are listed in the
+[open issues](../../issues?q=is%3Aissue+is%3Aopen). A human proofreading pass
+is wanted: see [CONTRIBUTING](CONTRIBUTING.md#proofreading-the-translation-needs-a-human-pass).
+
+**How was it made?** Strings were found by scanning the ROM and the FireRed
+decomp's layout, translated with Claude's help (reusing FireRed's official
+English wherever the hack kept it), and re-inserted with tools that wrap text to
+each box. Baked-in graphics text is redrawn. Details are in
+[How it works](#how-it-works) and [`PROCESS.md`](PROCESS.md).
+
+**Why isn't it on Hackdex?** Only a hack's original creator can list it there,
+and this is an unofficial fan translation distributed as a patch from GitHub.
+
+**Where do I ask questions or chat?** On the [Discord](https://discord.gg/pWnawqhT5C).
+Bugs go on [GitHub Issues](../../issues/new/choose) so they're tracked.
+
 ## Legal
 
-Pokémon is © Nintendo / Creatures Inc. / GAME FREAK inc. Pokémon Mercury is the
+Pokémon is © Nintendo / Creatures Inc. / GAME FREAK inc. Pokémon Azoth (Mercury) is the
 work of its original Chinese authors. This is an unofficial fan translation,
 not affiliated with or endorsed by any of them. **No ROMs are distributed.** The
 patch contains only the differences needed to produce the translated game from

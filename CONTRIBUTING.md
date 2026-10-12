@@ -67,6 +67,30 @@ Conventions (details in [`PROCESS.md`](PROCESS.md)):
 - Character/place names must match `text/en/name_canon.json`
   (`python3 scripts/name_fix.py` reports mismatches).
 
+## Proofreading (the translation needs a human pass)
+
+The translation is machine-assisted, so editing it is the most useful thing
+you can do, and you don't need to code.
+
+- **One line:** use the [Wording suggestion form](../../issues/new/choose).
+  Say where it is in the game, paste the current text and your version.
+- **Many lines:** use the spreadsheet workflow.
+
+  ```bash
+  python3 scripts/review.py export review.csv --match "Falkner" --limit 200
+  # open review.csv in any spreadsheet; type your version in the new_en column
+  python3 scripts/review.py import review.csv --dry-run     # check it first
+  python3 scripts/review.py import review.csv               # write it
+  python3 scripts/insert.py                                 # rebuild to see it in game
+  ```
+
+  `import` rejects lines that drop or change codes like `{FD:01}` (the player's
+  name) or use characters the game's font can't draw. Don't hand-wrap
+  dialogue: the inserter wraps it. Keep menu and description lines short.
+  `--source vanilla` also lists lines that are FireRed's own English.
+- **Names:** characters and places follow `text/en/name_canon.json`; please
+  don't "fix" one spelling in isolation.
+
 ## Before you open a PR
 
 1. Rebuild: `python3 scripts/insert.py`. The report must say

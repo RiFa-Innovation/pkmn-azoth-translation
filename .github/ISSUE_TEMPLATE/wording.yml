@@ -1,0 +1,49 @@
+name: Wording suggestion
+description: A line that reads awkwardly, is mistranslated, or could be better English
+labels: [proofreading]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proofreading! One line per issue is easiest, or paste several if they're in the same place.
+        If you're doing a lot, the spreadsheet workflow in CONTRIBUTING.md is faster.
+  - type: input
+    id: version
+    attributes:
+      label: Patch version
+      placeholder: beta-4
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where in the game
+      description: Town / NPC / menu / battle, so I can find it.
+      placeholder: Violet City Gym, the guide NPC at the entrance
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: Copy it as shown (a screenshot also works).
+    validations:
+      required: true
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested text
+      description: Keep it short enough for the box. Mention anything that needs context (a name, a joke, a pun).
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What's wrong with the current line?
+      options:
+        - Mistranslation (wrong meaning)
+        - Awkward or unnatural English
+        - Inconsistent name or term
+        - Typo or punctuation
+        - Tone or character voice
+        - Other
