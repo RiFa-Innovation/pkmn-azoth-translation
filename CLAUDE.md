@@ -1,0 +1,131 @@
+# Instructions for working on this repo (Pokémon Azoth / Mercury EN translation)
+
+Read this first. Deeper background: `PROCESS.md` (pipeline facts, ROM maps; its
+"Resume point" sections are historical), `EMULATOR.md` (emulator setup and
+tracing), `PLAYTEST.md` (every finding, numbered), `CONTRIBUTING.md`.
+
+## Ground rules
+
+- **Never commit or upload ROMs, saves, save states, emulator backups or `dist/`.**
+  The patch is distributed only as a BPS in GitHub Releases. Base ROM: FireRed
+  USA v1.0, CRC32 `DD88761C` ("Squirrels" #1636).
+- Be explicit in any public text that this is only a **translation done with
+  Claude**; the hack, its name and content belong to its original authors.
+- The user's `dist/` is theirs: **never overwrite** their `.gba/.sav`. Add new
+  builds next to them (`... - next.gba/.bps`, plus a copy of the save).
+- Releases, merges and posts are outward-facing: do them when asked. Release
+  steps are below. #13 is **parked** until the user reaches it in their
+  playthrough.
+- Use `/bin/ls` (the shell `ls` is aliased with `--icons`; empty zsh globs also
+  abort `&&` chains). Scratch files go in the session scratchpad, not `/tmp`.
+
+## Build and verify (do after every ROM-affecting change)
+
+```
+python3 scripts/insert.py     # -> build/Mercury_EN.gba + .bps, prints a report
+```
+
+Required report: `missing 0, too_long 0, errors 0`. Then apply the BPS to the
+clean ROM and require a byte-identical result:
+
+```
+python3 scripts/bps.py apply "roms/Pokemon - FireRed Version (USA, Europe).gba" build/Mercury_EN.bps /tmp/chk.gba
+cmp /tmp/chk.gba build/Mercury_EN.gba
+```
+
+Re-dump only when the discovery logic changes: `python3 scripts/dump_all.py`
+(rewrites `text/zh.json`; review the diff, it is large).
+
+## Where a fix goes (decision table)
+
+| Symptom | Fix |
+|---|---|
+| Wrong/Chinese string that is in `text/zh.json` | `text/en/strings.json` (TM keyed by the Chinese text; `null` = skip junk) |
+| Text too long / clipped / overflows a box | `text/en/width_override.json` (`px`, `dialogue`, `lines` hard cap). `too_long` in the report lists offenders; the original is kept, so fix before shipping |
+| String reached only by base+offset (GCC section anchor) | `text/en/manual_strings.json` (in place, asserts the source bytes), `anchored.json`, `data/anchor_refs.json` |
+| Text baked into graphics | `gfx/*.json` specs + `scripts/gfx_text.py`, `logo.py` (locate tiles/map with `vram.py`, `gfx.py locate`) |
+| Wrong code behaviour / pointer / immediate | `data/code_patches.json` (`patch` with `orig` byte assertion; `vanilla` ranges) |
+| String exists but was never dumped | `scripts/dump_all.py` (`ref_kind`, `is_mixed`, guards) |
+
+Proofreading edits arrive as CSVs (`scripts/review.py export/import`; token
+validation included). Don't hand-wrap dialogue; the inserter wraps.
+
+## Triage workflow (player report -> fix)
+
+1. Reproduce in the emulator from the reporter's `.sav` if given (`RHT_LOAD_SAVE=1`,
+   `scripts/play.py`; see `EMULATOR.md`). Capture a screenshot or frame grid.
+2. **Pin the root cause with the debugger, don't guess**: find the text address
+   (`gfx.py locate`, `watch_read`/`watch_log`, `break_at` on `AddTextPrinter`
+   `0x08002CF4`), then ask who references it (`text/zh.json` refs, `ref_kind`).
+3. Fix in the narrowest place from the table above; rebuild; re-verify in game.
+4. Add a numbered row to `PLAYTEST.md` (symptom, cause, fix, how verified).
+5. Branch + PR; CI (`no-roms`) must pass. Close issues manually or with exactly
+   one `Fixes #N` per issue: a single commit message with `Fixes #1, #2` only
+   closes the first, and a stray "fixes #N" closes issues the user wants kept open.
+6. Label `fixed-in-release` **only after** the release exists.
+
+## Findings worth remembering (classes of bug already hit)
+
+- **Pointer trust is the main risk.** A "reference" found by scanning may be an
+  instruction, a GCC anchor, data inside an LZ77 blob, an applymovement
+  stream or a vanilla data word. Wrongly repointing these gave corrupted
+  tiles, NPC movement crashes, achievement crashes and header damage. Current
+  guards in `dump_all.py`: header (<0x200), `in_lz77`, applymovement
+  (0x4F/0x50) unless `near_code`, vanilla-data-word -> vanilla symbol rule.
+  After any change here confirm compressed blobs report 0 changed.
+- **Free-space pool:** `0xFF` runs can be live data. `insert.py::referenced_ff`
+  excludes referenced FF ranges; don't relocate into them.
+- **Mixed strings:** mostly-Latin text with a hanzi (names + one character) is
+  below the hanzi ratio; `is_mixed` dumps them from script refs only. Arrow
+  glyphs are only trusted from script refs. (#29, 103 strings.)
+- **Two font widths:** Latin is 6 px, hanzi 12 px; English re-wraps to the
+  window's pixel width. Boxes that cannot scroll need a `lines` cap.
+- **Help Tips:** body box is 5 rows, wraps at ~150 px; each page is its own
+  table entry (0x1E467C4-0x1E468A0); `{F8:xx}` button icons count 12-24 px
+  (SELECT ~20-24). Cap pages at px 148 / 5 lines. (#31)
+- **CFRU extended object graphics** table at `0x08961600`: entry 0 is the 32x32
+  player, rival is entry 72 (sheet `0x09F54D34`, 9x512 B, palette `0x09F55F34`).
+  Using vanilla sheets with the hack's templates garbles sprites. (#30)
+- **Ability pop-up possessive** is a code-appended `的` (`03 0B FF`) at
+  `0x1CEAAE4`; patched via `code_patches.json`. (#6)
+- **Script injection** for tests: write a script pointer into the global script
+  context (`0x03000EB0`: +8 ptr, +0 = 0, +1 = 1, `0x03000EA8` = 0); call
+  routines via `gMain.callback2` (`0x030030F4`) with a Thumb stub assembled
+  `arm-none-eabi-as -mcpu=arm7tdmi` (not Thumb-2).
+- **Freeze on talking to an NPC = placeholder script.** The hack uses
+  `0x08000000` (and `0x08000001`, 366 objects, unverified) as an object-event
+  script instead of NULL; FireRed runs the ROM header as bytecode. Signature:
+  script ctx at `0x03000EB0` stuck in mode 2 with scriptPtr `0x08000009`.
+  `insert.py::null_placeholder_scripts` zeroes `0x08000000` (592). The hack
+  moved `gMapGroups` to `0xB3B100` (vanilla table is 0xFF). Always test a
+  suspected freeze against `roms/Pokemon Mercury 1.3.3 (patched).gba` first:
+  if it hangs there too it is an original-hack bug. (#17, PLAYTEST 57)
+- Save states break between patch versions; in-game saves carry over.
+
+## Release steps (only when asked)
+
+1. Merge the PR (CI green). `git checkout main && git pull`.
+2. `python3 scripts/insert.py`, apply-and-compare as above; copy
+   `build/Mercury_EN.bps` to `Pokemon-Azoth-English-beta-N.bps`.
+3. Notes: copy the previous release's structure (`gh release view beta-N-1`):
+   bug-report link, patch/hash table (base CRC32+SHA-1, patch SHA-1, ROM SHA-1),
+   "New in beta N" with the detailed fix list, known issues. Use the
+   `pkmn-azoth-translation` repo URLs.
+4. `gh release create beta-N <bps> --target main --title "Beta N: ..." --notes-file ...`
+5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
+6. Refresh the user's `dist/` copy (alongside, never over).
+
+## Current state (2026-10-12, after beta-6)
+
+Open: #13 (parked, stray text after double-battle intro at mid text speed),
+#17 (Sprout Tower freeze, not reproduced), #19 (Ilex shrine / Beautifly crash,
+retest requested), #11 (~10 mid-block Chinese fragments), #2 (long achievement
+names clipped), #24 (human proofreading pass, ongoing). Not yet checked in game:
+the new BracerPoints/price/¥ lines and the Wobbuffet line from beta-6.
+
+Ideas for next sessions: play further than the recorded progress and log
+findings as `PLAYTEST.md` rows 57+; sweep remaining Chinese by grepping a fresh
+dump of the built ROM for hanzi; check other fixed-width UI lists (menus,
+summary screens, Pokédex entries) for overflow the way Help Tips was swept
+(capture every entry, view the grid); keep the Reddit/Discord announcement
+drafts up to date (the user posts them).
