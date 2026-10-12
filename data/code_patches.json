@@ -141,5 +141,25 @@
     "count": 84
    }
   ]
+ },
+ "ability_popup_possessive": {
+  "why": "CFRU's PrintBattlerOnAbilityPopUp (0x1CEAAE4) appends the possessive to the battler's name as three bytes: movs r2,#3 / strb; adds r2,#8 / strb; adds r2,#0xF4 / strb = 03 0B FF, i.e. the hanzi 的 + terminator, shown as 'Zorua的' above the ability name. Immediates changed so it stores B4 E7 FF (apostrophe, 's', terminator): movs r2,#0xB4; adds r2,#0x33 (-> E7); adds r2,#0x18 (-> FF). Same length, nothing else touched (issue #6, PLAYTEST finding 17).",
+  "patch": [
+   {
+    "at": "1CEAC44",
+    "orig": "0322",
+    "new": "b422"
+   },
+   {
+    "at": "1CEAC48",
+    "orig": "0832",
+    "new": "3332"
+   },
+   {
+    "at": "1CEAC4C",
+    "orig": "f432",
+    "new": "1832"
+   }
+  ]
  }
 }

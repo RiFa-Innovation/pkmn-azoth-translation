@@ -1,4 +1,4 @@
-"""Title logo: 口袋妖怪 / Pokémon / 水银  ->  POKéMON / MERCURY.
+"""Title logo: 口袋妖怪 / Pokémon / 水银  ->  POKéMON / AZOTH (+ the original 水银).
 
 The logo is BG0, 8bpp, raw (not LZ77): tiles at 0xF00FC0 (162 tiles),
 map at 0xF03840 (32x20), palette at 0xF03D40. The title code at 0xF0052A
@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 TILES, MAP, PAL, LIT_TILES = 0xF00FC0, 0xF03840, 0xF03D40, 0xF006BC
 MAX_TILES = 0xDF
+AZOTH_X = 99  # centre x of the AZOTH wordmark
 W, H = 240, 80  # logo occupies map rows 0..9
 
 FONT_BIG = "/System/Library/Fonts/Supplemental/Impact.ttf"
@@ -113,10 +114,7 @@ def build_image(rom):
         left, right = img[y][wx0 - 1], img[y][wx1]
         for x in range(wx0, wx1):
             img[y][x] = left if x < (wx0 + wx1) // 2 else right
-    # 2. erase 水银 entirely (it sits on the transparent background)
-    for y in range(40, H):
-        for x in range(146, 216):
-            img[y][x] = 0
+    # 2. 水银 stays: it is the hack's own title and sits beside AZOTH
     # 3. big POKéMON on the plate
     big = mask_text("POKéMON", FONT_BIG, 29, spacing=1)
     bw, bh = len(big[0]), len(big)
@@ -129,11 +127,11 @@ def build_image(rom):
         for x in range(bw):
             if big[y][x] and (y == 0 or not big[y - 1][x]):
                 img[by + y][bx + x] = WHITE
-    # 4. MERCURY in the wordmark's place under the title, italic, white rim +
-    #    navy outer like 水银
-    sub = mask_text("MERCURY", FONT_SUB, 15, shear=0.25, spacing=0)
+    # 4. AZOTH in the wordmark's place under the title, italic, white rim +
+    #    navy outer like 水银 (left of it)
+    sub = mask_text("AZOTH", FONT_SUB, 15, shear=0.25, spacing=1)
     sw, sh = len(sub[0]), len(sub)
-    sx, sy = 99 - sw // 2, 49
+    sx, sy = AZOTH_X - sw // 2, 49
     stamp(img, dilate(sub, 2), sx - 2, sy - 2, lambda x, y, h: NAVY)
     stamp(img, dilate(sub, 1), sx - 1, sy - 1, lambda x, y, h: WHITE)
     stamp(img, sub, sx, sy, lambda x, y, h: SUB_FILL[min(len(SUB_FILL) - 1, y * len(SUB_FILL) // h)])
