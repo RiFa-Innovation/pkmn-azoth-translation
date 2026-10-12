@@ -1266,208 +1266,208 @@
   "note": "ability description (summary box ~134px, 2 lines)"
  },
  "1DB8F09": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 0 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB8F60": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 1 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB8FAB": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 2 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB900A": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 3 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9052": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 4 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB90A7": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 5 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB910D": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 6 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB916A": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 7 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB91CD": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 8 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9227": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 9 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB92A7": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 10 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB92EA": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 11 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9340": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 12 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB93A0": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 13 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB93F7": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 14 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9450": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 15 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB94A3": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 16 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB94FC": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 17 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9547": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 18 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB95AF": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 19 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB961A": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 20 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9681": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 21 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB96E9": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 22 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9750": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 23 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB97B8": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 24 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB981B": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 25 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB987D": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 26 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB98E0": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 27 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9946": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 28 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB99AB": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 29 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9A04": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 30 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9A6C": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 31 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9AD8": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 32 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9B4E": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 33 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9BBE": {
   "px": 156,
@@ -1476,22 +1476,22 @@
   "note": "achievement 34 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
  },
  "1DB9C2A": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 35 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9C86": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 36 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "1DB9CE1": {
-  "px": 156,
+  "px": 148,
   "dialogue": false,
   "lines": 5,
-  "note": "achievement 37 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+  "note": "achievement description pane: wraps under the right edge, 5 rows"
  },
  "0E3BA4C": {
   "px": 86,
@@ -2416,5 +2416,11 @@
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBAFFF": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "locked achievement description"
  }
 }
