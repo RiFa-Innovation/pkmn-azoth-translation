@@ -1,6 +1,9 @@
 # Pokémon Mercury — English translation
 
+[![Join the Discord](https://img.shields.io/badge/Discord-Join_the_community-5865F2?logo=discord&logoColor=white)](https://discord.gg/pWnawqhT5C)
 [![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/river8)
+
+Chat, ask questions and share screenshots on **[Discord](https://discord.gg/pWnawqhT5C)**. Bug reports still go on [GitHub Issues](../../issues/new/choose) so they can be tracked.
 
 > **Optional.** The patch is and stays free. The Ko-fi link only helps me spend
 > more time on this translation. It is not for the original Mercury hack or its

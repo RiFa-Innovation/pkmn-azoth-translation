@@ -3,3 +3,6 @@ contact_links:
   - name: Download the latest patch
     url: https://github.com/RiFa-Innovation/pkmn-mercury-translation/releases/latest
     about: Make sure you're on the newest release before reporting.
+  - name: Chat or ask a question (Discord)
+    url: https://discord.gg/pWnawqhT5C
+    about: Questions, screenshots and general chat. Please file bugs as GitHub issues so they get tracked.
