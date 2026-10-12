@@ -102,6 +102,21 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   if it hangs there too it is an original-hack bug. (#17, PLAYTEST 57)
 - Save states break between patch versions; in-game saves carry over.
 
+## Replaying the new-game path (verified 2026-10-12, current build)
+
+Boot with no `.sav` (omit `RHT_LOAD_SAVE`). Press A through the naming
+screen (Start confirms), the disclaimer pages and Settings (**B** closes
+Settings, not A). Then: bedroom stairs (walk onto the warp tile, then press
+toward it), Mom's scene in the house (A until the script context mode at
+`0x03000EB1` is 0), door mat at the bottom (press Down), New Bark Town (3.66).
+Lyra's scene is **in her house (43.5)**: enter through its door (script
+`warp 43 5 0 0 0` works) and step left of the door, which fires the coord
+trigger. Then the lab (43.6): walking up from the door triggers Elm's scene;
+afterwards stand at (7,5) in the lab, face up and press A for the starter
+screen (map 43.7). Use `press_buttons frames=2 release_frames=10` taps and
+`snap` states at each step (`saves/states/ng-*.ss`, gitignored). All three
+starters, the nickname screen and Elm's farewell were verified here.
+
 ## Release steps (only when asked)
 
 1. Merge the PR (CI green). `git checkout main && git pull`.
