@@ -6805,15 +6805,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01740B0": {
-   "zh": "\n他看上去很虚弱。",
-   "cap": 17,
-   "refs": [
-    "15B303C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01740D6": {
    "zh": "我听说许多人都晕船了。",
    "cap": 22,
@@ -8517,15 +8508,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0176554": {
-   "zh": "做不到的！",
-   "cap": 10,
-   "refs": [
-    "0D0E798:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0176573": {
    "zh": "太感谢你了！",
    "cap": 12,
@@ -8714,15 +8696,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0176A07": {
-   "zh": "来太多的麻烦了！",
-   "cap": 16,
-   "refs": [
-    "0796BE4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0176A19": {
    "zh": "嗯？\n我输了？",
@@ -8986,15 +8959,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0177007": {
-   "zh": "。{FB}这是我们秘密制作的试验品\n掌门球。{FB}它将能成功收服任何\n宝可梦！{FB}不过你在使用它时\n可不要声张。",
-   "cap": 91,
-   "refs": [
-    "157B850:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0177041": {
    "zh": "梦！{FB}不过你在使用它时\n可不要声张。",
    "cap": 33,
@@ -9031,15 +8995,6 @@
    "untrusted": 1,
    "suspect": false
   },
-  "0177133": {
-   "zh": "8要的商业计划。{FB}你还是别太关心\n大人的事为好……{FB}知道这些可是相当痛苦的呢！",
-   "cap": 71,
-   "refs": [
-    "159D52C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01771AB": {
    "zh": "呃！！\n我又输了！？",
    "cap": 16,
@@ -9057,15 +9012,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01771D3": {
-   "zh": "r希鲁夫的计划！{FB}但是，火箭队不会倒下的！{FB}{FD:01}！永远不要忘记所有\n宝可梦都是为火箭队存在的！{FB}我得走了，但我会回来的！",
-   "cap": 107,
-   "refs": [
-    "1609CD4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "017726A": {
    "zh": "给我站住！\n你敢再走一步！",
@@ -9354,15 +9300,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0177700": {
-   "zh": "是居民们丢下的。",
-   "cap": 16,
-   "refs": [
-    "11E4A84:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0177720": {
    "zh": "这里是建造实验室的理想地方。\n看看这儿。",
@@ -10981,15 +10918,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "017AB0E": {
-   "zh": "沁d！{FB}如果你想知道做什么最好，\n那就放弃往里走的念头吧！",
-   "cap": 53,
-   "refs": [
-    "0787E64:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "017AB73": {
    "zh": "活火山是指正在喷发的，\n或将要喷发的火山。",
    "cap": 40,
@@ -11121,15 +11049,6 @@
    "cap": 52,
    "refs": [
     "0163D2A:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "017B003": {
-   "zh": "锔！果。",
-   "cap": 7,
-   "refs": [
-    "07911C7:message"
    ],
    "untrusted": 0,
    "suspect": false
@@ -12721,15 +12640,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "017EB08": {
-   "zh": "氢u！我收服了一群\n既强壮又聪明的宝可梦！{FB}来吧，让我看看你收服了什么！\n{FD:01}!",
-   "cap": 70,
-   "refs": [
-    "161AD88:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "017EB71": {
    "zh": "嘿！\n放松点！{FA}你已经赢了！",
    "cap": 24,
@@ -13417,15 +13327,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01800FF": {
-   "zh": "穷w确性。{FB}致命攻击提高触发命中要害的几率。{FB}它们在彩虹百货大楼都能买到！",
-   "cap": 69,
-   "refs": [
-    "156064C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "018017A": {
    "zh": "彩虹市\n拥有彩虹般梦想的城市",
    "cap": 28,
@@ -13471,15 +13372,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0180246": {
-   "zh": "战斗中能力不会下降。{FB}在彩虹百货大楼都能买到！",
-   "cap": 44,
-   "refs": [
-    "15DB6C4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01802A4": {
    "zh": "代币兑换奖品！\n奖品兑换",
    "cap": 23,
@@ -13506,24 +13398,6 @@
    ],
    "untrusted": 1,
    "suspect": false
-  },
-  "0180308": {
-   "zh": "\n我的舌头被烫伤了！{FB}大厦里的老妇人\n给我喝了一些茶。{FB}但茶太烫了！\n必须等凉下来之后再喝。",
-   "cap": 84,
-   "refs": [
-    "091A8E8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0180350": {
-   "zh": "来之后再喝。",
-   "cap": 12,
-   "refs": [
-    "0E264B8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0180388": {
    "zh": "小朋友，你好！{FB}我曾经看见过你好多次，\n但未能有过畅谈的机会。{FB}所幸现在我们成功相聚。{FB}让我教你技能生蛋\n来庆祝下这感人的一刻吧。",
@@ -13776,7 +13650,7 @@
    "cap": 142,
    "refs": [
     "01C4AFB:loadpointer",
-    "0703DF8:literal"
+    "0703DF8:aligned"
    ],
    "untrusted": 67,
    "suspect": false
@@ -14664,15 +14538,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0182634": {
-   "zh": "e有些过分了哦。{FB}你和他们是什么关系？\n朋友还是别的什么？{FB}我猜你是准备好\n为了他们跟我宣战了。",
-   "cap": 88,
-   "refs": [
-    "1214F44:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "01826B7": {
    "zh": "好吧！\n如你们所愿，我们会走的！{FB}我们很高兴\n和这个无趣的岛说再见！",
    "cap": 62,
@@ -14862,16 +14727,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0182B3E": {
-   "zh": "{FD:01}！{FB}你到七岛上来干什么？{FB}你不该老学我，\n知道吗？{FB}反正我已经拿到宝可梦的蛋了，\n在这岛上已经没什么事可做了。{FB}嘿，我打赌你都不知道\n什么是宝可梦的蛋。{FB}那你就永远别想\n完成全国宝可梦图鉴了。{FB}对了，我在这岛上遇到了\n一个我们都认识的人。{FB}如果你好奇的话，\n可以到处找找哦！{FB}我呢，没时间浪费在这里了。{FB}先闪啦！",
-   "cap": 284,
-   "refs": [
-    "13165D0:literal",
-    "1329FC8:literal"
-   ],
-   "untrusted": 3,
-   "suspect": true
   },
   "0182CE3": {
    "zh": "啊，你发现我了！\n请别告诉科拿。{FB}你知道科拿有许多许多\n的毛绒娃娃吗？{FB}每次她回四之岛，\n她的收藏都会增加！",
@@ -15420,15 +15275,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01839D7": {
-   "zh": "声巨响！{FB}伴随着毁灭性的力量！{FB}在关键时刻，\n百万吨拳击就是最强悍的攻击！{FA}你也这么认为吧？{FB}现在！\n让我教你的宝可梦学会这个技能！",
-   "cap": 120,
-   "refs": [
-    "154F87C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0183A00": {
    "zh": "—万吨拳击就是最强悍的攻击！{FA}你也这么认为吧？{FB}现在！\n让我教你的宝可梦学会这个技能！",
@@ -17574,15 +17420,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "018631C": {
-   "zh": "酷了。{FB}速度即是力量！\n看来你已经领悟到了！",
-   "cap": 40,
-   "refs": [
-    "14F4E6C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0186344": {
    "zh": "宝可梦对战？\n太激动了！来吧！",
    "cap": 27,
@@ -19668,15 +19505,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0188999": {
-   "zh": "我必须想想该怎样\n战胜他们。{FB}你不能这样磨磨蹭蹭了，\n继续前进吧！",
-   "cap": 61,
-   "refs": [
-    "15FDA94:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0188A3C": {
    "zh": "{FD:06}：什么？{FD:01}！\n在这儿碰到你真是令我惊讶！{FB}你是打算去宝可梦联盟吗？{FB}你也收集齐了全部徽章？\n真是太好了！{FB}作为去宝可梦联盟之前的热身！\n我要先击败你，{FD:01}{FB}来吧！",
    "cap": 146,
@@ -19761,15 +19589,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0188D03": {
-   "zh": "宝可梦为主的\n专业犯罪组织。{FB}想加入吗？{FB}你确定？{FB}来吧，加入我们吧！{FB}我是叫你加入我们！{FB}好吧，看来得给你来点硬的！{FB}我要让你无法拒绝！",
-   "cap": 123,
-   "refs": [
-    "11E6FA4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0188DDC": {
    "zh": "啊！\n你太强了！",
@@ -20108,15 +19927,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0189317": {
-   "zh": "另一只。{FB}这是一种有名的战术。",
-   "cap": 28,
-   "refs": [
-    "16187C8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0189333": {
    "zh": "我的朋友拥有很多可爱的宝可梦。\n我很羡慕！",
@@ -20950,15 +20760,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "018A391": {
-   "zh": "走族不见了，\n但小迷很安全。{FB}一切事情都变好了！",
-   "cap": 44,
-   "refs": [
-    "166ECED:trainerbattle"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "018A3E2": {
    "zh": "用这双手，\n我要创造我的胜利！",
    "cap": 28,
@@ -21026,15 +20827,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "018A51C": {
-   "zh": "这儿真不安静……",
-   "cap": 15,
-   "refs": [
-    "1EAC074:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "018A535": {
    "zh": "呃……\n我的感觉，太烦闷了……",
    "cap": 25,
@@ -21083,15 +20875,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "018A610": {
-   "zh": "v之中，\n来一场从容的战斗真是令人惬意。",
-   "cap": 37,
-   "refs": [
-    "15C3234:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "018A645": {
    "zh": "我正在想着\n专门为宝可梦建一个游泳池。",
@@ -23490,15 +23273,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "018E621": {
-   "zh": "是发现宝可梦，\n你是无法得到它们的详细资料的。{FB}你必须抓住它们\n来获取完整的资料。{FB}那么，给你一些收服\n野生宝可梦的工具吧。",
-   "cap": 115,
-   "refs": [
-    "146F064:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "018E6B3": {
    "zh": "{FD:01}得到了5个精灵球。",
    "cap": 19,
@@ -23789,15 +23563,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "018F515": {
-   "zh": "\n去再次修炼。{FB}也许我们将来可能会再见吧！\n永别了！",
-   "cap": 47,
-   "refs": [
-    "13E469C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "018F586": {
    "zh": "绿色徽章能使任何级别的宝可梦\n无理由地服从于你。{FB}这是你作为一个\n优秀的宝可梦训练师的证据。{FB}有了它，你就能挑战\n宝可梦联盟了。{FB}也带上这个技能。{FB}把它作为你挑战宝可梦联盟\n的礼物。",
@@ -24172,15 +23937,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "018FF67": {
-   "zh": "o态的问题。",
-   "cap": 11,
-   "refs": [
-    "079A110:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "018FF88": {
    "zh": "你想读哪个？",
    "cap": 12,
@@ -24290,15 +24046,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0190308": {
-   "zh": "毒药卖的很好。",
-   "cap": 14,
-   "refs": [
-    "0E3105C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "019032C": {
    "zh": "我要买一些药水。{FB}你无法预见你的宝可梦\n什么时候需要快速恢复。",
    "cap": 59,
@@ -24307,15 +24054,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0190330": {
-   "zh": "买一些药水。{FB}你无法预见你的宝可梦\n什么时候需要快速恢复。",
-   "cap": 55,
-   "refs": [
-    "11F8A80:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0190384": {
    "zh": "接待员告诉我。{FB}可以随便使用角落里的电脑。\n她真是太和蔼了！",
@@ -24506,15 +24244,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0190954": {
-   "zh": "一种原始且珍贵的宝可梦。",
-   "cap": 24,
-   "refs": [
-    "0FE0DC0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0190975": {
    "zh": "镰刀盔的化石\n一种原始且珍贵的宝可梦。",
    "cap": 37,
@@ -24568,24 +24297,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0190B31": {
-   "zh": "T之石，哈？{FB}它很特殊吗？\n在我看来不过是普通石头罢了。",
-   "cap": 50,
-   "refs": [
-    "15AFD9C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0190B3D": {
-   "zh": "很特殊吗？\n在我看来不过是普通石头罢了。",
-   "cap": 38,
-   "refs": [
-    "14729E8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0190B80": {
    "zh": "1969年7月20日！{FB}人类在那一天第一次\n登上月球。{FB}为了看到那个新闻，\n我甚至买了台彩色电视机。",
@@ -24911,15 +24622,6 @@
    "untrusted": 0,
    "suspect": true
   },
-  "0191640": {
-   "zh": "0\n可能不会听训练师的话。{FB}但是如果有徽章就不一样了……",
-   "cap": 51,
-   "refs": [
-    "0FD6ABC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01916A9": {
    "zh": "什么！？{FB}火箭队在月见山？\n是么？{FB}我在打电话！\n要走了！",
    "cap": 49,
@@ -24964,15 +24666,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0191782": {
-   "zh": "和那边的小孩交换了宝可梦。{FB}我有两只皮卡丘，所以我\n寻思着可以交换一只。",
-   "cap": 68,
-   "refs": [
-    "07A27C0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01917E4": {
    "zh": "宝可梦在成长过程中\n可以学到新的技能。{FB}但是有一些必须要有人教\n它们才能学会。",
@@ -25616,15 +25309,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0193100": {
-   "zh": "H间处。{FB}如果你给我带回一些树果粉末，\n我会给你调制一些药物。{FB}别忘了，把树果压碎成\n树果粉末带回来给我。",
-   "cap": 97,
-   "refs": [
-    "0FD3500:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "019321D": {
    "zh": "为什么要对我说谎？{FB}你有多少树果？\n一个也没有！",
@@ -27386,15 +27070,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0196C00": {
-   "zh": "宝可梦使用者。{FB}她精于花道，\n虽然她看上去很娇小……{FB}但她绝不是个可以小看的对手！",
-   "cap": 75,
-   "refs": [
-    "0FD30BC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0196CA1": {
    "zh": "你可以用赢来的代币可以去那儿\n换取稀有的宝可梦。{FB}但是，我老是赢不了！",
    "cap": 66,
@@ -28909,15 +28584,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0199999": {
-   "zh": "c梦。\n那我就指望着用它了！",
-   "cap": 25,
-   "refs": [
-    "15DAD8C:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "01999B7": {
    "zh": "我知道夏伯为什么会\n成为一名训练师。",
    "cap": 35,
@@ -29185,15 +28851,6 @@
    "cap": 169,
    "refs": [
     "016E3F0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "019A0DF": {
-   "zh": "来自：宝可梦研究组……",
-   "cap": 20,
-   "refs": [
-    "15470E1:message"
    ],
    "untrusted": 0,
    "suspect": false
@@ -30233,15 +29890,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "019C50D": {
-   "zh": "于我仅仅是一个粉丝。",
-   "cap": 20,
-   "refs": [
-    "163A8C4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "019C55C": {
    "zh": "我觉得训练师\n在他们战斗时非常棒。{FB}你觉得呢？",
    "cap": 43,
@@ -30963,15 +30611,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "019E207": {
-   "zh": "\n呃，谢谢！{FA}……{FA}咕噜……咕噜……{FA}……{FA}嗯……{FA}如果你想去{FA}金黄市的话……{FA}……{FA}就去吧。{FB}我去和其他的警卫\n一起分了这杯茶。",
-   "cap": 102,
-   "refs": [
-    "0FD6B04:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "019E2B7": {
    "zh": "呃，我虽然很口渴得要命。\n但我仍然在第一线执勤！{FB}喂，站住！那条路禁止通行！",
    "cap": 69,
@@ -31690,15 +31329,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01A0008": {
-   "zh": "细胞分离系统。",
-   "cap": 14,
-   "refs": [
-    "1564B10:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01A0035": {
    "zh": "不！？\n你不能这么冷淡！{FB}拜托，你一定要帮我这个陷入了\n大-大-大麻烦的人！{FB}怎样，帅哥？\n好吧？{FA}行吧？{FA}太好了！",
    "cap": 98,
@@ -31913,24 +31543,6 @@
    "cap": 82,
    "refs": [
     "03ED4F4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "01A0819": {
-   "zh": "可以说这场\n是一场很精彩的比赛。{FB}我可以肯定的说，\n这是一场很有深度的比赛！",
-   "cap": 71,
-   "refs": [
-    "1FFAB44:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
-  "01A083A": {
-   "zh": "可以肯定的说，\n这是一场很有深度的比赛！",
-   "cap": 38,
-   "refs": [
-    "1E6420C:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -32350,15 +31962,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01A1919": {
-   "zh": "自己来完成。",
-   "cap": 12,
-   "refs": [
-    "0795C2C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01A197E": {
    "zh": "噢！\n这……这是……",
    "cap": 15,
@@ -32390,10 +31993,9 @@
    "zh": "这……这不是什么奇怪的事，\n请你一定要帮我，拜托了。",
    "cap": 47,
    "refs": [
-    "017109B:loadpointer",
-    "07A27A8:literal"
+    "017109B:loadpointer"
    ],
-   "untrusted": 0,
+   "untrusted": 1,
    "suspect": false
   },
   "01A1A3F": {
@@ -33045,24 +32647,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01A3303": {
-   "zh": "没错吧？{FB}我喜欢她，真的很喜欢！{FB}我听说\n她也来过这里旅游！",
-   "cap": 54,
-   "refs": [
-    "11FC7D0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "01A330D": {
-   "zh": "喜欢她，真的很喜欢！{FB}我听说\n她也来过这里旅游！",
-   "cap": 44,
-   "refs": [
-    "15D4660:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01A3379": {
    "zh": "我喜欢在安静的地方居住，\n为此我买了这幢房子。{FB}今天，我会去享受一下钓鱼的乐趣。",
@@ -34524,15 +34108,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01A6421": {
-   "zh": "希加罗普号将以{FD:02}倍的高速前进！",
-   "cap": 30,
-   "refs": [
-    "155B8A8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01A644F": {
    "zh": "这个技能只能教你一次，\n确定要学习吗？",
    "cap": 36,
@@ -35606,15 +35181,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01AFB3F": {
-   "zh": "那些\n被遗弃的宝可梦。",
-   "cap": 21,
-   "refs": [
-    "161C06C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01AFB76": {
    "zh": "{FC:01 08}{FC:03 09}这是个怎么样的人？{FB}{FC:06 04}{FC:01 02}{FC:03 03}这老人气冲冲的冲到\n我们的秘密基地。{FB}然后，他开始唠叨我们\n火箭队滥用宝可梦的行为。{FB}所以我们来了一场\n用成年人的方式进行的谈话。",
    "cap": 155,
@@ -35677,15 +35243,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01AFF27": {
-   "zh": "德最喜欢的宝可梦？{FB}{FC:06 04}{FC:01 02}{FC:03 03}那些混蛋占领\n了我们的大厦……{FB}他们的头目说他在找寻\n强大的宝可梦。",
-   "cap": 90,
-   "refs": [
-    "0E05044:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01AFFA8": {
    "zh": "{FC:01 08}{FC:03 09}这是个怎么样的人？{FB}{FC:06 04}{FC:01 02}{FC:03 03}火箭队的头目\n是一个特别残忍的人！{FB}对于他来说，宝可梦只是一个\n可以被利用的工具。",
@@ -35847,15 +35404,6 @@
     "141F150:literal"
    ],
    "untrusted": 14,
-   "suspect": true
-  },
-  "01B0615": {
-   "zh": "去{FA}达到我们的目标。{FB}现在，我得去和我的女儿进行培训了。",
-   "cap": 52,
-   "refs": [
-    "077ECD0:literal"
-   ],
-   "untrusted": 0,
    "suspect": true
   },
   "01B061E": {
@@ -36100,9 +35648,10 @@
    "zh": "宝可梦联盟",
    "cap": 11,
    "refs": [
-    "045F8AC:aligned"
+    "045F8AC:aligned",
+    "0483044:aligned"
    ],
-   "untrusted": 10,
+   "untrusted": 9,
    "suspect": false
   },
   "01B0C88": {
@@ -37653,15 +37202,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01B14F7": {
-   "zh": "：华蓝道馆\n馆主小霞！{FB}据说，小霞很崇拜四天王\n的科拿。",
-   "cap": 50,
-   "refs": [
-    "0CCE618:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01B14FE": {
    "zh": "馆\n馆主小霞！{FB}据说，小霞很崇拜四天王\n的科拿。",
    "cap": 43,
@@ -37935,16 +37475,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01B1F02": {
-   "zh": "\n你可真是来对地方了！{FB}快看，快看！\n看到了吧！\n这些是我的贴纸！{FA}你看，我得到了很多吧！{FB}我猜你也想要一些。\n一定是这样！{FB}如果你在我面前自夸，\n我就给你一个贴纸{FB}好了，快夸我吧！",
-   "cap": 161,
-   "refs": [
-    "14499E0:literal",
-    "1449D30:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01B1FEF": {
    "zh": "快说我的好话！\n我会给你一个贴纸。",
@@ -42081,15 +41611,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01BDD81": {
-   "zh": "M忘的时光。",
-   "cap": 11,
-   "refs": [
-    "1E8EED4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01BDEDF": {
    "zh": "我希望你能在无线\n通信系统里度过难忘的时光。",
    "cap": 43,
@@ -42417,15 +41938,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01BF701": {
-   "zh": "…\n等你腾出了空间再过来吧。",
-   "cap": 26,
-   "refs": [
-    "16292C0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01BF72A": {
    "zh": "{FD:01}从抚养家爷爷\n手中拿到了蛋。",
@@ -43234,24 +42746,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01C1B06": {
-   "zh": "！不放水！\n我们真刀真枪的战一场！",
-   "cap": 31,
-   "refs": [
-    "07802A0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "01C1B19": {
-   "zh": "枪的战一场！",
-   "cap": 12,
-   "refs": [
-    "07816F0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01C1B37": {
    "zh": "叭哈哈！\n很好！我又感到无聊了！嗯哼！",
    "cap": 34,
@@ -43410,7 +42904,7 @@
    "cap": 26,
    "refs": [
     "01A9C70:aligned",
-    "04DBE8C:literal"
+    "04DBE8C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -43487,15 +42981,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01C2101": {
-   "zh": "降c做……{FA}……要我放弃钓鱼果然很困难啊！",
-   "cap": 36,
-   "refs": [
-    "1E8ECE0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01C2134": {
    "zh": "我收服了什么？{FB}除非你击败了我\n否则你永远不会知道！",
    "cap": 49,
@@ -43522,15 +43007,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01C21C9": {
-   "zh": "y我们能赢，我就嫁给你！",
-   "cap": 22,
-   "refs": [
-    "0E21A88:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01C21EE": {
    "zh": "我的鸟宝可梦还记得你！",
@@ -43847,15 +43323,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01C28F9": {
-   "zh": "经\n变得更强了……",
-   "cap": 16,
-   "refs": [
-    "11F4EC8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01C2913": {
    "zh": "你想要什么？",
@@ -45028,15 +44495,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "01C4666": {
-   "zh": "：我最亲爱的阿雪，我们\n一起的话一定能赢的！",
-   "cap": 41,
-   "refs": [
-    "154B978:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "01C4699": {
    "zh": "阿雪：我不会拖累我的好友\n阿力的！我们一定会赢！",
    "cap": 45,
@@ -45654,15 +45112,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "01C632C": {
-   "zh": "6能。{FB}蚊香蝌蚪是水系的宝可梦。{FB}所以，储水变得\n非常有效，造成双倍伤害。",
-   "cap": 66,
-   "refs": [
-    "1FE9590:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "01C63A9": {
    "zh": "这个情况要赢\n有点有难度……{FB}我们来交换宝可梦吧！",
@@ -49792,15 +49241,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "03D762D": {
-   "zh": "要关头时提升特防。",
-   "cap": 18,
-   "refs": [
-    "15536B8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "03D765C": {
    "zh": "宝可梦携带后，\n紧要关头时提升命中要害率。",
    "cap": 40,
@@ -50265,11 +49705,9 @@
    "zh": "可以小幅提升\n水系技能威力。",
    "cap": 27,
    "refs": [
-    "109E12C:literal",
-    "109E138:literal",
     "109E39C:literal"
    ],
-   "untrusted": 9,
+   "untrusted": 11,
    "suspect": true
   },
   "03D8669": {
@@ -51422,7 +50860,7 @@
     "03E44D8:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "03E5900": {
    "zh": "肤啊",
@@ -52913,15 +52351,6 @@
     "03F1E5C:aligned",
     "0C2B1B0:aligned",
     "0C2B1B4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "03F07D0": {
-   "zh": ":奉",
-   "cap": 4,
-   "refs": [
-    "0FEA95C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -54734,15 +54163,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "03FC919": {
-   "zh": "\n回复了一点点HP",
-   "cap": 16,
-   "refs": [
-    "07862A8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "03FC935": {
    "zh": "{FD:13}的{FD:1A}\n引发了沙雹！",
@@ -56818,6 +56238,15 @@
    "untrusted": 0,
    "suspect": true
   },
+  "03FF994": {
+   "zh": "肠；羚",
+   "cap": 6,
+   "refs": [
+    "03FF9B4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
+  },
   "03FFA0C": {
    "zh": "肤貉",
    "cap": 5,
@@ -57382,85 +56811,190 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0415DE0": {
+   "zh": "{FC:01 0F}{FC:03 0E}宝可梦栖息地",
+   "cap": 19,
+   "refs": [
+    "0451F7C:aligned",
+    "0452034:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0415DF7": {
    "zh": "草地宝可梦",
    "cap": 11,
    "refs": [
+    "0451F84:aligned",
+    "045203C:aligned",
     "0452344:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E09": {
    "zh": "森林宝可梦",
    "cap": 11,
    "refs": [
+    "0451F8C:aligned",
+    "0452044:aligned",
     "0452348:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E18": {
    "zh": "水边宝可梦",
    "cap": 11,
    "refs": [
+    "0451F94:aligned",
+    "045204C:aligned",
     "045234C:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E2D": {
    "zh": "海洋宝可梦",
    "cap": 11,
    "refs": [
+    "0451F9C:aligned",
+    "0452054:aligned",
     "0452350:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E39": {
    "zh": "洞窟宝可梦",
    "cap": 11,
    "refs": [
+    "0451FA4:aligned",
+    "045205C:aligned",
     "0452354:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E46": {
    "zh": "山地宝可梦",
    "cap": 11,
    "refs": [
+    "0451FAC:aligned",
+    "0452064:aligned",
     "0452358:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E57": {
    "zh": "荒地宝可梦",
    "cap": 11,
    "refs": [
+    "0451FB4:aligned",
+    "045206C:aligned",
     "045235C:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E6D": {
    "zh": "城市宝可梦",
    "cap": 11,
    "refs": [
+    "0451FBC:aligned",
+    "0452074:aligned",
     "0452360:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E7B": {
    "zh": "珍稀宝可梦",
    "cap": 11,
    "refs": [
+    "0451FC4:aligned",
+    "045207C:aligned",
     "0452364:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415E88": {
+   "zh": "{FC:01 0F}{FC:03 0E}搜索",
+   "cap": 11,
+   "refs": [
+    "0451FCC:aligned",
+    "0452084:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415E95": {
+   "zh": "序号排序",
+   "cap": 9,
+   "refs": [
+    "0451F74:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EB0": {
+   "zh": "{FC:01 0F}{FC:03 0E}其他",
+   "cap": 11,
+   "refs": [
+    "0451FF4:aligned",
+    "04520AC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EDF": {
+   "zh": "由轻到重排序",
+   "cap": 13,
+   "refs": [
+    "0451FE4:aligned",
+    "045209C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EED": {
+   "zh": "由小到大排序",
+   "cap": 13,
+   "refs": [
+    "0451FEC:aligned",
+    "04520A4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EFB": {
+   "zh": "{FC:01 0F}{FC:03 0E}宝可梦列表",
+   "cap": 17,
+   "refs": [
+    "0451F6C:aligned",
+    "045201C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415F0E": {
+   "zh": "编号模式：关都",
+   "cap": 14,
+   "refs": [
+    "0452024:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415F24": {
+   "zh": "编号模式：全国",
+   "cap": 14,
+   "refs": [
+    "045202C:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "0415F3D": {
@@ -57718,13 +57252,18 @@
     "0453F84:aligned",
     "045A628:aligned",
     "045A660:aligned",
+    "0466DF8:aligned",
+    "0466E30:aligned",
+    "0466E48:aligned",
+    "0466E60:aligned",
+    "0466E70:aligned",
     "1D43804:literal",
     "1D46E28:literal",
     "1DE3C0C:aligned",
     "1DE4954:aligned",
     "1DE498C:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "04161C8": {
@@ -57734,6 +57273,58 @@
     "0046830:literal",
     "009D8BC:literal",
     "0121240:literal",
+    "025F80C:aligned",
+    "03DFE40:aligned",
+    "03DFE80:aligned",
+    "03DFEB0:aligned",
+    "03DFEC8:aligned",
+    "03DFED8:aligned",
+    "03DFEE8:aligned",
+    "03DFEF8:aligned",
+    "03DFF10:aligned",
+    "03DFF28:aligned",
+    "03DFF48:aligned",
+    "03DFFC0:aligned",
+    "03E0010:aligned",
+    "03E0020:aligned",
+    "03E0030:aligned",
+    "03E0048:aligned",
+    "03E0058:aligned",
+    "03E0070:aligned",
+    "03E0088:aligned",
+    "03E00A8:aligned",
+    "03E00B8:aligned",
+    "03E00D0:aligned",
+    "03E00E8:aligned",
+    "03E0108:aligned",
+    "03E0120:aligned",
+    "03E0140:aligned",
+    "03E0160:aligned",
+    "03E0188:aligned",
+    "03E0208:aligned",
+    "03E0220:aligned",
+    "03E0240:aligned",
+    "03E0278:aligned",
+    "03E0290:aligned",
+    "03E02A8:aligned",
+    "03E02C8:aligned",
+    "03E02E0:aligned",
+    "03E02F8:aligned",
+    "03E0310:aligned",
+    "03E0348:aligned",
+    "03E0368:aligned",
+    "03E0380:aligned",
+    "03E0398:aligned",
+    "03E03B8:aligned",
+    "03E03D8:aligned",
+    "03E03F8:aligned",
+    "03E0418:aligned",
+    "03E0438:aligned",
+    "03E0448:aligned",
+    "03E0460:aligned",
+    "03E0478:aligned",
+    "03E04A0:aligned",
+    "03E04A8:aligned",
     "03F5BEC:aligned",
     "03F5C28:aligned",
     "03F5C38:aligned",
@@ -57744,7 +57335,7 @@
     "0463160:aligned",
     "0464394:aligned"
    ],
-   "untrusted": 52,
+   "untrusted": 0,
    "suspect": false
   },
   "04161D4": {
@@ -59708,13 +59299,76 @@
    "untrusted": 0,
    "suspect": false
   },
+  "04178E6": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "03DFE58:aligned",
+    "03DFE78:aligned",
+    "03DFE98:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178EB": {
+   "zh": "蛋",
+   "cap": 3,
+   "refs": [
+    "03DFD90:aligned",
+    "03DFDB8:aligned",
+    "03DFDE0:aligned",
+    "03DFE00:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178F0": {
+   "zh": "进入殿堂",
+   "cap": 9,
+   "refs": [
+    "03DFD80:aligned",
+    "03DFDB0:aligned",
+    "03DFDC8:aligned",
+    "03DFDF8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178FD": {
+   "zh": "胜利数",
+   "cap": 7,
+   "refs": [
+    "03DFDA0:aligned",
+    "03DFDD0:aligned",
+    "03DFDE8:aligned",
+    "03DFE08:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417907": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "03DFD88:aligned",
+    "03DFD98:aligned",
+    "03DFDA8:aligned",
+    "03DFDC0:aligned",
+    "03DFDD8:aligned",
+    "03DFDF0:aligned",
+    "03DFE10:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0417929": {
    "zh": "退出",
    "cap": 5,
    "refs": [
+    "03E0260:aligned",
     "03F5C98:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417938": {
@@ -59723,9 +59377,12 @@
    "refs": [
     "012A514:literal",
     "0155858:literal",
-    "0155914:literal"
+    "0155914:literal",
+    "03DFD50:aligned",
+    "03DFE48:aligned",
+    "03DFE88:aligned"
    ],
-   "untrusted": 3,
+   "untrusted": 0,
    "suspect": false
   },
   "041793C": {
@@ -59734,16 +59391,206 @@
    "refs": [
     "012A518:literal",
     "015585C:literal",
-    "0155918:literal"
+    "0155918:literal",
+    "03DFD58:aligned",
+    "03DFE50:aligned",
+    "03DFE90:aligned"
    ],
-   "untrusted": 3,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417944": {
+   "zh": "单人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417952": {
+   "zh": "双人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417960": {
+   "zh": "多人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE70:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "041796D": {
    "zh": "尝试一次挑战。",
    "cap": 14,
    "refs": [
-    "03DFEA0:literal"
+    "03DFEA0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041797F": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "03DFEA8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417984": {
+   "zh": "美味之水{FC:13 57}{FC:06 00}200¥",
+   "cap": 19,
+   "refs": [
+    "03DFF30:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041799A": {
+   "zh": "塞可汽水{FC:13 57}{FC:06 00}300¥",
+   "cap": 19,
+   "refs": [
+    "03DFF38:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04179ED": {
+   "zh": "很好",
+   "cap": 5,
+   "refs": [
+    "03DFFC8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04179F7": {
+   "zh": "不好",
+   "cap": 5,
+   "refs": [
+    "03DFFD0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A02": {
+   "zh": "红色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00C0:aligned",
+    "03E00F0:aligned",
+    "03E0128:aligned",
+    "03E0168:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A0C": {
+   "zh": "黄色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00D8:aligned",
+    "03E00F8:aligned",
+    "03E0148:aligned",
+    "03E0170:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A19": {
+   "zh": "蓝色碎片",
+   "cap": 9,
+   "refs": [
+    "03E0110:aligned",
+    "03E0130:aligned",
+    "03E0150:aligned",
+    "03E0178:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A24": {
+   "zh": "绿色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00B0:aligned",
+    "03E00C8:aligned",
+    "03E00E0:aligned",
+    "03E0100:aligned",
+    "03E0118:aligned",
+    "03E0138:aligned",
+    "03E0158:aligned",
+    "03E0180:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A37": {
+   "zh": "右",
+   "cap": 3,
+   "refs": [
+    "03DFFD8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A3D": {
+   "zh": "左",
+   "cap": 3,
+   "refs": [
+    "03DFFE0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A42": {
+   "zh": "冰冻光束{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF50:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A58": {
+   "zh": "魔法闪耀{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF58:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A6E": {
+   "zh": "十万伏特{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A84": {
+   "zh": "喷射火焰{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A9A": {
+   "zh": "替身{FC:13 50}{FC:06 00}2000币",
+   "cap": 17,
+   "refs": [
+    "03DFF70:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -59792,6 +59639,42 @@
    ],
    "untrusted": 0,
    "suspect": false
+  },
+  "0417ADC": {
+   "zh": "一般",
+   "cap": 5,
+   "refs": [
+    "03DFD60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AE3": {
+   "zh": "黑",
+   "cap": 3,
+   "refs": [
+    "03DFD68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AE9": {
+   "zh": "粉",
+   "cap": 3,
+   "refs": [
+    "03DFD70:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AEE": {
+   "zh": "深褐",
+   "cap": 5,
+   "refs": [
+    "03DFD78:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
   },
   "0417AF4": {
    "zh": "帅气",
@@ -59993,11 +59876,71 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0417BE2": {
+   "zh": "伊布",
+   "cap": 5,
+   "refs": [
+    "03E0190:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BE8": {
+   "zh": "火精灵",
+   "cap": 7,
+   "refs": [
+    "03E0198:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BF0": {
+   "zh": "雷精灵",
+   "cap": 7,
+   "refs": [
+    "03E01A0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BF8": {
+   "zh": "水精灵",
+   "cap": 7,
+   "refs": [
+    "03E01A8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0417C01": {
    "zh": "退出寻找。",
    "cap": 10,
    "refs": [
-    "03E01B0:literal"
+    "03E01B0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C0F": {
+   "zh": "美味之水",
+   "cap": 9,
+   "refs": [
+    "03E0018:aligned",
+    "03E0038:aligned",
+    "03E0060:aligned",
+    "03E0090:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C1B": {
+   "zh": "塞可汽水",
+   "cap": 9,
+   "refs": [
+    "03E0028:aligned",
+    "03E0040:aligned",
+    "03E0078:aligned",
+    "03E0098:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60009,6 +59952,142 @@
     "00D06CC:literal",
     "00D07C4:literal",
     "03E0714:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C4B": {
+   "zh": "不用了",
+   "cap": 7,
+   "refs": [
+    "03E01C0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C55": {
+   "zh": "穿山鼠{FC:13 55}{FC:06 00} 500代币",
+   "cap": 21,
+   "refs": [
+    "03E01C8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C6A": {
+   "zh": "六尾{FC:13 55}{FC:06 00}1000代币",
+   "cap": 19,
+   "refs": [
+    "03E01D0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C83": {
+   "zh": "滑滑小子{FC:13 50}{FC:06 00} 2800代币",
+   "cap": 24,
+   "refs": [
+    "03E01D8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C9D": {
+   "zh": "木棉球{FC:13 50}{FC:06 00} 5500代币",
+   "cap": 22,
+   "refs": [
+    "03E01E0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417CB7": {
+   "zh": "宝贝龙{FC:13 50}{FC:06 00} 9999代币",
+   "cap": 22,
+   "refs": [
+    "03E01E8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D4C": {
+   "zh": "不用了",
+   "cap": 7,
+   "refs": [
+    "03DFF78:aligned",
+    "03DFFA8:aligned",
+    "03E01F0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D56": {
+   "zh": "贝之化石",
+   "cap": 9,
+   "refs": [
+    "03DFED0:aligned",
+    "03DFF00:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D63": {
+   "zh": "龟壳化石",
+   "cap": 9,
+   "refs": [
+    "03DFEE0:aligned",
+    "03DFF18:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D6F": {
+   "zh": "秘密琥珀",
+   "cap": 9,
+   "refs": [
+    "03DFEF0:aligned",
+    "03DFF08:aligned",
+    "03DFF20:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D79": {
+   "zh": "交换中心",
+   "cap": 9,
+   "refs": [
+    "03E01F8:aligned",
+    "03E02B0:aligned",
+    "03E02E8:aligned",
+    "03E0328:aligned",
+    "03E0350:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D86": {
+   "zh": "大竞技场",
+   "cap": 9,
+   "refs": [
+    "03E0200:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D90": {
+   "zh": "有线联机游戏",
+   "cap": 13,
+   "refs": [
+    "03E0210:aligned"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
+  "0417DA0": {
+   "zh": "无线",
+   "cap": 5,
+   "refs": [
+    "03E0218:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60071,27 +60150,42 @@
    "zh": "一之岛",
    "cap": 7,
    "refs": [
+    "03E0280:aligned",
+    "03E0298:aligned",
+    "03E03C0:aligned",
+    "03E0408:aligned",
+    "03E0428:aligned",
     "03E17E4:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417DFE": {
    "zh": "二之岛",
    "cap": 7,
    "refs": [
+    "03E0268:aligned",
+    "03E02A0:aligned",
+    "03E03C8:aligned",
+    "03E03E8:aligned",
+    "03E0430:aligned",
     "03E17E8:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417E09": {
    "zh": "三之岛",
    "cap": 7,
    "refs": [
+    "03E0270:aligned",
+    "03E0288:aligned",
+    "03E03D0:aligned",
+    "03E03F0:aligned",
+    "03E0410:aligned",
     "03E17EC:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417E16": {
@@ -60134,45 +60228,205 @@
    "zh": "枯叶",
    "cap": 5,
    "refs": [
+    "03E03E0:aligned",
+    "03E0400:aligned",
+    "03E0420:aligned",
+    "03E0440:aligned",
     "03E17E0:aligned"
    ],
-   "untrusted": 4,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E50": {
+   "zh": "大竞技场",
+   "cap": 9,
+   "refs": [
+    "03E02B8:aligned",
+    "03E02F0:aligned",
+    "03E0330:aligned",
+    "03E0358:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E5A": {
+   "zh": "树果混合",
+   "cap": 9,
+   "refs": [
+    "03E02C0:aligned",
+    "03E0340:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E72": {
+   "zh": "宝可梦跳绳",
+   "cap": 11,
+   "refs": [
+    "03E0300:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E7F": {
+   "zh": "嘟嘟利摘树果",
+   "cap": 13,
+   "refs": [
+    "03E0308:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E94": {
+   "zh": "2个小蘑菇",
+   "cap": 10,
+   "refs": [
+    "03E0318:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EA4": {
+   "zh": "1个大蘑菇",
+   "cap": 10,
+   "refs": [
+    "03E0320:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EB3": {
+   "zh": "七岛",
+   "cap": 5,
+   "refs": [
+    "03E0370:aligned",
+    "03E0388:aligned",
+    "03E03A0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EC1": {
+   "zh": "脐之岩",
+   "cap": 7,
+   "refs": [
+    "03E0378:aligned",
+    "03E03A8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
+  },
+  "0417ECC": {
+   "zh": "诞生之岛",
+   "cap": 9,
+   "refs": [
+    "03E0390:aligned",
+    "03E03B0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417ED9": {
+   "zh": "对焦镜{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFF88:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EF7": {
+   "zh": "节拍器{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFF90:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F11": {
+   "zh": "力量头带{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 25,
+   "refs": [
+    "03DFF98:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F2F": {
+   "zh": "达人带{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFFA0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F4D": {
+   "zh": "广角镜{FC:13 55}{FC:06 00}800枚代币",
+   "cap": 22,
+   "refs": [
+    "03DFF80:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F69": {
+   "zh": "成为队长",
+   "cap": 9,
+   "refs": [
+    "03E0470:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F77": {
+   "zh": "加入队伍",
+   "cap": 9,
+   "refs": [
+    "03E0468:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "0417F82": {
    "zh": "单人",
    "cap": 5,
    "refs": [
+    "03E0480:aligned",
     "03FE9C4:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F89": {
    "zh": "双人",
    "cap": 5,
    "refs": [
+    "03E0488:aligned",
     "03FE9C8:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F90": {
    "zh": "淘汰",
    "cap": 5,
    "refs": [
+    "03E0490:aligned",
     "03FE9CC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F99": {
    "zh": "混合",
    "cap": 5,
    "refs": [
+    "03E0498:aligned",
     "03FE9D0:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417FBB": {
@@ -60278,10 +60532,11 @@
    "zh": "屋顶",
    "cap": 5,
    "refs": [
+    "03DFEB8:aligned",
     "03F5B80:aligned",
     "03F5CEC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0418075": {
@@ -60297,27 +60552,30 @@
    "zh": "联机玩游戏",
    "cap": 11,
    "refs": [
+    "03E0248:aligned",
     "03F5C8C:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041808E": {
    "zh": "直连房间",
    "cap": 9,
    "refs": [
+    "03E0250:aligned",
     "03F5C90:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041809C": {
    "zh": "联合房间",
    "cap": 9,
    "refs": [
+    "03E0258:aligned",
     "03F5C94:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "04180A7": {
@@ -60424,7 +60682,7 @@
    "zh": "你想执行什么操作？",
    "cap": 18,
    "refs": [
-    "03CEA90:literal",
+    "03CEA90:aligned",
     "1CCE4D4:literal"
    ],
    "untrusted": 0,
@@ -60434,7 +60692,7 @@
    "zh": "请选择一种主题。",
    "cap": 16,
    "refs": [
-    "03CEA98:literal",
+    "03CEA98:aligned",
     "1CCE4DC:literal"
    ],
    "untrusted": 0,
@@ -60444,17 +60702,27 @@
    "zh": "选择一张壁纸。",
    "cap": 14,
    "refs": [
-    "03CEAA0:literal",
+    "03CEAA0:aligned",
     "1CCE4E4:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "041825C": {
+   "zh": "选择了{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEAA8:aligned",
+    "03CEB40:aligned"
+   ],
+   "untrusted": 2,
    "suspect": false
   },
   "041826C": {
    "zh": "跳转到哪个盒子？",
    "cap": 16,
    "refs": [
-    "03CEAB0:literal",
+    "03CEAB0:aligned",
     "1CCE4F4:literal"
    ],
    "untrusted": 0,
@@ -60464,7 +60732,7 @@
    "zh": "寄存到哪个盒子？",
    "cap": 16,
    "refs": [
-    "03CEAB8:literal",
+    "03CEAB8:aligned",
     "1CCE4FC:literal"
    ],
    "untrusted": 0,
@@ -60474,7 +60742,7 @@
    "zh": "{F7:00}已经寄存了。",
    "cap": 14,
    "refs": [
-    "03CEAC0:literal",
+    "03CEAC0:aligned",
     "1CCE504:literal"
    ],
    "untrusted": 0,
@@ -60484,7 +60752,7 @@
    "zh": "这个盒子满了。",
    "cap": 14,
    "refs": [
-    "03CEAC8:literal",
+    "03CEAC8:aligned",
     "1CCE50C:literal"
    ],
    "untrusted": 0,
@@ -60494,7 +60762,7 @@
    "zh": "将这只宝可梦放生？",
    "cap": 18,
    "refs": [
-    "03CEAD0:literal",
+    "03CEAD0:aligned",
     "1CCE514:literal"
    ],
    "untrusted": 0,
@@ -60504,17 +60772,26 @@
    "zh": "{F7:00}被放生了。",
    "cap": 12,
    "refs": [
-    "03CEAD8:literal",
+    "03CEAD8:aligned",
     "1CCE51C:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "04182DF": {
+   "zh": "再见，{F7:00}！",
+   "cap": 9,
+   "refs": [
+    "03CEAE0:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "04182EC": {
    "zh": "标记你的宝可梦。",
    "cap": 16,
    "refs": [
-    "03CEAE8:literal",
+    "03CEAE8:aligned",
     "1CCE52C:literal"
    ],
    "untrusted": 0,
@@ -60524,7 +60801,7 @@
    "zh": "你的队伍满了！",
    "cap": 14,
    "refs": [
-    "03CEAF8:literal",
+    "03CEAF8:aligned",
     "1CCE53C:literal"
    ],
    "untrusted": 0,
@@ -60534,7 +60811,7 @@
    "zh": "你现在拿着宝可梦！",
    "cap": 18,
    "refs": [
-    "03CEB00:literal",
+    "03CEB00:aligned",
     "1CCE544:literal"
    ],
    "untrusted": 0,
@@ -60544,7 +60821,7 @@
    "zh": "你要带走哪只？",
    "cap": 14,
    "refs": [
-    "03CEB08:literal",
+    "03CEB08:aligned",
     "1CCE54C:literal"
    ],
    "untrusted": 0,
@@ -60554,7 +60831,7 @@
    "zh": "你不能将蛋放生。",
    "cap": 16,
    "refs": [
-    "03CEB10:literal",
+    "03CEB10:aligned",
     "1CCE554:literal"
    ],
    "untrusted": 0,
@@ -60564,17 +60841,26 @@
    "zh": "继续操作盒子吗？",
    "cap": 16,
    "refs": [
-    "03CEB18:literal",
+    "03CEB18:aligned",
     "1CCE55C:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0418392": {
+   "zh": "{F7:00}回来！",
+   "cap": 8,
+   "refs": [
+    "03CEB20:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "04183A0": {
    "zh": "它在为你担心吗？",
    "cap": 16,
    "refs": [
-    "03CEB28:literal",
+    "03CEB28:aligned",
     "1CCE56C:literal"
    ],
    "untrusted": 0,
@@ -60584,7 +60870,7 @@
    "zh": "请删除邮件。",
    "cap": 12,
    "refs": [
-    "03CEB38:literal",
+    "03CEB38:aligned",
     "1CCE57C:literal"
    ],
    "untrusted": 0,
@@ -60594,7 +60880,7 @@
    "zh": "将道具放回背包。",
    "cap": 16,
    "refs": [
-    "03CEB50:literal",
+    "03CEB50:aligned",
     "1CCE594:literal"
    ],
    "untrusted": 0,
@@ -60604,7 +60890,7 @@
    "zh": "背包已经满了。",
    "cap": 14,
    "refs": [
-    "03CEB58:literal",
+    "03CEB58:aligned",
     "1CCE59C:literal"
    ],
    "untrusted": 0,
@@ -60614,17 +60900,35 @@
    "zh": "把这个道具放回背包吗？",
    "cap": 22,
    "refs": [
-    "03CEB60:literal",
+    "03CEB60:aligned",
     "1CCE5A4:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0418433": {
+   "zh": "正带着{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEB68:aligned"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
+  "0418443": {
+   "zh": "更改为{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEB70:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0418452": {
    "zh": "邮件不能存放！",
    "cap": 14,
    "refs": [
-    "03CEB78:literal",
+    "03CEB78:aligned",
     "1CCE5BC:literal"
    ],
    "untrusted": 0,
@@ -61278,15 +61582,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "04188D8": {
-   "zh": "为流行语。",
-   "cap": 10,
-   "refs": [
-    "15F65B0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "04188F0": {
    "zh": "流行语",
    "cap": 7,
@@ -61461,7 +61756,7 @@
    "zh": "你的选择？",
    "cap": 10,
    "refs": [
-    "03E2464:literal"
+    "03E2464:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -61470,7 +61765,7 @@
    "zh": "的昵称是？",
    "cap": 10,
    "refs": [
-    "03E247C:literal"
+    "03E247C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -61598,15 +61893,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0419140": {
-   "zh": "0收服它们！",
-   "cap": 11,
-   "refs": [
-    "1ECB710:literal"
-   ],
-   "untrusted": 3,
-   "suspect": true
   },
   "041917D": {
    "zh": "天然形成的地下隧道。\n由于尚未开发，\n这里一片漆黑。\n需要带着灯才能通行。",
@@ -63630,6 +63916,51 @@
    "untrusted": 0,
    "suspect": false
   },
+  "041B33D": {
+   "zh": "上升",
+   "cap": 5,
+   "refs": [
+    "045ABEC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B343": {
+   "zh": "下降",
+   "cap": 5,
+   "refs": [
+    "045ABF4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B350": {
+   "zh": "象征",
+   "cap": 5,
+   "refs": [
+    "045ABFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B358": {
+   "zh": "登记",
+   "cap": 5,
+   "refs": [
+    "045AC04:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B361": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "045AC0C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "041B366": {
    "zh": "是否退出聊天？",
    "cap": 14,
@@ -63643,7 +63974,7 @@
    "zh": "在哪里登记文本？",
    "cap": 16,
    "refs": [
-    "045AB70:literal"
+    "045AB70:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63652,7 +63983,7 @@
    "zh": "在这里登记文本？",
    "cap": 16,
    "refs": [
-    "045AB7C:literal"
+    "045AB7C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63661,7 +63992,7 @@
    "zh": "输入正文。",
    "cap": 10,
    "refs": [
-    "045AB88:literal"
+    "045AB88:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63688,7 +64019,7 @@
    "zh": "正在退出聊天……",
    "cap": 15,
    "refs": [
-    "045AB94:literal"
+    "045AB94:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63697,7 +64028,7 @@
    "zh": "队长{F7:00}已经离开\n聊天结束。",
    "cap": 25,
    "refs": [
-    "045ABA0:literal"
+    "045ABA0:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63706,7 +64037,7 @@
    "zh": "登记的文本已经更改。\n是否保存游戏？",
    "cap": 34,
    "refs": [
-    "045ABAC:literal"
+    "045ABAC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63715,7 +64046,7 @@
    "zh": "已经有记录存档了。\n是否覆盖记录？",
    "cap": 32,
    "refs": [
-    "045ABB8:literal"
+    "045ABB8:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63724,7 +64055,7 @@
    "zh": "保存中……\n请不要关闭电源。",
    "cap": 25,
    "refs": [
-    "045ABC4:literal"
+    "045ABC4:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63733,7 +64064,7 @@
    "zh": "{F7:00}保存了游戏。",
    "cap": 14,
    "refs": [
-    "045ABD0:literal"
+    "045ABD0:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63742,7 +64073,7 @@
    "zh": "如果队长离开了，\n聊天就会终止。这样可以吗？",
    "cap": 41,
    "refs": [
-    "045ABDC:literal"
+    "045ABDC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63932,10 +64263,11 @@
    "zh": "登记",
    "cap": 5,
    "refs": [
+    "0456E3C:aligned",
     "045A690:aligned",
     "1DE49BC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041B6FD": {
@@ -63987,8 +64319,8 @@
    "zh": "教会我如何战斗。",
    "cap": 16,
    "refs": [
-    "0479308:literal",
-    "0479340:literal"
+    "0479308:aligned",
+    "0479340:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63997,8 +64329,8 @@
    "zh": "异常状态是什么？",
    "cap": 16,
    "refs": [
-    "0479310:literal",
-    "0479348:literal"
+    "0479310:aligned",
+    "0479348:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64007,8 +64339,8 @@
    "zh": "属性相克是什么？",
    "cap": 16,
    "refs": [
-    "0479318:literal",
-    "0479350:literal"
+    "0479318:aligned",
+    "0479350:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64017,8 +64349,8 @@
    "zh": "我想要收服宝可梦。",
    "cap": 18,
    "refs": [
-    "0479320:literal",
-    "0479358:literal"
+    "0479320:aligned",
+    "0479358:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64027,7 +64359,17 @@
    "zh": "我如何登记一个道具？",
    "cap": 20,
    "refs": [
-    "0479330:literal"
+    "0479330:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B836": {
+   "zh": "取消",
+   "cap": 5,
+   "refs": [
+    "0479338:aligned",
+    "0479360:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64085,15 +64427,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "041BF7F": {
-   "zh": "性的相形的话\n战斗将会变得更艰难。{FB}那么，让我来演示一下\n我所指的意思吧{FB}好咧，那么看好了！{FB}不要把你的视线从\n宝可梦老大哥秀上移开!",
-   "cap": 124,
-   "refs": [
-    "15F310C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "041C0AF": {
    "zh": "那么有没有可能发动一次攻击\n来造成巨大的伤害呢？{FB}如何来判断敌对的宝可梦\n是否会对你的宝可梦构成威胁呢？{FB}它有没有可能拥有\n毁灭性威力的招式呢？{FB}仔细观察双方的属性\n就能占据优势{FB}那么，下次再会！{FB}对了，对于酷属性的宝可梦老大哥来说\n像你一样拥有帅属性的孩子会有极佳{FA}的相性！{FB}记住了，训练师，天天做好事\n将会带来快乐！",
@@ -66307,6 +66640,83 @@
    "untrusted": 0,
    "suspect": false
   },
+  "041EDDD": {
+   "zh": "神秘卡片",
+   "cap": 9,
+   "refs": [
+    "0466DD0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EDEA": {
+   "zh": "神秘新闻",
+   "cap": 9,
+   "refs": [
+    "0466DD8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EDF6": {
+   "zh": "无线通信",
+   "cap": 9,
+   "refs": [
+    "0466DE8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE0D": {
+   "zh": "好友",
+   "cap": 5,
+   "refs": [
+    "0466DF0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE14": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0466DE0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE19": {
+   "zh": "接收",
+   "cap": 5,
+   "refs": [
+    "0466E18:aligned",
+    "0466E38:aligned",
+    "0466E50:aligned",
+    "0466E68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE21": {
+   "zh": "发送",
+   "cap": 5,
+   "refs": [
+    "0466E20:aligned",
+    "0466E58:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE26": {
+   "zh": "丢弃",
+   "cap": 5,
+   "refs": [
+    "0466E28:aligned",
+    "0466E40:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "041EE2B": {
    "zh": "全部删除{FC:13 57}取消{FC:13 A4}确认",
    "cap": 23,
@@ -66315,15 +66725,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "043F208": {
-   "zh": "    肤貉块貉驶貉噪牛驶貉块貉\n",
-   "cap": 30,
-   "refs": [
-    "161BEE8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "043F20C": {
    "zh": "肤貉块貉驶貉噪牛驶貉块貉\n",
@@ -66684,15 +67085,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "044555B": {
-   "zh": "大的翅膀\n翱翔于天空，\n一天不落地都没问题。",
-   "cap": 41,
-   "refs": [
-    "1569288:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "04455C3": {
    "zh": "大量生存在草原上，\n靠摇晃舌头\n感知四周的危险。",
    "cap": 45,
@@ -66828,15 +67220,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0445998": {
-   "zh": "处的声音的时候\n耳朵便会像翅膀一样扇动，\n如果生气的话会发射毒针。",
-   "cap": 63,
-   "refs": [
-    "11E8E00:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "04459AF": {
    "zh": "像翅膀一样扇动，\n如果生气的话会发射毒针。",
@@ -67064,15 +67447,6 @@
    "cap": 34,
    "refs": [
     "17D9FA0:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0445F56": {
-   "zh": "的成长而长大。",
-   "cap": 14,
-   "refs": [
-    "0E9513C:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -67755,15 +68129,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0447333": {
-   "zh": "在地下以时速80公里的速度\n边挖边寻找猎物。",
-   "cap": 41,
-   "refs": [
-    "15AC510:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0447352": {
    "zh": "寻找猎物。",
@@ -68981,15 +69346,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0449777": {
-   "zh": "始用\n吵闹的叫声合唱。",
-   "cap": 21,
-   "refs": [
-    "1472838:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "04497BB": {
    "zh": "身体十分轻盈，\n为了不被吹走\n而紧紧地抓着地面。",
    "cap": 45,
@@ -69094,15 +69450,6 @@
    "cap": 59,
    "refs": [
     "17DB494:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0449ABB": {
-   "zh": "保护自己。",
-   "cap": 10,
-   "refs": [
-    "155B514:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -69702,15 +70049,6 @@
    "cap": 47,
    "refs": [
     "17DBA34:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "044AA23": {
-   "zh": "，后会发现\n自己渐渐连站都站不住了。",
-   "cap": 34,
-   "refs": [
-    "14DB974:literal"
    ],
    "untrusted": 0,
    "suspect": true
@@ -71453,15 +71791,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "044DD07": {
-   "zh": "会出现在人类面前。\n因此被误解为带来灾难的宝可梦。",
-   "cap": 48,
-   "refs": [
-    "0FE0C94:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "044DD27": {
    "zh": "来灾难的宝可梦。",
    "cap": 16,
@@ -71614,15 +71943,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "044E0BF": {
-   "zh": "\n岩石的缝隙中生长的海草。",
-   "cap": 25,
-   "refs": [
-    "0408390:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "044E109": {
    "zh": "从一亿年前开始一直没有\n改变过形态的宝可梦。\n发现于深海调查中。",
@@ -71837,15 +72157,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "044E748": {
-   "zh": "姿态\n就像流星一样。",
-   "cap": 19,
-   "refs": [
-    "15594D4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "044E785": {
    "zh": "据说不论什么愿望\n都能够实现。1000年之中\n只会醒来七天的时间。",
@@ -73060,15 +73371,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "04556F8": {
-   "zh": " 小桌子",
-   "cap": 8,
-   "refs": [
-    "000014C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0456698": {
    "zh": "滓倒    ",
    "cap": 9,
@@ -73365,7 +73667,7 @@
    "zh": "你停止加入。{FB}",
    "cap": 13,
    "refs": [
-    "0457778:literal"
+    "0457778:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -73707,7 +74009,7 @@
    "zh": "作为自我介绍，我会展示\n给你我的训练师卡片。",
    "cap": 42,
    "refs": [
-    "0458110:literal"
+    "0458110:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -73929,14 +74231,12 @@
    "zh": "了那个技能？\n真是好办法！{FB}",
    "cap": 25,
    "refs": [
-    "104BA38:literal",
-    "104BA44:literal",
     "104BDBC:literal",
     "105BF98:literal",
     "105BFBC:literal",
     "105C08C:literal"
    ],
-   "untrusted": 18,
+   "untrusted": 20,
    "suspect": true
   },
   "0458644": {
@@ -74464,6 +74764,62 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0459344": {
+   "zh": "对战",
+   "cap": 5,
+   "refs": [
+    "0456E04:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "045934C": {
+   "zh": "聊天",
+   "cap": 5,
+   "refs": [
+    "0456E0C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459354": {
+   "zh": "问候",
+   "cap": 5,
+   "refs": [
+    "0456DFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459360": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0456E14:aligned",
+    "0456E4C:aligned",
+    "0456EFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459368": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0456F74:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459370": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "0456E44:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0459394": {
    "zh": "单人对战",
    "cap": 9,
@@ -74668,7 +75024,7 @@
    "zh": "取消读取卡片。",
    "cap": 14,
    "refs": [
-    "045960C:literal"
+    "045960C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79291,7 +79647,7 @@
    "zh": "感谢使用\n神秘礼物系统。{FB}因为你持有神秘卡片，\n你可以参与一项在{FA}宝可梦商店进行的调查。{FB}通过这些调查你可以\n训练师们来到七岛。{FB}…我来给你一个\n用于调查的密码吧：{FB}“GIVE ME\nAWESOME TRAINER”{FB}把这个写在调查上\n并发送至无线通讯系统。",
    "cap": 216,
    "refs": [
-    "0489050:literal"
+    "0489050:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79300,7 +79656,7 @@
    "zh": "似乎是在枯叶市港口才能使用的。{FB}为什么不试一试来\n看看这到底有什么用。",
    "cap": 67,
    "refs": [
-    "048950C:literal"
+    "048950C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79309,28 +79665,10 @@
    "zh": "感谢使用\n神秘礼物系统。{FB}你是{FD:01}吧？\n这张船票是给你的。",
    "cap": 51,
    "refs": [
-    "04896BC:literal"
+    "04896BC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0489900": {
-   "zh": "究竟？",
-   "cap": 6,
-   "refs": [
-    "15D70BC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "050077F": {
-   "zh": "檩Z6a铲",
-   "cap": 8,
-   "refs": [
-    "0F04E4C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "05453B3": {
    "zh": "浇",
@@ -79339,16 +79677,6 @@
     "10855DC:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "055577B": {
-   "zh": "等",
-   "cap": 3,
-   "refs": [
-    "0A4C9D4:aligned",
-    "0C911B8:aligned"
-   ],
-   "untrusted": 1,
    "suspect": false
   },
   "06FBF58": {
@@ -80051,15 +80379,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "07AA419": {
-   "zh": "历史长河之中...{FB}",
-   "cap": 17,
-   "refs": [
-    "15656F4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "07AA42A": {
    "zh": "时拉比挥洒出\n充满生命力的光芒，一点一滴\n地渗透进深渊的黑暗中。{FB}那股温暖的力量，抚平了\n洛奇亚心中那道因人类而生、\n深不见底的伤痕。{FB}漆黑的枷锁分崩离析，洛奇亚\n终于重新敞开心扉，恢复了\n原本那纯白无暇的姿态。{FB}",
    "cap": 198,
@@ -80149,15 +80468,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "07AADDF": {
-   "zh": "。{FB}请务必注意，切勿将\n本作中的任何同人设定、\n人物关系及机制代入或\n混淆至宝可梦官方\n设定中。{FB}第二，由于本作在剧情和\n设定上存在较多深度的\n彩蛋与联动，\n极不建议未接触过\n宝可梦系列官方正作的\n玩家将本作作为\n入坑首选。{FB}为获得最完整的\n剧情共鸣与情感体验，\n强烈建议您在游玩本作前，\n至少体验过以下\n官方作品：\n“宝可梦 金/银/水晶”\n或“宝可梦 心金/魂银”\n“宝可梦 钻石/珍珠/白金”{FB}此外，若您曾通关过\n“宝可梦传说 阿尔宙斯”、\n“宝可梦传说 Z-A”以及\n“宝可梦 欧米伽红宝石/\n阿尔法蓝宝石”，将会对\n本作的剧情有\n更深层次的理解。{FB}第三，“宝可梦 水银”\n为完全免费的非盈利性\n同人交流作品，\n仅供宝可梦爱好者\n学习与娱乐，\n严禁用于任何商业\n牟利行为。{FB}如果您在获取本作的\n任何渠道中支付了金钱，\n说明您已经遭遇了诈骗。{FB}第四，为确保游戏底层\n代码的稳定运行，\n请务必使用以下经过\n充分测试的推荐模拟器：\nPC端：mGBA\nAndroid端：\nMy Boy！ 或 Pizza Boy\niOS端：Delta{FB}烧录卡：EZ0烧录卡\n警告：强烈不建议使用\nVBA(VisualBoyAdvance)\n等其他老旧或兼容性欠佳的\n模拟器游玩，\n否则极易出现画面撕裂\n或卡死现象。{FB}第五，在游玩过程中，\n请务必养成勤存档的\n好习惯，且必须使用游戏内\n含的正常存档功能\n(即电池存档)。\n强烈不建议过度依赖\n模拟器的“即时存档\n(Save States)”功能。{FB}绝对禁止随意修改设备的\n系统时间。\n以上违规操作极易导致\n游戏内存数据读取混乱，\n进而引发不可控的恶性BUG\n甚至造成永久性坏档。{FB}第六，目前在引擎优化下，\n在上述提到的模拟器中，\n除Delta模拟器外，\n已全面支持BGM\n(背景音乐)随游戏倍速\n同步变化的功能。\n注，此功能需通过模拟器的\n倍速设置触发，{FB}单纯长按键盘空格键加速\n无法实现BGM同步。\n我们在本作的音乐编排上\n倾注了大量的心血，\n请尽情享受旅途中的\n音乐吧！{FB}当您按下START键，\n即视为您已阅读并知悉上述\n所有注意事项。\n祝您在“宝可梦 水银”的\n世界中，度过一段\n难忘的旅程!",
-   "cap": 1557,
-   "refs": [
-    "071AE98:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "07AB3F4": {
    "zh": "乔伊小姐：哎呀！\n大家快看...{FA}我们的样子也变了！{FB}君莎小姐：制服的细节\n全都不见了，{FA}变成了一个个小方格...{FB}须木佐：这个\n我最喜欢了啊！！{FA}Suki！ SuKi！{FA}Daisuki！！！{FB}胡桃：看来，这套\n不可思议的服装{FB}彻底唤醒了\n所有人心底的记忆！{FB}乔伊小姐：毫无悬念！{FB}君莎小姐：这场\n比赛的冠军！{FB}胡桃：就是带我们\n找回初心的你！{FB}须木佐：这个\n我最喜欢了啊！{FB}妈妈：恭喜你！{FB}岩铁：恭喜你，小鬼！{FB}千惠：恭喜啦!好厉害!{FB}露营少年(林克)：恭喜!{FB}波加曼人：波加波加!\n(恭喜!){FB}小茜：恭喜你哦!{FB}短裤少年：恭喜!\n(这句文本也是复用的){FB}谢谢大家！{FB}在所有人的\n祝福声中，{FB}恭喜！你赢得了满金\nCosplay大赛冠军！{FB} ",
@@ -81519,15 +81829,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "07B4740": {
-   "zh": "，真是比\n书本上写的要有趣一万倍啊！{FA}我要赶紧把这个课题写成论文！",
-   "cap": 62,
-   "refs": [
-    "07B40EC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "07B474A": {
    "zh": "本上写的要有趣一万倍啊！{FA}我要赶紧把这个课题写成论文！",
    "cap": 52,
@@ -81751,15 +82052,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "07B5110": {
-   "zh": "之塔、灯塔和\n埋藏之塔是他们已经去过的地方……{FB}所以，他们接下来很有可能\n前往铃铛塔、烧焦塔和广播塔……",
-   "cap": 95,
-   "refs": [
-    "1442D00:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "07B5171": {
    "zh": "嗯……全到齐了啊！{FB}龙穴发生的事……\n我都听松叶说了。{FB}……总之，\n接下来我们要做的……{FB}就是防止银色羽毛\n落入火箭队的手里。",
@@ -82508,15 +82800,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "07B807F": {
-   "zh": "传说中的宝可梦。{FB}…… …… …… ……{FB}走吧，\n我现在充满了灵感！{FA}马上就能把那套美极套装做出来！",
-   "cap": 82,
-   "refs": [
-    "1FDCB04:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "07B810E": {
    "zh": "银色宝可梦示意\n{FD:01}和店员坐到它的背上。{FB}准备带{FD:01}\n和店员回到满金市。",
    "cap": 64,
@@ -82871,15 +83154,6 @@
    "cap": 128,
    "refs": [
     "07B8D8B:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "07B93E0": {
-   "zh": "缠耔颔嫡耒\n远处传来了一阵悠扬的笛声……",
-   "cap": 38,
-   "refs": [
-    "07B8D6C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -84402,15 +84676,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "07BDE57": {
-   "zh": "多多努力啊，不要松懈！",
-   "cap": 21,
-   "refs": [
-    "1FDC034:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "07BDE85": {
    "zh": "你能到这儿来\n就证明你有相当的实力！{FB}我也会拿出全力\n来应战的！",
@@ -86026,15 +86291,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "08F0404": {
-   "zh": "一起吃了！{FB}虽然不知道这东西能不能吃...\n但真的很好吃。{FB}你自己保重！{FB}哔... ... ...{FB} ",
-   "cap": 80,
-   "refs": [
-    "0783328:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "08F0454": {
    "zh": "喂？我是康明...{FB}呀，你好{FB}！昨天我在孩子的面前\n让鲤鱼王给逃走了，{FA}我当时很失望，{FA}结果他给了我个精灵球！{FB}我感到很欣慰。{FB}你有空了也给你的妈妈\n多打打电话吧！{FB}哔... ... ...{FB} ",
    "cap": 162,
@@ -86144,15 +86400,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "08F085C": {
-   "zh": "来一定是有非凡的才能啊。{FB}下次再聊吧。{FB}哔... ... ...{FB} ",
-   "cap": 52,
-   "refs": [
-    "0796468:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "08F0890": {
    "zh": "喂？我是佳织...{FB}你现在有时间吗？{FB}我现在好无聊啊，\n如果你有空的话，{FA}就和我来一场对战吧？{FB}我在32号道路，\n到了就跟我打个招呼吧。{FB}哔... ... ...{FB} ",
    "cap": 135,
@@ -86240,15 +86487,6 @@
    "cap": 143,
    "refs": [
     "08FFCCC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "08F0B37": {
-   "zh": "动态！{FB}满金地下通道发生尴尬意外。\n药草粉末飘进隔壁美容室，{FA}导致正在理发的长尾怪手{FA}连打喷嚏把假发全吹飞了。",
-   "cap": 103,
-   "refs": [
-    "0FD9B71:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -86739,15 +86977,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "08F2A93": {
-   "zh": "%收听今日新闻频道！\n带您纵览宝可梦最新动态！{FB}神奥地下通道的探险活动\n正在年轻群体中风靡！{FB}每天都有无数的化石\n和神秘玉石{FA}被充满干劲的寻宝者挖出！",
-   "cap": 140,
-   "refs": [
-    "0FE769C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "08F2B1F": {
    "zh": "欢迎收听今日新闻频道！\n为您播报今日的焦点快讯！{FB}天文学家在神奥帷幕市的\n陨石坑中，{FA}提取到了未知的宇宙辐射波。{FB}专家猜测，\n这可能与能改变形态的{FA}宇宙宝可梦有关。",
    "cap": 152,
@@ -86801,15 +87030,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "08F2E81": {
-   "zh": "，\n已在百代市找到了正当工作。",
-   "cap": 28,
-   "refs": [
-    "0EF8B9C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "08F2E9D": {
    "zh": "欢迎收听今日新闻频道！\n为您带来最前沿的地区速递！{FB}娜姿馆主的超能力表演秀\n门票在一分钟内售罄！{FB}观众们纷纷表示，\n想被她用念力变成洋娃娃{FA}亲身体验一下。",
@@ -90231,15 +90451,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "08FA0DF": {
-   "zh": "托我替他送回信.\n收件人正在31号道路旅行.",
-   "cap": 40,
-   "refs": [
-    "07652E4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "08FA107": {
    "zh": "替警卫送信",
@@ -94238,15 +94449,6 @@
    "untrusted": 0,
    "suspect": true
   },
-  "08FF888": {
-   "zh": "会怎样看待这个答案.",
-   "cap": 20,
-   "refs": [
-    "11FB594:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "08FF89C": {
    "zh": "长老的答案",
    "cap": 11,
@@ -94624,7 +94826,7 @@
     "17DAB68:aligned"
    ],
    "untrusted": 1,
-   "suspect": false
+   "suspect": true
   },
   "09B0000": {
    "zh": "降到地面使身体休\n息，回复自己最大\nHP的一半。",
@@ -94760,15 +94962,6 @@
    ],
    "untrusted": 1,
    "suspect": false
-  },
-  "09B0308": {
-   "zh": "成的锐爪\n劈开对手。容易击\n中要害。",
-   "cap": 33,
-   "refs": [
-    "11E918C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09B0330": {
    "zh": "蓄力攻击，若在对\n手之后攻击\n则威力翻倍。",
@@ -95112,15 +95305,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09B0AA7": {
-   "zh": "对手。给予\n物理伤害。",
-   "cap": 20,
-   "refs": [
-    "1553A58:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09B0AC0": {
    "zh": "用自己的身体狂舞\n挥打，给予\n对手伤害。",
@@ -95910,15 +96094,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09C216F": {
-   "zh": "喳札诩诩诩 \n",
-   "cap": 13,
-   "refs": [
-    "09C1E18:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
   },
   "09C2372": {
    "zh": "喂，{FD:01}！",
@@ -97375,15 +97550,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09C69DC": {
-   "zh": "诩诩诤噪\n",
-   "cap": 10,
-   "refs": [
-    "09C663C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09C6CDD": {
    "zh": "  琴音",
@@ -100892,15 +101058,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09D0741": {
-   "zh": "树了吗？{FB}听说这是缘朱市多年前\n赠予桔梗市的枫树，{FA}也是两座城市间友谊的象征。",
-   "cap": 73,
-   "refs": [
-    "077FA34:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09D07E0": {
    "zh": "哟！\n未来的冠军！{FA}请收下这个！",
    "cap": 28,
@@ -104285,15 +104442,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09D8B17": {
-   "zh": "缢哓漯遘\n",
-   "cap": 10,
-   "refs": [
-    "09D88D8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09D8B5B": {
    "zh": "嗷嗷！",
    "cap": 6,
@@ -105887,15 +106035,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09DDD22": {
-   "zh": "\n那就让我看看你的实力吧！",
-   "cap": 25,
-   "refs": [
-    "1E57854:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09DDD3D": {
    "zh": "……哼！\n这些精灵真没用。{FB}……你要清楚，你能赢\n是因为我的精灵太弱了。",
    "cap": 62,
@@ -107095,11 +107234,11 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09E0146": {
-   "zh": "框祷",
-   "cap": 5,
+  "09E014B": {
+   "zh": "满金百货\n您想要的应有尽有！",
+   "cap": 27,
    "refs": [
-    "161ABFF:message"
+    "09E0143:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -108713,15 +108852,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09E2899": {
-   "zh": "爱宝可梦\n不给别人看看吗？",
-   "cap": 25,
-   "refs": [
-    "1589748:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09E28B4": {
    "zh": "输了也没关系。",
    "cap": 14,
@@ -109897,15 +110027,6 @@
    "cap": 98,
    "refs": [
     "09E699F:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "09E6C4D": {
-   "zh": "踪踪踪踪\n",
-   "cap": 10,
-   "refs": [
-    "09E692C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -112586,15 +112707,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09F019E": {
-   "zh": "然后另一个是{FA}铃铛塔的传说……{FB}我们在缘朱市\n一直在传承着{FA}这个铃铛塔的传说。",
-   "cap": 72,
-   "refs": [
-    "07871F4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09F01E7": {
    "zh": "闪烁着彩虹色的宝可梦\n在高塔的顶端优雅地舞动……{FB}闪烁着银色光芒的宝可梦\n在大海的潮旋处沉睡……{FB}我怎么也联想不到一块。",
    "cap": 112,
@@ -112708,15 +112820,6 @@
    "cap": 131,
    "refs": [
     "09F047E:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "09F0562": {
-   "zh": ">>{FB}吃掉在大海或河川\n捕获的宝可梦后，{FA}将其骨头清洗干净，{FA}谨慎地放回水中。{FB}这样的话，\n宝可梦会重获肉身，{FA}返回这个世界。",
-   "cap": 112,
-   "refs": [
-    "0B2FE5D:message"
    ],
    "untrusted": 0,
    "suspect": false
@@ -113093,15 +113196,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09F1403": {
-   "zh": "地球这个称呼\n逐渐被弃用，{FB}而称之为禁忌之地:\n逝去的耶路撒冷。",
-   "cap": 59,
-   "refs": [
-    "091B764:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09F1466": {
    "zh": "有本名为<<最后的忍者>>的书……\n要读读看吗？",
@@ -113730,15 +113824,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09F2D5B": {
-   "zh": "猕e\n能不能代替我去买药来？",
-   "cap": 26,
-   "refs": [
-    "09F2B28:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09F2D9D": {
    "zh": "……那个，谢谢你！\n……那就拜托你了。",
@@ -114961,15 +115046,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09F4F4B": {
-   "zh": "福遗迹和{FA}随意镇的遗迹有什么区别呢？",
-   "cap": 35,
-   "refs": [
-    "09F4BD0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09F4F70": {
    "zh": "山梨博士",
    "cap": 9,
@@ -115691,15 +115767,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09F719D": {
-   "zh": "诩诨踪踪\n",
-   "cap": 10,
-   "refs": [
-    "09F8F84:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
-  },
   "09F71AB": {
    "zh": "原来如此，\n是选择了这只精灵吗？{FA}和它一起去冒险，{FA}去呼吸城都地区{FA}这片土地上的空气吧！{FB}听我说，{FD:01}！\n你今后也会遇到{FA}各种各样的宝可梦，{FA}结识许许多多的人！{FB}这些邂逅会带给你\n许多激动和兴奋，{FA}我希望你从心底享受这些！",
    "cap": 200,
@@ -115799,15 +115866,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09F754D": {
-   "zh": "看来，来城都真是一个正确的决定！",
-   "cap": 31,
-   "refs": [
-    "09F6574:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09F75D0": {
    "zh": "2楼 货品齐全\n训练家超市。",
@@ -116024,15 +116082,6 @@
     "09F74EB:loadpointer"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "09F7CC5": {
-   "zh": "喳\n小宝宝和宝可梦的关系\n可好了！{FB}小宝宝睡午觉的时候，\n宝可梦也会依偎在身边一起睡呢。",
-   "cap": 82,
-   "refs": [
-    "09F7CAC:literal"
-   ],
-   "untrusted": 4,
    "suspect": false
   },
   "09F7CC8": {
@@ -117642,15 +117691,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09FD886": {
-   "zh": "2只宝可梦过来！",
-   "cap": 15,
-   "refs": [
-    "15ADBFC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09FD978": {
    "zh": "如果像你这么漂亮的人\n愿意当我的模特，{FA}我就一定能画出杰作！",
    "cap": 57,
@@ -118379,15 +118419,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09FF00C": {
-   "zh": "耐心等待。\n我们已经把你的宝可梦{FA}恢复到最佳状态了。",
-   "cap": 49,
-   "refs": [
-    "14C4E90:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "09FF03F": {
    "zh": "啊{F9:E7}{F9:D3}一边是害怕被发现的\n紧张感和刺激感，另一边又是{FA}这种背德行为所带来的快感{F9:E7}{F9:D3}{FB}这种感觉，真是太棒了呢……\n要沉沦进去了呢{F9:E7}{F9:D3}",
@@ -119329,15 +119360,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA0B08": {
-   "zh": "调试中，{FA}暂未投入使用。",
-   "cap": 22,
-   "refs": [
-    "1562D3C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AA0B29": {
    "zh": "满金大厦",
@@ -120303,15 +120325,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA2D03": {
-   "zh": "，你给我去那边！",
-   "cap": 15,
-   "refs": [
-    "16988A8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AA2D20": {
    "zh": "欢迎光临\n满金市广播塔！",
@@ -121384,15 +121397,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AA5403": {
-   "zh": "\n我还有很多东西不知道，{FA}但我的知识还是比你多得多！",
-   "cap": 49,
-   "refs": [
-    "11DC5E6:trainerbattle"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0AA5436": {
    "zh": "嗯嗯嗯？",
    "cap": 8,
@@ -121453,24 +121457,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AA5555": {
-   "zh": "它！{FA}这是超喜欢俱乐部的规矩！",
-   "cap": 28,
-   "refs": [
-    "029E73C:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
-  "0AA555B": {
-   "zh": "是超喜欢俱乐部的规矩！",
-   "cap": 22,
-   "refs": [
-    "1E57148:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AA5573": {
    "zh": "小宝可梦！",
    "cap": 10,
@@ -121497,15 +121483,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA55EA": {
-   "zh": " 点数，\n紧紧抓住宝可计步器跑了半天……{FA}都喘不过气来了！",
-   "cap": 52,
-   "refs": [
-    "11F5E20:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AA5629": {
    "zh": "哈、哈……哈……{FB}为了获得经验值，\n紧紧拿着精灵球PLUS跑了半天……{FA}都喘不过气来了！",
@@ -121578,15 +121555,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA580C": {
-   "zh": "!\n那该有多好啊。",
-   "cap": 16,
-   "refs": [
-    "11DE14C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AA5835": {
    "zh": "不管对手是什么宝可梦，\n我都预习好了！",
@@ -121830,15 +121798,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA624B": {
-   "zh": "能抓到{FA}比较强的虫宝可梦就行了。{FA}要参加吗？",
-   "cap": 41,
-   "refs": [
-    "1E7FF44:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AA62E4": {
    "zh": "自出生起\n就只抓虫宝可梦的我{FA}怎么可能会输！",
@@ -122579,15 +122538,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AA8555": {
-   "zh": "<9筷W虫大会中\n不允许使用菜单！",
-   "cap": 30,
-   "refs": [
-    "1561C54:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0AA8558": {
    "zh": "捕虫大会中\n不允许使用菜单！",
    "cap": 27,
@@ -122679,15 +122629,6 @@
    "untrusted": 0,
    "suspect": true
   },
-  "0AA8884": {
-   "zh": "前是一名国际刑警。{FB}你是叫{FD:01}吧？\n是来挑战道馆的吗？{FB}很抱歉，由于现在正在调查\n镇上呆呆兽失踪的事件，{FA}道馆暂时不对挑战者开放。",
-   "cap": 118,
-   "refs": [
-    "0E29150:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AA88FC": {
    "zh": "那么，请问你有意向帮忙\n调查这件事吗？",
    "cap": 36,
@@ -122721,10 +122662,9 @@
    "zh": "这里是浅葱市的灯塔{FB}别名又称作\n闪烁的灯塔",
    "cap": 41,
    "refs": [
-    "0AA8821:loadpointer",
-    "0CF8B50:literal"
+    "0AA8821:loadpointer"
    ],
-   "untrusted": 0,
+   "untrusted": 1,
    "suspect": false
   },
   "0AA8BF4": {
@@ -123178,17 +123118,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AAAA01": {
-   "zh": "量会增强，{FA}但是会更晚学会技能。",
-   "cap": 30,
-   "refs": [
-    "1E6A574:literal",
-    "1E6AA94:literal",
-    "1E93BF8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AAAA2A": {
    "zh": "什么什么？\n火箭队复活了？{FB}我在愤怒湖\n见到了一个满身漆黑的家伙……",
    "cap": 62,
@@ -123216,15 +123145,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AAAA89": {
-   "zh": "策幅&那里\n去看看暴鲤龙的舞蹈吧。",
-   "cap": 32,
-   "refs": [
-    "14B2FC0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AAAAA1": {
    "zh": "舞蹈吧。",
    "cap": 8,
@@ -123242,15 +123162,6 @@
    ],
    "untrusted": 1,
    "suspect": false
-  },
-  "0AAAADB": {
-   "zh": "定也会很高兴吧！",
-   "cap": 16,
-   "refs": [
-    "1668F70:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
   },
   "0AAAB85": {
    "zh": "啊，这样啊……",
@@ -123581,24 +123492,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AABB66": {
-   "zh": "e所见，\n在这个冰封的道场中{FA}他能使出令每个对手颤抖的攻击！{FB}做好被冰冻的觉悟了吗？\n啊！我错了！{FA}你能燃烧自己不被冰封吗！",
-   "cap": 113,
-   "refs": [
-    "157F934:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0AABBBA": {
-   "zh": "S了！{FA}你能燃烧自己不被冰封吗！",
-   "cap": 29,
-   "refs": [
-    "1E554D8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AABBD9": {
    "zh": "虽然柳伯很厉害，\n不过你也很厉害啊！{FB}这是一场超越了\n年龄限制的炽热之战！",
@@ -124032,15 +123925,6 @@
     "0AAC383:loadpointer",
     "0AAC396:loadpointer",
     "0AAD4D6:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0AACC44": {
-   "zh": "嗯，正好也准备好了，\n让我们看看有什么线索吧…{FB}皮丘告诉我，\n跟它一起玩耍的另一只皮丘，{FB}看见了空地上有一阵扭曲\n便跑过去了看了一下，{FA}然后就消失不见了……{FB}随着超自然现象而消失不见吗…？\n我听说过一个叫阿露福遗迹的地方，{FA}那里时常会有超自然现象发生。{FA}或许去那里可以找到什么线索？{FB}嗯……时间不早了，\n我得先走了，再见！",
-   "cap": 293,
-   "refs": [
-    "15F83E8:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -124572,24 +124456,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AAF536": {
-   "zh": "荟\n野{FC:63}!框厕",
-   "cap": 13,
-   "refs": [
-    "0AB7CC8:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
-  },
-  "0AAF7DB": {
-   "zh": "札诩诩诩\n",
-   "cap": 10,
-   "refs": [
-    "0AAF66C:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "0AAF7E5": {
    "zh": "哇{F9:D3}太有趣了！\n为了感谢你让我这么开心，{FA}送给你一个好东西。",
    "cap": 56,
@@ -124924,15 +124790,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AB3B00": {
-   "zh": "市里！{FA}拜托你啦！ ",
-   "cap": 17,
-   "refs": [
-    "14B7880:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AB3BAD": {
    "zh": "喂！\n小孩子做什么啊！？{FA}滚开！",
@@ -125485,15 +125342,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ABA431": {
-   "zh": "。{FA}再见啦，祝你旅途愉快！",
-   "cap": 23,
-   "refs": [
-    "154D830:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0ABB0EF": {
    "zh": "{FC:06 00}任务完成:<红色火球之谜>",
    "cap": 27,
@@ -125508,15 +125356,6 @@
    "cap": 24,
    "refs": [
     "0AB98CD:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0ABB9B7": {
-   "zh": "喳喳喳喳\n\n\n喳\n",
-   "cap": 15,
-   "refs": [
-    "0ABB77C:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -125769,15 +125608,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ABCF7E": {
-   "zh": " 锂锃锆甬\n你好，\n{FD:01}是吧？{FB}这是你妈妈寄给你的生日礼物，\n生日快乐啊朋友。{FA}请收下吧！",
-   "cap": 78,
-   "refs": [
-    "0ABC9D0:literal"
-   ],
-   "untrusted": 2,
-   "suspect": false
-  },
   "0ABCF88": {
    "zh": "你好，\n{FD:01}是吧？{FB}这是你妈妈寄给你的生日礼物，\n生日快乐啊朋友。{FA}请收下吧！",
    "cap": 68,
@@ -126015,16 +125845,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ABFC1B": {
-   "zh": "踪踪踪踪\n唔……\n我想想……{FB}我应该去过服装店，\n还去过百货大楼……{FB}除此之外没有\n什么特别有印象的地点了……",
-   "cap": 96,
-   "refs": [
-    "0ABF1F8:literal",
-    "0D564A4:literal"
-   ],
-   "untrusted": 3,
-   "suspect": false
-  },
   "0ABFC24": {
    "zh": "唔……\n我想想……{FB}我应该去过服装店，\n还去过百货大楼……{FB}除此之外没有\n什么特别有印象的地点了……",
    "cap": 87,
@@ -126213,15 +126033,6 @@
     "0ABF080:loadpointer"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "0AC128A": {
-   "zh": " 锂锃锆秭\n看……看来这位幸运观众\n有些不知所措呢……{FB}皮皮，请……请\n把幸运观众带上来吧！\n",
-   "cap": 81,
-   "refs": [
-    "0ABC9E0:literal"
-   ],
-   "untrusted": 2,
    "suspect": false
   },
   "0AC1294": {
@@ -127284,15 +127095,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AE0706": {
-   "zh": "灵。\n告诉你，在海里游泳可不容易。",
-   "cap": 31,
-   "refs": [
-    "078A660:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AE0727": {
    "zh": "训练师培养的精灵\n真的非常强大…",
@@ -128595,15 +128397,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AE3965": {
-   "zh": "诨\n一些宝可梦玩偶……",
-   "cap": 20,
-   "refs": [
-    "0AE3958:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0AE3968": {
    "zh": "一些宝可梦玩偶……",
    "cap": 17,
@@ -129661,15 +129454,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AE7874": {
-   "zh": "{FC:03 09}刺刺耳皮丘\n钻进了{FD:01}的精灵球！",
-   "cap": 32,
-   "refs": [
-    "0AE735C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AE7896": {
    "zh": "原来如此，原来如此，\n看来它交到了{FA}很多好朋友啊！",
    "cap": 46,
@@ -129678,24 +129462,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AE78AA": {
-   "zh": "H来它交到了{FA}很多好朋友啊！",
-   "cap": 26,
-   "refs": [
-    "0AE7348:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
-  "0AE78B7": {
-   "zh": "轻<好朋友啊！",
-   "cap": 13,
-   "refs": [
-    "0AE7320:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AE78C6": {
    "zh": "哦哦，对了！\n把精灵球当做礼物送给{FA}年轻的宝可梦训练家吧！{FB}这是老夫还是宝可梦训练家时\n用过的球啊！{FB}不用担心不用担心，\n这还能用的啦！",
@@ -130736,15 +130502,6 @@
    "cap": 128,
    "refs": [
     "0AB7289:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0AEAABF": {
-   "zh": "我们很遥远的地方。{FB}极巨化则是在伽勒尔地区\n发生的宝可梦巨大化的现象。{FB}在伽勒尔地区，\n极巨化对战是一件非常流行的事。",
-   "cap": 111,
-   "refs": [
-    "1622FD2:message"
    ],
    "untrusted": 0,
    "suspect": false
@@ -132527,15 +132284,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AF0103": {
-   "zh": "的事{F9:D3}\n以后再说吧。{FA}我们先出发了，再见！",
-   "cap": 38,
-   "refs": [
-    "167174C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0AF012A": {
    "zh": "OKOK{F9:D3}{FD:02}月{FD:03}日是吧？\n了解了，谢谢你。{FB}对了，还有这个…\n这是某人委托我给你的。",
    "cap": 72,
@@ -132672,15 +132420,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AF07B0": {
-   "zh": "员了！{FB}我把这个笔记给你吧，\n抓到的未知图腾会自动记录起来，{FA}非常方便！",
-   "cap": 66,
-   "refs": [
-    "0AF0690:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AF0886": {
    "zh": "{FC:06 00}接受任务:<阿露福遗迹之谜>",
@@ -133126,15 +132865,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AF203F": {
-   "zh": "谗凹翟 é谗凹翟 é谗凹翟 é谗凹翟 \n",
-   "cap": 33,
-   "refs": [
-    "0AF1F00:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AF2055": {
    "zh": " é谗凹翟 \n",
@@ -133687,15 +133417,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AF3529": {
-   "zh": "完好无损地回收了！{FB}辛苦你了，\n这是给你的报酬。",
-   "cap": 44,
-   "refs": [
-    "1599BD4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0AF358A": {
    "zh": "请问是看见了我的委托吗？\n事情是这样的，{FB}图书馆近期\n有很多逾期未归还的图书，{FA}可是我现在也抽不开身，{FA}请问你可以帮我去向{FA}借阅者们回收这些逾期图书吗？",
@@ -134454,15 +134175,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AF6BBA": {
-   "zh": "踪踪踪诩诨\n",
-   "cap": 12,
-   "refs": [
-    "0AF64A8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AF7069": {
    "zh": "  百合",
    "cap": 7,
@@ -134614,10 +134326,9 @@
    "zh": "茗茗茗茗\n",
    "cap": 10,
    "refs": [
-    "0AF6C19:loadpointer",
-    "0AF6D58:literal"
+    "0AF6C19:loadpointer"
    ],
-   "untrusted": 0,
+   "untrusted": 1,
    "suspect": false
   },
   "0AF7478": {
@@ -136839,15 +136550,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AFED32": {
-   "zh": "得很开心呢{F9:D3}！{FA}毕竟认识了不少新的朋友……{FA}这一切都多亏了你！",
-   "cap": 57,
-   "refs": [
-    "0AFE9FC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0AFED6D": {
    "zh": "嗯？\n似乎有什么动静……",
    "cap": 21,
@@ -138766,15 +138468,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0D57CBB": {
-   "zh": "馆的徽章！{FB}没想到吧，\n总算是领先你一回了！{FB}很厉害吧？\n快来夸我吧？{FB}…… …… …… ……\n…… …… …… ……{FB}既然都拿到了徽章，\n那么…就让我们来一场对战吧！",
-   "cap": 131,
-   "refs": [
-    "1EA478C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0D57D08": {
    "zh": "…… …… ……{FB}既然都拿到了徽章，\n那么…就让我们来一场对战吧！",
    "cap": 54,
@@ -139070,15 +138763,6 @@
    "cap": 44,
    "refs": [
     "0D58B5B:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0D58DED": {
-   "zh": "踪 \n\n可恶，\n反胜为败了……",
-   "cap": 24,
-   "refs": [
-    "0D58300:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -147821,15 +147505,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0E43AB2": {
-   "zh": ".围立起警告牌。\n上周有几个小孩偷偷溜进去，{FA}结果被窜出的瓦斯弹吓得大哭，{FA}至今不敢在晚上关灯睡觉。",
-   "cap": 93,
-   "refs": [
-    "0FED548:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0E43B40": {
    "zh": "Z兽之井打哈欠传染现象！\n下去考察的学者待了十分钟后，{FA}全员都不可控制地打起哈欠。{FB}这种奇妙的催眠波动\n目前科学仍无法解释。",
    "cap": 116,
@@ -147866,15 +147541,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0E4434E": {
-   "zh": "为您播报今日的焦点快讯！{FB}位于擂钵山最深处的瀑布洞穴\n传出连绵不绝的击打声。{FB}据说空手道大王正在闭关，\n希望能找到将巴尔郎{FA}培养至完美平衡的方法。",
-   "cap": 138,
-   "refs": [
-    "168A528:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0E4437C": {
    "zh": "洞穴\n传出连绵不绝的击打声。{FB}据说空手道大王正在闭关，\n希望能找到将巴尔郎{FA}培养至完美平衡的方法。",
    "cap": 92,
@@ -147882,7 +147548,7 @@
     "03D3E58:aligned"
    ],
    "untrusted": 0,
-   "suspect": true
+   "suspect": false
   },
   "0E4492C": {
    "zh": "己漂浮的电视机，{FA}里面寄宿着爱吃羊羹的幽灵。",
@@ -147929,15 +147595,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0E45910": {
-   "zh": "r年轻群体中风靡！{FB}每天都有无数的化石\n和神秘玉石{FA}被充满干劲的寻宝者挖出！",
-   "cap": 71,
-   "refs": [
-    "1589678:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0E45930": {
    "zh": "！石\n和神秘玉石{FA}被充满干劲的寻宝者挖出！",
    "cap": 39,
@@ -147945,7 +147602,7 @@
     "02372D4:aligned"
    ],
    "untrusted": 0,
-   "suspect": true
+   "suspect": false
   },
   "0E45B60": {
    "zh": "，\n搭载陨石偏转系统的{FA}新一代火箭将于下月发射。{FB}宇宙的浪漫，\n正等待着我们去探索！",
@@ -148038,15 +147695,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EB1003": {
-   "zh": "真不好。\n完全没照我的计划来。",
-   "cap": 28,
-   "refs": [
-    "1473F54:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EB102F": {
    "zh": "我的宝可梦是不会输的！",
@@ -148514,15 +148162,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EB1843": {
-   "zh": "欢虫系的宝可梦，\n那你就是看不起我!",
-   "cap": 34,
-   "refs": [
-    "15E7460:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EB1875": {
    "zh": "我还有很多稀有的宝可梦\n放在家里呢!",
@@ -150626,15 +150265,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EC0D46": {
-   "zh": "！{FB}它奔跑时的姿态，\n就像是流动的极光，{FA}既凛冽又温柔……",
-   "cap": 51,
-   "refs": [
-    "0FDA2C4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EC0DEC": {
    "zh": "你是想了解水君真正的姿态吗？\n……为了设计衣服？{FB}现在的年轻人，想法真是新奇。\n不过，这让我想起一个古老的故事。{FB}150年前，那场大火烧毁了钟之塔。\n三只无名的宝可梦在火中丧生。{FB}彩虹色的宝可梦降临，\n赋予了它们新的生命。{FB}其中一只，\n体内蕴藏着泉水般的温柔，{FA}它便是水君……{FB}它的存在，\n本身就是一种“包容”。{FB}像水一样包容万物，\n像风一样连接彼此。{FB}那个想做衣服的女孩……{FB}她是不是有着\n“想要成为宝可梦”的愿望？{FB}呵呵，并不是要模仿外表，\n而是要披上它的灵魂。{FB}当人类与宝可梦的心跳重叠之时，\n那才是真正的“化身”。",
    "cap": 464,
@@ -151777,15 +151407,6 @@
    "cap": 29,
    "refs": [
     "0EC327D:loadpointer"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0EC339E": {
-   "zh": "札诩\n前面就是新城区了。{FB}可能会有很多\n让你觉得惊喜的东西哦。",
-   "cap": 58,
-   "refs": [
-    "0EC3378:literal"
    ],
    "untrusted": 0,
    "suspect": false
@@ -153649,15 +153270,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EC9CB5": {
-   "zh": " 锂锃锆铿锂锃锆甬\n%",
-   "cap": 20,
-   "refs": [
-    "0EC9C68:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
-  },
   "0EC9CDC": {
    "zh": "新叶喵",
    "cap": 7,
@@ -154872,15 +154484,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ECEB4B": {
-   "zh": "莳\n这里存放着\n粉丝寄给我的信件。{FB}但是……\n这些信件的摆放顺序，变了。{FB}我习惯把未读的信放在上面，\n已读的放在下面。{FB}但是昨天回来的时候，\n几封已读的信被重新拆开了……{FB}而且，都是特定的几封……{FB}是那些在我还没有\n那么出名的时候，最早寄来的信。",
-   "cap": 221,
-   "refs": [
-    "0ECE7C0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0ECEB4E": {
    "zh": "这里存放着\n粉丝寄给我的信件。{FB}但是……\n这些信件的摆放顺序，变了。{FB}我习惯把未读的信放在上面，\n已读的放在下面。{FB}但是昨天回来的时候，\n几封已读的信被重新拆开了……{FB}而且，都是特定的几封……{FB}是那些在我还没有\n那么出名的时候，最早寄来的信。",
    "cap": 218,
@@ -155181,15 +154784,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ECFD27": {
-   "zh": "是……好痛苦……{FB}明天的……爽喉喷雾……\n还有……新的粉丝信……{FB}虽然……\n我是没资格署名的……",
-   "cap": 77,
-   "refs": [
-    "0ECFA4C:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "0ECFF06": {
    "zh": "喂喂……\n是{FD:01}吗……{FB}我是阿始……\n最近出了点状况……{FB}你有空可以……\n来一下桔梗市的精灵中心吗？",
    "cap": 83,
@@ -155281,15 +154875,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ED08E6": {
-   "zh": "\n是它给了我勇气。{FB}谢谢你。\n谢谢你保护了我的演出。{FB}谢谢你为了我\n做了那么多傻事。{FB}但是……如果失去了\n你这个“最初的观众”，{FB}就算我在\n全世界面前演出，{FA}我也不会开心的！{FB}因为……\n是你证明了，{FB}即使是在地下通道里，\n我也是可以发光的，{FA}不是吗？！",
-   "cap": 220,
-   "refs": [
-    "0ED02B4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0ED08ED": {
    "zh": "了我勇气。{FB}谢谢你。\n谢谢你保护了我的演出。{FB}谢谢你为了我\n做了那么多傻事。{FB}但是……如果失去了\n你这个“最初的观众”，{FB}就算我在\n全世界面前演出，{FA}我也不会开心的！{FB}因为……\n是你证明了，{FB}即使是在地下通道里，\n我也是可以发光的，{FA}不是吗？！",
    "cap": 213,
@@ -155373,15 +154958,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0ED0B18": {
-   "zh": "果是在这个\n狭窄的通道里引爆……{FB}谁也别想跑！\n……我们要永远在一起了！",
-   "cap": 64,
-   "refs": [
-    "07887D0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0ED0B5A": {
    "zh": "住口！！\n够了！！{FB}我不想看到那样的爱！\n我不想看到属于别人的爱！{FA}不要把……{FA}爱从我身边夺走！！！{FB}既然我注定要在黑暗中腐烂……\n既然光芒已经不再照耀我……{FB}那我就把这道光……\n永远地留在这里！{FB}留在这个只有\n我们知道的地下通道里！",
@@ -155514,15 +155090,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0ED0F20": {
-   "zh": "样\n被抛弃的顽皮雷弹……",
-   "cap": 22,
-   "refs": [
-    "0ED0124:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
   },
   "0ED0F23": {
    "zh": "被抛弃的顽皮雷弹……",
@@ -155721,15 +155288,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0ED19AD": {
-   "zh": " \n我一直在想……\n如果在那个时候，{FA}没有你停下脚步……{FB}如果没有你在\n我最想放弃的时候，{FA}在舞台上毫不犹豫地站在我身边……{FB}现在的我……\n会不会也……{FB}我想……我现在\n也许稍微明白一点了。{FB}所谓的偶像，\n不仅仅是穿上漂亮的衣服，{FA}站在聚光灯下接受喝彩的人。{FB}真正的偶像……\n应该是在别人坠入深渊时，{FB}能够毫不犹豫\n地向他们伸出手的人。{FB}就像当初你把我从那个\n空无一人的角落里拉出来一样……{FB}这次，轮到我\n来拉住他们了。{FB}可是，{FD:01}……\n向黑暗里伸出手的勇气，{FA}不是我自己原本就有的。{FB}如果没有人一直注视着我，\n如果没有那道比我更温暖、{FA}更坚定的光一直陪在我身边……{FA}再闪耀的一等星也是会坠落的呀。{FB}如果说，\n偶像存在的意义，{FB}就是成为照亮\n别人世界的那道光的话……{FB}那么。{FD:01}。\n从我们相遇的那一天起，{FA}你……就一直是我心里的偶像哦。{FB}只有站在你身边的时候，\n我才会觉得……{FA}自己是无所不能的。{FB}所以，作为我的首推偶像……\n在接下来的旅途中，{FA}也请你一直、一直注视着我吧。{FB}因为，如果我的光芒\n不能被最重要的人看到的话，{FA}我可是会很苦恼的呢。{FB}那么，再见啦，{FD:01}。\n晚安！我最闪耀的……一等星！",
-   "cap": 878,
-   "refs": [
-    "0ED181C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0ED19AF": {
    "zh": "我一直在想……\n如果在那个时候，{FA}没有你停下脚步……{FB}如果没有你在\n我最想放弃的时候，{FA}在舞台上毫不犹豫地站在我身边……{FB}现在的我……\n会不会也……{FB}我想……我现在\n也许稍微明白一点了。{FB}所谓的偶像，\n不仅仅是穿上漂亮的衣服，{FA}站在聚光灯下接受喝彩的人。{FB}真正的偶像……\n应该是在别人坠入深渊时，{FB}能够毫不犹豫\n地向他们伸出手的人。{FB}就像当初你把我从那个\n空无一人的角落里拉出来一样……{FB}这次，轮到我\n来拉住他们了。{FB}可是，{FD:01}……\n向黑暗里伸出手的勇气，{FA}不是我自己原本就有的。{FB}如果没有人一直注视着我，\n如果没有那道比我更温暖、{FA}更坚定的光一直陪在我身边……{FA}再闪耀的一等星也是会坠落的呀。{FB}如果说，\n偶像存在的意义，{FB}就是成为照亮\n别人世界的那道光的话……{FB}那么。{FD:01}。\n从我们相遇的那一天起，{FA}你……就一直是我心里的偶像哦。{FB}只有站在你身边的时候，\n我才会觉得……{FA}自己是无所不能的。{FB}所以，作为我的首推偶像……\n在接下来的旅途中，{FA}也请你一直、一直注视着我吧。{FB}因为，如果我的光芒\n不能被最重要的人看到的话，{FA}我可是会很苦恼的呢。{FB}那么，再见啦，{FD:01}。\n晚安！我最闪耀的……一等星！",
    "cap": 876,
@@ -155897,15 +155455,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0ED27EA": {
-   "zh": "！{FB}您说：‘不要怕，慢慢来，\n宝可梦会回应你的心意。’{FB}您教大家‘如何用\n眼神和宝可梦交流’那一集，{FA}我看了十遍！{FB}虽然我还没抓到宝可梦，\n但我已经决定了，{FA}明天要去草丛里试一试！{FB}如果我成功了，\n全是多亏了大哥！{FA}您是我的英雄！”",
-   "cap": 204,
-   "refs": [
-    "11F5E8C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0ED2831": {
    "zh": "c梦交流’那一集，{FA}我看了十遍！{FB}虽然我还没抓到宝可梦，\n但我已经决定了，{FA}明天要去草丛里试一试！{FB}如果我成功了，\n全是多亏了大哥！{FA}您是我的英雄！”",
@@ -156905,15 +156454,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0ED7DFD": {
-   "zh": "\n……那个叫阿渡的家伙！{FB}然后……接下来就是你了，\n在那之前你就做好心理准备吧……",
-   "cap": 72,
-   "refs": [
-    "0ED77AC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0ED7E1A": {
    "zh": "下来就是你了，\n在那之前你就做好心理准备吧……",
@@ -159519,15 +159059,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EDDCE3": {
-   "zh": "叫做龙穴的地方。{FB}那里面有一个祠堂，\n你去那里看看吧。{FB}如果在那里\n你也被认可了的话，{FB}我也会认可你为\n有资格接受道馆徽章的训练家！",
-   "cap": 122,
-   "refs": [
-    "0EDDBDC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EDDD75": {
    "zh": "我是小椿！\n世界第一的驯龙师。{FB}实力也不在宝可梦联盟的\n四天王之下。{FA}所以我是不会输给你的！{FA}怎样，还要和我对战吗？{FB}……我知道了，\n那快开始吧！{FB}对方训练家无论\n是什么样的对手，{FA}我都会全力对战！",
    "cap": 177,
@@ -159756,15 +159287,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EDF105": {
-   "zh": "诩诩诩诩\n",
-   "cap": 10,
-   "refs": [
-    "0EDE9FC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EDF10F": {
    "zh": "不错的对战。{FB}虽然没有那种要将对手\n彻底击溃的强劲电压，{FB}但你们招式碰撞时产生的电流……\n倒是让人觉得很温暖。",
    "cap": 102,
@@ -159965,15 +159487,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EDFF00": {
-   "zh": "箭队的干部，雅典娜。{FB}就让我代替\n阿波罗来会会你吧！",
-   "cap": 48,
-   "refs": [
-    "18AC56C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EDFF32": {
    "zh": " 雅典娜",
@@ -160218,15 +159731,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE08D8": {
-   "zh": "传承者……！{FB}请往里走吧，\n海声铃铛的碎片就在里面……",
-   "cap": 47,
-   "refs": [
-    "156246C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE093A": {
    "zh": "糟了！我完全搞错了！\n呱呱泡蛙进化后是<甲贺>忍蛙！{FA}它是天生的<甲贺流>传人，{FB}怎么可能学习\n死对头<伊贺流>的忍术啊！{FA}难怪它这么抗拒！{FB}看来我的方向完全反了……\n难道说真正的甲贺流高手……{FA}是在关都地区的浅红市吗？{FB}我要立刻出发，跨过大海去挑战\n浅红道馆的阿杏小姐！{FA}这次总不会搞错了吧……{FB}总之谢谢你！这个就当做是\n你见识到长老实力的封口费吧！{FA}我们关都地区再见！",
    "cap": 335,
@@ -160354,15 +159858,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EE0DBB": {
-   "zh": "\n宝可梦中心。{FB}但我总觉得那里的\n气氛太温和了，{FA}完全不像是忍者的据点……{FB}你能帮我去拜访一下长老，\n求取一份<秘传忍术>吗？",
-   "cap": 113,
-   "refs": [
-    "15E65B4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EE0E31": {
    "zh": "呼……\n不愧是传说中的忍者之乡卡吉镇！{FA}连空气里都弥漫着隐秘的气息！{FB}我从遥远的地方赶来，\n就是为了让我的呱头蛙{FA}在这里接受最正统的忍术训练！",
@@ -160575,15 +160070,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE1A20": {
-   "zh": "，\n本小姐有点饿了……{FA}需要回家补充一下查克拉！{FB}如果你想要学的话，\n待会来家里找本小姐吧。{FB}…… …… …… ……\n握握手，握握双手！",
-   "cap": 112,
-   "refs": [
-    "0E10E94:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE1AA3": {
    "zh": "彻底认输了！{FB}你竟然连精灵中心的\n盆栽数量都记得这么清楚吗？！",
    "cap": 58,
@@ -160704,15 +160190,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EE1F01": {
-   "zh": "头已经饥渴难耐了……",
-   "cap": 19,
-   "refs": [
-    "0BFA7F0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EE1F16": {
    "zh": "{FC:06 00}接受任务:<完美的能量餐>",
@@ -160921,15 +160398,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE2788": {
-   "zh": "、黄色碎片各一个。",
-   "cap": 17,
-   "refs": [
-    "02CB5F0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE2E91": {
    "zh": "不……这不是失败品。{FB}它是……超越了计算的……\n生命的奇迹。",
    "cap": 51,
@@ -161131,15 +160599,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE3701": {
-   "zh": "世6术的进步吗？{FB}明明可以让训练家更\n方便地与宝可梦心意相通……",
-   "cap": 59,
-   "refs": [
-    "1616258:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE3740": {
    "zh": "哼，还在\n说这种幼稚的话。{FB}听好了，老东西！{FB}希鲁夫公司持有\n宝可梦传输系统……{FB}以及诱发性\n进化波段的核心专利。{FB}每一次训练家通过\n宝可梦中心交换精灵，{FB}每一次勇吉拉变成胡地，\n每一次豪力变成怪力……{FA}都会产生巨大的现金流！{FA}这就是公司的聚宝功！{FB}而你那个不需要交换机器，\n就能模拟进化波段的通信电缆……{FB}一旦公开，\n公司的利润就会蒸发！{FA}这是绝对不被允许的！",
    "cap": 327,
@@ -161239,15 +160698,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE3EE5": {
-   "zh": "说，\n多边兽只是一种软件。{FB}为了节省昂贵的存储空间，\n同时也为了方便出售给不同的客户，{FA}每一只多边兽在出厂前，{FA}都必须执行出厂设置重置，{FA}清空所有测试数据。{FB}但是……这孩子不一样。\n在最终测试那天，{FA}它拒绝了重置指令。{FB}我们查阅了后台日志，\n发现它将一段被系统判定为{FA}“无用垃圾数据”的缓存，{FA}强行加密锁死在了核心代码里，{FA}导致系统无法格式化。",
-   "cap": 313,
-   "refs": [
-    "167CBB0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE4020": {
    "zh": "{FD:01}，既然\n让你看到了这一幕，{FA}我也就不瞒你了。{FB}其实……\n在隐居到这里之前，{FB}我曾是关都\n希鲁夫公司第一开发部的主管。",
    "cap": 106,
@@ -161346,15 +160796,6 @@
     "0EE42D0:loadpointer"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "0EE44D7": {
-   "zh": "喳喳喳喳喳喳\n告诉那老头子，\n希鲁夫公司最近查得很严。{FA}虽然我也很同情那个小家伙……{FB}但这可能是我最后一次\n帮他偷运修复补丁了。{FA}让他好自为之吧。",
-   "cap": 135,
-   "refs": [
-    "0EE4354:literal"
-   ],
-   "untrusted": 1,
    "suspect": false
   },
   "0EE44E4": {
@@ -161990,15 +161431,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE6B00": {
-   "zh": "！果都不碰了。{FB}我想……\n它大概是水土不服，{FB}觉得自己和\n这里的宝可梦格格不入吧……{FB}我听说在桧皮镇，\n有一个叫呆呆兽之井的地方。{FB}那里生活着\n很多城都地区的呆呆兽。{FB}我想带它去那里看看同类，\n或许能让它打起精神来。{FB}但是，我有点\n不太敢下到井里去……{FA}听说井里有很多超音蝠……{FB}你能去桧皮镇的\n呆呆兽之井入口处和我汇合，{FA}带我们进去看一看吗？",
-   "cap": 310,
-   "refs": [
-    "161560C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EE6FF0": {
    "zh": "{FC:06 00}完成任务:<同一片天空下的哈欠>",
    "cap": 33,
@@ -162208,15 +161640,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EE7E17": {
-   "zh": " \n要开启跳过开场介绍吗？{FB}如果开启，华丽大赛\n将跳过开场介绍直接开始。",
-   "cap": 66,
-   "refs": [
-    "0EE7C8C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0EE7E19": {
    "zh": "要开启跳过开场介绍吗？{FB}如果开启，华丽大赛\n将跳过开场介绍直接开始。",
    "cap": 64,
@@ -162261,19 +161684,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0EE80EE": {
-   "zh": "：整哪项个性化设置呢？",
-   "cap": 21,
-   "refs": [
-    "16654D4:literal",
-    "1675CD4:literal",
-    "1676188:literal",
-    "167663C:literal",
-    "1676AF0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0EE815C": {
    "zh": "要开启跳过开场介绍吗？{FB}如果开启，华丽大赛\n将跳过开场介绍直接开始。",
@@ -163685,15 +163095,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0EEEFEF": {
-   "zh": "绝对无法伪造的炙热羁绊啊！！",
-   "cap": 27,
-   "refs": [
-    "15EF0B8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0EEF351": {
    "zh": "我是宝可全能竞技赛的\n创办者——大拳！{FB}我们竞技赛的宗旨，\n就是抛开单纯的对战，{FB}去发掘宝可梦\n与人类的合作与信赖！{FB}以及各项\n综合能力的无限可能！{FB}但我们一直苦于找不到一位，\n能将这种炙热的情感{FA}传递给大众的完美人选！{FB}阿始先生！\n你对宝可梦的温柔，{FA}还有你激发新手潜能的卓越能力！{FB}我能感觉到！\n你就是全能竞技赛最需要的人！{FB}怎么样？{FB}你愿意来担任我们全能竞技赛的\n官方解说员与特约教练吗！{FA}跟我们一起来创造奇迹吧！！",
    "cap": 386,
@@ -164033,15 +163434,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0F308B1": {
-   "zh": "嫡耖颔嫡耔\n",
-   "cap": 12,
-   "refs": [
-    "0F30FB0:literal"
-   ],
-   "untrusted": 5,
-   "suspect": true
   },
   "0F30954": {
    "zh": "什、什么？\n总算是到顶层的灯室了吗？",
@@ -164471,15 +163863,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F328EB": {
-   "zh": "脓u，\n你就是{FD:01}吗……{FB}哎呀？\n你不知道我是谁吧？{FB}我是坂木，坂木大人！\n哇哈哈哈哈！",
-   "cap": 73,
-   "refs": [
-    "1616880:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0F32976": {
    "zh": "偷偷摸摸的小鬼\n和国际刑警……{FB}你们一定是打算潜入\n怪电波装置的房间吧？{FB}但是我不会让你们如愿以偿的！{FB}因为那个房间是\n用特别的暗号{FA}锁着的！{FB}那个暗号就是\n“坂木大人万岁！”{FB}呵呵呵，轻易说出来\n让你们吃惊不小吧？{FB}但是就算你们知道暗号\n也没有关系，{FB}因为那个房间若不用本大爷\n的声音说出暗号是打不开的！",
    "cap": 280,
@@ -164582,15 +163965,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F32DC6": {
-   "zh": "草倒草倒草倒草倒草倒草倒草倒\n",
-   "cap": 30,
-   "refs": [
-    "0F3260C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0F32E1A": {
    "zh": "呃……啊，\n不……没、没什么啦。",
    "cap": 25,
@@ -164654,15 +164028,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0F331BE": {
-   "zh": " ！\n之后进入地下商业街，{FA}再打开背包的时候，{FA}就已经不见了……{FB}如果真是弄丢了，\n也可能是在那个时候，{FA}丢在商业区和住宅区的某处了！！{FB}或许是在\n商业区和住宅区的某个垃圾桶里！？",
-   "cap": 161,
-   "refs": [
-    "1FED34C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0F33261": {
    "zh": "……那个，你从刚才起，\n一直在说什么呢？",
@@ -166431,16 +165796,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F3909A": {
-   "zh": "。\n今天……各位也辛苦了。{FA}今晚就请好好休息吧。",
-   "cap": 42,
-   "refs": [
-    "0F387B4:literal",
-    "0F389E4:literal"
-   ],
-   "untrusted": 5,
-   "suspect": true
-  },
   "0F390AA": {
    "zh": "苦了。{FA}今晚就请好好休息吧。",
    "cap": 26,
@@ -167073,15 +166428,6 @@
     "0F3B47D:message"
    ],
    "untrusted": 0,
-   "suspect": false
-  },
-  "0F3B907": {
-   "zh": "喳\n很快，战火开始蔓延……",
-   "cap": 23,
-   "refs": [
-    "0F3B614:literal"
-   ],
-   "untrusted": 1,
    "suspect": false
   },
   "0F3B90A": {
@@ -169142,15 +168488,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F40730": {
-   "zh": "…{FB}时之笛的作用……\n并不是召唤时拉比。{FB}而是……\n通过特殊音律产生的共振，{FA}激起大量的时之波纹……{FA}从而打开连接不同时空的通道。{FB}而作为吹奏者的我，\n将与另一侧的时拉比交换……{FB}也就是说……\n我会前往某个未知的时空，{FA}而时拉比……会来到这里……",
-   "cap": 216,
-   "refs": [
-    "11E8D38:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0F40831": {
    "zh": "断崖镇的长老已经\n认定你具备了成为“传承者”的资质，{FA}因此在信中托我对你进行考验。{FB}那么——",
    "cap": 84,
@@ -169290,15 +168627,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0F414DD": {
-   "zh": "X量的石头，\n还有把它们联系在一起的牵绊……{FB}……这便是——\n超级进化的起源。{FB}这份力量，\n曾经只属于知识、情感和意志{FA}三者完美契合之人。{FB}如今，能够完美驾驭\n超级进化力量的你，{FA}正是“传承者”的最佳人选！",
-   "cap": 181,
-   "refs": [
-    "0FE3134:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0F415C3": {
    "zh": "那么……恭喜你！\n第一轮考验通过！",
@@ -171525,15 +170853,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F49956": {
-   "zh": "了\n找宝可梦走了太多的路。{FB}脚又疼，头又困……{FB}如果我是野生宝可梦，\n那抓我简直不废吹灰之力。{FA}呼噜……",
-   "cap": 92,
-   "refs": [
-    "0F49748:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0F49A9B": {
    "zh": "毽子草被吹走了……",
    "cap": 17,
@@ -171679,15 +170998,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0F4A3B8": {
-   "zh": "见了\n{FD:01}获得树果的未来！",
-   "cap": 23,
-   "refs": [
-    "0F4A104:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0F4A3D1": {
    "zh": "天然鸟预见了\n{FD:01}获得道具的未来！",
@@ -177744,15 +177054,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0F5D00E": {
-   "zh": "的圈圈熊使用了怪力！{FB}圈圈熊的怪力\n推动了大石头！",
-   "cap": 47,
-   "refs": [
-    "1614DDC:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0F5D108": {
    "zh": "这是经常光顾\n缘朱舞场的一位大叔，{FA}送给我们的礼物。{FB}“这个是叫做冲浪的招式，\n有了它就能在水面上悠游自如！”{FB}他是这么向我们介绍的。{FB}我想这应该\n会对你的冒险有所帮助吧？{FB}不过……要想使用的话，\n需要先拿到卡吉道馆的徽章。{FB}那么，再见了{F9:D3}",
    "cap": 218,
@@ -178701,15 +178002,6 @@
    "untrusted": 2,
    "suspect": true
   },
-  "0FF69FF": {
-   "zh": "着，肆虐烧尽一切。",
-   "cap": 17,
-   "refs": [
-    "1EA3640:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0FF6AC0": {
    "zh": "与熊熊烈火\n展开了激烈的斗争，\n直到一切消失殆尽...",
    "cap": 49,
@@ -178875,15 +178167,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0FF7B13": {
-   "zh": "干什么!?”\n男子的声音因极度惊恐而破音，\n他拼命想要挣脱爱...{FB}“快走开！真的会死的！”\n昏暗的地下通道，空气中\n弥漫着危险的焦糊味。{FB}顽皮雷弹发出刺耳的电流声，\n白光在黑暗中急剧闪烁。{FB}面对眼前近乎疯狂的男人\n和即将引爆的顽皮雷弹，\n爱没有丝毫退缩。{FB}她没有逃跑，而是张开双臂，\n将那个满脸污垢、浑身颤抖的\n男子紧紧地拥入怀中。{FB} ",
-   "cap": 303,
-   "refs": [
-    "0A2E62C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0FF7C74": {
    "zh": "  块噪块  块噪块  块噪块  块噪块  块噪块  块噪块  块噪块  块",
@@ -179066,15 +178349,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0FF9601": {
-   "zh": "谢你为我做那么多傻事。{FB}但是...\n如果失去了\n你这个“最初的观众”，{FB}就算我在\n全世界面前唱歌，\n我也不会开心的！{FB}因为...你证明了，\n即使是在地下通道里，\n我也可以发光，不是吗？！”{FB}“...?! ”\n男子的身体僵硬得像一块石头，\n声音颤抖得不成样子。{FB}“爱.....?\n放开我.....我会.....\n弄脏你的.....”{FB} ",
-   "cap": 267,
-   "refs": [
-    "155F280:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "0FFACE8": {
    "zh": "—漫长夜...",
@@ -179533,10 +178807,9 @@
    "zh": "{F9:FB}\n 策鹤河啊",
    "cap": 13,
    "refs": [
-    "156B930:literal",
     "1C6165C:literal"
    ],
-   "untrusted": 0,
+   "untrusted": 1,
    "suspect": true
   },
   "1166619": {
@@ -179666,15 +178939,6 @@
    ],
    "untrusted": 3,
    "suspect": true
-  },
-  "1320F2F": {
-   "zh": "到鹤赫厕阿厕曹   埃厕策幅拂祷曹",
-   "cap": 32,
-   "refs": [
-    "077CEDF:trainerbattle"
-   ],
-   "untrusted": 0,
-   "suspect": false
   },
   "13C9890": {
    "zh": "某种护具。非常坚\n硬而且沉重。某种\n宝可梦很喜欢它。",
@@ -182611,15 +181875,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "140F01E": {
-   "zh": "r是孩子们的巢穴。\n释放出各种各样的费洛蒙，\n自由地控制孩子们。",
-   "cap": 59,
-   "refs": [
-    "0FD9EE0:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "140F059": {
    "zh": "有时候也会发现为了\n将储存的电分给同伴而互相\n摩擦颊囊的帕奇利兹。",
    "cap": 64,
@@ -183285,15 +182540,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "14101E0": {
-   "zh": "×来的世界。",
-   "cap": 11,
-   "refs": [
-    "15DBD0C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "14101EB": {
    "zh": "飞行的时候，\n会从薄纱一样的翅膀中发出闪光粒子。\n被称为新月的化身。",
@@ -184038,15 +183284,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1411607": {
-   "zh": "其他宝可梦。\n通过隐藏自己的本来面貌\n来保护自己不受危险侵害。",
-   "cap": 59,
-   "refs": [
-    "0FDDC4C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1411642": {
    "zh": "拥有一下子迷惑许多人的力量。\n展现出虚幻的景色来保护自己的住所。",
    "cap": 62,
@@ -184154,15 +183391,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1411900": {
-   "zh": "能量之后，\n变成了宝可梦。\n会把身体埋在雪里睡觉。",
-   "cap": 46,
-   "refs": [
-    "0FDDDEC:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
   },
   "141192E": {
    "zh": "栖息在雪山的宝可梦。\n在遥远过去的冰河时期\n迁移到了南方的土地。",
@@ -184731,15 +183959,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1412867": {
-   "zh": "出自己真正的力量。",
-   "cap": 18,
-   "refs": [
-    "0FDE528:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1412879": {
    "zh": "用特殊的发声法唱出的旋律\n可以自由地操纵听者的情绪。",
    "cap": 51,
@@ -184820,15 +184039,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1412A6E": {
-   "zh": "V身体，\n保护皮肤。装得无忧无虑的，\n实则很精明地窥视着四周。",
-   "cap": 56,
-   "refs": [
-    "0FD4610:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1412AA6": {
    "zh": "灵巧的身体不输给任何人。\n只需1分钟就能登上\n超过600米高的塔顶。",
@@ -185028,15 +184238,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1413333": {
-   "zh": "当隐藏自己的身体。",
-   "cap": 18,
-   "refs": [
-    "15349E8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1413345": {
    "zh": "用催眠术引诱对手靠近，\n再用头部的触手缠住它，\n然后泼洒消化液将其了结。",
    "cap": 68,
@@ -185063,15 +184264,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1413400": {
-   "zh": "巨铠的命令。",
-   "cap": 12,
-   "refs": [
-    "0AB6EF8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "141340C": {
    "zh": "和腐烂的海藻一模一样。\n一边骗过敌人的眼睛，\n一边积蓄进化的力量。",
@@ -185505,15 +184697,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "141411B": {
-   "zh": "焰。",
-   "cap": 4,
-   "refs": [
-    "11F301C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "141411F": {
    "zh": "会用长长的嘴吸取花粉和蜜。\n吃不完的花粉则会\n被它储蓄在体毛的缝隙间。",
    "cap": 67,
@@ -185730,15 +184913,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "14146E3": {
-   "zh": ".附着花时会很开心，\n并发挥出治愈的效果。\n喜欢有很多花的地方。",
-   "cap": 59,
-   "refs": [
-    "091954C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "141471E": {
    "zh": "在森林深处过着安静的生活。\n如同斗篷般的紫色体毛\n会随着年龄越来越长。",
@@ -187288,15 +186462,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1419322": {
-   "zh": "呶示N电器官。\n努力用后脚站立起来，\n然后从手掌释放出电击。",
-   "cap": 55,
-   "refs": [
-    "14E2290:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1419359": {
    "zh": "使用的格斗技非常独特。\n会一边用手掌给予打击，\n一边用肉球释放电击。",
    "cap": 64,
@@ -188188,15 +187353,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "15E093C": {
-   "zh": "&沼",
-   "cap": 4,
-   "refs": [
-    "0E04F90:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "1638888": {
    "zh": "咨奠",
    "cap": 5,
@@ -188208,15 +187364,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "166FB10": {
-   "zh": "惦Y渫",
-   "cap": 6,
-   "refs": [
-    "11DBAF4:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "17C6736": {
    "zh": "。 币 懊阿… 啊 ",
@@ -188284,15 +187431,6 @@
     "1D9D30C:aligned"
    ],
    "untrusted": 31,
-   "suspect": false
-  },
-  "1872275": {
-   "zh": " 向靶\n伊妆 窄l仓 ",
-   "cap": 18,
-   "refs": [
-    "0D05C60:literal"
-   ],
-   "untrusted": 0,
    "suspect": false
   },
   "1C8BC8A": {
@@ -188374,16 +187512,6 @@
     "1C966C4:aligned"
    ],
    "untrusted": 0,
-   "suspect": true
-  },
-  "1CB030F": {
-   "zh": ":啡藐阜 、 肤啊扶蹭亥藐何",
-   "cap": 25,
-   "refs": [
-    "08D9718:aligned",
-    "0F24898:aligned"
-   ],
-   "untrusted": 1,
    "suspect": true
   },
   "1CB1240": {
@@ -191338,15 +190466,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1D90310": {
-   "zh": "é。\n必定能够先制攻\n击。",
-   "cap": 22,
-   "refs": [
-    "1EA28D8:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "1D90326": {
    "zh": "用钢铁般坚硬的头\n部进行攻击。有\n时会使对手畏缩\n。",
    "cap": 48,
@@ -192023,15 +191142,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1D90E10": {
-   "zh": "沁f分\n拍打对手进行攻\n击。连续2次给\n予伤害。",
-   "cap": 42,
-   "refs": [
-    "078062C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1D90E3A": {
    "zh": "使用尾巴等拍打对\n手进行攻击。连\n续2次给予伤害\n。",
@@ -192744,15 +191854,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1D91F50": {
-   "zh": "开对手的\n反射壁或光墙等\n。也会降低对手\n的闪避率。",
-   "cap": 48,
-   "refs": [
-    "040CFEC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1D91F80": {
    "zh": "用无数青白色且闪\n耀的光线攻击对\n手。",
    "cap": 36,
@@ -193373,15 +192474,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1D92DF3": {
-   "zh": "%攻击。攻击后\n自己的防御会降\n低。",
-   "cap": 32,
-   "refs": [
-    "02CE850:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1D92E13": {
    "zh": "在不受到对手能力\n变化影响的情况\n下给予对手伤害\n。",
@@ -199485,15 +198577,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1D9C733": {
-   "zh": "n的招式将不能被连续使用两次!",
-   "cap": 29,
-   "refs": [
-    "166E338:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1D9C750": {
    "zh": "双方的所有宝可梦都受到了\n回复阻挡的效果!{FB}宝可梦无法得到治疗!",
    "cap": 61,
@@ -202938,15 +202021,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DA0969": {
-   "zh": "b能使用\n该属性的攻击招式！",
-   "cap": 26,
-   "refs": [
-    "02CF1DC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DA0983": {
    "zh": "在此挑战中，\n不能使用{FD:00}属性的招式！{FB}",
@@ -211575,15 +210649,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1DAAA03": {
-   "zh": "长时间不进行对战的话，\n对战的感觉会慢慢变迟钝的！{FB}我在38号道路等你，\n到了就直接来找我吧。",
-   "cap": 86,
-   "refs": [
-    "15D73BC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1DAAA59": {
    "zh": "{FC:10 0001}能炫耀下我的宝可梦不？",
    "cap": 26,
@@ -211619,15 +210684,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DAAAAD": {
-   "zh": "我做个朋友吧！{FB}喜欢宝可梦的\n是不会有坏人的！{FB}我们以后就多聊聊皮卡丘啊，\n呆呆兽啊，毒刺水母之类的{FB}有关宝可梦的话题吧！{FB}怎么样？\n和我交换电话号码吧？",
-   "cap": 141,
-   "refs": [
-    "15AA3DC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DAAB3A": {
    "zh": "好！以后就多聊聊\n关于宝可梦的话题吧！",
@@ -211719,15 +210775,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DAACCC": {
-   "zh": "常可爱吧。{FB}我们好像很合得来啊！\n我们做个朋友怎么样？{FB}方便的话把你的电话号码\n告诉给我好吗？{FB}我们聊些关于皮皮的话题吧！",
-   "cap": 113,
-   "refs": [
-    "1592CE4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DAAD3D": {
    "zh": "我的小皮皮\n非常可爱吧。",
@@ -214392,15 +213439,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1DB008A": {
-   "zh": "懦k，\n还要看角色扮演的还原度！{FB}你居然能穿着这么厚重的衣服，\n完美复刻大奶罐的滚动绝招！{FB}虽然有刮花舞台地板的嫌疑，\n但这份全身心投入角色的{FA}硬核表演精神，我给予绝对肯定！",
-   "cap": 161,
-   "refs": [
-    "143413C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1DB012B": {
    "zh": "接下来有请下一位……\n诶！？这位观众，请回到观众席……",
    "cap": 47,
@@ -214653,15 +213691,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DB07D2": {
-   "zh": "！\n请问需要买点什么吗？",
-   "cap": 22,
-   "refs": [
-    "040815C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DB07E8": {
    "zh": "那个，不好意思，打扰了！\n请问我哥哥今天有来过吗？{FA}就是一个顶着乱蓬蓬头发的{FA}理科男……",
@@ -215728,15 +214757,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1DB3301": {
-   "zh": ")的使者的眼光，\n果然没有错呢。",
-   "cap": 29,
-   "refs": [
-    "07A9F78:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1DB331E": {
    "zh": "胜负已分……\n松叶先生眼底的那片阴霾，{FA}终于彻底消散了呢。",
    "cap": 53,
@@ -215781,15 +214801,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DB3471": {
-   "zh": "4入铃铛塔的人。",
-   "cap": 15,
-   "refs": [
-    "154E3FC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DB3480": {
    "zh": "所以……{FD:01}！",
@@ -217151,15 +216162,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DB6740": {
-   "zh": "{FB}受损的城镇也在\n宝可梦的帮助下开始重建。{FB}训练家、道馆馆主、研究员以及\n普通市民共同搬开瓦砾、修复家园。",
-   "cap": 98,
-   "refs": [
-    "02CD78C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DB67A2": {
    "zh": "宝可梦联盟与国际刑警\n对火箭队展开了最后的清剿。{FB}大量残余成员被捕，散落各地的\n实验设施也被彻底摧毁。{FB}然而，无论国际刑警如何\n搜查漩涡岛的废墟与周边海域，{FA}都没有发现阿波罗的踪迹，{FB}关于阿波罗的调查档案，\n至今仍未合上。",
@@ -219494,15 +218496,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DBAD00": {
-   "zh": "数回忆招式。\n也可带着蘑菇前往烟墨市，\n寻找提供招式回忆的人物。\n选择宝可梦和想回忆的招式，\n所需点数或蘑菇以对话为准。",
-   "cap": 112,
-   "refs": [
-    "040CBFC:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DBAD70": {
    "zh": "遗传招式",
@@ -223913,15 +222906,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1DC0309": {
-   "zh": "手合作每人带2或3只宝可梦{FA}在多人战一决胜负。{FB}在塔内还备有名叫战斗大厅的\n房间供训练家聚会。{FB}请在这里寻找到伙伴一起\n添加标签组队！",
-   "cap": 125,
-   "refs": [
-    "1682708:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1DC0386": {
    "zh": "请选择参加对战的宝可梦。",
    "cap": 24,
@@ -224280,15 +223264,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "1DC0804": {
-   "zh": "化模式已关闭。",
-   "cap": 14,
-   "refs": [
-    "1E9E644:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "1DC0812": {
    "zh": "挑战",
    "cap": 5,
@@ -224415,15 +223390,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "1DC09E4": {
-   "zh": "定要注意这一点！",
-   "cap": 16,
-   "refs": [
-    "15AB010:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "1DC09F4": {
    "zh": "请选择参加对战的宝可梦。",
@@ -225942,7 +224908,7 @@
     "1DDE414:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DDE45C": {
    "zh": "噪鳌",
@@ -225969,7 +224935,7 @@
     "1DDF44C:aligned"
    ],
    "untrusted": 0,
-   "suspect": false
+   "suspect": true
   },
   "1DDF464": {
    "zh": "啊啊\n",
@@ -226692,7 +225658,7 @@
     "12C7A1C:aligned"
    ],
    "untrusted": 2,
-   "suspect": false
+   "suspect": true
   },
   "1E165C4": {
    "zh": " {FB}{F9:08} 曹  {FD:F9}块曹  {FB}{F9:08} 曹  {FD:F9}块曹  {FB}{F9:08} 曹  {FD:F9}块曹 ",
@@ -228618,15 +227584,6 @@
     "1FF56C0:literal"
    ],
    "untrusted": 3,
-   "suspect": false
-  },
-  "1FFCFBA": {
-   "zh": " 隙窍千n",
-   "cap": 9,
-   "refs": [
-    "0A3E374:aligned"
-   ],
-   "untrusted": 0,
    "suspect": false
   },
   "1FFF30C": {
