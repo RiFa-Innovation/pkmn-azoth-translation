@@ -493,5 +493,20 @@
   "zh": "宝可梦水银资料站\n请用浏览器访问：\nhttps://\nsum-light.github.io/\nazoth-wiki/",
   "cap": 75,
   "en": "Azoth Wiki\nOpen in a browser:\nhttps://\nsum-light.github.io/\nazoth-wiki/"
+ },
+ "0E3BA75": {
+  "zh": "任务:{FD:02} {F8:05}详情 {F8:00}传送",
+  "cap": 22,
+  "en": "Quest{FD:02} {F8:05}Info {F8:00}Warp"
+ },
+ "0E3BAFA": {
+  "zh": "{F8:0B}翻页  {F8:01}返回",
+  "cap": 15,
+  "en": "{F8:0B}Page  {F8:01}Back"
+ },
+ "0E3BB09": {
+  "zh": "{F8:01}返回  {F8:05}关闭",
+  "cap": 15,
+  "en": "{F8:01}Back  {F8:05}Exit"
  }
 }
