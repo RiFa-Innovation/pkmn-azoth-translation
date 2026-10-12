@@ -1,5 +1,11 @@
 # Pokémon Mercury — English translation
 
+[![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/river8)
+
+> **Optional.** The patch is and stays free. The Ko-fi link only helps me spend
+> more time on this translation. It is not for the original Mercury hack or its
+> authors, and nothing here is paid or gated.
+
 A from-scratch English translation of **Pokémon Mercury (口袋妖怪 水银) 1.3.3**,
 a Chinese FireRed ROM hack that remakes Johto on top of the Complete FireRed
 Upgrade (CFRU) engine. No other English patch for this hack exists.
