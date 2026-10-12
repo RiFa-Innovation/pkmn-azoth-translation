@@ -2080,5 +2080,341 @@
   "dialogue": false,
   "lines": 1,
   "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "1DBAF22": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAEBD": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBADF0": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAE4C": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA049": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA0B7": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9F71": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9FD6": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9E97": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9EF6": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9D45": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9DAF": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DB9E20": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAD79": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBACF2": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAC86": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAC0B": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBABA2": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAABF": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAB25": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA9E4": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBAA4A": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA90B": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA96B": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA83B": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA8A3": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA687": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA6EF": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA758": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA7C0": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA5B4": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA610": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA4D3": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA545": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA3FD": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA462": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA333": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA392": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA25F": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA2CE": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA12D": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA18D": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBA1DF": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBB51E": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBB582": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBB3B1": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBB413": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+ },
+ "1DBB44E": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB4AE": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB184": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB1F0": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB262": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB2D1": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB340": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB0B6": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
+ },
+ "1DBB11A": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  }
 }

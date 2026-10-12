@@ -161,5 +161,30 @@
     "new": "1832"
    }
   ]
+ },
+ "rival_icon_hack_sheet": {
+  "why": "FireRed's naming screen draws the rival's icon (NamingScreen_CreateRivalIcon 0x9F04C) from a sheet table at 0x3E23C0 / palette 0x3E23C8, but takes OAM/animations from object graphics entry 0. Mercury/CFRU made entry 0 a 32x32 sprite, so FireRed's 16x32 brown-haired rival sheet came out as four garbled fragments, and it is the wrong character anyway: the hack's rival is the red-haired one (object graphics entry 72: 9 frames x 512 B at 0x9F54D34, palette 0x9F55F34). Point the sheet and palette at those; entry 0's 32x32 shape then matches. The icon's walk-in-place loop (cmds at 0x3E23A8) addresses frames in tile units: 0, 24, 0, 32 = frames 0/3/0/4 of vanilla's 8-tile frames; the hack's frames are 16 tiles, so 24 and 32 become 48 and 64.",
+  "patch": [
+   {
+    "at": "3E23C0",
+    "orig": "80193e080009ff00",
+    "new": "344df5090012ff00"
+   },
+   {
+    "at": "3E23C8",
+    "orig": "0480e908",
+    "new": "345ff509"
+   },
+   {
+    "at": "3E23AC",
+    "orig": "1800",
+    "new": "3000"
+   },
+   {
+    "at": "3E23B4",
+    "orig": "2000",
+    "new": "4000"
+   }
+  ]
  }
 }

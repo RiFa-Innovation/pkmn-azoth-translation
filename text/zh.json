@@ -8210,6 +8210,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0175D4B": {
+   "zh": "咳……\n咳……",
+   "cap": 10,
+   "refs": [
+    "016185D:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0175D59": {
    "zh": "那倒提醒了我。{FB}瓦斯弹进化成了双弹瓦斯！",
    "cap": 38,
@@ -10567,6 +10576,15 @@
    "cap": 14,
    "refs": [
     "0163499:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "017A1AA": {
+   "zh": "恩……\n啊……",
+   "cap": 10,
+   "refs": [
+    "01634A6:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -20273,6 +20291,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "018998C": {
+   "zh": "呼……\n呼……",
+   "cap": 10,
+   "refs": [
+    "01ABDAD:trainerbattle"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
   "0189998": {
    "zh": "我输了是因为\n我跑步跑得没有力气了……",
    "cap": 36,
@@ -21349,6 +21376,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "018B2DA": {
+   "zh": "呲，呲……{FB}…………\n阿岩……",
+   "cap": 20,
+   "refs": [
+    "0168A1A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "018B2F8": {
    "zh": "这个碑是一些很干净的石块做成的。{FB}碑上刻着：\n“阿岩长眠于此”。",
    "cap": 58,
@@ -21412,6 +21448,15 @@
     "01AC415:trainerbattle"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "018B4C5": {
+   "zh": "呼……\n呼……",
+   "cap": 10,
+   "refs": [
+    "01AC419:trainerbattle"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "018B4D1": {
@@ -26771,6 +26816,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "01962A7": {
+   "zh": "GAME FREAK会议室",
+   "cap": 17,
+   "refs": [
+    "016C3D3:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "01962BF": {
    "zh": "我？\n我是程序员！",
    "cap": 16,
@@ -26830,6 +26884,15 @@
    "cap": 26,
    "refs": [
     "016C452:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "01964A8": {
+   "zh": "GAME FREAK开发室",
+   "cap": 17,
+   "refs": [
+    "016C437:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -50364,6 +50427,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "03DEA87": {
+   "zh": "啊               秘传学习机02",
+   "cap": 30,
+   "refs": [
+    "055A1BC:message"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "03DF3EA": {
    "zh": "资求 舒曹锪。 擎. 宄球",
    "cap": 22,
@@ -72209,15 +72281,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "04541AE": {
-   "zh": "煨锃é奥懊澳笆八疤把耙坝霸罢敖熬翱袄芭捌扒叭巴拔褒 ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( 一个人用的\n小桌子。",
-   "cap": 157,
-   "refs": [
-    "0455F34:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "0454228": {
    "zh": "( ( ( ( ( ( ( ( 一个人用的\n小桌子。",
    "cap": 35,
@@ -75694,17 +75757,6 @@
    ],
    "untrusted": 2,
    "suspect": false
-  },
-  "0471A4C": {
-   "zh": "         Vii iii iAA ié兹ié兹ié兹       iiiiiiiiAAAA踪踪踪踪踪踪        ii迢iii AAi 俾i 俾i 俾i  ié兹ié兹ié兹ié兹ié兹ié兹ié兹ié踪踪踪踪踪踪踪踪踪踪踪踪踪踪踪踪踪“i 俾i 俾i 俾i 俾i 俾i 俾i 俾i  ié兹ié兹ié兹iAA iii Vii        踪踪踪踪踪踪AAAAiiiiiiii        俾i 俾i 俾i AAi iii ii迢        ",
-   "cap": 289,
-   "refs": [
-    "014FDD0:literal",
-    "014FF68:literal",
-    "014FF94:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
   },
   "047565C": {
    "zh": "l啊 O讵 v讵 ",
@@ -81670,6 +81722,18 @@
    "untrusted": 0,
    "suspect": false
   },
+  "07B3E47": {
+   "zh": "{FC:06 00}获得了6点BracerPoints和6000¥!",
+   "cap": 33,
+   "refs": [
+    "07B3E29:loadpointer",
+    "07B4056:loadpointer",
+    "07B4698:loadpointer",
+    "07B4BB1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "07B3E6A": {
    "zh": "{FC:06 00}完成任务:<海星连接宇宙>",
    "cap": 27,
@@ -82746,6 +82810,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "07B7D9D": {
+   "zh": "那是……！！！",
+   "cap": 10,
+   "refs": [
+    "07B7C21:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "07B7DAC": {
    "zh": "糟、糟糕了！\n怎么突然下起这么大的雷雨！{FB}看来今天是没希望了，\n海浪太大了，{FA}就算有宝可梦也不会出来的吧……{FA}我们赶紧想办法回去吧！",
    "cap": 120,
@@ -82843,6 +82916,15 @@
    "cap": 314,
    "refs": [
     "0AEEF40:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "07B84CC": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和10000¥!",
+   "cap": 34,
+   "refs": [
+    "07B7757:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -84402,6 +84484,15 @@
    "cap": 89,
    "refs": [
     "07BD154:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "07BD2CE": {
+   "zh": "铃————！",
+   "cap": 8,
+   "refs": [
+    "07BD283:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -97858,6 +97949,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09C78C6": {
+   "zh": "果然翁：So{F9:D3}Nan{F9:D3}Su！",
+   "cap": 20,
+   "refs": [
+    "09C78BE:loadpointer",
+    "09CFBA1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09C79D3": {
    "zh": "嗨！\n有什么能帮到你的吗？",
    "cap": 24,
@@ -99423,6 +99524,55 @@
    "refs": [
     "09CC237:loadpointer",
     "09CC53A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CC72F": {
+   "zh": "2000元",
+   "cap": 7,
+   "refs": [
+    "09CC270:loadpointer",
+    "09CC2D4:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CC738": {
+   "zh": "5000元",
+   "cap": 7,
+   "refs": [
+    "09CC27E:loadpointer",
+    "09CC2E2:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CC741": {
+   "zh": "10000元",
+   "cap": 8,
+   "refs": [
+    "09CC28C:loadpointer",
+    "09CC2F0:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CC74B": {
+   "zh": "20000元",
+   "cap": 8,
+   "refs": [
+    "09CC29A:loadpointer",
+    "09CC2FE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CC755": {
+   "zh": "50000元",
+   "cap": 8,
+   "refs": [
+    "09CC2A8:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -101971,11 +102121,29 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09D24DE": {
+   "zh": "喝——！！\n且慢——！！",
+   "cap": 16,
+   "refs": [
+    "09D24BD:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09D24F0": {
    "zh": "别从这里走过去，\n这里有我刚刚发现的{FA}稀有精灵的足迹！{FB}等我描下它们来再说，\n好吗？",
    "cap": 77,
    "refs": [
     "09D24C5:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09D2579": {
+   "zh": "喝——！！\n且慢——！！",
+   "cap": 16,
+   "refs": [
+    "09D254E:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -102482,6 +102650,35 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09D36E4": {
+   "zh": "呆呆兽：……{FB}…… …… ……",
+   "cap": 19,
+   "refs": [
+    "09D5912:message",
+    "09D5982:message",
+    "09D59EF:message",
+    "09D5A5D:message",
+    "09D5ACE:loadpointer",
+    "0EE6D8B:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09D36F9": {
+   "zh": "…… …… 呀呆？",
+   "cap": 12,
+   "refs": [
+    "09D36DC:loadpointer",
+    "09D5950:loadpointer",
+    "09D59C0:loadpointer",
+    "09D5A2E:loadpointer",
+    "09D5A9E:loadpointer",
+    "09D5B07:loadpointer",
+    "0F4A832:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09D3714": {
    "zh": "这里是碳工匠小屋。{FB}找碳材料的工作\n就交给大葱鸭了！",
    "cap": 49,
@@ -102806,6 +103003,15 @@
    "cap": 31,
    "refs": [
     "09D4409:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09D4503": {
+   "zh": "木守宫:Treecko！",
+   "cap": 16,
+   "refs": [
+    "09D44F3:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -104859,6 +105065,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09D9B68": {
+   "zh": "卷卷耳:Buneary！",
+   "cap": 16,
+   "refs": [
+    "09D9B58:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09D9BAC": {
    "zh": "伊布：布{F9:D3}！",
    "cap": 11,
@@ -105783,6 +105998,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09DC8E7": {
+   "zh": "大针蜂:Beedrill！",
+   "cap": 17,
+   "refs": [
+    "09DC8D7:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09DC92C": {
    "zh": "赫拉克罗斯:Heracross！",
    "cap": 22,
@@ -106127,6 +106351,15 @@
    "cap": 12,
    "refs": [
     "09DDB0D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09DE1B6": {
+   "zh": "布鲁皇：Granbull！",
+   "cap": 17,
+   "refs": [
+    "09DE1AE:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -109092,6 +109325,20 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09E371C": {
+   "zh": "获得了3点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "09E338A:loadpointer",
+    "09E3760:loadpointer",
+    "09E3D46:loadpointer",
+    "09E79C7:loadpointer",
+    "0AE5EE5:loadpointer",
+    "0AE658B:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09E38C6": {
    "zh": "世上很有趣呢！\n会有很多新的发现！",
    "cap": 32,
@@ -109706,6 +109953,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09E5B27": {
+   "zh": "获得了5点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "09E5AC3:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09E5BFB": {
    "zh": "土龙弟弟消失了……",
    "cap": 17,
@@ -109720,6 +109976,15 @@
    "cap": 35,
    "refs": [
     "09E5BAB:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09E5C33": {
+   "zh": "获得了5点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "09E5BCF:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -109767,6 +110032,15 @@
    "refs": [
     "09E5FB7:loadpointer",
     "0AE3384:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09E6008": {
+   "zh": "获得了3点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "09E5FD6:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -110220,6 +110494,15 @@
    "untrusted": 1,
    "suspect": false
   },
+  "09E79FC": {
+   "zh": "变( ",
+   "cap": 5,
+   "refs": [
+    "09E77AD:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09E7A1D": {
    "zh": "喇叭芽之塔的妖怪……\n这个谜团总算是解开了。",
    "cap": 41,
@@ -110420,6 +110703,15 @@
     "0AE3413:loadpointer"
    ],
    "untrusted": 1,
+   "suspect": false
+  },
+  "09E8154": {
+   "zh": "获得了2点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "09E7FB2:loadpointer"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "09E8200": {
@@ -111392,6 +111684,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09EC2B1": {
+   "zh": "请抽奖！{FB}…… …… ……\n…… …… ……",
+   "cap": 26,
+   "refs": [
+    "09EC1C3:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09EC394": {
    "zh": "哎呀，{FD:01}！\n你的钱太多了！",
    "cap": 23,
@@ -111428,6 +111729,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09EC53C": {
+   "zh": "请抽奖！{FB}…… …… ……\n…… …… ……",
+   "cap": 26,
+   "refs": [
+    "09EC44E:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09EC5CC": {
    "zh": "欢迎来到\n满金百货商店的名店{FA}每日大抽奖！{FB}一次300元，\n有精美奖品等待您，{FA}想抽一个试试吗？",
    "cap": 85,
@@ -111452,6 +111762,15 @@
    "refs": [
     "09EC63A:loadpointer",
     "09EC9B1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09EC742": {
+   "zh": "请抽奖！{FB}…… …… ……\n…… …… ……",
+   "cap": 26,
+   "refs": [
+    "09EC654:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -111712,6 +112031,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09ED1D8": {
+   "zh": "00元",
+   "cap": 5,
+   "refs": [
+    "09ED156:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09ED2BC": {
    "zh": "哎呀，{FD:01}！\n你的钱太多了！",
    "cap": 23,
@@ -111735,6 +112063,39 @@
    "cap": 90,
    "refs": [
     "09ED1BC:message"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09ED4A2": {
+   "zh": "{FC:06 00}金珠        3500¥",
+   "cap": 21,
+   "refs": [
+    "09ED169:loadpointer",
+    "09ED3D1:loadpointer",
+    "09ED8A7:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09ED522": {
+   "zh": "{FC:06 00}小珍珠       550¥",
+   "cap": 21,
+   "refs": [
+    "09ED177:loadpointer",
+    "09ED3DF:loadpointer",
+    "09ED8B5:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09ED539": {
+   "zh": "{FC:06 00}大珍珠      3000¥",
+   "cap": 21,
+   "refs": [
+    "09ED185:loadpointer",
+    "09ED3ED:loadpointer",
+    "09ED8C3:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -113737,6 +114098,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09F28F0": {
+   "zh": "光儿：…… …… ……\n…噗…噗露！",
+   "cap": 24,
+   "refs": [
+    "09F28A5:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09F290A": {
    "zh": "连呼吸都很痛苦！",
    "cap": 16,
@@ -114828,6 +115198,15 @@
    "cap": 89,
    "refs": [
     "09F449F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09F4510": {
+   "zh": "暴雪王:ABOMASNOW!",
+   "cap": 18,
+   "refs": [
+    "09F4508:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -116765,6 +117144,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09FB47F": {
+   "zh": "林克        {FC:06 00}15000¥",
+   "cap": 22,
+   "refs": [
+    "09FB02A:loadpointer",
+    "09FBFA0:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09FB4FA": {
    "zh": "刚刚真是太惊险了……\n果然又是那些二改的人在搞鬼。{FB}他们一定是藏在某处，\n通过远程操作干扰了我们的游戏。{FB}啊，不好意思……\n你还不知道二改是什么意思吧？{FB}像我们这些制作人，\n都仅凭自己的爱好去制作游戏。{FB}而且我们都是无偿的，\n不涉及任何牟利行为。",
    "cap": 225,
@@ -116788,6 +117177,46 @@
    "cap": 55,
    "refs": [
     "09FAB06:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09FB6B4": {
+   "zh": "马里奥      {FC:06 00}15000¥",
+   "cap": 22,
+   "refs": [
+    "09FB038:loadpointer",
+    "09FBFAE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09FB6CC": {
+   "zh": "皮皮        {FC:06 00}30000¥",
+   "cap": 22,
+   "refs": [
+    "09FB046:loadpointer",
+    "09FBFBC:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09FB6E4": {
+   "zh": "沙奈朵      {FC:06 00}40000¥",
+   "cap": 22,
+   "refs": [
+    "09FB054:loadpointer",
+    "09FBFCA:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09FB6FC": {
+   "zh": "奇树        {FC:06 00}90000¥",
+   "cap": 22,
+   "refs": [
+    "09FB062:loadpointer",
+    "09FBFD8:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -116968,6 +117397,16 @@
    "cap": 31,
    "refs": [
     "09FB9EC:message"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09FC107": {
+   "zh": "卡比        {FC:06 00}15000¥",
+   "cap": 22,
+   "refs": [
+    "09FB01C:loadpointer",
+    "09FBF92:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -120172,6 +120611,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AA2676": {
+   "zh": "投羽枭：Dartrix！",
+   "cap": 16,
+   "refs": [
+    "0AA265D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AA26C4": {
    "zh": "我的赫拉克罗斯看上去\n和你玩得很开心呢，谢谢你！{FB}那么，\n要前往对战场地吗？",
    "cap": 70,
@@ -122811,6 +123259,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AA97DC": {
+   "zh": "30000元",
+   "cap": 8,
+   "refs": [
+    "09CC30C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AA9956": {
    "zh": "我和宝可梦\n之间有着深厚的友谊！{FA}谁都无法破坏！",
    "cap": 45,
@@ -123096,6 +123553,15 @@
    "cap": 36,
    "refs": [
     "0AAA95A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AAA996": {
+   "zh": "信使鸟:Delibird！",
+   "cap": 17,
+   "refs": [
+    "0AAA98E:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -123925,6 +124391,15 @@
     "0AAC383:loadpointer",
     "0AAC396:loadpointer",
     "0AAD4D6:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AAC9CF": {
+   "zh": "朽木妖:Trevenant！",
+   "cap": 18,
+   "refs": [
+    "0AAC9C7:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -126278,6 +126753,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AC21F4": {
+   "zh": "{FC:01 06}{FC:03 09}获得了10点BracerPoints！{FC:01 02}{FC:01 03}",
+   "cap": 36,
+   "refs": [
+    "0AC2114:loadpointer",
+    "0F50DC9:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AC2219": {
    "zh": "哦，嘘！",
    "cap": 7,
@@ -126553,6 +127038,17 @@
    "cap": 56,
    "refs": [
     "0AC2B50:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AC2EE6": {
+   "zh": "喝——啊——！",
+   "cap": 10,
+   "refs": [
+    "0AC2EA1:loadpointer",
+    "0AC2ED1:loadpointer",
+    "0AC2EDE:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -127600,6 +128096,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE1934": {
+   "zh": "{FC:01 06}{FC:03 09}获得了10点BracerPoints！{FC:01 02}{FC:01 03}",
+   "cap": 36,
+   "refs": [
+    "0AE13C1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE195A": {
    "zh": "新的一天也要继续加油哦！",
    "cap": 24,
@@ -128343,6 +128848,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE3745": {
+   "zh": "获得了5点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "0AE3146:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE375E": {
    "zh": "{FC:06 00}完成任务:<又帅又可爱的宝可梦>",
    "cap": 33,
@@ -128797,6 +129311,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE57DD": {
+   "zh": "获得了8点BracerPoints！",
+   "cap": 23,
+   "refs": [
+    "0AE5968:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE57F6": {
    "zh": "{FC:06 00}完成任务:<七大不可思议>",
    "cap": 27,
@@ -129211,11 +129734,29 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE6A1F": {
+   "zh": "{FC:06 00}获得了6点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE6407:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE6A3B": {
    "zh": "这是叔叔我今天刚收获的树果，\n也分给你一点吧！",
    "cap": 44,
    "refs": [
     "0AE6429:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AE6BA9": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE695A:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -129342,6 +129883,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE6EE6": {
+   "zh": "{FC:06 00}获得了4点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE6AE8:loadpointer",
+    "0AE6F6F:loadpointer"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
   "0AE6FDA": {
    "zh": "谢谢你，\n我现在就要去捕捉飞天螳螂试试！",
    "cap": 38,
@@ -129389,6 +129940,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE715C": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AE6B93:loadpointer",
+    "0AE726C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE717F": {
    "zh": "就是这个速度球！太好啦，\n有了这个我一定能捕捉飞天螳螂。{FB}真是太谢谢你了，\n不愧是协会的训练家，{FB}委托协会果然是正确的。\n对了,这个送给你作为谢礼吧!",
    "cap": 138,
@@ -129422,6 +129983,17 @@
    "refs": [
     "0AE7B42:loadpointer",
     "0AE7B79:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AE7794": {
+   "zh": "{FC:06 00}获得了6点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE7762:loadpointer",
+    "0AE7B61:loadpointer",
+    "0AE7B98:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -129641,6 +130213,15 @@
    "cap": 33,
    "refs": [
     "0AE7D74:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AE81D9": {
+   "zh": "{FC:06 00}获得了5点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE7D93:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -129997,6 +130578,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AE8E6B": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AE8D70:loadpointer",
+    "0AE8FAC:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AE8EE1": {
    "zh": "唉……\n我家里只有我一个男生……{FA}大姐和四姐又是单身，害得我{FA}总是被误认成她们的男朋友。",
    "cap": 80,
@@ -130123,6 +130714,15 @@
    "cap": 25,
    "refs": [
     "0AE9892:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AE9A95": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AE98B6:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -130945,6 +131545,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AEBF87": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和6000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEB811:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AEBFAA": {
    "zh": "故乡的味道……\n还真是令人怀念呢。",
    "cap": 31,
@@ -131165,6 +131774,15 @@
    "cap": 29,
    "refs": [
     "0AEC75C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AEC81C": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEC77B:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -131629,6 +132247,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AEE113": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEDC27:loadpointer",
+    "0F58733:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AEE20E": {
    "zh": "蘑菇……\n俺还想要吃蘑菇……{FB}你有蘑菇吗？\n俺可以用曾经修水管得到的{FA}一些碎片作为交换，{FB}一个小蘑菇可以换一个碎片，\n一个大蘑菇可以换三个碎片，{FA}一个芳香蘑菇可以换六个碎片，{FB}你要用哪一种蘑菇\n和俺交换咧？",
    "cap": 188,
@@ -131718,6 +132346,18 @@
    "refs": [
     "0AEE950:loadpointer",
     "0AEE97D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AEE64A": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEE49A:loadpointer",
+    "0AEE96F:loadpointer",
+    "0AEE99C:loadpointer",
+    "0AEE9C3:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -131904,6 +132544,15 @@
    "untrusted": 1,
    "suspect": false
   },
+  "0AEF00B": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEEF6A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AEF3FA": {
    "zh": "美发",
    "cap": 5,
@@ -132066,6 +132715,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AEF738": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEF9A8:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AEF75B": {
    "zh": "如果你有空的话，请把\n那只宝可梦给我的兄长看看吧！",
    "cap": 48,
@@ -132187,6 +132845,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AEFC63": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AEFC8C:loadpointer"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
   "0AEFD4A": {
    "zh": "请假王乖乖回去了…",
    "cap": 18,
@@ -132302,6 +132969,24 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AF018A": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "09E35E7:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF01A5": {
+   "zh": "{FC:06 00}获得了4点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "09E46C0:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AF01C0": {
    "zh": "{FC:01 06}{FC:03 09}{FD:01}把博士妻子的电话号码\n登陆到了精灵齿轮！",
    "cap": 47,
@@ -132309,6 +132994,62 @@
     "0AEFF13:message"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0AF01F0": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AC253A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF020B": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0ABB0CD:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF0226": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "09E3D64:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF02C9": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "09E77DB:loadpointer",
+    "0AE33A3:loadpointer",
+    "0AE394A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF02E4": {
+   "zh": "{FC:06 00}获得了{FD:02}点BracerPoints!",
+   "cap": 27,
+   "refs": [
+    "09E642F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF0300": {
+   "zh": "{FC:06 00}获得了5点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE3EAD:loadpointer"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0AF036F": {
@@ -132356,6 +133097,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AF0569": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "09E3F42:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AF0585": {
    "zh": "对了，\n要不要留个电话？",
    "cap": 22,
@@ -132398,6 +133148,15 @@
    "refs": [
     "0AF0360:loadpointer",
     "0AF04CE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF0636": {
+   "zh": "{FC:06 00}获得了2点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AE3437:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -132542,6 +133301,15 @@
    "cap": 23,
    "refs": [
     "0AF0AFB:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF0C2D": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0AF0B1A:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -133093,11 +133861,31 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AF2518": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AF2453:loadpointer",
+    "0AF2566:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AF271E": {
    "zh": "{FC:06 00}完成任务:<遗失的钥匙>",
    "cap": 25,
    "refs": [
     "0AF295C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF2739": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AF2711:loadpointer",
+    "0AF2986:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -133191,6 +133979,20 @@
    "cap": 35,
    "refs": [
     "0AF2B07:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF2B55": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AF30D6:loadpointer",
+    "0AFD00B:loadpointer",
+    "0AFD541:loadpointer",
+    "0AFFADC:loadpointer",
+    "0EC1F8E:loadpointer",
+    "0F5BA7B:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -133409,6 +134211,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AF34A9": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0AF346D:loadpointer",
+    "0F5BAB0:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AF34CC": {
    "zh": "嗯……\n让我看看……{FB}<<城都编年史>>、\n<<阿罗拉美女大赏>>和{FA}<<宝可梦水银攻略本>>{FB}没错，正是这三本书！\n完好无损地回收了！{FB}辛苦你了，\n这是给你的报酬。",
    "cap": 137,
@@ -133562,6 +134374,15 @@
    "cap": 31,
    "refs": [
     "0AF3CAF:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AF3D00": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥",
+   "cap": 32,
+   "refs": [
+    "0AF3CCE:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -135563,6 +136384,17 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AFC5E1": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和3000¥!",
+   "cap": 33,
+   "refs": [
+    "0AFC5B1:loadpointer",
+    "0AFD102:loadpointer",
+    "0AFD7B7:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AFC604": {
    "zh": "嗯？\n我什么都没说！",
    "cap": 18,
@@ -136267,6 +137099,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0AFE07F": {
+   "zh": "……城……\n……练……堡……数……",
+   "cap": 22,
+   "refs": [
+    "0AFE077:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0AFE13C": {
    "zh": "大叔带着乌波逃跑了……\n咦？好像有什么东西落在了地上！",
    "cap": 50,
@@ -136294,6 +137135,15 @@
     "0AFE61D:loadpointer"
    ],
    "untrusted": 1,
+   "suspect": false
+  },
+  "0AFE1D5": {
+   "zh": "……轮……\n各……外……着……",
+   "cap": 20,
+   "refs": [
+    "0AFE1CD:loadpointer"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "0AFE1F4": {
@@ -136593,6 +137443,16 @@
    "refs": [
     "0AFEDF4:loadpointer",
     "0EC1BF2:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AFF07D": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0AFF178:loadpointer",
+    "0AFF19B:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -137738,6 +138598,15 @@
    "cap": 29,
    "refs": [
     "0D55509:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0D555DA": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0D55528:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -150193,6 +151062,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EC07C3": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0EC048C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EC0837": {
    "zh": "水君很明显\n已经意识到了你的存在，{FB}缘朱市的传说上说\n传说中的宝可梦{FA}好像会贴近到它认可的{FA}人类身边来。{FB}今后我也要像你那样\n更加积极去面对水君才行……",
    "cap": 142,
@@ -150328,6 +151206,15 @@
    ],
    "untrusted": 2,
    "suspect": true
+  },
+  "0EC12A8": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0EC124F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
   },
   "0EC12CB": {
    "zh": "{FC:06 00}完成任务:<遥远的约定>",
@@ -151411,6 +152298,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EC32D3": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和3000¥!",
+   "cap": 33,
+   "refs": [
+    "0EC32A7:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EC33A3": {
    "zh": "前面就是新城区了。{FB}可能会有很多\n让你觉得惊喜的东西哦。",
    "cap": 53,
@@ -152174,6 +153070,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EC5B84": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和8000¥!",
+   "cap": 34,
+   "refs": [
+    "0EC599F:loadpointer",
+    "0EC6B40:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EC5E13": {
    "zh": "真理纱：站住，站住！\n你是谁呀！",
    "cap": 28,
@@ -152354,6 +153260,15 @@
    "cap": 25,
    "refs": [
     "0EC5DD6:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC6934": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和8000¥!",
+   "cap": 34,
+   "refs": [
+    "0EC5DF5:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -152973,6 +153888,36 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EC8303": {
+   "zh": "金之护符    {FC:06 00}50000¥",
+   "cap": 22,
+   "refs": [
+    "0EC80EE:loadpointer",
+    "0EC8216:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC831B": {
+   "zh": "银之护符    {FC:06 00}50000¥",
+   "cap": 22,
+   "refs": [
+    "0EC80FC:loadpointer",
+    "0EC8224:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC8333": {
+   "zh": "水晶护符    {FC:06 00}50000¥",
+   "cap": 22,
+   "refs": [
+    "0EC810A:loadpointer",
+    "0EC8232:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EC834B": {
    "zh": "想要稀有的护符吗？\n我的祖先可是送神山的祈祷师哦。",
    "cap": 48,
@@ -153023,6 +153968,15 @@
    "cap": 94,
    "refs": [
     "0EC863A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC86A2": {
+   "zh": "{FC:06 00}获得了15点BracerPoints和15000¥!",
+   "cap": 35,
+   "refs": [
+    "0EC8613:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -153149,6 +154103,15 @@
    "refs": [
     "0EC8421:loadpointer",
     "0EC8723:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC8FB1": {
+   "zh": "HIKARI……\n光……光之石吗？",
+   "cap": 23,
+   "refs": [
+    "0EC8F49:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -153739,6 +154702,15 @@
    "cap": 103,
    "refs": [
     "0ECA103:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0ECB689": {
+   "zh": "…… …… …… ……{FB}……对不起……",
+   "cap": 23,
+   "refs": [
+    "0ECB679:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -154529,6 +155501,15 @@
    ],
    "untrusted": 0,
    "suspect": true
+  },
+  "0ECEFFE": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和10000¥!",
+   "cap": 35,
+   "refs": [
+    "0ED0002:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
   },
   "0ECF023": {
    "zh": "特别是……{FD:01}。{FB}如果没有你在我身边，\n没有你帮我找回那个护身符，{FA}我绝对无法迈出那一步。{FB}你就像是我的\n“强力香草”一样呢！{FB}让原本需要蓄力很久的我也能\n瞬间释放出力量！{FB}这个……请你收下！\n这是我最珍贵的一份心意！",
@@ -155409,6 +156390,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0ED23AD": {
+   "zh": "{FC:06 00}获得了8点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0ED20BE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0ED25AD": {
    "zh": "{FC:06 00}接受任务:<最后的大哥秀>",
    "cap": 27,
@@ -155837,6 +156827,15 @@
     "0ED3489:loadpointer",
     "0ED34AE:trainerbattle",
     "0ED34B2:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0ED3FC6": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和8000¥!",
+   "cap": 33,
+   "refs": [
+    "0ED3FB0:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -157350,6 +158349,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EDA124": {
+   "zh": "德BeautyPoints{FC:01 02}{FC:03 03}吗？{FA}您现在共有{FD:02}点{FC:01 06}{FC:03 09}BeautyPoints{FC:01 02}{FC:03 03}。",
+   "cap": 64,
+   "refs": [
+    "0ED9D5D:message"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EDA1A2": {
    "zh": "您想要\n兑换多少个{FD:03}呢？",
    "cap": 23,
@@ -157357,6 +158365,50 @@
     "0EDA037:message",
     "0EDA496:message",
     "0EDA71A:message"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EDA1C3": {
+   "zh": "10个",
+   "cap": 5,
+   "refs": [
+    "0EDA005:loadpointer",
+    "0EDA464:loadpointer",
+    "0EDA6E8:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EDA1CC": {
+   "zh": "25个",
+   "cap": 5,
+   "refs": [
+    "0EDA013:loadpointer",
+    "0EDA472:loadpointer",
+    "0EDA6F6:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EDA1D5": {
+   "zh": "50个",
+   "cap": 5,
+   "refs": [
+    "0EDA021:loadpointer",
+    "0EDA480:loadpointer",
+    "0EDA704:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EDA1DE": {
+   "zh": "100个",
+   "cap": 6,
+   "refs": [
+    "0EDA02F:loadpointer",
+    "0EDA48E:loadpointer",
+    "0EDA712:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -159314,6 +160366,18 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EDF27F": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0EDF224:loadpointer",
+    "0EE03E6:loadpointer",
+    "0EE0730:loadpointer",
+    "0EE1146:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EDF2A2": {
    "zh": "{FC:06 00}完成任务:<异样的呆呆兽>",
    "cap": 27,
@@ -160052,6 +161116,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EE190B": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和7000¥!",
+   "cap": 33,
+   "refs": [
+    "0EE18CD:loadpointer",
+    "0EE18E2:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EE192E": {
    "zh": "见习忍者释放忍术消失了……\n如果想要学习毒菱，{FA}就去她的家中找她吧。",
    "cap": 63,
@@ -160178,6 +161252,16 @@
    "refs": [
     "0EE1BE0:loadpointer",
     "0EE2190:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EE1ED2": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0EE1C0A:loadpointer",
+    "0EE21BA:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -161249,6 +162333,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EE61EA": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0EE6144:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EE6213": {
    "zh": "真是个吵闹的家伙。 {FB}不过，\n他的那份热情……{FA}倒让老夫想起了年轻的时候啊。{FB}偶尔看看外面的世界，\n也不算太坏……{FB}好了，{FD:01}，\n老夫要继续工作了。",
    "cap": 128,
@@ -161431,6 +162524,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EE6FCD": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0EE6FAF:loadpointer",
+    "0EE751A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EE6FF0": {
    "zh": "{FC:06 00}完成任务:<同一片天空下的哈欠>",
    "cap": 33,
@@ -161578,6 +162681,15 @@
    "cap": 27,
    "refs": [
     "0EE791C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EE7998": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0EE793B:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -162317,6 +163429,20 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0EEAAF0": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和12000¥!",
+   "cap": 35,
+   "refs": [
+    "07B0A0A:loadpointer",
+    "07B1561:loadpointer",
+    "07B1646:loadpointer",
+    "07B33C0:loadpointer",
+    "0EEA99C:loadpointer",
+    "0EEF63A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0EEAB15": {
    "zh": "{FC:01 06}{FC:03 09}阿速将大比鸟超级进化的波动\n储存在了{FD:01}的超级石中。",
    "cap": 55,
@@ -162915,6 +164041,16 @@
    "refs": [
     "0EEC901:loadpointer",
     "0EECC38:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EECC89": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和10000¥!",
+   "cap": 34,
+   "refs": [
+    "07B21C2:loadpointer",
+    "0EECB47:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -164105,6 +165241,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F33473": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和10000¥!",
+   "cap": 34,
+   "refs": [
+    "0F333DE:loadpointer",
+    "0F58267:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F33497": {
    "zh": "难不成……\n终于帮我找到玩偶了吗？{FA}唔……我看看。",
    "cap": 43,
@@ -164634,6 +165780,17 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F3471A": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F344B6:loadpointer",
+    "0F34AFC:loadpointer",
+    "0F34DE6:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F3473D": {
    "zh": "{FC:06 00}完成任务:<穿玩偶服的人?>",
    "cap": 28,
@@ -164898,6 +166055,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F35349": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F35038:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F3536C": {
    "zh": "非现世的气息消失了，\n现在又可以去擂钵山修炼了。",
    "cap": 46,
@@ -164957,6 +166123,15 @@
    "cap": 27,
    "refs": [
     "0F3548C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F356F1": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F354B6:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -167169,6 +168344,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F3D1E1": {
+   "zh": "e了。",
+   "cap": 5,
+   "refs": [
+    "0F3C763:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F3D1EB": {
    "zh": "{FC:01 06}{FC:03 09}{FD:01}将断崖镇长老\n的信交给了龙之长老。",
    "cap": 41,
@@ -168064,6 +169248,15 @@
    "untrusted": 1,
    "suspect": false
   },
+  "0F3ECB4": {
+   "zh": "{FC:06 00}获得了5点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0F3EC7D:loadpointer"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
   "0F3ECD4": {
    "zh": "在委托你之前，\n我一共找过31个人。{FB}所以……\n你是第32个。{FB}这样一来……\n封印也就解除了。{FB}曾经使用神奇法术的旅人\n也应该不会和我计较了吧……{FB}谢谢你陪我。\n你永远都不要忘记我哦……",
    "cap": 161,
@@ -168135,6 +169328,15 @@
    "cap": 29,
    "refs": [
     "0F3F905:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F3EEEF": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和108¥!",
+   "cap": 32,
+   "refs": [
+    "0F3EE12:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -168225,6 +169427,15 @@
    "cap": 25,
    "refs": [
     "0F3F47C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F3F2A7": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和15000¥!",
+   "cap": 34,
+   "refs": [
+    "0F3F4A6:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -168335,6 +169546,15 @@
    "cap": 25,
    "refs": [
     "0F3FA02:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F3F894": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和15000¥!",
+   "cap": 34,
+   "refs": [
+    "0F3FA2C:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -168456,6 +169676,15 @@
    "refs": [
     "0F3FE8B:loadpointer",
     "0F3FED2:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F40260": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F3FEC0:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -168742,6 +169971,15 @@
    "cap": 52,
    "refs": [
     "0F426D8:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F4288C": {
+   "zh": "3……{FB}2……{FB}1……{FB}开始！",
+   "cap": 18,
+   "refs": [
+    "0F41DED:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -170816,6 +172054,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F49820": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和5000¥!",
+   "cap": 33,
+   "refs": [
+    "0F497B9:loadpointer",
+    "0F58760:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F49843": {
    "zh": "招式学习器44的里面是\n嗝……{FA}…… …… ……{FB}……哈！是“睡觉”！{FB}能酣畅入睡，\n立刻进入深度睡眠，{FA}还能回复体力！",
    "cap": 94,
@@ -171490,6 +172738,19 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F4B901": {
+   "zh": "{FC:01 06}{FC:03 09}获得了{FD:02}点BeautyPoints！{FC:01 02}{FC:01 03}",
+   "cap": 36,
+   "refs": [
+    "0ED9375:loadpointer",
+    "0ED9727:loadpointer",
+    "0EE8765:loadpointer",
+    "0EE8816:loadpointer",
+    "0EE8887:loadpointer"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
   "0F4B92E": {
    "zh": "辛苦了！\n这是给第一名的奖励！",
    "cap": 28,
@@ -171717,6 +172978,15 @@
    "cap": 21,
    "refs": [
     "0F4C1CE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F4C4E4": {
+   "zh": "…… …… …… ……\n…… …… …… ……{FB}好吧……",
+   "cap": 31,
+   "refs": [
+    "0F4C176:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -173277,6 +174547,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F50AD9": {
+   "zh": "ANANUKE……\n离洞绳？",
+   "cap": 18,
+   "refs": [
+    "0F5090F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F50B94": {
    "zh": "哎，{FD:01}！\n没遇到我的助手吗？{FB}他为了帮你把蛋送过去，\n到桔梗市的商店去等你了啊……",
    "cap": 74,
@@ -173504,6 +174783,15 @@
     "0F523DA:loadpointer"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0F51F3E": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F5215D:loadpointer"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0F51F99": {
@@ -174103,6 +175391,63 @@
    "cap": 34,
    "refs": [
     "0F537FB:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F5392D": {
+   "zh": "呆呆兽：……{FB}…… …… ……",
+   "cap": 19,
+   "refs": [
+    "0EE6D5C:loadpointer",
+    "0F538D1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F53942": {
+   "zh": "…… …… 呀呆？",
+   "cap": 12,
+   "refs": [
+    "0EE6DC9:loadpointer",
+    "0EE6E07:loadpointer",
+    "0F5391A:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F539CC": {
+   "zh": "呆河马：……{FB}…… …… ……",
+   "cap": 19,
+   "refs": [
+    "0F53970:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F539E1": {
+   "zh": "…… …… 呀呆？",
+   "cap": 12,
+   "refs": [
+    "0F539B9:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F53A6B": {
+   "zh": "呆河马：……{FB}…… …… ……",
+   "cap": 19,
+   "refs": [
+    "0F53A0F:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F53A80": {
+   "zh": "…… …… 呀呆？",
+   "cap": 12,
+   "refs": [
+    "0F53A58:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -175567,6 +176912,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F585FB": {
+   "zh": "{FC:06 00}获得了5点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "0AC1340:loadpointer",
+    "0ECB5D3:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F58640": {
    "zh": "进化以后的样子\n看上去有些麻烦呢…{FB}可是它看上去也没有\n达到能够进化的等级呢。{FB}难道是……坚决不愿意\n上班的心情使它进化了吗？{FB}早知道，还是豪力……{FB}算了，以后的事{F9:D3}\n以后再说吧。{FA}我们先出发了，再见！",
    "cap": 182,
@@ -176645,6 +178000,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0F5BD86": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和6000¥!",
+   "cap": 33,
+   "refs": [
+    "0F5BCE9:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0F5BDA9": {
    "zh": "{FC:06 00}完成任务:<迷路的小锯鳄>",
    "cap": 27,
@@ -177276,6 +178640,15 @@
    "cap": 29,
    "refs": [
     "0F5D66D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0F5DD80": {
+   "zh": "{FC:06 00}获得了3点BracerPoints和4000¥!",
+   "cap": 33,
+   "refs": [
+    "0F5D692:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -178856,6 +180229,15 @@
    ],
    "untrusted": 0,
    "suspect": true
+  },
+  "11D79D1": {
+   "zh": "     野 ！  Br耩",
+   "cap": 16,
+   "refs": [
+    "0539368:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
   },
   "128967F": {
    "zh": "艇宗诮棕医弄肤\n{FB}{F9:F8}{F7:F8}{F9:FC}",
@@ -187418,6 +188800,15 @@
     "1411624:aligned"
    ],
    "untrusted": 2,
+   "suspect": false
+  },
+  "17E0F03": {
+   "zh": "块           苹果居",
+   "cap": 20,
+   "refs": [
+    "01B0532:trainerbattle"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "17E0F53": {
@@ -197150,6 +198541,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1D9B582": {
+   "zh": "Level 100 队伍",
+   "cap": 15,
+   "refs": [
+    "1CCF6F1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1D9B591": {
    "zh": "满游戏代币",
    "cap": 11,
@@ -197299,6 +198699,15 @@
    "cap": 5,
    "refs": [
     "1CCF801:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1D9B63D": {
+   "zh": "HM和TM",
+   "cap": 7,
+   "refs": [
+    "1CCF80F:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -207697,6 +209106,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DA38BF": {
+   "zh": "{FC:06 00}获得了4点BracerPoints和4000¥!{FC:07}",
+   "cap": 35,
+   "refs": [
+    "1CD31B2:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DA38E2": {
    "zh": "那么，作为报答，\n我今后免费为你服务。{FB}想让宝可梦\n遗忘招式时，{FA}随时来找老夫吧。",
    "cap": 74,
@@ -207832,6 +209250,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DA4162": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和10000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD34A0:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DA4187": {
    "zh": "{FC:01 06}{FC:03 09}{FD:01}获得了丑丑鱼！",
    "cap": 22,
@@ -207919,6 +209346,15 @@
    "cap": 27,
    "refs": [
     "1CD3AD5:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA438E": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和12000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD3AF4:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -208177,6 +209613,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DA4B86": {
+   "zh": "{FC:06 00}获得了5点BracerPoints和6000¥!{FC:07}",
+   "cap": 35,
+   "refs": [
+    "1CD3C77:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DA4BA9": {
    "zh": "嘘！小点声！\n别把乔伊小姐的目光引过来了。{FB}你……是准备去隔壁\n华丽大赛会馆参赛的训练家吧？{FB}嘿嘿，算你运气好，\n碰上了我。{FB}我刚刚抓到了华丽大赛会馆\n后台数据库的一个漏洞。{FB}只要你给我提供一点算力赞助……\n也就是游戏城的代币啦。{FB}我就能绕过防火墙，\n直接修改底层数据，{FB}把你的{FC:01 06}{FC:03 09}BeautyPoints{FC:01 02}{FC:03 03}直接拉满！\n要来交易一下吗？",
    "cap": 301,
@@ -208236,6 +209681,26 @@
    "cap": 79,
    "refs": [
     "1CD3E6C:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA4DBE": {
+   "zh": "Bypass Firewall...\nInjecting Beauty Data...{FB}Overriding\nContest Stats...{FB}搞定！完美的数据篡改！",
+   "cap": 93,
+   "refs": [
+    "1CD3DE5:loadpointer",
+    "1CD3E11:loadpointer",
+    "1CD3E3D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA4E1B": {
+   "zh": "{FD:01}得了\n{FC:01 06}{FC:03 09}{FD:02}{FC:01 02}{FC:03 03}点{FC:01 06}{FC:03 09}BeautyPoints{FC:01 02}{FC:03 03}！",
+   "cap": 49,
+   "refs": [
+    "1CD3E51:message"
    ],
    "untrusted": 0,
    "suspect": false
@@ -208450,6 +209915,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DA55E8": {
+   "zh": "{FC:06 00}获得了15点BracerPoints和10000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD41A1:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DA560D": {
    "zh": "这期节目播出的时候，\n我一定会在特别鸣谢里{FA}念出你的名字哦！{FB}要记得收听我的节目哦，\n拜拜！",
    "cap": 85,
@@ -208558,6 +210032,15 @@
    "cap": 31,
    "refs": [
     "1CD4399:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA5A7C": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和12000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD43C9:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -209084,6 +210567,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DA7091": {
+   "zh": "{FC:06 00}获得了20点BracerPoints和20000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD48FC:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DA70B6": {
    "zh": "呼……虽然失控\n超级进化的事件，{FB}总算是告一段落了……{FB}但我对之前提到的\n卡吉镇传闻，{FB}还是有些放不下心啊。{FB}如果真的有人在暗中\n用电波，{FB}或是别的什么手段\n迫使宝可梦进化，{FB}那简直是不可饶恕的\n恶劣行径！{FB}{FD:01}，你之后的旅行\n应该也会经过{FA}卡吉镇那边吧？{FB}请你务必多加小心，\n顺便稍微留意一下{FA}那里的动静吧！",
    "cap": 278,
@@ -209372,6 +210864,15 @@
    "cap": 31,
    "refs": [
     "1CD0E6D:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA7A09": {
+   "zh": "{FC:06 00}获得了15点BracerPoints和20000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD0E83:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -209734,6 +211235,15 @@
    "cap": 27,
    "refs": [
     "1CD04BE:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DA8EA8": {
+   "zh": "{FC:06 00}获得了8点BracerPoints和9000¥!{FC:07}",
+   "cap": 35,
+   "refs": [
+    "1CD04D7:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -211596,6 +213106,15 @@
    "cap": 31,
    "refs": [
     "1CD6221:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DACB21": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和12000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD624E:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -213965,6 +215484,24 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DB141D": {
+   "zh": "{FC:06 00}获得了10点BracerPoints和5000¥!{FC:07}",
+   "cap": 36,
+   "refs": [
+    "1CD9520:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DB1441": {
+   "zh": "{FC:06 00}获得了25点BracerPoints和10000¥!{FC:07}",
+   "cap": 37,
+   "refs": [
+    "1CD9538:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DB1466": {
    "zh": "呼……刚才真的好险。\n多亏了正辉先生！{FB}让我们能够\n暂时在这里落脚。",
    "cap": 61,
@@ -213988,6 +215525,15 @@
    "cap": 268,
    "refs": [
     "1CD968E:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DB15CB": {
+   "zh": "………………{FB}……对不起。",
+   "cap": 17,
+   "refs": [
+    "1CD96EA:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -216519,6 +218065,15 @@
    "cap": 177,
    "refs": [
     "1CDE235:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DB754D": {
+   "zh": "          宝可梦 水银\n      Second Chapter：彩虹",
+   "cap": 48,
+   "refs": [
+    "1CDE2CD:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -221371,6 +222926,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "1DBE851": {
+   "zh": "{FC:06 00}获得了3点BracerPoints!",
+   "cap": 26,
+   "refs": [
+    "1CE1594:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "1DBE86B": {
    "zh": "{FC:06 00}接受任务:<红色碎片告急>",
    "cap": 27,
@@ -222008,6 +223572,15 @@
    "cap": 104,
    "refs": [
     "1CE27A4:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "1DBF4A1": {
+   "zh": "{FC:06 00} 获得了6点BracerPoints和6000",
+   "cap": 32,
+   "refs": [
+    "1CE27EC:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
