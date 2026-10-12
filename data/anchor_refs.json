@@ -1,0 +1,272 @@
+{
+ "043F2FC": {
+  "string": "0418706",
+  "ldr": "043F1CA",
+  "use": "ldr r0, [r5, #0x14]"
+ },
+ "043F308": {
+  "string": "0418902",
+  "ldr": "043F1CC",
+  "use": "ldrb r0, [r7, #5]"
+ },
+ "0732D20": {
+  "string": "073F040",
+  "ldr": "07329BA",
+  "use": "adds r0, #0x60"
+ },
+ "0738914": {
+  "string": "075C9C4",
+  "ldr": "073875C",
+  "use": "adds r3, #0x38"
+ },
+ "0AF64A8": {
+  "string": "0AF6BBA",
+  "ldr": "0AF64A4",
+  "use": "ldr r2, [r7, #0x38]"
+ },
+ "0B7A9B4": {
+  "string": "0A00A74",
+  "ldr": "0B7A780",
+  "use": "ldrh r4, [r2, #0x22]"
+ },
+ "0CCE618": {
+  "string": "01B14F7",
+  "ldr": "0CCE55A",
+  "use": "ldrb r7, [r7, #0x1f]"
+ },
+ "0DF1D70": {
+  "string": "0E37264",
+  "ldr": "0DF1CE0",
+  "use": "adds r1, #0x20"
+ },
+ "0DF2178": {
+  "string": "0E37264",
+  "ldr": "0DF1E54",
+  "use": "adds r0, #0x58"
+ },
+ "0DF3D4C": {
+  "string": "0E37CA0",
+  "ldr": "0DF3CE8",
+  "use": "adds r0, #0x27"
+ },
+ "0DF3E1C": {
+  "string": "0E37CA0",
+  "ldr": "0DF3DB8",
+  "use": "adds r0, #0x27"
+ },
+ "0DF4100": {
+  "string": "0E37CA0",
+  "ldr": "0DF3EE4",
+  "use": "adds r1, #0x38"
+ },
+ "0DF48D0": {
+  "string": "0E37CA0",
+  "ldr": "0DF48B8",
+  "use": "adds r4, #0xe"
+ },
+ "0DF7440": {
+  "string": "0E39F8C",
+  "ldr": "0DF71D2",
+  "use": "adds r1, #0x20"
+ },
+ "0DF85D4": {
+  "string": "0E3BACC",
+  "ldr": "0DF853A",
+  "use": "adds r1, #0x60"
+ },
+ "0DF8930": {
+  "string": "0E3BB4C",
+  "ldr": "0DF8736",
+  "use": "adds r0, #0x18"
+ },
+ "0DF8964": {
+  "string": "0E3BA4C",
+  "ldr": "0DF87AA",
+  "use": "adds r3, #0x3f"
+ },
+ "0DF9F20": {
+  "string": "0E3DA54",
+  "ldr": "0DF9E22",
+  "use": "adds r3, #0xd"
+ },
+ "0DFA0A0": {
+  "string": "0E3DA54",
+  "ldr": "0DF9FA2",
+  "use": "adds r3, #0xd"
+ },
+ "0DFA220": {
+  "string": "0E3DA54",
+  "ldr": "0DFA122",
+  "use": "adds r3, #0xd"
+ },
+ "0DFA3EC": {
+  "string": "0E3DA54",
+  "ldr": "0DFA28E",
+  "use": "adds r3, #0xd"
+ },
+ "0DFA80C": {
+  "string": "0E3DA54",
+  "ldr": "0DFA6FE",
+  "use": "adds r2, #0x74"
+ },
+ "0DFABFC": {
+  "string": "0E3DAD4",
+  "ldr": "0DFA832",
+  "use": "adds r3, #0x5b"
+ },
+ "0DFAC00": {
+  "string": "0E3DA54",
+  "ldr": "0DFA840",
+  "use": "adds r3, #0xd"
+ },
+ "0DFAC38": {
+  "string": "0E3DB54",
+  "ldr": "0DFA8DE",
+  "use": "adds r3, #0x55"
+ },
+ "0DFAC48": {
+  "string": "0E3DBD4",
+  "ldr": "0DFAA5C",
+  "use": "adds r3, #0x30"
+ },
+ "0DFAC50": {
+  "string": "0E3DC54",
+  "ldr": "0DFAB30",
+  "use": "adds r3, #0xb"
+ },
+ "0DFB070": {
+  "string": "0E3DA54",
+  "ldr": "0DFAD1E",
+  "use": "adds r3, #0xd"
+ },
+ "0DFB4C0": {
+  "string": "0E3DA54",
+  "ldr": "0DFB3C4",
+  "use": "adds r2, #0x74"
+ },
+ "0DFB4C8": {
+  "string": "0E3DAD4",
+  "ldr": "0DFB464",
+  "use": "adds r3, #0x5b"
+ },
+ "0DFB8B0": {
+  "string": "0E3DA54",
+  "ldr": "0DFB4CC",
+  "use": "adds r3, #0xd"
+ },
+ "0DFB8E8": {
+  "string": "0E3DB54",
+  "ldr": "0DFB55E",
+  "use": "adds r3, #0x55"
+ },
+ "0DFB8F0": {
+  "string": "0E3DBD4",
+  "ldr": "0DFB69C",
+  "use": "adds r3, #0x30"
+ },
+ "0DFB8F4": {
+  "string": "0E3DC54",
+  "ldr": "0DFB73C",
+  "use": "adds r3, #0xb"
+ },
+ "0DFBA90": {
+  "string": "0E3DA54",
+  "ldr": "0DFB978",
+  "use": "adds r3, #0xd"
+ },
+ "0F65328": {
+  "string": "0F68DDC",
+  "ldr": "0F65122",
+  "use": "adds r0, #0x20"
+ },
+ "0F654D8": {
+  "string": "0F68DDC",
+  "ldr": "0F653CA",
+  "use": "adds r0, #0x20"
+ },
+ "0FCA68C": {
+  "string": "0FF6AC0",
+  "ldr": "0FCA586",
+  "use": "adds r3, #0x5f"
+ },
+ "0FCAA2C": {
+  "string": "0FF6B40",
+  "ldr": "0FCA6B6",
+  "use": "adds r3, #0x6c"
+ },
+ "0FCAA4C": {
+  "string": "0FF6BC0",
+  "ldr": "0FCA750",
+  "use": "adds r3, #0x2b"
+ },
+ "0FCAA84": {
+  "string": "0FF6D40",
+  "ldr": "0FCA98A",
+  "use": "adds r3, #0x15"
+ },
+ "0FCAE0C": {
+  "string": "0FF6DC0",
+  "ldr": "0FCAA9E",
+  "use": "adds r3, #0x2a"
+ },
+ "0FCAE2C": {
+  "string": "0FF6E40",
+  "ldr": "0FCAB46",
+  "use": "adds r3, #0x28"
+ },
+ "0FCAE34": {
+  "string": "0FF6EC0",
+  "ldr": "0FCABB4",
+  "use": "adds r3, #0x19"
+ },
+ "0FCAE7C": {
+  "string": "0FF6FC0",
+  "ldr": "0FCADCE",
+  "use": "adds r3, #0x1b"
+ },
+ "0FCB230": {
+  "string": "0FF6FC0",
+  "ldr": "0FCAF12",
+  "use": "adds r0, #0x44"
+ },
+ "0FCB264": {
+  "string": "0FF6AC0",
+  "ldr": "0FCB07C",
+  "use": "adds r3, #0x31"
+ },
+ "0FCB26C": {
+  "string": "0FF6BC0",
+  "ldr": "0FCB10E",
+  "use": "adds r0, #0x74"
+ },
+ "0FCB278": {
+  "string": "0FF6DC0",
+  "ldr": "0FCB16C",
+  "use": "adds r0, #0x64"
+ },
+ "0FCD61C": {
+  "string": "0FF89BC",
+  "ldr": "0FCD604",
+  "use": "adds r4, #0x10"
+ },
+ "101124C": {
+  "string": "10D07DC",
+  "ldr": "1010EC8",
+  "use": "ldrh r4, [r1, #0x2c]"
+ },
+ "1019958": {
+  "string": "10D07DC",
+  "ldr": "1019618",
+  "use": "adds r1, #0x87"
+ },
+ "10A7580": {
+  "string": "10D07DC",
+  "ldr": "10A736C",
+  "use": "str r7, [r0, #0x44]"
+ },
+ "14729E8": {
+  "string": "0190B3D",
+  "ldr": "1472802",
+  "use": "ldrb r6, [r1, #5]"
+ }
+}

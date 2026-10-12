@@ -12,6 +12,8 @@ string inside them) are recycled as free space.
 Outputs: build/Mercury_EN.gba, build/Mercury_EN.bps (applies to clean FR 1.0),
          build/insert_report.json
 """
+import array
+import bisect
 import glob
 import json
 import os
@@ -56,6 +58,36 @@ def src_max_px(zh, widths):
         px = sum(mt.HANZI_PX if ord(c) >= 0x3000 else 6 for c in line)
         best = max(best, px)
     return best
+
+
+FF_KEEP_BEFORE, FF_KEEP_AFTER = 16, 256  # window kept around a table pointer's target
+
+
+def referenced_ff(rom):
+    """[start, end) spans of 0xFF runs the hack reads as data, never free space."""
+    runs = [(m.start(), m.end()) for m in re.finditer(rb"\xff{%d,}" % MIN_FREE_RUN, rom)]
+    starts = [s for s, _ in runs]
+
+    def run_of(off):
+        i = bisect.bisect_right(starts, off) - 1
+        return runs[i] if i >= 0 and off < runs[i][1] else None
+
+    out = []
+    lits = json.load(open("data/hack_code.json"))["literals"].values()
+    for v in lits:
+        r = run_of((v["value"] & ~1) - 0x08000000) if 0x08000000 <= v["value"] < 0x0A000000 else None
+        if r:
+            out.append(r)
+    words = array.array("I", rom[:len(rom) // 4 * 4])
+    isptr = [0x08000000 <= w < 0x0A000000 for w in words]
+    for i, w in enumerate(words):
+        if not isptr[i] or not ((i and isptr[i - 1]) or (i + 1 < len(words) and isptr[i + 1])):
+            continue
+        t = (w & ~1) - 0x08000000
+        r = run_of(t)
+        if r:
+            out.append((max(r[0], t - FF_KEEP_BEFORE), min(r[1], t + FF_KEEP_AFTER)))
+    return out
 
 
 class FreePool:
@@ -175,6 +207,17 @@ def main():
     if os.environ.get("INSERT_SKIP"):
         for a in json.load(open(os.environ["INSERT_SKIP"])):
             strings.pop(int(a, 16), None)
+    # refs that are GCC section anchors (scripts/anchor_refs.py): code reaches
+    # other data by offset from them, so they are never repointed and the
+    # original bytes are never recycled; such text is written in place or kept
+    anchor_refs = set(json.load(open("data/anchor_refs.json")))
+    for v in strings.values():
+        anc = [r for r in v["refs"] if r.split(":")[0] in anchor_refs]
+        if anc:
+            v["refs"] = [r for r in v["refs"] if r not in anc]
+            v["untrusted"] += len(anc)
+            v["anchored"] = True
+    report["anchor_kept"] = []
     starts = sorted(strings)
     contains_other = set()
     for i, a in enumerate(starts):
@@ -240,6 +283,8 @@ def main():
             rom[t:t + v["cap"]] = b + b"\xff" * (v["cap"] - len(b))
             pool.add(t + len(b) + 1, t + v["cap"]) if v["untrusted"] == 0 and t not in keep else None
             report["inplace"] += 1
+        elif v.get("anchored") and not v["refs"]:
+            report["anchor_kept"].append(f"{t:07X} {len(b)}>{v['cap']}: {en!r}")
         else:
             pending.append((t, b))
             if v["untrusted"] == 0 and t not in contains_other and t not in keep:
@@ -258,6 +303,12 @@ def main():
             for st in blk["strings"]:
                 a = int(st["zh_at"], 16)
                 pool.reserve(a - 1, src.index(b"\xff", a) + 1)
+    # 0xFF runs the hack reads as data are not free: a code literal into a run
+    # (a table the code indexes, e.g. 0xC2AEA0) keeps the whole run, and a
+    # pointer from a pointer table (end-marker entries such as the dressing
+    # room's 26th outfit at 0x76AF1C, empty-string slots) keeps a window
+    for a, b in referenced_ff(src):
+        pool.reserve(a, b)
     # every word that gets repointed below must not end up under new text
     for v in strings.values():
         for r in v["refs"]:
