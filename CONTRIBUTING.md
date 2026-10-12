@@ -19,10 +19,13 @@ or PR that tracks such a file or anything with a GBA ROM header.
 
 Open an issue with:
 
-- the release (e.g. `beta-2`) and emulator (mGBA version, or hardware/flashcart),
+- the release (e.g. `beta-3`) and emulator (mGBA version, or hardware/flashcart),
 - where it happened (town/route, menu, what you pressed),
-- a screenshot, and a save state or save file if it's a crash or freeze. Attach
-  saves to the issue, never to a PR.
+- a screenshot, and your `.sav` file if it's a crash or freeze (an in-game
+  save; emulator save states break between patch versions). Attach saves to
+  the issue, never to a PR.
+
+The [bug report form](../../issues/new/choose) asks for all of this.
 
 Untranslated or clipped text is a bug too. A screenshot is enough.
 

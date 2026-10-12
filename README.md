@@ -9,6 +9,21 @@ Upgrade (CFRU) engine. No other English patch for this hack exists.
 > polished and play-tested; see [Issues](../../issues) and
 > [`PLAYTEST.md`](PLAYTEST.md).
 
+## 🐞 Found a bug? Report it here
+
+**[Open an issue →](../../issues/new/choose)** · [Known issues](../../issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+Crashes, freezes, garbled screens, Chinese text that's still showing, text
+running out of its box: please report them all. Check the
+[open issues](../../issues) first, and add a comment if yours is already there.
+The most helpful reports include:
+
+- the **patch version** (e.g. `beta-3`) and your **emulator** (mGBA, myBoy…),
+- **where** it happened and what you pressed,
+- a **screenshot**,
+- for crashes, your **`.sav` file** from just before it happens (an in-game
+  save, not an emulator save state; save states break between patch versions).
+
 ## Download and patch
 
 This repository contains **no ROMs**. You need your own clean copy of

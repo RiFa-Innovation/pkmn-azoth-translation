@@ -1,0 +1,53 @@
+name: Bug report
+description: Crash, freeze, garbled screen, untranslated or clipped text
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please check the [open issues](../issues) first, and comment there if your bug is already listed.
+        **Don't attach ROM files.** Saves (.sav) are welcome.
+  - type: input
+    id: version
+    attributes:
+      label: Patch version
+      description: The release you applied, e.g. beta-3
+      placeholder: beta-3
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem?
+      options:
+        - Crash / freeze / reset
+        - Garbled or corrupted screen
+        - Chinese text still showing
+        - Text cut off or overflowing its box
+        - Wrong or awkward translation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and where?
+      description: The town/route or menu, what you pressed, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: shots
+    attributes:
+      label: Screenshot
+      description: Drag an image here. For crashes, also attach your .sav from just before it happens (in-game save, not an emulator save state).
+  - type: input
+    id: emulator
+    attributes:
+      label: Emulator / device
+      placeholder: mGBA 0.10, myBoy, flashcart…
+  - type: input
+    id: rom
+    attributes:
+      label: Base ROM
+      description: Should be FireRed USA v1.0 (the common "Squirrels" #1636 dump), CRC32 DD88761C
+      placeholder: FireRed USA 1.0 (Squirrels)
