@@ -201,61 +201,72 @@ def null_placeholder_scripts(rom, src):
 
 
 TOWER_GROUP, TOWER_MAP = 52, 2          # Bellsprout Tower, top floor
-SAGE_SCRIPT_NEW = (0x08AF60C9,          # its ON_RESUME script, to be kept
-                   bytes.fromhex("57" "0900" "0900" "0e00"    # setobjectxy 9, 9, 14
-                                 "57" "0800" "0a00" "0e00"    # setobjectxy 8, 10, 14
-                                 "63" "0900" "0900" "0e00"    # setobjectxyperm 9, 9, 14
-                                 "63" "0800" "0a00" "0e00"))  # setobjectxyperm 8, 10, 14
+TOWER_STAGE_VAR, TOWER_STAGE_ON_FLOOR = 0x5120, 22   # story stage while on the floor
+TOWER_STAGE_DONE = 23                                # ... and when the floor is over
+TOWER_ON_RESUME = 0x08AF60C9            # the map's own ON_RESUME script (kept)
 
 
-def tower_top_floor_sages(rom, src, pool):
-    """Bellsprout Tower's top floor (52.2) parks its two exit sages in the one
-    tile wide exit corridor and softlocks the player there.
+def tower_top_floor_softlock(rom, src, pool):
+    """Bellsprout Tower's top floor (52.2) softlocks the player in its exit corridor.
 
-    The sages (localIds 8 and 9) are spawned *inside* that corridor at
-    (12,22)/(12,21) and walk up into the room (their movement data ends at
-    (10,14)/(9,14)). The corridor holds exactly one object, so anything standing
-    in it - the following Pokemon, or the player on the scripted walk the coord
-    scene does at the same time - aborts the leading sage's walk after one step
-    and parks it on (12,20): the corridor's only tile. The player is then walled
-    in between the sage and their own follower, cannot reach the ladder down at
-    (12,23) (the way out of the tower) nor the coord-event tile (12,22) that
-    starts the next part of the story, and the quest stays on "head to the top".
-    Object templates live in SaveBlock1, so the stall survives reloads and
-    reproduces on the Chinese ROM (same save).
+    The floor's story lives in one long script chain, started by the coord event
+    on (12,22) and staged by two sages (localIds 8/9): the chain fights the
+    double battle and the Dynamax Bellsprout, walks both sages up the one tile
+    wide corridor into the room, and finally runs a cleanup that hides every
+    scene object and moves the story stage to 23. Until that cleanup runs the
+    story var stays at 22, which is also the coord event's trigger - so the tile
+    that starts the chain is armed the whole time.
 
-    Fix: an ON_RESUME script that re-places both sages where their walk is meant
-    to end. It runs on every map load and whenever the field is resumed (closing
-    the menu, leaving a battle), so a save that is already stuck is repaired by
-    opening and closing the menu. The map's own object templates get the same
-    coordinates so a fresh spawn cannot put them back in the corridor."""
+    A blocked `applymovement` walk *ends* (it does not wait), so the leading
+    sage's walk up the corridor stops after one step whenever anything else is
+    in that corridor (the following Pokemon, or the player). The sage then parks
+    on (12,20) - the corridor's only tile - and since the chain was interrupted,
+    the stage stays at 22: the player is walled in between the sage and their
+    follower, can neither reach the ladder down (12,23) nor step south without
+    restarting the whole chain (fights included), and the quest keeps reading
+    "Head to the top of Sprout Tower!". Object templates come from the save, so
+    reloading reproduces it, and the Chinese ROM is a dead end there too: every
+    NPC on that floor carries the placeholder `0x08000000` script, so talking to
+    the sage freezes the game (issue #17's bug) instead of opening the way.
+
+    Fix: an ON_RESUME script (runs on every map load and whenever the field is
+    resumed, so a stuck save is repaired on load, or by opening and closing the
+    menu) that finishes the interrupted floor: if the stage is 22 and the sages
+    are already spawned (flag 0x1798 clear - only true once the chain got past
+    the Bellsprout fight), it applies the same end-of-sequence cleanup as the
+    hack (hide the scene objects, stage 23). That frees the corridor, disarms
+    the coord trigger - so nothing replays - and the player can walk back down
+    into the tower. A healthy playthrough is untouched: the cleanup is gated on
+    the sages being spawned with the stage still on 22, which cannot happen
+    mid-chain (the chain has no field resumptions between those two points)."""
     u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
     rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
     gp = rp(GMAPGROUPS + 4 * TOWER_GROUP)
     mp = rp(gp + 4 * TOWER_MAP)
-    events, scripts = rp(mp + 4), rp(mp + 8)
-    objt = rp(events + 4)
+    scripts = rp(mp + 8)
     assert src[scripts:scripts + 11] == bytes.fromhex("03" "83067b08" "05" "c960af08" "00"), \
         "52.2 map scripts differ"
-    moved = {}
-    for i in range(src[events]):
-        lid = src[objt + 24 * i]
-        o = objt + 24 * i + 4
-        xy = (int.from_bytes(src[o:o + 2], "little", signed=True),
-              int.from_bytes(src[o + 2:o + 4], "little", signed=True))
-        if lid in (8, 9):
-            dest = (10, 14) if lid == 8 else (9, 14)   # end of its own walk
-            assert xy == ((12, 22) if lid == 8 else (12, 21)), f"sage {lid} at {xy}"
-            rom[o:o + 4] = (dest[0].to_bytes(2, "little", signed=True)
-                            + dest[1].to_bytes(2, "little", signed=True))
-            moved[lid] = dest
-    assert sorted(moved) == [8, 9], f"sages not found: {moved}"
 
-    body = SAGE_SCRIPT_NEW[1] + b"\x05" + SAGE_SCRIPT_NEW[0].to_bytes(4, "little")
+    b = bytes
+    head = (b"\x21" + TOWER_STAGE_VAR.to_bytes(2, "little")          # compare stage, 22
+            + TOWER_STAGE_ON_FLOOR.to_bytes(2, "little")
+            + b"\x06\x00")                                           # goto_if !equal, done
+    mid = b"\x2b" + (0x1798).to_bytes(2, "little") + b"\x06\x01"     # checkflag sages,
+    tail = (b"".join(b"\x29" + f.to_bytes(2, "little") for f in      # goto_if set, done
+                     (0x1794, 0x1790, 0x1791, 0x1795, 0x1796,       # the hack's own
+                      0x1797, 0x1798, 0x178f, 0x178e, 0x178b))      # end-of-sequence
+            + b"".join(b"\x53" + i.to_bytes(2, "little") for i in range(1, 10))
+            + b"\x16" + TOWER_STAGE_VAR.to_bytes(2, "little")
+            + TOWER_STAGE_DONE.to_bytes(2, "little")
+            + b"\x05" + TOWER_ON_RESUME.to_bytes(4, "little"))       # then the map's own
+    body = head + b"\0\0\0\0" + mid + b"\0\0\0\0" + tail
     at = pool.alloc_aligned(len(body))
+    done = 0x08000000 + at + len(body) - 5        # the trailing goto = "done"
     rom[at:at + len(body)] = body
+    for off in (len(head), len(head) + 4 + len(mid)):   # both goto_if destinations
+        rom[at + off:at + off + 4] = done.to_bytes(4, "little")
     rom[scripts + 6:scripts + 10] = (0x08000000 + at).to_bytes(4, "little")
-    return {"sages": moved, "on_resume": 0x08000000 + at}
+    return {"on_resume": 0x08000000 + at, "bytes": len(body)}
 
 
 def main():
@@ -541,7 +552,7 @@ def main():
             a, b = int(a, 16), int(b, 16)
             rom[a:b] = base[a:b]
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
-    report["tower_sages"] = tower_top_floor_sages(rom, src, pool)
+    report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
     naming_dispatch(rom, src, pool)
     report["free_after"] = pool.total()
 

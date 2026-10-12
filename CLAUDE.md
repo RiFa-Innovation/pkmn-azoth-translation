@@ -45,7 +45,7 @@ Re-dump only when the discovery logic changes: `python3 scripts/dump_all.py`
 | String reached only by base+offset (GCC section anchor) | `text/en/manual_strings.json` (in place, asserts the source bytes), `anchored.json`, `data/anchor_refs.json` |
 | Text baked into graphics | `gfx/*.json` specs + `scripts/gfx_text.py`, `logo.py` (locate tiles/map with `vram.py`, `gfx.py locate`) |
 | Wrong code behaviour / pointer / immediate | `data/code_patches.json` (`patch` with `orig` byte assertion; `vanilla` ranges) |
-| Wrong scene behaviour: NPC parked by an aborted `applymovement` walk, stuck staging | map-data fix in `insert.py` (object templates + an `ON_RESUME` script from the free pool); dump the scene scripts with `scripts/scrdis.py` |
+| NPC parked by an aborted `applymovement` walk / stalled scene staging | a script fix in `insert.py` from the free pool (a gated `ON_RESUME` cleanup that finishes the interrupted stage); read the scene scripts with `scripts/scrdis.py` |
 | String exists but was never dumped | `scripts/dump_all.py` (`ref_kind`, `is_mixed`, guards) |
 
 Proofreading edits arrive as CSVs (`scripts/review.py export/import`; token
@@ -105,11 +105,15 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   `applymovement` walk *ends* when a step is blocked (e.g. by the following
   Pokémon in a narrow corridor), so an escort NPC can park on the only tile and
   box the player in. Sprout Tower's top floor did exactly that (#37, PLAYTEST
-  60). Object templates live in `SaveBlock1` (copied from the map header on map
+  60) — and because the interrupted chain left the story stage on the value its
+  coord event tests, stepping south also restarted the whole chain, fights
+  included. Repair such a save by *finishing* the interrupted stage (the hack's
+  own cleanup: hide the scene objects, advance the stage), never by replaying
+  it: `ON_RESUME` (map scripts tag 5) runs on every map load and field resume,
+  so repointing it to a gated cleanup script repairs stuck saves in place.
+  Note object templates live in `SaveBlock1` (copied from the map header on map
   load, `script` refreshed separately), so a parked NPC is *in the save* — a
-  map-header edit alone does not repair existing saves. `ON_RESUME` (map scripts
-  tag 5) runs on every map load and field resume: repoint it to a script that
-  calls `setobjectxy`/`setobjectxyperm` to repair stuck saves in place.
+  map-header edit alone does not repair existing saves.
 - Save states break between patch versions; in-game saves carry over.
 
 ## Replaying the new-game path (verified 2026-10-12, current build)
