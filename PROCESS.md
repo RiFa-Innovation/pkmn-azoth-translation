@@ -1,7 +1,8 @@
 # Mercury (水银) 1.3.3 — translation process state
 
-> Updated 2026-10-10 (checkpoint 16). Resume from here. Everything below is
-> ground truth from the repo; see git log for checkpoints.
+> **Current working instructions, findings and triage steps are in
+> [`CLAUDE.md`](CLAUDE.md)** (updated 2026-10-12, beta-6). The resume points
+> below are historical (2026-10-10); established facts and ROM maps still hold.
 
 ## Goal
 
