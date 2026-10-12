@@ -200,6 +200,64 @@ def null_placeholder_scripts(rom, src):
     return n
 
 
+TOWER_GROUP, TOWER_MAP = 52, 2          # Bellsprout Tower, top floor
+SAGE_SCRIPT_NEW = (0x08AF60C9,          # its ON_RESUME script, to be kept
+                   bytes.fromhex("57" "0900" "0900" "0e00"    # setobjectxy 9, 9, 14
+                                 "57" "0800" "0a00" "0e00"    # setobjectxy 8, 10, 14
+                                 "63" "0900" "0900" "0e00"    # setobjectxyperm 9, 9, 14
+                                 "63" "0800" "0a00" "0e00"))  # setobjectxyperm 8, 10, 14
+
+
+def tower_top_floor_sages(rom, src, pool):
+    """Bellsprout Tower's top floor (52.2) parks its two exit sages in the one
+    tile wide exit corridor and softlocks the player there.
+
+    The sages (localIds 8 and 9) are spawned *inside* that corridor at
+    (12,22)/(12,21) and walk up into the room (their movement data ends at
+    (10,14)/(9,14)). The corridor holds exactly one object, so anything standing
+    in it - the following Pokemon, or the player on the scripted walk the coord
+    scene does at the same time - aborts the leading sage's walk after one step
+    and parks it on (12,20): the corridor's only tile. The player is then walled
+    in between the sage and their own follower, cannot reach the ladder down at
+    (12,23) (the way out of the tower) nor the coord-event tile (12,22) that
+    starts the next part of the story, and the quest stays on "head to the top".
+    Object templates live in SaveBlock1, so the stall survives reloads and
+    reproduces on the Chinese ROM (same save).
+
+    Fix: an ON_RESUME script that re-places both sages where their walk is meant
+    to end. It runs on every map load and whenever the field is resumed (closing
+    the menu, leaving a battle), so a save that is already stuck is repaired by
+    opening and closing the menu. The map's own object templates get the same
+    coordinates so a fresh spawn cannot put them back in the corridor."""
+    u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
+    rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
+    gp = rp(GMAPGROUPS + 4 * TOWER_GROUP)
+    mp = rp(gp + 4 * TOWER_MAP)
+    events, scripts = rp(mp + 4), rp(mp + 8)
+    objt = rp(events + 4)
+    assert src[scripts:scripts + 11] == bytes.fromhex("03" "83067b08" "05" "c960af08" "00"), \
+        "52.2 map scripts differ"
+    moved = {}
+    for i in range(src[events]):
+        lid = src[objt + 24 * i]
+        o = objt + 24 * i + 4
+        xy = (int.from_bytes(src[o:o + 2], "little", signed=True),
+              int.from_bytes(src[o + 2:o + 4], "little", signed=True))
+        if lid in (8, 9):
+            dest = (10, 14) if lid == 8 else (9, 14)   # end of its own walk
+            assert xy == ((12, 22) if lid == 8 else (12, 21)), f"sage {lid} at {xy}"
+            rom[o:o + 4] = (dest[0].to_bytes(2, "little", signed=True)
+                            + dest[1].to_bytes(2, "little", signed=True))
+            moved[lid] = dest
+    assert sorted(moved) == [8, 9], f"sages not found: {moved}"
+
+    body = SAGE_SCRIPT_NEW[1] + b"\x05" + SAGE_SCRIPT_NEW[0].to_bytes(4, "little")
+    at = pool.alloc_aligned(len(body))
+    rom[at:at + len(body)] = body
+    rom[scripts + 6:scripts + 10] = (0x08000000 + at).to_bytes(4, "little")
+    return {"sages": moved, "on_resume": 0x08000000 + at}
+
+
 def main():
     base = open(BASE, "rb").read()
     src = open(PATCHED, "rb").read()
@@ -483,6 +541,7 @@ def main():
             a, b = int(a, 16), int(b, 16)
             rom[a:b] = base[a:b]
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
+    report["tower_sages"] = tower_top_floor_sages(rom, src, pool)
     naming_dispatch(rom, src, pool)
     report["free_after"] = pool.total()
 
