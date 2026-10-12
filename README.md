@@ -154,7 +154,10 @@ More detail: [`PROCESS.md`](PROCESS.md) (pipeline and established facts),
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Bug reports with a screenshot and where
-in the game it happened are very welcome.
+in the game it happened are very welcome. Want to revise the dialogue? The
+[`TRANSLATING.md`](TRANSLATING.md) guide and the
+[review sheet](docs/dialogue-review.csv) (Chinese, English and context side
+by side) are made for that.
 
 ## FAQ
 

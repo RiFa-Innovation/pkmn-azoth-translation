@@ -74,6 +74,9 @@ you can do, and you don't need to code.
 
 - **One line:** use the [Wording suggestion form](../../issues/new/choose).
   Say where it is in the game, paste the current text and your version.
+- **Conversations:** edit [`docs/dialogue-review.csv`](docs/dialogue-review.csv)
+  (map, previous line, Chinese, English, your version). The full guide, rules
+  and the machine-assisted workflow are in [`TRANSLATING.md`](TRANSLATING.md).
 - **Many lines:** use the spreadsheet workflow.
 
   ```bash
