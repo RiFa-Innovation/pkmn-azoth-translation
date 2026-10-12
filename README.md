@@ -158,11 +158,12 @@ in the game it happened are very welcome.
 
 ## FAQ
 
-**What is it called, Azoth or Mercury?** The Chinese title is 口袋妖怪 水银
-("Pokémon Mercury"). The English name players and the authors' own wiki use is
-**Azoth** (an old alchemists' word for mercury). The game itself still says
-"Mercury" in places because that is what its Chinese text says; I'm keeping the
-literal translation until the authors confirm a preferred English name.
+**What is it called, Azoth or Mercury?** **Azoth**. The Chinese title is
+口袋妖怪 水银 ("Pokémon Mercury"), and the authors' own wiki and in-game text
+use the name Azoth (an old alchemists' word for mercury). The title screen,
+credits and dev-team lines in this patch say Azoth; the original 水银 stays in
+the logo. "Mercury" remains in the repo's file names and docs as the working
+name.
 
 **Which ROM do I need?** FireRed **USA v1.0**: the common "Squirrels" dump
 (#1636), CRC32 `DD88761C`. v1.1 and other languages won't patch. See
