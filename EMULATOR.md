@@ -111,3 +111,23 @@ must be absolute (the bridge's cwd is `utilities/mcp-mgba/lua`).
 search `rht:`) to load `ROM.sav` next to the ROM only when `RHT_LOAD_SAVE=1`,
 so scripted runs never write to a player's save. Copy the ROM and save to a
 scratch folder first. Playtest saves are backed up in `saves/` (gitignored).
+
+## Tracing and scripted repros (added 2026-10-12)
+
+- **Watchpoints**: `RHT_DEBUGGER=1` (local `headless-main.c` patch, search `rht:`)
+  attaches a debugger with no CLI so Lua `setWatchpoint`/`setRangeWatchpoint`
+  work; rebuild with `make -C utilities/mgba/build mgba-headless`. The bridge
+  (`lua/bridge.lua`, also local) adds `watch_read {min, max, write}` →
+  logs pc/lr/r0–r7 per access, `watch_log {clear}`, `watch_clear`.
+  They fire for **RAM** only: FireRed's ROM reads bypass them.
+- **Running a script directly**: write a script pointer to the global script
+  context and start it — `ctx=0x03000EB0`: `ctx+8 = ptr`, `ctx+0 = 0`
+  (stack depth), `ctx+1 = 1` (bytecode mode), `0x03000EA8 = 0` (running).
+  Scripts can live in free EWRAM (`0x0203FF00`), e.g. `callasm 0x08DF89B5;
+  end` opens Tasks, or `givemon` + `goto 0x081AA349` starts the Twins double
+  battle. Screen reached = `gMain.callback2` (`0x030030F4`): dressing room
+  `0x08DF1921`, Tasks `0x08DF7911`.
+- **Flags**: `gSaveBlock1` (`*0x03005008`) `+ 0xEE0 + id/8`, bit `id & 7`.
+- **Loading a real save**: copy ROM + `.sav` to a scratch folder as
+  `game.gba`/`game.sav` and boot with `RHT_LOAD_SAVE=1`. Save states are tied
+  to one build; don't load a state made on another ROM.

@@ -76,6 +76,14 @@ _HM = None
 _FM = None
 
 
+def _FR():
+    global _FM
+    if _FM is None:
+        import frmap
+        _FM = frmap.FRMap()
+    return _FM
+
+
 def vanilla_text_symbol(t):
     """Target is the start of a text symbol in vanilla FireRed (decomp map)."""
     global _FM
@@ -101,6 +109,8 @@ def ref_kind(rom, r, text=""):
     hm = hack_map()
     if hm.is_code(r):            # instruction bytes that merely look like a pointer
         return None
+    if r < 0x200:                # sGFRomHeader: pointers to data tables (gDecorations
+        return None              # starts with a name field), never to strings
     lit = hm.literal(r)
     if lit is not None:          # a literal-pool word some code loads
         if lit["anchor"] == "imm":
@@ -111,6 +121,12 @@ def ref_kind(rom, r, text=""):
             return None          # indexed array/struct base, not a string
         return "literal"
     if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4) or r < 0x250000):
+        return "aligned"
+    # a vanilla data word aimed at the start of a vanilla text symbol (the decomp
+    # says it is a text pointer even without pointer neighbours, e.g. the
+    # {gText_Yes, NULL} entries of sMultichoiceList_YesNo)
+    if (r % 4 == 0 and _FR().kind(r) == "data"
+            and vanilla_text_symbol(int.from_bytes(rom[r:r + 4], "little") - 0x08000000)):
         return "aligned"
     if rom[r - 2:r] == b"\x0f\x00":  # loadpointer, aligned or not
         return "loadpointer"
@@ -178,9 +194,12 @@ def scan_strings(rom, base):
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if short and not (single or is_textlike(s)):  # 喂，{FD:01}！: script text only
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
-        if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table
+        if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table,
+            # or a vanilla data word aimed at a vanilla text symbol (the decomp
+            # says so: e.g. sMultichoiceList_YesNo {gText_Yes, NULL} entries)
             trusted = [(r, k) for r, k in trusted
-                       if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4))]
+                       if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4)
+                                          or (_FR().kind(r) == "data" and vanilla_text_symbol(t)))]
         # A word left exactly as in vanilla FR cannot point at text the hack put
         # into space that was free (FF) in vanilla: it is code/data that merely
         # looks like a pointer (e.g. Thumb code at 0x1E4074 -> crash if repointed).

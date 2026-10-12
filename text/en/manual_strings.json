@@ -453,5 +453,40 @@
   "zh": "The user heals its\nown statuses and\nrestores HP. It also\nraises evasiveness.",
   "cap": 78,
   "en": "Heals status and\nrestores HP. Also\nraises evasiveness."
+ },
+ "0E3BAA4": {
+  "zh": "进行中",
+  "cap": 7,
+  "en": "Active"
+ },
+ "0E37CA7": {
+  "zh": "进行中",
+  "cap": 7,
+  "en": "Active"
+ },
+ "0E406C7": {
+  "zh": "进行中",
+  "cap": 7,
+  "en": "Active"
+ },
+ "03FD45E": {
+  "zh": "上! {FD:05}!",
+  "cap": 8,
+  "en": "Go! {FD:05}!"
+ },
+ "03FD466": {
+  "zh": "上! {FD:05} and\n{FD:07}!",
+  "cap": 15,
+  "en": "Go! {FD:05} and\n{FD:07}!"
+ },
+ "03FD475": {
+  "zh": "上! {FD:00}!",
+  "cap": 8,
+  "en": "Go! {FD:00}!"
+ },
+ "03FD47D": {
+  "zh": "去吧! {FD:00}!",
+  "cap": 10,
+  "en": "Now! {FD:00}!"
  }
 }

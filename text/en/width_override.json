@@ -1492,5 +1492,593 @@
   "dialogue": false,
   "lines": 5,
   "note": "achievement 37 description (Help Tips > Achievements box, 5 lines; more overflows the window)"
+ },
+ "0E3BA4C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3BA5B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C451": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C48B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C4B8": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C4E7": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C517": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C54A": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C57C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C5B2": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C5EE": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C642": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C67C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C6BA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C6FF": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C74D": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C77B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C7AB": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C7E0": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C83F": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C86B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C89D": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C8F6": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C938": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C960": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C994": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C9C0": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3C9EE": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CA16": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CA42": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CA79": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CABA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CAEA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CB14": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CB3E": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CB72": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CBAA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CBD7": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CC16": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CC5C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CC92": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CCD9": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CD11": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CD4B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CD86": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CDC4": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CE0A": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CE3C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CE72": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CEBF": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CEEF": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CF25": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CF5D": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CFA3": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3CFD9": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D00F": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D052": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D0A0": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D0E7": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D119": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D14B": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D175": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D1B4": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D1E4": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D21C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D242": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D26E": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D292": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D2C6": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D308": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D345": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D390": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D3C4": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D3FA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D44D": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D479": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D4B2": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D4DA": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D54A": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D577": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D5AF": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D5D7": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D601": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D631": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D66F": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D697": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D6CB": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D6FB": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D738": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D76A": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D79E": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D7D6": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D80A": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D863": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D897": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D8CC": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D900": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
+ },
+ "0E3D92C": {
+  "px": 86,
+  "dialogue": false,
+  "lines": 1,
+  "note": "quest name (Tasks list column ~86px before the status label)"
  }
 }

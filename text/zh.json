@@ -13776,7 +13776,7 @@
    "cap": 142,
    "refs": [
     "01C4AFB:loadpointer",
-    "0703DF8:literal"
+    "0703DF8:aligned"
    ],
    "untrusted": 67,
    "suspect": false
@@ -36100,9 +36100,10 @@
    "zh": "宝可梦联盟",
    "cap": 11,
    "refs": [
-    "045F8AC:aligned"
+    "045F8AC:aligned",
+    "0483044:aligned"
    ],
-   "untrusted": 10,
+   "untrusted": 9,
    "suspect": false
   },
   "01B0C88": {
@@ -43410,7 +43411,7 @@
    "cap": 26,
    "refs": [
     "01A9C70:aligned",
-    "04DBE8C:literal"
+    "04DBE8C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -56818,6 +56819,15 @@
    "untrusted": 0,
    "suspect": true
   },
+  "03FF994": {
+   "zh": "肠；羚",
+   "cap": 6,
+   "refs": [
+    "03FF9B4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
+  },
   "03FFA0C": {
    "zh": "肤貉",
    "cap": 5,
@@ -57382,85 +57392,190 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0415DE0": {
+   "zh": "{FC:01 0F}{FC:03 0E}宝可梦栖息地",
+   "cap": 19,
+   "refs": [
+    "0451F7C:aligned",
+    "0452034:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0415DF7": {
    "zh": "草地宝可梦",
    "cap": 11,
    "refs": [
+    "0451F84:aligned",
+    "045203C:aligned",
     "0452344:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E09": {
    "zh": "森林宝可梦",
    "cap": 11,
    "refs": [
+    "0451F8C:aligned",
+    "0452044:aligned",
     "0452348:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E18": {
    "zh": "水边宝可梦",
    "cap": 11,
    "refs": [
+    "0451F94:aligned",
+    "045204C:aligned",
     "045234C:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E2D": {
    "zh": "海洋宝可梦",
    "cap": 11,
    "refs": [
+    "0451F9C:aligned",
+    "0452054:aligned",
     "0452350:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E39": {
    "zh": "洞窟宝可梦",
    "cap": 11,
    "refs": [
+    "0451FA4:aligned",
+    "045205C:aligned",
     "0452354:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E46": {
    "zh": "山地宝可梦",
    "cap": 11,
    "refs": [
+    "0451FAC:aligned",
+    "0452064:aligned",
     "0452358:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E57": {
    "zh": "荒地宝可梦",
    "cap": 11,
    "refs": [
+    "0451FB4:aligned",
+    "045206C:aligned",
     "045235C:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E6D": {
    "zh": "城市宝可梦",
    "cap": 11,
    "refs": [
+    "0451FBC:aligned",
+    "0452074:aligned",
     "0452360:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
    "suspect": false
   },
   "0415E7B": {
    "zh": "珍稀宝可梦",
    "cap": 11,
    "refs": [
+    "0451FC4:aligned",
+    "045207C:aligned",
     "0452364:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415E88": {
+   "zh": "{FC:01 0F}{FC:03 0E}搜索",
+   "cap": 11,
+   "refs": [
+    "0451FCC:aligned",
+    "0452084:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415E95": {
+   "zh": "序号排序",
+   "cap": 9,
+   "refs": [
+    "0451F74:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EB0": {
+   "zh": "{FC:01 0F}{FC:03 0E}其他",
+   "cap": 11,
+   "refs": [
+    "0451FF4:aligned",
+    "04520AC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EDF": {
+   "zh": "由轻到重排序",
+   "cap": 13,
+   "refs": [
+    "0451FE4:aligned",
+    "045209C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EED": {
+   "zh": "由小到大排序",
+   "cap": 13,
+   "refs": [
+    "0451FEC:aligned",
+    "04520A4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415EFB": {
+   "zh": "{FC:01 0F}{FC:03 0E}宝可梦列表",
+   "cap": 17,
+   "refs": [
+    "0451F6C:aligned",
+    "045201C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415F0E": {
+   "zh": "编号模式：关都",
+   "cap": 14,
+   "refs": [
+    "0452024:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0415F24": {
+   "zh": "编号模式：全国",
+   "cap": 14,
+   "refs": [
+    "045202C:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "0415F3D": {
@@ -57718,13 +57833,18 @@
     "0453F84:aligned",
     "045A628:aligned",
     "045A660:aligned",
+    "0466DF8:aligned",
+    "0466E30:aligned",
+    "0466E48:aligned",
+    "0466E60:aligned",
+    "0466E70:aligned",
     "1D43804:literal",
     "1D46E28:literal",
     "1DE3C0C:aligned",
     "1DE4954:aligned",
     "1DE498C:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "04161C8": {
@@ -57734,6 +57854,58 @@
     "0046830:literal",
     "009D8BC:literal",
     "0121240:literal",
+    "025F80C:aligned",
+    "03DFE40:aligned",
+    "03DFE80:aligned",
+    "03DFEB0:aligned",
+    "03DFEC8:aligned",
+    "03DFED8:aligned",
+    "03DFEE8:aligned",
+    "03DFEF8:aligned",
+    "03DFF10:aligned",
+    "03DFF28:aligned",
+    "03DFF48:aligned",
+    "03DFFC0:aligned",
+    "03E0010:aligned",
+    "03E0020:aligned",
+    "03E0030:aligned",
+    "03E0048:aligned",
+    "03E0058:aligned",
+    "03E0070:aligned",
+    "03E0088:aligned",
+    "03E00A8:aligned",
+    "03E00B8:aligned",
+    "03E00D0:aligned",
+    "03E00E8:aligned",
+    "03E0108:aligned",
+    "03E0120:aligned",
+    "03E0140:aligned",
+    "03E0160:aligned",
+    "03E0188:aligned",
+    "03E0208:aligned",
+    "03E0220:aligned",
+    "03E0240:aligned",
+    "03E0278:aligned",
+    "03E0290:aligned",
+    "03E02A8:aligned",
+    "03E02C8:aligned",
+    "03E02E0:aligned",
+    "03E02F8:aligned",
+    "03E0310:aligned",
+    "03E0348:aligned",
+    "03E0368:aligned",
+    "03E0380:aligned",
+    "03E0398:aligned",
+    "03E03B8:aligned",
+    "03E03D8:aligned",
+    "03E03F8:aligned",
+    "03E0418:aligned",
+    "03E0438:aligned",
+    "03E0448:aligned",
+    "03E0460:aligned",
+    "03E0478:aligned",
+    "03E04A0:aligned",
+    "03E04A8:aligned",
     "03F5BEC:aligned",
     "03F5C28:aligned",
     "03F5C38:aligned",
@@ -57744,7 +57916,7 @@
     "0463160:aligned",
     "0464394:aligned"
    ],
-   "untrusted": 52,
+   "untrusted": 0,
    "suspect": false
   },
   "04161D4": {
@@ -59708,13 +59880,76 @@
    "untrusted": 0,
    "suspect": false
   },
+  "04178E6": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "03DFE58:aligned",
+    "03DFE78:aligned",
+    "03DFE98:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178EB": {
+   "zh": "蛋",
+   "cap": 3,
+   "refs": [
+    "03DFD90:aligned",
+    "03DFDB8:aligned",
+    "03DFDE0:aligned",
+    "03DFE00:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178F0": {
+   "zh": "进入殿堂",
+   "cap": 9,
+   "refs": [
+    "03DFD80:aligned",
+    "03DFDB0:aligned",
+    "03DFDC8:aligned",
+    "03DFDF8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04178FD": {
+   "zh": "胜利数",
+   "cap": 7,
+   "refs": [
+    "03DFDA0:aligned",
+    "03DFDD0:aligned",
+    "03DFDE8:aligned",
+    "03DFE08:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417907": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "03DFD88:aligned",
+    "03DFD98:aligned",
+    "03DFDA8:aligned",
+    "03DFDC0:aligned",
+    "03DFDD8:aligned",
+    "03DFDF0:aligned",
+    "03DFE10:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0417929": {
    "zh": "退出",
    "cap": 5,
    "refs": [
+    "03E0260:aligned",
     "03F5C98:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417938": {
@@ -59723,9 +59958,12 @@
    "refs": [
     "012A514:literal",
     "0155858:literal",
-    "0155914:literal"
+    "0155914:literal",
+    "03DFD50:aligned",
+    "03DFE48:aligned",
+    "03DFE88:aligned"
    ],
-   "untrusted": 3,
+   "untrusted": 0,
    "suspect": false
   },
   "041793C": {
@@ -59734,16 +59972,206 @@
    "refs": [
     "012A518:literal",
     "015585C:literal",
-    "0155918:literal"
+    "0155918:literal",
+    "03DFD58:aligned",
+    "03DFE50:aligned",
+    "03DFE90:aligned"
    ],
-   "untrusted": 3,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417944": {
+   "zh": "单人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417952": {
+   "zh": "双人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417960": {
+   "zh": "多人对战",
+   "cap": 9,
+   "refs": [
+    "03DFE70:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "041796D": {
    "zh": "尝试一次挑战。",
    "cap": 14,
    "refs": [
-    "03DFEA0:literal"
+    "03DFEA0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041797F": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "03DFEA8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417984": {
+   "zh": "美味之水{FC:13 57}{FC:06 00}200¥",
+   "cap": 19,
+   "refs": [
+    "03DFF30:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041799A": {
+   "zh": "塞可汽水{FC:13 57}{FC:06 00}300¥",
+   "cap": 19,
+   "refs": [
+    "03DFF38:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04179ED": {
+   "zh": "很好",
+   "cap": 5,
+   "refs": [
+    "03DFFC8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "04179F7": {
+   "zh": "不好",
+   "cap": 5,
+   "refs": [
+    "03DFFD0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A02": {
+   "zh": "红色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00C0:aligned",
+    "03E00F0:aligned",
+    "03E0128:aligned",
+    "03E0168:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A0C": {
+   "zh": "黄色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00D8:aligned",
+    "03E00F8:aligned",
+    "03E0148:aligned",
+    "03E0170:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A19": {
+   "zh": "蓝色碎片",
+   "cap": 9,
+   "refs": [
+    "03E0110:aligned",
+    "03E0130:aligned",
+    "03E0150:aligned",
+    "03E0178:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A24": {
+   "zh": "绿色碎片",
+   "cap": 9,
+   "refs": [
+    "03E00B0:aligned",
+    "03E00C8:aligned",
+    "03E00E0:aligned",
+    "03E0100:aligned",
+    "03E0118:aligned",
+    "03E0138:aligned",
+    "03E0158:aligned",
+    "03E0180:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A37": {
+   "zh": "右",
+   "cap": 3,
+   "refs": [
+    "03DFFD8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A3D": {
+   "zh": "左",
+   "cap": 3,
+   "refs": [
+    "03DFFE0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A42": {
+   "zh": "冰冻光束{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF50:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A58": {
+   "zh": "魔法闪耀{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF58:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A6E": {
+   "zh": "十万伏特{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A84": {
+   "zh": "喷射火焰{FC:13 50}{FC:06 00}3000币",
+   "cap": 21,
+   "refs": [
+    "03DFF68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417A9A": {
+   "zh": "替身{FC:13 50}{FC:06 00}2000币",
+   "cap": 17,
+   "refs": [
+    "03DFF70:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -59792,6 +60220,42 @@
    ],
    "untrusted": 0,
    "suspect": false
+  },
+  "0417ADC": {
+   "zh": "一般",
+   "cap": 5,
+   "refs": [
+    "03DFD60:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AE3": {
+   "zh": "黑",
+   "cap": 3,
+   "refs": [
+    "03DFD68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AE9": {
+   "zh": "粉",
+   "cap": 3,
+   "refs": [
+    "03DFD70:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417AEE": {
+   "zh": "深褐",
+   "cap": 5,
+   "refs": [
+    "03DFD78:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
   },
   "0417AF4": {
    "zh": "帅气",
@@ -59993,11 +60457,71 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0417BE2": {
+   "zh": "伊布",
+   "cap": 5,
+   "refs": [
+    "03E0190:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BE8": {
+   "zh": "火精灵",
+   "cap": 7,
+   "refs": [
+    "03E0198:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BF0": {
+   "zh": "雷精灵",
+   "cap": 7,
+   "refs": [
+    "03E01A0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417BF8": {
+   "zh": "水精灵",
+   "cap": 7,
+   "refs": [
+    "03E01A8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0417C01": {
    "zh": "退出寻找。",
    "cap": 10,
    "refs": [
-    "03E01B0:literal"
+    "03E01B0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C0F": {
+   "zh": "美味之水",
+   "cap": 9,
+   "refs": [
+    "03E0018:aligned",
+    "03E0038:aligned",
+    "03E0060:aligned",
+    "03E0090:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C1B": {
+   "zh": "塞可汽水",
+   "cap": 9,
+   "refs": [
+    "03E0028:aligned",
+    "03E0040:aligned",
+    "03E0078:aligned",
+    "03E0098:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60009,6 +60533,142 @@
     "00D06CC:literal",
     "00D07C4:literal",
     "03E0714:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C4B": {
+   "zh": "不用了",
+   "cap": 7,
+   "refs": [
+    "03E01C0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C55": {
+   "zh": "穿山鼠{FC:13 55}{FC:06 00} 500代币",
+   "cap": 21,
+   "refs": [
+    "03E01C8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C6A": {
+   "zh": "六尾{FC:13 55}{FC:06 00}1000代币",
+   "cap": 19,
+   "refs": [
+    "03E01D0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C83": {
+   "zh": "滑滑小子{FC:13 50}{FC:06 00} 2800代币",
+   "cap": 24,
+   "refs": [
+    "03E01D8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417C9D": {
+   "zh": "木棉球{FC:13 50}{FC:06 00} 5500代币",
+   "cap": 22,
+   "refs": [
+    "03E01E0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417CB7": {
+   "zh": "宝贝龙{FC:13 50}{FC:06 00} 9999代币",
+   "cap": 22,
+   "refs": [
+    "03E01E8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D4C": {
+   "zh": "不用了",
+   "cap": 7,
+   "refs": [
+    "03DFF78:aligned",
+    "03DFFA8:aligned",
+    "03E01F0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D56": {
+   "zh": "贝之化石",
+   "cap": 9,
+   "refs": [
+    "03DFED0:aligned",
+    "03DFF00:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D63": {
+   "zh": "龟壳化石",
+   "cap": 9,
+   "refs": [
+    "03DFEE0:aligned",
+    "03DFF18:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D6F": {
+   "zh": "秘密琥珀",
+   "cap": 9,
+   "refs": [
+    "03DFEF0:aligned",
+    "03DFF08:aligned",
+    "03DFF20:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D79": {
+   "zh": "交换中心",
+   "cap": 9,
+   "refs": [
+    "03E01F8:aligned",
+    "03E02B0:aligned",
+    "03E02E8:aligned",
+    "03E0328:aligned",
+    "03E0350:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D86": {
+   "zh": "大竞技场",
+   "cap": 9,
+   "refs": [
+    "03E0200:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417D90": {
+   "zh": "有线联机游戏",
+   "cap": 13,
+   "refs": [
+    "03E0210:aligned"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
+  "0417DA0": {
+   "zh": "无线",
+   "cap": 5,
+   "refs": [
+    "03E0218:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -60071,27 +60731,42 @@
    "zh": "一之岛",
    "cap": 7,
    "refs": [
+    "03E0280:aligned",
+    "03E0298:aligned",
+    "03E03C0:aligned",
+    "03E0408:aligned",
+    "03E0428:aligned",
     "03E17E4:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417DFE": {
    "zh": "二之岛",
    "cap": 7,
    "refs": [
+    "03E0268:aligned",
+    "03E02A0:aligned",
+    "03E03C8:aligned",
+    "03E03E8:aligned",
+    "03E0430:aligned",
     "03E17E8:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417E09": {
    "zh": "三之岛",
    "cap": 7,
    "refs": [
+    "03E0270:aligned",
+    "03E0288:aligned",
+    "03E03D0:aligned",
+    "03E03F0:aligned",
+    "03E0410:aligned",
     "03E17EC:aligned"
    ],
-   "untrusted": 5,
+   "untrusted": 0,
    "suspect": false
   },
   "0417E16": {
@@ -60134,45 +60809,205 @@
    "zh": "枯叶",
    "cap": 5,
    "refs": [
+    "03E03E0:aligned",
+    "03E0400:aligned",
+    "03E0420:aligned",
+    "03E0440:aligned",
     "03E17E0:aligned"
    ],
-   "untrusted": 4,
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E50": {
+   "zh": "大竞技场",
+   "cap": 9,
+   "refs": [
+    "03E02B8:aligned",
+    "03E02F0:aligned",
+    "03E0330:aligned",
+    "03E0358:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E5A": {
+   "zh": "树果混合",
+   "cap": 9,
+   "refs": [
+    "03E02C0:aligned",
+    "03E0340:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E72": {
+   "zh": "宝可梦跳绳",
+   "cap": 11,
+   "refs": [
+    "03E0300:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E7F": {
+   "zh": "嘟嘟利摘树果",
+   "cap": 13,
+   "refs": [
+    "03E0308:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417E94": {
+   "zh": "2个小蘑菇",
+   "cap": 10,
+   "refs": [
+    "03E0318:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EA4": {
+   "zh": "1个大蘑菇",
+   "cap": 10,
+   "refs": [
+    "03E0320:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EB3": {
+   "zh": "七岛",
+   "cap": 5,
+   "refs": [
+    "03E0370:aligned",
+    "03E0388:aligned",
+    "03E03A0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EC1": {
+   "zh": "脐之岩",
+   "cap": 7,
+   "refs": [
+    "03E0378:aligned",
+    "03E03A8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": true
+  },
+  "0417ECC": {
+   "zh": "诞生之岛",
+   "cap": 9,
+   "refs": [
+    "03E0390:aligned",
+    "03E03B0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417ED9": {
+   "zh": "对焦镜{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFF88:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417EF7": {
+   "zh": "节拍器{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFF90:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F11": {
+   "zh": "力量头带{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 25,
+   "refs": [
+    "03DFF98:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F2F": {
+   "zh": "达人带{FC:13 50}{FC:06 00}1000枚代币",
+   "cap": 23,
+   "refs": [
+    "03DFFA0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F4D": {
+   "zh": "广角镜{FC:13 55}{FC:06 00}800枚代币",
+   "cap": 22,
+   "refs": [
+    "03DFF80:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F69": {
+   "zh": "成为队长",
+   "cap": 9,
+   "refs": [
+    "03E0470:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0417F77": {
+   "zh": "加入队伍",
+   "cap": 9,
+   "refs": [
+    "03E0468:aligned"
+   ],
+   "untrusted": 0,
    "suspect": false
   },
   "0417F82": {
    "zh": "单人",
    "cap": 5,
    "refs": [
+    "03E0480:aligned",
     "03FE9C4:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F89": {
    "zh": "双人",
    "cap": 5,
    "refs": [
+    "03E0488:aligned",
     "03FE9C8:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F90": {
    "zh": "淘汰",
    "cap": 5,
    "refs": [
+    "03E0490:aligned",
     "03FE9CC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417F99": {
    "zh": "混合",
    "cap": 5,
    "refs": [
+    "03E0498:aligned",
     "03FE9D0:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0417FBB": {
@@ -60278,10 +61113,11 @@
    "zh": "屋顶",
    "cap": 5,
    "refs": [
+    "03DFEB8:aligned",
     "03F5B80:aligned",
     "03F5CEC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0418075": {
@@ -60297,27 +61133,30 @@
    "zh": "联机玩游戏",
    "cap": 11,
    "refs": [
+    "03E0248:aligned",
     "03F5C8C:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041808E": {
    "zh": "直连房间",
    "cap": 9,
    "refs": [
+    "03E0250:aligned",
     "03F5C90:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041809C": {
    "zh": "联合房间",
    "cap": 9,
    "refs": [
+    "03E0258:aligned",
     "03F5C94:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "04180A7": {
@@ -60424,7 +61263,7 @@
    "zh": "你想执行什么操作？",
    "cap": 18,
    "refs": [
-    "03CEA90:literal",
+    "03CEA90:aligned",
     "1CCE4D4:literal"
    ],
    "untrusted": 0,
@@ -60434,7 +61273,7 @@
    "zh": "请选择一种主题。",
    "cap": 16,
    "refs": [
-    "03CEA98:literal",
+    "03CEA98:aligned",
     "1CCE4DC:literal"
    ],
    "untrusted": 0,
@@ -60444,17 +61283,27 @@
    "zh": "选择一张壁纸。",
    "cap": 14,
    "refs": [
-    "03CEAA0:literal",
+    "03CEAA0:aligned",
     "1CCE4E4:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "041825C": {
+   "zh": "选择了{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEAA8:aligned",
+    "03CEB40:aligned"
+   ],
+   "untrusted": 2,
    "suspect": false
   },
   "041826C": {
    "zh": "跳转到哪个盒子？",
    "cap": 16,
    "refs": [
-    "03CEAB0:literal",
+    "03CEAB0:aligned",
     "1CCE4F4:literal"
    ],
    "untrusted": 0,
@@ -60464,7 +61313,7 @@
    "zh": "寄存到哪个盒子？",
    "cap": 16,
    "refs": [
-    "03CEAB8:literal",
+    "03CEAB8:aligned",
     "1CCE4FC:literal"
    ],
    "untrusted": 0,
@@ -60474,7 +61323,7 @@
    "zh": "{F7:00}已经寄存了。",
    "cap": 14,
    "refs": [
-    "03CEAC0:literal",
+    "03CEAC0:aligned",
     "1CCE504:literal"
    ],
    "untrusted": 0,
@@ -60484,7 +61333,7 @@
    "zh": "这个盒子满了。",
    "cap": 14,
    "refs": [
-    "03CEAC8:literal",
+    "03CEAC8:aligned",
     "1CCE50C:literal"
    ],
    "untrusted": 0,
@@ -60494,7 +61343,7 @@
    "zh": "将这只宝可梦放生？",
    "cap": 18,
    "refs": [
-    "03CEAD0:literal",
+    "03CEAD0:aligned",
     "1CCE514:literal"
    ],
    "untrusted": 0,
@@ -60504,17 +61353,26 @@
    "zh": "{F7:00}被放生了。",
    "cap": 12,
    "refs": [
-    "03CEAD8:literal",
+    "03CEAD8:aligned",
     "1CCE51C:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "04182DF": {
+   "zh": "再见，{F7:00}！",
+   "cap": 9,
+   "refs": [
+    "03CEAE0:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "04182EC": {
    "zh": "标记你的宝可梦。",
    "cap": 16,
    "refs": [
-    "03CEAE8:literal",
+    "03CEAE8:aligned",
     "1CCE52C:literal"
    ],
    "untrusted": 0,
@@ -60524,7 +61382,7 @@
    "zh": "你的队伍满了！",
    "cap": 14,
    "refs": [
-    "03CEAF8:literal",
+    "03CEAF8:aligned",
     "1CCE53C:literal"
    ],
    "untrusted": 0,
@@ -60534,7 +61392,7 @@
    "zh": "你现在拿着宝可梦！",
    "cap": 18,
    "refs": [
-    "03CEB00:literal",
+    "03CEB00:aligned",
     "1CCE544:literal"
    ],
    "untrusted": 0,
@@ -60544,7 +61402,7 @@
    "zh": "你要带走哪只？",
    "cap": 14,
    "refs": [
-    "03CEB08:literal",
+    "03CEB08:aligned",
     "1CCE54C:literal"
    ],
    "untrusted": 0,
@@ -60554,7 +61412,7 @@
    "zh": "你不能将蛋放生。",
    "cap": 16,
    "refs": [
-    "03CEB10:literal",
+    "03CEB10:aligned",
     "1CCE554:literal"
    ],
    "untrusted": 0,
@@ -60564,17 +61422,26 @@
    "zh": "继续操作盒子吗？",
    "cap": 16,
    "refs": [
-    "03CEB18:literal",
+    "03CEB18:aligned",
     "1CCE55C:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0418392": {
+   "zh": "{F7:00}回来！",
+   "cap": 8,
+   "refs": [
+    "03CEB20:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "04183A0": {
    "zh": "它在为你担心吗？",
    "cap": 16,
    "refs": [
-    "03CEB28:literal",
+    "03CEB28:aligned",
     "1CCE56C:literal"
    ],
    "untrusted": 0,
@@ -60584,7 +61451,7 @@
    "zh": "请删除邮件。",
    "cap": 12,
    "refs": [
-    "03CEB38:literal",
+    "03CEB38:aligned",
     "1CCE57C:literal"
    ],
    "untrusted": 0,
@@ -60594,7 +61461,7 @@
    "zh": "将道具放回背包。",
    "cap": 16,
    "refs": [
-    "03CEB50:literal",
+    "03CEB50:aligned",
     "1CCE594:literal"
    ],
    "untrusted": 0,
@@ -60604,7 +61471,7 @@
    "zh": "背包已经满了。",
    "cap": 14,
    "refs": [
-    "03CEB58:literal",
+    "03CEB58:aligned",
     "1CCE59C:literal"
    ],
    "untrusted": 0,
@@ -60614,17 +61481,35 @@
    "zh": "把这个道具放回背包吗？",
    "cap": 22,
    "refs": [
-    "03CEB60:literal",
+    "03CEB60:aligned",
     "1CCE5A4:literal"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0418433": {
+   "zh": "正带着{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEB68:aligned"
+   ],
+   "untrusted": 1,
+   "suspect": false
+  },
+  "0418443": {
+   "zh": "更改为{F7:00}。",
+   "cap": 10,
+   "refs": [
+    "03CEB70:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0418452": {
    "zh": "邮件不能存放！",
    "cap": 14,
    "refs": [
-    "03CEB78:literal",
+    "03CEB78:aligned",
     "1CCE5BC:literal"
    ],
    "untrusted": 0,
@@ -61461,7 +62346,7 @@
    "zh": "你的选择？",
    "cap": 10,
    "refs": [
-    "03E2464:literal"
+    "03E2464:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -61470,7 +62355,7 @@
    "zh": "的昵称是？",
    "cap": 10,
    "refs": [
-    "03E247C:literal"
+    "03E247C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63630,6 +64515,51 @@
    "untrusted": 0,
    "suspect": false
   },
+  "041B33D": {
+   "zh": "上升",
+   "cap": 5,
+   "refs": [
+    "045ABEC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B343": {
+   "zh": "下降",
+   "cap": 5,
+   "refs": [
+    "045ABF4:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B350": {
+   "zh": "象征",
+   "cap": 5,
+   "refs": [
+    "045ABFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B358": {
+   "zh": "登记",
+   "cap": 5,
+   "refs": [
+    "045AC04:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B361": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "045AC0C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "041B366": {
    "zh": "是否退出聊天？",
    "cap": 14,
@@ -63643,7 +64573,7 @@
    "zh": "在哪里登记文本？",
    "cap": 16,
    "refs": [
-    "045AB70:literal"
+    "045AB70:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63652,7 +64582,7 @@
    "zh": "在这里登记文本？",
    "cap": 16,
    "refs": [
-    "045AB7C:literal"
+    "045AB7C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63661,7 +64591,7 @@
    "zh": "输入正文。",
    "cap": 10,
    "refs": [
-    "045AB88:literal"
+    "045AB88:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63688,7 +64618,7 @@
    "zh": "正在退出聊天……",
    "cap": 15,
    "refs": [
-    "045AB94:literal"
+    "045AB94:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63697,7 +64627,7 @@
    "zh": "队长{F7:00}已经离开\n聊天结束。",
    "cap": 25,
    "refs": [
-    "045ABA0:literal"
+    "045ABA0:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63706,7 +64636,7 @@
    "zh": "登记的文本已经更改。\n是否保存游戏？",
    "cap": 34,
    "refs": [
-    "045ABAC:literal"
+    "045ABAC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63715,7 +64645,7 @@
    "zh": "已经有记录存档了。\n是否覆盖记录？",
    "cap": 32,
    "refs": [
-    "045ABB8:literal"
+    "045ABB8:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63724,7 +64654,7 @@
    "zh": "保存中……\n请不要关闭电源。",
    "cap": 25,
    "refs": [
-    "045ABC4:literal"
+    "045ABC4:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63733,7 +64663,7 @@
    "zh": "{F7:00}保存了游戏。",
    "cap": 14,
    "refs": [
-    "045ABD0:literal"
+    "045ABD0:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63742,7 +64672,7 @@
    "zh": "如果队长离开了，\n聊天就会终止。这样可以吗？",
    "cap": 41,
    "refs": [
-    "045ABDC:literal"
+    "045ABDC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63932,10 +64862,11 @@
    "zh": "登记",
    "cap": 5,
    "refs": [
+    "0456E3C:aligned",
     "045A690:aligned",
     "1DE49BC:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "041B6FD": {
@@ -63987,8 +64918,8 @@
    "zh": "教会我如何战斗。",
    "cap": 16,
    "refs": [
-    "0479308:literal",
-    "0479340:literal"
+    "0479308:aligned",
+    "0479340:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -63997,8 +64928,8 @@
    "zh": "异常状态是什么？",
    "cap": 16,
    "refs": [
-    "0479310:literal",
-    "0479348:literal"
+    "0479310:aligned",
+    "0479348:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64007,8 +64938,8 @@
    "zh": "属性相克是什么？",
    "cap": 16,
    "refs": [
-    "0479318:literal",
-    "0479350:literal"
+    "0479318:aligned",
+    "0479350:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64017,8 +64948,8 @@
    "zh": "我想要收服宝可梦。",
    "cap": 18,
    "refs": [
-    "0479320:literal",
-    "0479358:literal"
+    "0479320:aligned",
+    "0479358:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -64027,7 +64958,17 @@
    "zh": "我如何登记一个道具？",
    "cap": 20,
    "refs": [
-    "0479330:literal"
+    "0479330:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041B836": {
+   "zh": "取消",
+   "cap": 5,
+   "refs": [
+    "0479338:aligned",
+    "0479360:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -66303,6 +67244,83 @@
    "cap": 9,
    "refs": [
     "01423B0:literal"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EDDD": {
+   "zh": "神秘卡片",
+   "cap": 9,
+   "refs": [
+    "0466DD0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EDEA": {
+   "zh": "神秘新闻",
+   "cap": 9,
+   "refs": [
+    "0466DD8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EDF6": {
+   "zh": "无线通信",
+   "cap": 9,
+   "refs": [
+    "0466DE8:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE0D": {
+   "zh": "好友",
+   "cap": 5,
+   "refs": [
+    "0466DF0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE14": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0466DE0:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE19": {
+   "zh": "接收",
+   "cap": 5,
+   "refs": [
+    "0466E18:aligned",
+    "0466E38:aligned",
+    "0466E50:aligned",
+    "0466E68:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE21": {
+   "zh": "发送",
+   "cap": 5,
+   "refs": [
+    "0466E20:aligned",
+    "0466E58:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "041EE26": {
+   "zh": "丢弃",
+   "cap": 5,
+   "refs": [
+    "0466E28:aligned",
+    "0466E40:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -73060,15 +74078,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "04556F8": {
-   "zh": " 小桌子",
-   "cap": 8,
-   "refs": [
-    "000014C:aligned"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
   "0456698": {
    "zh": "滓倒    ",
    "cap": 9,
@@ -73365,7 +74374,7 @@
    "zh": "你停止加入。{FB}",
    "cap": 13,
    "refs": [
-    "0457778:literal"
+    "0457778:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -73707,7 +74716,7 @@
    "zh": "作为自我介绍，我会展示\n给你我的训练师卡片。",
    "cap": 42,
    "refs": [
-    "0458110:literal"
+    "0458110:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -74464,6 +75473,62 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0459344": {
+   "zh": "对战",
+   "cap": 5,
+   "refs": [
+    "0456E04:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "045934C": {
+   "zh": "聊天",
+   "cap": 5,
+   "refs": [
+    "0456E0C:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459354": {
+   "zh": "问候",
+   "cap": 5,
+   "refs": [
+    "0456DFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459360": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0456E14:aligned",
+    "0456E4C:aligned",
+    "0456EFC:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459368": {
+   "zh": "退出",
+   "cap": 5,
+   "refs": [
+    "0456F74:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0459370": {
+   "zh": "说明",
+   "cap": 5,
+   "refs": [
+    "0456E44:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "0459394": {
    "zh": "单人对战",
    "cap": 9,
@@ -74668,7 +75733,7 @@
    "zh": "取消读取卡片。",
    "cap": 14,
    "refs": [
-    "045960C:literal"
+    "045960C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79291,7 +80356,7 @@
    "zh": "感谢使用\n神秘礼物系统。{FB}因为你持有神秘卡片，\n你可以参与一项在{FA}宝可梦商店进行的调查。{FB}通过这些调查你可以\n训练师们来到七岛。{FB}…我来给你一个\n用于调查的密码吧：{FB}“GIVE ME\nAWESOME TRAINER”{FB}把这个写在调查上\n并发送至无线通讯系统。",
    "cap": 216,
    "refs": [
-    "0489050:literal"
+    "0489050:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79300,7 +80365,7 @@
    "zh": "似乎是在枯叶市港口才能使用的。{FB}为什么不试一试来\n看看这到底有什么用。",
    "cap": 67,
    "refs": [
-    "048950C:literal"
+    "048950C:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -79309,7 +80374,7 @@
    "zh": "感谢使用\n神秘礼物系统。{FB}你是{FD:01}吧？\n这张船票是给你的。",
    "cap": 51,
    "refs": [
-    "04896BC:literal"
+    "04896BC:aligned"
    ],
    "untrusted": 0,
    "suspect": false
