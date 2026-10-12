@@ -169,6 +169,37 @@ def naming_dispatch(rom, src, pool):
     rom[HACK:HACK + 16] = jump(d + 8)
 
 
+GMAPGROUPS = 0xB3B100   # the hack moved gMapGroups; literal in Overworld_GetMapHeaderByGroupAndId (0x55238)
+
+
+def null_placeholder_scripts(rom, src):
+    """The hack leaves 0x08000000 (ROM offset 0, the cartridge header) as the
+    script of many object events. FireRed treats only NULL as "nothing to
+    interact with", so talking to one runs the ROM header as script bytecode and
+    freezes the game (the original Chinese ROM does the same: Bellsprout Tower
+    top floor, local id 8). Interaction scripts are reloaded from the map header
+    on every map load, so zeroing them also fixes existing saves."""
+    assert src[0x5524C:0x55250] == (0x08000000 + GMAPGROUPS).to_bytes(4, "little")
+    u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
+    rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
+    n, seen, g = 0, set(), 0
+    while g < 80 and (gp := rp(GMAPGROUPS + 4 * g)) is not None:
+        m = 0
+        while m < 500 and (mp := rp(gp + 4 * m)) is not None:
+            ev = rp(mp + 4) if mp + 8 <= len(src) else None
+            op = rp(ev + 4) if ev and ev + 8 <= len(src) else None
+            if op and src[ev] <= 64:
+                for i in range(src[ev]):
+                    a = op + 24 * i + 16
+                    if a not in seen and u32(a) == 0x08000000:
+                        seen.add(a)
+                        rom[a:a + 4] = bytes(4)
+                        n += 1
+            m += 1
+        g += 1
+    return n
+
+
 def main():
     base = open(BASE, "rb").read()
     src = open(PATCHED, "rb").read()
@@ -451,6 +482,7 @@ def main():
         for a, b, _ in blk.get("vanilla", []):
             a, b = int(a, 16), int(b, 16)
             rom[a:b] = base[a:b]
+    report["null_object_scripts"] = null_placeholder_scripts(rom, src)
     naming_dispatch(rom, src, pool)
     report["free_after"] = pool.total()
 
