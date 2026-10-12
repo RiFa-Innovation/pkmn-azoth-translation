@@ -97448,6 +97448,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09C6F38": {
+   "zh": "这里是29号道路\n吉野市→若叶镇",
+   "cap": 29,
+   "refs": [
+    "09C6F30:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09C6F60": {
    "zh": "哟，\n你的精灵还好吗？{FB}如果精灵太虚弱，\n不想让它战斗，{FB}那你走路的时候，\n尽量避开草丛比较好。",
    "cap": 86,
@@ -97516,6 +97525,15 @@
    "cap": 31,
    "refs": [
     "09C7185:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09C71B7": {
+   "zh": "这里是29号道路\n吉野市←若叶镇",
+   "cap": 29,
+   "refs": [
+    "09C71AF:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -98103,6 +98121,15 @@
    "refs": [
     "09C8819:loadpointer",
     "09E2D33:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09C886D": {
+   "zh": "这里是30号道路\n↓吉野市 ↑31号道路",
+   "cap": 33,
+   "refs": [
+    "09C8865:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -99550,6 +99577,15 @@
    "cap": 31,
    "refs": [
     "09CD065:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09CD0A9": {
+   "zh": "31号道路\n桔梗市→吉野市",
+   "cap": 23,
+   "refs": [
+    "09CD0A1:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -106773,6 +106809,15 @@
    "cap": 47,
    "refs": [
     "09DF948:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09DF98A": {
+   "zh": "满金市 商业区\n← 住宅区",
+   "cap": 23,
+   "refs": [
+    "09DF982:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -120120,6 +120165,15 @@
    "cap": 17,
    "refs": [
     "0AA272E:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0AA27DE": {
+   "zh": "满金市 港湾区\n→ 住宅区",
+   "cap": 23,
+   "refs": [
+    "0AA27AA:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false
@@ -152271,6 +152325,15 @@
    "cap": 27,
    "refs": [
     "0EC4D1E:loadpointer"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0EC4D4C": {
+   "zh": "103号道路\n↓古辰镇",
+   "cap": 18,
+   "refs": [
+    "0EC4D44:loadpointer"
    ],
    "untrusted": 0,
    "suspect": false

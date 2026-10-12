@@ -13877,5 +13877,12 @@
 "47号道路": "Route 47",
 "48号道路": "Route 48",
 "40号水路": "Route 40",
-"41号水路": "Route 41"
+"41号水路": "Route 41",
+"这里是29号道路\n吉野市→若叶镇": "Route 29\nCherrygrove City → New Bark Town",
+"这里是29号道路\n吉野市←若叶镇": "Route 29\nCherrygrove City ← New Bark Town",
+"这里是30号道路\n↓吉野市 ↑31号道路": "Route 30\n↓ Cherrygrove City  ↑ Route 31",
+"31号道路\n桔梗市→吉野市": "Route 31\nViolet City → Cherrygrove City",
+"满金市 商业区\n← 住宅区": "Goldenrod City Business District\n← Residential District",
+"满金市 港湾区\n→ 住宅区": "Goldenrod City Harbor District\n→ Residential District",
+"103号道路\n↓古辰镇": "Route 103\n↓ Oldale Town"
 }
