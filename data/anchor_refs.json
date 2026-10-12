@@ -34,6 +34,41 @@
   "ldr": "0CCE55A",
   "use": "ldrb r7, [r7, #0x1f]"
  },
+ "0DF07D4": {
+  "string": "0E37030",
+  "ldr": "0DF05EE",
+  "use": "adds r0, #0x18"
+ },
+ "0DF07DC": {
+  "string": "0E370B0",
+  "ldr": "0DF068C",
+  "use": "adds r0, #0x10"
+ },
+ "0DF0CF0": {
+  "string": "0E370F0",
+  "ldr": "0DF0ABC",
+  "use": "adds r0, #8"
+ },
+ "0DF0F64": {
+  "string": "0E370F0",
+  "ldr": "0DF0D58",
+  "use": "adds r0, #8"
+ },
+ "0DF1414": {
+  "string": "0E37170",
+  "ldr": "0DF12D4",
+  "use": "adds r0, #0x10"
+ },
+ "0DF158C": {
+  "string": "0E37170",
+  "ldr": "0DF14A0",
+  "use": "adds r1, #0x58"
+ },
+ "0DF1800": {
+  "string": "0E37170",
+  "ldr": "0DF16CC",
+  "use": "adds r1, #0x58"
+ },
  "0DF1D70": {
   "string": "0E37264",
   "ldr": "0DF1CE0",
@@ -43,6 +78,51 @@
   "string": "0E37264",
   "ldr": "0DF1E54",
   "use": "adds r0, #0x58"
+ },
+ "0DF21C0": {
+  "string": "0E372E4",
+  "ldr": "0DF2052",
+  "use": "adds r3, #0x30"
+ },
+ "0DF22B4": {
+  "string": "0E37264",
+  "ldr": "0DF2276",
+  "use": "adds r1, r3, #7"
+ },
+ "0DF232C": {
+  "string": "0E37264",
+  "ldr": "0DF22D0",
+  "use": "adds r3, #0x60"
+ },
+ "0DF2608": {
+  "string": "0E37264",
+  "ldr": "0DF24AE",
+  "use": "adds r3, #0x1a"
+ },
+ "0DF263C": {
+  "string": "0E372E4",
+  "ldr": "0DF254C",
+  "use": "adds r0, #0x40"
+ },
+ "0DF2878": {
+  "string": "0E37264",
+  "ldr": "0DF2716",
+  "use": "adds r3, #0x1a"
+ },
+ "0DF28AC": {
+  "string": "0E372E4",
+  "ldr": "0DF27BA",
+  "use": "adds r0, #0x40"
+ },
+ "0DF2B0C": {
+  "string": "0E3771C",
+  "ldr": "0DF2A82",
+  "use": "adds r4, #0xc"
+ },
+ "0DF2FD0": {
+  "string": "0E3771C",
+  "ldr": "0DF2E2C",
+  "use": "adds r1, #0x54"
  },
  "0DF3D4C": {
   "string": "0E37CA0",
@@ -59,15 +139,175 @@
   "ldr": "0DF3EE4",
   "use": "adds r1, #0x38"
  },
+ "0DF417C": {
+  "string": "0E37D20",
+  "ldr": "0DF405A",
+  "use": "adds r0, #0xc"
+ },
+ "0DF4560": {
+  "string": "0E37D20",
+  "ldr": "0DF4492",
+  "use": "adds r0, #0xc"
+ },
+ "0DF4838": {
+  "string": "0E37CA0",
+  "ldr": "0DF4652",
+  "use": "adds r3, #0x1a"
+ },
+ "0DF487C": {
+  "string": "0E37D20",
+  "ldr": "0DF47B4",
+  "use": "adds r0, #0xc"
+ },
  "0DF48D0": {
   "string": "0E37CA0",
   "ldr": "0DF48B8",
   "use": "adds r4, #0xe"
  },
+ "0DF5348": {
+  "string": "0E399E4",
+  "ldr": "0DF5234",
+  "use": "adds r0, #0x38"
+ },
+ "0DF538C": {
+  "string": "0E39A64",
+  "ldr": "0DF5252",
+  "use": "adds r0, #0x48"
+ },
+ "0DF56EC": {
+  "string": "0E39A64",
+  "ldr": "0DF54D8",
+  "use": "adds r6, #0x88"
+ },
+ "0DF56F4": {
+  "string": "0E39AE4",
+  "ldr": "0DF54E8",
+  "use": "adds r0, #0x40"
+ },
+ "0DF56FC": {
+  "string": "0E39B64",
+  "ldr": "0DF553C",
+  "use": "adds r0, #8"
+ },
+ "0DF5A88": {
+  "string": "0E39C64",
+  "ldr": "0DF590C",
+  "use": "adds r0, #0x10"
+ },
+ "0DF5CB8": {
+  "string": "0E399E4",
+  "ldr": "0DF5BC4",
+  "use": "adds r0, #0x80"
+ },
+ "0DF5D18": {
+  "string": "0E39A64",
+  "ldr": "0DF5BCE",
+  "use": "adds r0, #0x78"
+ },
+ "0DF5D20": {
+  "string": "0E39C64",
+  "ldr": "0DF5BD8",
+  "use": "adds r0, #0x40"
+ },
+ "0DF5F18": {
+  "string": "0E39C64",
+  "ldr": "0DF5DDC",
+  "use": "adds r1, #0x58"
+ },
+ "0DF5F20": {
+  "string": "0E399E4",
+  "ldr": "0DF5DEA",
+  "use": "adds r0, #0x10"
+ },
+ "0DF5F58": {
+  "string": "0E39A64",
+  "ldr": "0DF5E3C",
+  "use": "adds r0, #0xa8"
+ },
+ "0DF615C": {
+  "string": "0E399E4",
+  "ldr": "0DF6058",
+  "use": "adds r0, #0xa0"
+ },
+ "0DF6164": {
+  "string": "0E39A64",
+  "ldr": "0DF6064",
+  "use": "adds r0, #0x98"
+ },
+ "0DF65B4": {
+  "string": "0E399E4",
+  "ldr": "0DF6332",
+  "use": "adds r5, #0x58"
+ },
+ "0DF65BC": {
+  "string": "0E39A64",
+  "ldr": "0DF6340",
+  "use": "adds r4, #0x50"
+ },
+ "0DF65CC": {
+  "string": "0E39CE4",
+  "ldr": "0DF63AA",
+  "use": "adds r0, #0x30"
+ },
+ "0DF66D4": {
+  "string": "0E399E4",
+  "ldr": "0DF668A",
+  "use": "adds r0, #0x78"
+ },
+ "0DF66DC": {
+  "string": "0E39A64",
+  "ldr": "0DF6694",
+  "use": "adds r0, #0x70"
+ },
+ "0DF66E4": {
+  "string": "0E39CE4",
+  "ldr": "0DF669E",
+  "use": "adds r0, #0x60"
+ },
+ "0DF6D78": {
+  "string": "0E399E4",
+  "ldr": "0DF6B04",
+  "use": "adds r0, #0xb8"
+ },
+ "0DF6D80": {
+  "string": "0E39A64",
+  "ldr": "0DF6B0E",
+  "use": "adds r0, #0xb0"
+ },
+ "0DF6D88": {
+  "string": "0E39CE4",
+  "ldr": "0DF6B18",
+  "use": "adds r0, #0x78"
+ },
+ "0DF6DA4": {
+  "string": "0E39D64",
+  "ldr": "0DF6C28",
+  "use": "adds r0, #0x10"
+ },
  "0DF7440": {
   "string": "0E39F8C",
   "ldr": "0DF71D2",
   "use": "adds r1, #0x20"
+ },
+ "0DF782C": {
+  "string": "0E39F8C",
+  "ldr": "0DF76CC",
+  "use": "adds r3, #0x1a"
+ },
+ "0DF7FE0": {
+  "string": "0E3BACC",
+  "ldr": "0DF7E9A",
+  "use": "adds r6, #0x4c"
+ },
+ "0DF8008": {
+  "string": "0E3BA4C",
+  "ldr": "0DF7FAE",
+  "use": "adds r5, #0x5f"
+ },
+ "0DF8268": {
+  "string": "0E3BACC",
+  "ldr": "0DF8074",
+  "use": "adds r0, #0x58"
  },
  "0DF85D4": {
   "string": "0E3BACC",
@@ -83,6 +323,36 @@
   "string": "0E3BA4C",
   "ldr": "0DF87AA",
   "use": "adds r3, #0x3f"
+ },
+ "0DF8CE4": {
+  "string": "0E3BB4C",
+  "ldr": "0DF8B30",
+  "use": "adds r3, #0x2d"
+ },
+ "0DF8CF4": {
+  "string": "0E3BA4C",
+  "ldr": "0DF8B6E",
+  "use": "adds r3, #0x4b"
+ },
+ "0DF8D28": {
+  "string": "0E3BBCC",
+  "ldr": "0DF8C52",
+  "use": "adds r0, #0x28"
+ },
+ "0DF900C": {
+  "string": "0E3D944",
+  "ldr": "0DF8FA0",
+  "use": "adds r0, #0x18"
+ },
+ "0DF9470": {
+  "string": "0E3D944",
+  "ldr": "0DF9468",
+  "use": "adds r2, #0x50"
+ },
+ "0DF9CF0": {
+  "string": "0E3DA54",
+  "ldr": "0DF9BBE",
+  "use": "adds r1, #0x3c"
  },
  "0DF9F20": {
   "string": "0E3DA54",
@@ -139,6 +409,16 @@
   "ldr": "0DFAD1E",
   "use": "adds r3, #0xd"
  },
+ "0DFB074": {
+  "string": "0E3DCD4",
+  "ldr": "0DFADE2",
+  "use": "adds r3, #0x5b"
+ },
+ "0DFB078": {
+  "string": "0E3DD54",
+  "ldr": "0DFAE8E",
+  "use": "adds r3, #0x26"
+ },
  "0DFB4C0": {
   "string": "0E3DA54",
   "ldr": "0DFB3C4",
@@ -169,10 +449,30 @@
   "ldr": "0DFB73C",
   "use": "adds r3, #0xb"
  },
+ "0DFBA8C": {
+  "string": "0E3DCD4",
+  "ldr": "0DFB96A",
+  "use": "adds r3, #0x5b"
+ },
  "0DFBA90": {
   "string": "0E3DA54",
   "ldr": "0DFB978",
   "use": "adds r3, #0xd"
+ },
+ "0DFBA9C": {
+  "string": "0E3DD54",
+  "ldr": "0DFBA0A",
+  "use": "adds r3, #0x26"
+ },
+ "0DFC0E4": {
+  "string": "0E3E02C",
+  "ldr": "0DFC016",
+  "use": "adds r0, #0x30"
+ },
+ "0DFC7F8": {
+  "string": "0E3E02C",
+  "ldr": "0DFC6B0",
+  "use": "adds r3, #0x55"
  },
  "0F65328": {
   "string": "0F68DDC",
@@ -184,20 +484,50 @@
   "ldr": "0F653CA",
   "use": "adds r0, #0x20"
  },
+ "0FCA640": {
+  "string": "0FF69C0",
+  "ldr": "0FCA380",
+  "use": "adds r2, #0x62"
+ },
+ "0FCA668": {
+  "string": "0FF6A40",
+  "ldr": "0FCA418",
+  "use": "adds r3, #0x21"
+ },
  "0FCA68C": {
   "string": "0FF6AC0",
   "ldr": "0FCA586",
   "use": "adds r3, #0x5f"
+ },
+ "0FCA694": {
+  "string": "0FF6B40",
+  "ldr": "0FCA5BC",
+  "use": "adds r3, #6"
  },
  "0FCAA2C": {
   "string": "0FF6B40",
   "ldr": "0FCA6B6",
   "use": "adds r3, #0x6c"
  },
+ "0FCAA30": {
+  "string": "0FF69C0",
+  "ldr": "0FCA6C4",
+  "use": "adds r3, #0x50"
+ },
  "0FCAA4C": {
   "string": "0FF6BC0",
   "ldr": "0FCA750",
   "use": "adds r3, #0x2b"
+ },
+ "0FCAA74": {
+  "string": "0FF6C40",
+  "ldr": "0FCA898",
+  "use": "adds r0, #0xc"
+ },
+ "0FCAA80": {
+  "string": "0FF6CC0",
+  "ldr": "0FCA91A",
+  "use": "adds r3, #0x21"
  },
  "0FCAA84": {
   "string": "0FF6D40",
@@ -209,6 +539,11 @@
   "ldr": "0FCAA9E",
   "use": "adds r3, #0x2a"
  },
+ "0FCAE10": {
+  "string": "0FF69C0",
+  "ldr": "0FCAAAC",
+  "use": "adds r3, #0x50"
+ },
  "0FCAE2C": {
   "string": "0FF6E40",
   "ldr": "0FCAB46",
@@ -218,6 +553,11 @@
   "string": "0FF6EC0",
   "ldr": "0FCABB4",
   "use": "adds r3, #0x19"
+ },
+ "0FCAE4C": {
+  "string": "0FF6F40",
+  "ldr": "0FCAC8C",
+  "use": "adds r0, #0x2c"
  },
  "0FCAE7C": {
   "string": "0FF6FC0",
@@ -229,6 +569,16 @@
   "ldr": "0FCAF12",
   "use": "adds r0, #0x44"
  },
+ "0FCB248": {
+  "string": "0FF69C0",
+  "ldr": "0FCAFE0",
+  "use": "adds r2, #0x18"
+ },
+ "0FCB258": {
+  "string": "0FF6A40",
+  "ldr": "0FCB01C",
+  "use": "adds r3, #0x78"
+ },
  "0FCB264": {
   "string": "0FF6AC0",
   "ldr": "0FCB07C",
@@ -239,10 +589,125 @@
   "ldr": "0FCB10E",
   "use": "adds r0, #0x74"
  },
+ "0FCB274": {
+  "string": "0FF6C40",
+  "ldr": "0FCB13C",
+  "use": "adds r3, #0x24"
+ },
  "0FCB278": {
   "string": "0FF6DC0",
   "ldr": "0FCB16C",
   "use": "adds r0, #0x64"
+ },
+ "0FCB284": {
+  "string": "0FF6F40",
+  "ldr": "0FCB1CA",
+  "use": "adds r0, #0x14"
+ },
+ "0FCB300": {
+  "string": "0FF6F40",
+  "ldr": "0FCB29E",
+  "use": "adds r0, #0x5c"
+ },
+ "0FCB310": {
+  "string": "0FF69C0",
+  "ldr": "0FCB2D6",
+  "use": "adds r3, #0x50"
+ },
+ "0FCB4B0": {
+  "string": "0FF6FC0",
+  "ldr": "0FCB35E",
+  "use": "adds r3, #0x5c"
+ },
+ "0FCB4B4": {
+  "string": "0FF69C0",
+  "ldr": "0FCB368",
+  "use": "adds r3, #0x50"
+ },
+ "0FCB4BC": {
+  "string": "0FF7040",
+  "ldr": "0FCB3CE",
+  "use": "adds r3, #8"
+ },
+ "0FCB5B0": {
+  "string": "0FF69C0",
+  "ldr": "0FCB54A",
+  "use": "adds r3, #0x50"
+ },
+ "0FCB928": {
+  "string": "0FF7040",
+  "ldr": "0FCB5F8",
+  "use": "adds r0, #0x38"
+ },
+ "0FCB994": {
+  "string": "0FF6FC0",
+  "ldr": "0FCB778",
+  "use": "adds r3, #0x1b"
+ },
+ "0FCB998": {
+  "string": "0FF69C0",
+  "ldr": "0FCB786",
+  "use": "adds r3, #0x50"
+ },
+ "0FCB9A4": {
+  "string": "0FF70C0",
+  "ldr": "0FCB7E8",
+  "use": "adds r3, #4"
+ },
+ "0FCB9AC": {
+  "string": "0FF7140",
+  "ldr": "0FCB88E",
+  "use": "adds r3, #3"
+ },
+ "0FCBB04": {
+  "string": "0FF69C0",
+  "ldr": "0FCB9CA",
+  "use": "adds r2, #0x62"
+ },
+ "0FCBBC0": {
+  "string": "0FF69C0",
+  "ldr": "0FCBB70",
+  "use": "adds r3, #0x50"
+ },
+ "0FCBC50": {
+  "string": "0FF69C0",
+  "ldr": "0FCBC00",
+  "use": "adds r3, #0x50"
+ },
+ "0FCBCCC": {
+  "string": "0FF69C0",
+  "ldr": "0FCBC8E",
+  "use": "adds r3, #0x50"
+ },
+ "0FCBD5C": {
+  "string": "0FF71C0",
+  "ldr": "0FCBD00",
+  "use": "adds r3, #0x1c"
+ },
+ "0FCBD60": {
+  "string": "0FF69C0",
+  "ldr": "0FCBD0E",
+  "use": "adds r3, #0x50"
+ },
+ "0FCC15C": {
+  "string": "0FF72C0",
+  "ldr": "0FCBF2C",
+  "use": "adds r7, #0x10"
+ },
+ "0FCC168": {
+  "string": "0FF7340",
+  "ldr": "0FCBF58",
+  "use": "adds r6, #0x50"
+ },
+ "0FCC17C": {
+  "string": "0FF73C0",
+  "ldr": "0FCC036",
+  "use": "adds r6, #0x30"
+ },
+ "0FCC27C": {
+  "string": "0FF73C0",
+  "ldr": "0FCC23E",
+  "use": "adds r0, #0x38"
  },
  "0FCD61C": {
   "string": "0FF89BC",

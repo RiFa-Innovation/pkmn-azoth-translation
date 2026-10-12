@@ -74,6 +74,30 @@ def anchor_use(a, reg):
     return None
 
 
+# text blocks the hack's code indexes by offset from an anchor that is not
+# itself a dumped string (so the pass over zh.json refs below never sees it)
+TEXT_BLOCKS = [(0x0E37000, 0x0E3F000), (0x0FF6000, 0x0FF7400)]
+
+
+def block_anchors(out):
+    """Every literal-pool word pointing into TEXT_BLOCKS that code uses as
+    base + imm. Entries use the same shape (key = literal offset, string =
+    the pointed-to address); anchored.py turns them into text targets."""
+    import numpy as np
+    w = np.frombuffer(o[:len(o) & ~3], dtype="<u4")
+    for lo, hi in TEXT_BLOCKS:
+        for idx in np.nonzero((w >= 0x08000000 + lo) & (w < 0x08000000 + hi))[0]:
+            lit = int(idx) * 4
+            if f"{lit:07X}" in out:
+                continue
+            for la, reg in loaders(lit):
+                use = anchor_use(la, reg)
+                if use:
+                    out[f"{lit:07X}"] = {"string": f"{int(w[idx]) - 0x08000000:07X}",
+                                         "ldr": f"{la:07X}", "use": use}
+                    break
+
+
 def main():
     strings = json.load(open("text/zh.json", encoding="utf-8"))["strings"]
     out = {}
@@ -90,6 +114,7 @@ def main():
                 if use:
                     out[f"{ro:07X}"] = {"string": addr, "ldr": f"{la:07X}", "use": use}
                     break
+    block_anchors(out)
     json.dump(dict(sorted(out.items())), open(OUT, "w"), indent=1, ensure_ascii=False)
     print(f"{len(out)} anchor refs -> {OUT}")
 

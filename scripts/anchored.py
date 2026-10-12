@@ -44,13 +44,18 @@ def build():
         if isinstance(blk, dict):
             handled |= {int(s["zh_at"], 16) for s in blk["strings"]}
     out = {}
-    targets = {L["value"] - 0x08000000 + o for L in hm.literals.values() if L["anchor"] == "imm"
-               for o in L["offs"]}
-    for lit, L in hm.literals.items():
-        if L["anchor"] != "imm":
-            continue
-        base = L["value"] - 0x08000000
-        for o in L["offs"]:
+    # anchors the code map missed (code it never discovered): data/anchor_refs.json,
+    # `adds rX, #imm` uses only (scripts/anchor_refs.py), same shape as above
+    lits = {lit: (L["value"] - 0x08000000, list(L["offs"])) for lit, L in hm.literals.items()
+            if L["anchor"] == "imm"}
+    for lit, v in json.load(open("data/anchor_refs.json")).items():
+        m = re.fullmatch(r"adds r\d, #(0x[0-9a-f]+|\d+)", v["use"])
+        lit = int(lit, 16)
+        if m and lit not in lits:
+            lits[lit] = (int(v["string"], 16), [int(m.group(1), 0)])
+    targets = {b + o for b, offs in lits.values() for o in offs}
+    for lit, (base, offs) in lits.items():
+        for o in offs:
             t = base + o
             if not (0 < t < len(rom)) or t in handled:
                 continue
