@@ -1,0 +1,74 @@
+{
+ "_doc": "Dressing-room screen (BG2): top bar hints \u79fb\u52a8 \u786e\u8ba4 \u8fd4\u56de (Move / Confirm / Back).",
+ "tiles": {
+  "lz": "E04B88",
+  "refs": [
+   "DF212C"
+  ]
+ },
+ "map": {
+  "lz": "E05390",
+  "refs": [
+   "DF214C"
+  ],
+  "width": 32,
+  "height": 20
+ },
+ "pal_bank": 1,
+ "max_tiles": 320,
+ "preview_pal": "gfx/dressing_pal.bin",
+ "edits": [
+  {
+   "erase": [
+    136,
+    0,
+    238,
+    12
+   ],
+   "erase_colors": [
+    5,
+    8,
+    12
+   ],
+   "bg": 4,
+   "parts": [
+    {
+     "blit": [
+      137,
+      1,
+      145,
+      11
+     ]
+    },
+    "Move",
+    " ",
+    {
+     "blit": [
+      170,
+      1,
+      177,
+      11
+     ]
+    },
+    "OK",
+    " ",
+    {
+     "blit": [
+      203,
+      1,
+      211,
+      11
+     ]
+    },
+    "Back"
+   ],
+   "at": [
+    0,
+    -1
+   ],
+   "align": "right",
+   "ink": 8,
+   "shadow": 12
+  }
+ ]
+}
