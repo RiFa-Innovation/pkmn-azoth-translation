@@ -2424,6 +2424,8 @@
   "note": "locked achievement description"
  },
  "_doc_quests": "Quest-board detail pane (issue #41): 3 rows fit the box; the descriptions were condensed to wrap in 3 lines at 176 px (no scroll, extra rows would be drawn past the window).",
+ "0EECB5D": {"px": 176, "dialogue": false, "lines": 3, "note": "Pokegear help page body (More about Flying): 3-line box, wrapped at 198 px the lines ran past the right edge (issue #65)"},
+ "0EECEDA": {"px": 176, "dialogue": false, "lines": 3, "note": "Pokegear help page body (About the Quest Screen): same box as 0EECB5D (issue #65)"},
  "0E3B01A": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
  "0E3B064": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
  "0E3B0AC": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
