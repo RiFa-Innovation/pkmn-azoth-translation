@@ -89,6 +89,10 @@ this string" in one call. Add what you learn with `hackdb.py note add`.
   mode 1 with `scriptPtr` outside `0x08......`. Check any suspicious freeze by diffing every
   `goto`/`call`/`goto_if`/`call_if` operand against the original hack (hackdb `cmds` table).
   (#64, PLAYTEST 80)
+- **A manual string can swallow a movement stream.** A `manual_strings.json` entry whose zh begins with
+  garbage (`úú\n...`, `œY ...`) may start 1-3 bytes early, inside the preceding `applymovement`
+  stream, so its "ref" is the operand. After adding manual entries, diff all `applymovement`/`goto`/`call`
+  operands of the built ROM against the original (hackdb `cmds` on both ROMs). (#87, PLAYTEST 84)
 - **Free-space pool:** `0xFF` runs can be live data. `insert.py::referenced_ff`
   excludes referenced FF ranges; don't relocate into them.
 - **Mixed strings:** mostly-Latin text with a hanzi (names + one character) is
