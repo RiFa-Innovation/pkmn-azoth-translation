@@ -114,6 +114,19 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   Note object templates live in `SaveBlock1` (copied from the map header on map
   load, `script` refreshed separately), so a parked NPC is *in the save* — a
   map-header edit alone does not repair existing saves.
+- **A scene NPC that comes back after a map reload has no flag.** Object template
+  flagId 0 spawns the object on every map load, so a cleanup's `removeobject`
+  only lasts the session ("the old man walks up and down the stairs again").
+  Give it a flag the hack's own cleanups set — Sprout Tower's elder uses 0x178b,
+  set by the same script that advances the story stage, so saves that already
+  finished the scene have it too. (#37, PLAYTEST 64)
+- **Fix a shared movement blob by repointing its operands, not the blob.** The
+  Sprout Tower cast's leave walks shared three movement blobs with six
+  `applymovement` sites in other scripts, so editing the blobs (beta-10, in
+  `code_patches.json`) had to be reverted in beta-11. Pointing the six *operand
+  slots* in that scene's own scripts at one pooled "stay put" movement (`0x62`
+  idles + `0xFE`) gives the same effect and touches no shared byte. (#37,
+  PLAYTEST 62, 64)
 - Save states break between patch versions; in-game saves carry over.
 
 ## Replaying the new-game path (verified 2026-10-12, current build)

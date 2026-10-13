@@ -240,7 +240,26 @@ def tower_top_floor_softlock(rom, src, pool):
     the coord trigger - so nothing replays - and the player can walk back down
     into the tower. A healthy playthrough is untouched: the cleanup is gated on
     the sages being spawned with the stage still on 22, which cannot happen
-    mid-chain (the chain has no field resumptions between those two points)."""
+    mid-chain (the chain has no field resumptions between those two points).
+
+    Two further defects of the same scene:
+
+    * The cast's farewell walks go *down* that same one-tile corridor (localIds 3,
+      8 and 9 are sent to movement blobs of `down`/`right` steps). A blocked walk
+      ends after its first step, so the NPCs park on the corridor's only tile while
+      the player is still talking to them - and beta-11 reverted the earlier fix
+      that had edited those blobs, because the same three blobs are referenced from
+      six `applymovement` sites in other scripts. Instead, the six *operands* in
+      this scene's scripts are repointed at a pooled "stay put" movement: the cast
+      stays in the room (the corridor is never blocked, during or after the
+      conversation) and the sequence's own cleanup still hides them.
+
+    * The silent old man at (9,4) (localId 6) carried *no* flag in its template, so
+      the cleanup's removeobject lasted only until the next map load: leave the
+      floor and come back and he is walking down and up the stairs again. He now
+      uses flag 0x178b - unused by every object in the hack, and the last entry the
+      hack's own cleanups set, in the same script that advances the stage to 23, so
+      any save that finished the scene already has it - and therefore stays gone."""
     u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
     rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
     u16 = lambda o: int.from_bytes(src[o:o + 2], "little")
@@ -300,7 +319,37 @@ def tower_top_floor_softlock(rom, src, pool):
     for off in (len(head2), len(head2) + 4 + len(mid2)):
         rom[at2 + off:at2 + off + 4] = chain.to_bytes(4, "little")
     rom[coord + 0xC:coord + 0x10] = (0x08000000 + at2).to_bytes(4, "little")
+
+    # The sequence walks its cast *down the one-tile exit corridor* when it ends;
+    # that path aborts at the corridor walls, so they park in the player's only way
+    # out and look stuck after the conversation ("Morty in the stairs"). Repoint
+    # just those applymovement operands at a pooled "stay put" movement: the cast
+    # stays in the room, the corridor stays clear, and the sequence's own cleanup
+    # still hides them. The movement blobs themselves are left untouched - they are
+    # referenced from other scripts.
+    stay = b"\x62" * 9 + b"\xfe"          # the idle action the hack uses elsewhere
+    sat = pool.alloc_aligned(len(stay))
+    rom[sat:sat + len(stay)] = stay
+    leave_slots = {0xAF6B4B: 0x08AF6B81, 0xAF6B52: 0x08AF6B8C, 0xAF6ACB: 0x08AF6B99,
+                   0xAF7D8B: 0x08AF6B8C, 0xAF85D8: 0x08AF6B81, 0xAF85DF: 0x08AF6B8C}
+    for off, want in sorted(leave_slots.items()):
+        assert src[off - 3] == 0x4F, f"{off:#x} is not an applymovement opcode"
+        got = int.from_bytes(src[off:off + 4], "little")
+        assert got == want, f"{off:#x} points at {got:#x}, expected {want:#x}"
+        rom[off:off + 4] = (0x08000000 + sat).to_bytes(4, "little")
+
+    # The old man at (9,4) (localId 6) has *no* flag in its template, so the
+    # sequence's removeobject only lasts until the next map load - walking down and
+    # up the stairs brings him back. Give him flag 0x178b: no object anywhere uses
+    # it and the hack's own cleanups set it as the last entry of the flag list they
+    # set before removing the scene cast, so he stays gone.
+    objt = rp(events + 4)
+    t = objt + 24 * 5
+    assert src[t] == 6 and int.from_bytes(src[t + 20:t + 22], "little") == 0, \
+        "localId 6 template differs"
+    rom[t + 20:t + 22] = (0x178b).to_bytes(2, "little")
     return {"on_resume": 0x08000000 + at, "coord_script": 0x08000000 + at2,
+            "stay_movement": 0x08000000 + sat, "elder_flag": 0x178b,
             "bytes": [len(body), len(body2)]}
 
 
