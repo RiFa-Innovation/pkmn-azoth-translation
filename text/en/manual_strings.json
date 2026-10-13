@@ -528,5 +528,35 @@
   "zh": "委托列表",
   "cap": 9,
   "en": "Quests"
+ },
+ "0EB33C2": {
+  "zh": "中毒",
+  "cap": 21,
+  "en": "Poison"
+ },
+ "0EB33D7": {
+  "zh": "麻痹",
+  "cap": 21,
+  "en": "Paralysis"
+ },
+ "0EB33EC": {
+  "zh": "睡眠",
+  "cap": 21,
+  "en": "Sleep"
+ },
+ "0EB3401": {
+  "zh": "燃烧",
+  "cap": 21,
+  "en": "Burn"
+ },
+ "0EB3416": {
+  "zh": "冰冻",
+  "cap": 21,
+  "en": "Freeze"
+ },
+ "0EB342B": {
+  "zh": "确认",
+  "cap": 8,
+  "en": "Confirm"
  }
 }
