@@ -114,6 +114,15 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   Note object templates live in `SaveBlock1` (copied from the map header on map
   load, `script` refreshed separately), so a parked NPC is *in the save* — a
   map-header edit alone does not repair existing saves.
+- **UI labels can be invisible to every scan.** A label the code loads as
+  `ldr rX, =<block>` + `adds rX, #imm` owns no pointer, so `find_leftover_zh`
+  (pointer-based) and the dump never list it. `data/hack_code.json` marks such
+  literals (`"anchor": "imm"`, with the exact `offs` the code uses) — the quest
+  board's `已完成`/`未完成`/`委托数量`/`委托列表` sit at 0xE39F8C..0xE39FF5 that
+  way. Fix them **in place** through `text/en/manual_strings.json` (byte-asserted
+  `zh` + `cap`, the path `进行中` -> `Active` uses); never relocate the block —
+  the same literal is used with other offsets, including reads of data fields, so
+  moving it breaks them. (#41, PLAYTEST 65)
 - **A scene NPC that comes back after a map reload has no flag.** Object template
   flagId 0 spawns the object on every map load, so a cleanup's `removeobject`
   only lasts the session ("the old man walks up and down the stairs again").
