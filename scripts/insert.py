@@ -202,11 +202,12 @@ def null_placeholder_scripts(rom, src):
                             seen.add(a)
                             rom[a:a + 4] = bytes(4)
                             n += 1
-                for cnt, tbl, off in ((src[ev + 2], ev + 0xC, 12),   # coord events
-                                      (src[ev + 3], ev + 0x10, 12)):  # BG events
+                # (count, table ptr, record size, script offset): coord 16/+12, BG 12/+8
+                for cnt, tbl, size, off in ((src[ev + 2], ev + 0xC, 16, 12),
+                                            (src[ev + 3], ev + 0x10, 12, 8)):
                     tab = rp(tbl) if cnt <= 64 else None
                     for i in range(cnt if tab else 0):
-                        a = tab + 16 * i + off
+                        a = tab + size * i + off
                         if a not in seen and JUNK(a):
                             seen.add(a)
                             rom[a:a + 4] = bytes(4)
