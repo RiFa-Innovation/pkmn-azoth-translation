@@ -25,7 +25,7 @@ OUT = "text/zh.json"
 
 # name, file offset, stride, field size, count  (counts from plausibility scan)
 TABLES = [
-    ("species", 0x141B350, 11, 11, 1292),
+    ("species", 0x141B350, 11, 11, 1554),  # last real name 1553 (Pecharunt); 1554+ is data
     ("moves", 0x1D97378, 13, 13, 1000),
     ("abilities", 0x1D8E858, 13, 13, 302),
     ("items", 0x3DB028, 44, 14, 378),  # old copy; the game reads items2
