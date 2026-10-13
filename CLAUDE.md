@@ -15,7 +15,8 @@ tracing), `PLAYTEST.md` (every finding, numbered), `CONTRIBUTING.md`.
   release gets its own folder `dist/beta-N/` containing
   `Pokemon-Azoth-English-beta-N.bps` and `Pokemon-Azoth-English-beta-N.gba`
   (version in the name, so it can be uploaded to their server as-is); never
-  write flat files into `dist/` or touch their `- next.*` files.
+  write flat files into `dist/` or touch their `- next.*` files. Package via
+  `scripts/dist.py N`.
 - Releases, merges and posts are outward-facing: do them when asked. Release
   steps are below. #13 is **parked** until the user reaches it in their
   playthrough.
@@ -178,15 +179,16 @@ starters, the nickname screen and Elm's farewell were verified here.
 ## Release steps (only when asked)
 
 1. Merge the PR (CI green). `git checkout main && git pull`.
-2. `python3 scripts/insert.py`, apply-and-compare as above; copy
-   `build/Mercury_EN.bps` to `Pokemon-Azoth-English-beta-N.bps`.
+2. `python3 scripts/dist.py N` - builds, verifies the BPS byte-identically,
+   and packages `dist/beta-N/` (versioned `.bps`, `.gba`, `.sav`; `--save PATH`
+   for a different save, `--no-build` when already built). It prints the
+   SHA-1s for the notes.
 3. Notes: copy the previous release's structure (`gh release view beta-N-1`):
    bug-report link, patch/hash table (base CRC32+SHA-1, patch SHA-1, ROM SHA-1),
    "New in beta N" with the detailed fix list, known issues. Use the
    `pkmn-azoth-translation` repo URLs.
-4. `gh release create beta-N <bps> --target main --title "Beta N: ..." --notes-file ...`
+4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
-6. Refresh `dist/`: create `dist/beta-N/` with `Pokemon-Azoth-English-beta-N.bps` and `Pokemon-Azoth-English-beta-N.gba` (never overwrite the user's files, never flat files).
 
 ## Current state (2026-10-12, after beta-9)
 
