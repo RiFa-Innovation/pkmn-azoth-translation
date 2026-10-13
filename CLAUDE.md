@@ -81,6 +81,13 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   glyphs are only trusted from script refs. (#29, 103 strings.)
 - **Two font widths:** Latin is 6 px, hanzi 12 px; English re-wraps to the
   window's pixel width. Boxes that cannot scroll need a `lines` cap.
+- **Strings reachable only by pointers the dump never walks** (literal-pool
+  words, tables `dump_all.py` doesn't scan): found by
+  `scripts/find_leftover_zh.py` filtered to aligned refs + sentence
+  punctuation, fixed via `text/en/manual_strings.json` (asserts the source
+  decode; fits in place or relocates and repoints its `refs`). False positives
+  in the same scan: pointer tables - the source bytes contain an `08xxxxxx`
+  word. (PLAYTEST 75)
 - **Help Tips:** body box is 5 rows, wraps at ~150 px; each page is its own
   table entry (0x1E467C4-0x1E468A0); `{F8:xx}` button icons count 12-24 px
   (SELECT ~20-24). Cap pages at px 148 / 5 lines. (#31)
