@@ -11,8 +11,11 @@ tracing), `PLAYTEST.md` (every finding, numbered), `CONTRIBUTING.md`.
   USA v1.0, CRC32 `DD88761C` ("Squirrels" #1636).
 - Be explicit in any public text that this is only a **translation done with
   Claude**; the hack, its name and content belong to its original authors.
-- The user's `dist/` is theirs: **never overwrite** their `.gba/.sav`. Add new
-  builds next to them (`... - next.gba/.bps`, plus a copy of the save).
+- The user's `dist/` is theirs: **never overwrite** their `.gba/.sav`. Every
+  release gets its own folder `dist/beta-N/` containing
+  `Pokemon-Azoth-English-beta-N.bps` and `Pokemon-Azoth-English-beta-N.gba`
+  (version in the name, so it can be uploaded to their server as-is); never
+  write flat files into `dist/` or touch their `- next.*` files.
 - Releases, merges and posts are outward-facing: do them when asked. Release
   steps are below. #13 is **parked** until the user reaches it in their
   playthrough.
@@ -183,7 +186,7 @@ starters, the nickname screen and Elm's farewell were verified here.
    `pkmn-azoth-translation` repo URLs.
 4. `gh release create beta-N <bps> --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
-6. Refresh the user's `dist/` copy (alongside, never over).
+6. Refresh `dist/`: create `dist/beta-N/` with `Pokemon-Azoth-English-beta-N.bps` and `Pokemon-Azoth-English-beta-N.gba` (never overwrite the user's files, never flat files).
 
 ## Current state (2026-10-12, after beta-9)
 
