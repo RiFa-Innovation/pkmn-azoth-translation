@@ -38,5 +38,13 @@
  [
   "flag:0x1669",
   "Route 36 odd tree (Sudowoodo) hidden once set"
+ ],
+ [
+  "flag:0xbaa",
+  "Mr. Pokemon batch 1 turned in (set by 0x09CD4702 after c18,c3f,c39,c03 all set). Gate for phone call 2. Batch flags: ba9 acc1, baa done1, bab call2, bac acc2, bad done2, bae call3, baf acc3, bb0 done3, bb1 call4, bb2 acc4, bb3 done4 (issue #51)"
+ ],
+ [
+  "0x09D4FC1C",
+  "overworld per-frame fn; chain at 0x09D4FF30 fires Mr. Pokemon calls 1/50 per frame: call1 needs 0x168e, call2 0x16ba(Chuck)+baa, call3 0x825(Jasmine)+bad, call4 0xb62(Clair)+bb0 (issue #51)"
  ]
 ]
