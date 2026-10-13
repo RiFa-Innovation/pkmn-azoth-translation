@@ -186,25 +186,5 @@
     "new": "4000"
    }
   ]
- },
- "sprout_tower_leave_walks": {
-  "_doc": "The post-fight conversation's cast (localId 3 and the two sages 8/9) is told to walk 'down down [right...]' out of the top floor, but the top floor's only way down is a ONE-TILE corridor whose side tiles are walls: the walk aborts at the wall after two steps and parks the cast in the corridor instead, so a player who then walks down is trapped above them (issue #37's second flavour - Falkner/Morty/Elder stacked in the corridor after the conversation). Movement data, same length, replaced with the idle action the hack already uses elsewhere (0x62): the cast stays in the room and the sequence's own cleanup still hides them. In-place, byte-asserted.",
-  "patch": [
-   {
-    "at": "0xAF6B81",
-    "orig": "101010131310101010fe",
-    "new": "626262626262626262fe"
-   },
-   {
-    "at": "0xAF6B8C",
-    "orig": "1010131310101010fe",
-    "new": "6262626262626262fe"
-   },
-   {
-    "at": "0xAF6B99",
-    "orig": "101013131310101010fe",
-    "new": "626262626262626262fe"
-   }
-  ]
  }
 }
