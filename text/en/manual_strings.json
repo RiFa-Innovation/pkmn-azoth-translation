@@ -1,5 +1,29 @@
 {
  "_doc": "Strings the pointer scan cannot find (code computes their address, or only a literal-pool word points at them). cap = bytes incl. the FF terminator. Written in place when the English fits; otherwise relocated and every listed ref repointed.",
+ "0FFABE8": {
+  "zh": "由于对宝可梦力量的恐惧，\n人类与宝可梦\n之间的距离变得越来越远。",
+  "cap": 64,
+  "en": "Fear of Pokémon's power\ndrove people and Pokémon apart.",
+  "refs": ["018101C"]
+ },
+ "0F5D79C": {
+  "zh": "œY 磺cö框e好，\n是来挑战道馆的吗？{FB}不好意思，道馆的馆主\n现在去擂钵山了……",
+  "cap": 88,
+  "en": "Hello! Are you here to\nchallenge the gym? Sorry, our\nleader is away at Mt. Mortar...",
+  "refs": ["0A1F7EC"]
+ },
+ "0F36EFE": {
+  "zh": "úú\n我也能够……\n与大家共享这份回忆吗？",
+  "cap": 42,
+  "en": "Can I... share this memory\nwith everyone too?",
+  "refs": ["0F3618C"]
+ },
+ "0AA11D1": {
+  "zh": "如果你想关闭免打扰模式，\n欢迎随时来找我！",
+  "cap": 42,
+  "en": "If you want to turn off\nDo Not Disturb mode,\njust come and see me!",
+  "refs": ["0AA1024"]
+ },
  "E37728": {
   "zh": "退出设置",
   "cap": 9,
