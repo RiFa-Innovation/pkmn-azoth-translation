@@ -225,7 +225,15 @@ def ref_kind(rom, r, text=""):
         # which decode as hanzi and sit right before the NPC's text. Repointing
         # it hands text bytes to the movement engine ("jumped to invalid
         # address", the Beautifly/Wurmple scene).
-        if r >= 3 and rom[r - 3] in (0x4F, 0x50) and not hm.near_code(r):
+        # The word can also straddle the operand: local id (2 B) + the low half
+        # of the pointer (r-1), or the id's high byte + 3 pointer bytes (r-2),
+        # e.g. `applymovement 0x0A, 0x08F308AE` holds the aligned word
+        # 0x08AE000A, which is a valid pointer to another string; repointing it
+        # corrupted the Ecruteak Summer Festival scene (56.44, #87).
+        if r >= 3 and not hm.near_code(r) and (
+                rom[r - 3] in (0x4F, 0x50)
+                or any(rom[r - k] in (0x4F, 0x50) and rom[r - k + 6] in (8, 9)
+                       for k in (1, 2))):
             return None
         # `goto`/`call` (04/05: opcode, ptr) and `goto_if`/`call_if` (06/07:
         # opcode, cond, ptr) put their 4-byte operand at an odd offset, so the

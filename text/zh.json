@@ -101129,24 +101129,13 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09D0006": {
-   "zh": "呢？{FA}就让我来确认一下吧！",
-   "cap": 24,
-   "refs": [
-    "0F30B4C:literal",
-    "0F30B7C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09D0008": {
    "zh": "？{FA}就让我来确认一下吧！",
    "cap": 22,
    "refs": [
-    "0F30EFC:literal",
     "0F30F2C:aligned"
    ],
-   "untrusted": 2,
+   "untrusted": 3,
    "suspect": true
   },
   "09D0020": {
@@ -127395,20 +127384,10 @@
    "zh": "哎呀，\n想不到这里也是死路……",
    "cap": 27,
    "refs": [
-    "0AE0002:loadpointer",
-    "0F30CE8:literal"
-   ],
-   "untrusted": 0,
-   "suspect": false
-  },
-  "0AE000B": {
-   "zh": "袱5，\n想不到这里也是死路……",
-   "cap": 26,
-   "refs": [
-    "0F30DDC:literal"
+    "0AE0002:loadpointer"
    ],
    "untrusted": 1,
-   "suspect": true
+   "suspect": false
   },
   "0AE00CD": {
    "zh": "我捉了许多的精灵！{FB}上啊！\n我的虫精灵之队！",
