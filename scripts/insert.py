@@ -413,6 +413,12 @@ def main():
               "too_long": [], "errors": []}
 
     # --- fixed-stride tables
+    # Entry 0 of a table shares its address with the table base, so the code's
+    # `ldr =<base>` literal looks like a pointer to entry 0's string. The table
+    # pass owns those bytes; the string pass must not relocate them (#70: the
+    # type-name base was repointed to a relocated "Normal", so every other
+    # type read garbage).
+    table_heads = set()
     for name, t in dump["tables"].items():
         path = f"text/en/tables/{name}.json"
         if not os.path.exists(path):
@@ -432,11 +438,14 @@ def main():
             o = base_off + int(idx) * stride
             rom[o:o + size] = b + b"\x00" * (size - len(b))
             n += 1
+            if int(idx) == 0:
+                table_heads.add(o)
         report["tables"][name] = n
 
     # --- pointer-referenced strings
     tm = load_tm()
-    strings = {int(k, 16): v for k, v in dump["strings"].items()}
+    strings = {int(k, 16): v for k, v in dump["strings"].items()
+               if int(k, 16) not in table_heads}
     # debugging: INSERT_SKIP=<json list of hex addrs> leaves those strings untouched
     if os.environ.get("INSERT_SKIP"):
         for a in json.load(open(os.environ["INSERT_SKIP"])):
