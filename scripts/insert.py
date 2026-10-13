@@ -204,6 +204,8 @@ TOWER_GROUP, TOWER_MAP = 52, 2          # Bellsprout Tower, top floor
 TOWER_STAGE_VAR, TOWER_STAGE_ON_FLOOR = 0x5120, 22   # story stage while on the floor
 TOWER_STAGE_DONE = 23                                # ... and when the floor is over
 TOWER_ON_RESUME = 0x08AF60C9            # the map's own ON_RESUME script (kept)
+COORD_SCRIPT = 0x08AF5A3A              # the floor's story trigger script
+COORD_NATIVE, COORD_CHAIN = 0x08CA0051, 0x08AF5011
 
 
 def tower_top_floor_softlock(rom, src, pool):
@@ -241,6 +243,7 @@ def tower_top_floor_softlock(rom, src, pool):
     mid-chain (the chain has no field resumptions between those two points)."""
     u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
     rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
+    u16 = lambda o: int.from_bytes(src[o:o + 2], "little")
     gp = rp(GMAPGROUPS + 4 * TOWER_GROUP)
     mp = rp(gp + 4 * TOWER_MAP)
     scripts = rp(mp + 8)
@@ -252,13 +255,13 @@ def tower_top_floor_softlock(rom, src, pool):
             + TOWER_STAGE_ON_FLOOR.to_bytes(2, "little")
             + b"\x06\x00")                                           # goto_if !equal, done
     mid = b"\x2b" + (0x1798).to_bytes(2, "little") + b"\x06\x01"     # checkflag sages,
-    tail = (b"".join(b"\x29" + f.to_bytes(2, "little") for f in      # goto_if set, done
-                     (0x1794, 0x1790, 0x1791, 0x1795, 0x1796,       # the hack's own
-                      0x1797, 0x1798, 0x178f, 0x178e, 0x178b))      # end-of-sequence
-            + b"".join(b"\x53" + i.to_bytes(2, "little") for i in range(1, 10))
-            + b"\x16" + TOWER_STAGE_VAR.to_bytes(2, "little")
-            + TOWER_STAGE_DONE.to_bytes(2, "little")
-            + b"\x05" + TOWER_ON_RESUME.to_bytes(4, "little"))       # then the map's own
+    cleanup = (b"".join(b"\x29" + f.to_bytes(2, "little") for f in   # the hack's own
+                        (0x1794, 0x1790, 0x1791, 0x1795, 0x1796,    # end-of-sequence
+                         0x1797, 0x1798, 0x178f, 0x178e, 0x178b))    # cleanup: hide the
+               + b"".join(b"\x53" + i.to_bytes(2, "little") for i in range(1, 10))
+               + b"\x16" + TOWER_STAGE_VAR.to_bytes(2, "little")     # cast, stage -> done
+               + TOWER_STAGE_DONE.to_bytes(2, "little"))
+    tail = cleanup + b"\x05" + TOWER_ON_RESUME.to_bytes(4, "little")  # then the map's own
     body = head + b"\0\0\0\0" + mid + b"\0\0\0\0" + tail
     at = pool.alloc_aligned(len(body))
     done = 0x08000000 + at + len(body) - 5        # the trailing goto = "done"
@@ -266,7 +269,39 @@ def tower_top_floor_softlock(rom, src, pool):
     for off in (len(head), len(head) + 4 + len(mid)):   # both goto_if destinations
         rom[at + off:at + off + 4] = done.to_bytes(4, "little")
     rom[scripts + 6:scripts + 10] = (0x08000000 + at).to_bytes(4, "little")
-    return {"on_resume": 0x08000000 + at, "bytes": len(body)}
+
+    # The coord event that *starts* the floor's story stays armed for the whole
+    # sequence (its gate is the stage var, which only the cleanup advances), and
+    # the sequence's fights are not flag-gated: an interrupted run therefore
+    # re-fights every time the player crosses that tile on the way down. Repoint
+    # that one pointer slot (this map's own coord-event table) at a second script
+    # that finishes the floor instead of re-running it once the fights are done.
+    events = rp(mp + 4)
+    coord = rp(events + 0xC)
+    cx, cy = struct.unpack_from("<HH", rom, coord) if False else (u16(coord), u16(coord + 2))
+    assert (cx, cy) == (12, 22), f"52.2 coord event at {(cx, cy)}"
+    assert u16(coord + 6) == TOWER_STAGE_VAR and u16(coord + 8) == TOWER_STAGE_ON_FLOOR, \
+        f"52.2 coord gate {u16(coord + 6):#x} == {u16(coord + 8)}"
+    assert u32(coord + 0xC) == COORD_SCRIPT, f"52.2 coord script is {u32(coord + 0xC):#x}"
+    assert src[COORD_SCRIPT - 0x08000000:COORD_SCRIPT - 0x08000000 + 10] == \
+        b"\x23" + b"\x51\x00\xca\x08" + b"\x05" + COORD_CHAIN.to_bytes(4, "little"), \
+        "52.2 coord script bytes differ"
+    stage = lambda v: v.to_bytes(2, "little")
+    cb = (b"\x23" + COORD_NATIVE.to_bytes(4, "little")          # callnative ...
+          + b"\x05" + COORD_CHAIN.to_bytes(4, "little"))        # goto the story
+    head2 = (b"\x21" + stage(TOWER_STAGE_VAR) + stage(TOWER_STAGE_ON_FLOOR) + b"\x06\x00")
+    mid2 = b"\x2b" + (0x1798).to_bytes(2, "little") + b"\x06\x01"
+    body2 = (head2 + b"\0\0\0\0" + mid2 + b"\0\0\0\0"
+             + cleanup + b"\x02" + cb)          # cleanup, end, then the story (if reached)
+    at2 = pool.alloc_aligned(len(body2))
+    rom[at2:at2 + len(body2)] = body2
+    chain_off = len(head2) + 4 + len(mid2) + 4 + len(cleanup) + 1
+    chain = 0x08000000 + at2 + chain_off
+    for off in (len(head2), len(head2) + 4 + len(mid2)):
+        rom[at2 + off:at2 + off + 4] = chain.to_bytes(4, "little")
+    rom[coord + 0xC:coord + 0x10] = (0x08000000 + at2).to_bytes(4, "little")
+    return {"on_resume": 0x08000000 + at, "coord_script": 0x08000000 + at2,
+            "bytes": [len(body), len(body2)]}
 
 
 def main():
