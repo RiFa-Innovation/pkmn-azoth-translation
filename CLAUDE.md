@@ -82,6 +82,13 @@ this string" in one call. Add what you learn with `hackdb.py note add`.
   guards in `dump_all.py`: header (<0x200), `in_lz77`, applymovement
   (0x4F/0x50) unless `near_code`, vanilla-data-word -> vanilla symbol rule.
   After any change here confirm compressed blobs report 0 changed.
+- **A string pointer can hide inside a `goto` operand.** `goto`/`call` operands sit at odd
+  offsets, so the aligned word two bytes into one is the operand's high half + padding and can
+  be a valid pointer to some string; repointing it breaks the jump (`goto 0x08AF8628` ->
+  `0xEFDF8628`, the Sprout Tower hang that survived beta-17..20). Script context signature:
+  mode 1 with `scriptPtr` outside `0x08......`. Check any suspicious freeze by diffing every
+  `goto`/`call`/`goto_if`/`call_if` operand against the original hack (hackdb `cmds` table).
+  (#64, PLAYTEST 80)
 - **Free-space pool:** `0xFF` runs can be live data. `insert.py::referenced_ff`
   excludes referenced FF ranges; don't relocate into them.
 - **Mixed strings:** mostly-Latin text with a hanzi (names + one character) is
