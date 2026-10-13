@@ -227,6 +227,17 @@ def ref_kind(rom, r, text=""):
         # address", the Beautifly/Wurmple scene).
         if r >= 3 and rom[r - 3] in (0x4F, 0x50) and not hm.near_code(r):
             return None
+        # `goto`/`call` (04/05: opcode, ptr) and `goto_if`/`call_if` (06/07:
+        # opcode, cond, ptr) put their 4-byte operand at an odd offset, so the
+        # aligned word that starts two bytes into it is the operand's high half
+        # plus two bytes of whatever follows. When the string at that word's
+        # target has 08/09 as its second address byte the "word" is itself a
+        # valid pointer, and repointing it rewrote the jump's high half
+        # (`goto 0x08AF8628` -> `0xEFDF8628`: the Sprout Tower scene hung after
+        # the elder's farewell; issue #64).
+        if r >= 4 and rom[r + 1] in (8, 9) and (rom[r - 3] in (0x04, 0x05)
+                                                or rom[r - 4] in (0x06, 0x07)):
+            return None
         return "literal"
     return None
 
