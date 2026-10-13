@@ -173,28 +173,43 @@ GMAPGROUPS = 0xB3B100   # the hack moved gMapGroups; literal in Overworld_GetMap
 
 
 def null_placeholder_scripts(rom, src):
-    """The hack leaves 0x08000000 (ROM offset 0, the cartridge header) as the
-    script of many object events. FireRed treats only NULL as "nothing to
-    interact with", so talking to one runs the ROM header as script bytecode and
+    """The hack leaves pointers into the cartridge header as the script of many
+    object, coord and BG events: 0x08000000 (ROM offset 0) and, in 366 objects the
+    first pass missed, 0x08000001. FireRed treats only NULL as "nothing to
+    interact with", so interacting with one runs the header as script bytecode and
     freezes the game (the original Chinese ROM does the same: Bellsprout Tower
-    top floor, local id 8). Interaction scripts are reloaded from the map header
-    on every map load, so zeroing them also fixes existing saves."""
+    top floor, local id 8). Nothing can legitimately point into the header, so any
+    script pointer below 0x08000100 is junk: Bellsprout Tower's remaining NPCs
+    carry 0x08000001 and are why the floor still locks up for some players after
+    the first fix. Scripts are reloaded from the map header on every map load, so
+    zeroing them also fixes existing saves."""
     assert src[0x5524C:0x55250] == (0x08000000 + GMAPGROUPS).to_bytes(4, "little")
     u32 = lambda o: int.from_bytes(src[o:o + 4], "little")
     rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
+    JUNK = lambda a: 0x08000000 <= u32(a) < 0x08000100
     n, seen, g = 0, set(), 0
     while g < 80 and (gp := rp(GMAPGROUPS + 4 * g)) is not None:
         m = 0
         while m < 500 and (mp := rp(gp + 4 * m)) is not None:
             ev = rp(mp + 4) if mp + 8 <= len(src) else None
-            op = rp(ev + 4) if ev and ev + 8 <= len(src) else None
-            if op and src[ev] <= 64:
-                for i in range(src[ev]):
-                    a = op + 24 * i + 16
-                    if a not in seen and u32(a) == 0x08000000:
-                        seen.add(a)
-                        rom[a:a + 4] = bytes(4)
-                        n += 1
+            if ev and ev + 0x14 <= len(src) and src[ev] <= 64:
+                op = rp(ev + 4)                       # object events (24 B records)
+                if op:
+                    for i in range(src[ev]):
+                        a = op + 24 * i + 16
+                        if a not in seen and JUNK(a):
+                            seen.add(a)
+                            rom[a:a + 4] = bytes(4)
+                            n += 1
+                for cnt, tbl, off in ((src[ev + 2], ev + 0xC, 12),   # coord events
+                                      (src[ev + 3], ev + 0x10, 12)):  # BG events
+                    tab = rp(tbl) if cnt <= 64 else None
+                    for i in range(cnt if tab else 0):
+                        a = tab + 16 * i + off
+                        if a not in seen and JUNK(a):
+                            seen.add(a)
+                            rom[a:a + 4] = bytes(4)
+                            n += 1
             m += 1
         g += 1
     return n

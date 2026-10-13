@@ -93,14 +93,26 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
   context (`0x03000EB0`: +8 ptr, +0 = 0, +1 = 1, `0x03000EA8` = 0); call
   routines via `gMain.callback2` (`0x030030F4`) with a Thumb stub assembled
   `arm-none-eabi-as -mcpu=arm7tdmi` (not Thumb-2).
-- **Freeze on talking to an NPC = placeholder script.** The hack uses
-  `0x08000000` (and `0x08000001`, 366 objects, unverified) as an object-event
-  script instead of NULL; FireRed runs the ROM header as bytecode. Signature:
+- **Freeze on talking to an NPC = placeholder script.** The hack's map generator
+  left the cartridge header as the script of event slots instead of NULL:
+  **981 unique addresses** (652 object events `0x08000000`, 632 `0x08000001`,
+  20 coord events, 4 BG events) spread over **528 maps**. FireRed runs the ROM
+  header as bytecode and the engine chases the garbage pointers in it. Signature:
   script ctx at `0x03000EB0` stuck in mode 2 with scriptPtr `0x08000009`.
-  `insert.py::null_placeholder_scripts` zeroes `0x08000000` (592). The hack
-  moved `gMapGroups` to `0xB3B100` (vanilla table is 0xFF). Always test a
-  suspected freeze against `roms/Pokemon Mercury 1.3.3 (patched).gba` first:
-  if it hangs there too it is an original-hack bug. (#17, PLAYTEST 57)
+  `insert.py::null_placeholder_scripts` zeroes any script pointer below
+  `0x08000100` for object, coord and BG events (592 sites in beta-7, which
+  matched `== 0x08000000` only; 981 now). The hack moved `gMapGroups` to
+  `0xB3B100` (vanilla table is 0xFF). Always test a suspected freeze against
+  `roms/Pokemon Mercury 1.3.3 (patched).gba` first: if it hangs there too it is
+  an original-hack bug. (#17, PLAYTEST 57, 74)
+- **"Only works on emulator X" reports are usually invalid accesses.** The
+  placeholder above is a clean example: the bug is in the hack, but what
+  *happens* while garbage runs as script bytecode depends on how the emulator
+  answers reads of the BIOS region and of open bus (mGBA's maintainer: "invalid
+  accesses behave a certain way ... Pokémon ROM hacks that only work in VBA").
+  A NULL script pointer is *fine* - FireRed understands NULL; a pointer into the
+  header is not. Before chasing an emulator, check for invalid pointers in the
+  data the path touches. (#64, PLAYTEST 74)
 - **Softlock in a one-tile corridor = a scene walk that aborted.** An
   `applymovement` walk *ends* when a step is blocked (e.g. by the following
   Pokémon in a narrow corridor), so an escort NPC can park on the only tile and
