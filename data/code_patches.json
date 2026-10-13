@@ -186,5 +186,11 @@
     "new": "4000"
    }
   ]
+ },
+ "money_symbol_vanilla": {
+  "why": "Money sign: FireRed draws the Pokédollar at character 0xB7 (charmap '¥'), and the hack kept the character - the Mart's price list and the trainer card print it - but it redrew the glyph in its Latin font as the kanji 円, so English text shows 円 next to prices. Restore FireRed's glyph in the font the game uses. The blob holds two copies of the font: 0x1F5EC0 is the edited one the game draws with, 0x1F9EC0 is already vanilla. Larger Latin letters in this font sit one row higher than FireRed's, so the restored glyph is a touch taller than the hack's own letters - that is FireRed's own shape, which is what the report asked for.",
+  "vanilla": [
+   ["01F5EC0", "01F5F00", "sFontMaleLatinGlyphs 0xB7"]
+  ]
  }
 }
