@@ -218,6 +218,8 @@ def null_placeholder_scripts(rom, src):
 TOWER_GROUP, TOWER_MAP = 52, 2          # Bellsprout Tower, top floor
 TOWER_STAGE_VAR, TOWER_STAGE_ON_FLOOR = 0x5120, 22   # story stage while on the floor
 TOWER_STAGE_DONE = 23                                # ... and when the floor is over
+ROAD_VAR, ROAD_AFTER_TOWER = 0x5186, 4   # Johto road stage; the hack's cleanup sets it to 4
+ROUTE36 = (3, 85)                        # its coord events (36,14)/(37,14) are gated on ==3
 TOWER_ON_RESUME = 0x08AF60C9            # the map's own ON_RESUME script (kept)
 COORD_SCRIPT = 0x08AF5A3A              # the floor's story trigger script
 COORD_NATIVE, COORD_CHAIN = 0x08CA0051, 0x08AF5011
@@ -294,7 +296,9 @@ def tower_top_floor_softlock(rom, src, pool):
                          0x1797, 0x1798, 0x178f, 0x178e, 0x178b))    # cleanup: hide the
                + b"".join(b"\x53" + i.to_bytes(2, "little") for i in range(1, 10))
                + b"\x16" + TOWER_STAGE_VAR.to_bytes(2, "little")     # cast, stage -> done
-               + TOWER_STAGE_DONE.to_bytes(2, "little"))
+               + TOWER_STAGE_DONE.to_bytes(2, "little")
+               + b"\x16" + ROAD_VAR.to_bytes(2, "little")            # road stage -> 4 (the
+               + ROAD_AFTER_TOWER.to_bytes(2, "little"))             # hack's own setvar; #52
     tail = cleanup + b"\x05" + TOWER_ON_RESUME.to_bytes(4, "little")  # then the map's own
     body = head + b"\0\0\0\0" + mid + b"\0\0\0\0" + tail
     at = pool.alloc_aligned(len(body))
@@ -363,7 +367,38 @@ def tower_top_floor_softlock(rom, src, pool):
     assert src[t] == 6 and int.from_bytes(src[t + 20:t + 22], "little") == 0, \
         "localId 6 template differs"
     rom[t + 20:t + 22] = (0x178b).to_bytes(2, "little")
-    return {"on_resume": 0x08000000 + at, "coord_script": 0x08000000 + at2,
+
+    # Issue #52: beta-7..11 ran a cleanup that moved the stage to 23 but left the road
+    # stage 0x5186 at 3, so Route 36's two coord events ("Let's go see what's
+    # happening in Violet City") stayed armed and walled the road to Ecruteak. The
+    # cleanup above now sets it, but saves already past the tower have stage >= 23
+    # and road stage 3 (3 is only ever set before the tower, so this is never a
+    # healthy state). Put a guard in front of both coord scripts: stage >= 23 ->
+    # finish the road stage and end silently; otherwise run the original script.
+    g3 = rp(GMAPGROUPS + 4 * ROUTE36[0])
+    m36 = rp(g3 + 4 * ROUTE36[1])
+    ev36 = rp(m36 + 4)
+    coords = rp(ev36 + 0xC)
+    n_coord = src[ev36 + 2]
+    fixed = []
+    for i in range(n_coord):
+        c = coords + 16 * i
+        if u16(c + 6) != ROAD_VAR or u16(c + 8) != 3:
+            continue
+        orig = u32(c + 0xC)
+        gb = (b"\x21" + TOWER_STAGE_VAR.to_bytes(2, "little")        # compare stage, 23
+              + TOWER_STAGE_DONE.to_bytes(2, "little")
+              + b"\x06\x04" + b"\0\0\0\0"                          # goto_if >=, repair
+              + b"\x05" + orig.to_bytes(4, "little")                  # goto the original
+              + b"\x16" + ROAD_VAR.to_bytes(2, "little")             # repair: road stage 4,
+              + ROAD_AFTER_TOWER.to_bytes(2, "little") + b"\x02")    # end
+        ga = pool.alloc_aligned(len(gb))
+        rom[ga:ga + len(gb)] = gb
+        rom[ga + 7:ga + 11] = (0x08000000 + ga + 16).to_bytes(4, "little")
+        rom[c + 0xC:c + 0x10] = (0x08000000 + ga).to_bytes(4, "little")
+        fixed.append((u16(c), u16(c + 2), 0x08000000 + ga))
+    assert len(fixed) == 2, f"Route 36 gated coord events: {fixed}"
+    return {"route36_guards": fixed, "on_resume": 0x08000000 + at, "coord_script": 0x08000000 + at2,
             "stay_movement": 0x08000000 + sat, "elder_flag": 0x178b,
             "bytes": [len(body), len(body2)]}
 
