@@ -86682,16 +86682,6 @@
    "untrusted": 6,
    "suspect": true
   },
-  "08F0978": {
-   "zh": "开发的{FA}阔星公司总部大楼前。{FB}他们强烈抗议公司在市内\n建立野生特区的做法。",
-   "cap": 70,
-   "refs": [
-    "0E37C30:literal",
-    "1DBB3D4:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "08F09A5": {
    "zh": "市内\n建立野生特区的做法。",
    "cap": 25,
@@ -86709,15 +86699,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "08F09CE": {
-   "zh": "频道！\n聚焦不可思议的奇闻轶事！{FB}培育屋老爷爷老花眼又严重了。\n他昨天小心翼翼捧着白色圆球{FA}孵了一整天。{FB}晚上老奶奶回来才告诉他，\n那只是一个掉下来的白球果。",
-   "cap": 147,
-   "refs": [
-    "1CE6790:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
   },
   "08F0A61": {
    "zh": "欢迎收听今日新闻频道！\n为您播报今日的焦点快讯！{FB}阿四馆主为了锻炼心智，\n决定在瀑布下进行冥想修行。{FB}然而弟子两小时后将他抬回。\n原因并非水流太强，而是他在{FA}白噪音下舒服地睡着并感冒了。",
@@ -95832,15 +95813,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "09C089C": {
-   "zh": "TCH也很流行啊！",
-   "cap": 15,
-   "refs": [
-    "09CA99C:literal"
-   ],
-   "untrusted": 0,
-   "suspect": true
-  },
   "09C08B6": {
    "zh": "由人与恶魔融合为一的主人公\n在一望无际的沙漠中奔跑……{FB}我也该出发了。",
    "cap": 66,
@@ -95849,15 +95821,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09C08EC": {
-   "zh": "也该出发了。",
-   "cap": 12,
-   "refs": [
-    "0AB67D8:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
   },
   "09C0903": {
    "zh": "电视上播放着一部电影。\n四个男孩沿着铁轨{FA}步行着开始了旅行。{FB}这已经是四十多年前的老电影了，\n真是时过境迁啊。",
@@ -101400,15 +101363,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "09D089D": {
-   "zh": "\n按这个状态直到{FA}宝可梦冠军吧！",
-   "cap": 30,
-   "refs": [
-    "09EFD68:literal"
-   ],
-   "untrusted": 3,
-   "suspect": true
   },
   "09D08DC": {
    "zh": "桔梗市宝可梦道馆\n馆主：小刚{FB}优胜训练师：\n{FD:06}",
@@ -113409,12 +113363,9 @@
    "zh": "d。{FB}创造出世界后，\n起始之物便陷入了沉睡之中。",
    "cap": 43,
    "refs": [
-    "09F66E8:literal",
-    "09F7184:literal",
-    "09FB2F4:literal",
     "09FB4D4:literal"
    ],
-   "untrusted": 4,
+   "untrusted": 7,
    "suspect": true
   },
   "09F092C": {
@@ -119900,15 +119851,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0AA08AA": {
-   "zh": "个世界是我的！”的感觉！{FA}好了，说茄……子！",
-   "cap": 37,
-   "refs": [
-    "0AAA2AC:literal"
-   ],
-   "untrusted": 4,
-   "suspect": true
   },
   "0AA0A35": {
    "zh": "我在附近巡逻，\n看看有没有可疑的人。",
@@ -127828,15 +127770,6 @@
    "untrusted": 0,
    "suspect": false
   },
-  "0AE08AE": {
-   "zh": "的湛蓝市吗？{FB}凡是有大海的地方，\n都是湛蓝市的一部分！",
-   "cap": 50,
-   "refs": [
-    "0AE3FB8:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
-  },
   "0AE08FD": {
    "zh": "亚美：我们两个会\n齐心协力对付你的！",
    "cap": 34,
@@ -133349,23 +133282,10 @@
    "zh": "从上面掉下来，\n也就是说……{FA}你完成了石版的拼图？！{FB}太棒了！\n看来你很有考古才能啊！{FB}从现在开始，\n你就是我们遗迹研究所的一员了！{FB}我把这个笔记给你吧，\n抓到的未知图腾会自动记录起来，{FA}非常方便！",
    "cap": 178,
    "refs": [
-    "0AF0826:loadpointer",
-    "0AF59AC:literal",
-    "0AF7D84:literal",
-    "0AFEF08:literal"
+    "0AF0826:loadpointer"
    ],
-   "untrusted": 7,
+   "untrusted": 10,
    "suspect": false
-  },
-  "0AF08F5": {
-   "zh": "能啊！{FB}从现在开始，\n你就是我们遗迹研究所的一员了！{FB}我把这个笔记给你吧，\n抓到的未知图腾会自动记录起来，{FA}非常方便！",
-   "cap": 108,
-   "refs": [
-    "0AF96C4:literal",
-    "0AFAF40:literal"
-   ],
-   "untrusted": 2,
-   "suspect": true
   },
   "0AF0902": {
    "zh": ",始，\n你就是我们遗迹研究所的一员了！{FB}我把这个笔记给你吧，\n抓到的未知图腾会自动记录起来，{FA}非常方便！",
@@ -156010,18 +155930,6 @@
    ],
    "untrusted": 0,
    "suspect": false
-  },
-  "0ED08ED": {
-   "zh": "了我勇气。{FB}谢谢你。\n谢谢你保护了我的演出。{FB}谢谢你为了我\n做了那么多傻事。{FB}但是……如果失去了\n你这个“最初的观众”，{FB}就算我在\n全世界面前演出，{FA}我也不会开心的！{FB}因为……\n是你证明了，{FB}即使是在地下通道里，\n我也是可以发光的，{FA}不是吗？！",
-   "cap": 213,
-   "refs": [
-    "0ED361C:literal",
-    "0ED4754:literal",
-    "0ED5294:literal",
-    "0ED5630:literal"
-   ],
-   "untrusted": 3,
-   "suspect": true
   },
   "0ED0945": {
    "zh": "这个“最初的观众”，{FB}就算我在\n全世界面前演出，{FA}我也不会开心的！{FB}因为……\n是你证明了，{FB}即使是在地下通道里，\n我也是可以发光的，{FA}不是吗？！",
@@ -192412,15 +192320,6 @@
    "untrusted": 1,
    "suspect": true
   },
-  "1D90956": {
-   "zh": "U秘而\n又美丽的舞蹈。\n提高自己的特攻\n、特防和速度。",
-   "cap": 48,
-   "refs": [
-    "08EB5B8:literal"
-   ],
-   "untrusted": 1,
-   "suspect": true
-  },
   "1D90962": {
    "zh": "的舞蹈。\n提高自己的特攻\n、特防和速度。",
    "cap": 36,
@@ -192496,7 +192395,7 @@
     "0EB1070:literal",
     "1D9D710:literal"
    ],
-   "untrusted": 76,
+   "untrusted": 79,
    "suspect": true
   },
   "1D909FF": {
