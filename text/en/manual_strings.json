@@ -4,25 +4,33 @@
   "zh": "由于对宝可梦力量的恐惧，\n人类与宝可梦\n之间的距离变得越来越远。",
   "cap": 64,
   "en": "Fear of Pokémon's power\ndrove people and Pokémon apart.",
-  "refs": ["018101C"]
+  "refs": [
+   "018101C"
+  ]
  },
  "0F5D79C": {
   "zh": "œY 磺cö框e好，\n是来挑战道馆的吗？{FB}不好意思，道馆的馆主\n现在去擂钵山了……",
   "cap": 88,
   "en": "Hello! Are you here to\nchallenge the gym? Sorry, our\nleader is away at Mt. Mortar...",
-  "refs": ["0A1F7EC"]
+  "refs": [
+   "0A1F7EC"
+  ]
  },
  "0F36EFE": {
   "zh": "úú\n我也能够……\n与大家共享这份回忆吗？",
   "cap": 42,
   "en": "Can I... share this memory\nwith everyone too?",
-  "refs": ["0F3618C"]
+  "refs": [
+   "0F3618C"
+  ]
  },
  "0AA11D1": {
   "zh": "如果你想关闭免打扰模式，\n欢迎随时来找我！",
   "cap": 42,
   "en": "If you want to turn off\nDo Not Disturb mode,\njust come and see me!",
-  "refs": ["0AA1024"]
+  "refs": [
+   "0AA1024"
+  ]
  },
  "E37728": {
   "zh": "退出设置",
@@ -582,5 +590,133 @@
   "zh": "确认",
   "cap": 8,
   "en": "Confirm"
+ },
+ "1DA3157": {
+  "zh": "光粉       {FC:06 00}48BP",
+  "cap": 19,
+  "en": "Bright Powder {FC:06 00}48BP",
+  "refs": [
+   "1FF37E4"
+  ]
+ },
+ "1DA317D": {
+  "zh": "大地膜     {FC:06 00}15BP",
+  "cap": 19,
+  "en": "Terrain Ext. {FC:06 00}15BP",
+  "refs": [
+   "1FF37EC"
+  ]
+ },
+ "1DA31C9": {
+  "zh": "焦点镜     {FC:06 00}48BP",
+  "cap": 19,
+  "en": "Scope Lens {FC:06 00}48BP",
+  "refs": [
+   "1FF37FC"
+  ]
+ },
+ "1DA3287": {
+  "zh": "气球       {FC:06 00}15BP",
+  "cap": 19,
+  "en": "Air Balloon {FC:06 00}15BP",
+  "refs": [
+   "1FF3824"
+  ]
+ },
+ "1DA329A": {
+  "zh": "红牌       {FC:06 00}20BP",
+  "cap": 19,
+  "en": "Red Card {FC:06 00}20BP",
+  "refs": [
+   "1FF3828"
+  ]
+ },
+ "1DA3332": {
+  "zh": "万能伞     {FC:06 00}20BP",
+  "cap": 19,
+  "en": "UtilUmbrella {FC:06 00}20BP",
+  "refs": [
+   "1FF3848"
+  ]
+ },
+ "1DA337E": {
+  "zh": "PP提升剂   {FC:06 00}10BP",
+  "cap": 19,
+  "en": "PP Up {FC:06 00}10BP",
+  "refs": [
+   "1FF3794"
+  ]
+ },
+ "1DA3391": {
+  "zh": "幸运蛋     {FC:06 00}77BP",
+  "cap": 19,
+  "en": "Lucky Egg {FC:06 00}77BP",
+  "refs": [
+   "1FF3798"
+  ]
+ },
+ "1DA33A4": {
+  "zh": "榴石果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Pomeg Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF379C"
+  ]
+ },
+ "1DA33B7": {
+  "zh": "藻根果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Kelpsy Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF37A0"
+  ]
+ },
+ "1DA33CA": {
+  "zh": "比巴果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Qualot Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF37A4"
+  ]
+ },
+ "1DA33DD": {
+  "zh": "哈密果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Hondew Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF37A8"
+  ]
+ },
+ "1DA33F0": {
+  "zh": "萄葡果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Grepa Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF37AC"
+  ]
+ },
+ "1DA3403": {
+  "zh": "茄番果      {FC:06 00}1BP",
+  "cap": 19,
+  "en": "Tamato Berry {FC:06 00}1BP",
+  "refs": [
+   "1FF37B0"
+  ]
+ },
+ "1DA34AE": {
+  "zh": "超级快龙      {FC:06 00}100BP",
+  "cap": 23,
+  "en": "Mega Dragonite {FC:06 00}100BP",
+  "refs": [
+   "1FF3774"
+  ]
+ },
+ "1DA331F": {
+  "zh": "厚底靴     {FC:06 00}20BP",
+  "cap": 19,
+  "en": "HvyDuty Boots {FC:06 00}20BP",
+  "refs": [
+   "1FF3844"
+  ]
  }
 }
