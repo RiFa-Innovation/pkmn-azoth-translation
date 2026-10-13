@@ -1,0 +1,42 @@
+[
+ [
+  "map:3.85",
+  "Route 36 (Violet <-> Ecruteak road; Sudowoodo tree obj#28 flag 0x1669; issue #52)"
+ ],
+ [
+  "map:52.2",
+  "Bellsprout (Sprout) Tower top floor"
+ ],
+ [
+  "map:3.66",
+  "New Bark Town"
+ ],
+ [
+  "map:43.5",
+  "Lyra's house"
+ ],
+ [
+  "map:43.6",
+  "Elm's lab"
+ ],
+ [
+  "map:43.7",
+  "Starter-choice screen (map as picture)"
+ ],
+ [
+  "var:0x5186",
+  "Johto road-progress stage (hack var array). 0..5 in order; Route 36 gates coord events on ==3 ('Let's go see what's happening in Violet City'); ==4 after Sprout Tower cleanup scene; 3.89 gates on ==4 -> 5. C quest accessor FUN 0x9D8D074: FlagGet(0x178B) && VarGet(0x5186)>3."
+ ],
+ [
+  "var:0x5120",
+  "Sprout Tower story stage: 22 on top floor, 23 when floor over (set by tower-end cleanup at 0x08AF8628)"
+ ],
+ [
+  "flag:0x178B",
+  "Sprout Tower cast-gone flag; last flag set by tower cleanup; C quest accessor 0x9D8D074 also requires it"
+ ],
+ [
+  "flag:0x1669",
+  "Route 36 odd tree (Sudowoodo) hidden once set"
+ ]
+]

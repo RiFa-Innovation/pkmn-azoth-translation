@@ -38,3 +38,6 @@ utilities/
 __pycache__/
 *.pyc
 .venv/
+
+# Personal MCP client config (absolute machine paths)
+.mcp.json

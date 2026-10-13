@@ -57,6 +57,10 @@ validation included). Don't hand-wrap dialogue; the inserter wraps.
 
 ## Triage workflow (player report -> fix)
 
+**Start with `HACKDB.md`**: `python3 scripts/hackdb.py build`, then `var`/`flag`/`text`/`map`/
+`script`/`who`/`whatis` answer "what gates this, who sets it, which map event reaches
+this string" in one call. Add what you learn with `hackdb.py note add`.
+
 1. Reproduce in the emulator from the reporter's `.sav` if given (`RHT_LOAD_SAVE=1`,
    `scripts/play.py`; see `EMULATOR.md`). Capture a screenshot or frame grid.
 2. **Pin the root cause with the debugger, don't guess**: find the text address
