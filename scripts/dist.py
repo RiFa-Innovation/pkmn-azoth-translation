@@ -5,9 +5,10 @@
 
 Runs scripts/insert.py (unless --no-build), verifies the BPS by applying it to
 the clean base ROM and comparing byte-identical, then writes dist/beta-N/ with
-the versioned .bps, .gba and .sav. The save defaults to the one we have been
-playing on (dist/Pokemon Azoth (English) - next.sav); pass --save to ship a
-different one. Refuses to touch a folder that already exists.
+the versioned .bps, .gba and .sav. The save is always included (a copy named
+to pair with the .gba, so it loads automatically); it defaults to the one we
+have been playing on (dist/Pokemon Azoth (English) - next.sav), pass --save to
+ship a different one. Refuses to touch a folder that already exists.
 """
 import argparse
 import hashlib
@@ -65,11 +66,10 @@ def main():
     shutil.copyfile(gba, out / f"{name}.gba")
 
     save = Path(args.save).expanduser() if args.save else DEFAULT_SAVE
-    if save.exists():
-        shutil.copyfile(save, out / f"{name}.sav")
-        print(f"save: {save}")
-    else:
-        print(f"warning: no save at {save}; packaged without one", file=sys.stderr)
+    if not save.exists():
+        sys.exit(f"no save at {save}; pass --save PATH (the package always includes the .sav, named to pair with the .gba so it loads automatically)")
+    shutil.copyfile(save, out / f"{name}.sav")
+    print(f"save: {save}")
 
     for p in sorted(out.iterdir()):
         print(f"{p.name}\tSHA-1 {hashlib.sha1(p.read_bytes()).hexdigest()}")
