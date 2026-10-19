@@ -1,5 +1,11 @@
 {
  "_doc": "Per-string window overrides {addr: {px, dialogue, lines}} for text drawn in a narrower box than its class implies (dialogue = 2-line box, lines 3+ scroll with {FA}). lines = max lines for a box that does not scroll; insert.py reports too_long instead of overflowing it.",
+ "1DBB5DA": {
+  "px": 148,
+  "dialogue": false,
+  "lines": 5,
+  "note": "locked record description (sibling of 1DBAFFF; one-line English overflowed the Help Tips pane)"
+ },
  "1D8E714": {
   "px": 134,
   "dialogue": false,
