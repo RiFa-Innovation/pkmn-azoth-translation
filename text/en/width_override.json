@@ -1,5 +1,41 @@
 {
  "_doc": "Per-string window overrides {addr: {px, dialogue, lines}} for text drawn in a narrower box than its class implies (dialogue = 2-line box, lines 3+ scroll with {FA}). lines = max lines for a box that does not scroll; insert.py reports too_long instead of overflowing it.",
+ "1D8E714": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
+ "1D8E788": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
+ "1D8E73E": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
+ "1D8E75E": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
+ "1D8E6EC": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
+ "1D8E6CD": {
+  "px": 134,
+  "dialogue": false,
+  "lines": 2,
+  "note": "special ability description (summary box ~134px, 2 lines); overflowed VRAM on the Ledian hero form (#97)"
+ },
  "07AB603": {
   "px": 144,
   "dialogue": true,
