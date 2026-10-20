@@ -8,7 +8,7 @@
    "asm": "checkflag 0x14db\ngoto_if 1 ok\ngoto 0x087BE6F7\nok:\nsay \"The path west leads to Mt. Silver.{FB}Only a Champion may go.{FB}Take care out there!\"\nend"
   },
   "silver_enter": {
-   "asm": "lockall\ncheckflag 0x14db\ngoto_if 0 no\nwarp 58.0 32 12\nwaitstate\nend\nno:\nreleaseall\nend"
+   "asm": "lockall\ncheckflag 0x14db\ngoto_if 0 no\nwarp 58.0 8 10\nwaitstate\nend\nno:\nreleaseall\nend"
   },
   "ball_max_revive": {
    "asm": "setorcopyvar 0x8000 0x19\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
@@ -42,32 +42,47 @@
   },
   "from_summit": {
    "asm": "lockall\nwarp 58.3 7 13\nwaitstate\nend"
+  },
+  "silver_nurse": {
+   "asm": "faceplayer\nsay \"Welcome to the Mt. Silver rest stop!{FB}Let me restore your Pok\u00e9mon to full health.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nspecial 0\nfadescreen 0\nsay \"Your Pok\u00e9mon are fully healed.{FB}Be careful up there!\"\nend"
   }
  },
  "groups": {
   "58": [
    {
-    "name": "Route 28 (prototype)",
+    "name": "Route 28",
     "clone": "3.81",
     "mapsec": 204,
     "events": {
      "warps": [
       {
-       "x": 32,
-       "y": 11,
+       "x": 8,
+       "y": 9,
        "elev": 0,
        "warp_id": 1,
        "to": "55.1"
       },
       {
-       "x": 49,
-       "y": 10,
+       "x": 25,
+       "y": 8,
        "elev": 0,
        "warp_id": 0,
        "to": "58.1"
       }
+     ],
+     "objects": [
+      {
+       "local_id": 1,
+       "gfx": 64,
+       "x": 21,
+       "y": 12,
+       "elev": 3,
+       "movement": 0,
+       "script": "silver_nurse"
+      }
      ]
-    }
+    },
+    "layout": "route28"
    },
    {
     "name": "Mt. Silver 1F",
@@ -240,6 +255,74 @@
   }
  ],
  "wild": [
+  {
+   "map": "58.0",
+   "land": {
+    "rate": 20,
+    "mons": [
+     [
+      111,
+      40,
+      44
+     ],
+     [
+      77,
+      40,
+      44
+     ],
+     [
+      114,
+      40,
+      44
+     ],
+     [
+      24,
+      41,
+      45
+     ],
+     [
+      84,
+      41,
+      45
+     ],
+     [
+      85,
+      42,
+      46
+     ],
+     [
+      112,
+      43,
+      47
+     ],
+     [
+      215,
+      42,
+      46
+     ],
+     [
+      228,
+      42,
+      46
+     ],
+     [
+      232,
+      44,
+      48
+     ],
+     [
+      227,
+      44,
+      48
+     ],
+     [
+      217,
+      45,
+      49
+     ]
+    ]
+   }
+  },
   {
    "map": "58.1",
    "land": {
@@ -794,5 +877,123 @@
     }
    ]
   }
- ]
+ ],
+ "layouts": {
+  "route28": {
+   "from": "3.81",
+   "crop": [
+    24,
+    2,
+    64,
+    20
+   ],
+   "patch": [
+    {
+     "x": 10,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 10,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 10,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 13,
+     "block": 12301
+    }
+   ]
+  }
+ }
 }

@@ -159,3 +159,20 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
   `free_after` 679,466 B.
 - Still open: real Route 28 map, Pokémon Center, summit + Red, Mt. Silver trainers, story hook (Archer/Rainbow Stone),
   flag reservation `0x1338`-`0x13FF` in `CLAUDE.md`, species evolution-table audit, CJK font reclaim.
+
+**2026-10-20, Red and Route 28 (this branch)**
+- **Red** (trainer id 461, an unused empty-name slot): class `PKMN Trainer` (39), battle pic 61 (black hair, red jacket;
+  the pack has no Red sprite), overworld gfx 150, Pikachu 72 / Espeon 70 / Snorlax 71 / Venusaur 73 / Charizard 74 /
+  Blastoise 74 with Full Restores. Waits on the summit map `58.4` (Alabaster Icelands layout, mapsec Mt. Silver), reached
+  from the Mewtwo nook of `58.3` (coord event at `(7,12)`); the way back is a coord event at `(49,51)`. Battle,
+  intro text and the `PKMN Trainer Red wants to battle!` banner verified.
+- **Route 28** (`58.0`) is now its own layout (`64x20`, cut out of Route 27's block data, ~2.5 KB; tilesets shared),
+  with a tall-grass patch (wild header: Rhyhorn, Ponyta, Tangela, Arbok, Dodrio, Sneasel, Donphan, Ursaring Lv 40-49),
+  a rest-stop nurse (full heal), the cave to Mt. Silver and a door back to the gatehouse.
+- Facts: only **one** spare group slot exists (58); slot 59 is the table terminator. The trainer battle pic table is at
+  `0x23957C` (148 entries, palettes right after); the `0x1DE5A08` table is a portrait set. Overworld sprites:
+  240 entries at `0x08961600`, palette table at `0x1E0F750`.
+- New tooling: `scripts/maprender.py` (render any layout/map to PNG), `mapedit.py` layouts (crop + patch), trainers,
+  `scrasm.py` `trainer ID "intro" "defeat"`.
+- Not done: Mt. Silver trainers, unique tiles/house interior for Route 28, a Red-specific sprite, the Archer/Rainbow Stone
+  hook, flags `0x1338`-`0x133F` documented in `CLAUDE.md`.

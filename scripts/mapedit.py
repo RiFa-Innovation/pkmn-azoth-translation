@@ -16,7 +16,7 @@ Event dicts (all ints; script/ptr fields are ROM addresses 0x08xxxxxx or 0):
          (a missing script/flag is 0 = no script, never the 0x08000000 placeholder)
   coord  {x, y, elev, var, value, script}
   bg     {x, y, elev, kind, script}
-The gMapGroups table (0xB3B100) has two spare slots (58, 59) filled with 0xF7F7F7F7.
+The gMapGroups table (0xB3B100) has ONE spare slot (58, filled with 0xF7F7F7F7); slot 59 is the terminator.
 """
 import json
 import os
@@ -195,6 +195,31 @@ def land_encounter_layout(rom, src, pool, lay_ptr, cache):
     return ROM_BASE + new_lay
 
 
+def build_layouts(rom, src, pool, layouts):
+    """New layouts cut out of an existing one: {"name": {"from": "G.N", "crop": [x, y, w, h],
+    "patch": [{"x", "y", "block"}]}}. The tilesets and border are shared with the source; only the
+    block data (w*h*2 bytes) and a 24-byte layout struct are new. Returns name -> (address, layout id)."""
+    out = {}
+    for name, L in layouts.items():
+        g, n = (int(x) for x in L["from"].split("."))
+        lo = u32(src, header_off(src, g, n)) - ROM_BASE
+        w, h, border, mp, pri, sec = struct.unpack_from("<IIIIII", src, lo)
+        x0, y0, cw, ch = L["crop"]
+        assert x0 + cw <= w and y0 + ch <= h, f"{name}: crop outside {w}x{h}"
+        blocks = [list(struct.unpack_from(f"<{cw}H", src, mp - ROM_BASE + 2 * ((y0 + y) * w + x0))) for y in range(ch)]
+        for pt in L.get("patch", []):
+            blocks[pt["y"]][pt["x"]] = pt["block"]
+        blob = b"".join(struct.pack(f"<{cw}H", *row) for row in blocks)
+        ba = pool.alloc_aligned(len(blob))
+        rom[ba:ba + len(blob)] = blob
+        la = pool.alloc_aligned(24)
+        rom[la:la + 24] = struct.pack("<IIIIII", cw, ch, border, ROM_BASE + ba, pri, sec)
+        lid = FREE_LAYOUT_IDS.pop(0)
+        rom[LAYOUT_TABLE + 4 * (lid - 1):LAYOUT_TABLE + 4 * lid] = struct.pack("<I", ROM_BASE + la)
+        out[name] = (ROM_BASE + la, lid)
+    return out
+
+
 def apply(rom, src, pool, spec_path="data/new_maps.json"):
     spec = json.load(open(spec_path, encoding="utf-8"))
     report = {"maps": 0, "bytes": 0}
@@ -234,6 +259,7 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         new_ev = build_events(rom, pool, ev, item)
         rom[h + 4:h + 8] = struct.pack("<I", ROM_BASE + new_ev)
     tile_cache = {}
+    layouts = build_layouts(rom, src, pool, spec.get("layouts", {}))
     for gs, maps in spec.get("groups", {}).items():
         g = int(gs)
         assert g in SPARE, f"group {g}: only spare slots {SPARE} are free"
@@ -244,6 +270,10 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
             cg, cn = (int(x) for x in m["clone"].split("."))
             hdr = bytearray(src[header_off(src, cg, cn):header_off(src, cg, cn) + HEADER])
             hdr[8:16] = bytes(8)                         # no map scripts, no connections
+            if m.get("layout"):
+                lay, lid = layouts[m["layout"]]
+                struct.pack_into("<I", hdr, 0, lay)
+                struct.pack_into("<H", hdr, 18, lid)
             if m.get("land_encounter"):
                 lay = land_encounter_layout(rom, src, pool, struct.unpack_from("<I", hdr, 0)[0], tile_cache)
                 lid = FREE_LAYOUT_IDS.pop(0)
