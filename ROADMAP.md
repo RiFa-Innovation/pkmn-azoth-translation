@@ -140,3 +140,22 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
   warp only turns the player; hack flags >= 0x900 must be set through the game's own `setflag`, not by poking RAM.
 - Bug fixed on the way: `store()` slice-assignment of a string that already ended in `0xFF` shrank the ROM by a byte;
   always assign equal-length slices.
+
+**2026-10-20, Mt. Silver vertical slice (this branch)**
+- `58.0` Route 28 prototype (Route 27 layout clone) -> door `(49,10)` -> `58.1`-`58.3` Mt. Silver 1F-3F (Cerulean
+  Cave layouts and warps, remapped to the new maps), 8 item balls (Max Revive, PP Max, Ultra Ball x3, Full Restore,
+  Protein, Carbos, Rare Candy, Max Elixir) on new flags `0x1338`-`0x133F`; Mewtwo's static encounter removed.
+  Floors, stairs and an item pickup verified in the emulator.
+- Wild encounters: a wild header for each floor (Ursaring Lv47 seen on 1F). Facts that cost time:
+  - The live wild table is `0x1E468B0` (133 entries, read by the function at `0x08082934`); the vanilla-layout copy at
+    `0xCF915C` is stale and unread. Cerulean Cave has **no** entry in the live table, so it never had encounters.
+  - Land encounters need a metatile with encounter type 1 (attribute bits 24-26). Cave floors in the hack's shared
+    tileset are type 0, so `mapedit` clones the layout's secondary tileset (attribute table copy, ~1.5 KB) and marks
+    the plain floor tiles; the originals are untouched.
+  - The game loads a layout through `gMapLayouts` (`0xA66440`, indexed by the header's layout id), not the header's
+    layout pointer: a cloned layout needs a layout id. 118 ids are unused by any map; ids 52-77 are reserved here.
+  - Walking tests need `hold >= 20` frames per tap in caves; the first tap after a warp only turns.
+- Cost: the whole slice (4 maps, 8 items, 3 wild headers, 3 tileset clones, relocated 4.3 KB wild table) is ~9.7 KB;
+  `free_after` 679,466 B.
+- Still open: real Route 28 map, Pokémon Center, summit + Red, Mt. Silver trainers, story hook (Archer/Rainbow Stone),
+  flag reservation `0x1338`-`0x13FF` in `CLAUDE.md`, species evolution-table audit, CJK font reclaim.

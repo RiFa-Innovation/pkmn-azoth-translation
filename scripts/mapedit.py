@@ -28,6 +28,9 @@ import mercury_text as mt  # noqa: E402
 import scrasm  # noqa: E402
 
 GROUP_TABLE = 0xB3B100
+LAYOUT_TABLE = 0xA66440     # gMapLayouts: pointer per layout id (id 1 first); the game loads the layout by
+                            # the header's layout id, NOT by the header's layout pointer
+FREE_LAYOUT_IDS = list(range(52, 78))   # ids no map header uses (checked with hackdb), pointer slots reusable
 ROM_BASE = 0x08000000
 FILL = 0xF7F7F7F7
 HEADER = 28
@@ -155,6 +158,43 @@ def _resolve_scripts(spec, scripts):
             fix(m.get("events", {}))
 
 
+def land_encounter_layout(rom, src, pool, lay_ptr, cache):
+    """Clone a layout whose secondary tileset marks its plain floor tiles as land-encounter
+    tiles (attribute bits 24-26 = 1). Returns the new layout's ROM address.
+    The tileset clone is cached per (secondary tileset, id set)."""
+    lo = lay_ptr - ROM_BASE
+    w, h, border, mp, pri, sec = struct.unpack_from("<IIIIII", src, lo)
+    pri_o, sec_o = pri - ROM_BASE, sec - ROM_BASE
+    attrs = {}
+    for base, ts, cnt in ((0, pri_o, 640), (640, sec_o, 384)):
+        a = u32(src, ts + 20) - ROM_BASE
+        for i in range(cnt):
+            attrs[base + i] = u32(src, a + 4 * i)
+    blocks = struct.unpack_from(f"<{w * h}H", src, mp - ROM_BASE)
+    ids = sorted({b & 0x3FF for b in blocks if not b & 0xC00
+                  and (b & 0x3FF) >= 640 and (attrs[b & 0x3FF] & 0x1FF) == 0
+                  and (attrs[b & 0x3FF] >> 24) & 7 == 0 and (b & 0x3FF) != 1023})
+    key = (sec, tuple(ids))
+    if key not in cache:
+        a_old = u32(src, sec_o + 20) - ROM_BASE
+        tbl = bytearray(src[a_old:a_old + 384 * 4])
+        for i in ids:
+            v = struct.unpack_from("<I", tbl, 4 * (i - 640))[0] | (1 << 24)
+            struct.pack_into("<I", tbl, 4 * (i - 640), v)
+        ta = pool.alloc_aligned(len(tbl))
+        rom[ta:ta + len(tbl)] = tbl
+        ts_new = pool.alloc_aligned(24)
+        blob = bytearray(src[sec_o:sec_o + 24])
+        struct.pack_into("<I", blob, 20, ROM_BASE + ta)
+        rom[ts_new:ts_new + 24] = blob
+        cache[key] = ROM_BASE + ts_new
+    new_lay = pool.alloc_aligned(24)
+    blob = bytearray(src[lo:lo + 24])
+    struct.pack_into("<I", blob, 20, cache[key])
+    rom[new_lay:new_lay + 24] = blob
+    return ROM_BASE + new_lay
+
+
 def apply(rom, src, pool, spec_path="data/new_maps.json"):
     spec = json.load(open(spec_path, encoding="utf-8"))
     report = {"maps": 0, "bytes": 0}
@@ -193,6 +233,7 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         assert len(users) == 1, f"events of {item['map']} are shared by {len(users)} maps"
         new_ev = build_events(rom, pool, ev, item)
         rom[h + 4:h + 8] = struct.pack("<I", ROM_BASE + new_ev)
+    tile_cache = {}
     for gs, maps in spec.get("groups", {}).items():
         g = int(gs)
         assert g in SPARE, f"group {g}: only spare slots {SPARE} are free"
@@ -203,6 +244,13 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
             cg, cn = (int(x) for x in m["clone"].split("."))
             hdr = bytearray(src[header_off(src, cg, cn):header_off(src, cg, cn) + HEADER])
             hdr[8:16] = bytes(8)                         # no map scripts, no connections
+            if m.get("land_encounter"):
+                lay = land_encounter_layout(rom, src, pool, struct.unpack_from("<I", hdr, 0)[0], tile_cache)
+                lid = FREE_LAYOUT_IDS.pop(0)
+                assert u32(src, LAYOUT_TABLE + 4 * (struct.unpack_from("<H", hdr, 18)[0] - 1)) == struct.unpack_from("<I", hdr, 0)[0]
+                rom[LAYOUT_TABLE + 4 * (lid - 1):LAYOUT_TABLE + 4 * lid] = struct.pack("<I", lay)
+                struct.pack_into("<I", hdr, 0, lay)
+                struct.pack_into("<H", hdr, 18, lid)
             if m.get("mapsec") is not None:
                 hdr[20] = m["mapsec"]
             if m.get("music") is not None:
@@ -220,8 +268,51 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
             rom[arr + 4 * i:arr + 4 * i + 4] = struct.pack("<I", ROM_BASE + ha)
             report["maps"] += 1
         rom[slot:slot + 4] = struct.pack("<I", ROM_BASE + arr)
+    if spec.get("wild"):
+        report["wild"] = add_wild(rom, src, pool, spec["wild"])
     report["bytes"] = before - pool.total()
     return report
+
+
+WILD_TABLE = 0x1E468B0  # the hack's live gWildMonHeaders (20-byte entries, group 0xFF terminates);
+                        # 0xCF915C is a stale vanilla-layout copy that no code reads
+WILD_SLOTS = {"land": 12, "water": 5, "rock": 5, "fish": 10}
+
+
+def add_wild(rom, src, pool, entries):
+    """Append wild-encounter headers: relocate the table, repoint its 3 literal-pool references."""
+    n = 0
+    while src[WILD_TABLE + 20 * n] != 0xFF:
+        n += 1
+    old_end = WILD_TABLE + 20 * (n + 1)
+    new_tbl = pool.alloc_aligned(20 * (n + 1 + len(entries)))
+    rom[new_tbl:new_tbl + 20 * n] = src[WILD_TABLE:WILD_TABLE + 20 * n]
+    for k, e in enumerate(entries):
+        g, m = (int(x) for x in e["map"].split("."))
+        ptrs = []
+        for kind in ("land", "water", "rock", "fish"):
+            if kind not in e:
+                ptrs.append(0)
+                continue
+            blk = e[kind]
+            mons = blk["mons"]
+            assert len(mons) == WILD_SLOTS[kind], f"{e['map']} {kind}: need {WILD_SLOTS[kind]} slots"
+            arr = pool.alloc_aligned(4 * len(mons))
+            for i, (sp, lo, hi) in enumerate(mons):
+                rom[arr + 4 * i:arr + 4 * i + 4] = struct.pack("<BBH", lo, hi, sp)
+            info = pool.alloc_aligned(8)
+            rom[info:info + 8] = struct.pack("<BBHI", blk["rate"], 0, 0, ROM_BASE + arr)
+            ptrs.append(ROM_BASE + info)
+        o = new_tbl + 20 * (n + k)
+        rom[o:o + 20] = bytes([g, m, 0, 0]) + struct.pack("<4I", *ptrs)
+    o = new_tbl + 20 * (n + len(entries))
+    rom[o:o + 20] = src[WILD_TABLE + 20 * n:old_end]
+    word = struct.pack("<I", ROM_BASE + WILD_TABLE)
+    hits = [m.start() for m in __import__("re").finditer(__import__("re").escape(word), src)]
+    assert len(hits) == 3, f"expected 3 references to gWildMonHeaders, found {len(hits)}"
+    for h in hits:
+        rom[h:h + 4] = struct.pack("<I", ROM_BASE + new_tbl)
+    return {"entries": len(entries), "table": new_tbl}
 
 
 def _hdr_ev(src, g, n):
