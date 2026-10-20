@@ -176,3 +176,17 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
   `scrasm.py` `trainer ID "intro" "defeat"`.
 - Not done: Mt. Silver trainers, unique tiles/house interior for Route 28, a Red-specific sprite, the Archer/Rainbow Stone
   hook, flags `0x1338`-`0x133F` documented in `CLAUDE.md`.
+
+**2026-10-20, open items worked**
+- Mt. Silver trainers: 8 (Hiker, Bird Keeper x2, Black Belt, Psychic, Miner, Dragon Tamer, Ace Trainer) on Route 28 and the
+  three floors, default-move parties Lv 43-56; `mapedit` trainers support default moves (8-byte party entries).
+- Unused-species spawns: Spinda, Numel, Cacnea, Trapinch, Lunatone, Solrock, Torkoal, Spoink, Gulpin, Beldum, Flygon in the new
+  wild tables; Metagross on Verena's team. Of species <= 411 only 57 stay unreachable (legendaries, Hoenn starters etc.);
+  the evolution table for ids > 411 was not found (CFRU layout differs from the vanilla table at `0x25977C`), so ids > 411
+  (forms, G-Max) are still unaudited.
+- Story hook (draft): beating Red sets flag `0x1340` and he looks toward a rainbow shimmer beyond the Whirl Islands; later
+  chapters can gate on that flag. Text is placeholder for the user to rewrite.
+- Font reclaim: still blocked. A scan of the built ROM shows real untranslated Chinese remains (Mystery Gift, Union Room,
+  shop and TM fragments; ~40 strings after discarding decode noise), so the ~0.87 MB CJK fonts cannot be freed until issue #11
+  is finished; after that the level-2 tails (~385 KB) are the first candidate. Emulator watchpoints cannot trace ROM reads.
+- Space: `free_after` 674,725 B with all Mt. Silver content in (~14.3 KB).

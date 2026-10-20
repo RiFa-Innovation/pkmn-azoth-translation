@@ -35,7 +35,7 @@
    "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
   },
   "red_talk": {
-   "asm": "faceplayer\ntrainer 461 \"...\" \"...\"\nsay \"... ... ...\"\nend"
+   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\"\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend"
   },
   "to_summit": {
    "asm": "lockall\nsay \"A bitter wind blows down from above...\"\nwarp 58.4 49 50\nwaitstate\nend"
@@ -402,7 +402,7 @@
       44
      ],
      [
-      24,
+      308,
       41,
       45
      ],
@@ -422,7 +422,7 @@
       47
      ],
      [
-      215,
+      339,
       42,
       46
      ],
@@ -437,7 +437,7 @@
       48
      ],
      [
-      227,
+      344,
       44,
       48
      ],
@@ -470,7 +470,7 @@
       48
      ],
      [
-      246,
+      321,
       42,
       46
      ],
@@ -480,7 +480,7 @@
       49
      ],
      [
-      200,
+      348,
       44,
       48
      ],
@@ -500,7 +500,7 @@
       51
      ],
      [
-      231,
+      332,
       44,
       48
      ],
@@ -535,7 +535,7 @@
       48
      ],
      [
-      246,
+      398,
       42,
       46
      ],
@@ -648,7 +648,7 @@
       50
      ],
      [
-      246,
+      351,
       44,
       48
      ],
@@ -668,7 +668,7 @@
       50
      ],
      [
-      217,
+      332,
       48,
       52
      ],
@@ -683,7 +683,7 @@
       52
      ],
      [
-      227,
+      349,
       48,
       52
      ],
@@ -718,7 +718,7 @@
       48
      ],
      [
-      246,
+      398,
       42,
       46
      ],
@@ -741,7 +741,7 @@
       52
      ],
      [
-      75,
+      398,
       48,
       52
      ],
@@ -761,7 +761,7 @@
       52
      ],
      [
-      217,
+      367,
       50,
       54
      ],
@@ -786,7 +786,7 @@
       56
      ],
      [
-      248,
+      334,
       54,
       58
      ],
