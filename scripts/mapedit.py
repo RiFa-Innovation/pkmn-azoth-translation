@@ -34,7 +34,7 @@ FREE_LAYOUT_IDS = list(range(52, 78))   # ids no map header uses (checked with h
 ROM_BASE = 0x08000000
 FILL = 0xF7F7F7F7
 HEADER = 28
-SPARE = (58, 59)
+SPARE = (58,)
 
 
 def u32(rom, o):
@@ -268,10 +268,36 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
             rom[arr + 4 * i:arr + 4 * i + 4] = struct.pack("<I", ROM_BASE + ha)
             report["maps"] += 1
         rom[slot:slot + 4] = struct.pack("<I", ROM_BASE + arr)
+    if spec.get("trainers"):
+        report["trainers"] = add_trainers(rom, pool, spec["trainers"])
     if spec.get("wild"):
         report["wild"] = add_wild(rom, src, pool, spec["wild"])
     report["bytes"] = before - pool.total()
     return report
+
+
+TRAINER_TABLE = 0x23EACC - 4   # gTrainers: 40-byte entries indexed by trainer id
+
+
+def add_trainers(rom, pool, trainers):
+    """Write trainer entries in place (ids must be unused slots) with their party in the pool.
+    party mon: {species, level, iv, item, moves[4]} (16-byte 'item + custom moves' layout)."""
+    for t in trainers:
+        o = TRAINER_TABLE + 40 * t["id"]
+        name = mt.encode_en(t["name"]).rstrip(b"\xff") + b"\xff"
+        assert len(name) <= 12
+        items = (list(t.get("items", [])) + [0] * 4)[:4]
+        ent = struct.pack("<BBBB", 3, t["class"], t.get("music", 0x0A), t["pic"]) + name.ljust(12, b"\x00")
+        ent += struct.pack("<4HIIII", *items, t.get("double", 0), t.get("ai", 7), len(t["party"]), 0)
+        party = b""
+        for m in t["party"]:
+            mv = (list(m["moves"]) + [0] * 4)[:4]
+            party += struct.pack("<HBBHH4H", m.get("iv", 255), m["level"], 0, m["species"], m.get("item", 0), *mv)
+        pa = pool.alloc_aligned(len(party))
+        rom[pa:pa + len(party)] = party
+        ent = ent[:36] + struct.pack("<I", ROM_BASE + pa)
+        rom[o:o + 40] = ent
+    return len(trainers)
 
 
 WILD_TABLE = 0x1E468B0  # the hack's live gWildMonHeaders (20-byte entries, group 0xFF terminates);

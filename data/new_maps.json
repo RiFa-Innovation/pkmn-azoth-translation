@@ -33,6 +33,15 @@
   },
   "ball_max_elixir": {
    "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "red_talk": {
+   "asm": "faceplayer\ntrainer 461 \"...\" \"...\"\nsay \"... ... ...\"\nend"
+  },
+  "to_summit": {
+   "asm": "lockall\nsay \"A bitter wind blows down from above...\"\nwarp 58.4 49 50\nwaitstate\nend"
+  },
+  "from_summit": {
+   "asm": "lockall\nwarp 58.3 7 13\nwaitstate\nend"
   }
  },
  "groups": {
@@ -153,9 +162,47 @@
         "script": "ball_max_elixir"
        }
       }
-     }
+     },
+     "coords": [
+      {
+       "x": 7,
+       "y": 12,
+       "elev": 3,
+       "var": 16537,
+       "value": 0,
+       "script": "to_summit"
+      }
+     ]
     },
     "land_encounter": true
+   },
+   {
+    "name": "Mt. Silver summit",
+    "clone": "52.23",
+    "mapsec": 205,
+    "events": {
+     "objects": [
+      {
+       "local_id": 1,
+       "gfx": 150,
+       "x": 49,
+       "y": 44,
+       "elev": 3,
+       "movement": 0,
+       "script": "red_talk"
+      }
+     ],
+     "coords": [
+      {
+       "x": 49,
+       "y": 51,
+       "elev": 0,
+       "var": 16537,
+       "value": 0,
+       "script": "from_summit"
+      }
+     ]
+    }
    }
   ]
  },
@@ -656,6 +703,96 @@
      ]
     ]
    }
+  }
+ ],
+ "trainers": [
+  {
+   "id": 461,
+   "name": "Red",
+   "class": 39,
+   "pic": 61,
+   "music": 10,
+   "ai": 7,
+   "items": [
+    19,
+    19,
+    19,
+    25
+   ],
+   "party": [
+    {
+     "species": 25,
+     "level": 72,
+     "iv": 255,
+     "item": 202,
+     "moves": [
+      344,
+      85,
+      231,
+      98
+     ]
+    },
+    {
+     "species": 196,
+     "level": 70,
+     "iv": 255,
+     "item": 200,
+     "moves": [
+      94,
+      234,
+      247,
+      347
+     ]
+    },
+    {
+     "species": 143,
+     "level": 71,
+     "iv": 255,
+     "item": 142,
+     "moves": [
+      34,
+      89,
+      156,
+      63
+     ]
+    },
+    {
+     "species": 3,
+     "level": 73,
+     "iv": 255,
+     "item": 200,
+     "moves": [
+      76,
+      188,
+      79,
+      89
+     ]
+    },
+    {
+     "species": 6,
+     "level": 74,
+     "iv": 255,
+     "item": 141,
+     "moves": [
+      53,
+      19,
+      337,
+      89
+     ]
+    },
+    {
+     "species": 9,
+     "level": 74,
+     "iv": 255,
+     "item": 142,
+     "moves": [
+      56,
+      58,
+      57,
+      240
+     ]
+    }
+   ]
   }
  ]
 }

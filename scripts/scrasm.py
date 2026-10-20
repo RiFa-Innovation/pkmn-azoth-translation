@@ -6,6 +6,7 @@ address, resolved by the caller via `externs`).
 
   say "text"          -> loadword 0 <text>; callstd 2   (text is wrapped to the dialogue box)
   warp G.N X Y        -> warp G N 0xFF X Y
+  trainer ID "intro" "defeat"   -> trainerbattle single (type 0); execution continues after the battle
   <opcode> args...    -> any opcode known to scrdis (names from pokefirered event.inc)
 
 assemble(src, base_addr, widths, externs, text_alloc) -> bytes
@@ -53,6 +54,11 @@ def assemble(src, base, widths, externs, text_alloc):
             pc += 2 + 5 + 2   # loadword 0 ptr (6) + callstd 2 (2) -> 8
             pc -= 1
             continue
+        m = re.match(r'trainer\s+(\w+)\s+"(.*?)"\s+"(.*?)"$', ln)
+        if m:
+            items.append(("trainer", int(m.group(1), 0), m.group(2), m.group(3)))
+            pc += 14
+            continue
         parts = ln.split()
         name = parts[0]
         if name == "warp":
@@ -77,6 +83,9 @@ def assemble(src, base, widths, externs, text_alloc):
             text = mt.wrap_en(it[1], __import__("builtins").bytes(widths), DIALOGUE_PX, True)
             a = text_alloc(mt.encode_en(text))
             out += bytes([0x0F, 0]) + struct.pack("<I", a) + bytes([0x09, 0x02])
+        elif it[0] == "trainer":
+            ptrs = [text_alloc(mt.encode_en(mt.wrap_en(t, bytes(widths), DIALOGUE_PX, True))) for t in it[2:4]]
+            out += bytes([0x5C, 0]) + struct.pack("<HHII", it[1], 0, *ptrs)
         elif it[0] == "warp":
             g, n = (int(x) for x in it[1][0].split("."))
             out += bytes([0x39, g, n, 0xFF]) + struct.pack("<HH", _num(it[1][1]), _num(it[1][2]))
