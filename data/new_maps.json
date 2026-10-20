@@ -9,6 +9,30 @@
   },
   "silver_enter": {
    "asm": "lockall\ncheckflag 0x14db\ngoto_if 0 no\nwarp 58.0 32 12\nwaitstate\nend\nno:\nreleaseall\nend"
+  },
+  "ball_max_revive": {
+   "asm": "setorcopyvar 0x8000 0x19\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_pp_max": {
+   "asm": "setorcopyvar 0x8000 0x47\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_ultra": {
+   "asm": "setorcopyvar 0x8000 0x2\nsetorcopyvar 0x8001 3\ncallstd 1\nend"
+  },
+  "ball_full_restore": {
+   "asm": "setorcopyvar 0x8000 0x13\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_protein": {
+   "asm": "setorcopyvar 0x8000 0x40\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_carbos": {
+   "asm": "setorcopyvar 0x8000 0x42\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_rare_candy": {
+   "asm": "setorcopyvar 0x8000 0x44\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_max_elixir": {
+   "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
   }
  },
  "groups": {
@@ -25,8 +49,109 @@
        "elev": 0,
        "warp_id": 1,
        "to": "55.1"
+      },
+      {
+       "x": 49,
+       "y": 10,
+       "elev": 0,
+       "warp_id": 0,
+       "to": "58.1"
       }
      ]
+    }
+   },
+   {
+    "name": "Mt. Silver 1F",
+    "clone": "1.72",
+    "mapsec": 205,
+    "events_from": "1.72",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "edit": {
+      "warps": {
+       "0": {
+        "to": "58.0",
+        "warp_id": 1
+       }
+      },
+      "objects": {
+       "0": {
+        "flag": 4920,
+        "script": "ball_max_revive"
+       },
+       "1": {
+        "flag": 4921,
+        "script": "ball_pp_max"
+       },
+       "2": {
+        "flag": 4922,
+        "script": "ball_ultra"
+       }
+      }
+     }
+    }
+   },
+   {
+    "name": "Mt. Silver 2F",
+    "clone": "1.73",
+    "mapsec": 205,
+    "events_from": "1.73",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "edit": {
+      "objects": {
+       "0": {
+        "flag": 4923,
+        "script": "ball_full_restore"
+       },
+       "1": {
+        "flag": 4924,
+        "script": "ball_protein"
+       },
+       "2": {
+        "flag": 4925,
+        "script": "ball_carbos"
+       }
+      }
+     }
+    }
+   },
+   {
+    "name": "Mt. Silver 3F",
+    "clone": "1.74",
+    "mapsec": 205,
+    "events_from": "1.74",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "remove": {
+      "objects": [
+       2
+      ]
+     },
+     "edit": {
+      "objects": {
+       "0": {
+        "flag": 4926,
+        "script": "ball_rare_candy"
+       },
+       "1": {
+        "flag": 4927,
+        "script": "ball_max_elixir"
+       }
+      }
+     }
     }
    }
   ]

@@ -99,14 +99,23 @@ def build_events(rom, pool, ev_off, add):
         sz = SIZES[kind]
         o = ptrs[i] - ROM_BASE if ptrs[i] else 0
         old = [bytes(rom[o + k * sz:o + (k + 1) * sz]) for k in range(counts[i])] if ptrs[i] else []
+        if kind == "warps":
+            for k, w in enumerate(old):
+                dest = f"{w[7]}.{w[6]}"
+                if dest in add.get("remap", {}):
+                    old[k] = _edit("warps", w, {"to": add["remap"][dest]})
         for idx, ed in edits.get(kind, {}).items():
             assert len(old[int(idx)]) == sz, (kind, idx, ev_off, ptrs, counts, len(old[int(idx)]))
             old[int(idx)] = _edit(kind, old[int(idx)], ed)
+        keep = [k for k in range(len(old)) if k not in add.get("remove", {}).get(kind, [])]
+        if len(keep) != len(old):
+            counts[i] -= len(old) - len(keep)
+            old = [old[k] for k in keep]
         new = [PACK[kind](e) for e in add.get(kind, [])]
         blob = b"".join(old + new)
         counts[i] += len(new)
         assert counts[i] < 256, f"too many {kind}"
-        if blob and (new or edits.get(kind)):
+        if blob and (new or edits.get(kind) or add.get("remap") or add.get("remove", {}).get(kind)):
             a = pool.alloc_aligned(len(blob))
             rom[a:a + len(blob)] = blob
             out_ptrs.append(ROM_BASE + a)
@@ -200,7 +209,11 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
                 struct.pack_into("<H", hdr, 16, m["music"])
             if m.get("weather") is not None:
                 hdr[22] = m["weather"]
-            ev = build_events(rom, pool, 0, m.get("events", {}))
+            src_ev = 0
+            if m.get("events_from"):
+                fg, fn = (int(x) for x in m["events_from"].split("."))
+                src_ev = u32(src, header_off(src, fg, fn) + 4) - ROM_BASE
+            ev = build_events(rom, pool, src_ev, m.get("events", {}))
             struct.pack_into("<I", hdr, 4, ROM_BASE + ev)
             ha = pool.alloc_aligned(HEADER)
             rom[ha:ha + HEADER] = hdr
