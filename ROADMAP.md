@@ -106,3 +106,24 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
   writer is the main tool to build (it can live in `scripts/`), and the BPS pipeline must keep the clean-ROM
   byte-identical check.
 - Save compatibility: new flags/vars must stay inside the hack's own var/flag arrays.
+
+## 9. Progress log
+
+**2026-10-20, measurements**
+- Species: wild tables reference 293 species, trainer parties 430, script gifts/wild battles add 30 more:
+  508 directly reachable of 1,293 sprite entries. The other 789 are evolutions, forms (Mega, G-Max at
+  1264+), event species and free candidates for Mt. Silver spawns. The evolution table for ids > 411 was not
+  located (CFRU relocated it); needed before deciding any species is truly unused.
+- Font trace: emulator watchpoints do not fire on ROM reads (`EMULATOR.md`), so reads of the CJK font cannot
+  be traced that way. Alternative: translate the ~150 high-confidence leftover Chinese strings
+  (`build/leftover_zh.json`, aligned refs + sentence punctuation) via `manual_strings.json`, then free the font.
+- Free-space numbers: `insert.py` pool 0.69 MB after the English build.
+
+**2026-10-20, prototype (this branch)**
+- `scripts/mapedit.py` (spec `data/new_maps.json`) adds maps to the spare gMapGroups slots 58/59 and appends
+  events to existing maps; scripts/`mapdrive.py` drives a scratch ROM+save copy in the emulator.
+- Result: new map `58.0` (Route 28 prototype, clone of Route 27's layout) costs ~500 bytes and is reached from
+  Route 26 through a coord event; round trip verified in the emulator, BPS byte-identical.
+- Finding: a warp event on a plain tile does nothing (FireRed needs a door/stairs/cave metatile behaviour);
+  use a coord event + `warp` script until a real door metatile is placed.
+- The prototype warp tile on Route 26 `(14,10)` is a dev hook, not for release.

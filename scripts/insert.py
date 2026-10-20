@@ -26,6 +26,7 @@ import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 import gfx_text  # noqa: E402
 import logo  # noqa: E402
+import mapedit  # noqa: E402
 import maptext  # noqa: E402
 import sprtext  # noqa: E402
 import statusicons  # noqa: E402
@@ -705,6 +706,7 @@ def main():
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
     naming_dispatch(rom, src, pool)
+    report["new_maps"] = mapedit.apply(rom, src, pool)
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)

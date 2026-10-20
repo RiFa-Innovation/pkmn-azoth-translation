@@ -1,0 +1,16 @@
+{
+  "_doc": "New maps/events for scripts/mapedit.py. Prototype: Route 28 (group 58) reached from Route 26.",
+  "scripts": {
+    "to_route28": {"warp": "58.0", "x": 32, "y": 12},
+    "from_route28": {"warp": "3.106", "x": 14, "y": 11}
+  },
+  "groups": {
+    "58": [
+      {"name": "Route 28 (prototype)", "clone": "3.81", "mapsec": 204,
+       "events": {"coords": [{"x": 32, "y": 12, "var": 16537, "value": 0, "script": "from_route28"}]}}
+    ]
+  },
+  "append_events": [
+    {"map": "3.106", "coords": [{"x": 14, "y": 10, "var": 16537, "value": 0, "script": "to_route28"}]}
+  ]
+}
