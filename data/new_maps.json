@@ -45,6 +45,30 @@
   },
   "silver_nurse": {
    "asm": "faceplayer\nsay \"Welcome to the Mt. Silver rest stop!{FB}Let me restore your Pok\u00e9mon to full health.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nspecial 0\nfadescreen 0\nsay \"Your Pok\u00e9mon are fully healed.{FB}Be careful up there!\"\nend"
+  },
+  "tr_48": {
+   "asm": "trainer 48 \"Mt. Silver is no place for the unprepared!\" \"My rocks crumbled...\"\nsay \"Beyond here the cave never sleeps.\"\nend"
+  },
+  "tr_49": {
+   "asm": "trainer 49 \"My birds rule these skies!\" \"Grounded...\"\nsay \"The peak is where the wind turns.\"\nend"
+  },
+  "tr_62": {
+   "asm": "trainer 62 \"Hah! Show me your guts!\" \"Good fight...\"\nsay \"Train your body as well as your team.\"\nend"
+  },
+  "tr_77": {
+   "asm": "trainer 77 \"I saw you coming in a dream.\" \"I did not foresee this...\"\nsay \"The sun and the moon both watch you.\"\nend"
+  },
+  "tr_113": {
+   "asm": "trainer 113 \"I dig the dark. You?\" \"Struck rock bottom...\"\nsay \"Mind the loose stone ahead.\"\nend"
+  },
+  "tr_200": {
+   "asm": "trainer 200 \"Fly or fall!\" \"I fell!\"\nsay \"Higher floors have stranger winds.\"\nend"
+  },
+  "tr_454": {
+   "asm": "trainer 454 \"Dragons answer only to the worthy!\" \"You tamed them...\"\nsay \"Go on. The summit awaits.\"\nend"
+  },
+  "tr_455": {
+   "asm": "trainer 455 \"Few reach this floor. Fewer leave it.\" \"Impressive...\"\nsay \"Red waits where the air is thinnest.\"\nend"
   }
  },
  "groups": {
@@ -79,6 +103,30 @@
        "elev": 3,
        "movement": 0,
        "script": "silver_nurse"
+      },
+      {
+       "local_id": 148,
+       "gfx": 20,
+       "x": 3,
+       "y": 12,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_48"
+      },
+      {
+       "local_id": 149,
+       "gfx": 21,
+       "x": 11,
+       "y": 13,
+       "elev": 3,
+       "movement": 7,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_49"
       }
      ]
     },
@@ -116,7 +164,33 @@
         "script": "ball_ultra"
        }
       }
-     }
+     },
+     "objects": [
+      {
+       "local_id": 162,
+       "gfx": 116,
+       "x": 22,
+       "y": 19,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_62"
+      },
+      {
+       "local_id": 177,
+       "gfx": 114,
+       "x": 4,
+       "y": 13,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_77"
+      }
+     ]
     },
     "land_encounter": true
    },
@@ -146,7 +220,33 @@
         "script": "ball_carbos"
        }
       }
-     }
+     },
+     "objects": [
+      {
+       "local_id": 113,
+       "gfx": 45,
+       "x": 12,
+       "y": 6,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_113"
+      },
+      {
+       "local_id": 100,
+       "gfx": 28,
+       "x": 15,
+       "y": 8,
+       "elev": 3,
+       "movement": 9,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_200"
+      }
+     ]
     },
     "land_encounter": true
    },
@@ -186,6 +286,32 @@
        "var": 16537,
        "value": 0,
        "script": "to_summit"
+      }
+     ],
+     "objects": [
+      {
+       "local_id": 154,
+       "gfx": 118,
+       "x": 8,
+       "y": 17,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_454"
+      },
+      {
+       "local_id": 155,
+       "gfx": 122,
+       "x": 18,
+       "y": 18,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_455"
       }
      ]
     },
@@ -874,6 +1000,190 @@
       57,
       240
      ]
+    }
+   ]
+  },
+  {
+   "id": 48,
+   "name": "Ruben",
+   "class": 65,
+   "pic": 67,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 75,
+     "level": 43
+    },
+    {
+     "species": 112,
+     "level": 44
+    },
+    {
+     "species": 339,
+     "level": 43
+    }
+   ]
+  },
+  {
+   "id": 49,
+   "name": "Skylar",
+   "class": 79,
+   "pic": 104,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 85,
+     "level": 44
+    },
+    {
+     "species": 227,
+     "level": 45
+    },
+    {
+     "species": 18,
+     "level": 45
+    }
+   ]
+  },
+  {
+   "id": 62,
+   "name": "Kenji",
+   "class": 80,
+   "pic": 105,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 57,
+     "level": 46
+    },
+    {
+     "species": 68,
+     "level": 47
+    },
+    {
+     "species": 237,
+     "level": 46
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "name": "Isolde",
+   "class": 75,
+   "pic": 100,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 65,
+     "level": 47
+    },
+    {
+     "species": 348,
+     "level": 46
+    },
+    {
+     "species": 349,
+     "level": 46
+    },
+    {
+     "species": 97,
+     "level": 47
+    }
+   ]
+  },
+  {
+   "id": 113,
+   "name": "Dag",
+   "class": 68,
+   "pic": 93,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 208,
+     "level": 49
+    },
+    {
+     "species": 76,
+     "level": 48
+    },
+    {
+     "species": 219,
+     "level": 48
+    }
+   ]
+  },
+  {
+   "id": 200,
+   "name": "Falk",
+   "class": 79,
+   "pic": 104,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 22,
+     "level": 49
+    },
+    {
+     "species": 227,
+     "level": 50
+    },
+    {
+     "species": 85,
+     "level": 49
+    }
+   ]
+  },
+  {
+   "id": 454,
+   "name": "Draco",
+   "class": 33,
+   "pic": 45,
+   "music": 5,
+   "ai": 1,
+   "party": [
+    {
+     "species": 148,
+     "level": 52
+    },
+    {
+     "species": 230,
+     "level": 53
+    },
+    {
+     "species": 334,
+     "level": 52
+    }
+   ]
+  },
+  {
+   "id": 455,
+   "name": "Verena",
+   "class": 86,
+   "pic": 22,
+   "music": 3,
+   "ai": 1,
+   "party": [
+    {
+     "species": 248,
+     "level": 54
+    },
+    {
+     "species": 197,
+     "level": 54
+    },
+    {
+     "species": 94,
+     "level": 54
+    },
+    {
+     "species": 400,
+     "level": 56
     }
    ]
   }

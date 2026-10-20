@@ -317,12 +317,16 @@ def add_trainers(rom, pool, trainers):
         name = mt.encode_en(t["name"]).rstrip(b"\xff") + b"\xff"
         assert len(name) <= 12
         items = (list(t.get("items", [])) + [0] * 4)[:4]
-        ent = struct.pack("<BBBB", 3, t["class"], t.get("music", 0x0A), t["pic"]) + name.ljust(12, b"\x00")
+        custom = all("moves" in m for m in t["party"])   # else: default moves, 8-byte party entries
+        ent = struct.pack("<BBBB", 3 if custom else 0, t["class"], t.get("music", 0x0A), t["pic"]) + name.ljust(12, b"\x00")
         ent += struct.pack("<4HIIII", *items, t.get("double", 0), t.get("ai", 7), len(t["party"]), 0)
         party = b""
         for m in t["party"]:
-            mv = (list(m["moves"]) + [0] * 4)[:4]
-            party += struct.pack("<HBBHH4H", m.get("iv", 255), m["level"], 0, m["species"], m.get("item", 0), *mv)
+            if custom:
+                mv = (list(m["moves"]) + [0] * 4)[:4]
+                party += struct.pack("<HBBHH4H", m.get("iv", 255), m["level"], 0, m["species"], m.get("item", 0), *mv)
+            else:
+                party += struct.pack("<HBBHH", m.get("iv", 128), m["level"], 0, m["species"], 0)
         pa = pool.alloc_aligned(len(party))
         rom[pa:pa + len(party)] = party
         ent = ent[:36] + struct.pack("<I", ROM_BASE + pa)
