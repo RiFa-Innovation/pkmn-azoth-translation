@@ -19,7 +19,13 @@ Event dicts (all ints; script/ptr fields are ROM addresses 0x08xxxxxx or 0):
 The gMapGroups table (0xB3B100) has two spare slots (58, 59) filled with 0xF7F7F7F7.
 """
 import json
+import os
 import struct
+import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+import mercury_text as mt  # noqa: E402
+import scrasm  # noqa: E402
 
 GROUP_TABLE = 0xB3B100
 ROM_BASE = 0x08000000
@@ -61,18 +67,46 @@ PACK = {"objects": pack_object, "warps": pack_warp, "coords": pack_coord, "bgs":
 ORDER = ("objects", "warps", "coords", "bgs")   # counts at +0..+3, pointers at +4,+8,+12,+16
 
 
+SCRIPT_AT = {"objects": 16, "coords": 12, "bgs": 8}
+
+
+def _edit(kind, entry, ed):
+    e = bytearray(entry)
+    if kind == "warps":
+        if "to" in ed:
+            g, n = (int(x) for x in ed["to"].split("."))
+            e[6], e[7] = n, g
+        if "warp_id" in ed:
+            e[5] = ed["warp_id"]
+        if "x" in ed:
+            e[0:2] = struct.pack("<h", ed["x"])
+        if "y" in ed:
+            e[2:4] = struct.pack("<h", ed["y"])
+    if "script" in ed:
+        e[SCRIPT_AT[kind]:SCRIPT_AT[kind] + 4] = struct.pack("<I", ed["script"])
+    if "flag" in ed and kind == "objects":
+        e[20:22] = struct.pack("<H", ed["flag"])
+    return bytes(e)
+
+
 def build_events(rom, pool, ev_off, add):
-    """Return a new events struct offset: old arrays copied with `add` entries appended."""
+    """Return a new events struct offset: old arrays copied (with optional `edit`) and `add` appended."""
     counts = list(rom[ev_off:ev_off + 4]) if ev_off else [0, 0, 0, 0]
     ptrs = [u32(rom, ev_off + 4 + 4 * i) for i in range(4)] if ev_off else [0] * 4
+    edits = add.get("edit", {})
     out_ptrs = []
     for i, kind in enumerate(ORDER):
-        old = rom[ptrs[i] - ROM_BASE:ptrs[i] - ROM_BASE + counts[i] * SIZES[kind]] if ptrs[i] else b""
-        new = b"".join(PACK[kind](e) for e in add.get(kind, []))
-        blob = old + new
-        counts[i] += len(add.get(kind, []))
+        sz = SIZES[kind]
+        o = ptrs[i] - ROM_BASE if ptrs[i] else 0
+        old = [bytes(rom[o + k * sz:o + (k + 1) * sz]) for k in range(counts[i])] if ptrs[i] else []
+        for idx, ed in edits.get(kind, {}).items():
+            assert len(old[int(idx)]) == sz, (kind, idx, ev_off, ptrs, counts, len(old[int(idx)]))
+            old[int(idx)] = _edit(kind, old[int(idx)], ed)
+        new = [PACK[kind](e) for e in add.get(kind, [])]
+        blob = b"".join(old + new)
+        counts[i] += len(new)
         assert counts[i] < 256, f"too many {kind}"
-        if blob:
+        if blob and (new or edits.get(kind)):
             a = pool.alloc_aligned(len(blob))
             rom[a:a + len(blob)] = blob
             out_ptrs.append(ROM_BASE + a)
@@ -91,10 +125,18 @@ def build_script(sc):
     return bytes.fromhex(sc["hex"])
 
 
+class _Any(dict):
+    def __getitem__(self, k):
+        return 0
+
+
 def _resolve_scripts(spec, scripts):
     def fix(ev):
         for key in ("objects", "coords", "bgs"):
             for e in ev.get(key, []):
+                if isinstance(e.get("script"), str):
+                    e["script"] = scripts[e["script"]]
+            for e in ev.get("edit", {}).get(key, {}).values():
                 if isinstance(e.get("script"), str):
                     e["script"] = scripts[e["script"]]
     for m in spec.get("append_events", []):
@@ -109,11 +151,28 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
     report = {"maps": 0, "bytes": 0}
     before = pool.total()
     scripts = {}
-    for name, sc in spec.get("scripts", {}).items():
+    widths = bytes(src[mt.WIDTHS_OFF:mt.WIDTHS_OFF + 256])
+
+    def store(b):
+        b = b if b.endswith(b"\xff") else b + b"\xff"
+        a = pool.alloc_aligned(len(b))
+        rom[a:a + len(b)] = b
+        return ROM_BASE + a
+
+    plain = {n: sc for n, sc in spec.get("scripts", {}).items() if "asm" not in sc}
+    asm = {n: sc for n, sc in spec.get("scripts", {}).items() if "asm" in sc}
+    for name, sc in plain.items():
         code = build_script(sc)
         a = pool.alloc_aligned(len(code))
         rom[a:a + len(code)] = code
         scripts[name] = ROM_BASE + a
+    sizes = {n: len(scrasm.assemble(sc["asm"], 0, widths, _Any(), lambda b: 0)) for n, sc in asm.items()}
+    for name in asm:
+        scripts[name] = ROM_BASE + pool.alloc_aligned(sizes[name])
+    for name, sc in asm.items():
+        code = scrasm.assemble(sc["asm"], scripts[name], widths, scripts, store)
+        a = scripts[name] - ROM_BASE
+        rom[a:a + len(code)] = code
     _resolve_scripts(spec, scripts)
     # appended events on existing maps: build a fresh events struct and repoint the header (+4)
     for item in spec.get("append_events", []):

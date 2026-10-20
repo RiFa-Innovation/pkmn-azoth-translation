@@ -41,6 +41,12 @@ def run_script(e, code):
     e.write(RUNNING, bytes(4))
 
 
+def set_flag(e, flag):
+    """Set a flag through the game's own setflag command (hack flags >= 0x900 live outside SaveBlock1+0xEE0)."""
+    run_script(e, bytes([0x29]) + struct.pack("<H", flag) + bytes([0x02]))
+    e.wait(20)
+
+
 def warp(e, g, n, x, y, wait=90):
     run_script(e, bytes([0x39, g, n, 0xFF]) + struct.pack("<HH", x, y) + bytes([0x27, 0x02]))
     e.wait(wait)

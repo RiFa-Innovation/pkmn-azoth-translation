@@ -127,3 +127,16 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
 - Finding: a warp event on a plain tile does nothing (FireRed needs a door/stairs/cave metatile behaviour);
   use a coord event + `warp` script until a real door metatile is placed.
 - The prototype warp tile on Route 26 `(14,10)` is a dev hook, not for release.
+
+**2026-10-20, entrance wired (this branch)**
+- `55.1` is the Route 26 gatehouse. Its west door at `(1,6)` was an unfinished placeholder (warp to `0.0`,
+  impassable red mat at `(0,6)`, plain floor behaviour), and the west guard blocks `x=7` with "Ahead is Mt. Silver…".
+- Now: guard coord events (`0x087BE5AF`) pass when flag `0x14DB` (Champion, checked by Mom's Ashida scene) is
+  set; the guard talks differently; a new coord event at `(1,6)` warps to `58.0` (needs the same flag).
+  `58.0` has a real door warp back to `55.1`. Verified in the emulator both ways; without the flag nothing warps.
+- New tools: `scripts/scrasm.py` (script assembler with `say "text"`, labels, `warp G.N X Y`),
+  `mapedit.py` event edits (`edit`: retarget warps / coord / object scripts) and `mapdrive.py set_flag`.
+- Lessons: a coord script that ends with plain `end` freezes input (needs `releaseall`); first button press after a
+  warp only turns the player; hack flags >= 0x900 must be set through the game's own `setflag`, not by poking RAM.
+- Bug fixed on the way: `store()` slice-assignment of a string that already ended in `0xFF` shrank the ROM by a byte;
+  always assign equal-length slices.
