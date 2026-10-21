@@ -94,6 +94,81 @@ def main():
             print(f"   special var {0x8000 + nidx:#x} = {u16(e, SPV + 2 * nidx)}", "result", u16(e, SPV + 0x18))
         elif tok == "cursor":
             print("   party cursor slotId", struct.unpack("<b", e.read(0x0203B0A0 + 9, 1))[0], "raw gPartyMenu", e.read(0x0203B0A0, 20).hex(), "cb2", hex(struct.unpack("<I", e.read(CB2, 4))[0]))
+        elif tok.startswith("hijack:"):          # while a battle runs, point the paused script at `goto <generated script>` so it resumes there
+            import json
+            addr = int(json.load(open(f"{RIVER}/build/insert_report.json"))["new_maps"]["frontier"]["scripts"][tok[7:]], 16)
+            for _ in range(80):
+                if struct.unpack("<I", e.read(CB2, 4))[0] == 0x08011101:
+                    break
+                e.wait(15)
+            else:
+                print("   hijack: never saw the battle")
+            e.write(SCRIPT, bytes([0x05]) + struct.pack("<I", addr))
+            e.write(CTX + 8, struct.pack("<I", SCRIPT))
+            print("   hijacked the paused script ->", tok[7:])
+        elif tok.startswith("give:"):            # give one of each item id in A-B (fills the Bag pockets) with the game's own additem
+            a_, b_ = (int(v) for v in tok[5:].split("-"))
+            code = b"".join(bytes([0x44]) + struct.pack("<HH", i, 1) for i in range(a_, b_ + 1)) + bytes([0x02])
+            e.write(0x0203F000, code)
+            inject(bytes([0x05]) + struct.pack("<I", 0x0203F000))
+            e.wait(60)
+        elif tok.startswith("flag:"):             # set a story flag with the game's own setflag
+            fl = int(tok[5:], 0)
+            inject(bytes([0x29]) + struct.pack("<H", fl) + bytes([0x02]))
+        elif tok == "block":                      # the generated opponent block in RAM: species, level, item, moves
+            n = hackvar(e, VARS["MODE"])
+            cnt = 4 if n == 2 else 3
+            blk = e.read(0x02022400, 16 * cnt)
+            print("   opponent block:", [(struct.unpack_from("<H", blk, 16 * i + 4)[0], blk[16 * i + 2], struct.unpack_from("<H", blk, 16 * i + 6)[0]) for i in range(cnt)])
+        elif tok.startswith("climb:"):            # smart lazy player: climb:N[:until=0x5123=14][:strong][:stop0]
+            parts = tok[6:].split(":")
+            nmax = int(parts[0])
+            opts = parts[1:]
+            until = next((o[6:] for o in opts if o.startswith("until=")), None)
+            for it in range(nmax):
+                if "strong" in opts:             # raise the generated opponent: legendary at Lv 100 with strong attacks
+                    for i in range(4):
+                        base = 0x02022400 + 16 * i
+                        e.write(base + 2, bytes([100]))
+                        e.write(base + 4, struct.pack("<H", 150))
+                        e.write(base + 8, struct.pack("<4H", 94, 247, 58, 85))
+                if "stop0" in opts and hackvar(e, VARS["STATE"]) == 0:
+                    print("   challenge ended (STATE 0) after", it, "iterations")
+                    break
+                if until:
+                    vv, val = until.split("=")[0:2] if until.count("=") == 1 else (until.split("=")[0], until.split("=")[1])
+                    if hackvar(e, int(vv, 0)) == int(val, 0):
+                        print("   reached", until, "after", it, "iterations")
+                        break
+                cb = struct.unpack("<I", e.read(CB2, 4))[0]
+                if cb == 0x08137EE9:
+                    e.press("B", hold=3, release=6)
+                    e.wait(40)
+                elif cb == 0x0811EBA1 and e.read(COUNT, 1)[0]:
+                    cnt = e.read(COUNT, 1)[0]
+                    hp = [u16(e, PARTY + 100 * i + 0x56) for i in range(cnt)]
+                    alive = [i for i in range(cnt) if hp[i] > 0]
+                    if not alive:
+                        e.press("B", hold=3, release=6)
+                        e.wait(40)
+                        continue
+                    t = alive[0]
+                    for _ in range(14):
+                        c = struct.unpack("<b", e.read(0x0203B0A0 + 9, 1))[0]
+                        if c == t:
+                            break
+                        key = "Down" if c // 2 < t // 2 else "Up" if c // 2 > t // 2 else "Right" if c % 2 < t % 2 else "Left"
+                        e.press(key, hold=3, release=6)
+                        e.wait(12)
+                    e.press("A", hold=3, release=6)
+                    e.wait(25)
+                    e.press("A", hold=3, release=6)
+                    e.wait(60)
+                else:
+                    e.press("A", hold=3, release=6)
+                    e.wait(50)
+            else:
+                print("   climb loop used all", nmax, "iterations")
         elif tok.startswith("pick:"):            # in the party menu: move the cursor (gPartyMenu.slotId at +9) to slot N and press A
             t = int(tok[5:])
             for _ in range(60):                  # wait until the party menu is up, then let it settle

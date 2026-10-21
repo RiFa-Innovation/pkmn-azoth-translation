@@ -171,10 +171,7 @@ def build_scripts():
         copyvar $PERM_HI 0x8006
         setvar $MODE {mode}
         setvar $STREAK 0
-        random 65535
-        copyvar $SEED_LO 0x800D
-        random 65535
-        copyvar $SEED_HI 0x800D
+        call @fr_make_seed
         setvar $STATE 1
         say "Your party is set to Lv 50. Floor one is Red: warm hands, warm hearts.{{FB}}Up you go!"
         goto @fr_to_arena
@@ -183,6 +180,33 @@ def build_scripts():
         release
         end
         """)
+
+    # --- challenge seed: this hack's `random 65535` is badly skewed (mostly < 25), so each 16-bit half is random(256) + 256 * random(256)
+    A("fr_make_seed", """
+        random 256
+        copyvar $SEED_LO 0x800D
+        random 256
+        copyvar $TMP 0x800D
+        lo_loop:
+        compare_var_to_value $TMP 0
+        goto_if 1 lo_done
+        subvar $TMP 1
+        addvar $SEED_LO 256
+        goto lo_loop
+        lo_done:
+        random 256
+        copyvar $SEED_HI 0x800D
+        random 256
+        copyvar $TMP 0x800D
+        hi_loop:
+        compare_var_to_value $TMP 0
+        goto_if 1 hi_done
+        subvar $TMP 1
+        addvar $SEED_HI 256
+        goto hi_loop
+        hi_done:
+        return
+    """)
 
     # --- floor index (STREAK mod 7 -> TMP), shared
     A("fr_floor_idx", """
