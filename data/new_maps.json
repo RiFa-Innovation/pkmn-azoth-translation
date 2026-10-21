@@ -35,7 +35,7 @@
    "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
   },
   "red_talk": {
-   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\" after\nafter:\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend"
+   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\" after\nafter:\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\ncompare_var_to_value 0x5108 13\ngoto_if 4 calm\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend\ncalm:\nsay \"... ...{FB}The rainbow is gone, but Red is still looking at the place where it was.{FB}For the first time, he's smiling.\"\nend"
   },
   "to_summit": {
    "asm": "lockall\nsay \"A bitter wind blows down from above...\"\nwarp 58.4 49 50\nwaitstate\nend"
@@ -101,7 +101,7 @@
    "asm": "compare_var_to_value 0x5108 5\ngoto_if 1 show\nsetflag 0x1356\ngoto @orig_52_5_transition\nshow:\nclearflag 0x1356\ngoto @orig_52_5_transition"
   },
   "ch2_library": {
-   "asm": "lockall\nsetvar 0x5108 6\nsetflag 0x1347\nsetflag 0x1348\nsay \"Tamao: Champion. Thank you for coming.{FB}The Priestess of Ecruteak left a document. It has never been opened.\"\nsay \"Morty: Our records say only the youngest of the Kimono sisters may read it.{FB}And the youngest...\"\nsay \"Tamao: ...is Sange. And Sange is gone. So it stayed sealed, all these years.\"\nfadescreen 1\nplaymoncry 251 0\ndelay 30\nfadescreen 0\nsay \"A faint flute drifts through the archive, from nowhere. The seal on the document loosens as the Key Stone warms.\"\nsay \"Tamao: It's opening. It's... a score. And a note in the margin.\"\nsay \"'To the one who carries my letter.{FB}Play this together, all of you, and leave my place empty. That is the promise.'{FB}'-Sange, Priestess of Ecruteak'\"\nsay \"Tamao: That handwriting. I would know it anywhere.{FB}The Priestess wasn't a stranger. She was Sange.\"\nsay \"Morty: She never left the story. She went back and wrote it.{FB}A hundred and fifty years of people played her song without knowing whose it was.\"\nsay \"Tamao: My sisters and I will learn every note.{FB}When you need us, send word. We will play wherever the stones are listening.\"\nreleaseall\nend"
+   "asm": "lockall\nsetvar 0x5108 6\nsetflag 0x1347\nsetflag 0x1348\nsay \"Tamao: Champion. Thank you for coming.{FB}The Priestess of Ecruteak left a document. It has never been opened.\"\nsay \"Morty: Our records say only the youngest of the Kimono sisters may read it.{FB}And the youngest...\"\nsay \"Tamao: ...is Sange. And Sange is gone. So it stayed sealed, all these years.\"\nfadescreen 1\nplaymoncry 251 0\ndelay 30\nfadescreen 0\nremoveobject 82\nsay \"A faint flute drifts through the archive, from nowhere. The seal on the document loosens as the Key Stone warms.\"\nsay \"Tamao: It's opening. It's... a score. And a note in the margin.\"\nsay \"'To the one who carries my letter.{FB}Play this together, all of you, and leave my place empty. That is the promise.'{FB}'-Sange, Priestess of Ecruteak'\"\nsay \"Tamao: That handwriting. I would know it anywhere.{FB}The Priestess wasn't a stranger. She was Sange.\"\nsay \"Morty: She never left the story. She went back and wrote it.{FB}A hundred and fifty years of people played her song without knowing whose it was.\"\nsay \"Tamao: My sisters and I will learn every note.{FB}When you need us, send word. We will play wherever the stones are listening.\"\nreleaseall\nend"
   },
   "ch2_whirl_tr": {
    "asm": "compare_var_to_value 0x5108 6\ngoto_if 1 show\nsetflag 0x1357\ngoto @orig_55_14_transition\nshow:\nclearflag 0x1357\ngoto @orig_55_14_transition"
@@ -135,6 +135,12 @@
   },
   "ch2_navel": {
    "asm": "lockall\nsetvar 0x5108 13\nsetflag 0x134e\nsay \"The summit hall is quiet. Wind from the open sea moves through the cave like slow breath.\"\nfadescreen 3\ndelay 20\nplaymoncry 249 0\nwaitmoncry\nfadescreen 0\nsay \"High above the hall, two shapes cross against the light. One is white and silver. One is red and gold.{FB}Lugia, and Ho-Oh.\"\nplaymoncry 250 0\nwaitmoncry\nsay \"They circle together once. Where their paths cross, a rainbow stretches across the whole sea, clear down to the horizon.\"\nsay \"You think of a letter that began: 'By the time you read this, I will no longer be in this world.'{FB}'Go and share that happiness. Please, live well.'\"\nsay \"A bell rings once, far away. The rainbow holds a moment longer than it should.\"\nreleaseall\nend"
+  },
+  "ch2_navel_hall_tr": {
+   "asm": "compare_var_to_value 0x5108 12\ngoto_if 1 show\nsetflag 0x1360\ngoto @orig_2_55_transition\nshow:\nclearflag 0x1360\ngoto @orig_2_55_transition"
+  },
+  "ch2_elm_end": {
+   "asm": "lockall\nsetvar 0x5108 14\nsetflag 0x134f\nturnobject 1 1\nsay \"Elm: Welcome home, {FD:01}.{FB}The signal is gone. 3:07 goes by in silence now. Buena says so, too.\"\nsay \"Elm: Reports of a rainbow over the sea all describe one afternoon. Navel Rock.{FB}I think you were there.\"\nsay \"Elm: Something odd is happening, too. A melody is turning up in places it has no business being.{FB}A lullaby in Cherrygrove. A whistle in the Radio Tower. Nobody knows who started it.\"\nsay \"Elm: You didn't carry that alone.{FB}That's what changed everything.\"\nsay \"~ Pok\u00e9mon Azoth: Second Chapter, Rainbow ~{FB}The end of this chapter.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -455,6 +461,14 @@
      "var": 20744,
      "value": 0,
      "script": "ch2_elm"
+    },
+    {
+     "x": 5,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 13,
+     "script": "ch2_elm_end"
     }
    ]
   },
@@ -547,7 +561,7 @@
     },
     {
      "local_id": 45,
-     "gfx": 136,
+     "gfx": 146,
      "x": 8,
      "y": 17,
      "elev": 3,
@@ -735,6 +749,15 @@
      "elev": 3,
      "movement": 8,
      "flag": 4950
+    },
+    {
+     "local_id": 82,
+     "gfx": 5,
+     "x": 4,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4950
     }
    ],
    "coords": [
@@ -769,7 +792,7 @@
    "objects": [
     {
      "local_id": 90,
-     "gfx": 87,
+     "gfx": 142,
      "x": 5,
      "y": 4,
      "elev": 3,
@@ -878,7 +901,7 @@
     },
     {
      "local_id": 98,
-     "gfx": 136,
+     "gfx": 146,
      "x": 12,
      "y": 13,
      "elev": 3,
@@ -1054,6 +1077,26 @@
      "var": 20744,
      "value": 12,
      "script": "ch2_navel"
+    }
+   ],
+   "objects": [
+    {
+     "local_id": 130,
+     "gfx": 157,
+     "x": 10,
+     "y": 4,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4960
+    },
+    {
+     "local_id": 131,
+     "gfx": 205,
+     "x": 19,
+     "y": 4,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4960
     }
    ]
   }
@@ -2152,6 +2195,52 @@
   {
    "map": "2.0",
    "on_transition": "ch2_navel_tr"
+  },
+  {
+   "map": "2.55",
+   "on_transition": "ch2_navel_hall_tr"
+  }
+ ],
+ "overworld_sprites": [
+  {
+   "gfx_id": 142,
+   "bank_key": "objgfx/npc/giovanni",
+   "w": 16,
+   "template": 5,
+   "source": "firered"
+  },
+  {
+   "gfx_id": 146,
+   "bank_key": "objgfx/npc/frontier-brains-anabel",
+   "w": 16,
+   "template": 5
+  },
+  {
+   "gfx_id": 157,
+   "bank_key": "objgfx/species/lugia",
+   "w": 64,
+   "template": 207,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
+  },
+  {
+   "gfx_id": 205,
+   "bank_key": "objgfx/species/ho-oh",
+   "w": 64,
+   "template": 207,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
+  },
+  {
+   "gfx_id": 5,
+   "bank_key": "objgfx/species/celebi",
+   "w": 32,
+   "template": 72,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
   }
  ]
 }

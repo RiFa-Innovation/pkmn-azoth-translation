@@ -25,6 +25,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import mercury_text as mt  # noqa: E402
+import owgfx  # noqa: E402
 import scrasm  # noqa: E402
 
 GROUP_TABLE = 0xB3B100
@@ -233,6 +234,8 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         rom[a:a + len(b)] = b
         return ROM_BASE + a
 
+    if spec.get("overworld_sprites"):
+        report["overworld_sprites"] = owgfx.install(rom, src, pool, spec["overworld_sprites"])
     end_script = None
     for ms in spec.get("map_scripts", []):
         g, n = (int(x) for x in ms["map"].split("."))

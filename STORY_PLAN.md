@@ -449,3 +449,8 @@ Things only you can supply or confirm (the tooling cannot):
    porting their own work to pokeemerald-expansion); and permission/credit wording for a public release.
 9. **Testing the unknowns**: play a real run through beats 1-13 and report: trigger positions that are missed, NPC overlap, dialogue
    box wrapping, sprite looks, and anything that breaks existing scenes (for example the Ecruteak theatre now shows four dancers).
+- **Beat 14 built:** Elm's lab scene at `CH2_STAGE == 13` (signal gone, the Navel Rock rainbow report, the melody turning up in odd places,
+  "you didn't carry that alone", chapter-end card), sets `CH2_DONE` (`0x134F`) and `CH2_STAGE = 14`; Red's repeat line changes at stage 13+.
+- **Sprites from the bank** (`~/.rhw/bank`, optional at build; not committed): gfx ids `142` Giovanni, `146` Anabel, `157` Lugia,
+  `205` Ho-Oh, `5` Celebi installed by `scripts/owgfx.py` (reserved ids; without the bank the build skips them). Lugia and Ho-Oh now appear in
+  the Navel Rock hall, Celebi in the library. Not yet re-checked: the final BPS round-trip after the sprite fallback edit.
