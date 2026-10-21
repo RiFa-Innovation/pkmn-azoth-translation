@@ -224,8 +224,9 @@ No new map or layout is required.
 
 ## 7. Side content (priority order)
 
-1. Goldenrod Dept. Store 6th-floor lottery: the sixth floor is the **Dept. Store lottery floor**, not the Radio Tower; the
-   "closed to outsiders" text sits on a different floor. Open the lottery floor after beat 8 as a thank-you.
+1. Goldenrod Radio Tower 6th floor (**Goldenrod Cinema**): the tower directory (`50.30`) lists 2F Pokégear R&D, 3F "Pokémon Azoth
+Dev Team", 4F Oreburgh Mine Museum, 5F Pokémon Chat Center, 6F Goldenrod Cinema, and the 6th floor is "closed to outsiders".
+   (An earlier note here confused it with the Dept. Store lottery floor; the two are separate buildings.) Open it after beat 8.
 2. Olivine ferry: reopen after beat 11 (the "engine maintenance" text).
 3. Ruins of Alph: two inscriptions about the old Lugia/Ho-Oh conflict, with Morty (optional).
 4. Alabaster Icelands: Laventon's warning that a time-slip cannot be steered (optional; reuses the existing scene).
@@ -334,3 +335,11 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
 - **Beat 1 built:** a coord trigger at `(5,11)` in Elm's lab (`43.6`), gated by var `0x5108 == 0` and flag `0x14DA` (Ashida
   scene seen). Elm turns, explains the returned signal, sets `CH2_START` (`0x1341`) and `CH2_STAGE = 1`. Verified in the
   emulator (scene plays, var set, no retrigger). Dialogue is a draft for the owner to rewrite.
+
+- **Beat 2 built** in the Radio Tower lobby (`50.23`) rather than an upper floor (the upper floors are not built): when
+  `CH2_STAGE == 1`, Lyra, Buena and Looker stand on the lobby carpet; walking past `x = 7` plays the scene (node glows
+  under the Key Stone, Archer's recording "The stage is set. Take your cue.", Lyra stays with Buena), sets `NODE_A_FOUND`
+  (`0x1342`) and `CH2_STAGE = 2`. The cast is hidden at any other stage by a chained `ON_TRANSITION` script (flag `0x1352`).
+  Verified in the emulator (cast visible at stage 1, hidden at stage 0, scene plays, stage 2 set).
+- **Tooling:** `mapedit` `map_scripts` (hook a map's `ON_TRANSITION` and chain to the original with `goto @orig_G_N_transition`).
+- **Sprites chosen:** Lyra `152`, Buena `125`, Looker `123` (by eye from the overworld sheet; adjust if wrong).

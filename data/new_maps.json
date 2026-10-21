@@ -72,6 +72,12 @@
   },
   "ch2_elm": {
    "asm": "lockall\ncheckflag 0x14da\ngoto_if 0 skip\ncheckflag 0x1341\ngoto_if 1 skip\nsetflag 0x1341\nsetvar 0x5108 1\nturnobject 1 1\nsay \"Elm: Ah, {FD:01}! Come here a moment.{FB}Look at this printout. It's the signal that forced all those wild Pok\u00e9mon to Mega Evolve.{FB}It came back last night. Only four seconds, at 3:07, in the band the old Radio Tower used.{FB}I won't ask you to go. I only want you to know.\"\nsay \"Elm: ...Of course you'll look into it. You always do.{FB}Start at Goldenrod. Buena says her broadcasts have been dropping out every night at the same hour.\"\nreleaseall\nend\nskip:\nreleaseall\nend"
+  },
+  "ch2_radio_tr": {
+   "asm": "compare_var_to_value 0x5108 1\ngoto_if 1 show\nsetflag 0x1352\ngoto @orig_50_23_transition\nshow:\nclearflag 0x1352\ngoto @orig_50_23_transition"
+  },
+  "ch2_radio": {
+   "asm": "lockall\nsetvar 0x5108 2\nsetflag 0x1342\nmove 255 face_right\nsay \"Buena: {FD:01}! You came. Thank goodness.{FB}Every night at 3:07, my broadcast drops out for four seconds. Four seconds of dead air.{FB}I run a radio show. I notice that.\"\nsay \"Looker: International Police. We pulled this from the antenna room.{FB}It's Rocket hardware, but it's wired like no Rocket device I know.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"The device glows with a faint rainbow light as the Key Stone answers it.\"\nsay \"...Champion.{FB}The stage is set. Take your cue.\"\nsay \"Looker: That's Archer's voice. He wasn't planning to defeat you, {FD:01}.{FB}He needs you.\"\nsay \"Lyra: Then I'm staying here with Buena.{FB}Someone has to hold the line while you're out there. Go on.{FB}Call me if anything flickers!\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -392,6 +398,72 @@
      "var": 20744,
      "value": 0,
      "script": "ch2_elm"
+    }
+   ]
+  },
+  {
+   "map": "50.23",
+   "objects": [
+    {
+     "local_id": 40,
+     "gfx": 152,
+     "x": 11,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    },
+    {
+     "local_id": 41,
+     "gfx": 125,
+     "x": 12,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    },
+    {
+     "local_id": 42,
+     "gfx": 123,
+     "x": 13,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 9,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 10,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 12,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
     }
    ]
   }
@@ -1338,6 +1410,12 @@
      24
     ]
    }
+  }
+ ],
+ "map_scripts": [
+  {
+   "map": "50.23",
+   "on_transition": "ch2_radio_tr"
   }
  ]
 }

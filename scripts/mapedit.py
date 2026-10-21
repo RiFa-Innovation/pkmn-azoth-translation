@@ -233,6 +233,24 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         rom[a:a + len(b)] = b
         return ROM_BASE + a
 
+    end_script = None
+    for ms in spec.get("map_scripts", []):
+        g, n = (int(x) for x in ms["map"].split("."))
+        h = header_off(src, g, n)
+        tbl = u32(src, h + 8)
+        orig = 0
+        if tbl:
+            o = tbl - ROM_BASE
+            while src[o]:
+                if src[o] == 3:
+                    orig = u32(src, o + 1)
+                o += 5
+        if not orig:
+            if end_script is None:
+                end_script = ROM_BASE + pool.alloc_aligned(1)
+                rom[end_script - ROM_BASE] = 0x02
+            orig = end_script
+        scripts[f"orig_{g}_{n}_transition"] = orig
     plain = {n: sc for n, sc in spec.get("scripts", {}).items() if "asm" not in sc}
     asm = {n: sc for n, sc in spec.get("scripts", {}).items() if "asm" in sc}
     for name, sc in plain.items():
@@ -248,6 +266,27 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         a = scripts[name] - ROM_BASE
         rom[a:a + len(code)] = code
     _resolve_scripts(spec, scripts)
+    for ms in spec.get("map_scripts", []):
+        g, n = (int(x) for x in ms["map"].split("."))
+        h = header_off(src, g, n)
+        tbl = u32(src, h + 8)
+        entries = []
+        if tbl:
+            o = tbl - ROM_BASE
+            while src[o]:
+                entries.append([src[o], u32(src, o + 1)])
+                o += 5
+        new = scripts[ms["on_transition"]]
+        for e_ in entries:
+            if e_[0] == 3:
+                e_[1] = new
+                break
+        else:
+            entries.append([3, new])
+        blob = b"".join(struct.pack("<BI", t, p) for t, p in entries) + b"\x00"
+        ta = pool.alloc_aligned(len(blob))
+        rom[ta:ta + len(blob)] = blob
+        rom[h + 8:h + 12] = struct.pack("<I", ROM_BASE + ta)
     # appended events on existing maps: build a fresh events struct and repoint the header (+4)
     for item in spec.get("append_events", []):
         g, n = (int(x) for x in item["map"].split("."))
