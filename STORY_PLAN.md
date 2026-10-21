@@ -417,3 +417,35 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   `CH2_ENDING_SEEN` (`0x134D`) and `CH2_STAGE = 12`. The **centre dancer is hidden from stage 11 on** (flag `0x135C`, set by the
   map's transition hook) and a flute object (`101`, flag `0x135D`) stands in her place permanently; Lance and Silver appear
   only at stage 11 (flag `0x135B`). Verified in the emulator, including the reloaded stage (four dancers, empty centre).
+- **Beat 13 built** at Navel Rock (the two maps the ferry would reach). At `CH2_STAGE == 12`: **(A)** on the island dock (`2.0`) Ashida
+  (sprite `140`, flag `0x135E`) explains the ticket and sends the player up the rock (plays once, flag `0x135F`); **(B)** walking up the
+  summit corridor (`2.55`, tile `(14,6)`) plays the epilogue: a white flash, Lugia's and Ho-Oh's cries, "two shapes cross against
+  the light", a rainbow over the whole sea, a callback to Sange's letter, a bell. Sets `NAVEL_ROCK_DONE` (`0x134E`) and
+  `CH2_STAGE = 13`. **No Lugia or Ho-Oh sprite exists in the overworld sprite table** (objects `>= 240` are variable-graphics
+  slots, and the 64x64 sprites are scenery and starters), so the legendaries are only cries, a flash and text. Verified in
+  the emulator with the stage forced; the **ferry route from Vermilion has not been tested** (needs a late save).
+
+## 14. What the owner must provide or verify
+
+Things only you can supply or confirm (the tooling cannot):
+
+1. **A late-game save** (after Chapter 1's Hall of Fame, with the Mystic Ticket and Key Stone): to confirm the Radio Tower lobby
+   state (flag `0x1693`, cast placement), the Vermilion ferry to Navel Rock, and that stages chain correctly in a real run.
+2. **Sprites (images)**: overworld sprites for Lugia, Ho-Oh, Celebi, Giovanni, a flute, the Rainbow Stone ring/shards, Archer, Ashida
+   (floral shirt), Looker and Anabel if the stand-ins are wrong. Each as a 16x32 (people) or 32x32/64x64 (Pokémon) PNG with the
+   game palette; a Red battle portrait with a proper cap if the recoloured one is not good enough.
+3. **Which sprite is which** (identity checks): confirm the stand-ins I chose by eye for Lyra `152`, Buena `125`, Looker `123`,
+   Lance `119`, Silver `129`, Anabel `136`, Dawn `14`, Tamao `31`, other Kimono sister `42`, Morty `183`, Giovanni `87`, Archer `134`,
+   Ariana `72`, Elder `33`, Axel `245`, Ashida `140`.
+4. **Wording**: all dialogue is a draft in a consistent voice; rewrite lines, add your own beats, and decide the tone of Sange's
+   reveal, Lance's apology and Archer's motive. Also decide whether to use named labels ("Giovanni:") or keep him unnamed.
+5. **Design decisions**: whether stages stay strictly linear (the plan wanted an open middle), whether beat 4 should include
+   Clair/Dragon's Den, whether to add the optional rematches (Axel, Lance), and whether Red's rainbow line should point at Navel Rock.
+6. **Music and sound**: all scenes reuse existing fanfares and cries; new themes (Archer, the song, the epilogue) need audio you provide
+   or choose from existing tracks (song ids).
+7. **Mega rewards**: confirm Latias (beat 4) and Diancie (beat 11) are the ones you want; only Kangaskhan, Latias, Audino and Diancie
+   have real Mega forms in the ROM (the other 19 locked entries have none).
+8. **Engine and release plans**: whether this content should ship in the translation patch or stay a separate add-on (the authors are
+   porting their own work to pokeemerald-expansion); and permission/credit wording for a public release.
+9. **Testing the unknowns**: play a real run through beats 1-13 and report: trigger positions that are missed, NPC overlap, dialogue
+   box wrapping, sprite looks, and anything that breaks existing scenes (for example the Ecruteak theatre now shows four dancers).

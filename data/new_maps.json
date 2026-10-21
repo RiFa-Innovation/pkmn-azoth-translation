@@ -126,6 +126,15 @@
   },
   "ch2_theatre": {
    "asm": "lockall\nsetvar 0x5108 12\nsetflag 0x134d\nsay \"The Ecruteak Dance Theater is full tonight. The curtain rises on the Kimono Girls.\"\nsay \"Tamao: Good evening, everyone. Tonight's dance is for someone who isn't here.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"The melody is the one from the archive. Four dancers move through it.{FB}In the center of the stage, one place is left empty. A single flute rests there, waiting.\"\nsay \"Lance: {FD:01}. A title couldn't have done this.{FB}A bond could. I'll try to remember the difference.\"\nsay \"Silver: ...I'm not waiting around for Giovanni's opinion. Or anyone's.{FB}Lance. Next time, watch what I do before you judge me.\"\nsay \"Lance: I will.\"\nsay \"Silver: ...Champion. Thanks. Don't tell anyone I said it.\"\nfadescreen 1\nremoveobject 112\ndelay 20\nfadescreen 0\nsay \"The last note fades, and the theatre stays quiet a moment longer than it should.{FB}Somewhere, very faintly, a flute seems to answer.\"\nreleaseall\nend"
+  },
+  "ch2_navel_tr": {
+   "asm": "compare_var_to_value 0x5108 12\ngoto_if 1 show\nsetflag 0x135e\ngoto @orig_2_0_transition\nshow:\nclearflag 0x135e\ngoto @orig_2_0_transition"
+  },
+  "ch2_ashida": {
+   "asm": "lockall\nonce 0x135f\nsay \"Ashida: Well, well. You actually took the ticket.{FB}I travel the world looking for strong Trainers, Champion. The strong ones always end up where sky and sea currents meet.\"\nsay \"Ashida: Not for the fight. For the quiet.{FB}Go on up the rock. The summit hall is calm today. But it isn't empty.\"\nendonce"
+  },
+  "ch2_navel": {
+   "asm": "lockall\nsetvar 0x5108 13\nsetflag 0x134e\nsay \"The summit hall is quiet. Wind from the open sea moves through the cave like slow breath.\"\nfadescreen 3\ndelay 20\nplaymoncry 249 0\nwaitmoncry\nfadescreen 0\nsay \"High above the hall, two shapes cross against the light. One is white and silver. One is red and gold.{FB}Lugia, and Ho-Oh.\"\nplaymoncry 250 0\nwaitmoncry\nsay \"They circle together once. Where their paths cross, a rainbow stretches across the whole sea, clear down to the horizon.\"\nsay \"You think of a letter that began: 'By the time you read this, I will no longer be in this world.'{FB}'Go and share that happiness. Please, live well.'\"\nsay \"A bell rings once, far away. The rainbow holds a moment longer than it should.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -992,6 +1001,59 @@
      "var": 20744,
      "value": 11,
      "script": "ch2_theatre"
+    }
+   ]
+  },
+  {
+   "map": "2.0",
+   "objects": [
+    {
+     "local_id": 120,
+     "gfx": 140,
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4958
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    },
+    {
+     "x": 9,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    },
+    {
+     "x": 10,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    }
+   ]
+  },
+  {
+   "map": "2.55",
+   "coords": [
+    {
+     "x": 14,
+     "y": 6,
+     "elev": 0,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_navel"
     }
    ]
   }
@@ -2086,6 +2148,10 @@
   {
    "map": "48.5",
    "on_transition": "ch2_theatre_tr"
+  },
+  {
+   "map": "2.0",
+   "on_transition": "ch2_navel_tr"
   }
  ]
 }
