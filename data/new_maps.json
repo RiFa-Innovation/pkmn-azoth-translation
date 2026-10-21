@@ -102,6 +102,12 @@
   },
   "ch2_library": {
    "asm": "lockall\nsetvar 0x5108 6\nsetflag 0x1347\nsetflag 0x1348\nsay \"Tamao: Champion. Thank you for coming.{FB}The Priestess of Ecruteak left a document. It has never been opened.\"\nsay \"Morty: Our records say only the youngest of the Kimono sisters may read it.{FB}And the youngest...\"\nsay \"Tamao: ...is Sange. And Sange is gone. So it stayed sealed, all these years.\"\nfadescreen 1\nplaymoncry 251 0\ndelay 30\nfadescreen 0\nsay \"A faint flute drifts through the archive, from nowhere. The seal on the document loosens as the Key Stone warms.\"\nsay \"Tamao: It's opening. It's... a score. And a note in the margin.\"\nsay \"'To the one who carries my letter.{FB}Play this together, all of you, and leave my place empty. That is the promise.'{FB}'-Sange, Priestess of Ecruteak'\"\nsay \"Tamao: That handwriting. I would know it anywhere.{FB}The Priestess wasn't a stranger. She was Sange.\"\nsay \"Morty: She never left the story. She went back and wrote it.{FB}A hundred and fifty years of people played her song without knowing whose it was.\"\nsay \"Tamao: My sisters and I will learn every note.{FB}When you need us, send word. We will play wherever the stones are listening.\"\nreleaseall\nend"
+  },
+  "ch2_whirl_tr": {
+   "asm": "compare_var_to_value 0x5108 6\ngoto_if 1 show\nsetflag 0x1357\ngoto @orig_55_14_transition\nshow:\nclearflag 0x1357\ngoto @orig_55_14_transition"
+  },
+  "ch2_whirl": {
+   "asm": "lockall\nsetvar 0x5108 7\nsetflag 0x1349\nsay \"Silver: ...Father.\"\nsay \"Giovanni: So you followed the signal, boy. Good. Don't mistake that for concern.{FB}Rocket's name is being used for something I never authorized.\"\nsay \"Silver: You left. You don't get to authorize anything.\"\nsay \"Giovanni: The chamber behind the Whirl Islands waterfall was once ours.{FB}A facility from my years. Its transmitter is still wired to the old dish.{FB}That is all I will give you.\"\nsay \"Giovanni: I won't ask forgiveness. Whatever you do next...{FB}do it for your own reasons.\"\nfadescreen 1\nremoveobject 90\ndelay 20\nfadescreen 0\nsay \"Silver: ...Don't look at me like that.{FB}The Pok\u00e9mon go first. They're the ones being fed into that ring.{FB}What he is to me can wait.\"\nsay \"Silver: Come on. The waterfall chamber is at the bottom of this place.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -728,6 +734,47 @@
      "var": 20744,
      "value": 5,
      "script": "ch2_library"
+    }
+   ]
+  },
+  {
+   "map": "55.14",
+   "objects": [
+    {
+     "local_id": 90,
+     "gfx": 87,
+     "x": 5,
+     "y": 4,
+     "elev": 3,
+     "movement": 10,
+     "flag": 4951
+    },
+    {
+     "local_id": 91,
+     "gfx": 129,
+     "x": 7,
+     "y": 4,
+     "elev": 3,
+     "movement": 9,
+     "flag": 4951
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 6,
+     "elev": 3,
+     "var": 20744,
+     "value": 6,
+     "script": "ch2_whirl"
+    },
+    {
+     "x": 8,
+     "y": 6,
+     "elev": 3,
+     "var": 20744,
+     "value": 6,
+     "script": "ch2_whirl"
     }
    ]
   }
@@ -1722,6 +1769,10 @@
   {
    "map": "52.5",
    "on_transition": "ch2_library_tr"
+  },
+  {
+   "map": "55.14",
+   "on_transition": "ch2_whirl_tr"
   }
  ]
 }

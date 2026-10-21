@@ -371,3 +371,9 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   song). Sets `PRIESTESS_PAGE` (`0x1347`), `SONG_LEARNED` (`0x1348`) and `CH2_STAGE = 6`; cast hidden otherwise (`0x1356`).
   Celebi has no sprite here (only the cry and a screen flash), to avoid adding an object. The stage order is linear
   (beat 5 -> 6) rather than the plan's open middle. Verified in the emulator.
+- **Beat 7 built** in the first Whirl Islands room (`55.14`, the small room behind the entrance door): at `CH2_STAGE == 6`
+  Giovanni (sprite `87`, dark hat, as a silhouetted cameo) and Silver (`129`) wait; stepping in from the door plays the
+  scene (Silver: "...Father."; Giovanni withholds forgiveness, says Rocket's name is being used without his authorization,
+  gives one fact: the waterfall chamber was an old Rocket facility with a transmitter still wired to the dish, then fades
+  out; Silver puts the Pokémon first). Sets `GIOVANNI_SEEN` (`0x1349`) and `CH2_STAGE = 7`; cast hidden otherwise
+  (`0x1357`). Verified in the emulator. No Giovanni overworld sprite was identified in the data, so `87` is a stand-in.
