@@ -250,3 +250,31 @@ mechanic; Sange's page; Silver's choice; Lance's identity.
 - Ecruteak theatre/library maps for the sealed document (beat 6); where the existing "seal" scene lives.
 - A trainer holding Mega Stone `533` actually Mega Evolves in a test battle (existing trainers hold it, so expected).
 - Whirl Islands `55.16`: warps, the sisters' arrival staging, and that the waterfall chamber has room for the ring.
+
+## 10. What the authors' wiki adds (checked 2026-10-20)
+
+Source: `https://sum-light.github.io/azoth-wiki/` (news, items, Pokédex, distribution pages; read through a page
+summariser, and the atlas/map pages did not load, so treat details as approximate).
+
+- **Timeline.** *Mercury FC ~致150年后的你* ("To You, 150 Years Later", the Chapter 1 title, matching Sange's letter) was
+  released 2026-09-28 with 97 side quests. Main Story 1.3.3 (our base) is the latest main-story build (2026-10-08).
+  **No Chapter 2 content has been announced**; the wiki says walkthroughs and key-trainer teams are "planned". The
+  authors' current work is a *Battle Tower Special Edition 3.0* (Battle Tower + Battle Factory) being ported to the
+  **pokeemerald-expansion** engine with Legends Z-A Megas and save transfer through "Mercury HOME".
+- **Megas.** The Pokédex lists 1,432 entries with 50+ Mega entries (e.g. #0869 Mega Venusaur, #0870/#0871 Charizard X/Y,
+  Z-A Megas, Alolan Megas) and separate Gigantamax entries (#1260+). The ROM's own dialogue has 51 species with a
+  "stored X's aura" unlock (Meganium, Typhlosion, Feraligatr, Chandelure, Baxcalibur, Excadrill, Scrafty, Eelektross,
+  Clefable, Raichu, Corviknight, Staraptor, Victreebel, Starmie, Scizor, Alakazam, Gardevoir, Lucario, Garchomp, Tyranitar,
+  Salamence, Gyarados and more). Megas work through **one generic Mega Stone (#533, "Super Stone")** plus a per-species
+  stored aura; it is given by Elm's lab and the Route 30 grandfather. The 19 species-specific stones (#534-#579) exist as items,
+  but no script hands them out; the wiki lists their location as "not confirmed".
+- **What this changes for the plan.**
+  1. Archer's Mega finale needs no new item: any of the 51 aura species can Mega Evolve on a trainer holding `533`
+     (existing trainers already do).
+  2. Rewards should be *auras* (an unlock scene, like the existing ones), not stones. The unused species stones should not be given out.
+  3. Mt. Silver and Red are absent from the wiki's map data. They remain our addition and do not conflict with anything announced.
+  4. **Engine risk.** If the authors move the main game to pokeemerald-expansion, this FireRed-based patch and its
+     content cannot be carried over automatically. Chapter 2 content built here should stay as data (`data/new_maps.json`,
+     scene scripts) so that it can be re-implemented, and should be kept clearly separate from the translation patch.
+  5. The Chapter 1 title ("To You, 150 Years Later") supports the Priestess reveal: the authors themselves frame the story
+     as a message across 150 years.
