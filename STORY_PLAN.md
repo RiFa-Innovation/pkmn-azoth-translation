@@ -343,3 +343,9 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   Verified in the emulator (cast visible at stage 1, hidden at stage 0, scene plays, stage 2 set).
 - **Tooling:** `mapedit` `map_scripts` (hook a map's `ON_TRANSITION` and chain to the original with `goto @orig_G_N_transition`).
 - **Sprites chosen:** Lyra `152`, Buena `125`, Looker `123` (by eye from the overworld sheet; adjust if wrong).
+- **Beat 3 built** in the Indigo Plateau front hall (`13.0`): at `CH2_STAGE == 2` Lance (`119`), Silver (`129`) and Anabel
+  (`136`) wait near the south end; stepping onto row `y = 20` plays the scene (Lance admits he was the cloaked opponent and
+  that he judged a bond like a test result; Silver hands over the relay coil and refuses a pity apology; Anabel flags the
+  Shadow-device pattern), sets `LANCE_CLEARED` (`0x1343`), `SILVER_JOINS` (`0x1344`) and `CH2_STAGE = 3`. Cast hidden at other
+  stages (flag `0x1353`). Verified in the emulator. Sprites are chosen by eye.
+- **Fix:** `mapedit` no longer refuses to edit a map whose events struct is shared (it always copies).

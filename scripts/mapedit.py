@@ -292,9 +292,7 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         g, n = (int(x) for x in item["map"].split("."))
         h = header_off(src, g, n)
         ev = u32(src, h + 4) - ROM_BASE
-        users = [1 for gg in range(58) for nn in range(256)
-                 if _hdr_ev(src, gg, nn) == ev]
-        assert len(users) == 1, f"events of {item['map']} are shared by {len(users)} maps"
+        # events structs may be shared between maps; build_events always copies, so only this header is repointed
         new_ev = build_events(rom, pool, ev, item)
         rom[h + 4:h + 8] = struct.pack("<I", ROM_BASE + new_ev)
     tile_cache = {}
