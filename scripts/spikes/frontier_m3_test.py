@@ -2,7 +2,7 @@
 
     python3 scripts/spikes/frontier_m3_test.py "saves/gets_frozen_after fight_and_convo/Azoth.sav" [ROM]
 
-Run from the main checkout (it needs utilities/mgba and saves/). Builds scripts/frontier_native.s at 0x0203F900, injects it into EWRAM
+Run from the main checkout (it needs utilities/mgba and saves/). Builds the natives (scripts/frontier_native.py) at 0x0203F600, injects it into EWRAM
 and drives it through `callnative`, decoding the party in Python to verify slot order, Lv 50 stats (formula checked against the game's own
 stats at the real level first), the 6-slot save round trip, restoration and idempotence.
 """
@@ -20,7 +20,7 @@ import play  # noqa: E402
 from emu import Emu  # noqa: E402
 import frontier_native as fn  # noqa: E402
 
-BASE = 0x0203F900
+BASE = 0x0203F600
 SCRIPT = 0x0203FF00
 CTX, RUNNING, CB2 = 0x03000EB0, 0x03000EA8, 0x030030F4
 PARTY, COUNT, SPV = 0x02024284, 0x02024029, 0x020370B8
@@ -143,7 +143,19 @@ def main():
     check(res == 0, f"B fr_enter ok (perm LO={lo:#06x} HI={hi:#06x})")
     check(c == 2, f"B party count is 2 (got {c})")
     check(mons[0][:80] == mons0[2][:80] and mons[1][:80] == mons0[0][:80], "B picks moved to the front in pick order")
-    check(mons[2] == mons0[1] and mons[3] == mons0[3] and mons[4:] == mons0[4:], "B the other mons are untouched in slots 2..5")
+    # the unpicked mons are hidden from the party menu: species cleared, the real species parked in the HP field
+    ok = True
+    for slot, orig in ((2, 1), (3, 3)):
+        d = decode(mons[slot])
+        ok &= d["species"] == 0 and d["hp"] == d0[orig]["species"]
+        # only the species, the has-species flag (byte 19) and the HP field (0x56-0x57, the parking spot) may differ
+        ok &= all(mons[slot][i] == mons0[orig][i] for i in range(100) if i not in (19, 32, 33, 0x56, 0x57))
+    ok &= mons[4:] == mons0[4:]
+    if not ok:
+        for slot, orig in ((2, 1), (3, 3)):
+            diff = [(i, mons0[orig][i], mons[slot][i]) for i in range(100) if mons[slot][i] != mons0[orig][i]]
+            print("   slot", slot, "differs from original at (offset, was, now):", diff[:12], "decoded species", decode(mons[slot])["species"], "hp", decode(mons[slot])["hp"], "orig species", d0[orig]["species"])
+    check(ok, "B the unpicked mons are hidden (species 0, real species parked in HP) and otherwise untouched")
     for i in (0, 1):
         d = decode(mons[i])
         check(d["level"] == 50, f"B slot {i} is Lv 50")
@@ -168,6 +180,7 @@ def main():
         same = all(a[k] == d[k] for k in ("pers", "species", "item", "exp", "evs", "ivs", "moves", "level", "stats"))
         check(same, f"D slot {i} back in its original place with the original level, stats, EXP, EVs, IVs and moves")
         check(d["hp"] == d["stats"][0], f"D slot {i} healed")
+        check(mons3[i][19] == mons0[i][19] and mons3[i][:80] == mons0[i][:80] or all(mons3[i][j] == mons0[i][j] for j in range(80) if not (12 <= j - 20 < 12)), f"D slot {i} box data (incl. the has-species flag) is back to the original")
     # E. idempotent
     res, _, hi3 = run(BASE + 4, v5=lo, v6=0)
     b4, c4, _ = party()

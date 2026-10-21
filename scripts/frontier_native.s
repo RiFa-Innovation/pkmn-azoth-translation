@@ -16,15 +16,7 @@
 
 .syntax unified
 .thumb
-.global _start
-_start:                         @ jump table: +0 fr_enter, +4 fr_leave, +8 fr_heal (each entry is a `b`)
-    b fr_enter
-    nop
-    b fr_leave
-    nop
-    b fr_heal_entry
-    nop
-
+.global fr_enter, fr_leave, fr_heal_entry
 
 .macro jlt t
     bge 9999f
@@ -321,6 +313,40 @@ fr_enter:
     ldr r0, [sp, #8]
     cmp r4, r0
     blt 6b
+    @ hide the unpicked Pokemon: the party menu lists every occupied slot, so park each one's species in its (unused) HP field and clear
+    @ the species; fr_leave puts it back before the engine recalculation. Slots that were already empty have HP 0 and stay empty.
+    ldr r4, [sp, #8]
+20: cmp r4, #6
+    bge 22f
+    movs r5, #MON_SIZE
+    muls r5, r4
+    ldr r2, =gPlayerParty
+    adds r5, r5, r2
+    adds r0, r5, #0
+    movs r1, #11
+    movs r2, #0
+    ldr r3, =GetMonData
+    bl call_r3
+    cmp r0, #0
+    beq 21f
+    str r0, [sp, #36]
+    adds r0, r5, #0
+    movs r1, #57                 @ MON_DATA_HP := species
+    mov r2, sp
+    adds r2, #36
+    ldr r3, =SetMonData
+    bl call_r3
+    movs r0, #0
+    str r0, [sp, #36]
+    adds r0, r5, #0
+    movs r1, #11                 @ MON_DATA_SPECIES := 0
+    mov r2, sp
+    adds r2, #36
+    ldr r3, =SetMonData
+    bl call_r3
+21: adds r4, #1
+    b 20b
+22:
     @ truncate the party and heal it
     ldr r0, [sp, #8]
     ldr r1, =gPlayerPartyCount
@@ -417,6 +443,36 @@ fr_leave:
     ldr r0, [sp, #32]
     ldr r3, =Free
     bl call_r3
+    @ bring the parked species back (see fr_enter) before the engine recalculation
+    movs r4, #0
+30: movs r5, #MON_SIZE
+    muls r5, r4
+    ldr r2, =gPlayerParty
+    adds r5, r5, r2
+    adds r0, r5, #0
+    movs r1, #11
+    movs r2, #0
+    ldr r3, =GetMonData
+    bl call_r3
+    cmp r0, #0
+    bne 31f
+    adds r0, r5, #0
+    movs r1, #57                 @ the parked species
+    movs r2, #0
+    ldr r3, =GetMonData
+    bl call_r3
+    cmp r0, #0
+    beq 31f
+    str r0, [sp, #36]
+    adds r0, r5, #0
+    movs r1, #11
+    mov r2, sp
+    adds r2, #36
+    ldr r3, =SetMonData
+    bl call_r3
+31: adds r4, #1
+    cmp r4, #6
+    blt 30b
     @ engine recalculation (level from EXP) for every occupied slot
     movs r4, #0
 13: movs r5, #MON_SIZE

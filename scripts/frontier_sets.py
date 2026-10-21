@@ -627,13 +627,26 @@ def load_brains(ctx):
     return out, errs, warns
 
 
-def pack(ctx, sets):
+def pack(ctx, sets, header=False):
+    """24-byte records. With header=True the records are sorted by tier and prefixed with a 20-byte index for the native generator:
+    u16 total, u16 tier_start[4], u16 tier_count[4], u16 reserved (tiers 1..4; start counts records, not bytes)."""
     spread_ids = {n: i for i, n in enumerate(sorted(ctx.pool["spreads"]))}
+    ordered = sorted(sets, key=lambda st: (st["tier"], st["id"])) if header else list(sets)
     blob = bytearray()
-    for st in sets:
+    for st in ordered:
         mv = (st["moves"] + [0] * 4)[:4]
         md = (st["moves_d"] + [0] * 4)[:4]
         blob += struct.pack("<HH4H4HBBBB", st["id"], st["item"], *mv, *md, spread_ids[st["spread"]], st["ability_slot"], st["tier"], st["flags"])
+    if header:
+        starts, counts, pos = [], [], 0
+        for t in (1, 2, 3, 4):
+            c = sum(1 for st in ordered if st["tier"] == t)
+            starts.append(pos)
+            counts.append(c)
+            pos += c
+        hdr = struct.pack("<H4H4HH", len(ordered), *starts, *counts, 0)
+        assert len(hdr) == 20
+        return hdr + bytes(blob), spread_ids
     return bytes(blob), spread_ids
 
 
@@ -680,7 +693,7 @@ def main():
     errs += berrs
     warns += bwarns
     species = {st["id"] for st in sets}
-    blob, spread_ids = pack(ctx, sets)
+    blob, spread_ids = pack(ctx, sets, header=True)
     print(f"brains: " + ", ".join(f"{k} {len(v)}" for k, v in brains.items()))
     for w in bwarns:
         print("  WARN", w)

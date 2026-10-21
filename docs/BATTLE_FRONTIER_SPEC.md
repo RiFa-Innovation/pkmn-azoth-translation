@@ -146,7 +146,9 @@ Do **not** copy the party to a backup area. The design that survived contact wit
   for every party member before trusting it (test A) and matched exactly.
 - **Scale out is stateless:** `CalculateMonStats` (level from EXP, stats from level) puts the true values back, followed by `HealPlayerParty`.
   Nothing about the original levels is stored. EXP is never touched, and facility battles give none (6.4).
-- **Truncate and permute:** the picks move to slots 0..n-1 (in pick order), `gPlayerPartyCount` is set to n, the other mons stay in slots n..5. The
+- **Truncate, permute and hide:** the picks move to slots 0..n-1 (in pick order) and `gPlayerPartyCount` is set to n. The other mons stay in slots n..5 *but are hidden*:
+  the party menu lists every occupied slot (found in the first end-to-end fight: the unpicked Grotle was selectable), so `fr_enter` parks each one's species in its
+  unused HP field and clears the species; `fr_leave` puts the species back before the recalculation. The
   original order is a permutation packed into two hack vars: **LO** = original index of slots 0-4, 3 bits each; **HI** = slot 5 | original count << 3 |
   **bit 15 = "mutated" marker**. `SavePlayerParty` copies all six slots, so a save inside the facility loses nothing (test C).
 - **`fr_leave` is idempotent:** it does nothing unless HI has bit 15, and clears HI on the way out, so a cleanup that fires twice (or a loss path plus a
@@ -197,6 +199,40 @@ The speech lines come from a CFRU per-trainer speech table (the orphan "Battle T
 **Rejected:** `BATTLE_TYPE_TRAINER_TOWER` (the vanilla Trainer Tower type). In this hack it garbled the battle text buffers (class/name read
 through the vanilla Trainer Tower struct overflowed into `gBattleTypeFlags`, which sits right after the string buffers), showed the
 player as "Leader Falkner", and dropped the trainer flag, so the fight became a "Wild" battle. `BATTLE_TYPE_TRAINER_TOWER` stays off.
+
+### 6.6 Opponent generation and battle start as built (M4, 2026-10-21)
+
+**Natives** (one 1,680-byte image, no static data, linked by `scripts/frontier_native.py`: entry table `scripts/native/frontier_entry.s`, `fr_enter/fr_leave/fr_heal` in
+`scripts/frontier_native.s`, the generator in C `scripts/native/frontier_gen.c` built with `arm-none-eabi-gcc -mthumb -Os -ffreestanding`, `fr_start_battle` in `scripts/frontier_start.s`).
+Entries, called with `callnative <base + off>|1`: **+0 fr_enter, +4 fr_leave, +8 fr_heal, +12 fr_gen_opponent, +16 fr_start_battle**.
+
+- `fr_gen_opponent` (in: `0x8000` battle number n, `0x8001` doubles flag, `0x8002/3` seed; out: the party block at `0x02022400`, `0x8004` = Pokémon count, `0x8005` = a random word for
+  the script to pick a trainer identity). Pure function of (seed, n, mode). Tier: round = (n-1)/7, tier = min(4, 1 + round), +1 on the round's last battle; 30% of picks come from one tier lower.
+  Clauses: no duplicate species or items, at most one legendary and one Mega per team, no boss-only sets. Doubles use each set's doubles list (Protect swapped in). IV byte 255 (= all 31).
+  Sets come from `build/frontier/sets.bin` (`pack(header=True)`: 20-byte tier index, then 24-byte records sorted by tier); M5 links the table into the ROM.
+- `fr_start_battle` (in: `0x8000` shell trainer id, `0x8001` doubles flag): `gTrainerBattleOpponent_A`, `gBattleTypeFlags = TRAINER | BATTLE_TOWER (| DOUBLE)`, then the vanilla tower
+  battle sequence. Two **shell trainer slots** (singles: party size 3, doubles: size 4, `double` field set) hold class, name, picture and AI; their party pointer is the RAM block.
+
+**Verified in the emulator** (`scripts/spikes/frontier_m4_e2e.py`, `frontier_m4_test.py`): (a) CFRU builds the enemy party from a trainer record whose party pointer is in **EWRAM**,
+with the custom moves and held items (Leftovers visibly restored HP), levels from the block, and the AI switching ("withdrew Venusaur!", "sent out Alakazam!"); (b) a **win**:
+no "gained Exp. Points", no prize money, the defeat speech printed inside the battle, straight back to the script; (c) a **loss** (only the lead alive): outcome 2, **no whiteout**, the
+player stays on the same tile, the lose speech shows; (d) **doubles** (flags `0x10D`): two foes out, Intimidate triggers; (e) the full chain
+`fr_enter` -> `fr_gen_opponent` -> `fr_start_battle` on a real save: the party menu shows only the three picks, opponents differ per seed and battle number (survey of battles
+1, 5, 7, 8, 14, 15, 22, 30 and 50 for singles and doubles: tiers climb, doubles lists swap in Protect, clauses hold).
+
+**Speech text.** The engine prints the opponent's end-of-battle speeches from the first entry of the orphaned Battle Tower trainer table (`0x1DEC3A0`, 52 bytes; **word 1 = the
+speech when the player wins, word 2 = when the player loses**, word 0 is the table's own intro text). The ROM words point at ROM text, but they can point at **RAM**, so M5 points them at two EWRAM
+text buffers that the script fills per opponent (verified: "The Shell wins. Better luck next time." appeared on a loss). The pre-battle intro is printed by the script before the call.
+Nothing else in that table is read by this path (the table is not indexed by trainer id; every test, with ids 76, 100 and 459, used entry 0).
+
+**The "rest." line was a translation bug, not ours.** The second intro message ("X sent out Y!") was garbage ("rest.", "right type, I guess.") in every battle, tower or not, even
+for an untouched NPC trainer; the original Chinese ROM prints it correctly. Cause: CFRU picks between two strings by `literal - (imm+1)` and the English relocation broke the spacing.
+Fixed on `main` (PR #107, issue #105, PLAYTEST 89); **this branch needs that fix merged in** (or the same `insert.py` step) before Frontier battles read correctly. Also learned the
+`BATTLE_TYPE_TRAINER_TOWER` bit (1<<19) is not needed and stays off; `BATTLE_TOWER` (1<<8) alone gives the no-EXP/no-money/no-whiteout behaviour.
+
+**Still open for M5:** per-battle money/EXP are none (good), but the trainer *defeated* flag of the shell ids is set on a win (harmless, never used by an NPC); a Mega Stone on an opponent
+and Mega Evolution of the player's own Pokémon in these fights were not exercised; EV spreads and natures are not applied (the block format has no field for them), so the opponent sets rely on
+IV 31 only; the intro `trainerbattle`-style overworld speech is not used (we start the battle natively).
 
 ### 6.5 Opponent look-and-feel
 
@@ -353,7 +389,7 @@ risky and unnecessary). Naming is clearly "Battle Points". A single-line text pa
 | **M1** (done 2026-10-21) | `scripts/frontier_data.py` + species/move/learnset extraction; `data/frontier/pool.json` | `frontier_data.py` summary; section 7.7 |
 | **M2** (done 2026-10-21, review pending) | Set generator + validator + packed table; sample teams reviewed by River | `frontier_sets.py --check`, `sample_teams.md`, size report (section 7.7) |
 | **M3** (done 2026-10-21) | Native helpers `fr_enter`/`fr_leave`/`fr_heal` (party mutate/restore) with idempotence and save tests | `frontier_m3_test.py`: 32 checks pass; battle screenshot (section 6.3) |
-| **M4** | `fr_gen_opponent` + `fr_start_battle` (M2 path) and a single scripted battle | one Lv 50 battle through to the return script |
+| **M4** (done 2026-10-21) | `fr_gen_opponent` (C) + `fr_start_battle` and the full chain in the emulator | section 6.6; `frontier_m4_e2e.py` |
 | **M5** | Hall map `31.3` rewired, reception, room map, round loop, BP, shop, records | full 7-battle singles round, then doubles, in the emulator |
 | **M6** | Brain (Lance) 21 and 49, symbols, polish, balancing pass | full run to 21 with a Lv 50 test team |
 | **M7** | PLAYTEST rows, `CLAUDE.md`/`HACKDB` notes, release notes for the River Edition (v0.2), BPS check | `insert.py` clean, BPS byte-identical |
@@ -602,5 +638,5 @@ Left from section 11: **S0** (do the new vars/flags survive a save/reload?). New
 1. **M1/M2 (no ROM risk, start now):** extend `scripts/frontier_data.py` into the set generator (`data/frontier/pool.json`, `sets.json`,
    validator, sample teams).
 2. ~~M3~~ done: `scripts/frontier_native.s` + `frontier_native.py` (test links it in EWRAM; M5 links it at its free-pool address).
-3. **M4:** `fr_gen_opponent` + `fr_start_battle` (flags `0x108`, shell slot with EWRAM party), loss and doubles checks.
+3. ~~M4~~ done (section 6.6).
 4. **M5:** maps (31.6/31.3 warps, five arenas in group 58), scripts, shop, records.
