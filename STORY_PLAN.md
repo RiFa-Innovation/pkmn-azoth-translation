@@ -384,3 +384,14 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   Looker reporting that Buena's all-listeners show drowned the node's 3:07 pulse (Node A dark), that Looker's team guards
   the antenna, and that Archer's last relay is behind the waterfall. Sets `NODE_A_DOWN` (`0x134A`) and `CH2_STAGE = 8`.
   Verified in the emulator. A real Pokégear call remains a possible later upgrade.
+- **Beat 9 built** in the top chamber of `55.16` (the only walkable open space there; the plan's "waterfall chamber" does not exist
+  as such in this map). At `CH2_STAGE == 8`, Archer (sprite `134`), Silver, Dawn and four shard objects (`104`) wait in the top room;
+  stepping into the corridor (`y = 11`, `x = 12..13`) plays the scene (Archer's motive: devotion is something a man can be
+  discarded from, so he built a bond nobody can leave; the player's silent refusal; Silver and Dawn go to free the Pokémon)
+  then the **Archer battle** (trainer `457`, class Rocket Admin, pic `51`, his old six at Lv 64-68 with items `[353, 19, 19, 19]`
+  and the generic Mega Stone `533` on Alakazam). **Stage 9 is set only after a win** (a loss leaves stage 8 and the scene replays).
+  Cast hidden otherwise (flag `0x1358`). Beats 10-11 (overload, the song) are still to build; the Whirl Islands call text
+  now says "the chamber where Lugia slept". Verified: scene, battle start, and (with a Lv 5 test Archer) the post-win path.
+- **Bug found and fixed:** a type 0 `trainerbattle` ends the script after the battle, so everything I had written after
+  the fight in beat 5 (Ariana) and in Red's summit script never ran on the first win. `scrasm` now supports type 2
+  (`trainer ID "intro" "defeat" LABEL`); beat 5 and Red use it and set their state after the label. Beat 5 re-verified.

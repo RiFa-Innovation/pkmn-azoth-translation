@@ -35,7 +35,7 @@
    "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
   },
   "red_talk": {
-   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\"\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend"
+   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\" after\nafter:\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend"
   },
   "to_summit": {
    "asm": "lockall\nsay \"A bitter wind blows down from above...\"\nwarp 58.4 49 50\nwaitstate\nend"
@@ -95,7 +95,7 @@
    "asm": "compare_var_to_value 0x5108 4\ngoto_if 1 show\nsetflag 0x1355\ngoto @orig_56_49_transition\nshow:\nclearflag 0x1355\ngoto @orig_56_49_transition"
   },
   "ch2_buried": {
-   "asm": "lockall\nsetvar 0x5108 5\nsetflag 0x1346\nsay \"Ariana: Oh, there you are. Late for your own cue, Champion.{FB}Archer said you'd come. He's very good at knowing where people will stand.\"\nsay \"Silver: Spare us the theatre. That's the node, isn't it?{FB}We follow the signal. We stop the signal.\"\nsay \"Dawn: It's drawing power from the old stones under the tower.{FB}If we cut it here, the whole line wobbles. Ready?\"\ntrainer 456 \"Then let me hold you here until the curtain falls!\" \"...The curtain falls on me, it seems.\"\nsay \"Ariana: ...Archer never told me it would feel like this.{FB}Do as you like. He doesn't need me anymore.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"{FD:01} held the Key Stone against the node. Its rainbow light shuddered and went dark.\"\nsay \"Silver: ...Is that it?\"\nfadescreen 1\ndelay 30\nfadescreen 0\nsay \"The node flickers back to life, dimmer than before.\"\nsay \"Dawn: It restarts on its own. Cutting power won't hold it.{FB}It needs something else. Something the stones answer to freely.\"\nsay \"Silver: Then we find what that is. I'll keep watch here.{FB}Go. The Elder and the Kimono Girls know more than we do.\"\nreleaseall\nend"
+   "asm": "lockall\nsay \"Ariana: Oh, there you are. Late for your own cue, Champion.{FB}Archer said you'd come. He's very good at knowing where people will stand.\"\nsay \"Silver: Spare us the theatre. That's the node, isn't it?{FB}We follow the signal. We stop the signal.\"\nsay \"Dawn: It's drawing power from the old stones under the tower.{FB}If we cut it here, the whole line wobbles. Ready?\"\ntrainer 456 \"Then let me hold you here until the curtain falls!\" \"...The curtain falls on me, it seems.\" won\nwon:\nsetvar 0x5108 5\nsetflag 0x1346\nsay \"Ariana: ...Archer never told me it would feel like this.{FB}Do as you like. He doesn't need me anymore.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"{FD:01} held the Key Stone against the node. Its rainbow light shuddered and went dark.\"\nsay \"Silver: ...Is that it?\"\nfadescreen 1\ndelay 30\nfadescreen 0\nsay \"The node flickers back to life, dimmer than before.\"\nsay \"Dawn: It restarts on its own. Cutting power won't hold it.{FB}It needs something else. Something the stones answer to freely.\"\nsay \"Silver: Then we find what that is. I'll keep watch here.{FB}Go. The Elder and the Kimono Girls know more than we do.\"\nreleaseall\nend"
   },
   "ch2_library_tr": {
    "asm": "compare_var_to_value 0x5108 5\ngoto_if 1 show\nsetflag 0x1356\ngoto @orig_52_5_transition\nshow:\nclearflag 0x1356\ngoto @orig_52_5_transition"
@@ -107,10 +107,16 @@
    "asm": "compare_var_to_value 0x5108 6\ngoto_if 1 show\nsetflag 0x1357\ngoto @orig_55_14_transition\nshow:\nclearflag 0x1357\ngoto @orig_55_14_transition"
   },
   "ch2_whirl": {
-   "asm": "lockall\nsetvar 0x5108 7\nsetflag 0x1349\nsay \"Silver: ...Father.\"\nsay \"Giovanni: So you followed the signal, boy. Good. Don't mistake that for concern.{FB}Rocket's name is being used for something I never authorized.\"\nsay \"Silver: You left. You don't get to authorize anything.\"\nsay \"Giovanni: The chamber behind the Whirl Islands waterfall was once ours.{FB}A facility from my years. Its transmitter is still wired to the old dish.{FB}That is all I will give you.\"\nsay \"Giovanni: I won't ask forgiveness. Whatever you do next...{FB}do it for your own reasons.\"\nfadescreen 1\nremoveobject 90\ndelay 20\nfadescreen 0\nsay \"Silver: ...Don't look at me like that.{FB}The Pok\u00e9mon go first. They're the ones being fed into that ring.{FB}What he is to me can wait.\"\nsay \"Silver: Come on. The waterfall chamber is at the bottom of this place.\"\nreleaseall\nend"
+   "asm": "lockall\nsetvar 0x5108 7\nsetflag 0x1349\nsay \"Silver: ...Father.\"\nsay \"Giovanni: So you followed the signal, boy. Good. Don't mistake that for concern.{FB}Rocket's name is being used for something I never authorized.\"\nsay \"Silver: You left. You don't get to authorize anything.\"\nsay \"Giovanni: The deep chamber where Lugia slept was once ours.{FB}A facility from my years. Its transmitter is still wired to the old dish.{FB}That is all I will give you.\"\nsay \"Giovanni: I won't ask forgiveness. Whatever you do next...{FB}do it for your own reasons.\"\nfadescreen 1\nremoveobject 90\ndelay 20\nfadescreen 0\nsay \"Silver: ...Don't look at me like that.{FB}The Pok\u00e9mon go first. They're the ones being fed into that ring.{FB}What he is to me can wait.\"\nsay \"Silver: Come on. The chamber where Lugia slept is deeper in. Keep climbing.\"\nreleaseall\nend"
   },
   "ch2_call": {
-   "asm": "lockall\nsetvar 0x5108 8\nsetflag 0x134a\nplayse 0x15\nsay \"Your Pok\u00e9gear is ringing!\"\nsay \"Lyra: {FD:01}! It's me! Don't hang up, it's good news!{FB}Buena had the idea. The node's pulse hits at 3:07 on one frequency, right?\"\nsay \"Buena: So I scheduled the loudest, silliest show I've ever aired on that exact frequency, with every listener's request line open.{FB}A thousand people singing along drowned it out.\"\nsay \"Lyra: The node went dark and stayed dark! It was kind of beautiful, honestly.{FB}Looker's team is guarding the antenna now.\"\nsay \"Looker: One more thing. The signal's last relay is at the bottom of the Whirl Islands, behind the waterfall.{FB}That's where Archer is. Don't go alone.\"\nsay \"Lyra: ...Come back safe. And {FD:01}? Thanks for trusting us with the hard part.\"\nreleaseall\nend"
+   "asm": "lockall\nsetvar 0x5108 8\nsetflag 0x134a\nplayse 0x15\nsay \"Your Pok\u00e9gear is ringing!\"\nsay \"Lyra: {FD:01}! It's me! Don't hang up, it's good news!{FB}Buena had the idea. The node's pulse hits at 3:07 on one frequency, right?\"\nsay \"Buena: So I scheduled the loudest, silliest show I've ever aired on that exact frequency, with every listener's request line open.{FB}A thousand people singing along drowned it out.\"\nsay \"Lyra: The node went dark and stayed dark! It was kind of beautiful, honestly.{FB}Looker's team is guarding the antenna now.\"\nsay \"Looker: One more thing. The signal's last relay is deep in the Whirl Islands, in the chamber where Lugia slept.{FB}That's where Archer is. Don't go alone.\"\nsay \"Lyra: ...Come back safe. And {FD:01}? Thanks for trusting us with the hard part.\"\nreleaseall\nend"
+  },
+  "ch2_final_tr": {
+   "asm": "compare_var_to_value 0x5108 8\ngoto_if 1 show\nsetflag 0x1358\ngoto @orig_55_16_transition\nshow:\nclearflag 0x1358\ngoto @orig_55_16_transition"
+  },
+  "ch2_final": {
+   "asm": "lockall\nsay \"Archer: ...Welcome, Champion. Punctual. I do admire a performer who hits their mark.\"\nsay \"Silver: Where are the Pok\u00e9mon you've been feeding into that ring?\"\nsay \"Archer: Where they belong. In the chorus. Together, always.{FB}Do you know what Rocket taught me? That devotion is something a man can be discarded from.\"\nsay \"Archer: So I built a bond nobody can leave. It needs only one willing voice to hold it steady.{FB}A Champion. A Trainer whose partner followed them out of a lab as a child. You.\"\nsay \"The Key Stone in your hand stays cold. You shake your head.\"\nsay \"Archer: ...No? The script anticipated that. Then we play the scene the other way.\"\nsay \"Dawn: Silver, the ring! Those Pok\u00e9mon are being drained!{FB}Silver: I'm on it. {FD:01}, he's yours!\"\ntrainer 457 \"Then let the next act begin!\" \"...A flawless performance. Of course it was.\" won\nwon:\nsetvar 0x5108 9\nsay \"Archer: ...Then let them stay on the stage with me.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -810,6 +816,92 @@
      "var": 20744,
      "value": 7,
      "script": "ch2_call"
+    }
+   ]
+  },
+  {
+   "map": "55.16",
+   "objects": [
+    {
+     "local_id": 90,
+     "gfx": 134,
+     "x": 13,
+     "y": 6,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4952
+    },
+    {
+     "local_id": 91,
+     "gfx": 129,
+     "x": 10,
+     "y": 8,
+     "elev": 3,
+     "movement": 10,
+     "flag": 4952
+    },
+    {
+     "local_id": 92,
+     "gfx": 14,
+     "x": 16,
+     "y": 8,
+     "elev": 3,
+     "movement": 9,
+     "flag": 4952
+    },
+    {
+     "local_id": 93,
+     "gfx": 104,
+     "x": 11,
+     "y": 6,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4952
+    },
+    {
+     "local_id": 94,
+     "gfx": 104,
+     "x": 15,
+     "y": 6,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4952
+    },
+    {
+     "local_id": 95,
+     "gfx": 104,
+     "x": 11,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4952
+    },
+    {
+     "local_id": 96,
+     "gfx": 104,
+     "x": 15,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4952
+    }
+   ],
+   "coords": [
+    {
+     "x": 12,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 8,
+     "script": "ch2_final"
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 8,
+     "script": "ch2_final"
     }
    ]
   }
@@ -1646,6 +1738,94 @@
      "level": 62
     }
    ]
+  },
+  {
+   "id": 457,
+   "name": "Archer",
+   "class": 40,
+   "pic": 51,
+   "music": 133,
+   "ai": 7,
+   "items": [
+    353,
+    19,
+    19,
+    19
+   ],
+   "party": [
+    {
+     "species": 874,
+     "level": 64,
+     "iv": 255,
+     "item": 683,
+     "moves": [
+      412,
+      257,
+      472,
+      442
+     ]
+    },
+    {
+     "species": 875,
+     "level": 66,
+     "iv": 255,
+     "item": 533,
+     "moves": [
+      94,
+      374,
+      466,
+      269
+     ]
+    },
+    {
+     "species": 896,
+     "level": 65,
+     "iv": 255,
+     "item": 702,
+     "moves": [
+      532,
+      89,
+      360,
+      468
+     ]
+    },
+    {
+     "species": 888,
+     "level": 65,
+     "iv": 255,
+     "item": 696,
+     "moves": [
+      126,
+      367,
+      188,
+      194
+     ]
+    },
+    {
+     "species": 889,
+     "level": 66,
+     "iv": 255,
+     "item": 711,
+     "moves": [
+      429,
+      242,
+      228,
+      8
+     ]
+    },
+    {
+     "species": 905,
+     "level": 68,
+     "iv": 255,
+     "item": 141,
+     "moves": [
+      216,
+      89,
+      349,
+      395
+     ]
+    }
+   ]
   }
  ],
  "layouts": {
@@ -1808,6 +1988,10 @@
   {
    "map": "55.14",
    "on_transition": "ch2_whirl_tr"
+  },
+  {
+   "map": "55.16",
+   "on_transition": "ch2_final_tr"
   }
  ]
 }

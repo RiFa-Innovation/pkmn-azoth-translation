@@ -6,7 +6,9 @@ address, resolved by the caller via `externs`).
 
   say "text"          -> loadword 0 <text>; callstd 2   (text is wrapped to the dialogue box)
   warp G.N X Y        -> warp G N 0xFF X Y
-  trainer ID "intro" "defeat"   -> trainerbattle single (type 0); execution continues after the battle
+  trainer ID "intro" "defeat"        -> trainerbattle type 0: the script ENDS after the battle (use for plain NPC trainers)
+  trainer ID "intro" "defeat" LABEL  -> type 2 (continue script): after a win, execution resumes at LABEL (put LABEL
+                                        right after the command so an already-beaten trainer falls through to it)
   <opcode> args...    -> any opcode known to scrdis (names from pokefirered event.inc)
 
 assemble(src, base_addr, widths, externs, text_alloc) -> bytes
@@ -92,10 +94,10 @@ def assemble(src, base, widths, externs, text_alloc):
             items.append(("move", _num(m.group(1)), bytes(steps + [0xFE])))
             pc += 7 + 3   # applymovement local ptr (1+2+4) + waitmovement local (1+2) = 10
             continue
-        m = re.match(r'trainer\s+(\w+)\s+"(.*?)"\s+"(.*?)"$', ln)
+        m = re.match(r'trainer\s+(\w+)\s+"(.*?)"\s+"(.*?)"(?:\s+(\w+))?$', ln)
         if m:
-            items.append(("trainer", int(m.group(1), 0), m.group(2), m.group(3)))
-            pc += 14
+            items.append(("trainer", int(m.group(1), 0), m.group(2), m.group(3), m.group(4)))
+            pc += 18 if m.group(4) else 14   # type 2 (continue script) carries an extra 4-byte event-script pointer
             continue
         parts = ln.split()
         name = parts[0]
@@ -126,7 +128,10 @@ def assemble(src, base, widths, externs, text_alloc):
             out += bytes([0x50]) + struct.pack("<HI", it[1], a) + bytes([0x52]) + struct.pack("<H", it[1])
         elif it[0] == "trainer":
             ptrs = [text_alloc(mt.encode_en(mt.wrap_en(t, bytes(widths), DIALOGUE_PX, True))) for t in it[2:4]]
-            out += bytes([0x5C, 0]) + struct.pack("<HHII", it[1], 0, *ptrs)
+            if it[4]:   # TRAINER_BATTLE_CONTINUE_SCRIPT: after a win the script resumes at the label
+                out += bytes([0x5C, 2]) + struct.pack("<HHIII", it[1], 0, ptrs[0], ptrs[1], ptr(it[4]))
+            else:       # type 0 ends the script after the battle
+                out += bytes([0x5C, 0]) + struct.pack("<HHII", it[1], 0, *ptrs)
         elif it[0] == "warp":
             g, n = (int(x) for x in it[1][0].split("."))
             out += bytes([0x39, g, n, 0xFF]) + struct.pack("<HH", _num(it[1][1]), _num(it[1][2]))

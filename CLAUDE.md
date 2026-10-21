@@ -71,6 +71,9 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
   `warp`, or a door/stairs metatile); a coord/object script must end with `releaseall`/`release` or input stays
   frozen; hack flags >= 0x900 must be set via the game's own `setflag` (poking RAM misses them); cave taps need
   `hold >= 20` frames; assign equal-length slices into the ROM bytearray (a length change shifts every later byte).
+- A script `trainerbattle` of type 0 **ends the script after the battle**; to run story lines after a win use type 2
+  (`trainer ID "intro" "defeat" LABEL` in `scrasm.py`, with `LABEL:` right after it) and set story state *after* the label,
+  never before the fight (a loss would otherwise strand the story).
 - Trainer battle pics are the 148-entry table at `0x23957C` (+palettes); overworld sprites 240 entries at `0x08961600`.
 - Species audit (2026-10-20): wild/trainer/script data reach 508 of 1,293 sprite entries; of species <= 411 only
   57 are unreachable even through evolution (legendaries and unobtainable Hoenn species): use those first for new spawns.
