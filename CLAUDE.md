@@ -64,7 +64,7 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
 
 - **Reserved ids (do not reuse elsewhere):** map group 58 (the only spare `gMapGroups` slot; slot 59 is the terminator),
   flags `0x1338`-`0x133F` (Mt. Silver item balls) and `0x1340` (Red beaten), layout ids 52-77, trainer ids
-  48, 49, 62, 77, 113, 200, 454, 455, 461 (empty-name slots no script referenced).
+  48, 49, 62, 77, 113, 200, 454, 455, 456 (Ariana, Chapter 2 beat 5), 461 (empty-name slots no script referenced); flags `0x1341`-`0x135x` and var `0x5108` are the Chapter 2 story state (see `STORY_PLAN.md` section 6).
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +

@@ -203,8 +203,8 @@ Flags (80 free in `0x1338`-`0x1387`; used: `0x1338`-`0x133F` items, `0x1340` Red
 `0x1350`-`0x1357` per-cutscene "seen once" guards, `0x1358`-`0x1360` side hooks.
 
 ### Trainers (empty-name slots no script references: 456-460, 492-497; 461 is Red)
-- `456` Archer (final): 6 Pokémon, one holding Mega Stone `533`, Lv 64-70.
-- `457` Ariana (Node B, optional) or reuse trainer `404`/`405`-style entries.
+- `456` Ariana (Node B, **built**, beat 5).
+- `457` Archer (final): 6 Pokémon, one holding Mega Stone `533`, Lv 64-70, items `[353]`.
 - `458`-`460` spares for rematches (Axel, Lance, Silver) if wanted.
 
 ### New mechanics
@@ -358,3 +358,9 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   Dragon's Den and Clair were dropped from this beat; the optional Axel rematch is not built.
 - **Lesson:** the `where()` ASCII map marks collision only; water and waterfall tiles look walkable. Check a render
   (`scripts/maprender.py`) before placing scene tiles.
+- **Beat 5 built** in the Buried Tower (`56.49`): at `CH2_STAGE == 4`, Silver (`129`), Dawn (`14`), Ariana (`72`) and the node
+  (object `102`) wait in the round chamber; stepping into the chamber (`y = 22`) plays the scene, a battle against **Ariana**
+  (trainer `456`, class Rocket Admin, battle pic `52`, Arbok/Vileplume/Murkrow/Gengar Lv 60-62), then the Key Stone cuts the
+  node, it restarts dimmer, and Dawn says it needs "something the stones answer to freely". Sets `NODE_B_DOWN` (`0x1346`) and
+  `CH2_STAGE = 5`; cast hidden otherwise (flag `0x1355`). Verified in the emulator (scene, battle, stage 5). Archer's trainer
+  entry moves to `457`.

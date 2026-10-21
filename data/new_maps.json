@@ -90,6 +90,12 @@
   },
   "ch2_cliff": {
    "asm": "lockall\nsetvar 0x5108 4\nsetflag 0x1345\nsay \"Elder: So you are the Champion. Axel wrote ahead of you.{FB}Come, stand with us. The old things are best said out here, where the wind can hear them.\"\nsay \"Elder: Long ago the Meteor People held a stone that shone in seven colors.{FB}It could gather the strength of every Pok\u00e9mon around it and focus it, like light through glass.\"\nsay \"Elder: The Rainbow Stone does not make a bond. It only carries one that already exists.{FB}A man who forces it to speak for people who never agreed... is only shouting into a canyon.\"\nsay \"Axel: That's why Lucario and I train. Evolution beyond evolution still depends on one partnership.{FB}Nobody can do it for you, and nobody can do it to you.\"\nsay \"Dawn: I compared notes with what I saw in Sinnoh.{FB}Galactic tried to bend a legend by force, too. It never worked the way they promised.\"\nsay \"Elder: Archer's plan needs one Trainer who chooses to connect.{FB}Refuse him, and the whole system breaks. Every Pok\u00e9mon it touches will pay for it.\"\nsay \"Elder: That is what 'Successor' means: not the keeper of a weapon, but the keeper of what was learned.{FB}Take this with you, and remember it when the time comes.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc24\nsay \"The Elder stored Latias's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsay \"Elder: Go to the Buried Tower. Rocket hides a node under the old stones.{FB}Axel will watch the road behind you.\"\nreleaseall\nend"
+  },
+  "ch2_buried_tr": {
+   "asm": "compare_var_to_value 0x5108 4\ngoto_if 1 show\nsetflag 0x1355\ngoto @orig_56_49_transition\nshow:\nclearflag 0x1355\ngoto @orig_56_49_transition"
+  },
+  "ch2_buried": {
+   "asm": "lockall\nsetvar 0x5108 5\nsetflag 0x1346\nsay \"Ariana: Oh, there you are. Late for your own cue, Champion.{FB}Archer said you'd come. He's very good at knowing where people will stand.\"\nsay \"Silver: Spare us the theatre. That's the node, isn't it?{FB}We follow the signal. We stop the signal.\"\nsay \"Dawn: It's drawing power from the old stones under the tower.{FB}If we cut it here, the whole line wobbles. Ready?\"\ntrainer 456 \"Then let me hold you here until the curtain falls!\" \"...The curtain falls on me, it seems.\"\nsay \"Ariana: ...Archer never told me it would feel like this.{FB}Do as you like. He doesn't need me anymore.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"{FD:01} held the Key Stone against the node. Its rainbow light shuddered and went dark.\"\nsay \"Silver: ...Is that it?\"\nfadescreen 1\ndelay 30\nfadescreen 0\nsay \"The node flickers back to life, dimmer than before.\"\nsay \"Dawn: It restarts on its own. Cutting power won't hold it.{FB}It needs something else. Something the stones answer to freely.\"\nsay \"Silver: Then we find what that is. I'll keep watch here.{FB}Go. The Elder and the Kimono Girls know more than we do.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -600,6 +606,73 @@
      "var": 20744,
      "value": 3,
      "script": "ch2_cliff"
+    }
+   ]
+  },
+  {
+   "map": "56.49",
+   "objects": [
+    {
+     "local_id": 70,
+     "gfx": 129,
+     "x": 7,
+     "y": 19,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 71,
+     "gfx": 14,
+     "x": 11,
+     "y": 19,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 72,
+     "gfx": 72,
+     "x": 9,
+     "y": 13,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 73,
+     "gfx": 102,
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4949
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
+    },
+    {
+     "x": 9,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
+    },
+    {
+     "x": 10,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
     }
    ]
   }
@@ -1410,6 +1483,32 @@
      "level": 56
     }
    ]
+  },
+  {
+   "id": 456,
+   "name": "Ariana",
+   "class": 47,
+   "pic": 52,
+   "music": 132,
+   "ai": 7,
+   "party": [
+    {
+     "species": 24,
+     "level": 60
+    },
+    {
+     "species": 45,
+     "level": 61
+    },
+    {
+     "species": 198,
+     "level": 61
+    },
+    {
+     "species": 94,
+     "level": 62
+    }
+   ]
   }
  ],
  "layouts": {
@@ -1560,6 +1659,10 @@
   {
    "map": "56.27",
    "on_transition": "ch2_cliff_tr"
+  },
+  {
+   "map": "56.49",
+   "on_transition": "ch2_buried_tr"
   }
  ]
 }
