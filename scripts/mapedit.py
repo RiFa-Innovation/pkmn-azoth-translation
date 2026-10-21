@@ -298,12 +298,65 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
             rom[arr + 4 * i:arr + 4 * i + 4] = struct.pack("<I", ROM_BASE + ha)
             report["maps"] += 1
         rom[slot:slot + 4] = struct.pack("<I", ROM_BASE + arr)
+    if spec.get("trainer_pics"):
+        report["trainer_pics"] = add_trainer_pics(rom, src, pool, spec["trainer_pics"])
     if spec.get("trainers"):
         report["trainers"] = add_trainers(rom, pool, spec["trainers"])
     if spec.get("wild"):
         report["wild"] = add_wild(rom, src, pool, spec["wild"])
     report["bytes"] = before - pool.total()
     return report
+
+
+TRAIN_PIC = 0x23957C            # battle trainer pics: 148 x {ptr, 0x800, tag}; palettes (ptr, tag) follow at +148*8
+TRAIN_PAL = TRAIN_PIC + 148 * 8
+
+
+def _lz_literal(data):
+    """GBA LZ77 stream made only of literals (valid, just uncompressed)."""
+    out = bytearray(struct.pack("<I", 0x10 | (len(data) << 8)))
+    for i in range(0, len(data), 8):
+        out.append(0)
+        out += data[i:i + 8]
+    return bytes(out)
+
+
+def add_trainer_pics(rom, src, pool, pics):
+    """Repurpose unused trainer-pic slots: share another pic's graphics, with a recoloured palette.
+    {"index": 17, "pic_from": 135, "recolor": {"3": [r, g, b]}} (colour index -> 8-bit RGB)."""
+    for p in pics:
+        i, f = p["index"], p["pic_from"]
+        rom[TRAIN_PIC + 8 * i:TRAIN_PIC + 8 * i + 8] = src[TRAIN_PIC + 8 * f:TRAIN_PIC + 8 * f + 8]
+        po = u32(src, TRAIN_PAL + 8 * f) - ROM_BASE
+        pal = bytearray(_lz77_decompress(src, po))
+        for ci, (r, g, b) in p.get("recolor", {}).items():
+            struct.pack_into("<H", pal, 2 * int(ci), (r >> 3) | ((g >> 3) << 5) | ((b >> 3) << 10))
+        blob = _lz_literal(bytes(pal))
+        a = pool.alloc_aligned(len(blob))
+        rom[a:a + len(blob)] = blob
+        rom[TRAIN_PAL + 8 * i:TRAIN_PAL + 8 * i + 4] = struct.pack("<I", ROM_BASE + a)
+    return len(pics)
+
+
+def _lz77_decompress(rom, o):
+    size = struct.unpack_from("<I", rom, o)[0] >> 8
+    out, p = bytearray(), o + 4
+    while len(out) < size:
+        f = rom[p]
+        p += 1
+        for b in range(8):
+            if len(out) >= size:
+                break
+            if f & (0x80 >> b):
+                a, c = rom[p], rom[p + 1]
+                p += 2
+                n, d = (a >> 4) + 3, ((a & 15) << 8 | c) + 1
+                for _ in range(n):
+                    out.append(out[-d])
+            else:
+                out.append(rom[p])
+                p += 1
+    return bytes(out)
 
 
 TRAINER_TABLE = 0x23EACC - 4   # gTrainers: 40-byte entries indexed by trainer id
