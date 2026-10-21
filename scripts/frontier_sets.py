@@ -650,6 +650,27 @@ def pack(ctx, sets, header=False):
     return bytes(blob), spread_ids
 
 
+def pack_json(path, header=True):
+    """Pack data/frontier/sets.json (ids only, no ROM) into the table the natives read; same bytes as pack(header=True)."""
+    d = json.load(open(path))
+    order = d["spreads"]["order"]
+    sets = sorted(d["sets"], key=lambda st: (st["tier"], st["id"])) if header else d["sets"]
+    blob = bytearray()
+    for st in sets:
+        mv = (list(st["moves"]) + [0] * 4)[:4]
+        md = (list(st["moves_d"]) + [0] * 4)[:4]
+        blob += struct.pack("<HH4H4HBBBB", st["id"], st["item"], *mv, *md, order.index(st["spread"]), st["ability_slot"], st["tier"], st["flags"])
+    if not header:
+        return bytes(blob)
+    starts, counts, pos = [], [], 0
+    for t in (1, 2, 3, 4):
+        c = sum(1 for st in sets if st["tier"] == t)
+        starts.append(pos)
+        counts.append(c)
+        pos += c
+    return struct.pack("<H4H4HH", len(sets), *starts, *counts, 0) + bytes(blob)
+
+
 def write_samples(ctx, sets, path, rng):
     by_tier = collections.defaultdict(list)
     for st in sets:
@@ -711,7 +732,6 @@ def main():
         d["item_name"] = ctx.items.get(st["item"])
         d["move_names"] = [ctx.mv[m]["name"] for m in st["moves"]]
         d["move_names_d"] = [ctx.mv[m]["name"] for m in st["moves_d"]]
-        d.pop("moves"), d.pop("moves_d")
         named.append(d)
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump({"seed": a.seed, "spreads": {"order": sorted(pool["spreads"]), "defs": pool["spreads"]}, "sets": named, "brains": brains},

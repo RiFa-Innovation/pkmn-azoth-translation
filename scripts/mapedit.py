@@ -227,6 +227,12 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
     before = pool.total()
     scripts = {}
     widths = bytes(src[mt.WIDTHS_OFF:mt.WIDTHS_OFF + 256])
+    fr_ext = None
+    if spec.get("frontier"):          # Spectrum Frontier (scripts/frontier_build.py): natives + tables first, then its maps and scripts join the spec
+        import frontier_build as fb
+        fr_ext = fb.link(rom, src, pool)
+        scripts.update(fr_ext["externs"])
+        fb.extend(spec, fr_ext)
 
     def store(b):
         b = b if b.endswith(b"\xff") else b + b"\xff"
@@ -321,6 +327,21 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
                 rom[LAYOUT_TABLE + 4 * (lid - 1):LAYOUT_TABLE + 4 * lid] = struct.pack("<I", lay)
                 struct.pack_into("<I", hdr, 0, lay)
                 struct.pack_into("<H", hdr, 18, lid)
+            if m.get("map_scripts"):      # map scripts on a new map: frame table (tag 2), on-transition (3), on-resume (5)
+                mscr, entries = m["map_scripts"], []
+                if mscr.get("frame"):
+                    tbl = b"".join(struct.pack("<HHI", e["var"], e["value"], scripts[e["script"]]) for e in mscr["frame"]) + b"\x00\x00"
+                    ta = pool.alloc_aligned(len(tbl))
+                    rom[ta:ta + len(tbl)] = tbl
+                    entries.append((2, ROM_BASE + ta))
+                if mscr.get("transition"):
+                    entries.append((3, scripts[mscr["transition"]]))
+                if mscr.get("resume"):
+                    entries.append((5, scripts[mscr["resume"]]))
+                blob = b"".join(struct.pack("<BI", t, p_) for t, p_ in entries) + b"\x00"
+                ba = pool.alloc_aligned(len(blob))
+                rom[ba:ba + len(blob)] = blob
+                struct.pack_into("<I", hdr, 8, ROM_BASE + ba)
             if m.get("mapsec") is not None:
                 hdr[20] = m["mapsec"]
             if m.get("music") is not None:
@@ -344,6 +365,9 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         report["trainers"] = add_trainers(rom, pool, spec["trainers"])
     if spec.get("wild"):
         report["wild"] = add_wild(rom, src, pool, spec["wild"])
+    if fr_ext:                        # last: the trainer table moves, so River's own trainers (written above) must already be in it
+        report["frontier"] = {**{k: v for k, v in fr_ext.items() if k not in ("externs", "at")}, **fb.finalize(rom, src, pool),
+                              "scripts": {k: f"{v:#010x}" for k, v in scripts.items() if k.startswith("fr_")}}
     report["bytes"] = before - pool.total()
     return report
 

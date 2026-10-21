@@ -120,3 +120,39 @@ void fr_gen_opponent(void)
     VARS[5] = (u16)(rnd(&rs) >> 16);
     RESULT = 0;
 }
+
+
+/* fr_pick_speech: copy one random line of each kind into the RAM text buffers the engine / script print from.
+ *   in : 0x8005 = a random word (fr_gen_opponent leaves one there); fr_speech = ROM table:
+ *        u16 count[3] (intro, defeat, win), u16 pad, then count[0]+count[1]+count[2] ROM pointers to FF-terminated texts
+ *   out: 0x02022600 intro (script prints it before the fight), 0x02022680 defeat (word 1 of the speech-table entry: the player won),
+ *        0x02022700 win (word 2: the player lost); each at most 128 bytes */
+extern const u8 fr_speech[];
+
+static void copy_text(volatile u8 *dst, const u8 *src)
+{
+    u32 i;
+    for (i = 0; i < 127; i++) {
+        u8 c = src[i];
+        dst[i] = c;
+        if (c == 0xFF)
+            return;
+    }
+    dst[127] = 0xFF;
+}
+
+void fr_pick_speech(void)
+{
+    const u16 *cnt = (const u16 *)fr_speech;
+    const u32 *ptr = (const u32 *)(fr_speech + 8);
+    u32 r = VARS[5];
+    u32 off = 0, k;
+
+    for (k = 0; k < 3; k++) {
+        u32 n = cnt[k];
+        u32 idx = (((r >> (5 * k)) & 31) * n) >> 5;
+        copy_text((volatile u8 *)(0x02022600 + 0x80 * k), (const u8 *)ptr[off + idx]);
+        off += n;
+    }
+    RESULT = 0;
+}

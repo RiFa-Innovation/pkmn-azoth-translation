@@ -5,9 +5,9 @@
 @   fr_enter   in : 0x8000 = n (number of picks, 1..4), 0x8001.. = pick slots (original party indexes, 0xFF = unused)
 @              out: 0x800D (Result) = 0 ok | 1 bad pick count/slot | 2 duplicate | 3 egg or empty slot
 @                   0x8005 = permutation LO (slots 0-4, 3 bits each), 0x8006 = permutation HI (bit 15 valid, bits 3-5 original count, bits 0-2 slot 5)
-@   fr_leave   in : 0x8005 / 0x8006 as returned by fr_enter. HI without bit 15 -> no-op (idempotent)
+@   fr_leave   in : 0x8005 / 0x8006 / 0x8009..0x800B as returned by fr_enter. HI without bit 15 -> no-op (idempotent)
 @              out: 0x8006 = 0 (marker cleared), 0x800D = 0
-@   fr_heal    full heal of gPlayerParty (HealPlayerParty)
+@   fr_heal    re-apply Lv 50 to the picks and fully heal them (a tower-flag battle resets the stats to the real level)
 @
 @ The party is reordered so the picks come first, gPlayerPartyCount is set to n, the picks get Lv 50 stats (level byte + the six stats are
 @ written directly, because CalculateMonStats would recompute the level from EXP), and the party is healed. The other mons stay in slots n..5
@@ -60,10 +60,24 @@
 .equ MON_SIZE,            100
 
 @ ---------------------------------------------------------------------------------------------------------------
-fr_heal_entry:
-    push {lr}
-    ldr r3, =HealPlayerParty
+fr_heal_entry:                   @ (re)scale every Pokemon in the (truncated) party to Lv 50, then heal: a tower-flag battle leaves the picks at their real levels
+    push {r4, lr}
+    movs r4, #0
+1:  ldr r0, =gPlayerPartyCount
+    ldrb r0, [r0]
+    cmp r4, r0
+    bge 2f
+    movs r0, #MON_SIZE
+    muls r0, r4
+    ldr r1, =gPlayerParty
+    adds r0, r0, r1
+    movs r1, #50
+    bl fr_scale_mon
+    adds r4, #1
+    b 1b
+2:  ldr r3, =HealPlayerParty
     bl call_r3
+    pop {r4}
     pop {r0}
     bx r0
 
@@ -313,8 +327,15 @@ fr_enter:
     ldr r0, [sp, #8]
     cmp r4, r0
     blt 6b
-    @ hide the unpicked Pokemon: the party menu lists every occupied slot, so park each one's species in its (unused) HP field and clear
-    @ the species; fr_leave puts it back before the engine recalculation. Slots that were already empty have HP 0 and stay empty.
+    @ hide the unpicked Pokemon: the party menu lists every occupied slot, so clear the species of each one and hand the species back to the
+    @ script in 0x8009..0x800B (in slot order; scripts keep them in hack vars and pass them to fr_leave). Nothing else of the Pokemon is
+    @ touched, and nothing is parked inside it (battle code rewrites some fields of such slots, and the padding words hold hack data).
+    ldr r7, =gSpecialVars
+    movs r0, #0
+    strh r0, [r7, #18]
+    strh r0, [r7, #20]
+    strh r0, [r7, #22]
+    str r0, [sp, #40]            @ hidden counter
     ldr r4, [sp, #8]
 20: cmp r4, #6
     bge 22f
@@ -329,13 +350,15 @@ fr_enter:
     bl call_r3
     cmp r0, #0
     beq 21f
-    str r0, [sp, #36]
-    adds r0, r5, #0
-    movs r1, #57                 @ MON_DATA_HP := species
-    mov r2, sp
-    adds r2, #36
-    ldr r3, =SetMonData
-    bl call_r3
+    ldr r1, [sp, #40]
+    cmp r1, #3
+    bge 21f
+    lsls r2, r1, #1
+    adds r2, #18
+    ldr r7, =gSpecialVars
+    strh r0, [r7, r2]            @ park in the script var
+    adds r1, #1
+    str r1, [sp, #40]
     movs r0, #0
     str r0, [sp, #36]
     adds r0, r5, #0
@@ -443,7 +466,9 @@ fr_leave:
     ldr r0, [sp, #32]
     ldr r3, =Free
     bl call_r3
-    @ bring the parked species back (see fr_enter) before the engine recalculation
+    @ bring the hidden Pokemon back: every empty slot below the original count takes the next species from 0x8009..0x800B
+    movs r0, #0
+    str r0, [sp, #40]
     movs r4, #0
 30: movs r5, #MON_SIZE
     muls r5, r4
@@ -456,11 +481,18 @@ fr_leave:
     bl call_r3
     cmp r0, #0
     bne 31f
-    adds r0, r5, #0
-    movs r1, #57                 @ the parked species
-    movs r2, #0
-    ldr r3, =GetMonData
-    bl call_r3
+    ldr r0, [sp, #12]
+    cmp r4, r0
+    bge 31f
+    ldr r1, [sp, #40]
+    cmp r1, #3
+    bge 31f
+    lsls r2, r1, #1
+    adds r2, #18
+    ldr r7, =gSpecialVars
+    ldrh r0, [r7, r2]
+    adds r1, #1
+    str r1, [sp, #40]
     cmp r0, #0
     beq 31f
     str r0, [sp, #36]

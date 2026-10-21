@@ -147,15 +147,17 @@ def main():
     ok = True
     for slot, orig in ((2, 1), (3, 3)):
         d = decode(mons[slot])
-        ok &= d["species"] == 0 and d["hp"] == d0[orig]["species"]
-        # only the species, the has-species flag (byte 19) and the HP field (0x56-0x57, the parking spot) may differ
-        ok &= all(mons[slot][i] == mons0[orig][i] for i in range(100) if i not in (19, 32, 33, 0x56, 0x57))
+        ok &= d["species"] == 0
+        # only the species and the has-species flag (byte 19) differ; the species travels in the script vars 0x8009..0x800B
+        ok &= all(mons[slot][i] == mons0[orig][i] for i in range(100) if i not in (19, 32, 33))
+    parked = [struct.unpack("<H", e.read(SPV + 18 + 2 * k, 2))[0] for k in range(3)]
+    ok &= parked == [d0[1]["species"], d0[3]["species"], 0]
     ok &= mons[4:] == mons0[4:]
     if not ok:
         for slot, orig in ((2, 1), (3, 3)):
             diff = [(i, mons0[orig][i], mons[slot][i]) for i in range(100) if mons[slot][i] != mons0[orig][i]]
             print("   slot", slot, "differs from original at (offset, was, now):", diff[:12], "decoded species", decode(mons[slot])["species"], "hp", decode(mons[slot])["hp"], "orig species", d0[orig]["species"])
-    check(ok, "B the unpicked mons are hidden (species 0, real species parked in HP) and otherwise untouched")
+    check(ok, "B the unpicked mons are hidden (species 0) and otherwise untouched")
     for i in (0, 1):
         d = decode(mons[i])
         check(d["level"] == 50, f"B slot {i} is Lv 50")
@@ -171,7 +173,7 @@ def main():
     b2, c2, _ = party()
     check(b2 == snap and c2 == scnt, "C SavePlayerParty / LoadPlayerParty keeps all six slots and the truncated count")
     # D. restore
-    res, lo2, hi2 = run(BASE + 4, v5=lo, v6=hi)
+    res, lo2, hi2 = run(BASE + 4, v5=lo, v6=hi, v9=parked[0], v10=parked[1], v11=parked[2])
     b3, c3, mons3 = party()
     check(res == 0 and hi2 == 0, f"D fr_leave ok, marker cleared (HI={hi2:#06x})")
     check(c3 == cnt0, f"D party count restored to {cnt0} (got {c3})")
@@ -180,17 +182,21 @@ def main():
         same = all(a[k] == d[k] for k in ("pers", "species", "item", "exp", "evs", "ivs", "moves", "level", "stats"))
         check(same, f"D slot {i} back in its original place with the original level, stats, EXP, EVs, IVs and moves")
         check(d["hp"] == d["stats"][0], f"D slot {i} healed")
+        diff = [(j, mons0[i][j], mons3[i][j]) for j in range(80) if mons3[i][j] != mons0[i][j]]
+        if diff:
+            print("   slot", i, "box bytes that differ after fr_leave (offset, was, now):", diff[:10])
         check(mons3[i][19] == mons0[i][19] and mons3[i][:80] == mons0[i][:80] or all(mons3[i][j] == mons0[i][j] for j in range(80) if not (12 <= j - 20 < 12)), f"D slot {i} box data (incl. the has-species flag) is back to the original")
     # E. idempotent
-    res, _, hi3 = run(BASE + 4, v5=lo, v6=0)
+    res, _, hi3 = run(BASE + 4, v5=lo, v6=0, v9=parked[0], v10=parked[1], v11=parked[2])
     b4, c4, _ = party()
     check(res == 0 and b4 == b3 and c4 == c3, "E a second fr_leave (marker clear) changes nothing")
     # doubles: four picks in reverse order, then leave
     res, lo, hi = run(BASE + 0, v0=4, v1=3, v2=2, v3=1, v4=0)
+    parked4 = [struct.unpack("<H", e.read(SPV + 18 + 2 * k, 2))[0] for k in range(3)]
     b5, c5, mons5 = party()
     check(res == 0 and c5 == 4, "G doubles: four picks accepted, count 4")
     check(all(decode(mons5[i])["level"] == 50 for i in range(4)), "G all four at Lv 50")
-    run(BASE + 4, v5=lo, v6=hi)
+    run(BASE + 4, v5=lo, v6=hi, v9=parked4[0], v10=parked4[1], v11=parked4[2])
     b6, c6, mons6 = party()
     check(c6 == cnt0 and all(decode(mons6[i])["species"] == d0[i]["species"] for i in range(cnt0)), "G order restored after a reversed 4-pick run")
     play.stop()

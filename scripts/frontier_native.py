@@ -4,7 +4,7 @@
 
 Sources: scripts/native/frontier_entry.s (entry table), scripts/frontier_native.s (fr_enter / fr_leave / fr_heal),
 scripts/native/frontier_gen.c (fr_gen_opponent), scripts/frontier_start.s (fr_start_battle).
-Entry points (callnative <base + off>|1): +0 fr_enter, +4 fr_leave, +8 fr_heal, +12 fr_gen_opponent, +16 fr_start_battle.
+Entry points (callnative <base + off>|1): +0 fr_enter, +4 fr_leave, +8 fr_heal, +12 fr_gen_opponent, +16 fr_start_battle, +20 fr_pick_speech.
 `--sets` is the ROM address of the packed set table (build/frontier/sets.bin); insert.py links it at its free-pool address (milestone M5).
 """
 import argparse
@@ -16,7 +16,7 @@ CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", 
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
 
-def build(base, out, sets=0x08F00000, start_flags="0x108"):
+def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     objs = []
     for name, cmd in (
@@ -29,7 +29,7 @@ def build(base, out, sets=0x08F00000, start_flags="0x108"):
         subprocess.check_call(cmd + ["-o", obj])
         objs.append(obj)
     elf = out + ".elf"
-    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", "-o", elf, *objs])
+    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", f"--defsym=fr_speech={speech:#x}", "-o", elf, *objs])
     subprocess.check_call(["arm-none-eabi-objcopy", "-O", "binary", elf, out])
     syms = subprocess.check_output(["arm-none-eabi-nm", "-n", elf], text=True)
     return open(out, "rb").read(), syms

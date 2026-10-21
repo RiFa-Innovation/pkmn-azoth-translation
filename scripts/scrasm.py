@@ -5,6 +5,7 @@ Operands: ints (0x.. ok), label names (4-byte pointer), `@name` (another script'
 address, resolved by the caller via `externs`).
 
   say "text"          -> loadword 0 <text>; callstd 2   (text is wrapped to the dialogue box)
+  ask "text"          -> loadword 0 <text>; callstd 5   (the text, then a Yes/No box; 0x800D = 1 for Yes, 0 for No or B)
   warp G.N X Y        -> warp G N 0xFF X Y
   trainer ID "intro" "defeat"        -> trainerbattle type 0: the script ENDS after the battle (use for plain NPC trainers)
   trainer ID "intro" "defeat" LABEL  -> type 2 (continue script): after a win, execution resumes at LABEL (put LABEL
@@ -59,10 +60,15 @@ def _preprocess(src):
     return "\n".join(out)
 
 
+STRINGVAR_OPS = {"buffernumberstring": 0x83, "bufferitemname": 0x80}   # one byte (string var id) + one halfword; scrdis' table lacks the byte
+
+
 def ops():
     global _OPS
     if _OPS is None:
         _OPS = {v[0]: (k, v[1]) for k, v in scrdis.load_macros().items()}
+        for name, op in STRINGVAR_OPS.items():
+            _OPS[name] = (op, [("byte", 1), ("2byte", 1)])
     return _OPS
 
 
@@ -87,6 +93,11 @@ def assemble(src, base, widths, externs, text_alloc):
             items.append(("say", m.group(1)))
             pc += 2 + 5 + 2   # loadword 0 ptr (6) + callstd 2 (2) -> 8
             pc -= 1
+            continue
+        m = re.match(r'ask\s+"(.*)"$', ln)
+        if m:
+            items.append(("ask", m.group(1)))
+            pc += 8
             continue
         m = re.match(r"move\s+(\S+)\s+(.+)$", ln)
         if m:
@@ -123,6 +134,10 @@ def assemble(src, base, widths, externs, text_alloc):
             text = mt.wrap_en(it[1], __import__("builtins").bytes(widths), DIALOGUE_PX, True)
             a = text_alloc(mt.encode_en(text))
             out += bytes([0x0F, 0]) + struct.pack("<I", a) + bytes([0x09, 0x02])
+        elif it[0] == "ask":
+            text = mt.wrap_en(it[1], __import__("builtins").bytes(widths), DIALOGUE_PX, True)
+            a = text_alloc(mt.encode_en(text))
+            out += bytes([0x0F, 0]) + struct.pack("<I", a) + bytes([0x09, 0x05])
         elif it[0] == "move":
             a = text_alloc(it[2])
             out += bytes([0x50]) + struct.pack("<HI", it[1], a) + bytes([0x52]) + struct.pack("<H", it[1])

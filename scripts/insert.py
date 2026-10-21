@@ -522,6 +522,9 @@ def main():
                  for i in range(MOVE_DESC_COUNT)}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
+    if json.load(open("data/new_maps.json")).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
+        import frontier_build
+        frontier_build.reserve(pool)
     # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
     keep = set()
     if os.environ.get("INSERT_NORECYCLE"):

@@ -234,6 +234,32 @@ Fixed on `main` (PR #107, issue #105, PLAYTEST 89); **this branch needs that fix
 and Mega Evolution of the player's own Pokémon in these fights were not exercised; EV spreads and natures are not applied (the block format has no field for them), so the opponent sets rely on
 IV 31 only; the intro `trainerbattle`-style overworld speech is not used (we start the battle natively).
 
+### 6.7 M5 as built: the playable MVP (2026-10-21)
+
+`scripts/frontier_build.py` (hooked into `mapedit.apply()` when `data/new_maps.json` has `"frontier": true`) does everything: `reserve()` takes one 31 KB run for the moved trainer
+table at the very start of `insert.py` (the free pool is too fragmented later: biggest run ~24 KB), `link()` writes the set table, the speech table and the 1,868-byte native image into the pool,
+`extend()` adds the arenas, hall/cabin edits and 19 scripts, and `finalize()` moves the trainer table (**743 -> 775 slots; 25 literal words that point into the first 40 bytes of the old table
+are repointed**, found with a window rule because random compressed-data words matching the whole range would be false positives), writes the 28 shell opponents and aims the speech
+table's words 1/2 at the RAM buffers. New: map-script tables on new maps (`"map_scripts": {"frame": [...]}` in `mapedit`), `ask "text"` in `scrasm` (Yes/No box), and the missing
+string-var byte of `buffernumberstring` / `bufferitemname`.
+
+| Piece | Result |
+|---|---|
+| Cost | sets 21 KB + natives 1.9 KB + speeches 0.2 KB + the table move 31 KB + scripts/maps ~97 KB (with Mt. Silver); `free_after` 562,143 B; `insert.py` `missing 0, too_long 0, errors 0`; BPS byte-identical |
+| Existing trainers after the table move | verified: a real NPC fight (Bug Catcher Kanta) reads and plays normally |
+| Map layout | arrival cabin `31.6` (door retargeted) <-> hall `31.3` (south door retargeted; singles counter at (4,4), doubles counter at (15,4), BP clerk at (17,12), records at (10,4), the original nurse/lore NPCs kept) <-> arenas `58.5`-`58.9` (clones of the Elite Four chambers: ice, psychic, fire, dark, gold) reached by script warps |
+| Floor -> arena | Red=fire, Orange=gold, Yellow=gold, Green=dark, Blue=ice, Indigo=psychic, Violet=psychic |
+| Flow | counter -> register (Yes/No) -> pick 3 or 4 in the party menu (`special ChoosePartyMon` once per pick) -> `fr_enter` -> warp to the floor's arena -> the arena's **frame-table script** (var `STATE == 1`) announces the floor, calls `fr_gen`, `fr_speech`, picks one of 12 shell identities, prints the opponent's intro line from RAM, `fr_heal` (re-scales and heals), `fr_start`, then resolves the battle -> win: `STREAK += 1`, next arena (or, after 7, BP award and "keep climbing?") -> retire/loss: `fr_leave`, record the streak, warp to the hall |
+| Verified in the emulator (`scripts/spikes/frontier_m5_drive.py`) | hall dialogue, singles registration (3 picks) and doubles (4 picks, double battle: "Dragon Tamer Draco sent out Jumpluff and Kadabra!"); three consecutive wins with the picks staying Lv 50 (streak 0 -> 1 -> 2); round complete at 14: "Seven floors cleared! The ledger pays you 4 Battle Points." then the prompt; **retire restores the party exactly** (original order, levels, EXP-derived stats, the hidden Grotle) and records the best streak (14); BP counter buys the 20-BP Leftovers (30 -> 10); the records board text; cabin door <-> hall door; **the hall's entry hook repairs an abandoned challenge** (warp in with `STATE = 1`: party restored, state cleared) |
+| Not yet exercised | a real **loss** (the lost branch shares the retire code and a lost tower-flag fight was verified to return to the script without a whiteout in M4); the ferry offer itself (`49.6`, needs the Champion flag); the shop's Mega Stone and the rest of the catalogue; the "bag full" and "not enough BP" branches; a reset in the middle of an arena (the frame script re-runs and regenerates the same opponent from the seed) |
+
+**Facts learned while building it**
+- A tower-flag battle resets the picks' stats to their real level afterwards (cause not traced), so `fr_heal` now re-applies Lv 50 and the script calls it before every fight.
+- Hidden Pokémon: nothing may be parked inside the struct (the HP field is rewritten by battle code, and the padding word at +30 holds hack data), so `fr_enter` returns their species in `0x8009`-`0x800B`; scripts keep them in hack vars `0x5127`-`0x5129` (the pick vars, free once `fr_enter` has run) and hand them back to every `fr_leave`.
+- The party menu remembers its cursor between picks; a driver (or a player) must not assume slot 0.
+- `random 65535` gave small seeds in the emulator (3, 14, 25 ...): the opponents are still seed-deterministic, but real play should be checked for variety (a second `random` or a counter could be mixed in).
+- The first arena script runs from the map's frame table (after the fade-in), which is why an intro line can be printed without a coord trigger.
+
 ### 6.5 Opponent look-and-feel
 
 Opponents are tower classes ("Ace Trainer", "Cooltrainer", "Pokémaniac", "Gentleman", "Lass", ...). Facility classes use
@@ -390,7 +416,7 @@ risky and unnecessary). Naming is clearly "Battle Points". A single-line text pa
 | **M2** (done 2026-10-21, review pending) | Set generator + validator + packed table; sample teams reviewed by River | `frontier_sets.py --check`, `sample_teams.md`, size report (section 7.7) |
 | **M3** (done 2026-10-21) | Native helpers `fr_enter`/`fr_leave`/`fr_heal` (party mutate/restore) with idempotence and save tests | `frontier_m3_test.py`: 32 checks pass; battle screenshot (section 6.3) |
 | **M4** (done 2026-10-21) | `fr_gen_opponent` (C) + `fr_start_battle` and the full chain in the emulator | section 6.6; `frontier_m4_e2e.py` |
-| **M5** | Hall map `31.3` rewired, reception, room map, round loop, BP, shop, records | full 7-battle singles round, then doubles, in the emulator |
+| **M5** (playable MVP done 2026-10-21) | Hall map `31.3` rewired, reception, arenas, round loop, BP, shop, records | section 6.7 |
 | **M6** | Brain (Lance) 21 and 49, symbols, polish, balancing pass | full run to 21 with a Lv 50 test team |
 | **M7** | PLAYTEST rows, `CLAUDE.md`/`HACKDB` notes, release notes for the River Edition (v0.2), BPS check | `insert.py` clean, BPS byte-identical |
 
@@ -639,4 +665,4 @@ Left from section 11: **S0** (do the new vars/flags survive a save/reload?). New
    validator, sample teams).
 2. ~~M3~~ done: `scripts/frontier_native.s` + `frontier_native.py` (test links it in EWRAM; M5 links it at its free-pool address).
 3. ~~M4~~ done (section 6.6).
-4. **M5:** maps (31.6/31.3 warps, five arenas in group 58), scripts, shop, records.
+4. ~~M5~~ playable MVP done (section 6.7). Left: **M6** (Lance at 21, Anabel at 49, seals, polish) and the checks listed under "Not yet exercised".

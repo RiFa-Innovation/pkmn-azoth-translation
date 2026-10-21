@@ -65,6 +65,10 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
 - **Reserved ids (do not reuse elsewhere):** map group 58 (the only spare `gMapGroups` slot; slot 59 is the terminator),
   flags `0x1338`-`0x133F` (Mt. Silver item balls) and `0x1340` (Red beaten), layout ids 52-77, trainer ids
   48, 49, 62, 77, 113, 200, 454, 455, 456 (Ariana, Chapter 2 beat 5), 461 (empty-name slots no script referenced); flags `0x1341`-`0x135x` and var `0x5108` are the Chapter 2 story state (see `STORY_PLAN.md` section 6).
+- **Spectrum Frontier reservations** (`scripts/frontier_build.py`, spec `docs/BATTLE_FRONTIER_SPEC.md`): hack vars `0x5121`-`0x5132`, flags `0x1388`-`0x13A7`,
+  maps `58.5`-`58.9` (arenas), EWRAM `0x02022400`-`0x020227FF` (opponent party block `0x02022400`, speech buffers `0x02022600/680/700`; borrowed link buffers, the game is offline),
+  **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
+  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text. `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +
