@@ -325,3 +325,12 @@ summariser, and the atlas/map pages did not load, so treat details as approximat
 
 Plan changes from these results: Megas to hand out are **Diancie, Latias, Kangaskhan, Audino** only; Archer (and any other
 Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh; finale uses the top chamber of `55.16`.
+
+## 13. Build log (branch `feat/chapter-2-rainbow`)
+
+- **Tooling:** `scripts/scrasm.py` gained `move <local> <step...>` (applymovement + waitmovement with named steps from the
+  decomp, e.g. `walk_down face_left`), and `once FLAG ... endonce` (body runs a single time). Existing: `say`, `trainer`,
+  `warp`, labels, any opcode by name.
+- **Beat 1 built:** a coord trigger at `(5,11)` in Elm's lab (`43.6`), gated by var `0x5108 == 0` and flag `0x14DA` (Ashida
+  scene seen). Elm turns, explains the returned signal, sets `CH2_START` (`0x1341`) and `CH2_STAGE = 1`. Verified in the
+  emulator (scene plays, var set, no retrigger). Dialogue is a draft for the owner to rewrite.

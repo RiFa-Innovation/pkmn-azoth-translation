@@ -23,6 +23,38 @@ import scrdis  # noqa: E402
 
 DIALOGUE_PX = 198
 _OPS = None
+_MOVES = None
+
+MOVEMENT_INC = os.path.join(os.path.dirname(__file__), "..", "utilities/pokefirered/asm/macros/movement.inc")
+MOVEMENT_H = os.path.join(os.path.dirname(__file__), "..", "utilities/pokefirered/include/constants/event_object_movement.h")
+
+
+def moves():
+    """movement name -> byte (walk_down, face_left, delay_8, step_end ... from the decomp macros)."""
+    global _MOVES
+    if _MOVES is None:
+        consts = {m.group(1): int(m.group(2), 0)
+                  for m in re.finditer(r"#define (MOVEMENT_ACTION_\w+)\s+(0x[0-9A-Fa-f]+|\d+)", open(MOVEMENT_H).read())}
+        _MOVES = {m.group(1): consts[m.group(2)]
+                  for m in re.finditer(r"create_movement_action (\w+), (MOVEMENT_ACTION_\w+)", open(MOVEMENT_INC).read())
+                  if m.group(2) in consts}
+        _MOVES["step_end"] = 0xFE
+    return _MOVES
+
+
+def _preprocess(src):
+    """once FLAG ... endonce: run the body a single time (sets FLAG first); later triggers just release."""
+    out = []
+    for raw in src.splitlines():
+        ln = raw.strip()
+        m = re.match(r"once\s+(\S+)$", ln)
+        if m:
+            out += [f"checkflag {m.group(1)}", "goto_if 1 _once_end", f"setflag {m.group(1)}"]
+        elif ln == "endonce":
+            out += ["releaseall", "end", "_once_end:", "releaseall", "end"]
+        else:
+            out.append(raw)
+    return "\n".join(out)
 
 
 def ops():
@@ -38,7 +70,7 @@ def _num(tok):
 
 def assemble(src, base, widths, externs, text_alloc):
     lines = []
-    for raw in src.splitlines():
+    for raw in _preprocess(src).splitlines():
         raw = raw.split("#")[0].strip() if '"' not in raw else raw.strip()
         if raw:
             lines.append(raw)
@@ -53,6 +85,12 @@ def assemble(src, base, widths, externs, text_alloc):
             items.append(("say", m.group(1)))
             pc += 2 + 5 + 2   # loadword 0 ptr (6) + callstd 2 (2) -> 8
             pc -= 1
+            continue
+        m = re.match(r"move\s+(\S+)\s+(.+)$", ln)
+        if m:
+            steps = [moves()[w] for w in m.group(2).split()]
+            items.append(("move", _num(m.group(1)), bytes(steps + [0xFE])))
+            pc += 7 + 3   # applymovement local ptr (1+2+4) + waitmovement local (1+2) = 10
             continue
         m = re.match(r'trainer\s+(\w+)\s+"(.*?)"\s+"(.*?)"$', ln)
         if m:
@@ -83,6 +121,9 @@ def assemble(src, base, widths, externs, text_alloc):
             text = mt.wrap_en(it[1], __import__("builtins").bytes(widths), DIALOGUE_PX, True)
             a = text_alloc(mt.encode_en(text))
             out += bytes([0x0F, 0]) + struct.pack("<I", a) + bytes([0x09, 0x02])
+        elif it[0] == "move":
+            a = text_alloc(it[2])
+            out += bytes([0x50]) + struct.pack("<HI", it[1], a) + bytes([0x52]) + struct.pack("<H", it[1])
         elif it[0] == "trainer":
             ptrs = [text_alloc(mt.encode_en(mt.wrap_en(t, bytes(widths), DIALOGUE_PX, True))) for t in it[2:4]]
             out += bytes([0x5C, 0]) + struct.pack("<HHII", it[1], 0, *ptrs)

@@ -69,6 +69,9 @@
   },
   "tr_455": {
    "asm": "trainer 455 \"Few reach this floor. Fewer leave it.\" \"Impressive...\"\nsay \"Red waits where the air is thinnest.\"\nend"
+  },
+  "ch2_elm": {
+   "asm": "lockall\ncheckflag 0x14da\ngoto_if 0 skip\ncheckflag 0x1341\ngoto_if 1 skip\nsetflag 0x1341\nsetvar 0x5108 1\nturnobject 1 1\nsay \"Elm: Ah, {FD:01}! Come here a moment.{FB}Look at this printout. It's the signal that forced all those wild Pok\u00e9mon to Mega Evolve.{FB}It came back last night. Only four seconds, at 3:07, in the band the old Radio Tower used.{FB}I won't ask you to go. I only want you to know.\"\nsay \"Elm: ...Of course you'll look into it. You always do.{FB}Start at Goldenrod. Buena says her broadcasts have been dropping out every night at the same hour.\"\nreleaseall\nend\nskip:\nreleaseall\nend"
   }
  },
  "groups": {
@@ -376,6 +379,19 @@
      "var": 16537,
      "value": 0,
      "script": "silver_enter"
+    }
+   ]
+  },
+  {
+   "map": "43.6",
+   "coords": [
+    {
+     "x": 5,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 0,
+     "script": "ch2_elm"
     }
    ]
   }
