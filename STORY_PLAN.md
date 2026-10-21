@@ -401,3 +401,12 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   "something they answer to freely": the Kimono Girls' song. Sets flag `0x1359` and **`CH2_STAGE = 10`** (stage 9 is no longer
   stored; the win and the overload are one scene). Verified with a Lv 5 test Archer (full scene, stage 10). Beat 11 (the song)
   starts at stage 10.
+- **Beat 11 built** in `55.16` as a second scene. After the overload the script sets `CH2_STAGE = 10`, fades and **warps to the same
+  map**; the map's transition hook then shows the arrivals (Looker `123`, Anabel `136`, Tamao `31` and another sister `42`, flag
+  `0x135A`). Stepping into the corridor (`y = 11`) plays the song scene: the sisters learned every note and leave "the fifth place
+  empty"; the shards settle on one note and the ring's jagged red softens back to a rainbow; Lugia's cry answers from far out
+  over the sea; Archer ("Nobody made them") is taken into custody by Looker; Silver on Giovanni; Tamao grants the **Diancie**
+  Mega aura (flag `0xC2D`). Sets `CHORUS_DOWN` (`0x134B`), `ARCHER_CAUGHT` (`0x134C`) and **`CH2_STAGE = 11`**.
+  Verified with a Lv 5 test Archer through the full chain. Only two sisters are shown (object budget of 16 live objects).
+- **Lesson:** `addobject`/`setobjectxy` did not reliably bring cast on mid-scene (FR spawns only objects near the camera, and the
+  live-object limit is 16). The warp-reload trick above is the dependable way and is now in `CLAUDE.md`.

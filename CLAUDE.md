@@ -74,6 +74,9 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
 - A script `trainerbattle` of type 0 **ends the script after the battle**; to run story lines after a win use type 2
   (`trainer ID "intro" "defeat" LABEL` in `scrasm.py`, with `LABEL:` right after it) and set story state *after* the label,
   never before the fight (a loss would otherwise strand the story).
+- Scene cast that must *appear mid-scene*: do not use `addobject`/`setobjectxy` (objects outside the camera's range are not
+  spawned, and late `addobject` was unreliable). Hide them with a flag via the map's `ON_TRANSITION` hook, change the story
+  var, then `warp` to the same map; the reload spawns them (see beats 9-11 in `STORY_PLAN.md`). FR allows 16 live objects.
 - Trainer battle pics are the 148-entry table at `0x23957C` (+palettes); overworld sprites 240 entries at `0x08961600`.
 - Species audit (2026-10-20): wild/trainer/script data reach 508 of 1,293 sprite entries; of species <= 411 only
   57 are unreachable even through evolution (legendaries and unobtainable Hoenn species): use those first for new spawns.

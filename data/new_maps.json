@@ -113,10 +113,13 @@
    "asm": "lockall\nsetvar 0x5108 8\nsetflag 0x134a\nplayse 0x15\nsay \"Your Pok\u00e9gear is ringing!\"\nsay \"Lyra: {FD:01}! It's me! Don't hang up, it's good news!{FB}Buena had the idea. The node's pulse hits at 3:07 on one frequency, right?\"\nsay \"Buena: So I scheduled the loudest, silliest show I've ever aired on that exact frequency, with every listener's request line open.{FB}A thousand people singing along drowned it out.\"\nsay \"Lyra: The node went dark and stayed dark! It was kind of beautiful, honestly.{FB}Looker's team is guarding the antenna now.\"\nsay \"Looker: One more thing. The signal's last relay is deep in the Whirl Islands, in the chamber where Lugia slept.{FB}That's where Archer is. Don't go alone.\"\nsay \"Lyra: ...Come back safe. And {FD:01}? Thanks for trusting us with the hard part.\"\nreleaseall\nend"
   },
   "ch2_final_tr": {
-   "asm": "compare_var_to_value 0x5108 8\ngoto_if 1 show\nsetflag 0x1358\ngoto @orig_55_16_transition\nshow:\nclearflag 0x1358\ngoto @orig_55_16_transition"
+   "asm": "compare_var_to_value 0x5108 8\ngoto_if 1 stage8\ncompare_var_to_value 0x5108 10\ngoto_if 1 stage10\nsetflag 0x1358\nsetflag 0x135a\ngoto @orig_55_16_transition\nstage8:\nclearflag 0x1358\nsetflag 0x135a\ngoto @orig_55_16_transition\nstage10:\nclearflag 0x1358\nclearflag 0x135a\ngoto @orig_55_16_transition"
   },
   "ch2_final": {
-   "asm": "lockall\nsay \"Archer: ...Welcome, Champion. Punctual. I do admire a performer who hits their mark.\"\nsay \"Silver: Where are the Pok\u00e9mon you've been feeding into that ring?\"\nsay \"Archer: Where they belong. In the chorus. Together, always.{FB}Do you know what Rocket taught me? That devotion is something a man can be discarded from.\"\nsay \"Archer: So I built a bond nobody can leave. It needs only one willing voice to hold it steady.{FB}A Champion. A Trainer whose partner followed them out of a lab as a child. You.\"\nsay \"The Key Stone in your hand stays cold. You shake your head.\"\nsay \"Archer: ...No? The script anticipated that. Then we play the scene the other way.\"\nsay \"Dawn: Silver, the ring! Those Pok\u00e9mon are being drained!{FB}Silver: I'm on it. {FD:01}, he's yours!\"\ntrainer 457 \"Then let the next act begin!\" \"...A flawless performance. Of course it was.\" won\nwon:\nsay \"Archer: ...Then let them stay on the stage with me.\"\nfadescreen 1\nplayse 0x15\ndelay 15\nfadescreen 0\nsay \"The ring of shards flares white. Its rainbow light turns jagged, then red.{FB}Every shard begins to ring on a different note.\"\nsay \"Dawn: It's not shutting down! It's feeding on itself!{FB}Silver!!\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"Silver: ...I'm fine. A Pok\u00e9mon panicked and I took the hit.{FB}Get the others out of the ring. NOW.\"\nsay \"From beyond the cave walls come cries. Wild Pok\u00e9mon all over the islands are being forced to Mega Evolve.\"\nsay \"Archer: No... no, that's not the score.{FB}Stop. Stop it! It was supposed to hold them. It was supposed to...\"\nsay \"Archer: ...I can't stop it either.\"\nsay \"Dawn: The stones are screaming at the wrong pitch. We can't cut it.{FB}Only something they answer to freely will calm them.{FB}The song! Where are the Kimono Girls?\"\nsetflag 0x1359\nsetvar 0x5108 10\nreleaseall\nend"
+   "asm": "lockall\nsay \"Archer: ...Welcome, Champion. Punctual. I do admire a performer who hits their mark.\"\nsay \"Silver: Where are the Pok\u00e9mon you've been feeding into that ring?\"\nsay \"Archer: Where they belong. In the chorus. Together, always.{FB}Do you know what Rocket taught me? That devotion is something a man can be discarded from.\"\nsay \"Archer: So I built a bond nobody can leave. It needs only one willing voice to hold it steady.{FB}A Champion. A Trainer whose partner followed them out of a lab as a child. You.\"\nsay \"The Key Stone in your hand stays cold. You shake your head.\"\nsay \"Archer: ...No? The script anticipated that. Then we play the scene the other way.\"\nsay \"Dawn: Silver, the ring! Those Pok\u00e9mon are being drained!{FB}Silver: I'm on it. {FD:01}, he's yours!\"\ntrainer 457 \"Then let the next act begin!\" \"...A flawless performance. Of course it was.\" won\nwon:\nsay \"Archer: ...Then let them stay on the stage with me.\"\nfadescreen 1\nplayse 0x15\ndelay 15\nfadescreen 0\nsay \"The ring of shards flares white. Its rainbow light turns jagged, then red.{FB}Every shard begins to ring on a different note.\"\nsay \"Dawn: It's not shutting down! It's feeding on itself!{FB}Silver!!\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"Silver: ...I'm fine. A Pok\u00e9mon panicked and I took the hit.{FB}Get the others out of the ring. NOW.\"\nsay \"From beyond the cave walls come cries. Wild Pok\u00e9mon all over the islands are being forced to Mega Evolve.\"\nsay \"Archer: No... no, that's not the score.{FB}Stop. Stop it! It was supposed to hold them. It was supposed to...\"\nsay \"Archer: ...I can't stop it either.\"\nsay \"Dawn: The stones are screaming at the wrong pitch. We can't cut it.{FB}Only something they answer to freely will calm them.{FB}The song! Where are the Kimono Girls?\"\nsetflag 0x1359\nsetvar 0x5108 10\nfadescreen 1\nplayse 0x15\ndelay 25\nwarp 55.16 12 12\nwaitstate\nend"
+  },
+  "ch2_song": {
+   "asm": "lockall\nsay \"Looker: We heard the ring from the harbour! I brought the sisters in my boat.{FB}Anabel: Whatever that thing is doing, it's tearing the whole archipelago apart.\"\nsay \"Tamao: {FD:01}. We learned every note.{FB}Sisters, take your places. And leave the fifth place empty.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"Four voices and four instruments carry a melody none of them learned from anyone alive.{FB}It is gentle and unhurried. It sounds like a flute that is still being played, somewhere else.\"\nsay \"The shards stop fighting each other. One by one they settle on the same note.{FB}The jagged red softens back into the colors of a rainbow.\"\nplaymoncry 249 0\nfadescreen 1\ndelay 25\nfadescreen 0\nsay \"From far out over the sea, a great voice answers the song. Lugia.\"\nsay \"Archer: ...They're listening. Nobody made them.{FB}I spent years and a hundred machines trying to make that happen.\"\nsay \"Looker: Archer. You're coming with me. The file on you has been open long enough.\"\nsay \"Archer: ...Of course. The curtain was always going to fall.\"\nfadescreen 1\nremoveobject 90\nremoveobject 97\nremoveobject 98\ndelay 20\nfadescreen 0\nsay \"Silver: He's theirs now. I won't pretend I feel anything about it.{FB}...The Pok\u00e9mon are safe. That's what matters.\"\nsay \"Tamao: The shards are quiet. The stones remember who refused to be an anchor.{FB}Take this, from all of us.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc2d\nsay \"Tamao stored Diancie's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsetflag 0x134b\nsetflag 0x134c\nsetvar 0x5108 11\nreleaseall\nend"
   }
  },
  "groups": {
@@ -850,40 +853,40 @@
      "flag": 4952
     },
     {
-     "local_id": 93,
-     "gfx": 104,
-     "x": 11,
-     "y": 6,
+     "local_id": 97,
+     "gfx": 123,
+     "x": 13,
+     "y": 13,
      "elev": 3,
-     "movement": 0,
-     "flag": 4952
+     "movement": 8,
+     "flag": 4954
     },
     {
-     "local_id": 94,
-     "gfx": 104,
+     "local_id": 98,
+     "gfx": 136,
+     "x": 12,
+     "y": 13,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    },
+    {
+     "local_id": 99,
+     "gfx": 31,
+     "x": 14,
+     "y": 14,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    },
+    {
+     "local_id": 100,
+     "gfx": 42,
      "x": 15,
-     "y": 6,
+     "y": 14,
      "elev": 3,
-     "movement": 0,
-     "flag": 4952
-    },
-    {
-     "local_id": 95,
-     "gfx": 104,
-     "x": 11,
-     "y": 8,
-     "elev": 3,
-     "movement": 0,
-     "flag": 4952
-    },
-    {
-     "local_id": 96,
-     "gfx": 104,
-     "x": 15,
-     "y": 8,
-     "elev": 3,
-     "movement": 0,
-     "flag": 4952
+     "movement": 8,
+     "flag": 4954
     }
    ],
    "coords": [
@@ -902,6 +905,22 @@
      "var": 20744,
      "value": 8,
      "script": "ch2_final"
+    },
+    {
+     "x": 12,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 10,
+     "script": "ch2_song"
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 10,
+     "script": "ch2_song"
     }
    ]
   }
