@@ -395,3 +395,9 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
 - **Bug found and fixed:** a type 0 `trainerbattle` ends the script after the battle, so everything I had written after
   the fight in beat 5 (Ariana) and in Red's summit script never ran on the first win. `scrasm` now supports type 2
   (`trainer ID "intro" "defeat" LABEL`); beat 5 and Red use it and set their state after the label. Beat 5 re-verified.
+- **Beat 10 built** as the continuation of the Archer script (same room, `55.16`): after the win, Archer's plea, the ring of shards
+  flares white then jagged red, Silver takes a hit freeing a panicked Pokémon, cries come from beyond the walls (wild
+  Pokémon across the islands forced to Mega Evolve), Archer admits he cannot stop it either, and Dawn says the stones need
+  "something they answer to freely": the Kimono Girls' song. Sets flag `0x1359` and **`CH2_STAGE = 10`** (stage 9 is no longer
+  stored; the win and the overload are one scene). Verified with a Lv 5 test Archer (full scene, stage 10). Beat 11 (the song)
+  starts at stage 10.
