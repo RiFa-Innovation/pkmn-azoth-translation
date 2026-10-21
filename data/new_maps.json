@@ -108,6 +108,9 @@
   },
   "ch2_whirl": {
    "asm": "lockall\nsetvar 0x5108 7\nsetflag 0x1349\nsay \"Silver: ...Father.\"\nsay \"Giovanni: So you followed the signal, boy. Good. Don't mistake that for concern.{FB}Rocket's name is being used for something I never authorized.\"\nsay \"Silver: You left. You don't get to authorize anything.\"\nsay \"Giovanni: The chamber behind the Whirl Islands waterfall was once ours.{FB}A facility from my years. Its transmitter is still wired to the old dish.{FB}That is all I will give you.\"\nsay \"Giovanni: I won't ask forgiveness. Whatever you do next...{FB}do it for your own reasons.\"\nfadescreen 1\nremoveobject 90\ndelay 20\nfadescreen 0\nsay \"Silver: ...Don't look at me like that.{FB}The Pok\u00e9mon go first. They're the ones being fed into that ring.{FB}What he is to me can wait.\"\nsay \"Silver: Come on. The waterfall chamber is at the bottom of this place.\"\nreleaseall\nend"
+  },
+  "ch2_call": {
+   "asm": "lockall\nsetvar 0x5108 8\nsetflag 0x134a\nplayse 0x15\nsay \"Your Pok\u00e9gear is ringing!\"\nsay \"Lyra: {FD:01}! It's me! Don't hang up, it's good news!{FB}Buena had the idea. The node's pulse hits at 3:07 on one frequency, right?\"\nsay \"Buena: So I scheduled the loudest, silliest show I've ever aired on that exact frequency, with every listener's request line open.{FB}A thousand people singing along drowned it out.\"\nsay \"Lyra: The node went dark and stayed dark! It was kind of beautiful, honestly.{FB}Looker's team is guarding the antenna now.\"\nsay \"Looker: One more thing. The signal's last relay is at the bottom of the Whirl Islands, behind the waterfall.{FB}That's where Archer is. Don't go alone.\"\nsay \"Lyra: ...Come back safe. And {FD:01}? Thanks for trusting us with the hard part.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -775,6 +778,38 @@
      "var": 20744,
      "value": 6,
      "script": "ch2_whirl"
+    },
+    {
+     "x": 5,
+     "y": 4,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 6,
+     "y": 4,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 5,
+     "y": 5,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 6,
+     "y": 5,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
     }
    ]
   }

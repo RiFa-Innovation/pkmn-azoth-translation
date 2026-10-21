@@ -377,3 +377,10 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   gives one fact: the waterfall chamber was an old Rocket facility with a transmitter still wired to the dish, then fades
   out; Silver puts the Pokémon first). Sets `GIOVANNI_SEEN` (`0x1349`) and `CH2_STAGE = 7`; cast hidden otherwise
   (`0x1357`). Verified in the emulator. No Giovanni overworld sprite was identified in the data, so `87` is a stand-in.
+- **Beat 8 built as a scripted "call", not the native Pokégear call system.** The game's own phone calls are driven by native
+  code with text pointers held in literal pools (the `0x8E6C60` area), so adding a native call would need a reverse-engineered
+  table. Instead the call plays as a scripted scene in the first Whirl Islands room (`55.14`): at `CH2_STAGE == 7`, walking
+  toward the ladder (tiles `(5,5)`, `(6,5)`, `(5,4)`, `(6,4)`) triggers "Your Pokégear is ringing!" with Lyra, Buena and
+  Looker reporting that Buena's all-listeners show drowned the node's 3:07 pulse (Node A dark), that Looker's team guards
+  the antenna, and that Archer's last relay is behind the waterfall. Sets `NODE_A_DOWN` (`0x134A`) and `CH2_STAGE = 8`.
+  Verified in the emulator. A real Pokégear call remains a possible later upgrade.
