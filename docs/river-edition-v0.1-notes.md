@@ -12,10 +12,15 @@ Apply `Pokemon-Azoth-English-RIVER-EDITION-v0.1.bps` to a **clean Pokémon FireR
 |---|---|
 | Base CRC32 | `DD88761C` |
 | Base SHA-1 | `41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc` |
-| Patch SHA-1 | `c2498703cc942faae1cea0d668a96b2f76701c40` |
-| Patched ROM SHA-1 | `958659ba579664932c4d9bafcb6cc6d668d55383` (32 MB) |
+| Patch SHA-1 | `8a630fe008df4b013cdffa2c2f2d76b38eeb2083` |
+| Patched ROM SHA-1 | `2a49924e337f4e0854232e762940403757ccd224` (32 MB) |
 
 It contains everything in the latest beta translation **plus** the River content below. No save is included: Chapter 2 needs a save that has become Champion (flag-gated), so play it from a late in-game save of your own. In-game saves from the betas carry over; **save states do not**.
+
+## Also in this build
+- The title screen carries a red **RIVER EDITION** tag so it can't be mistaken for a beta.
+- **Unown report page 12 is translated (#100).** Its text starts mid-string, which is why it stayed Chinese; the English is now written so both pages read.
+- **A script-scan bug is fixed (#90):** the loader that blanks junk script pointers read sign/event records with the wrong size, leaving one junk pointer and zeroing three unrelated words in Route/League data.
 
 ## ⚠️ Spoilers below (the continuation's story)
 
@@ -30,6 +35,7 @@ It contains everything in the latest beta translation **plus** the River content
 - Several characters use stand-in sprites chosen by eye (Archer, Ashida, Tamao, Looker, Lance and others); Anabel's colours need checking.
 - After the Ecruteak performance the theatre shows **four** dancers (one place is left empty on purpose); other scenes there may be affected.
 - Story progress is stored in new flags and variable `0x5108`; the scenes run in a fixed order.
-- All earlier beta known issues still apply (a few Pokédex words baked into graphics, one Unown note, Chinese Mercury Home gift names).
+- **Open reports I could not reproduce without a save**: empty Routes 31 and 37 and a missing Goldenrod quest NPC (#101-#103), the post-League task/lab error (#99), a stuck overworld Pokémon (#95), the Ruins of Alph scene (#63) and the Shadow Lugia lockout (#51). Saves from just before each are welcome.
+- All earlier beta known issues still apply (a few Pokédex words baked into graphics, Chinese Mercury Home gift names).
 
 No ROMs are distributed. The patch is and stays free.

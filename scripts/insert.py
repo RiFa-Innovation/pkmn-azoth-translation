@@ -683,8 +683,14 @@ def main():
     report["gfx"] += 1
     # title logo (raw 8bpp BG): fits in the original tile area, so in place
     lt, lm = logo.build(src)
-    assert len(lt) <= 162 * 64
-    rom[logo.TILES:logo.TILES + len(lt)] = lt
+    assert len(lt) <= logo.MAX_TILES * 64
+    if len(lt) <= 162 * 64:
+        rom[logo.TILES:logo.TILES + len(lt)] = lt
+    else:   # the River Edition tag needs more tiles: relocate them and repoint the title code's literal
+        assert src[logo.LIT_TILES:logo.LIT_TILES + 4] == (0x08000000 + logo.TILES).to_bytes(4, "little")
+        la = pool.alloc_aligned(len(lt))
+        rom[la:la + len(lt)] = lt
+        rom[logo.LIT_TILES:logo.LIT_TILES + 4] = (0x08000000 + la).to_bytes(4, "little")
     rom[logo.MAP:logo.MAP + len(lm)] = lm
     report["gfx"] += 1
     # plain code/data patches (data/code_patches.json)

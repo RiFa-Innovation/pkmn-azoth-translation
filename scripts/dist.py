@@ -44,6 +44,9 @@ def main():
         ap.error("give either a beta number or --river VERSION")
 
     if not args.no_build:
+        import os
+        if args.river:
+            os.environ["RHT_EDITION"] = "river"     # scripts/logo.py adds the RIVER EDITION title tag
         print(run([sys.executable, "scripts/insert.py"]).strip().splitlines()[-1])
 
     gba = ROOT / "build" / "Mercury_EN.gba"
