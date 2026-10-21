@@ -410,3 +410,10 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   Verified with a Lv 5 test Archer through the full chain. Only two sisters are shown (object budget of 16 live objects).
 - **Lesson:** `addobject`/`setobjectxy` did not reliably bring cast on mid-scene (FR spawns only objects near the camera, and the
   live-object limit is 16). The warp-reload trick above is the dependable way and is now in `CLAUDE.md`.
+- **Beat 12 built** in the Ecruteak Dance Theater (`48.5`, the stage with five Kimono Girl sprites `184`): at `CH2_STAGE == 11`
+  Lance (`119`) and Silver (`129`) wait near the entrance; stepping up from the door (`y = 15`) plays the performance
+  (Tamao's dedication, Sange's melody, one place left empty on stage with a flute resting there, Lance's "a title couldn't have
+  done this; a bond could", Silver refusing to wait for Giovanni's opinion and thanking the Champion). Sets
+  `CH2_ENDING_SEEN` (`0x134D`) and `CH2_STAGE = 12`. The **centre dancer is hidden from stage 11 on** (flag `0x135C`, set by the
+  map's transition hook) and a flute object (`101`, flag `0x135D`) stands in her place permanently; Lance and Silver appear
+  only at stage 11 (flag `0x135B`). Verified in the emulator, including the reloaded stage (four dancers, empty centre).

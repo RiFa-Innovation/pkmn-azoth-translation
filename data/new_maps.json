@@ -120,6 +120,12 @@
   },
   "ch2_song": {
    "asm": "lockall\nsay \"Looker: We heard the ring from the harbour! I brought the sisters in my boat.{FB}Anabel: Whatever that thing is doing, it's tearing the whole archipelago apart.\"\nsay \"Tamao: {FD:01}. We learned every note.{FB}Sisters, take your places. And leave the fifth place empty.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"Four voices and four instruments carry a melody none of them learned from anyone alive.{FB}It is gentle and unhurried. It sounds like a flute that is still being played, somewhere else.\"\nsay \"The shards stop fighting each other. One by one they settle on the same note.{FB}The jagged red softens back into the colors of a rainbow.\"\nplaymoncry 249 0\nfadescreen 1\ndelay 25\nfadescreen 0\nsay \"From far out over the sea, a great voice answers the song. Lugia.\"\nsay \"Archer: ...They're listening. Nobody made them.{FB}I spent years and a hundred machines trying to make that happen.\"\nsay \"Looker: Archer. You're coming with me. The file on you has been open long enough.\"\nsay \"Archer: ...Of course. The curtain was always going to fall.\"\nfadescreen 1\nremoveobject 90\nremoveobject 97\nremoveobject 98\ndelay 20\nfadescreen 0\nsay \"Silver: He's theirs now. I won't pretend I feel anything about it.{FB}...The Pok\u00e9mon are safe. That's what matters.\"\nsay \"Tamao: The shards are quiet. The stones remember who refused to be an anchor.{FB}Take this, from all of us.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc2d\nsay \"Tamao stored Diancie's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsetflag 0x134b\nsetflag 0x134c\nsetvar 0x5108 11\nreleaseall\nend"
+  },
+  "ch2_theatre_tr": {
+   "asm": "compare_var_to_value 0x5108 11\ngoto_if 4 ended\nsetflag 0x135b\nsetflag 0x135d\nclearflag 0x135c\ngoto @orig_48_5_transition\nended:\nsetflag 0x135c\nclearflag 0x135d\ncompare_var_to_value 0x5108 11\ngoto_if 1 stage11\nsetflag 0x135b\ngoto @orig_48_5_transition\nstage11:\nclearflag 0x135b\ngoto @orig_48_5_transition"
+  },
+  "ch2_theatre": {
+   "asm": "lockall\nsetvar 0x5108 12\nsetflag 0x134d\nsay \"The Ecruteak Dance Theater is full tonight. The curtain rises on the Kimono Girls.\"\nsay \"Tamao: Good evening, everyone. Tonight's dance is for someone who isn't here.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"The melody is the one from the archive. Four dancers move through it.{FB}In the center of the stage, one place is left empty. A single flute rests there, waiting.\"\nsay \"Lance: {FD:01}. A title couldn't have done this.{FB}A bond could. I'll try to remember the difference.\"\nsay \"Silver: ...I'm not waiting around for Giovanni's opinion. Or anyone's.{FB}Lance. Next time, watch what I do before you judge me.\"\nsay \"Lance: I will.\"\nsay \"Silver: ...Champion. Thanks. Don't tell anyone I said it.\"\nfadescreen 1\nremoveobject 112\ndelay 20\nfadescreen 0\nsay \"The last note fades, and the theatre stays quiet a moment longer than it should.{FB}Somewhere, very faintly, a flute seems to answer.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -921,6 +927,71 @@
      "var": 20744,
      "value": 10,
      "script": "ch2_song"
+    }
+   ]
+  },
+  {
+   "map": "48.5",
+   "edit": {
+    "objects": {
+     "1": {
+      "flag": 4956
+     }
+    }
+   },
+   "objects": [
+    {
+     "local_id": 111,
+     "gfx": 119,
+     "x": 11,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4955
+    },
+    {
+     "local_id": 112,
+     "gfx": 129,
+     "x": 12,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4955
+    },
+    {
+     "local_id": 113,
+     "gfx": 101,
+     "x": 9,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4957
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
+    },
+    {
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
+    },
+    {
+     "x": 10,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
     }
    ]
   }
@@ -2011,6 +2082,10 @@
   {
    "map": "55.16",
    "on_transition": "ch2_final_tr"
+  },
+  {
+   "map": "48.5",
+   "on_transition": "ch2_theatre_tr"
   }
  ]
 }
