@@ -349,3 +349,12 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   Shadow-device pattern), sets `LANCE_CLEARED` (`0x1343`), `SILVER_JOINS` (`0x1344`) and `CH2_STAGE = 3`. Cast hidden at other
   stages (flag `0x1353`). Verified in the emulator. Sprites are chosen by eye.
 - **Fix:** `mapedit` no longer refuses to edit a map whose events struct is shared (it always copies).
+- **Beat 4 built** in Cliffside Town (`56.27`), compressed to one scene on the plaza in front of the Pokémon Center (the
+  town's central channel is a waterfall, so it is not walkable ground): the Elder (`33`), Axel (`245`) and Dawn (`14`) stand
+  there at `CH2_STAGE == 3`; stepping onto the plaza's west edge plays the scene (the Rainbow Stone carries a bond but cannot
+  make one; "Successor" means keeper of what was learned; Dawn's Galactic comparison), grants the **Latias** Mega aura (flag
+  `0xC24`, with the same fanfare line as the original aura scenes), sets `ELDER_KNOWS` (`0x1345`) and `CH2_STAGE = 4`, and
+  points the player at the Buried Tower. Cast hidden otherwise (flag `0x1354`). Verified in the emulator (scene and stage). The
+  Dragon's Den and Clair were dropped from this beat; the optional Axel rematch is not built.
+- **Lesson:** the `where()` ASCII map marks collision only; water and waterfall tiles look walkable. Check a render
+  (`scripts/maprender.py`) before placing scene tiles.

@@ -84,6 +84,12 @@
   },
   "ch2_indigo": {
    "asm": "lockall\nsetvar 0x5108 3\nsetflag 0x1343\nsetflag 0x1344\nmove 255 walk_up\nsay \"Lance: {FD:01}. Good. I hoped you'd come here.{FB}I owe you a straight answer. The cloaked Dragon Tamer who beat Silver on this floor was me.\"\nsay \"Lance: I told him his love and trust for his Pok\u00e9mon wasn't enough.{FB}I judged a bond like a test result. That was a poor judgment, and I've thought about it every day since.\"\nsay \"Silver: Hmph. Don't look at me.{FB}I'm not here for his apology. I took this from a Rocket grunt on Route 23.\"\nsay \"Silver: A relay coil. It hums every night at 3:07, then goes quiet.{FB}Same time your Radio Tower trouble starts, right?\"\nsay \"Anabel: That coil carries the pattern of Orre's Shadow device.{FB}Those machines seal a Pok\u00e9mon's heart shut. Rocket copied the idea.{FB}We have to remove it, not use it.\"\nsay \"Silver: I'm following the signal. On my own.{FB}...You can come along, if you can keep up.\"\nsay \"Lance: Silver. For what it's worth...{FB}I was wrong about you.\"\nsay \"Silver: ...Tch. Keep your pity. Show me with your actions next time.\"\nreleaseall\nend"
+  },
+  "ch2_cliff_tr": {
+   "asm": "compare_var_to_value 0x5108 3\ngoto_if 1 show\nsetflag 0x1354\ngoto @orig_56_27_transition\nshow:\nclearflag 0x1354\ngoto @orig_56_27_transition"
+  },
+  "ch2_cliff": {
+   "asm": "lockall\nsetvar 0x5108 4\nsetflag 0x1345\nsay \"Elder: So you are the Champion. Axel wrote ahead of you.{FB}Come, stand with us. The old things are best said out here, where the wind can hear them.\"\nsay \"Elder: Long ago the Meteor People held a stone that shone in seven colors.{FB}It could gather the strength of every Pok\u00e9mon around it and focus it, like light through glass.\"\nsay \"Elder: The Rainbow Stone does not make a bond. It only carries one that already exists.{FB}A man who forces it to speak for people who never agreed... is only shouting into a canyon.\"\nsay \"Axel: That's why Lucario and I train. Evolution beyond evolution still depends on one partnership.{FB}Nobody can do it for you, and nobody can do it to you.\"\nsay \"Dawn: I compared notes with what I saw in Sinnoh.{FB}Galactic tried to bend a legend by force, too. It never worked the way they promised.\"\nsay \"Elder: Archer's plan needs one Trainer who chooses to connect.{FB}Refuse him, and the whole system breaks. Every Pok\u00e9mon it touches will pay for it.\"\nsay \"Elder: That is what 'Successor' means: not the keeper of a weapon, but the keeper of what was learned.{FB}Take this with you, and remember it when the time comes.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc24\nsay \"The Elder stored Latias's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsay \"Elder: Go to the Buried Tower. Rocket hides a node under the old stones.{FB}Axel will watch the road behind you.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -528,6 +534,72 @@
      "var": 20744,
      "value": 2,
      "script": "ch2_indigo"
+    }
+   ]
+  },
+  {
+   "map": "56.27",
+   "objects": [
+    {
+     "local_id": 60,
+     "gfx": 33,
+     "x": 45,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    },
+    {
+     "local_id": 61,
+     "gfx": 245,
+     "x": 46,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    },
+    {
+     "local_id": 62,
+     "gfx": 14,
+     "x": 47,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    }
+   ],
+   "coords": [
+    {
+     "x": 42,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 42,
+     "y": 18,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 43,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 43,
+     "y": 18,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
     }
    ]
   }
@@ -1484,6 +1556,10 @@
   {
    "map": "13.0",
    "on_transition": "ch2_indigo_tr"
+  },
+  {
+   "map": "56.27",
+   "on_transition": "ch2_cliff_tr"
   }
  ]
 }
