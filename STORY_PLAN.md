@@ -307,6 +307,21 @@ summariser, and the atlas/map pages did not load, so treat details as approximat
   Spread them over the story rather than one dump: a handful per act keeps the Mega theme alive. Archer's Pokémon can
   Mega Evolve using any already-unlockable species (existing trainers already hold item `533`).
 - **Cost.** One `setflag` plus a few text lines each (about 60-120 bytes per unlock). No new item or sprite.
-- **To verify before building:** that setting a table flag in a test save makes the species appear in the Key Stone
-  list (the bag has no Key Items pocket for a test item; use the Key Stone from the real save or an NPC scene), and
-  that the Mega form's battle sprite exists for the 23 (the wiki lists the entries; battle graphics unchecked).
+- **Correction after testing (see section 12):** only 4 of the 23 have a Mega form in the ROM (Kangaskhan, Latias,
+  Audino, Diancie). The other 19 are flags with no Mega species behind them; do not hand those out.
+
+## 12. Verification results (2026-10-20, emulator and ROM)
+
+| Check | Result |
+|---|---|
+| Trainer Mega Evolution | **Works only if the trainer has a Key Stone (item `353`) in their item list** *and* a party Pokémon holding the generic Mega Stone `533`. Tested: a Lv 90 Alakazam, Diancie, Latias, Kangaskhan and Audino each showed "X's Mega Stone is reacting to Kenji's Key Stone!" and Mega Evolved. A Mega Stone alone, with AI flags 1 or 7, or with the unlock flag set, did nothing. The existing Lance entry has `353` in his items, which matches. **Archer's trainer entry needs `items: [353]`.** |
+| Mega unlock logic | Static: the code at `0x09D47084` loops the `0x1DE3D04` table and calls `FlagGet` on the flag paired with each party species. Not UI-tested for the player (the test save has no Key Stone). |
+| Real Mega forms of the 23 "unlockable" species | **Only 4 exist**: Kangaskhan (id 878), Latias (907), Audino (917), Diancie (918). All four render distinct battle sprites and animate. The remaining 19 have no Mega species. |
+| Variable `0x5108` | Safe: lives at RAM `0x203B584`, inside the range other story variables use; set and read back, neighbours untouched. |
+| Navel Rock | Ferry check exists at Vermilion (`3.5`, `3.71` coord events test item `0x172`). The Navel Rock maps (`2.0`, `2.36`, `2.43`-`2.46`, `2.54`, `2.55`) contain **no objects**: vanilla Lugia/Ho-Oh are not there, so the epilogue must add its own scene objects. |
+| Finale location | `55.16` (27x80 cave) has a Lugia object at `(17,16)` and a roomy top chamber; no waterfall tile is visible in the layout. Use the top chamber as the arena. `55.14` and `55.15` are the vanilla-style Whirl Islands floors. |
+| Sange/Priestess scene | The Ecruteak archive (`52.5`, bookshelf events) already carries Priestess text; the second-page scene can be added there. |
+| Radio Tower interior | **Not checked**: needs a late save (the test save is early). The takeover maps (`52.28`, `52.29`, `52.36`, `55.53`) are scripted by frame/transition scripts. |
+
+Plan changes from these results: Megas to hand out are **Diancie, Latias, Kangaskhan, Audino** only; Archer (and any other
+Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh; finale uses the top chamber of `55.16`.
