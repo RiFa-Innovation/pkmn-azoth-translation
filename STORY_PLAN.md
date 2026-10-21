@@ -278,3 +278,35 @@ summariser, and the atlas/map pages did not load, so treat details as approximat
      scene scripts) so that it can be re-implemented, and should be kept clearly separate from the translation patch.
   5. The Chapter 1 title ("To You, 150 Years Later") supports the Priestess reveal: the authors themselves frame the story
      as a message across 150 years.
+
+## 11. How Mega unlocks work, and 23 Megas that are posted but unobtainable (checked in the ROM)
+
+- **Mechanism (static evidence, not yet UI-verified).** A table at ROM `0x1DE3D04` lists 86 pairs *(species, flag)*; the flag
+  is the unlock. The quest scripts that print "X stored Mega Y's aura" end by `setflag` of the matching table flag
+  (Pidgeot `0xC04`, Slowbro `0xC06`, Gyarados `0xC0A`, Sableye `0xC17`, Lucario `0xB29`, Meganium `0xB2E`, Feraligatr
+  `0xB30`, Starmie `0xC32`, Victreebel `0xC37`, Excadrill `0xC38`, Staraptor `0xC49`, Typhlosion `0xB48`). The message is
+  cosmetic (printed by the script or native code); the flag is what the Key Stone logic reads. So a new unlock scene is
+  just: scene + `setflag <flag>` + a `say` line. The full table is in `data/mega_unlocks.json`.
+- **23 entries have no `setflag` of their flag anywhere in the ROM**: Kangaskhan `0xC08`, Latias `0xC24`, Audino `0xC2C`,
+  Diancie `0xC2D`, Emboar `0xC2F`, Barbaracle `0xC31`, Floette `0xC33`, Scolipede `0xC36`, Dragalge `0xC3C`, Chesnaught
+  `0xC43`, Delphox `0xC45`, Drampa `0xC46`, Zygarde `0xC47`, Heatran `0xC4C`, Golurk `0xC4E`, Meowstic `0xC4F`, Golisopod
+  `0xC51`, Magearna `0xC52`, Zeraora `0xC53`, Scovillain `0xC54`, Glimmora `0xC55`, Tatsugiri `0xC56`, Dondozo `0xC57`.
+  (The check cannot see unlocks done through other opcodes or computed flags; treat as "probably unobtainable".)
+  These are exactly the "posted but not yet obtainable" Megas the authors left for later chapters.
+- **Use them as Chapter 2 rewards, tied to the foreign-region cameos** (all dialogue-only regions in the plan):
+  | Region / source | Megas | Plan hook |
+  |---|---|---|
+  | Hoenn (Cliffside Elder) | Latias | beat 4, the Meteor People story |
+  | Rainbow Stone theme | **Diancie** | beat 11, when the Chorus shuts down: the shard's own aura, the plan's namesake |
+  | Kalos (Anzu document, Prism Tower) | Chesnaught, Delphox, Meowstic, Barbaracle, Dragalge, Floette, Zygarde, Magearna | beats 2 and 8: the Kalos technical document unlocks them in small groups |
+  | Sinnoh (Dawn/Lucas, Galactic thread) | Heatran | beat 5/7: the Stark Mountain report |
+  | Unova (research note) | Emboar, Scolipede, Audino, Golurk | beat 4 side hook |
+  | Alola (Kukui) | Drampa, Golisopod, Zeraora | beat 3 and epilogue |
+  | Paldea (cameo) | Scovillain, Glimmora, Tatsugiri, Dondozo | epilogue/side hook |
+  | Kanto (Mom/Ashida) | Kangaskhan | beat 1 or 13 |
+  Spread them over the story rather than one dump: a handful per act keeps the Mega theme alive. Archer's Pokémon can
+  Mega Evolve using any already-unlockable species (existing trainers already hold item `533`).
+- **Cost.** One `setflag` plus a few text lines each (about 60-120 bytes per unlock). No new item or sprite.
+- **To verify before building:** that setting a table flag in a test save makes the species appear in the Key Stone
+  list (the bag has no Key Items pocket for a test item; use the Key Stone from the real save or an NPC scene), and
+  that the Mega form's battle sprite exists for the 23 (the wiki lists the entries; battle graphics unchecked).
