@@ -96,6 +96,12 @@
   },
   "ch2_buried": {
    "asm": "lockall\nsetvar 0x5108 5\nsetflag 0x1346\nsay \"Ariana: Oh, there you are. Late for your own cue, Champion.{FB}Archer said you'd come. He's very good at knowing where people will stand.\"\nsay \"Silver: Spare us the theatre. That's the node, isn't it?{FB}We follow the signal. We stop the signal.\"\nsay \"Dawn: It's drawing power from the old stones under the tower.{FB}If we cut it here, the whole line wobbles. Ready?\"\ntrainer 456 \"Then let me hold you here until the curtain falls!\" \"...The curtain falls on me, it seems.\"\nsay \"Ariana: ...Archer never told me it would feel like this.{FB}Do as you like. He doesn't need me anymore.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"{FD:01} held the Key Stone against the node. Its rainbow light shuddered and went dark.\"\nsay \"Silver: ...Is that it?\"\nfadescreen 1\ndelay 30\nfadescreen 0\nsay \"The node flickers back to life, dimmer than before.\"\nsay \"Dawn: It restarts on its own. Cutting power won't hold it.{FB}It needs something else. Something the stones answer to freely.\"\nsay \"Silver: Then we find what that is. I'll keep watch here.{FB}Go. The Elder and the Kimono Girls know more than we do.\"\nreleaseall\nend"
+  },
+  "ch2_library_tr": {
+   "asm": "compare_var_to_value 0x5108 5\ngoto_if 1 show\nsetflag 0x1356\ngoto @orig_52_5_transition\nshow:\nclearflag 0x1356\ngoto @orig_52_5_transition"
+  },
+  "ch2_library": {
+   "asm": "lockall\nsetvar 0x5108 6\nsetflag 0x1347\nsetflag 0x1348\nsay \"Tamao: Champion. Thank you for coming.{FB}The Priestess of Ecruteak left a document. It has never been opened.\"\nsay \"Morty: Our records say only the youngest of the Kimono sisters may read it.{FB}And the youngest...\"\nsay \"Tamao: ...is Sange. And Sange is gone. So it stayed sealed, all these years.\"\nfadescreen 1\nplaymoncry 251 0\ndelay 30\nfadescreen 0\nsay \"A faint flute drifts through the archive, from nowhere. The seal on the document loosens as the Key Stone warms.\"\nsay \"Tamao: It's opening. It's... a score. And a note in the margin.\"\nsay \"'To the one who carries my letter.{FB}Play this together, all of you, and leave my place empty. That is the promise.'{FB}'-Sange, Priestess of Ecruteak'\"\nsay \"Tamao: That handwriting. I would know it anywhere.{FB}The Priestess wasn't a stranger. She was Sange.\"\nsay \"Morty: She never left the story. She went back and wrote it.{FB}A hundred and fifty years of people played her song without knowing whose it was.\"\nsay \"Tamao: My sisters and I will learn every note.{FB}When you need us, send word. We will play wherever the stones are listening.\"\nreleaseall\nend"
   }
  },
  "groups": {
@@ -673,6 +679,55 @@
      "var": 20744,
      "value": 4,
      "script": "ch2_buried"
+    }
+   ]
+  },
+  {
+   "map": "52.5",
+   "objects": [
+    {
+     "local_id": 80,
+     "gfx": 31,
+     "x": 9,
+     "y": 7,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4950
+    },
+    {
+     "local_id": 81,
+     "gfx": 183,
+     "x": 11,
+     "y": 7,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4950
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
+    },
+    {
+     "x": 8,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
+    },
+    {
+     "x": 9,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
     }
    ]
   }
@@ -1663,6 +1718,10 @@
   {
    "map": "56.49",
    "on_transition": "ch2_buried_tr"
+  },
+  {
+   "map": "52.5",
+   "on_transition": "ch2_library_tr"
   }
  ]
 }

@@ -364,3 +364,10 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
   node, it restarts dimmer, and Dawn says it needs "something the stones answer to freely". Sets `NODE_B_DOWN` (`0x1346`) and
   `CH2_STAGE = 5`; cast hidden otherwise (flag `0x1355`). Verified in the emulator (scene, battle, stage 5). Archer's trainer
   entry moves to `457`.
+- **Beat 6 built** in the Ecruteak library entry hall (`52.5`): at `CH2_STAGE == 5` Tamao (`31`) and Morty (`183`) stand
+  in the hall; stepping onto row `y = 8` plays the scene (the Priestess's sealed document; Celebi's cry and a faint flute
+  loosen the seal as the Key Stone warms; the margin note "Play this together, all of you, and leave my place empty. That is the
+  promise. -Sange, Priestess of Ecruteak"; the handwriting reveals the Priestess *is* Sange; the sisters will learn the
+  song). Sets `PRIESTESS_PAGE` (`0x1347`), `SONG_LEARNED` (`0x1348`) and `CH2_STAGE = 6`; cast hidden otherwise (`0x1356`).
+  Celebi has no sprite here (only the cry and a screen flash), to avoid adding an object. The stage order is linear
+  (beat 5 -> 6) rather than the plan's open middle. Verified in the emulator.
