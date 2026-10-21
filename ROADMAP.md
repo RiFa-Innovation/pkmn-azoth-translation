@@ -190,3 +190,15 @@ Estimated cost: 10-14 maps x ~3 KB + events/scripts ~20 KB + 1 trainer sprite ~2
   shop and TM fragments; ~40 strings after discarding decode noise), so the ~0.87 MB CJK fonts cannot be freed until issue #11
   is finished; after that the level-2 tails (~385 KB) are the first candidate. Emulator watchpoints cannot trace ROM reads.
 - Space: `free_after` 674,725 B with all Mt. Silver content in (~14.3 KB).
+
+**2026-10-20, polish pass**
+- Red now has a recoloured battle pic (Ethan's pic with a red cap/jacket palette) installed in unused trainer-pic slot 17
+  (`trainer_pics` in `data/new_maps.json`: shares the graphics, new LZ77 palette). Verified in battle.
+- Defeated Mt. Silver trainers stay beaten (Kenji re-talk shows the after-battle line, no rematch).
+- Font reclaim re-assessment: `find_leftover_zh` output is mostly noise. Freed text leaves its old Chinese bytes behind in
+  the pool (dead copies) and graphics bytes decode as hanzi, so "aligned live pointers to hanzi" over-counts. A reliable
+  count needs either a text-render trace in the emulator over a full playthrough or a patched glyph hook that logs indices;
+  until then the CJK fonts stay. Real remaining examples seen: Chinese+English mixed lines (`1DBDEC8`, `1DA1340`), a
+  few fragments (`0AEAF20`, `0EDD0C3`).
+- No generic Pokémon Center interior exists to clone (the hack uses per-location healers), so the Route 28 rest stop stays an
+  outdoor nurse.
