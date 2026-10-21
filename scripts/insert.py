@@ -228,6 +228,45 @@ COORD_SCRIPT = 0x08AF5A3A              # the floor's story trigger script
 COORD_NATIVE, COORD_CHAIN = 0x08CA0051, 0x08AF5011
 
 
+# CFRU's BufferStringBattle (0x1D02B9E..) picks between two nearly identical battle strings with ARITHMETIC, not with two literals:
+# `r3 = cond ? 0 : -(imm + 1)` (movs rX,#imm / negs / bics) added to ONE literal pointer. The compiler could do that because in the
+# original ROM the two strings sit exactly imm + 1 bytes apart. Relocating the English strings breaks the spacing, so the code lands
+# in the middle of unrelated text (issue #105 "strange one-liner before the trainer's lead Pokemon", #13 doubles: "rest.", "est.",
+# "right type, I guess.", "isuke Goto"). Each pair is therefore re-laid as one block in the free pool:
+#   [English string reached with the offset, padded to k bytes][English string the literal points at]
+# and the literal is pointed at the second half. Both strings keep working, so nothing depends on which branch the code takes.
+SENDOUT_PAIRS = [
+    # name,              CFRU literal,  k (= imm + 1), vanilla ref word of the string at literal - k
+    ("ghost appeared",   0x1D0392C,     52,            0x00D73E0),
+    ("double send-out",  0x1D03978,     64,            0x00D7498),
+    ("single send-out",  0x1D0397C,     70,            0x00D74C4),
+    ("trainer withdrew", 0x1D03C04,     16,            0x00D7548),
+]
+
+
+def sendout_offset_pairs(rom, src, pool):
+    out = []
+    for name, lit, k, ref in SENDOUT_PAIRS:
+        base_src = int.from_bytes(src[lit:lit + 4], "little")
+        tgt_src = int.from_bytes(src[ref:ref + 4], "little")
+        assert 0x08000000 <= base_src < 0x0A000000 and base_src - k == tgt_src, \
+            f"sendout pair {name}: source pointers {base_src:#x} - {k} != {tgt_src:#x}"
+        def text_at(ptr):
+            o = ptr - 0x08000000
+            e = rom.index(b"\xff", o) + 1
+            return bytes(rom[o:e])
+        base_en = int.from_bytes(rom[lit:lit + 4], "little")        # the literal was repointed with the English text
+        tgt_en = int.from_bytes(rom[ref:ref + 4], "little")
+        a, b = text_at(base_en), text_at(tgt_en)
+        assert len(b) <= k, f"sendout pair {name}: English '{k}-byte' slot is {len(b)} bytes"
+        blk = b + b"\xff" * (k - len(b)) + a
+        at = pool.alloc(len(blk))
+        rom[at:at + len(blk)] = blk
+        rom[lit:lit + 4] = (0x08000000 + at + k).to_bytes(4, "little")
+        out.append({"pair": name, "block": f"{at:07X}", "bytes": len(blk)})
+    return out
+
+
 def tower_top_floor_softlock(rom, src, pool):
     """Bellsprout Tower's top floor (52.2) softlocks the player in its exit corridor.
 
@@ -712,6 +751,7 @@ def main():
             rom[a:b] = base[a:b]
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
+    report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
     report["new_maps"] = mapedit.apply(rom, src, pool)
     report["free_after"] = pool.total()

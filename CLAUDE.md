@@ -108,6 +108,13 @@ this string" in one call. Add what you learn with `hackdb.py note add`.
   guards in `dump_all.py`: header (<0x200), `in_lz77`, applymovement
   (0x4F/0x50) unless `near_code`, vanilla-data-word -> vanilla symbol rule.
   After any change here confirm compressed blobs report 0 changed.
+- **Two strings chosen by pointer arithmetic must stay the same distance apart.** The compiler turned
+  `cond ? A : B` into `A - (cond ? 0 : k)` (`movs rX,#imm` / `negs` / `bics`, k = imm+1) because A and B were k bytes apart.
+  Relocating the English breaks it: the code reads the middle of unrelated text (battle "sent out" lines: "rest.", "est.",
+  "right type, I guess."). Symptoms: one-line garbage that changes per build. Find it by breaking on the string expander
+  (`0x080D77F4`, r0 = template) and comparing with the original ROM. Fix: `insert.py::sendout_offset_pairs` re-lays each
+  pair as one block. Other such pairs may exist; a scan for `bics` + `ldr rX,[pc]` in code found only these four in
+  `BufferStringBattle`. (#105, PLAYTEST 89)
 - **A string pointer can hide inside a `goto` operand.** `goto`/`call` operands sit at odd
   offsets, so the aligned word two bytes into one is the operand's high half + padding and can
   be a valid pointer to some string; repointing it breaks the jump (`goto 0x08AF8628` ->
