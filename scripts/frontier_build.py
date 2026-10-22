@@ -298,7 +298,7 @@ def build_scripts():
         callnative @fr_heal
         callnative @fr_start
         waitstate
-        special 0xB4
+        specialvar 0x800D 0xB4
         compare_var_to_value 0x800D 1
         goto_if 1 @fr_won
         goto @fr_lost
@@ -354,7 +354,7 @@ def build_scripts():
         callnative @fr_heal
         callnative @fr_start
         waitstate
-        special 0xB4
+        specialvar 0x800D 0xB4
         compare_var_to_value 0x800D 1
         goto_if 1 @fr_won
         goto @fr_lost
@@ -545,8 +545,10 @@ def finalize(rom, src, pool):
         e = bytes(src[old + 40 * tid:old + 40 * tid + 40])
         return e[1], e[3], e[2]                       # class, picture, music/gender byte
 
-    def put(slot, tid, name, double, size):
+    def put(slot, tid, name, double, size, cls_override=None):
         cls, pic, music = donor(tid)
+        if cls_override is not None:
+            cls = cls_override
         a = new + 40 * slot
         rom[a:a + 40] = _record(cls, pic, music, name, double, 7, size)
 
@@ -555,9 +557,9 @@ def finalize(rom, src, pool):
     for i, (tid, name) in enumerate(ids["doubles"]):
         put(SHELL_D + i, tid, name, 1, 4)
     for brain, (s, d) in (("Lance", SHELL_LANCE), ("Anabel", SHELL_ANABEL)):
-        tid, name = ids["brains"][brain]
-        put(s, tid, name, 0, 3)
-        put(d, tid, name, 1, 4)
+        tid, name, *cls = ids["brains"][brain]
+        put(s, tid, name, 0, 3, *cls)
+        put(d, tid, name, 1, 4, *cls)
     # in-battle speeches: words 1 (the player won) and 2 (the player lost) of the first speech-table entry -> RAM buffers
     assert u32(src, SPEECH_ENTRY + 4) != 0 and u32(src, SPEECH_ENTRY + 8) != 0
     rom[SPEECH_ENTRY + 4:SPEECH_ENTRY + 12] = struct.pack("<II", SPEECH_BUF[1], SPEECH_BUF[2])

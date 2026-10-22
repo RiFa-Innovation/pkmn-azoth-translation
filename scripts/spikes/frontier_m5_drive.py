@@ -190,9 +190,9 @@ def main():
             for it in range(int(tok[5:])):
                 for i in range(4):
                     e.write(0x02022402 + 16 * i, bytes([100]))
-                if os.environ.get("WEAK"):                # keep the player's picks at 1 HP so the fight is lost for sure
-                    for i in range(3):
-                        e.write(PARTY + 100 * i + 0x56, struct.pack("<H", 1))
+                if os.environ.get("WEAK"):                # a real loss: every player mon (party and live battle structs) to 0 HP, the next turn ends the battle
+                    for ad in [PARTY + 100 * i + 0x56 for i in range(3)] + [0x02023BE4 + 0x58 * bb + 0x28 for bb in (0, 2)]:
+                        e.write(ad, struct.pack("<H", 0))
                 if hackvar(e, VARS["STATE"]) == 0:
                     print("   challenge ended after", it, "iterations")
                     break
@@ -217,6 +217,15 @@ def main():
             vv, val = spec_.split("=")
             k = 0
             for it in range(int(nmax)):
+                if os.environ.get("KILL"):                # keep every live enemy at 1 HP (never revives a fainted one)
+                    for i in range(6):
+                        ad = 0x0202402C + 100 * i + 0x56
+                        if u16(e, ad) > 1:
+                            e.write(ad, struct.pack("<H", 1))
+                if os.environ.get("GOD"):                 # player mons stay at full-ish HP (live ones only)
+                    for ad in [PARTY + 100 * i + 0x56 for i in range(4)] + [0x02023BE4 + 0x58 * bb + 0x28 for bb in range(4)]:
+                        if u16(e, ad) > 0:
+                            e.write(ad, struct.pack("<H", 100))
                 if hackvar(e, int(vv, 0)) == int(val, 0):
                     print("   reached", spec_, "after", it, "iterations")
                     break
@@ -226,6 +235,11 @@ def main():
                     e.wait(40)
                     continue
                 if cb == 0x0811EBA1 and e.read(COUNT, 1)[0]:
+                    if os.environ.get("DBL") and k % 3 != 2:     # doubles: the party screen is usually the "Pokémon" menu: back out first
+                        e.press("B", hold=3, release=6)
+                        e.wait(40)
+                        k += 1
+                        continue
                     e.press(["Right", "Down", "Right", "Right"][k % 4], hold=3, release=6)
                     e.wait(10)
                     k += 1
@@ -289,6 +303,9 @@ def main():
             for i in range(6):
                 e.write(0x0202402C + 100 * i + 0x56, struct.pack("<H", 1))
             print("   enemy party species:", [struct.unpack_from("<H", e.read(0x0202402C + 100 * i + 32, 2))[0] for i in range(6)])
+        elif tok.startswith("mem:"):              # mem:0x02023E8A:2 -> hex dump
+            ad, n = tok[4:].split(":")
+            print("   mem", ad, e.read(int(ad, 0), int(n)).hex())
         elif tok == "ctx":                        # script context: mode bytes and the script pointer (where is a stalled script?)
             print("   ctx mode", e.read(CTX, 2).hex(), "scriptPtr", hex(struct.unpack("<I", e.read(CTX + 8, 4))[0]), "running", e.read(RUNNING, 1).hex())
         elif tok == "state":
