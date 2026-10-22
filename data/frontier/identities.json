@@ -1,5 +1,5 @@
 {
- "_doc": "Opponent identities: shell trainer slots copy class, picture and music from a donor trainer id of the hack and carry our own name (<= 10 characters). Brains are separate shells.",
+ "_doc": "Opponent identities: shell trainer slots copy class, picture and music from a donor trainer id of the hack and carry our own name (<= 10 characters). Brains are separate shells. A brain entry may carry a third value: a trainer class id overriding the donor's (Anabel: 24 Leader, instead of the donor's Int'l Police).",
  "singles": [
   [
    1,
@@ -107,7 +107,8 @@
   ],
   "Anabel": [
    514,
-   "Anabel"
+   "Anabel",
+   24
   ]
  }
 }
