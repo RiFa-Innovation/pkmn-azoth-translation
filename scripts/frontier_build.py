@@ -469,7 +469,8 @@ def build_scripts():
         end
     """)
 
-    # --- BP shop (items offered one at a time; Yes buys, No shows the next)
+    # --- BP shop (items offered one at a time; Yes buys, No shows the next). Neither checkitemspace nor additem's result reports a full pocket in this hack
+    # (both say 1 and nothing is added), so success is confirmed with checkitem afterwards.
     items = json.load(open(os.path.join(DATA, "shop.json")))["items"]
     ids = {}
     for fnm in ("items2.json", "items.json"):
@@ -483,8 +484,8 @@ def build_scripts():
         label = it["item"] + (f" x{qty}" if qty > 1 else "")
         nxt = f"shop_{i + 1}" if i + 1 < len(items) else "shop_end"
         shop += [f"shop_{i}:", f'ask "{label}: {price} BP. Buy it?"', "compare_var_to_value 0x800D 1", f"goto_if 1 buy_{i}", f"goto {nxt}",
-                 f"buy_{i}:", f"compare_var_to_value $BP {price}", "goto_if 0 poor", f"checkitemspace {iid} {qty}", "compare_var_to_value 0x800D 0",
-                 "goto_if 1 full", f"additem {iid} {qty}", f"subvar $BP {price}", f'say "{label} is yours."', f"goto {nxt}"]
+                 f"buy_{i}:", f"compare_var_to_value $BP {price}", "goto_if 0 poor", f"additem {iid} {qty}", f"checkitem {iid} {qty}", "compare_var_to_value 0x800D 0",
+                 "goto_if 1 full", f"subvar $BP {price}", f'say "{label} is yours."', f"goto {nxt}"]
     shop += ["shop_end:", 'say "That is everything. Come again!"', "release", "end",
              "poor:", 'say "Not enough Battle Points yet."', "release", "end",
              "full:", 'say "Your Bag is full."', "release", "end"]

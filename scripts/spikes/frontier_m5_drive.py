@@ -80,7 +80,7 @@ def main():
             if e.read(CTX + 8, 4) != struct.pack("<I", SCRIPT):
                 return
     for tok in a.steps.split():
-        if tok in ("A", "B", "Up", "Down", "Left", "Right", "Start", "Select"):
+        if tok in ("A", "B", "Up", "Down", "Left", "Right", "Start", "Select", "L", "R"):
             e.press(tok, hold=3, release=6)
             e.wait(24)
         elif tok.startswith("w") and tok[1:].isdigit():
@@ -222,10 +222,15 @@ def main():
                         ad = 0x0202402C + 100 * i + 0x56
                         if u16(e, ad) > 1:
                             e.write(ad, struct.pack("<H", 1))
-                if os.environ.get("GOD"):                 # player mons stay at full-ish HP (live ones only)
-                    for ad in [PARTY + 100 * i + 0x56 for i in range(4)] + [0x02023BE4 + 0x58 * bb + 0x28 for bb in range(4)]:
+                if os.environ.get("GOD"):                 # live player mons are topped up to their max HP every iteration (never revives a fainted one)
+                    for ad, mx in [(PARTY + 100 * i + 0x56, PARTY + 100 * i + 0x58) for i in range(4)] + [(0x02023BE4 + 0x58 * bb + 0x28, 0x02023BE4 + 0x58 * bb + 0x2C) for bb in range(4)]:
                         if u16(e, ad) > 0:
-                            e.write(ad, struct.pack("<H", 100))
+                            e.write(ad, struct.pack("<H", u16(e, mx)))
+                if os.environ.get("HANZI"):               # stop at the first battle message whose buffer holds a hanzi lead byte (0x03)
+                    buf = bytes(e.read(0x02022AB8, 200)).split(b"\xff")[0]
+                    if b"\x03\x79\x0c\x1b" in buf or b"\x0c\x1b\x03\x0b" in buf:
+                        print("   HANZI in battle text:", buf.hex())
+                        break
                 if hackvar(e, int(vv, 0)) == int(val, 0):
                     print("   reached", spec_, "after", it, "iterations")
                     break
@@ -303,9 +308,35 @@ def main():
             for i in range(6):
                 e.write(0x0202402C + 100 * i + 0x56, struct.pack("<H", 1))
             print("   enemy party species:", [struct.unpack_from("<H", e.read(0x0202402C + 100 * i + 32, 2))[0] for i in range(6)])
+        elif tok.startswith("chk:"):              # chk:200 -> the game's own checkitemspace for one of the item; prints 0x800D
+            iid = int(tok[4:])
+            inject(bytes([0x46]) + struct.pack("<HH", iid, 1) + bytes([0x19]) + struct.pack("<HH", 0x8008, 0x800D) + bytes([0x02]))
+            e.wait(40)
+            print("   checkitemspace", iid, "->", struct.unpack("<H", e.read(SPV + 2 * 8, 2))[0])
+        elif tok.startswith("add:"):              # add:200 -> the game's own additem; prints the result (0x800D) after copying it to 0x8008
+            iid = int(tok[4:])
+            inject(bytes([0x44]) + struct.pack("<HH", iid, 1) + bytes([0x19]) + struct.pack("<HH", 0x8008, 0x800D) + bytes([0x02]))
+            e.wait(40)
+            print("   additem", iid, "->", struct.unpack("<H", e.read(SPV + 2 * 8, 2))[0])
+        elif tok.startswith("own:"):              # own:200 -> the game's checkitem (is it in the Bag?)
+            iid = int(tok[4:])
+            inject(bytes([0x47]) + struct.pack("<HH", iid, 1) + bytes([0x19]) + struct.pack("<HH", 0x8008, 0x800D) + bytes([0x02]))
+            e.wait(40)
+            print("   checkitem", iid, "->", struct.unpack("<H", e.read(SPV + 2 * 8, 2))[0])
+        elif tok.startswith("msg:"):              # msg:0x09DA10C9 -> show that ROM string as a message box (loadword + callstd 2)
+            inject(bytes([0x0F, 0]) + struct.pack("<I", int(tok[4:], 0)) + bytes([0x09, 2, 0x02]))
+            e.wait(60)
+        elif tok.startswith("poke:"):             # poke:0x0203988C=0100  (hex bytes)
+            ad, hx = tok[5:].split("=")
+            e.write(int(ad, 0), bytes.fromhex(hx))
         elif tok.startswith("mem:"):              # mem:0x02023E8A:2 -> hex dump
             ad, n = tok[4:].split(":")
             print("   mem", ad, e.read(int(ad, 0), int(n)).hex())
+        elif tok == "enemy0":                     # a real win: every enemy mon (party and live battle structs 1, 3) to 0 HP
+            for i in range(6):
+                e.write(0x0202402C + 100 * i + 0x56, struct.pack("<H", 0))
+            for bb in (1, 3):
+                e.write(0x02023BE4 + 0x58 * bb + 0x28, struct.pack("<H", 0))
         elif tok == "ctx":                        # script context: mode bytes and the script pointer (where is a stalled script?)
             print("   ctx mode", e.read(CTX, 2).hex(), "scriptPtr", hex(struct.unpack("<I", e.read(CTX + 8, 4))[0]), "running", e.read(RUNNING, 1).hex())
         elif tok == "state":
