@@ -289,7 +289,7 @@ def main():
             e.wait(120)
         elif tok.startswith("goto:"):            # jump into a generated script by name (addresses from build/insert_report.json)
             import json
-            addr = int(json.load(open(f"{RIVER}/build/insert_report.json"))["new_maps"]["frontier"]["scripts"][tok[5:]], 16)
+            addr = int(tok[5:], 16) if tok[5:].startswith("0x") else int(json.load(open(f"{RIVER}/build/insert_report.json"))["new_maps"]["frontier"]["scripts"][tok[5:]], 16)
             inject(bytes([0x05]) + struct.pack("<I", addr))
             e.wait(60)
         elif tok.startswith("setvar:"):          # poke a hack variable: setvar:0x5123=6
@@ -325,6 +325,9 @@ def main():
             print("   checkitem", iid, "->", struct.unpack("<H", e.read(SPV + 2 * 8, 2))[0])
         elif tok.startswith("msg:"):              # msg:0x09DA10C9 -> show that ROM string as a message box (loadword + callstd 2)
             inject(bytes([0x0F, 0]) + struct.pack("<I", int(tok[4:], 0)) + bytes([0x09, 2, 0x02]))
+            e.wait(60)
+        elif tok.startswith("raw:"):              # raw:1604800000250500 -> inject these script bytes (an end is appended)
+            inject(bytes.fromhex(tok[4:]) + bytes([0x02]))
             e.wait(60)
         elif tok.startswith("poke:"):             # poke:0x0203988C=0100  (hex bytes)
             ad, hx = tok[5:].split("=")

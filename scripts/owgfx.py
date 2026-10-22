@@ -9,6 +9,9 @@ How an overworld sprite works in this ROM (checked against the existing 240 entr
     height, 4 flag bytes, oam, subsprite tables, anims, images, affine anims;
   * `images` is an array of {data ptr, size} frames; the palette is found by tag in the table at
     0x1E0F750 ({ptr, tag, 0}, ptr -> 32 raw bytes).
+A spec may name {"page": 15, "index": k} instead of "gfx_id": the info goes into a page table of our own (array word PAGE_COUNT).
+A map object then uses one of the variable graphics ids (240-255 -> var 0x4010 + id - 240, 16-bit value (page << 8) | index);
+ids 240-253 and 255 are used by the hack, 254 (var 0x401E) is unused, so a map's on_transition script sets that var.
 We reuse an existing entry of the same size as the template (oam/anims), point `images` at new frame data,
 and borrow a palette tag that no entry uses by repointing its palette to ours. Unused gfx ids (not used by
 any map event) are the slots to overwrite. Bank location: $RHW_BANK or ~/.rhw/bank (assets are the user's own
@@ -24,6 +27,8 @@ from PIL import Image
 ROM_BASE = 0x08000000
 OW_TABLE = 0x961600
 OW_COUNT = 240
+PAGE_ARRAY = 0x1DDD7B4            # graphics pages: array[high byte of a 16-bit graphics id] -> table of 256 info pointers (page 0 = OW_TABLE)
+PAGE_COUNT = 15                   # pages 0-14 are used by the hack (follower/species sprites); page 15 is free (its array word is 0)
 PAL_TABLE = 0x1E0F750
 INFO_FMT = "<HHHHHHBBBBIIIII"
 
@@ -72,13 +77,26 @@ def tiles(img):
     return bytes(out)
 
 
+def all_info_tables(src):
+    """Every object-graphics info table: the main one (240 used entries) plus each page of the page array."""
+    tabs = [(OW_TABLE, OW_COUNT)]
+    for i in range(1, PAGE_COUNT):
+        p = struct.unpack_from("<I", src, PAGE_ARRAY + 4 * i)[0]
+        if ROM_BASE <= p < ROM_BASE + len(src):
+            tabs.append((p - ROM_BASE, 256))
+    return tabs
+
+
 def unused_palette_entries(src):
-    """Palette-table entries whose tag no object graphics info uses."""
+    """Palette-table entries whose tag no object graphics info uses (main table and every page)."""
     used = set()
-    for i in range(OW_COUNT):
-        p = struct.unpack_from("<I", src, OW_TABLE + 4 * i)[0] - ROM_BASE
-        t = struct.unpack_from(INFO_FMT, src, p)
-        used |= {t[1], t[2]}
+    for base, count in all_info_tables(src):
+        for i in range(count):
+            p = struct.unpack_from("<I", src, base + 4 * i)[0] - ROM_BASE
+            if not (0 <= p <= len(src) - 36):
+                continue
+            t = struct.unpack_from(INFO_FMT, src, p)
+            used |= {t[1], t[2]}
     out = []
     a = PAL_TABLE
     while True:
@@ -97,6 +115,7 @@ def install(rom, src, pool, sprites):
     # keep the tail of the table: entries near the end are the least likely to be referenced by code
     free.reverse()
     installed = 0
+    page_at = None
     for s in sprites:
         try:
             png, pal = find_asset(s["bank_key"], s["w"], s.get("source"))
@@ -130,5 +149,14 @@ def install(rom, src, pool, sprites):
         t[13] = ROM_BASE + img_arr
         info = pool.alloc_aligned(36)
         rom[info:info + 36] = struct.pack(INFO_FMT, *t)
-        rom[OW_TABLE + 4 * s["gfx_id"]:OW_TABLE + 4 * s["gfx_id"] + 4] = struct.pack("<I", ROM_BASE + info)
+        if "page" in s:
+            assert s["page"] == PAGE_COUNT, "only the free page 15 is ours"
+            if page_at is None:
+                assert struct.unpack_from("<I", src, PAGE_ARRAY + 4 * PAGE_COUNT)[0] == 0, "page array word is not free"
+                page_at = pool.alloc_aligned(1024)           # all-zero entries fall back to the default graphics
+                rom[page_at:page_at + 1024] = bytes(1024)
+                rom[PAGE_ARRAY + 4 * PAGE_COUNT:PAGE_ARRAY + 4 * PAGE_COUNT + 4] = struct.pack("<I", ROM_BASE + page_at)
+            rom[page_at + 4 * s["index"]:page_at + 4 * s["index"] + 4] = struct.pack("<I", ROM_BASE + info)
+        else:
+            rom[OW_TABLE + 4 * s["gfx_id"]:OW_TABLE + 4 * s["gfx_id"] + 4] = struct.pack("<I", ROM_BASE + info)
     return installed
