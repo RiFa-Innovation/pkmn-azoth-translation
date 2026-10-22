@@ -228,6 +228,15 @@ screen (map 43.7). Use `press_buttons frames=2 release_frames=10` taps and
 `snap` states at each step (`saves/states/ng-*.ss`, gitignored). All three
 starters, the nickname screen and Elm's farewell were verified here.
 
+## Editions (translation vs River)
+
+`scripts/edition.py`: `RHT_EDITION` unset = the **translation** (what the numbered betas ship; map spec
+`data/new_maps.translation.json` = the Spectrum Frontier post-game only); `RHT_EDITION=river` = the **River Edition**
+(`data/new_maps.json` = Frontier + the fan-made Chapter 2, Route 28, Mt. Silver, Red, bank sprites; title gets the RIVER
+EDITION tag; `scripts/dist.py --river V` sets it). Both editions carry the Frontier; Chapter 2 is released separately.
+The Frontier's arenas are the *last* maps of group 58, so their ids follow whatever the edition already put there.
+Verify **both** after any change: `python3 scripts/insert.py` and `RHT_EDITION=river python3 scripts/insert.py`.
+
 ## Release steps (only when asked)
 
 1. Merge the PR (CI green). `git checkout main && git pull`.
