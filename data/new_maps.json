@@ -562,7 +562,7 @@
     },
     {
      "local_id": 45,
-     "gfx": 146,
+     "gfx": 136,
      "x": 8,
      "y": 17,
      "elev": 3,
@@ -753,7 +753,7 @@
     },
     {
      "local_id": 82,
-     "gfx": 5,
+     "gfx": 191,
      "x": 4,
      "y": 8,
      "elev": 3,
@@ -902,7 +902,7 @@
     },
     {
      "local_id": 98,
-     "gfx": 146,
+     "gfx": 136,
      "x": 12,
      "y": 13,
      "elev": 3,
@@ -1083,7 +1083,7 @@
    "objects": [
     {
      "local_id": 130,
-     "gfx": 157,
+     "gfx": 5,
      "x": 10,
      "y": 4,
      "elev": 3,
@@ -1092,7 +1092,7 @@
     },
     {
      "local_id": 131,
-     "gfx": 205,
+     "gfx": 157,
      "x": 19,
      "y": 4,
      "elev": 3,
@@ -2204,20 +2204,7 @@
  ],
  "overworld_sprites": [
   {
-   "gfx_id": 142,
-   "bank_key": "objgfx/npc/giovanni",
-   "w": 16,
-   "template": 5,
-   "source": "firered"
-  },
-  {
-   "gfx_id": 146,
-   "bank_key": "objgfx/npc/frontier-brains-anabel",
-   "w": 16,
-   "template": 5
-  },
-  {
-   "gfx_id": 157,
+   "gfx_id": 5,
    "bank_key": "objgfx/species/lugia",
    "w": 64,
    "template": 207,
@@ -2226,19 +2213,10 @@
    "frames": 1
   },
   {
-   "gfx_id": 205,
+   "gfx_id": 157,
    "bank_key": "objgfx/species/ho-oh",
    "w": 64,
    "template": 207,
-   "source": "expansion",
-   "map_frames": false,
-   "frames": 1
-  },
-  {
-   "gfx_id": 5,
-   "bank_key": "objgfx/species/celebi",
-   "w": 32,
-   "template": 72,
    "source": "expansion",
    "map_frames": false,
    "frames": 1
