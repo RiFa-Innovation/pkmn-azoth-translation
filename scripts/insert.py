@@ -22,6 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import bps  # noqa: E402
+import edition  # noqa: E402
 import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 import gfx_text  # noqa: E402
@@ -522,7 +523,7 @@ def main():
                  for i in range(MOVE_DESC_COUNT)}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
-    if json.load(open("data/new_maps.json")).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
+    if json.load(open(edition.new_maps_path())).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
         import frontier_build
         frontier_build.reserve(pool)
     # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
@@ -756,7 +757,7 @@ def main():
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
     report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
-    report["new_maps"] = mapedit.apply(rom, src, pool)
+    report["new_maps"] = mapedit.apply(rom, src, pool, edition.new_maps_path())
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)

@@ -1,0 +1,15 @@
+{
+ "frontier": true,
+ "_doc": "Translation edition: only the Spectrum Frontier (scripts/frontier_build.py adds its maps, hall edits and scripts). The River Edition uses data/new_maps.json (select with RHT_EDITION=river, scripts/edition.py).",
+ "scripts": {},
+ "groups": {
+  "58": []
+ },
+ "append_events": [],
+ "wild": [],
+ "trainers": [],
+ "layouts": {},
+ "trainer_pics": [],
+ "map_scripts": [],
+ "overworld_sprites": []
+}

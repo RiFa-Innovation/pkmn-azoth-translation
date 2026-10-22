@@ -1,4 +1,4 @@
-"""Spectrum Frontier build step (docs/BATTLE_FRONTIER_SPEC.md). Called by mapedit.apply() when data/new_maps.json has "frontier": true.
+"""Spectrum Frontier build step (docs/BATTLE_FRONTIER_SPEC.md). Called by mapedit.apply() when the edition's map spec (scripts/edition.py) has "frontier": true.
 
     link(rom, src, pool)      before scripts are assembled: sets table, speech table and the native image go into the free pool;
                               returns the externs scripts use (`callnative @fr_enter` ...)
@@ -6,7 +6,7 @@
     finalize(rom, src, pool)  last step: moves the trainer table (room for 32 more slots), repoints its 40-byte-window literals, writes the shell
                               opponents (class/picture/music from donor trainers, our names) and aims the speech-table words at the RAM text buffers
 
-Reserved: vars 0x5121-0x5132 (PARK0-2 reuse PICK1-3 after fr_enter: the hidden Pokémon's species), flags 0x1388-0x13A7, trainer slots 743-774 (new), map group 58 maps 58.5-58.9, EWRAM 0x02022400-0x020227FF.
+Reserved: vars 0x5121-0x5132 (PARK0-2 reuse PICK1-3 after fr_enter: the hidden Pokémon's species), flags 0x1388-0x13A7, trainer slots 743-774 (new), map group 58: the Frontier's arenas are its LAST maps (58.0-58.6 in the translation edition, 58.5-58.11 after the River Edition's five), EWRAM 0x02022400-0x020227FF.
 """
 import array
 import json
@@ -36,13 +36,14 @@ SHELL_ANABEL = (769, 770)
 BLOCK = 0x02022400                    # the RAM party the shells point at
 SPEECH_BUF = (0x02022600, 0x02022680, 0x02022700)   # intro, defeat, win
 SPEECH_ENTRY = 0x1DEC3A0              # first entry of the orphaned Battle Tower trainer table: words 1 / 2 = speech when the player wins / loses
-ARENA_MAPSEC = 220                    # "Battle Tower"
+ARENA_MAPSEC = 220                # "Battle Tower"
+ARENA_BASE = 5                  # index of the first arena in group 58 (set by extend())
 HALL, CABIN = "31.3", "31.6"
 HALL_DOOR = (10, 17)                  # inside the hall's south door
 
 # arena clones of the Elite Four chambers: key, source map, arrival tile, challenger tile
 SEAL = dict(SILVER_S=0x1389, GOLD_S=0x138A, SILVER_D=0x138B, GOLD_D=0x138C)   # Seal flags (hack flags >= 0x900: set with the game's own setflag)
-BRAIN_ARENAS = [("lance", "1.79", (8, 25), (8, 7), 119), ("anabel", "1.79", (8, 25), (8, 7), 136)]   # 58.10 (Lance), 58.11 (Anabel)
+BRAIN_ARENAS = [("lance", "1.79", (8, 25), (8, 7), 119), ("anabel", "1.79", (8, 25), (8, 7), 136)]   # the two after the five floor arenas
 ARENAS = [("ice", "1.75", (7, 20), (7, 11)), ("psychic", "1.76", (7, 20), (7, 11)), ("fire", "1.77", (7, 20), (7, 11)),
           ("dark", "1.78", (7, 20), (7, 11)), ("gold", "1.79", (8, 25), (8, 7))]
 FLOOR_ARENA = ["fire", "gold", "gold", "dark", "ice", "psychic", "psychic"]
@@ -242,7 +243,7 @@ def build_scripts():
     """)
 
     # --- warp to the arena for the current floor
-    arena_ids = {k: f"58.{5 + i}" for i, (k, *_r) in enumerate(ARENAS + BRAIN_ARENAS)}
+    arena_ids = {k: f"58.{ARENA_BASE + i}" for i, (k, *_r) in enumerate(ARENAS + BRAIN_ARENAS)}
     arrive = {k: a for k, _s, a, _n, *_g in ARENAS + BRAIN_ARENAS}
     lines = ["compare_var_to_value $STREAK 20", "goto_if 1 to_lance", "compare_var_to_value $STREAK 48", "goto_if 1 to_anabel", "call @fr_floor_idx"]
     for f in range(7):
@@ -495,11 +496,11 @@ def build_scripts():
 
 # --------------------------------------------------------------------------------------------------------------------------- extend
 def extend(spec, ext):
+    groups = spec.setdefault("groups", {})
+    global ARENA_BASE
+    ARENA_BASE = len(groups.setdefault("58", []))      # the arenas follow whatever the edition already put in group 58
     S = build_scripts()
     spec.setdefault("scripts", {}).update(S)
-    groups = spec.setdefault("groups", {})
-    first = len(groups.get("58", []))
-    assert first == 5, f"group 58 has {first} maps; the Frontier arenas are 58.5-58.9"
     for key, srcmap, arrive, npc, *g in ARENAS + BRAIN_ARENAS:
         groups["58"].append({"name": f"Spectrum Arena ({key})", "clone": srcmap, "mapsec": ARENA_MAPSEC,
                              "events": {"objects": [{"local_id": 1, "gfx": g[0] if g else 71, "x": npc[0], "y": npc[1], "elev": 3, "movement": 0, "script": "fr_arena_npc"}]},
