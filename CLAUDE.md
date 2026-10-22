@@ -235,7 +235,8 @@ starters, the nickname screen and Elm's farewell were verified here.
 (`data/new_maps.json` = Frontier + the fan-made Chapter 2, Route 28, Mt. Silver, Red, bank sprites; title gets the RIVER
 EDITION tag; `scripts/dist.py --river V` sets it). Both editions carry the Frontier; Chapter 2 is released separately.
 The Frontier's arenas are the *last* maps of group 58, so their ids follow whatever the edition already put there.
-Verify **both** after any change: `python3 scripts/insert.py` and `RHT_EDITION=river python3 scripts/insert.py`.
+Build and verify **both** after any change: `python3 scripts/build_editions.py` (clean-report check, BPS round trip, copies to
+`build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
 
 ## Release steps (only when asked)
 
