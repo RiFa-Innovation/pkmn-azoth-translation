@@ -6,7 +6,7 @@
     finalize(rom, src, pool)  last step: moves the trainer table (room for 32 more slots), repoints its 40-byte-window literals, writes the shell
                               opponents (class/picture/music from donor trainers, our names) and aims the speech-table words at the RAM text buffers
 
-Reserved: vars 0x5121-0x5132 (PARK0-2 reuse PICK1-3 after fr_enter: the hidden Pokémon's species), flags 0x1388-0x13A7, trainer slots 743-774 (new), map group 58: the Frontier's arenas are its LAST maps (58.0-58.6 in the translation edition, 58.5-58.11 after the River Edition's five), EWRAM 0x02022400-0x020227FF.
+Reserved: vars 0x5121-0x5132 and 0x513A-0x513B (PARK0-2 reuse PICK1-3 after fr_enter: the hidden Pokémon's species), flags 0x1388-0x13A7, trainer slots 743-774 (new), map group 58: the Frontier's arenas are its LAST maps (58.0-58.6 in the translation edition, 58.5-58.11 after the River Edition's five), EWRAM 0x02022400-0x020227FF.
 """
 import array
 import json
@@ -26,7 +26,7 @@ ROM_BASE = 0x08000000
 DATA = os.path.join(ROOT, "data/frontier")
 
 VARS = dict(MODE=0x5121, STATE=0x5122, STREAK=0x5123, SEED_LO=0x5124, SEED_HI=0x5125, PICK0=0x5126, PICK1=0x5127, PICK2=0x5128, PICK3=0x5129,
-            PERM_LO=0x512A, PERM_HI=0x512B, PARK0=0x5127, PARK1=0x5128, PARK2=0x5129, BP=0x512C, BEST_S=0x512D, BEST_D=0x512E, SYMBOLS=0x512F, TMP=0x5130, TMP2=0x5131, SHOP=0x5132)
+            PERM_LO=0x512A, PERM_HI=0x512B, PARK0=0x5127, PARK1=0x5128, PARK2=0x5129, BP=0x512C, BEST_S=0x512D, BEST_D=0x512E, SYMBOLS=0x512F, TMP=0x5130, TMP2=0x5131, SHOP=0x5132, STAKE=0x513A, DIRTY=0x513B)
 TRAINER_TABLE = 0x23EACC - 4          # file offset of trainer 0 (40-byte entries)
 TRAINER_COUNT = 743
 EXTRA_SLOTS = 32
@@ -47,9 +47,20 @@ BRAIN_ARENAS = [("lance", "1.79", (8, 25), (8, 7), 119), ("anabel", "1.79", (8, 
 ARENAS = [("ice", "1.75", (7, 20), (7, 11)), ("psychic", "1.76", (7, 20), (7, 11)), ("fire", "1.77", (7, 20), (7, 11)),
           ("dark", "1.78", (7, 20), (7, 11)), ("gold", "1.79", (8, 25), (8, 7))]
 FLOOR_ARENA = ["fire", "gold", "gold", "dark", "ice", "psychic", "psychic"]
-FLOORS = [("Red", "Kindle", "Warm hands, warm hearts."), ("Orange", "Ember", "Rough and cheerful."), ("Yellow", "Spark", "Mind the showoffs."),
-          ("Green", "Grove", "Patient, outdoorsy company."), ("Blue", "Tide", "Calm and precise."), ("Indigo", "Dusk", "Something uncanny hums here."),
-          ("Violet", "Prism", "Nobody here is a stranger to the rainbow.")]
+FLOORS = [("Red", "Kindle", "Warm hands, warm hearts.", "Fire and Fighting types set the pace.", (10, 1)),
+          ("Orange", "Ember", "Rough and cheerful.", "Rock and Ground types hold the stairs.", (5, 4)),
+          ("Yellow", "Spark", "Mind the showoffs.", "Electric and Normal types hold the floor.", (13, 0)),
+          ("Green", "Grove", "Patient, outdoorsy company.", "Grass, Bug and Flying types roam here.", (12, 6, 2)),
+          ("Blue", "Tide", "Calm and precise.", "Water, Ice and Steel types wait here.", (11, 15, 8)),
+          ("Indigo", "Dusk", "Something uncanny hums here.", "Psychic, Ghost and Dark types wait in the dusk.", (14, 7, 17)),
+          ("Violet", "Prism", "Nobody here is a stranger to the rainbow.", "Dragon and Fairy types guard the top, and the boss is a tier up.", (16, 23))]
+
+
+def theme_mask(types):
+    m = 0
+    for t in types:
+        m |= 1 << t
+    return m
 
 
 def u32(b, o):
@@ -75,15 +86,19 @@ def link(rom, src, pool):
     rom[a_sets:a_sets + len(sets)] = sets
     speech = json.load(open(os.path.join(DATA, "speech.json")))
     kinds = ["intro", "defeat", "win"]
+    floors = speech["floor"]
+    per = len(floors[0]["intro"])
     ptrs = []
-    for k in kinds:
-        for line in speech[k]:
-            b = mt.encode_en(line)
-            assert len(b) <= 127, f"speech line too long ({len(b)} bytes): {line!r}"
-            a = pool.alloc(len(b))
-            rom[a:a + len(b)] = b
-            ptrs.append(ROM_BASE + a)
-    blob = struct.pack("<HHHH", *(len(speech[k]) for k in kinds), 0) + b"".join(struct.pack("<I", p) for p in ptrs)
+    for k in kinds:                                   # pointer order [kind][floor][line] (frontier_gen.c fr_pick_speech)
+        for fl in floors:
+            assert len(fl[k]) == per, (k, fl[k])
+            for line in fl[k]:
+                b = mt.encode_en(line)
+                assert len(b) <= 127, f"speech line too long ({len(b)} bytes): {line!r}"
+                a = pool.alloc(len(b))
+                rom[a:a + len(b)] = b
+                ptrs.append(ROM_BASE + a)
+    blob = struct.pack("<HHI", len(floors), per, 0) + b"".join(struct.pack("<I", p) for p in ptrs)
     a_speech = pool.alloc_aligned(len(blob))
     rom[a_speech:a_speech + len(blob)] = blob
     brains = fsets.pack_brains_json(os.path.join(DATA, "sets.json"))
@@ -143,6 +158,10 @@ def build_scripts():
     """)
 
     # --- reception counters (singles: 3 picks, doubles: 4)
+    greet = {"singles": ("Welcome to the Spectrum Tower. I am Hue.{FB}Seven floors, seven battles, one colour each. Everyone climbs at Lv 50: the stairs do not care how strong you were yesterday.",
+                         "Shall I enter you for the singles climb? Three Pokémon, one at a time."),
+             "doubles": ("Welcome, welcome! I am Saturate, and I like my battles in pairs.{FB}Seven floors, seven battles, four Pokémon, all at Lv 50. The stairs do not care how strong you were yesterday.",
+                         "Shall I enter you for the doubles climb? Four Pokémon, two at a time.")}
     for mode, n, label, who in ((1, 3, "singles", "Hue"), (2, 4, "doubles", "Saturate")):
         picks = ""
         for i in range(n):
@@ -168,15 +187,15 @@ def build_scripts():
         callnative @fr_leave
         setvar $STATE 0
         fresh:
-        say "Welcome to the Spectrum Tower.{{FB}}Seven floors, seven battles, one colour each.{{FB}}Everyone fights at Lv 50: the stairs do not care how strong you were yesterday."
-        ask "Shall I register you for the {label} climb?"
+        say "{greet[label][0]}"
+        ask "{greet[label][1]}"
         compare_var_to_value 0x800D 1
         goto_if 1 pick
         say "Come back whenever the sky is the right shade."
         release
         end
         pick:
-        say "Choose {n} Pokémon. They fight at Lv 50."
+        say "Choose {n} Pokémon. For the climb they stand at Lv 50, and the tower puts them back exactly as it found them."
         {picks}
         setvar 0x8000 {n}
         {args}callnative @fr_enter
@@ -195,7 +214,8 @@ def build_scripts():
         setvar $STREAK 0
         call @fr_make_seed
         setvar $STATE 1
-        say "Your party is set to Lv 50. Floor one is Red: warm hands, warm hearts.{{FB}}Up you go!"
+        say "Your party is set to Lv 50. The ledger has your name.{{FB}}Up you go!"
+        call @fr_wager
         goto @fr_to_arena
         cancel:
         say "Another time, then."
@@ -261,9 +281,20 @@ def build_scripts():
     ann = ["call @fr_floor_idx"]
     for f in range(7):
         ann += [f"compare_var_to_value $TMP {f}", f"goto_if 1 say_{f}"]
-    for f, (colour, name, line) in enumerate(FLOORS):
-        ann += [f"say_{f}:", f'say "Floor {f + 1}: {colour}. {line}"', "return"]
+    for f, (colour, name, line, theme, _types) in enumerate(FLOORS):
+        ann += [f"say_{f}:", f'say "Floor {f + 1}: {colour}. {line}{{FB}}{theme}"', "return"]
     A("fr_announce", "\n".join(ann))
+
+    # --- the floor's colour: type theme masks for the generator (0x8006 low / 0x8007 high), leaves the floor index in $TMP
+    th = ["call @fr_floor_idx"]
+    for f, (_c, _n, _l, _t, types) in enumerate(FLOORS):
+        m = theme_mask(types)
+        th += [f"compare_var_to_value $TMP {f}", f"goto_if 1 th_{f}"]
+    th += ["setvar 0x8006 0", "setvar 0x8007 0", "return"]
+    for f, (_c, _n, _l, _t, types) in enumerate(FLOORS):
+        m = theme_mask(types)
+        th += [f"th_{f}:", f"setvar 0x8006 {m & 0xFFFF}", f"setvar 0x8007 {m >> 16}", "return"]
+    A("fr_theme", "\n".join(th))
 
     # --- the arena frame script: announce, build the opponent, fight, resolve
     A("fr_arena_start", """
@@ -279,7 +310,19 @@ def build_scripts():
         subvar 0x8001 1
         copyvar 0x8002 $SEED_LO
         copyvar 0x8003 $SEED_HI
+        call @fr_theme
+        setvar 0x8008 0
+        compare_var_to_value $STREAK 13
+        goto_if 1 shadow
+        compare_var_to_value $STREAK 34
+        goto_if 1 shadow
+        goto gen
+        shadow:
+        setvar 0x8008 1
+        say "The tower holds up a mirror.{FB}It is you, a little to the left."
+        gen:
         callnative @fr_gen
+        copyvar 0x8006 $TMP
         callnative @fr_speech
         random 12
         copyvar $TMP2 0x800D
@@ -307,6 +350,13 @@ def build_scripts():
 
     # --- a won fight: heal, count it, Seals at 21 and 49, round reward every 7th, otherwise the next floor
     A("fr_won", """
+        callnative @fr_faint
+        compare_var_to_value 0x800D 0
+        goto_if 2 hurt
+        goto healed
+        hurt:
+        setvar $DIRTY 1
+        healed:
         callnative @fr_heal
         addvar $STREAK 1
         compare_var_to_value $STREAK 21
@@ -396,7 +446,80 @@ def build_scripts():
     bp = ["setvar 0x8008 3"]
     for k, thr in enumerate((14, 28, 42, 56, 70)):
         bp += [f"compare_var_to_value $STREAK {thr}", "goto_if 0 bp_go", f"setvar 0x8008 {4 + k}"]
-    A("fr_round_done", "\n".join(bp) + """
+    A("fr_settle", """
+        compare_var_to_value $STAKE 0
+        goto_if 1 none
+        compare_var_to_value $DIRTY 0
+        goto_if 1 clean
+        say "A Pokémon fell on the way up, so the stake stays in the ledger."
+        setvar $STAKE 0
+        return
+        clean:
+        setvar $TMP2 2
+        compare_var_to_value $STAKE 2
+        goto_if 1 double
+        goto pay_it
+        double:
+        setvar $TMP2 4
+        pay_it:
+        buffernumberstring 0 $TMP2
+        say "A flawless round! The tower pays your stake double: {FD:02} Battle Points."
+        copyvar 0x8008 $TMP2
+        pay:
+        compare_var_to_value 0x8008 0
+        goto_if 1 paid
+        addvar $BP 1
+        subvar 0x8008 1
+        goto pay
+        paid:
+        setvar $STAKE 0
+        none:
+        return
+    """)
+
+    A("fr_wager", """
+        setvar $STAKE 0
+        setvar $DIRTY 0
+        compare_var_to_value $BP 1
+        goto_if 0 nostake
+        ask "Would you care to stake a Battle Point on a flawless round? Lose no Pokémon and the tower pays double."
+        compare_var_to_value 0x800D 1
+        goto_if 1 stake
+        return
+        stake:
+        subvar $BP 1
+        setvar $STAKE 1
+        compare_var_to_value $BP 1
+        goto_if 0 staked
+        ask "A second point, perhaps?"
+        compare_var_to_value 0x800D 1
+        goto_if 0 staked
+        subvar $BP 1
+        setvar $STAKE 2
+        staked:
+        buffernumberstring 0 $STAKE
+        say "Entered in the ledger: {FD:02}. Climb clean."
+        return
+        nostake:
+        return
+    """)
+
+    ban = []
+    for thr, line in ((7, "SPECTRUM! Seven floors, seven colours, one climb."), (14, "DOUBLE SPECTRUM! The colours are starting to answer you."),
+                      (21, "TRIPLE SPECTRUM! The stairs are learning your name."), (28, "FOURFOLD SPECTRUM! The tower has stopped counting out loud."),
+                      (35, "FIVEFOLD SPECTRUM! Even the handrails are impressed."), (42, "SIXFOLD SPECTRUM! One more, and the tower will have to say something."),
+                      (49, "SEVENFOLD SPECTRUM! A whole rainbow of rainbows.")):
+        ban += [f"compare_var_to_value $STREAK {thr}", f"goto_if 1 b{thr}"]
+    ban += ["compare_var_to_value $STREAK 56", "goto_if 4 beyond", "return"]
+    for thr, line in ((7, "SPECTRUM! Seven floors, seven colours, one climb."), (14, "DOUBLE SPECTRUM! The colours are starting to answer you."),
+                      (21, "TRIPLE SPECTRUM! The stairs are learning your name."), (28, "FOURFOLD SPECTRUM! The tower has stopped counting out loud."),
+                      (35, "FIVEFOLD SPECTRUM! Even the handrails are impressed."), (42, "SIXFOLD SPECTRUM! One more, and the tower will have to say something."),
+                      (49, "SEVENFOLD SPECTRUM! A whole rainbow of rainbows.")):
+        ban += [f"b{thr}:", f'say "{line}"', "return"]
+    ban += ["beyond:", 'say "BEYOND THE SPECTRUM! The ledger has run out of colours, and is ordering more."', "return"]
+    A("fr_banner", "\n".join(ban))
+
+    A("fr_round_done", "call @fr_settle\ncall @fr_banner\n" + "\n".join(bp) + """
         bp_go:
         buffernumberstring 0 0x8008
         bp_add:
@@ -406,12 +529,13 @@ def build_scripts():
         subvar 0x8008 1
         goto bp_add
         bp_done:
-        say "Seven floors cleared! The ledger pays you {FD:02} Battle Points."
+        say "The ledger pays you {FD:02} Battle Points."
         ask "Keep climbing? The next floor is already humming."
         compare_var_to_value 0x800D 1
         goto_if 1 go_on
         goto @fr_retire
         go_on:
+        call @fr_wager
         setvar $STATE 1
         goto @fr_to_arena
     """)
@@ -451,8 +575,50 @@ def build_scripts():
     A("fr_arena_npc", """
         lock
         faceplayer
-        say "..."
+        say "The tower hums. Somewhere below, the next floor is already waiting."
         release
+        end
+    """)
+
+    # --- Old Dowser (hall): a retired Trainer Tower champion; his talk follows the Seals
+    A("fr_dowser", f"""
+        lock
+        faceplayer
+        checkflag {SEAL["GOLD_S"]}
+        goto_if 1 gold
+        checkflag {SEAL["GOLD_D"]}
+        goto_if 1 gold
+        checkflag {SEAL["SILVER_S"]}
+        goto_if 1 silver
+        checkflag {SEAL["SILVER_D"]}
+        goto_if 1 silver
+        say "Back in the old Trainer Tower we timed everything. The new place counts wins instead. I miss the clock, but the wins are nicer.{{FB}}A tip: every floor has a colour, and every colour has habits. Check the floor's types before you choose your Pokémon."
+        release
+        end
+        silver:
+        say "Silver Seal, eh? Lance does not hand those out for politeness.{{FB}}They say the one above him sees battles before they happen. Bring something she has not seen."
+        release
+        end
+        gold:
+        say "A Gold Seal! In my day that earned you a statue. Here they just write it down.{{FB}}Still. I would have liked to see Lance's face."
+        release
+        end
+    """)
+
+    # --- the empty chair: "Reserved." until a Gold Seal, then a hint of the Chapter 2 song (never explained)
+    A("fr_chair", f"""
+        checkflag {SEAL["GOLD_S"]}
+        goto_if 1 gold
+        checkflag {SEAL["GOLD_D"]}
+        goto_if 1 gold
+        lockall
+        say "Reserved."
+        releaseall
+        end
+        gold:
+        lockall
+        say "Reserved: for whoever finishes the song."
+        releaseall
         end
     """)
 
@@ -463,7 +629,7 @@ def build_scripts():
         buffernumberstring 0 $BEST_S
         buffernumberstring 1 $BEST_D
         buffernumberstring 2 $BP
-        say "Longest climbs: {FD:02} battles in Singles, {FD:03} in Doubles.{FB}You hold {FD:04} Battle Points."
+        say "Your longest climbs: {FD:02} battles in Singles, {FD:03} in Doubles.{FB}The ledger holds {FD:04} Battle Points in your name."
         call @fr_seal_line_s
         call @fr_seal_line_d
         release
@@ -477,9 +643,9 @@ def build_scripts():
     for fnm in ("items2.json", "items.json"):
         for k, v in json.load(open(os.path.join(ROOT, "text/en/tables", fnm))).items():
             ids.setdefault(v.lower(), int(k))
-    shop = ["lock", "faceplayer", 'say "Battle Points are the only currency the tower respects."',
+    shop = ["lock", "faceplayer", 'say "Battle Points are the only currency the tower respects. Spend them like you lost the key to something."',
             'ask "Care to browse the prize counter?"', "compare_var_to_value 0x800D 1", "goto_if 1 shop_0",
-            'say "Come back anytime."', "release", "end"]
+            'say "The prizes will keep. Come back when your points are burning a hole in the ledger."', "release", "end"]
     for i, it in enumerate(items):
         iid, qty, price = ids[it["item"].lower()], it.get("qty", 1), it["price"]
         label = it["item"] + (f" x{qty}" if qty > 1 else "")
@@ -487,9 +653,9 @@ def build_scripts():
         shop += [f"shop_{i}:", f'ask "{label}: {price} BP. Buy it?"', "compare_var_to_value 0x800D 1", f"goto_if 1 buy_{i}", f"goto {nxt}",
                  f"buy_{i}:", f"compare_var_to_value $BP {price}", "goto_if 0 poor", f"additem {iid} {qty}", f"checkitem {iid} {qty}", "compare_var_to_value 0x800D 0",
                  "goto_if 1 full", f"subvar $BP {price}", f'say "{label} is yours."', f"goto {nxt}"]
-    shop += ["shop_end:", 'say "That is everything. Come again!"', "release", "end",
-             "poor:", 'say "Not enough Battle Points yet."', "release", "end",
-             "full:", 'say "Your Bag is full."', "release", "end"]
+    shop += ["shop_end:", 'say "That is the whole counter. Come again when the ledger is fatter."', "release", "end",
+             "poor:", 'say "Not quite enough points. The tower is strict about arithmetic."', "release", "end",
+             "full:", 'say "Your Bag is full. Make some room, and the prize will be here."', "release", "end"]
     A("fr_bp_clerk", "\n".join(shop))
     return S
 
@@ -511,7 +677,9 @@ def extend(spec, ext):
                "edit": {"warps": {"0": {"to": CABIN, "warp_id": 0}},
                         "objects": {"2": {"script": "fr_recep_doubles"}, "4": {"script": "fr_recep_singles"}}},
                "objects": [{"local_id": 9, "gfx": 166, "x": 17, "y": 12, "elev": 3, "movement": 0, "script": "fr_bp_clerk"},
-                           {"local_id": 10, "gfx": 26, "x": 10, "y": 4, "elev": 3, "movement": 0, "script": "fr_records"}]})
+                           {"local_id": 10, "gfx": 26, "x": 10, "y": 4, "elev": 3, "movement": 0, "script": "fr_records"},
+                           {"local_id": 11, "gfx": 144, "x": 6, "y": 15, "elev": 3, "movement": 0, "script": "fr_dowser"}],
+               "bgs": [{"x": 6, "y": 17, "elev": 3, "kind": 0, "script": "fr_chair"}]})
     spec.setdefault("map_scripts", []).append({"map": HALL, "on_transition": "fr_hall_tr"})
     return spec
 

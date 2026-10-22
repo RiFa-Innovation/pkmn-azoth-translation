@@ -5,7 +5,7 @@
 
 Run from the main checkout. Scratch ROM = the current build with (a) build/frontier/sets.bin written into a free 0xFF run, (b) two shell trainer slots
 (459 singles, 460 doubles) whose party pointer is the RAM block 0x02022400, (c) the first entry of the orphaned Battle Tower speech table pointing its
-defeat/lose words at RAM text buffers. The natives are linked in EWRAM at 0x0203F520 for the test (M5 links them into ROM).
+defeat/lose words at RAM text buffers. The natives are linked in EWRAM at 0x0203EC00 for the test (M5 links them into ROM).
 """
 import argparse
 import os
@@ -24,7 +24,7 @@ from emu import Emu  # noqa: E402
 import frontier_native as fn  # noqa: E402
 import mercury_text as mt  # noqa: E402
 
-BASE, SCRIPT = 0x0203F520, 0x0203FF00
+BASE, SCRIPT = 0x0203EC00, 0x0203FF00
 CTX, RUNNING, CB2 = 0x03000EB0, 0x03000EA8, 0x030030F4
 SPV, V8 = 0x020370B8, 0x020370C8
 PARTY, COUNT = 0x02024284, 0x02024029

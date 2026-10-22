@@ -2,7 +2,7 @@
 
     python3 scripts/spikes/frontier_m3_test.py "saves/gets_frozen_after fight_and_convo/Azoth.sav" [ROM]
 
-Run from the main checkout (it needs utilities/mgba and saves/). Builds the natives (scripts/frontier_native.py) at 0x0203F520, injects it into EWRAM
+Run from the main checkout (it needs utilities/mgba and saves/). Builds the natives (scripts/frontier_native.py) at 0x0203EC00, injects it into EWRAM
 and drives it through `callnative`, decoding the party in Python to verify slot order, Lv 50 stats (formula checked against the game's own
 stats at the real level first), the 6-slot save round trip, restoration and idempotence.
 """
@@ -20,7 +20,7 @@ import play  # noqa: E402
 from emu import Emu  # noqa: E402
 import frontier_native as fn  # noqa: E402
 
-BASE = 0x0203F520
+BASE = 0x0203EC00
 SCRIPT = 0x0203FF00
 CTX, RUNNING, CB2 = 0x03000EB0, 0x03000EA8, 0x030030F4
 PARTY, COUNT, SPV = 0x02024284, 0x02024029, 0x020370B8

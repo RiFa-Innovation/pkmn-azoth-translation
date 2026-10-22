@@ -4,7 +4,7 @@
 
 Sources: scripts/native/frontier_entry.s (entry table), scripts/frontier_native.s (fr_enter / fr_leave / fr_heal),
 scripts/native/frontier_gen.c (fr_gen_opponent), scripts/frontier_start.s (fr_start_battle).
-Entry points (callnative <base + ENTRY_STRIDE * i>|1), i = 0..7: enter, leave, heal, gen, start, speech, gen_brain, brain_speech.
+Entry points (callnative <base + ENTRY_STRIDE * i>|1), i = 0..8: enter, leave, heal, gen, start, speech, gen_brain, brain_speech, faint.
 `--sets` is the ROM address of the packed set table (build/frontier/sets.bin); insert.py links it at its free-pool address (milestone M5).
 """
 import argparse
@@ -13,7 +13,7 @@ import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENTRY_STRIDE = 8        # bytes per entry in scripts/native/frontier_entry.s
-ENTRIES = ["enter", "leave", "heal", "gen", "start", "speech", "gen_brain", "brain_speech"]
+ENTRIES = ["enter", "leave", "heal", "gen", "start", "speech", "gen_brain", "brain_speech", "faint"]
 CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", "-fno-strict-aliasing", "-fno-stack-protector", "-fno-pic",
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 

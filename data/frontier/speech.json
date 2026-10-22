@@ -1,73 +1,161 @@
 {
- "_doc": "Draft Spectrum Frontier lines (River rewrites). intro: printed by the script before the fight (2 lines, <= 30 chars each). defeat: shown inside the battle when the player wins (2 lines, <= 24 chars). win: shown inside the battle when the player loses (2 lines, <= 24 chars). Use \\n for the line break.",
- "intro": [
-  "Floor by floor, that is the\nonly way up. Shall we?",
-  "Seven floors, seven colours.\nThis one is mine.",
-  "I have waited on this landing\nall day. Show me something.",
-  "Level 50 is the great leveller.\nLet us see who is ready.",
-  "The stairs do not care how\nstrong you were yesterday.",
-  "Mind the steps. They remember\nevery trainer who slipped.",
-  "A new challenger! The ledger\nwas getting lonely.",
-  "Nothing personal. The tower\nsimply wants a battle.",
-  "I trained all week for this\nvery floor. Do your worst!",
-  "Colours fade, but a good\nbattle lasts. Ready?",
-  "You climb well. Let us see\nhow you fight.",
-  "No wagers, no weather, no\nrush. Just a good match.",
-  "Your Pokémon look keen.\nMine are keener. Come on!",
-  "The old Trainer Tower timed\neverything. I prefer wins.",
-  "Do you hear that humming?\nIt means a battle is due.",
-  "Step up! The next floor\ncan wait a minute."
- ],
- "defeat": [
-  "You beat me!\nWell fought.",
-  "A fair loss.\nI will train harder.",
-  "Splendid! Mind the next\nfloor, it bites.",
-  "I was ready, and still\nit was not enough.",
-  "Beaten fair and square.\nGo on up!",
-  "That was a good one.\nThe stairs are yours.",
-  "My team did its best.\nYours did better.",
-  "Ha! I hoped for exactly\nthis kind of fight.",
-  "You read me like a book.\nWell played.",
-  "The humming stopped.\nYou win this one.",
-  "Down, but not out.\nSee you at the top!",
-  "I will remember that\ncombination. Go on.",
-  "Strong. Very strong.\nOnward, then.",
-  "Even the colours blur\nwhen you fight like that.",
-  "Fine, fine. The way\nis open.",
-  "I lost, and I enjoyed\nevery turn."
- ],
- "win": [
-  "The Shell wins.\nBetter luck next time.",
-  "The stairs go down faster\nthan they go up.",
-  "Not today. Take a breath\nand come back.",
-  "That was close, though.\nTry again.",
-  "Floors like this are\nwhy we train.",
-  "The tower will wait\nfor you.",
-  "A good fight. Not a\nwinning one.",
-  "Rest your team. The\nledger can wait.",
-  "Better luck on the\nnext climb.",
-  "You were nearly there.\nClimb again!",
-  "I got lucky. Honestly.\nCome back soon.",
-  "The humming goes on.\nSo should you.",
-  "Hold your head up.\nThat was a real battle.",
-  "Not this time, friend.\nMaybe the next.",
-  "Down you go. Mind\nthe landing!",
-  "A fine try. Your\nPokémon tried harder."
+ "_doc": "Spectrum Frontier lines. floor[f] (f = 0 Red .. 6 Violet): four intro / defeat / win lines per floor, picked by the seed; in-battle lines are 2 lines of <= 30 characters. brain: in-battle Brain lines (2 lines, <= 24 chars) and script lines (wrapped by the scripts). Rewritten 2026-10-22.",
+ "floor": [
+  {
+   "intro": [
+    "Warm-up round! Don't mind me,\nI'm still out of breath.",
+    "First floor, first handshake.\nLet's make it a good one.",
+    "My team's still warm from\nthe stairs. Ready?",
+    "Level 50, no excuses.\nI like that about this place."
+   ],
+   "defeat": [
+    "Ha! Well fought!\nGo on, the stairs are warm.",
+    "You warmed me up nicely.\nOnward!",
+    "I'll remember that one.\nGo on up.",
+    "A fair loss, and a friendly\none. Off you go."
+   ],
+   "win": [
+    "That one's on the house.\nCome back with fresh legs.",
+    "Close! Breathe, regroup,\nand try the stairs again.",
+    "Don't let it sting. It's\nonly the first floor!",
+    "Warm-ups are the hardest.\nSee you next climb."
+   ]
+  },
+  {
+   "intro": [
+    "Orange floor! Mind your boots,\nit gets rowdy up here.",
+    "Nothing fancy here. Just\nhard knocks and good cheer.",
+    "I've hauled bigger loads than\nyour team. Come on!",
+    "Stone and dust, friend.\nLet's see what you're made of."
+   ],
+   "defeat": [
+    "Hah! That's the stuff!\nGo on, I'll mop up.",
+    "You hit like a landslide.\nWell done!",
+    "Fair's fair. The next floor's\nall yours.",
+    "Crumbled! Good fight, friend.\nMind the rest."
+   ],
+   "win": [
+    "Dust yourself off and try\nagain. No shame in it.",
+    "Rough floor, rough luck.\nCome back stronger.",
+    "Even rock wears down.\nYou'll get through.",
+    "Good scrap! The stairs\nwill wait for you."
+   ]
+  },
+  {
+   "intro": [
+    "Mind the rules: no wagers,\nno weather, no rush.",
+    "A civilised battle, if you\nplease. We have an audience.",
+    "Smile. We're being watched\nfrom behind the glass.",
+    "Rule one: look magnificent.\nRule two: win."
+   ],
+   "defeat": [
+    "Splendid! I concede with\nthe utmost grace.",
+    "Gracious in defeat is the\nonly way I know.",
+    "Bravo! The audience is\non its feet.",
+    "I protest... no. That was\nclean. Go on up."
+   ],
+   "win": [
+    "A fine try. Do take a bow\non your way down.",
+    "The judges have spoken.\nBetter luck next time.",
+    "Not quite, darling. Practise\nand return.",
+    "Applause for you both.\nI merely won."
+   ]
+  },
+  {
+   "intro": [
+    "Take your time. The grove\nis in no hurry.",
+    "Listen. Even the stairs\nsound like leaves here.",
+    "Patience wins more fights\nthan power. Shall we?",
+    "I raised this team on open\nroads. Show me yours."
+   ],
+   "defeat": [
+    "The wind shifted. Yours,\nthis time. Go on.",
+    "You grew faster than I\nexpected. Well done.",
+    "A good harvest. The path\nis open.",
+    "Fair weather to you.\nClimb safely."
+   ],
+   "win": [
+    "Grow a little more, then\ncome back to the grove.",
+    "Nothing is rushed here.\nTry again when you're ready.",
+    "Even storms pass. Rest\nand return.",
+    "Next season, then. The\nstairs will keep."
+   ]
+  },
+  {
+   "intro": [
+    "Calm now. Cold, even.\nPrecision wins here.",
+    "The tide goes out, the tide\ncomes in. Let's begin.",
+    "I've timed this matchup.\nLet's see if you can too.",
+    "Clear heads on this floor.\nShow me yours."
+   ],
+   "defeat": [
+    "A clean read. Nicely\nexecuted.",
+    "The tide turned. Go on\nup.",
+    "I miscalculated. Rarely\nhappens. Well done.",
+    "Cold, correct and fair.\nThe stairs are yours."
+   ],
+   "win": [
+    "Not precise enough. Study\nthe tide and return.",
+    "Correct, but late. Try\nagain.",
+    "Cool your head. The next\nclimb will be kinder.",
+    "Exactly as calculated.\nTill next time."
+   ]
+  },
+  {
+   "intro": [
+    "The tower hums an old tune.\nDo you hear it?",
+    "You arrived a moment before\nyou knocked.",
+    "Dusk is when the quiet\nthings stir.",
+    "I saw you on the stairs\nlast week. Or next."
+   ],
+   "defeat": [
+    "The note moved.\nGo on.",
+    "How odd. I remembered that\nending differently.",
+    "You're not who I expected.\nGood.",
+    "Quiet again. The way is\nopen."
+   ],
+   "win": [
+    "I knew. I'm sorry. Come\nback another evening.",
+    "The tune carries on.\nSo should you.",
+    "It is written. Rewrite it\nnext time.",
+    "Mind the shadows going\ndown. They follow."
+   ]
+  },
+  {
+   "intro": [
+    "Nobody here is a stranger\nto the rainbow. Ready?",
+    "Seven floors, seven colours.\nThis last one is mine.",
+    "You made it to the top of\nthe round. Let's finish it.",
+    "All the colours end here.\nShow me yours."
+   ],
+   "defeat": [
+    "Every colour, and you kept\nyour own. Splendid.",
+    "The last floor falls.\nThe ledger awaits.",
+    "A rainbow ends somewhere.\nIt ended here.",
+    "Magnificent. Go and claim\nyour points."
+   ],
+   "win": [
+    "So close to the top. The\nledger can wait.",
+    "The last step is the\nsteepest. Try again.",
+    "All seven colours, and\nstill one short.",
+    "The prism bends. It will\nbend back."
+   ]
+  }
  ],
  "brain": {
   "_doc": "In-battle Brain lines (2 lines, <= 24 chars): defeat = shown when the player wins, win = when the player loses. Script lines (intro, seal) are printed by the scripts and wrap automatically.",
   "Lance": {
    "defeat": "A bond like that is not\ntaught. Well done.",
    "win": "Not yet. A Dragon Master\nis patient. Return.",
-   "intro": "To think you'd make it this far!{FB}As the Tower Master I'll fight with all I have. That is the default rule of Trainers!{FB}Let's get to know each other through Pokémon battle!",
-   "seal": "Lance: A title could not have done that. A bond could.{FB}The Silver Seal is yours, with ten Battle Points."
+   "intro": "So you climbed all this way.{FB}I am Lance, Master of this tower. A title means little here; the stairs decide.{FB}Show me what you have built.",
+   "seal": "Lance: A title could not have done that. A bond could.{FB}Take the Silver Seal. It comes with ten Battle Points, and my respect."
   },
   "Anabel": {
    "defeat": "So that is how it ends.\nThank you for showing me.",
    "win": "I saw it. I am sorry.\nClimb again.",
-   "intro": "I saw this battle before it began, and I still do not know how it ends.{FB}Please. Show me.",
+   "intro": "I saw this battle before it began, and I still do not know how it ends.{FB}That has never happened to me. Please, show me.",
    "intro_after": "The song is quiet now. I wondered whether you would come.{FB}I saw this battle before it began, and I still do not know how it ends. Shall we find out?",
-   "seal": "Anabel: The Gold Seal. I did not see that one coming.{FB}You have my thanks, and twenty Battle Points."
+   "seal": "Anabel: The Gold Seal. I did not see that one coming.{FB}Take it, with twenty Battle Points. And thank you: it has been a long time since anything surprised me."
   }
  }
 }

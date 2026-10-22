@@ -326,6 +326,12 @@ def main():
         elif tok.startswith("msg:"):              # msg:0x09DA10C9 -> show that ROM string as a message box (loadword + callstd 2)
             inject(bytes([0x0F, 0]) + struct.pack("<I", int(tok[4:], 0)) + bytes([0x09, 2, 0x02]))
             e.wait(60)
+        elif tok == "untilmenu":                  # press A (60-frame gaps) until the party menu is up, so dialogue length does not matter
+            for _ in range(30):
+                if struct.unpack("<I", e.read(CB2, 4))[0] == 0x0811EBA1:
+                    break
+                e.press("A", hold=3, release=6)
+                e.wait(60)
         elif tok.startswith("raw:"):              # raw:1604800000250500 -> inject these script bytes (an end is appended)
             inject(bytes.fromhex(tok[4:]) + bytes([0x02]))
             e.wait(60)
