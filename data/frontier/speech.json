@@ -156,6 +156,12 @@
    "intro": "I saw this battle before it began, and I still do not know how it ends.{FB}That has never happened to me. Please, show me.",
    "intro_after": "The song is quiet now. I wondered whether you would come.{FB}I saw this battle before it began, and I still do not know how it ends. Shall we find out?",
    "seal": "Anabel: The Gold Seal. I did not see that one coming.{FB}Take it, with twenty Battle Points. And thank you: it has been a long time since anything surprised me."
+  },
+  "Silver": {
+   "defeat": "...Tch. I'll get stronger.\nJust you wait.",
+   "win": "Weak. Come back when\nyou've earned it.",
+   "intro": "Silver: ...You. Of all people.{FB}I heard someone was climbing this tower and winning. Figured I'd see what the fuss was about.{FB}Don't expect me to go easy.",
+   "after": "Silver: Tch. ...Fine. That was a good battle.{FB}Don't tell anyone I said that."
   }
  }
 }

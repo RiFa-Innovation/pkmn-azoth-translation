@@ -18,7 +18,7 @@ CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", 
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
 
-def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000, brains=0x08F20000, bspeech=0x08F30000):
+def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000, brains=0x08F20000, bspeech=0x08F30000, heirloom=0x08F40000):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     objs = []
     for name, cmd in (
@@ -31,7 +31,7 @@ def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000, br
         subprocess.check_call(cmd + ["-o", obj])
         objs.append(obj)
     elf = out + ".elf"
-    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", f"--defsym=fr_speech={speech:#x}", f"--defsym=fr_brains={brains:#x}", f"--defsym=fr_bspeech={bspeech:#x}", "-o", elf, *objs])
+    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", f"--defsym=fr_speech={speech:#x}", f"--defsym=fr_brains={brains:#x}", f"--defsym=fr_bspeech={bspeech:#x}", f"--defsym=fr_heirloom={heirloom:#x}", "-o", elf, *objs])
     subprocess.check_call(["arm-none-eabi-objcopy", "-O", "binary", elf, out])
     syms = subprocess.check_output(["arm-none-eabi-nm", "-n", elf], text=True)
     return open(out, "rb").read(), syms
