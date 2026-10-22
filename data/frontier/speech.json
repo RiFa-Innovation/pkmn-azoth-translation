@@ -53,5 +53,21 @@
   "Not this time, friend.\nMaybe the next.",
   "Down you go. Mind\nthe landing!",
   "A fine try. Your\nPokémon tried harder."
- ]
+ ],
+ "brain": {
+  "_doc": "In-battle Brain lines (2 lines, <= 24 chars): defeat = shown when the player wins, win = when the player loses. Script lines (intro, seal) are printed by the scripts and wrap automatically.",
+  "Lance": {
+   "defeat": "A bond like that is not\ntaught. Well done.",
+   "win": "Not yet. A Dragon Master\nis patient. Return.",
+   "intro": "To think you'd make it this far!{FB}As the Tower Master I'll fight with all I have. That is the default rule of Trainers!{FB}Let's get to know each other through Pokémon battle!",
+   "seal": "Lance: A title could not have done that. A bond could.{FB}The Silver Seal is yours, with ten Battle Points."
+  },
+  "Anabel": {
+   "defeat": "So that is how it ends.\nThank you for showing me.",
+   "win": "I saw it. I am sorry.\nClimb again.",
+   "intro": "I saw this battle before it began, and I still do not know how it ends.{FB}Please. Show me.",
+   "intro_after": "The song is quiet now. I wondered whether you would come.{FB}I saw this battle before it began, and I still do not know how it ends. Shall we find out?",
+   "seal": "Anabel: The Gold Seal. I did not see that one coming.{FB}You have my thanks, and twenty Battle Points."
+  }
+ }
 }

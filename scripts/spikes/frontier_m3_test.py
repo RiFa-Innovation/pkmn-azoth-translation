@@ -2,7 +2,7 @@
 
     python3 scripts/spikes/frontier_m3_test.py "saves/gets_frozen_after fight_and_convo/Azoth.sav" [ROM]
 
-Run from the main checkout (it needs utilities/mgba and saves/). Builds the natives (scripts/frontier_native.py) at 0x0203F600, injects it into EWRAM
+Run from the main checkout (it needs utilities/mgba and saves/). Builds the natives (scripts/frontier_native.py) at 0x0203F520, injects it into EWRAM
 and drives it through `callnative`, decoding the party in Python to verify slot order, Lv 50 stats (formula checked against the game's own
 stats at the real level first), the 6-slot save round trip, restoration and idempotence.
 """
@@ -20,7 +20,7 @@ import play  # noqa: E402
 from emu import Emu  # noqa: E402
 import frontier_native as fn  # noqa: E402
 
-BASE = 0x0203F600
+BASE = 0x0203F520
 SCRIPT = 0x0203FF00
 CTX, RUNNING, CB2 = 0x03000EB0, 0x03000EA8, 0x030030F4
 PARTY, COUNT, SPV = 0x02024284, 0x02024029, 0x020370B8
@@ -173,7 +173,7 @@ def main():
     b2, c2, _ = party()
     check(b2 == snap and c2 == scnt, "C SavePlayerParty / LoadPlayerParty keeps all six slots and the truncated count")
     # D. restore
-    res, lo2, hi2 = run(BASE + 4, v5=lo, v6=hi, v9=parked[0], v10=parked[1], v11=parked[2])
+    res, lo2, hi2 = run(BASE + fn.ENTRY_STRIDE, v5=lo, v6=hi, v9=parked[0], v10=parked[1], v11=parked[2])
     b3, c3, mons3 = party()
     check(res == 0 and hi2 == 0, f"D fr_leave ok, marker cleared (HI={hi2:#06x})")
     check(c3 == cnt0, f"D party count restored to {cnt0} (got {c3})")
@@ -187,7 +187,7 @@ def main():
             print("   slot", i, "box bytes that differ after fr_leave (offset, was, now):", diff[:10])
         check(mons3[i][19] == mons0[i][19] and mons3[i][:80] == mons0[i][:80] or all(mons3[i][j] == mons0[i][j] for j in range(80) if not (12 <= j - 20 < 12)), f"D slot {i} box data (incl. the has-species flag) is back to the original")
     # E. idempotent
-    res, _, hi3 = run(BASE + 4, v5=lo, v6=0, v9=parked[0], v10=parked[1], v11=parked[2])
+    res, _, hi3 = run(BASE + fn.ENTRY_STRIDE, v5=lo, v6=0, v9=parked[0], v10=parked[1], v11=parked[2])
     b4, c4, _ = party()
     check(res == 0 and b4 == b3 and c4 == c3, "E a second fr_leave (marker clear) changes nothing")
     # doubles: four picks in reverse order, then leave
@@ -196,7 +196,7 @@ def main():
     b5, c5, mons5 = party()
     check(res == 0 and c5 == 4, "G doubles: four picks accepted, count 4")
     check(all(decode(mons5[i])["level"] == 50 for i in range(4)), "G all four at Lv 50")
-    run(BASE + 4, v5=lo, v6=hi, v9=parked4[0], v10=parked4[1], v11=parked4[2])
+    run(BASE + fn.ENTRY_STRIDE, v5=lo, v6=hi, v9=parked4[0], v10=parked4[1], v11=parked4[2])
     b6, c6, mons6 = party()
     check(c6 == cnt0 and all(decode(mons6[i])["species"] == d0[i]["species"] for i in range(cnt0)), "G order restored after a reversed 4-pick run")
     play.stop()

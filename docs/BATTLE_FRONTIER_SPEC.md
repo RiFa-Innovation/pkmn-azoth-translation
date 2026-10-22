@@ -269,6 +269,15 @@ pool of 24 classes x 2 genders is encoded in the generator. Names: a 120-name li
 repeat inside one round. Speeches: 40 intro + 40 victory + 40 defeat lines, authored by us (a first draft for River to rewrite; same
 "drafts for the owner" convention as the Chapter 2 dialogue).
 
+### 6.8 M6 as built: the Brains and Seals (2026-10-21)
+
+- Battle 21 is **Lance** (arena `58.10`), battle 49 is **Anabel** (`58.11`); both are clones of the gold arena with their own NPC sprite. `fr_to_arena` routes streak 20/48 there and `fr_arena_start` hands over to `fr_brain_lance`/`fr_brain_anabel`. Anabel's intro changes after the River Edition's Chapter 2 (flag `0x134F`).
+- Brain teams come from `fr_gen_brain` (Mega holder always first, partial Fisher-Yates for the rest, from the 6 Lance/Anabel sets each; doubles use the doubles moves); speech from `fr_brain_speech` (two ROM pointers per Brain into the RAM buffers). Shell slots 767-770.
+- A win runs the shared `fr_won` (heal, streak +1); at 21 and 49 it goes to `fr_seal_silver`/`fr_seal_gold`: flags `0x1389` Silver singles, `0x138A` Gold singles, `0x138B`/`0x138C` doubles, +10 / +20 BP, then the normal round reward. The records NPC shows the Seal per mode.
+- **Bug found while testing:** the entry stubs hold absolute addresses, but the image was linked at `0x08000000` (the old branch-only stubs were position independent). `link()` now relinks at the final address. Symptom: script frozen right after `callnative fr_enter`.
+- Verified in the emulator (`frontier_m5_drive.py`, streak poked to 20/48): Lance's team (Mega Dragonite lead) and speeches, defeat -> Silver Seal text, BP 14 (10 + round 4), records "Singles: the Silver Seal."; Anabel's intro, psychic team, win -> streak 49, BP 26 (20 + round 6). Not exercised: the Brain loss path, doubles Brains, Gold Seal text screenshot.
+- Cosmetic: Anabel's donor class prints as "Int'l Police"; give her an own class name when the identities file is revisited.
+
 ## 7. Party generation (sources, pipeline, tuning)
 
 ### 7.1 Principles
@@ -666,4 +675,4 @@ Left from section 11: **S0** (do the new vars/flags survive a save/reload?). New
    validator, sample teams).
 2. ~~M3~~ done: `scripts/frontier_native.s` + `frontier_native.py` (test links it in EWRAM; M5 links it at its free-pool address).
 3. ~~M4~~ done (section 6.6).
-4. ~~M5~~ playable MVP done (section 6.7). Left: **M6** (Lance at 21, Anabel at 49, seals, polish) and the checks listed under "Not yet exercised".
+4. ~~M5~~ playable MVP done (section 6.7). M6 (section 6.8) is built. Left: polish and the checks listed under "Not yet exercised".

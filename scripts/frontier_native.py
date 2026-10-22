@@ -4,7 +4,7 @@
 
 Sources: scripts/native/frontier_entry.s (entry table), scripts/frontier_native.s (fr_enter / fr_leave / fr_heal),
 scripts/native/frontier_gen.c (fr_gen_opponent), scripts/frontier_start.s (fr_start_battle).
-Entry points (callnative <base + off>|1): +0 fr_enter, +4 fr_leave, +8 fr_heal, +12 fr_gen_opponent, +16 fr_start_battle, +20 fr_pick_speech.
+Entry points (callnative <base + ENTRY_STRIDE * i>|1), i = 0..7: enter, leave, heal, gen, start, speech, gen_brain, brain_speech.
 `--sets` is the ROM address of the packed set table (build/frontier/sets.bin); insert.py links it at its free-pool address (milestone M5).
 """
 import argparse
@@ -12,11 +12,13 @@ import os
 import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ENTRY_STRIDE = 8        # bytes per entry in scripts/native/frontier_entry.s
+ENTRIES = ["enter", "leave", "heal", "gen", "start", "speech", "gen_brain", "brain_speech"]
 CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", "-fno-strict-aliasing", "-fno-stack-protector", "-fno-pic",
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
 
-def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000):
+def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000, brains=0x08F20000, bspeech=0x08F30000):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     objs = []
     for name, cmd in (
@@ -29,7 +31,7 @@ def build(base, out, sets=0x08F00000, start_flags="0x108", speech=0x08F10000):
         subprocess.check_call(cmd + ["-o", obj])
         objs.append(obj)
     elf = out + ".elf"
-    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", f"--defsym=fr_speech={speech:#x}", "-o", elf, *objs])
+    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=fr_sets={sets:#x}", f"--defsym=fr_speech={speech:#x}", f"--defsym=fr_brains={brains:#x}", f"--defsym=fr_bspeech={bspeech:#x}", "-o", elf, *objs])
     subprocess.check_call(["arm-none-eabi-objcopy", "-O", "binary", elf, out])
     syms = subprocess.check_output(["arm-none-eabi-nm", "-n", elf], text=True)
     return open(out, "rb").read(), syms

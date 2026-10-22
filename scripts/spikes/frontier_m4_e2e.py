@@ -5,7 +5,7 @@
 
 Run from the main checkout. Scratch ROM = the current build with (a) build/frontier/sets.bin written into a free 0xFF run, (b) two shell trainer slots
 (459 singles, 460 doubles) whose party pointer is the RAM block 0x02022400, (c) the first entry of the orphaned Battle Tower speech table pointing its
-defeat/lose words at RAM text buffers. The natives are linked in EWRAM at 0x0203F600 for the test (M5 links them into ROM).
+defeat/lose words at RAM text buffers. The natives are linked in EWRAM at 0x0203F520 for the test (M5 links them into ROM).
 """
 import argparse
 import os
@@ -24,7 +24,7 @@ from emu import Emu  # noqa: E402
 import frontier_native as fn  # noqa: E402
 import mercury_text as mt  # noqa: E402
 
-BASE, SCRIPT = 0x0203F600, 0x0203FF00
+BASE, SCRIPT = 0x0203F520, 0x0203FF00
 CTX, RUNNING, CB2 = 0x03000EB0, 0x03000EA8, 0x030030F4
 SPV, V8 = 0x020370B8, 0x020370C8
 PARTY, COUNT = 0x02024284, 0x02024029
@@ -33,7 +33,7 @@ BLOCK, TEXT_BUF = 0x02022400, 0x02022600
 TRAINER_TABLE = 0x23EACC - 4
 SHELLS = {0: 459, 1: 460}
 SPEECH_ENTRY = 0x1DEC3A0
-OFF = {"enter": 0, "leave": 4, "heal": 8, "gen": 12, "start": 16}
+OFF = {n: i * fn.ENTRY_STRIDE for i, n in enumerate(fn.ENTRIES)}
 
 
 def enc_name(s):

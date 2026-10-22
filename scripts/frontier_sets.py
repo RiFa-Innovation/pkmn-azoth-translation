@@ -671,6 +671,21 @@ def pack_json(path, header=True):
     return struct.pack("<H4H4HH", len(sets), *starts, *counts, 0) + bytes(blob)
 
 
+def pack_brains_json(path):
+    """The Brain teams (Lance, then Anabel; 6 records each, 24 bytes) packed from data/frontier/sets.json (no ROM needed)."""
+    d = json.load(open(path))
+    order = d["spreads"]["order"]
+    blob = bytearray()
+    for name in ("Lance", "Anabel"):
+        team = d["brains"][name]
+        assert len(team) == 6, name
+        for st in team:
+            mv = (list(st["moves"]) + [0] * 4)[:4]
+            md = (list(st["moves_d"]) + [0] * 4)[:4]
+            blob += struct.pack("<HH4H4HBBBB", st["id"], st["item"], *mv, *md, order.index(st["spread"]), st["ability_slot"], st["tier"], st["flags"])
+    return bytes(blob)
+
+
 def write_samples(ctx, sets, path, rng):
     by_tier = collections.defaultdict(list)
     for st in sets:

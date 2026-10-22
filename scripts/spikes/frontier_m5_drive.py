@@ -285,6 +285,12 @@ def main():
         elif tok == "wlog":
             for ent in e.call("watch_log"):
                 print("   write pc", hex(ent["pc"]), "lr", hex(ent["lr"]), "r0", hex(ent["r0"]), "r1", hex(ent["r1"]), "r2", hex(ent["r2"]), "frame", ent["frame"])
+        elif tok == "enemy1":                     # every enemy-party mon to 1 HP (win a brain fight quickly)
+            for i in range(6):
+                e.write(0x0202402C + 100 * i + 0x56, struct.pack("<H", 1))
+            print("   enemy party species:", [struct.unpack_from("<H", e.read(0x0202402C + 100 * i + 32, 2))[0] for i in range(6)])
+        elif tok == "ctx":                        # script context: mode bytes and the script pointer (where is a stalled script?)
+            print("   ctx mode", e.read(CTX, 2).hex(), "scriptPtr", hex(struct.unpack("<I", e.read(CTX + 8, 4))[0]), "running", e.read(RUNNING, 1).hex())
         elif tok == "state":
             print({k: hackvar(e, v) for k, v in VARS.items()}, "cb2", hex(struct.unpack("<I", e.read(CB2, 4))[0]), "party count", e.read(COUNT, 1)[0])
         elif tok == "party":

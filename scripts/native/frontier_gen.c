@@ -156,3 +156,59 @@ void fr_pick_speech(void)
     }
     RESULT = 0;
 }
+
+
+/* fr_gen_brain: the Brain's team from his six hand-built sets.
+ *   in : 0x8000 = brain (0 Lance, 1 Anabel), 0x8001 = 1 for doubles, 0x8002/3 = seed, 0x8004 = battle number
+ *   out: the party block (3 or 4 Pokemon, Lv 50), 0x8004 = count. The Mega-holder (flag bit 0) is always on the team; the rest are a seeded draw. */
+extern const u8 fr_brains[];
+
+void fr_gen_brain(void)
+{
+    const struct Set *b = (const struct Set *)(fr_brains + (VARS[0] & 1) * 6 * sizeof(struct Set));
+    u32 doubles = VARS[1] & 1;
+    u32 count = doubles ? 4 : 3;
+    u32 rs = ((u32)VARS[2] | ((u32)VARS[3] << 16)) ^ (VARS[4] * 0x9E3779B1u) ^ 0x3C6EF372u;
+    u32 idx[6], i, j, t;
+
+    if (rs == 0)
+        rs = 0x1234567u;
+    for (i = 0; i < 4; i++)
+        rnd(&rs);
+    for (i = 0; i < 6; i++)
+        idx[i] = i;
+    for (i = 0; i < 6; i++) {                        /* the Mega-holder goes first */
+        if (b[idx[i]].flags & F_MEGA) {
+            t = idx[0]; idx[0] = idx[i]; idx[i] = t;
+            break;
+        }
+    }
+    for (i = 1; i < count; i++) {                    /* partial Fisher-Yates over the rest */
+        j = i + below(&rs, 6 - i);
+        t = idx[i]; idx[i] = idx[j]; idx[j] = t;
+    }
+    for (i = 0; i < count; i++) {
+        const struct Set *s = &b[idx[i]];
+        const u16 *mv = doubles ? s->moves_d : s->moves;
+        BLOCK[i * 8 + 0] = 255;
+        BLOCK[i * 8 + 1] = 50;
+        BLOCK[i * 8 + 2] = s->species;
+        BLOCK[i * 8 + 3] = s->item;
+        for (j = 0; j < 4; j++)
+            BLOCK[i * 8 + 4 + j] = mv[j];
+    }
+    VARS[4] = (u16)count;
+    RESULT = 0;
+}
+
+/* fr_brain_speech: the Brain's in-battle lines. in: 0x8000 = brain. fr_bspeech = 4 ROM pointers (Lance defeat, Lance win, Anabel defeat, Anabel win)
+ * -> 0x02022680 (the player won) and 0x02022700 (the player lost) */
+extern const u8 fr_bspeech[];
+
+void fr_brain_speech(void)
+{
+    const u32 *p = (const u32 *)fr_bspeech + (VARS[0] & 1) * 2;
+    copy_text((volatile u8 *)0x02022680, (const u8 *)p[0]);
+    copy_text((volatile u8 *)0x02022700, (const u8 *)p[1]);
+    RESULT = 0;
+}

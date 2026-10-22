@@ -41,6 +41,8 @@ HALL, CABIN = "31.3", "31.6"
 HALL_DOOR = (10, 17)                  # inside the hall's south door
 
 # arena clones of the Elite Four chambers: key, source map, arrival tile, challenger tile
+SEAL = dict(SILVER_S=0x1389, GOLD_S=0x138A, SILVER_D=0x138B, GOLD_D=0x138C)   # Seal flags (hack flags >= 0x900: set with the game's own setflag)
+BRAIN_ARENAS = [("lance", "1.79", (8, 25), (8, 7), 119), ("anabel", "1.79", (8, 25), (8, 7), 136)]   # 58.10 (Lance), 58.11 (Anabel)
 ARENAS = [("ice", "1.75", (7, 20), (7, 11)), ("psychic", "1.76", (7, 20), (7, 11)), ("fire", "1.77", (7, 20), (7, 11)),
           ("dark", "1.78", (7, 20), (7, 11)), ("gold", "1.79", (8, 25), (8, 7))]
 FLOOR_ARENA = ["fire", "gold", "gold", "dark", "ice", "psychic", "psychic"]
@@ -83,12 +85,31 @@ def link(rom, src, pool):
     blob = struct.pack("<HHHH", *(len(speech[k]) for k in kinds), 0) + b"".join(struct.pack("<I", p) for p in ptrs)
     a_speech = pool.alloc_aligned(len(blob))
     rom[a_speech:a_speech + len(blob)] = blob
-    image, _ = fn.build(ROM_BASE, os.path.join(ROOT, "build/frontier/native.bin"), sets=ROM_BASE + a_sets, speech=ROM_BASE + a_speech)
+    brains = fsets.pack_brains_json(os.path.join(DATA, "sets.json"))
+    a_brains = pool.alloc_aligned(len(brains))
+    rom[a_brains:a_brains + len(brains)] = brains
+    bptrs = []
+    for who in ("Lance", "Anabel"):
+        for k in ("defeat", "win"):
+            b = mt.encode_en(speech["brain"][who][k])
+            assert len(b) <= 127, (who, k)
+            a = pool.alloc(len(b))
+            rom[a:a + len(b)] = b
+            bptrs.append(ROM_BASE + a)
+    a_bsp = pool.alloc_aligned(16)
+    rom[a_bsp:a_bsp + 16] = b"".join(struct.pack("<I", p_) for p_ in bptrs)
+    image, _ = fn.build(ROM_BASE, os.path.join(ROOT, "build/frontier/native.bin"), sets=ROM_BASE + a_sets, speech=ROM_BASE + a_speech,
+                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp)
+    pool_len = len(image)
     a_nat = pool.alloc_aligned(len(image))
+    # the entry stubs hold absolute addresses: relink at the final location (same size, only addresses change)
+    image, _ = fn.build(ROM_BASE + a_nat, os.path.join(ROOT, "build/frontier/native.bin"), sets=ROM_BASE + a_sets, speech=ROM_BASE + a_speech,
+                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp)
+    assert len(image) <= pool_len
     rom[a_nat:a_nat + len(image)] = image
     base = ROM_BASE + a_nat
-    names = ["fr_enter", "fr_leave", "fr_heal", "fr_gen", "fr_start", "fr_speech"]
-    externs = {n: (base + 4 * i) | 1 for i, n in enumerate(names)}
+    names = ["fr_" + n for n in fn.ENTRIES]
+    externs = {n: (base + fn.ENTRY_STRIDE * i) | 1 for i, n in enumerate(names)}
     return {"externs": externs, "sets": len(sets), "native": len(image), "speech": len(blob), "at": {"sets": a_sets, "speech": a_speech, "native": a_nat}}
 
 
@@ -221,11 +242,14 @@ def build_scripts():
     """)
 
     # --- warp to the arena for the current floor
-    arena_ids = {k: f"58.{5 + i}" for i, (k, *_r) in enumerate(ARENAS)}
-    arrive = {k: a for k, _s, a, _n in ARENAS}
-    lines = ["call @fr_floor_idx"]
+    arena_ids = {k: f"58.{5 + i}" for i, (k, *_r) in enumerate(ARENAS + BRAIN_ARENAS)}
+    arrive = {k: a for k, _s, a, _n, *_g in ARENAS + BRAIN_ARENAS}
+    lines = ["compare_var_to_value $STREAK 20", "goto_if 1 to_lance", "compare_var_to_value $STREAK 48", "goto_if 1 to_anabel", "call @fr_floor_idx"]
     for f in range(7):
         lines += [f"compare_var_to_value $TMP {f}", f"goto_if 1 to_{f}"]
+    for k in ("lance", "anabel"):
+        x, y = arrive[k]
+        lines += [f"to_{k}:", f"warp {arena_ids[k]} {x} {y}", "waitstate", "end"]
     for f in range(7):
         k = FLOOR_ARENA[f]
         x, y = arrive[k]
@@ -244,6 +268,10 @@ def build_scripts():
     A("fr_arena_start", """
         lockall
         call @fr_announce
+        compare_var_to_value $STREAK 20
+        goto_if 1 @fr_brain_lance
+        compare_var_to_value $STREAK 48
+        goto_if 1 @fr_brain_anabel
         copyvar 0x8000 $STREAK
         addvar 0x8000 1
         copyvar 0x8001 $MODE
@@ -272,17 +300,96 @@ def build_scripts():
         waitstate
         special 0xB4
         compare_var_to_value 0x800D 1
-        goto_if 1 won
+        goto_if 1 @fr_won
         goto @fr_lost
-        won:
+    """, INTRO=SPEECH_BUF[0], SHELL_S=SHELL_S, SHELL_D=SHELL_D)
+
+    # --- a won fight: heal, count it, Seals at 21 and 49, round reward every 7th, otherwise the next floor
+    A("fr_won", """
         callnative @fr_heal
         addvar $STREAK 1
+        compare_var_to_value $STREAK 21
+        goto_if 1 @fr_seal_silver
+        compare_var_to_value $STREAK 49
+        goto_if 1 @fr_seal_gold
         call @fr_floor_idx
         compare_var_to_value $TMP 0
         goto_if 1 @fr_round_done
         setvar $STATE 1
         goto @fr_to_arena
-    """, INTRO=SPEECH_BUF[0], SHELL_S=SHELL_S, SHELL_D=SHELL_D)
+    """)
+
+    # --- the Brains: Lance (battle 21), Anabel (battle 49)
+    sp = json.load(open(os.path.join(DATA, "speech.json")))["brain"]
+    for idx, (key, name, shells) in enumerate((("lance", "Lance", SHELL_LANCE), ("anabel", "Anabel", SHELL_ANABEL))):
+        intro = f'say "{sp[name]["intro"]}"'
+        if name == "Anabel":          # kinder after the River Edition's Chapter 2 (CH2_DONE 0x134F)
+            intro = f"""checkflag 0x134F
+        goto_if 1 after
+        {intro}
+        goto go
+        after:
+        say "{sp[name]["intro_after"]}"
+        go:"""
+        A(f"fr_brain_{key}", f"""
+        {intro}
+        setvar 0x8000 {idx}
+        copyvar 0x8001 $MODE
+        subvar 0x8001 1
+        copyvar 0x8002 $SEED_LO
+        copyvar 0x8003 $SEED_HI
+        copyvar 0x8004 $STREAK
+        callnative @fr_gen_brain
+        setvar 0x8000 {idx}
+        callnative @fr_brain_speech
+        compare_var_to_value $MODE 1
+        goto_if 1 singles
+        setvar 0x8000 {shells[1]}
+        goto id_done
+        singles:
+        setvar 0x8000 {shells[0]}
+        id_done:
+        copyvar 0x8001 $MODE
+        subvar 0x8001 1
+        callnative @fr_heal
+        callnative @fr_start
+        waitstate
+        special 0xB4
+        compare_var_to_value 0x800D 1
+        goto_if 1 @fr_won
+        goto @fr_lost
+        """)
+    for key, flag_s, flag_d, bp in (("silver", SEAL["SILVER_S"], SEAL["SILVER_D"], 10), ("gold", SEAL["GOLD_S"], SEAL["GOLD_D"], 20)):
+        name = "Lance" if key == "silver" else "Anabel"
+        A(f"fr_seal_{key}", f"""
+        compare_var_to_value $MODE 1
+        goto_if 1 singles
+        setflag {flag_d}
+        goto set
+        singles:
+        setflag {flag_s}
+        set:
+        say "{sp[name]["seal"]}"
+        addvar $BP {bp}
+        goto @fr_round_done
+        """)
+    # --- Seal case lines for the records board
+    for m, (fs, fg) in (("s", (SEAL["SILVER_S"], SEAL["GOLD_S"])), ("d", (SEAL["SILVER_D"], SEAL["GOLD_D"]))):
+        label = "Singles" if m == "s" else "Doubles"
+        A(f"fr_seal_line_{m}", f"""
+        checkflag {fg}
+        goto_if 1 gold
+        checkflag {fs}
+        goto_if 1 silver
+        say "{label}: no Seal yet."
+        return
+        gold:
+        say "{label}: the Gold Seal, and the Silver before it."
+        return
+        silver:
+        say "{label}: the Silver Seal."
+        return
+        """)
 
     # --- a finished round: Battle Points, then continue or retire
     bp = ["setvar 0x8008 3"]
@@ -356,6 +463,8 @@ def build_scripts():
         buffernumberstring 1 $BEST_D
         buffernumberstring 2 $BP
         say "Longest climbs: {FD:02} battles in Singles, {FD:03} in Doubles.{FB}You hold {FD:04} Battle Points."
+        call @fr_seal_line_s
+        call @fr_seal_line_d
         release
         end
     """)
@@ -390,9 +499,9 @@ def extend(spec, ext):
     groups = spec.setdefault("groups", {})
     first = len(groups.get("58", []))
     assert first == 5, f"group 58 has {first} maps; the Frontier arenas are 58.5-58.9"
-    for key, srcmap, arrive, npc in ARENAS:
+    for key, srcmap, arrive, npc, *g in ARENAS + BRAIN_ARENAS:
         groups["58"].append({"name": f"Spectrum Arena ({key})", "clone": srcmap, "mapsec": ARENA_MAPSEC,
-                             "events": {"objects": [{"local_id": 1, "gfx": 71, "x": npc[0], "y": npc[1], "elev": 3, "movement": 0, "script": "fr_arena_npc"}]},
+                             "events": {"objects": [{"local_id": 1, "gfx": g[0] if g else 71, "x": npc[0], "y": npc[1], "elev": 3, "movement": 0, "script": "fr_arena_npc"}]},
                              "map_scripts": {"frame": [{"var": VARS["STATE"], "value": 1, "script": "fr_arena_start"}]}})
     ae = spec.setdefault("append_events", [])
     ae.append({"map": CABIN, "edit": {"warps": {"0": {"to": HALL, "warp_id": 0}}}})
