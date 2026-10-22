@@ -1,0 +1,521 @@
+{
+ "_doc": "Mega unlock table at ROM 0x1DE3D04 (species, flag) x86, generated 2026-10-20. setflag_sites = occurrences of the setflag opcode with that flag anywhere in the ROM (0 = no known unlock path).",
+ "entries": [
+  {
+   "species_id": 3,
+   "species": "Venusaur",
+   "flag": "0xc00",
+   "setflag_sites": 29
+  },
+  {
+   "species_id": 6,
+   "species": "Charizard",
+   "flag": "0xc01",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 9,
+   "species": "Blastoise",
+   "flag": "0xc02",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 15,
+   "species": "Beedrill",
+   "flag": "0xc03",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 18,
+   "species": "Pidgeot",
+   "flag": "0xc04",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 65,
+   "species": "Alakazam",
+   "flag": "0xc05",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 80,
+   "species": "Slowbro",
+   "flag": "0xc06",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 94,
+   "species": "Gengar",
+   "flag": "0xc07",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 115,
+   "species": "Kangaskhan",
+   "flag": "0xc08",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 127,
+   "species": "Pinsir",
+   "flag": "0xc09",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 130,
+   "species": "Gyarados",
+   "flag": "0xc0a",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 142,
+   "species": "Aerodactyl",
+   "flag": "0xc0b",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 150,
+   "species": "Mewtwo",
+   "flag": "0xc0c",
+   "setflag_sites": 13
+  },
+  {
+   "species_id": 181,
+   "species": "Ampharos",
+   "flag": "0xc0d",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 208,
+   "species": "Steelix",
+   "flag": "0xc0e",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 212,
+   "species": "Scizor",
+   "flag": "0xc0f",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 214,
+   "species": "Heracross",
+   "flag": "0xc10",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 229,
+   "species": "Houndoom",
+   "flag": "0xc11",
+   "setflag_sites": 14
+  },
+  {
+   "species_id": 248,
+   "species": "Tyranitar",
+   "flag": "0xc12",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 279,
+   "species": "Sceptile",
+   "flag": "0xc13",
+   "setflag_sites": 5
+  },
+  {
+   "species_id": 282,
+   "species": "Blaziken",
+   "flag": "0xc14",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 285,
+   "species": "Swampert",
+   "flag": "0xc15",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 394,
+   "species": "Gardevoir",
+   "flag": "0xc16",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 322,
+   "species": "Sableye",
+   "flag": "0xc17",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 355,
+   "species": "Mawile",
+   "flag": "0xc18",
+   "setflag_sites": 8
+  },
+  {
+   "species_id": 384,
+   "species": "Aggron",
+   "flag": "0xc19",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 357,
+   "species": "Medicham",
+   "flag": "0xc1a",
+   "setflag_sites": 10
+  },
+  {
+   "species_id": 338,
+   "species": "Manectric",
+   "flag": "0xc1b",
+   "setflag_sites": 5
+  },
+  {
+   "species_id": 331,
+   "species": "Sharpedo",
+   "flag": "0xc1c",
+   "setflag_sites": 30
+  },
+  {
+   "species_id": 340,
+   "species": "Camerupt",
+   "flag": "0xc1d",
+   "setflag_sites": 5
+  },
+  {
+   "species_id": 359,
+   "species": "Altaria",
+   "flag": "0xc1e",
+   "setflag_sites": 8
+  },
+  {
+   "species_id": 378,
+   "species": "Banette",
+   "flag": "0xc1f",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 376,
+   "species": "Absol",
+   "flag": "0xc20",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 347,
+   "species": "Glalie",
+   "flag": "0xc21",
+   "setflag_sites": 5
+  },
+  {
+   "species_id": 397,
+   "species": "Salamence",
+   "flag": "0xc22",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 400,
+   "species": "Metagross",
+   "flag": "0xc23",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 407,
+   "species": "Latias",
+   "flag": "0xc24",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 408,
+   "species": "Latios",
+   "flag": "0xc25",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 406,
+   "species": "Rayquaza",
+   "flag": "0xc26",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 481,
+   "species": "Lopunny",
+   "flag": "0xc27",
+   "setflag_sites": 5
+  },
+  {
+   "species_id": 498,
+   "species": "Garchomp",
+   "flag": "0xc28",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 501,
+   "species": "Lucario",
+   "flag": "0xb29",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 513,
+   "species": "Abomasnow",
+   "flag": "0xc2a",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 528,
+   "species": "Gallade",
+   "flag": "0xc2b",
+   "setflag_sites": 3
+  },
+  {
+   "species_id": 584,
+   "species": "Audino",
+   "flag": "0xc2c",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 827,
+   "species": "Diancie",
+   "flag": "0xc2d",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 154,
+   "species": "Meganium",
+   "flag": "0xb2e",
+   "setflag_sites": 6
+  },
+  {
+   "species_id": 553,
+   "species": "Emboar",
+   "flag": "0xc2f",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 157,
+   "species": "Typhlosion",
+   "flag": "0xb48",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 160,
+   "species": "Feraligatr",
+   "flag": "0xb30",
+   "setflag_sites": 6
+  },
+  {
+   "species_id": 797,
+   "species": "Barbaracle",
+   "flag": "0xc31",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 121,
+   "species": "Starmie",
+   "flag": "0xc32",
+   "setflag_sites": 4
+  },
+  {
+   "species_id": 778,
+   "species": "Floette",
+   "flag": "0xc33",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 776,
+   "species": "Pyroar",
+   "flag": "0xc34",
+   "setflag_sites": 10
+  },
+  {
+   "species_id": 36,
+   "species": "Clefable",
+   "flag": "0xc35",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 598,
+   "species": "Scolipede",
+   "flag": "0xc36",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 71,
+   "species": "Victreebel",
+   "flag": "0xc37",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 583,
+   "species": "Excadrill",
+   "flag": "0xc38",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 657,
+   "species": "Eelektross",
+   "flag": "0xc39",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 795,
+   "species": "Malamar",
+   "flag": "0xc3b",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 799,
+   "species": "Dragalge",
+   "flag": "0xc3c",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 531,
+   "species": "Froslass",
+   "flag": "0xc3d",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 809,
+   "species": "Hawlucha",
+   "flag": "0xc3e",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 613,
+   "species": "Scrafty",
+   "flag": "0xc3f",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 662,
+   "species": "Chandelure",
+   "flag": "0xc40",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 766,
+   "species": "Greninja",
+   "flag": "0xc41",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 1162,
+   "species": "Falinks",
+   "flag": "0xc42",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 760,
+   "species": "Chesnaught",
+   "flag": "0xc43",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 227,
+   "species": "Skarmory",
+   "flag": "0xc44",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 763,
+   "species": "Delphox",
+   "flag": "0xc45",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 997,
+   "species": "Drampa",
+   "flag": "0xc46",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 826,
+   "species": "Zygarde",
+   "flag": "0xc47",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 451,
+   "species": "Staraptor",
+   "flag": "0xc49",
+   "setflag_sites": 2
+  },
+  {
+   "species_id": 26,
+   "species": "Raichu",
+   "flag": "0xc4a",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 538,
+   "species": "Heatran",
+   "flag": "0xc4c",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 544,
+   "species": "Darkrai",
+   "flag": "0xc4d",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 676,
+   "species": "Golurk",
+   "flag": "0xc4e",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 786,
+   "species": "Meowstic",
+   "flag": "0xc4f",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 957,
+   "species": "Crabominbl",
+   "flag": "0xc50",
+   "setflag_sites": 1
+  },
+  {
+   "species_id": 985,
+   "species": "Golisopod",
+   "flag": "0xc51",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1018,
+   "species": "Magearna",
+   "flag": "0xc52",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1078,
+   "species": "Zeraora",
+   "flag": "0xc53",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1459,
+   "species": "Scovillain",
+   "flag": "0xc54",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1478,
+   "species": "Glimmora",
+   "flag": "0xc55",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1486,
+   "species": "Tatsugiri",
+   "flag": "0xc56",
+   "setflag_sites": 0
+  },
+  {
+   "species_id": 1485,
+   "species": "Dondozo",
+   "flag": "0xc57",
+   "setflag_sites": 0
+  }
+ ]
+}

@@ -55,6 +55,36 @@ Re-dump only when the discovery logic changes: `python3 scripts/dump_all.py`
 Proofreading edits arrive as CSVs (`scripts/review.py export/import`; token
 validation included). Don't hand-wrap dialogue; the inserter wraps.
 
+## New content (maps, trainers, encounters): `data/new_maps.json`
+
+This is **new game content beyond the translation** (Mt. Silver, Red, Route 28; plan in `ROADMAP.md`,
+story state in `STORY.md`). `scripts/mapedit.py` applies it at the end of `insert.py`; the ROM is a fixed 32 MB,
+so everything is allocated from the free pool and reuses existing layouts/tilesets.
+Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/maprender.py`.
+
+- **Reserved ids (do not reuse elsewhere):** map group 58 (the only spare `gMapGroups` slot; slot 59 is the terminator),
+  flags `0x1338`-`0x133F` (Mt. Silver item balls) and `0x1340` (Red beaten), layout ids 52-77, trainer ids
+  48, 49, 62, 77, 113, 200, 454, 455, 456 (Ariana, Chapter 2 beat 5), 461 (empty-name slots no script referenced); flags `0x1341`-`0x135x` and var `0x5108` are the Chapter 2 story state (see `STORY_PLAN.md` section 6).
+- **Spectrum Frontier reservations** (`scripts/frontier_build.py`, spec `docs/BATTLE_FRONTIER_SPEC.md`): hack vars `0x5121`-`0x5132`, flags `0x1388`-`0x13A7`,
+  maps `58.5`-`58.9` (arenas), EWRAM `0x02022400`-`0x020227FF` (opponent party block `0x02022400`, speech buffers `0x02022600/680/700`; borrowed link buffers, the game is offline),
+  **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
+  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text. `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
+- Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
+  the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
+  metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +
+  `warp`, or a door/stairs metatile); a coord/object script must end with `releaseall`/`release` or input stays
+  frozen; hack flags >= 0x900 must be set via the game's own `setflag` (poking RAM misses them); cave taps need
+  `hold >= 20` frames; assign equal-length slices into the ROM bytearray (a length change shifts every later byte).
+- A script `trainerbattle` of type 0 **ends the script after the battle**; to run story lines after a win use type 2
+  (`trainer ID "intro" "defeat" LABEL` in `scrasm.py`, with `LABEL:` right after it) and set story state *after* the label,
+  never before the fight (a loss would otherwise strand the story).
+- Scene cast that must *appear mid-scene*: do not use `addobject`/`setobjectxy` (objects outside the camera's range are not
+  spawned, and late `addobject` was unreliable). Hide them with a flag via the map's `ON_TRANSITION` hook, change the story
+  var, then `warp` to the same map; the reload spawns them (see beats 9-11 in `STORY_PLAN.md`). FR allows 16 live objects.
+- Trainer battle pics are the 148-entry table at `0x23957C` (+palettes); overworld sprites 240 entries at `0x08961600`.
+- Species audit (2026-10-20): wild/trainer/script data reach 508 of 1,293 sprite entries; of species <= 411 only
+  57 are unreachable even through evolution (legendaries and unobtainable Hoenn species): use those first for new spawns.
+
 ## Triage workflow (player report -> fix)
 
 **Start with `HACKDB.md`**: `python3 scripts/hackdb.py build`, then `var`/`flag`/`text`/`map`/

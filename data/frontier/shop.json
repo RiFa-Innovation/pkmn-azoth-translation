@@ -1,0 +1,70 @@
+{
+ "_doc": "BP shop catalogue (the clerk offers items one at a time: Yes buys, No shows the next). price in Battle Points. item = name in text/en/tables/items*.json.",
+ "items": [
+  {
+   "item": "Leftovers",
+   "price": 20
+  },
+  {
+   "item": "Choice Band",
+   "price": 24
+  },
+  {
+   "item": "Choice Specs",
+   "price": 24
+  },
+  {
+   "item": "Choice Scarf",
+   "price": 24
+  },
+  {
+   "item": "Focus Sash",
+   "price": 18
+  },
+  {
+   "item": "Life Orb",
+   "price": 28
+  },
+  {
+   "item": "Expert Belt",
+   "price": 16
+  },
+  {
+   "item": "Shell Bell",
+   "price": 14
+  },
+  {
+   "item": "Quick Claw",
+   "price": 12
+  },
+  {
+   "item": "Scope Lens",
+   "price": 12
+  },
+  {
+   "item": "Eviolite",
+   "price": 22
+  },
+  {
+   "item": "Assault Vest",
+   "price": 26
+  },
+  {
+   "item": "Rare Candy",
+   "price": 10,
+   "qty": 5
+  },
+  {
+   "item": "PP Max",
+   "price": 8
+  },
+  {
+   "item": "Max Revive",
+   "price": 6
+  },
+  {
+   "item": "Mega Stone",
+   "price": 64
+  }
+ ]
+}

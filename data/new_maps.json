@@ -1,0 +1,2247 @@
+{
+ "frontier": true,
+ "_doc": "New maps/events for scripts/mapedit.py. Flag 0x14DB = became Champion (Mom's Ashida scene checks it). 55.1 = the Route 26 gate: west door (1,6) leads to Route 28 / Mt. Silver.",
+ "scripts": {
+  "silver_gate_pass": {
+   "asm": "checkflag 0x14db\ngoto_if 1 pass\ngoto 0x087BE5AF\npass:\nreleaseall\nend"
+  },
+  "silver_guard_talk": {
+   "asm": "checkflag 0x14db\ngoto_if 1 ok\ngoto 0x087BE6F7\nok:\nsay \"The path west leads to Mt. Silver.{FB}Only a Champion may go.{FB}Take care out there!\"\nend"
+  },
+  "silver_enter": {
+   "asm": "lockall\ncheckflag 0x14db\ngoto_if 0 no\nwarp 58.0 8 10\nwaitstate\nend\nno:\nreleaseall\nend"
+  },
+  "ball_max_revive": {
+   "asm": "setorcopyvar 0x8000 0x19\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_pp_max": {
+   "asm": "setorcopyvar 0x8000 0x47\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_ultra": {
+   "asm": "setorcopyvar 0x8000 0x2\nsetorcopyvar 0x8001 3\ncallstd 1\nend"
+  },
+  "ball_full_restore": {
+   "asm": "setorcopyvar 0x8000 0x13\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_protein": {
+   "asm": "setorcopyvar 0x8000 0x40\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_carbos": {
+   "asm": "setorcopyvar 0x8000 0x42\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_rare_candy": {
+   "asm": "setorcopyvar 0x8000 0x44\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "ball_max_elixir": {
+   "asm": "setorcopyvar 0x8000 0x25\nsetorcopyvar 0x8001 1\ncallstd 1\nend"
+  },
+  "red_talk": {
+   "asm": "faceplayer\ncheckflag 0x1340\ngoto_if 1 again\ntrainer 461 \"...\" \"...\" after\nafter:\nsetflag 0x1340\nsay \"... ... ...{FB}Red turns toward the sea.{FB}A faint rainbow shimmer hangs over the horizon, far out past the Whirl Islands.\"\nend\nagain:\ncompare_var_to_value 0x5108 13\ngoto_if 4 calm\nsay \"... ...{FB}Red keeps watching the rainbow light.\"\nend\ncalm:\nsay \"... ...{FB}The rainbow is gone, but Red is still looking at the place where it was.{FB}For the first time, he's smiling.\"\nend"
+  },
+  "to_summit": {
+   "asm": "lockall\nsay \"A bitter wind blows down from above...\"\nwarp 58.4 49 50\nwaitstate\nend"
+  },
+  "from_summit": {
+   "asm": "lockall\nwarp 58.3 7 13\nwaitstate\nend"
+  },
+  "silver_nurse": {
+   "asm": "faceplayer\nsay \"Welcome to the Mt. Silver rest stop!{FB}Let me restore your Pokémon to full health.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nspecial 0\nfadescreen 0\nsay \"Your Pokémon are fully healed.{FB}Be careful up there!\"\nend"
+  },
+  "tr_48": {
+   "asm": "trainer 48 \"Mt. Silver is no place for the unprepared!\" \"My rocks crumbled...\"\nsay \"Beyond here the cave never sleeps.\"\nend"
+  },
+  "tr_49": {
+   "asm": "trainer 49 \"My birds rule these skies!\" \"Grounded...\"\nsay \"The peak is where the wind turns.\"\nend"
+  },
+  "tr_62": {
+   "asm": "trainer 62 \"Hah! Show me your guts!\" \"Good fight...\"\nsay \"Train your body as well as your team.\"\nend"
+  },
+  "tr_77": {
+   "asm": "trainer 77 \"I saw you coming in a dream.\" \"I did not foresee this...\"\nsay \"The sun and the moon both watch you.\"\nend"
+  },
+  "tr_113": {
+   "asm": "trainer 113 \"I dig the dark. You?\" \"Struck rock bottom...\"\nsay \"Mind the loose stone ahead.\"\nend"
+  },
+  "tr_200": {
+   "asm": "trainer 200 \"Fly or fall!\" \"I fell!\"\nsay \"Higher floors have stranger winds.\"\nend"
+  },
+  "tr_454": {
+   "asm": "trainer 454 \"Dragons answer only to the worthy!\" \"You tamed them...\"\nsay \"Go on. The summit awaits.\"\nend"
+  },
+  "tr_455": {
+   "asm": "trainer 455 \"Few reach this floor. Fewer leave it.\" \"Impressive...\"\nsay \"Red waits where the air is thinnest.\"\nend"
+  },
+  "ch2_elm": {
+   "asm": "lockall\ncheckflag 0x14da\ngoto_if 0 skip\ncheckflag 0x1341\ngoto_if 1 skip\nsetflag 0x1341\nsetvar 0x5108 1\nturnobject 1 1\nsay \"Elm: Ah, {FD:01}! Come here a moment.{FB}Look at this printout. It's the signal that forced all those wild Pokémon to Mega Evolve.{FB}It came back last night. Only four seconds, at 3:07, in the band the old Radio Tower used.{FB}I won't ask you to go. I only want you to know.\"\nsay \"Elm: ...Of course you'll look into it. You always do.{FB}Start at Goldenrod. Buena says her broadcasts have been dropping out every night at the same hour.\"\nreleaseall\nend\nskip:\nreleaseall\nend"
+  },
+  "ch2_radio_tr": {
+   "asm": "compare_var_to_value 0x5108 1\ngoto_if 1 show\nsetflag 0x1352\ngoto @orig_50_23_transition\nshow:\nclearflag 0x1352\ngoto @orig_50_23_transition"
+  },
+  "ch2_radio": {
+   "asm": "lockall\nsetvar 0x5108 2\nsetflag 0x1342\nmove 255 face_right\nsay \"Buena: {FD:01}! You came. Thank goodness.{FB}Every night at 3:07, my broadcast drops out for four seconds. Four seconds of dead air.{FB}I run a radio show. I notice that.\"\nsay \"Looker: International Police. We pulled this from the antenna room.{FB}It's Rocket hardware, but it's wired like no Rocket device I know.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"The device glows with a faint rainbow light as the Key Stone answers it.\"\nsay \"...Champion.{FB}The stage is set. Take your cue.\"\nsay \"Looker: That's Archer's voice. He wasn't planning to defeat you, {FD:01}.{FB}He needs you.\"\nsay \"Lyra: Then I'm staying here with Buena.{FB}Someone has to hold the line while you're out there. Go on.{FB}Call me if anything flickers!\"\nreleaseall\nend"
+  },
+  "ch2_indigo_tr": {
+   "asm": "compare_var_to_value 0x5108 2\ngoto_if 1 show\nsetflag 0x1353\ngoto @orig_13_0_transition\nshow:\nclearflag 0x1353\ngoto @orig_13_0_transition"
+  },
+  "ch2_indigo": {
+   "asm": "lockall\nsetvar 0x5108 3\nsetflag 0x1343\nsetflag 0x1344\nmove 255 walk_up\nsay \"Lance: {FD:01}. Good. I hoped you'd come here.{FB}I owe you a straight answer. The cloaked Dragon Tamer who beat Silver on this floor was me.\"\nsay \"Lance: I told him his love and trust for his Pokémon wasn't enough.{FB}I judged a bond like a test result. That was a poor judgment, and I've thought about it every day since.\"\nsay \"Silver: Hmph. Don't look at me.{FB}I'm not here for his apology. I took this from a Rocket grunt on Route 23.\"\nsay \"Silver: A relay coil. It hums every night at 3:07, then goes quiet.{FB}Same time your Radio Tower trouble starts, right?\"\nsay \"Anabel: That coil carries the pattern of Orre's Shadow device.{FB}Those machines seal a Pokémon's heart shut. Rocket copied the idea.{FB}We have to remove it, not use it.\"\nsay \"Silver: I'm following the signal. On my own.{FB}...You can come along, if you can keep up.\"\nsay \"Lance: Silver. For what it's worth...{FB}I was wrong about you.\"\nsay \"Silver: ...Tch. Keep your pity. Show me with your actions next time.\"\nreleaseall\nend"
+  },
+  "ch2_cliff_tr": {
+   "asm": "compare_var_to_value 0x5108 3\ngoto_if 1 show\nsetflag 0x1354\ngoto @orig_56_27_transition\nshow:\nclearflag 0x1354\ngoto @orig_56_27_transition"
+  },
+  "ch2_cliff": {
+   "asm": "lockall\nsetvar 0x5108 4\nsetflag 0x1345\nsay \"Elder: So you are the Champion. Axel wrote ahead of you.{FB}Come, stand with us. The old things are best said out here, where the wind can hear them.\"\nsay \"Elder: Long ago the Meteor People held a stone that shone in seven colors.{FB}It could gather the strength of every Pokémon around it and focus it, like light through glass.\"\nsay \"Elder: The Rainbow Stone does not make a bond. It only carries one that already exists.{FB}A man who forces it to speak for people who never agreed... is only shouting into a canyon.\"\nsay \"Axel: That's why Lucario and I train. Evolution beyond evolution still depends on one partnership.{FB}Nobody can do it for you, and nobody can do it to you.\"\nsay \"Dawn: I compared notes with what I saw in Sinnoh.{FB}Galactic tried to bend a legend by force, too. It never worked the way they promised.\"\nsay \"Elder: Archer's plan needs one Trainer who chooses to connect.{FB}Refuse him, and the whole system breaks. Every Pokémon it touches will pay for it.\"\nsay \"Elder: That is what 'Successor' means: not the keeper of a weapon, but the keeper of what was learned.{FB}Take this with you, and remember it when the time comes.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc24\nsay \"The Elder stored Latias's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsay \"Elder: Go to the Buried Tower. Rocket hides a node under the old stones.{FB}Axel will watch the road behind you.\"\nreleaseall\nend"
+  },
+  "ch2_buried_tr": {
+   "asm": "compare_var_to_value 0x5108 4\ngoto_if 1 show\nsetflag 0x1355\ngoto @orig_56_49_transition\nshow:\nclearflag 0x1355\ngoto @orig_56_49_transition"
+  },
+  "ch2_buried": {
+   "asm": "lockall\nsay \"Ariana: Oh, there you are. Late for your own cue, Champion.{FB}Archer said you'd come. He's very good at knowing where people will stand.\"\nsay \"Silver: Spare us the theatre. That's the node, isn't it?{FB}We follow the signal. We stop the signal.\"\nsay \"Dawn: It's drawing power from the old stones under the tower.{FB}If we cut it here, the whole line wobbles. Ready?\"\ntrainer 456 \"Then let me hold you here until the curtain falls!\" \"...The curtain falls on me, it seems.\" won\nwon:\nsetvar 0x5108 5\nsetflag 0x1346\nsay \"Ariana: ...Archer never told me it would feel like this.{FB}Do as you like. He doesn't need me anymore.\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"{FD:01} held the Key Stone against the node. Its rainbow light shuddered and went dark.\"\nsay \"Silver: ...Is that it?\"\nfadescreen 1\ndelay 30\nfadescreen 0\nsay \"The node flickers back to life, dimmer than before.\"\nsay \"Dawn: It restarts on its own. Cutting power won't hold it.{FB}It needs something else. Something the stones answer to freely.\"\nsay \"Silver: Then we find what that is. I'll keep watch here.{FB}Go. The Elder and the Kimono Girls know more than we do.\"\nreleaseall\nend"
+  },
+  "ch2_library_tr": {
+   "asm": "compare_var_to_value 0x5108 5\ngoto_if 1 show\nsetflag 0x1356\ngoto @orig_52_5_transition\nshow:\nclearflag 0x1356\ngoto @orig_52_5_transition"
+  },
+  "ch2_library": {
+   "asm": "lockall\nsetvar 0x5108 6\nsetflag 0x1347\nsetflag 0x1348\nsay \"Tamao: Champion. Thank you for coming.{FB}The Priestess of Ecruteak left a document. It has never been opened.\"\nsay \"Morty: Our records say only the youngest of the Kimono sisters may read it.{FB}And the youngest...\"\nsay \"Tamao: ...is Sange. And Sange is gone. So it stayed sealed, all these years.\"\nfadescreen 1\nplaymoncry 251 0\ndelay 30\nfadescreen 0\nremoveobject 82\nsay \"A faint flute drifts through the archive, from nowhere. The seal on the document loosens as the Key Stone warms.\"\nsay \"Tamao: It's opening. It's... a score. And a note in the margin.\"\nsay \"'To the one who carries my letter.{FB}Play this together, all of you, and leave my place empty. That is the promise.'{FB}'-Sange, Priestess of Ecruteak'\"\nsay \"Tamao: That handwriting. I would know it anywhere.{FB}The Priestess wasn't a stranger. She was Sange.\"\nsay \"Morty: She never left the story. She went back and wrote it.{FB}A hundred and fifty years of people played her song without knowing whose it was.\"\nsay \"Tamao: My sisters and I will learn every note.{FB}When you need us, send word. We will play wherever the stones are listening.\"\nreleaseall\nend"
+  },
+  "ch2_whirl_tr": {
+   "asm": "compare_var_to_value 0x5108 6\ngoto_if 1 show\nsetflag 0x1357\ngoto @orig_55_14_transition\nshow:\nclearflag 0x1357\ngoto @orig_55_14_transition"
+  },
+  "ch2_whirl": {
+   "asm": "lockall\nsetvar 0x5108 7\nsetflag 0x1349\nsay \"Silver: ...Father.\"\nsay \"Giovanni: So you followed the signal, boy. Good. Don't mistake that for concern.{FB}Rocket's name is being used for something I never authorized.\"\nsay \"Silver: You left. You don't get to authorize anything.\"\nsay \"Giovanni: The deep chamber where Lugia slept was once ours.{FB}A facility from my years. Its transmitter is still wired to the old dish.{FB}That is all I will give you.\"\nsay \"Giovanni: I won't ask forgiveness. Whatever you do next...{FB}do it for your own reasons.\"\nfadescreen 1\nremoveobject 90\ndelay 20\nfadescreen 0\nsay \"Silver: ...Don't look at me like that.{FB}The Pokémon go first. They're the ones being fed into that ring.{FB}What he is to me can wait.\"\nsay \"Silver: Come on. The chamber where Lugia slept is deeper in. Keep climbing.\"\nreleaseall\nend"
+  },
+  "ch2_call": {
+   "asm": "lockall\nsetvar 0x5108 8\nsetflag 0x134a\nplayse 0x15\nsay \"Your Pokégear is ringing!\"\nsay \"Lyra: {FD:01}! It's me! Don't hang up, it's good news!{FB}Buena had the idea. The node's pulse hits at 3:07 on one frequency, right?\"\nsay \"Buena: So I scheduled the loudest, silliest show I've ever aired on that exact frequency, with every listener's request line open.{FB}A thousand people singing along drowned it out.\"\nsay \"Lyra: The node went dark and stayed dark! It was kind of beautiful, honestly.{FB}Looker's team is guarding the antenna now.\"\nsay \"Looker: One more thing. The signal's last relay is deep in the Whirl Islands, in the chamber where Lugia slept.{FB}That's where Archer is. Don't go alone.\"\nsay \"Lyra: ...Come back safe. And {FD:01}? Thanks for trusting us with the hard part.\"\nreleaseall\nend"
+  },
+  "ch2_final_tr": {
+   "asm": "compare_var_to_value 0x5108 8\ngoto_if 1 stage8\ncompare_var_to_value 0x5108 10\ngoto_if 1 stage10\nsetflag 0x1358\nsetflag 0x135a\ngoto @orig_55_16_transition\nstage8:\nclearflag 0x1358\nsetflag 0x135a\ngoto @orig_55_16_transition\nstage10:\nclearflag 0x1358\nclearflag 0x135a\ngoto @orig_55_16_transition"
+  },
+  "ch2_final": {
+   "asm": "lockall\nsay \"Archer: ...Welcome, Champion. Punctual. I do admire a performer who hits their mark.\"\nsay \"Silver: Where are the Pokémon you've been feeding into that ring?\"\nsay \"Archer: Where they belong. In the chorus. Together, always.{FB}Do you know what Rocket taught me? That devotion is something a man can be discarded from.\"\nsay \"Archer: So I built a bond nobody can leave. It needs only one willing voice to hold it steady.{FB}A Champion. A Trainer whose partner followed them out of a lab as a child. You.\"\nsay \"The Key Stone in your hand stays cold. You shake your head.\"\nsay \"Archer: ...No? The script anticipated that. Then we play the scene the other way.\"\nsay \"Dawn: Silver, the ring! Those Pokémon are being drained!{FB}Silver: I'm on it. {FD:01}, he's yours!\"\ntrainer 457 \"Then let the next act begin!\" \"...A flawless performance. Of course it was.\" won\nwon:\nsay \"Archer: ...Then let them stay on the stage with me.\"\nfadescreen 1\nplayse 0x15\ndelay 15\nfadescreen 0\nsay \"The ring of shards flares white. Its rainbow light turns jagged, then red.{FB}Every shard begins to ring on a different note.\"\nsay \"Dawn: It's not shutting down! It's feeding on itself!{FB}Silver!!\"\nfadescreen 1\ndelay 20\nfadescreen 0\nsay \"Silver: ...I'm fine. A Pokémon panicked and I took the hit.{FB}Get the others out of the ring. NOW.\"\nsay \"From beyond the cave walls come cries. Wild Pokémon all over the islands are being forced to Mega Evolve.\"\nsay \"Archer: No... no, that's not the score.{FB}Stop. Stop it! It was supposed to hold them. It was supposed to...\"\nsay \"Archer: ...I can't stop it either.\"\nsay \"Dawn: The stones are screaming at the wrong pitch. We can't cut it.{FB}Only something they answer to freely will calm them.{FB}The song! Where are the Kimono Girls?\"\nsetflag 0x1359\nsetvar 0x5108 10\nfadescreen 1\nplayse 0x15\ndelay 25\nwarp 55.16 12 12\nwaitstate\nend"
+  },
+  "ch2_song": {
+   "asm": "lockall\nsay \"Looker: We heard the ring from the harbour! I brought the sisters in my boat.{FB}Anabel: Whatever that thing is doing, it's tearing the whole archipelago apart.\"\nsay \"Tamao: {FD:01}. We learned every note.{FB}Sisters, take your places. And leave the fifth place empty.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"Four voices and four instruments carry a melody none of them learned from anyone alive.{FB}It is gentle and unhurried. It sounds like a flute that is still being played, somewhere else.\"\nsay \"The shards stop fighting each other. One by one they settle on the same note.{FB}The jagged red softens back into the colors of a rainbow.\"\nplaymoncry 249 0\nfadescreen 1\ndelay 25\nfadescreen 0\nsay \"From far out over the sea, a great voice answers the song. Lugia.\"\nsay \"Archer: ...They're listening. Nobody made them.{FB}I spent years and a hundred machines trying to make that happen.\"\nsay \"Looker: Archer. You're coming with me. The file on you has been open long enough.\"\nsay \"Archer: ...Of course. The curtain was always going to fall.\"\nfadescreen 1\nremoveobject 90\nremoveobject 97\nremoveobject 98\ndelay 20\nfadescreen 0\nsay \"Silver: He's theirs now. I won't pretend I feel anything about it.{FB}...The Pokémon are safe. That's what matters.\"\nsay \"Tamao: The shards are quiet. The stones remember who refused to be an anchor.{FB}Take this, from all of us.\"\nplayfanfare 0x103\nwaitfanfare\nsetflag 0xc2d\nsay \"Tamao stored Diancie's Mega Evolution aura in {FD:01}'s Mega Stone.\"\nsetflag 0x134b\nsetflag 0x134c\nsetvar 0x5108 11\nreleaseall\nend"
+  },
+  "ch2_theatre_tr": {
+   "asm": "compare_var_to_value 0x5108 11\ngoto_if 4 ended\nsetflag 0x135b\nsetflag 0x135d\nclearflag 0x135c\ngoto @orig_48_5_transition\nended:\nsetflag 0x135c\nclearflag 0x135d\ncompare_var_to_value 0x5108 11\ngoto_if 1 stage11\nsetflag 0x135b\ngoto @orig_48_5_transition\nstage11:\nclearflag 0x135b\ngoto @orig_48_5_transition"
+  },
+  "ch2_theatre": {
+   "asm": "lockall\nsetvar 0x5108 12\nsetflag 0x134d\nsay \"The Ecruteak Dance Theater is full tonight. The curtain rises on the Kimono Girls.\"\nsay \"Tamao: Good evening, everyone. Tonight's dance is for someone who isn't here.\"\nfadescreen 1\nplayfanfare 0x100\nwaitfanfare\nfadescreen 0\nsay \"The melody is the one from the archive. Four dancers move through it.{FB}In the center of the stage, one place is left empty. A single flute rests there, waiting.\"\nsay \"Lance: {FD:01}. A title couldn't have done this.{FB}A bond could. I'll try to remember the difference.\"\nsay \"Silver: ...I'm not waiting around for Giovanni's opinion. Or anyone's.{FB}Lance. Next time, watch what I do before you judge me.\"\nsay \"Lance: I will.\"\nsay \"Silver: ...Champion. Thanks. Don't tell anyone I said it.\"\nfadescreen 1\nremoveobject 112\ndelay 20\nfadescreen 0\nsay \"The last note fades, and the theatre stays quiet a moment longer than it should.{FB}Somewhere, very faintly, a flute seems to answer.\"\nreleaseall\nend"
+  },
+  "ch2_navel_tr": {
+   "asm": "compare_var_to_value 0x5108 12\ngoto_if 1 show\nsetflag 0x135e\ngoto @orig_2_0_transition\nshow:\nclearflag 0x135e\ngoto @orig_2_0_transition"
+  },
+  "ch2_ashida": {
+   "asm": "lockall\nonce 0x135f\nsay \"Ashida: Well, well. You actually took the ticket.{FB}I travel the world looking for strong Trainers, Champion. The strong ones always end up where sky and sea currents meet.\"\nsay \"Ashida: Not for the fight. For the quiet.{FB}Go on up the rock. The summit hall is calm today. But it isn't empty.\"\nendonce"
+  },
+  "ch2_navel": {
+   "asm": "lockall\nsetvar 0x5108 13\nsetflag 0x134e\nsay \"The summit hall is quiet. Wind from the open sea moves through the cave like slow breath.\"\nfadescreen 3\ndelay 20\nplaymoncry 249 0\nwaitmoncry\nfadescreen 0\nsay \"High above the hall, two shapes cross against the light. One is white and silver. One is red and gold.{FB}Lugia, and Ho-Oh.\"\nplaymoncry 250 0\nwaitmoncry\nsay \"They circle together once. Where their paths cross, a rainbow stretches across the whole sea, clear down to the horizon.\"\nsay \"You think of a letter that began: 'By the time you read this, I will no longer be in this world.'{FB}'Go and share that happiness. Please, live well.'\"\nsay \"A bell rings once, far away. The rainbow holds a moment longer than it should.\"\nreleaseall\nend"
+  },
+  "ch2_navel_hall_tr": {
+   "asm": "compare_var_to_value 0x5108 12\ngoto_if 1 show\nsetflag 0x1360\ngoto @orig_2_55_transition\nshow:\nclearflag 0x1360\ngoto @orig_2_55_transition"
+  },
+  "ch2_elm_end": {
+   "asm": "lockall\nsetvar 0x5108 14\nsetflag 0x134f\nturnobject 1 1\nsay \"Elm: Welcome home, {FD:01}.{FB}The signal is gone. 3:07 goes by in silence now. Buena says so, too.\"\nsay \"Elm: Reports of a rainbow over the sea all describe one afternoon. Navel Rock.{FB}I think you were there.\"\nsay \"Elm: Something odd is happening, too. A melody is turning up in places it has no business being.{FB}A lullaby in Cherrygrove. A whistle in the Radio Tower. Nobody knows who started it.\"\nsay \"Elm: You didn't carry that alone.{FB}That's what changed everything.\"\nsay \"~ Pokémon Azoth: Second Chapter, Rainbow ~{FB}The end of this chapter.\"\nreleaseall\nend"
+  }
+ },
+ "groups": {
+  "58": [
+   {
+    "name": "Route 28",
+    "clone": "3.81",
+    "mapsec": 204,
+    "events": {
+     "warps": [
+      {
+       "x": 8,
+       "y": 9,
+       "elev": 0,
+       "warp_id": 1,
+       "to": "55.1"
+      },
+      {
+       "x": 25,
+       "y": 8,
+       "elev": 0,
+       "warp_id": 0,
+       "to": "58.1"
+      }
+     ],
+     "objects": [
+      {
+       "local_id": 1,
+       "gfx": 64,
+       "x": 21,
+       "y": 12,
+       "elev": 3,
+       "movement": 0,
+       "script": "silver_nurse"
+      },
+      {
+       "local_id": 148,
+       "gfx": 20,
+       "x": 3,
+       "y": 12,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_48"
+      },
+      {
+       "local_id": 149,
+       "gfx": 21,
+       "x": 11,
+       "y": 13,
+       "elev": 3,
+       "movement": 7,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_49"
+      }
+     ]
+    },
+    "layout": "route28"
+   },
+   {
+    "name": "Mt. Silver 1F",
+    "clone": "1.72",
+    "mapsec": 205,
+    "events_from": "1.72",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "edit": {
+      "warps": {
+       "0": {
+        "to": "58.0",
+        "warp_id": 1
+       }
+      },
+      "objects": {
+       "0": {
+        "flag": 4920,
+        "script": "ball_max_revive"
+       },
+       "1": {
+        "flag": 4921,
+        "script": "ball_pp_max"
+       },
+       "2": {
+        "flag": 4922,
+        "script": "ball_ultra"
+       }
+      }
+     },
+     "objects": [
+      {
+       "local_id": 162,
+       "gfx": 116,
+       "x": 22,
+       "y": 19,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_62"
+      },
+      {
+       "local_id": 177,
+       "gfx": 114,
+       "x": 4,
+       "y": 13,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_77"
+      }
+     ]
+    },
+    "land_encounter": true
+   },
+   {
+    "name": "Mt. Silver 2F",
+    "clone": "1.73",
+    "mapsec": 205,
+    "events_from": "1.73",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "edit": {
+      "objects": {
+       "0": {
+        "flag": 4923,
+        "script": "ball_full_restore"
+       },
+       "1": {
+        "flag": 4924,
+        "script": "ball_protein"
+       },
+       "2": {
+        "flag": 4925,
+        "script": "ball_carbos"
+       }
+      }
+     },
+     "objects": [
+      {
+       "local_id": 113,
+       "gfx": 45,
+       "x": 12,
+       "y": 6,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 3,
+       "script": "tr_113"
+      },
+      {
+       "local_id": 100,
+       "gfx": 28,
+       "x": 15,
+       "y": 8,
+       "elev": 3,
+       "movement": 9,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_200"
+      }
+     ]
+    },
+    "land_encounter": true
+   },
+   {
+    "name": "Mt. Silver 3F",
+    "clone": "1.74",
+    "mapsec": 205,
+    "events_from": "1.74",
+    "events": {
+     "remap": {
+      "1.72": "58.1",
+      "1.73": "58.2",
+      "1.74": "58.3"
+     },
+     "remove": {
+      "objects": [
+       2
+      ]
+     },
+     "edit": {
+      "objects": {
+       "0": {
+        "flag": 4926,
+        "script": "ball_rare_candy"
+       },
+       "1": {
+        "flag": 4927,
+        "script": "ball_max_elixir"
+       }
+      }
+     },
+     "coords": [
+      {
+       "x": 7,
+       "y": 12,
+       "elev": 3,
+       "var": 16537,
+       "value": 0,
+       "script": "to_summit"
+      }
+     ],
+     "objects": [
+      {
+       "local_id": 154,
+       "gfx": 118,
+       "x": 8,
+       "y": 17,
+       "elev": 3,
+       "movement": 8,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_454"
+      },
+      {
+       "local_id": 155,
+       "gfx": 122,
+       "x": 18,
+       "y": 18,
+       "elev": 3,
+       "movement": 10,
+       "range": 17,
+       "trainer_type": 1,
+       "trainer_sight": 4,
+       "script": "tr_455"
+      }
+     ]
+    },
+    "land_encounter": true
+   },
+   {
+    "name": "Mt. Silver summit",
+    "clone": "52.23",
+    "mapsec": 205,
+    "events": {
+     "objects": [
+      {
+       "local_id": 1,
+       "gfx": 150,
+       "x": 49,
+       "y": 44,
+       "elev": 3,
+       "movement": 0,
+       "script": "red_talk"
+      }
+     ],
+     "coords": [
+      {
+       "x": 49,
+       "y": 51,
+       "elev": 0,
+       "var": 16537,
+       "value": 0,
+       "script": "from_summit"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "append_events": [
+  {
+   "map": "55.1",
+   "edit": {
+    "warps": {},
+    "coords": {
+     "2": {
+      "script": "silver_gate_pass"
+     },
+     "3": {
+      "script": "silver_gate_pass"
+     },
+     "4": {
+      "script": "silver_gate_pass"
+     }
+    },
+    "objects": {
+     "1": {
+      "script": "silver_guard_talk"
+     }
+    }
+   },
+   "coords": [
+    {
+     "x": 1,
+     "y": 6,
+     "var": 16537,
+     "value": 0,
+     "script": "silver_enter"
+    }
+   ]
+  },
+  {
+   "map": "43.6",
+   "coords": [
+    {
+     "x": 5,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 0,
+     "script": "ch2_elm"
+    },
+    {
+     "x": 5,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 13,
+     "script": "ch2_elm_end"
+    }
+   ]
+  },
+  {
+   "map": "50.23",
+   "objects": [
+    {
+     "local_id": 40,
+     "gfx": 152,
+     "x": 11,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    },
+    {
+     "local_id": 41,
+     "gfx": 125,
+     "x": 12,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    },
+    {
+     "local_id": 42,
+     "gfx": 123,
+     "x": 13,
+     "y": 10,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4946
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 9,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 10,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    },
+    {
+     "x": 7,
+     "y": 12,
+     "elev": 3,
+     "var": 20744,
+     "value": 1,
+     "script": "ch2_radio"
+    }
+   ]
+  },
+  {
+   "map": "13.0",
+   "objects": [
+    {
+     "local_id": 43,
+     "gfx": 119,
+     "x": 7,
+     "y": 18,
+     "elev": 3,
+     "movement": 10,
+     "flag": 4947
+    },
+    {
+     "local_id": 44,
+     "gfx": 129,
+     "x": 9,
+     "y": 18,
+     "elev": 3,
+     "movement": 9,
+     "flag": 4947
+    },
+    {
+     "local_id": 45,
+     "gfx": 146,
+     "x": 8,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4947
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 20,
+     "elev": 3,
+     "var": 20744,
+     "value": 2,
+     "script": "ch2_indigo"
+    },
+    {
+     "x": 8,
+     "y": 20,
+     "elev": 3,
+     "var": 20744,
+     "value": 2,
+     "script": "ch2_indigo"
+    },
+    {
+     "x": 9,
+     "y": 20,
+     "elev": 3,
+     "var": 20744,
+     "value": 2,
+     "script": "ch2_indigo"
+    }
+   ]
+  },
+  {
+   "map": "56.27",
+   "objects": [
+    {
+     "local_id": 60,
+     "gfx": 33,
+     "x": 45,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    },
+    {
+     "local_id": 61,
+     "gfx": 245,
+     "x": 46,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    },
+    {
+     "local_id": 62,
+     "gfx": 14,
+     "x": 47,
+     "y": 17,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4948
+    }
+   ],
+   "coords": [
+    {
+     "x": 42,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 42,
+     "y": 18,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 43,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    },
+    {
+     "x": 43,
+     "y": 18,
+     "elev": 3,
+     "var": 20744,
+     "value": 3,
+     "script": "ch2_cliff"
+    }
+   ]
+  },
+  {
+   "map": "56.49",
+   "objects": [
+    {
+     "local_id": 70,
+     "gfx": 129,
+     "x": 7,
+     "y": 19,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 71,
+     "gfx": 14,
+     "x": 11,
+     "y": 19,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 72,
+     "gfx": 72,
+     "x": 9,
+     "y": 13,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4949
+    },
+    {
+     "local_id": 73,
+     "gfx": 102,
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4949
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
+    },
+    {
+     "x": 9,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
+    },
+    {
+     "x": 10,
+     "y": 22,
+     "elev": 3,
+     "var": 20744,
+     "value": 4,
+     "script": "ch2_buried"
+    }
+   ]
+  },
+  {
+   "map": "52.5",
+   "objects": [
+    {
+     "local_id": 80,
+     "gfx": 31,
+     "x": 9,
+     "y": 7,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4950
+    },
+    {
+     "local_id": 81,
+     "gfx": 183,
+     "x": 11,
+     "y": 7,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4950
+    },
+    {
+     "local_id": 82,
+     "gfx": 5,
+     "x": 4,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4950
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
+    },
+    {
+     "x": 8,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
+    },
+    {
+     "x": 9,
+     "y": 8,
+     "elev": 3,
+     "var": 20744,
+     "value": 5,
+     "script": "ch2_library"
+    }
+   ]
+  },
+  {
+   "map": "55.14",
+   "objects": [
+    {
+     "local_id": 90,
+     "gfx": 142,
+     "x": 5,
+     "y": 4,
+     "elev": 3,
+     "movement": 10,
+     "flag": 4951
+    },
+    {
+     "local_id": 91,
+     "gfx": 129,
+     "x": 7,
+     "y": 4,
+     "elev": 3,
+     "movement": 9,
+     "flag": 4951
+    }
+   ],
+   "coords": [
+    {
+     "x": 7,
+     "y": 6,
+     "elev": 3,
+     "var": 20744,
+     "value": 6,
+     "script": "ch2_whirl"
+    },
+    {
+     "x": 8,
+     "y": 6,
+     "elev": 3,
+     "var": 20744,
+     "value": 6,
+     "script": "ch2_whirl"
+    },
+    {
+     "x": 5,
+     "y": 4,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 6,
+     "y": 4,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 5,
+     "y": 5,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    },
+    {
+     "x": 6,
+     "y": 5,
+     "elev": 3,
+     "var": 20744,
+     "value": 7,
+     "script": "ch2_call"
+    }
+   ]
+  },
+  {
+   "map": "55.16",
+   "objects": [
+    {
+     "local_id": 90,
+     "gfx": 134,
+     "x": 13,
+     "y": 6,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4952
+    },
+    {
+     "local_id": 91,
+     "gfx": 129,
+     "x": 10,
+     "y": 8,
+     "elev": 3,
+     "movement": 10,
+     "flag": 4952
+    },
+    {
+     "local_id": 92,
+     "gfx": 14,
+     "x": 16,
+     "y": 8,
+     "elev": 3,
+     "movement": 9,
+     "flag": 4952
+    },
+    {
+     "local_id": 97,
+     "gfx": 123,
+     "x": 13,
+     "y": 13,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    },
+    {
+     "local_id": 98,
+     "gfx": 146,
+     "x": 12,
+     "y": 13,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    },
+    {
+     "local_id": 99,
+     "gfx": 31,
+     "x": 14,
+     "y": 14,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    },
+    {
+     "local_id": 100,
+     "gfx": 42,
+     "x": 15,
+     "y": 14,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4954
+    }
+   ],
+   "coords": [
+    {
+     "x": 12,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 8,
+     "script": "ch2_final"
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 8,
+     "script": "ch2_final"
+    },
+    {
+     "x": 12,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 10,
+     "script": "ch2_song"
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "elev": 3,
+     "var": 20744,
+     "value": 10,
+     "script": "ch2_song"
+    }
+   ]
+  },
+  {
+   "map": "48.5",
+   "edit": {
+    "objects": {
+     "1": {
+      "flag": 4956
+     }
+    }
+   },
+   "objects": [
+    {
+     "local_id": 111,
+     "gfx": 119,
+     "x": 11,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4955
+    },
+    {
+     "local_id": 112,
+     "gfx": 129,
+     "x": 12,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4955
+    },
+    {
+     "local_id": 113,
+     "gfx": 101,
+     "x": 9,
+     "y": 8,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4957
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
+    },
+    {
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
+    },
+    {
+     "x": 10,
+     "y": 15,
+     "elev": 3,
+     "var": 20744,
+     "value": 11,
+     "script": "ch2_theatre"
+    }
+   ]
+  },
+  {
+   "map": "2.0",
+   "objects": [
+    {
+     "local_id": 120,
+     "gfx": 140,
+     "x": 9,
+     "y": 15,
+     "elev": 3,
+     "movement": 8,
+     "flag": 4958
+    }
+   ],
+   "coords": [
+    {
+     "x": 8,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    },
+    {
+     "x": 9,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    },
+    {
+     "x": 10,
+     "y": 17,
+     "elev": 3,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_ashida"
+    }
+   ]
+  },
+  {
+   "map": "2.55",
+   "coords": [
+    {
+     "x": 14,
+     "y": 6,
+     "elev": 0,
+     "var": 20744,
+     "value": 12,
+     "script": "ch2_navel"
+    }
+   ],
+   "objects": [
+    {
+     "local_id": 130,
+     "gfx": 157,
+     "x": 10,
+     "y": 4,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4960
+    },
+    {
+     "local_id": 131,
+     "gfx": 205,
+     "x": 19,
+     "y": 4,
+     "elev": 3,
+     "movement": 0,
+     "flag": 4960
+    }
+   ]
+  }
+ ],
+ "wild": [
+  {
+   "map": "58.0",
+   "land": {
+    "rate": 20,
+    "mons": [
+     [
+      111,
+      40,
+      44
+     ],
+     [
+      77,
+      40,
+      44
+     ],
+     [
+      114,
+      40,
+      44
+     ],
+     [
+      308,
+      41,
+      45
+     ],
+     [
+      84,
+      41,
+      45
+     ],
+     [
+      85,
+      42,
+      46
+     ],
+     [
+      112,
+      43,
+      47
+     ],
+     [
+      339,
+      42,
+      46
+     ],
+     [
+      228,
+      42,
+      46
+     ],
+     [
+      232,
+      44,
+      48
+     ],
+     [
+      344,
+      44,
+      48
+     ],
+     [
+      217,
+      45,
+      49
+     ]
+    ]
+   }
+  },
+  {
+   "map": "58.1",
+   "land": {
+    "rate": 10,
+    "mons": [
+     [
+      42,
+      44,
+      48
+     ],
+     [
+      95,
+      44,
+      48
+     ],
+     [
+      75,
+      44,
+      48
+     ],
+     [
+      321,
+      42,
+      46
+     ],
+     [
+      215,
+      45,
+      49
+     ],
+     [
+      348,
+      44,
+      48
+     ],
+     [
+      246,
+      44,
+      48
+     ],
+     [
+      95,
+      46,
+      50
+     ],
+     [
+      217,
+      47,
+      51
+     ],
+     [
+      332,
+      44,
+      48
+     ],
+     [
+      247,
+      48,
+      52
+     ],
+     [
+      232,
+      50,
+      54
+     ]
+    ]
+   },
+   "rock": {
+    "rate": 10,
+    "mons": [
+     [
+      74,
+      40,
+      46
+     ],
+     [
+      75,
+      40,
+      46
+     ],
+     [
+      95,
+      42,
+      48
+     ],
+     [
+      398,
+      42,
+      46
+     ],
+     [
+      213,
+      44,
+      50
+     ]
+    ]
+   },
+   "water": {
+    "rate": 4,
+    "mons": [
+     [
+      61,
+      40,
+      45
+     ],
+     [
+      60,
+      40,
+      45
+     ],
+     [
+      119,
+      42,
+      48
+     ],
+     [
+      118,
+      42,
+      48
+     ],
+     [
+      130,
+      45,
+      50
+     ]
+    ]
+   },
+   "fish": {
+    "rate": 30,
+    "mons": [
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      118,
+      25,
+      35
+     ],
+     [
+      118,
+      25,
+      35
+     ],
+     [
+      119,
+      35,
+      45
+     ],
+     [
+      119,
+      35,
+      45
+     ],
+     [
+      130,
+      45,
+      50
+     ],
+     [
+      130,
+      45,
+      50
+     ],
+     [
+      148,
+      50,
+      55
+     ]
+    ]
+   }
+  },
+  {
+   "map": "58.2",
+   "land": {
+    "rate": 10,
+    "mons": [
+     [
+      42,
+      46,
+      50
+     ],
+     [
+      75,
+      46,
+      50
+     ],
+     [
+      351,
+      44,
+      48
+     ],
+     [
+      247,
+      46,
+      50
+     ],
+     [
+      215,
+      47,
+      51
+     ],
+     [
+      200,
+      46,
+      50
+     ],
+     [
+      332,
+      48,
+      52
+     ],
+     [
+      232,
+      50,
+      54
+     ],
+     [
+      95,
+      48,
+      52
+     ],
+     [
+      349,
+      48,
+      52
+     ],
+     [
+      229,
+      48,
+      52
+     ],
+     [
+      248,
+      52,
+      55
+     ]
+    ]
+   },
+   "rock": {
+    "rate": 10,
+    "mons": [
+     [
+      74,
+      40,
+      46
+     ],
+     [
+      75,
+      40,
+      46
+     ],
+     [
+      95,
+      42,
+      48
+     ],
+     [
+      398,
+      42,
+      46
+     ],
+     [
+      213,
+      44,
+      50
+     ]
+    ]
+   }
+  },
+  {
+   "map": "58.3",
+   "land": {
+    "rate": 10,
+    "mons": [
+     [
+      42,
+      48,
+      52
+     ],
+     [
+      398,
+      48,
+      52
+     ],
+     [
+      247,
+      48,
+      52
+     ],
+     [
+      215,
+      49,
+      53
+     ],
+     [
+      200,
+      48,
+      52
+     ],
+     [
+      367,
+      50,
+      54
+     ],
+     [
+      232,
+      52,
+      56
+     ],
+     [
+      227,
+      50,
+      54
+     ],
+     [
+      229,
+      50,
+      54
+     ],
+     [
+      248,
+      52,
+      56
+     ],
+     [
+      334,
+      54,
+      58
+     ],
+     [
+      149,
+      54,
+      58
+     ]
+    ]
+   },
+   "rock": {
+    "rate": 10,
+    "mons": [
+     [
+      74,
+      40,
+      46
+     ],
+     [
+      75,
+      40,
+      46
+     ],
+     [
+      95,
+      42,
+      48
+     ],
+     [
+      246,
+      42,
+      46
+     ],
+     [
+      213,
+      44,
+      50
+     ]
+    ]
+   },
+   "water": {
+    "rate": 4,
+    "mons": [
+     [
+      61,
+      40,
+      45
+     ],
+     [
+      60,
+      40,
+      45
+     ],
+     [
+      119,
+      42,
+      48
+     ],
+     [
+      118,
+      42,
+      48
+     ],
+     [
+      130,
+      45,
+      50
+     ]
+    ]
+   },
+   "fish": {
+    "rate": 30,
+    "mons": [
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      129,
+      10,
+      20
+     ],
+     [
+      118,
+      25,
+      35
+     ],
+     [
+      118,
+      25,
+      35
+     ],
+     [
+      119,
+      35,
+      45
+     ],
+     [
+      119,
+      35,
+      45
+     ],
+     [
+      130,
+      45,
+      50
+     ],
+     [
+      130,
+      45,
+      50
+     ],
+     [
+      148,
+      50,
+      55
+     ]
+    ]
+   }
+  }
+ ],
+ "trainers": [
+  {
+   "id": 461,
+   "name": "Red",
+   "class": 39,
+   "pic": 17,
+   "music": 10,
+   "ai": 7,
+   "items": [
+    19,
+    19,
+    19,
+    25
+   ],
+   "party": [
+    {
+     "species": 25,
+     "level": 72,
+     "iv": 255,
+     "item": 202,
+     "moves": [
+      344,
+      85,
+      231,
+      98
+     ]
+    },
+    {
+     "species": 196,
+     "level": 70,
+     "iv": 255,
+     "item": 200,
+     "moves": [
+      94,
+      234,
+      247,
+      347
+     ]
+    },
+    {
+     "species": 143,
+     "level": 71,
+     "iv": 255,
+     "item": 142,
+     "moves": [
+      34,
+      89,
+      156,
+      63
+     ]
+    },
+    {
+     "species": 3,
+     "level": 73,
+     "iv": 255,
+     "item": 200,
+     "moves": [
+      76,
+      188,
+      79,
+      89
+     ]
+    },
+    {
+     "species": 6,
+     "level": 74,
+     "iv": 255,
+     "item": 141,
+     "moves": [
+      53,
+      19,
+      337,
+      89
+     ]
+    },
+    {
+     "species": 9,
+     "level": 74,
+     "iv": 255,
+     "item": 142,
+     "moves": [
+      56,
+      58,
+      57,
+      240
+     ]
+    }
+   ]
+  },
+  {
+   "id": 48,
+   "name": "Ruben",
+   "class": 65,
+   "pic": 67,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 75,
+     "level": 43
+    },
+    {
+     "species": 112,
+     "level": 44
+    },
+    {
+     "species": 339,
+     "level": 43
+    }
+   ]
+  },
+  {
+   "id": 49,
+   "name": "Skylar",
+   "class": 79,
+   "pic": 104,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 85,
+     "level": 44
+    },
+    {
+     "species": 227,
+     "level": 45
+    },
+    {
+     "species": 18,
+     "level": 45
+    }
+   ]
+  },
+  {
+   "id": 62,
+   "name": "Kenji",
+   "class": 80,
+   "pic": 105,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 57,
+     "level": 46
+    },
+    {
+     "species": 68,
+     "level": 47
+    },
+    {
+     "species": 237,
+     "level": 46
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "name": "Isolde",
+   "class": 75,
+   "pic": 100,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 65,
+     "level": 47
+    },
+    {
+     "species": 348,
+     "level": 46
+    },
+    {
+     "species": 349,
+     "level": 46
+    },
+    {
+     "species": 97,
+     "level": 47
+    }
+   ]
+  },
+  {
+   "id": 113,
+   "name": "Dag",
+   "class": 68,
+   "pic": 93,
+   "music": 11,
+   "ai": 1,
+   "party": [
+    {
+     "species": 208,
+     "level": 49
+    },
+    {
+     "species": 76,
+     "level": 48
+    },
+    {
+     "species": 219,
+     "level": 48
+    }
+   ]
+  },
+  {
+   "id": 200,
+   "name": "Falk",
+   "class": 79,
+   "pic": 104,
+   "music": 0,
+   "ai": 1,
+   "party": [
+    {
+     "species": 22,
+     "level": 49
+    },
+    {
+     "species": 227,
+     "level": 50
+    },
+    {
+     "species": 85,
+     "level": 49
+    }
+   ]
+  },
+  {
+   "id": 454,
+   "name": "Draco",
+   "class": 33,
+   "pic": 45,
+   "music": 5,
+   "ai": 1,
+   "party": [
+    {
+     "species": 148,
+     "level": 52
+    },
+    {
+     "species": 230,
+     "level": 53
+    },
+    {
+     "species": 334,
+     "level": 52
+    }
+   ]
+  },
+  {
+   "id": 455,
+   "name": "Verena",
+   "class": 86,
+   "pic": 22,
+   "music": 3,
+   "ai": 1,
+   "party": [
+    {
+     "species": 248,
+     "level": 54
+    },
+    {
+     "species": 197,
+     "level": 54
+    },
+    {
+     "species": 94,
+     "level": 54
+    },
+    {
+     "species": 400,
+     "level": 56
+    }
+   ]
+  },
+  {
+   "id": 456,
+   "name": "Ariana",
+   "class": 47,
+   "pic": 52,
+   "music": 132,
+   "ai": 7,
+   "party": [
+    {
+     "species": 24,
+     "level": 60
+    },
+    {
+     "species": 45,
+     "level": 61
+    },
+    {
+     "species": 198,
+     "level": 61
+    },
+    {
+     "species": 94,
+     "level": 62
+    }
+   ]
+  },
+  {
+   "id": 457,
+   "name": "Archer",
+   "class": 40,
+   "pic": 51,
+   "music": 133,
+   "ai": 7,
+   "items": [
+    353,
+    19,
+    19,
+    19
+   ],
+   "party": [
+    {
+     "species": 874,
+     "level": 64,
+     "iv": 255,
+     "item": 683,
+     "moves": [
+      412,
+      257,
+      472,
+      442
+     ]
+    },
+    {
+     "species": 875,
+     "level": 66,
+     "iv": 255,
+     "item": 533,
+     "moves": [
+      94,
+      374,
+      466,
+      269
+     ]
+    },
+    {
+     "species": 896,
+     "level": 65,
+     "iv": 255,
+     "item": 702,
+     "moves": [
+      532,
+      89,
+      360,
+      468
+     ]
+    },
+    {
+     "species": 888,
+     "level": 65,
+     "iv": 255,
+     "item": 696,
+     "moves": [
+      126,
+      367,
+      188,
+      194
+     ]
+    },
+    {
+     "species": 889,
+     "level": 66,
+     "iv": 255,
+     "item": 711,
+     "moves": [
+      429,
+      242,
+      228,
+      8
+     ]
+    },
+    {
+     "species": 905,
+     "level": 68,
+     "iv": 255,
+     "item": 141,
+     "moves": [
+      216,
+      89,
+      349,
+      395
+     ]
+    }
+   ]
+  }
+ ],
+ "layouts": {
+  "route28": {
+   "from": "3.81",
+   "crop": [
+    24,
+    2,
+    64,
+    20
+   ],
+   "patch": [
+    {
+     "x": 10,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 10,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 10,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 11,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 12,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 13,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 14,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 15,
+     "y": 13,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 11,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 12,
+     "block": 12301
+    },
+    {
+     "x": 16,
+     "y": 13,
+     "block": 12301
+    }
+   ]
+  }
+ },
+ "trainer_pics": [
+  {
+   "index": 17,
+   "pic_from": 135,
+   "recolor": {
+    "3": [
+     216,
+     40,
+     40
+    ],
+    "1": [
+     136,
+     24,
+     24
+    ]
+   }
+  }
+ ],
+ "map_scripts": [
+  {
+   "map": "50.23",
+   "on_transition": "ch2_radio_tr"
+  },
+  {
+   "map": "13.0",
+   "on_transition": "ch2_indigo_tr"
+  },
+  {
+   "map": "56.27",
+   "on_transition": "ch2_cliff_tr"
+  },
+  {
+   "map": "56.49",
+   "on_transition": "ch2_buried_tr"
+  },
+  {
+   "map": "52.5",
+   "on_transition": "ch2_library_tr"
+  },
+  {
+   "map": "55.14",
+   "on_transition": "ch2_whirl_tr"
+  },
+  {
+   "map": "55.16",
+   "on_transition": "ch2_final_tr"
+  },
+  {
+   "map": "48.5",
+   "on_transition": "ch2_theatre_tr"
+  },
+  {
+   "map": "2.0",
+   "on_transition": "ch2_navel_tr"
+  },
+  {
+   "map": "2.55",
+   "on_transition": "ch2_navel_hall_tr"
+  }
+ ],
+ "overworld_sprites": [
+  {
+   "gfx_id": 142,
+   "bank_key": "objgfx/npc/giovanni",
+   "w": 16,
+   "template": 5,
+   "source": "firered"
+  },
+  {
+   "gfx_id": 146,
+   "bank_key": "objgfx/npc/frontier-brains-anabel",
+   "w": 16,
+   "template": 5
+  },
+  {
+   "gfx_id": 157,
+   "bank_key": "objgfx/species/lugia",
+   "w": 64,
+   "template": 207,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
+  },
+  {
+   "gfx_id": 205,
+   "bank_key": "objgfx/species/ho-oh",
+   "w": 64,
+   "template": 207,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
+  },
+  {
+   "gfx_id": 5,
+   "bank_key": "objgfx/species/celebi",
+   "w": 32,
+   "template": 72,
+   "source": "expansion",
+   "map_frames": false,
+   "frames": 1
+  }
+ ]
+}

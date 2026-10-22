@@ -10,6 +10,7 @@ BG layers share palette RAM).
     python3 scripts/logo.py OUT.png      # preview (original above, new below)
 Used by insert.py via build(src_rom) -> (tiles, map).
 """
+import os
 import struct
 import sys
 
@@ -28,6 +29,8 @@ ICE = [48, 42, 31, 44, 41, 40, 39, 32, 36]   # light -> dark letter fill
 NAVY, DARK, WHITE = 52, 12, 57
 SUB_FILL = [41, 40, 39, 32]
 BLUES = set(range(29, 56)) - {30}            # letter/ice colours (30 = red)
+RED = 30
+RIVER_TAG = "RIVER EDITION" if os.environ.get("RHT_EDITION") == "river" else None   # unofficial fan build marker
 
 
 def palette(rom):
@@ -135,6 +138,14 @@ def build_image(rom):
     stamp(img, dilate(sub, 2), sx - 2, sy - 2, lambda x, y, h: NAVY)
     stamp(img, dilate(sub, 1), sx - 1, sy - 1, lambda x, y, h: WHITE)
     stamp(img, sub, sx, sy, lambda x, y, h: SUB_FILL[min(len(SUB_FILL) - 1, y * len(SUB_FILL) // h)])
+    # 5. River Edition tag under the plate (unofficial fan Chapter 2 build; set RIVER_TAG = None for a plain build)
+    if RIVER_TAG:
+        tag = mask_text(RIVER_TAG, FONT_SUB, 9, spacing=1)
+        tw, th = len(tag[0]), len(tag)
+        tx, ty = 18, H - th - 3
+        stamp(img, dilate(tag, 2), tx - 2, ty - 2, lambda x, y, h: NAVY)
+        stamp(img, dilate(tag, 1), tx - 1, ty - 1, lambda x, y, h: WHITE)
+        stamp(img, tag, tx, ty, lambda x, y, h: RED)
     return img
 
 
@@ -171,4 +182,4 @@ def preview(rom, path):
 
 
 if __name__ == "__main__":
-    preview(open("roms/Pokemon Mercury 1.3.3 (patched).gba", "rb").read(), sys.argv[1])
+    preview(open("roms/Pokemon Mercury 1.3.3 (patched).gba", "rb").read(), sys.argv[1])  # RHT_EDITION=river for the tagged logo

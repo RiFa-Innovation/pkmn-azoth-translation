@@ -26,6 +26,7 @@ import layout  # noqa: E402
 import mercury_text as mt  # noqa: E402
 import gfx_text  # noqa: E402
 import logo  # noqa: E402
+import mapedit  # noqa: E402
 import maptext  # noqa: E402
 import sprtext  # noqa: E402
 import statusicons  # noqa: E402
@@ -521,6 +522,9 @@ def main():
                  for i in range(MOVE_DESC_COUNT)}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
+    if json.load(open("data/new_maps.json")).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
+        import frontier_build
+        frontier_build.reserve(pool)
     # debugging: INSERT_NORECYCLE=<json list of hex addrs> never frees those originals
     keep = set()
     if os.environ.get("INSERT_NORECYCLE"):
@@ -721,8 +725,14 @@ def main():
     report["gfx"] += 1
     # title logo (raw 8bpp BG): fits in the original tile area, so in place
     lt, lm = logo.build(src)
-    assert len(lt) <= 162 * 64
-    rom[logo.TILES:logo.TILES + len(lt)] = lt
+    assert len(lt) <= logo.MAX_TILES * 64
+    if len(lt) <= 162 * 64:
+        rom[logo.TILES:logo.TILES + len(lt)] = lt
+    else:   # the River Edition tag needs more tiles: relocate them and repoint the title code's literal
+        assert src[logo.LIT_TILES:logo.LIT_TILES + 4] == (0x08000000 + logo.TILES).to_bytes(4, "little")
+        la = pool.alloc_aligned(len(lt))
+        rom[la:la + len(lt)] = lt
+        rom[logo.LIT_TILES:logo.LIT_TILES + 4] = (0x08000000 + la).to_bytes(4, "little")
     rom[logo.MAP:logo.MAP + len(lm)] = lm
     report["gfx"] += 1
     # plain code/data patches (data/code_patches.json)
@@ -746,6 +756,7 @@ def main():
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
     report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
+    report["new_maps"] = mapedit.apply(rom, src, pool)
     report["free_after"] = pool.total()
 
     os.makedirs("build", exist_ok=True)

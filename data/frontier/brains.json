@@ -1,0 +1,37 @@
+{
+  "_doc": "Hand-built Brain teams (Lv 50). Names are resolved against the ROM; scripts/frontier_sets.py validates legality, the one-Mega rule and the species/item clauses. Doubles lists default to the singles list.",
+  "Lance": {
+    "title": "Tower Master (Silver Seal, streak 21)",
+    "sets": [
+      {"species": "Dragonite",  "item": "Mega Stone",   "spread": "phys_fast",   "moves": ["Outrage", "ExtremeSpeed", "Fire Punch", "Roost"],
+       "moves_d": ["Outrage", "ExtremeSpeed", "Fire Punch", "Protect"]},
+      {"species": "Gyarados",   "item": "Lum Berry",    "spread": "phys_fast",   "moves": ["Waterfall", "Dragon Dance", "Earthquake", "Ice Fang"],
+       "moves_d": ["Waterfall", "Dragon Dance", "Protect", "Ice Fang"]},
+      {"species": "Aerodactyl", "item": "Focus Sash",   "spread": "phys_fast",   "moves": ["Rock Slide", "Wing Attack", "Earthquake", "Roost"],
+       "moves_d": ["Rock Slide", "Wing Attack", "Protect", "Roost"]},
+      {"species": "Charizard",  "item": "Charcoal",     "spread": "spec_fast",   "moves": ["Flamethrower", "Air Slash", "Dragon Pulse", "Roost"],
+       "moves_d": ["Heat Wave", "Air Slash", "Dragon Pulse", "Protect"]},
+      {"species": "Salamence",  "item": "Life Orb",     "spread": "spec_fast",   "moves": ["Draco Meteor", "Fire Blast", "Hurricane", "Earthquake"],
+       "moves_d": ["Draco Meteor", "Heat Wave", "Hurricane", "Protect"]},
+      {"species": "Kingdra",    "item": "Leftovers",    "spread": "spec_bulky",  "moves": ["Surf", "Dragon Pulse", "Ice Beam", "Rest"],
+       "moves_d": ["Muddy Water", "Dragon Pulse", "Ice Beam", "Protect"]}
+    ]
+  },
+  "Anabel": {
+    "title": "Salon Maiden (Gold Seal, streak 49)",
+    "sets": [
+      {"species": "Espeon",     "item": "Leftovers",    "spread": "spec_fast",   "moves": ["Psychic", "Shadow Ball", "Calm Mind", "Morning Sun"],
+       "moves_d": ["Psychic", "Shadow Ball", "Protect", "Morning Sun"]},
+      {"species": "Alakazam",   "item": "Mega Stone",   "spread": "spec_fast",   "moves": ["Psychic", "Focus Blast", "Shadow Ball", "Calm Mind"],
+       "moves_d": ["Psychic", "Focus Blast", "Shadow Ball", "Protect"]},
+      {"species": "Entei",      "item": "Life Orb",     "spread": "phys_strong", "moves": ["Flare Blitz", "ExtremeSpeed", "Stone Edge", "Sacred Fire"],
+       "moves_d": ["Flare Blitz", "ExtremeSpeed", "Stone Edge", "Protect"]},
+      {"species": "Latias",     "item": "Sitrus Berry", "spread": "spec_bulky",  "moves": ["Draco Meteor", "Psychic", "Recover", "Calm Mind"],
+       "moves_d": ["Draco Meteor", "Psychic", "Recover", "Protect"]},
+      {"species": "Gardevoir",  "item": "Wise Glasses", "spread": "spec_strong", "moves": ["Moonblast", "Psychic", "Shadow Ball", "Calm Mind"],
+       "moves_d": ["Moonblast", "Psychic", "Shadow Ball", "Protect"]},
+      {"species": "Metagross",  "item": "Choice Band",  "spread": "phys_strong", "moves": ["Meteor Mash", "Earthquake", "Zen Headbutt", "Bullet Punch"],
+       "moves_d": ["Meteor Mash", "Earthquake", "Zen Headbutt", "Bullet Punch"]}
+    ]
+  }
+}

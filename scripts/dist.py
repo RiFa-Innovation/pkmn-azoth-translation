@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Package a release into dist/beta-N/.
+"""Package a release into dist/beta-N/ (or dist/river-V/ for the River Edition).
 
     python3 scripts/dist.py 19 [--save PATH] [--no-build]
+    python3 scripts/dist.py --river 0.1 [--no-build]     # unofficial Chapter 2 build, no save included
 
 Runs scripts/insert.py (unless --no-build), verifies the BPS by applying it to
 the clean base ROM and comparing byte-identical, then writes dist/beta-N/ with
@@ -34,12 +35,18 @@ def run(cmd):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("beta", type=int, help="beta release number")
+    ap.add_argument("beta", type=int, nargs="?", help="beta release number")
+    ap.add_argument("--river", metavar="VERSION", help="package the River Edition (unofficial fan Chapter 2), e.g. 0.1")
     ap.add_argument("--save", help=".sav to package (default: dist/Pokemon Azoth (English) - next.sav)")
     ap.add_argument("--no-build", action="store_true", help="skip scripts/insert.py (use the existing build/)")
     args = ap.parse_args()
+    if (args.beta is None) == (args.river is None):
+        ap.error("give either a beta number or --river VERSION")
 
     if not args.no_build:
+        import os
+        if args.river:
+            os.environ["RHT_EDITION"] = "river"     # scripts/logo.py adds the RIVER EDITION title tag
         print(run([sys.executable, "scripts/insert.py"]).strip().splitlines()[-1])
 
     gba = ROOT / "build" / "Mercury_EN.gba"
@@ -56,15 +63,23 @@ def main():
         run(["cmp", str(chk), str(gba)])
         print("BPS applies to the clean ROM byte-identically")
 
-    out = ROOT / "dist" / f"beta-{args.beta}"
+    if args.river:
+        out = ROOT / "dist" / f"river-{args.river}"
+        name = f"Pokemon-Azoth-English-RIVER-EDITION-v{args.river}"
+    else:
+        out = ROOT / "dist" / f"beta-{args.beta}"
+        name = f"Pokemon-Azoth-English-beta-{args.beta}"
     if out.exists():
         sys.exit(f"{out} already exists; not overwriting")
     out.mkdir(parents=True)
 
-    name = f"Pokemon-Azoth-English-beta-{args.beta}"
     shutil.copyfile(bps, out / f"{name}.bps")
     shutil.copyfile(gba, out / f"{name}.gba")
 
+    if args.river and not args.save:
+        for p in sorted(out.iterdir()):
+            print(f"{p.name}\tSHA-1 {hashlib.sha1(p.read_bytes()).hexdigest()}")
+        return   # the River Edition ships without a save: its story needs a late-game save of the player's own
     save = Path(args.save).expanduser() if args.save else DEFAULT_SAVE
     if not save.exists():
         sys.exit(f"no save at {save}; pass --save PATH (the package always includes the .sav, named to pair with the .gba so it loads automatically)")
