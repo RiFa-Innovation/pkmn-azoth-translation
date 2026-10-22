@@ -672,11 +672,11 @@ def pack_json(path, header=True):
 
 
 def pack_brains_json(path):
-    """The Brain teams (Lance, then Anabel; 6 records each, 24 bytes) packed from data/frontier/sets.json (no ROM needed)."""
+    """The Brain teams (Lance, Anabel, then Silver; 6 records each, 24 bytes) packed from data/frontier/sets.json (no ROM needed)."""
     d = json.load(open(path))
     order = d["spreads"]["order"]
     blob = bytearray()
-    for name in ("Lance", "Anabel"):
+    for name in ("Lance", "Anabel", "Silver"):
         team = d["brains"][name]
         assert len(team) == 6, name
         for st in team:

@@ -1,0 +1,49 @@
+{
+ "_doc": "Heirloom Sets: now and then (1 battle in 8, seeded) the opponent plays a borrowed team of an iconic Johto trainer: a hand-picked species list (six each; sets come from the set table).",
+ "teams": [
+  {
+   "name": "Falkner's flock",
+   "species": [
+    "Pidgeot",
+    "Fearow",
+    "Noctowl",
+    "Dodrio",
+    "Xatu",
+    "Skarmory"
+   ]
+  },
+  {
+   "name": "Bugsy's hive",
+   "species": [
+    "Scizor",
+    "Heracross",
+    "Forretress",
+    "Ariados",
+    "Butterfree",
+    "Beedrill"
+   ]
+  },
+  {
+   "name": "Whitney's favourites",
+   "species": [
+    "Miltank",
+    "Clefable",
+    "Blissey",
+    "Snorlax",
+    "Granbull",
+    "Wigglytuff"
+   ]
+  },
+  {
+   "name": "the Kimono Girls' Eevee line",
+   "species": [
+    "Espeon",
+    "Umbreon",
+    "Vaporeon",
+    "Jolteon",
+    "Flareon",
+    "Glaceon"
+   ]
+  }
+ ]
+}

@@ -33,6 +33,7 @@ EXTRA_SLOTS = 32
 SHELL_S, SHELL_D = 743, 755           # 12 singles shells (party size 3), 12 doubles shells (size 4, double battle)
 SHELL_LANCE = (767, 768)              # singles, doubles
 SHELL_ANABEL = (769, 770)
+SHELL_SILVER = (771, 772)
 BLOCK = 0x02022400                    # the RAM party the shells point at
 SPEECH_BUF = (0x02022600, 0x02022680, 0x02022700)   # intro, defeat, win
 SPEECH_ENTRY = 0x1DEC3A0              # first entry of the orphaned Battle Tower trainer table: words 1 / 2 = speech when the player wins / loses
@@ -105,22 +106,34 @@ def link(rom, src, pool):
     a_brains = pool.alloc_aligned(len(brains))
     rom[a_brains:a_brains + len(brains)] = brains
     bptrs = []
-    for who in ("Lance", "Anabel"):
+    for who in ("Lance", "Anabel", "Silver"):
         for k in ("defeat", "win"):
             b = mt.encode_en(speech["brain"][who][k])
             assert len(b) <= 127, (who, k)
             a = pool.alloc(len(b))
             rom[a:a + len(b)] = b
             bptrs.append(ROM_BASE + a)
-    a_bsp = pool.alloc_aligned(16)
-    rom[a_bsp:a_bsp + 16] = b"".join(struct.pack("<I", p_) for p_ in bptrs)
+    a_bsp = pool.alloc_aligned(4 * len(bptrs))
+    rom[a_bsp:a_bsp + 4 * len(bptrs)] = b"".join(struct.pack("<I", p_) for p_ in bptrs)
+    # Heirloom teams: 4 x (u16 count, 6 x u16 species id); names resolve through the species name table (lowest id = the base form)
+    snames = json.load(open(os.path.join(ROOT, "text/en/tables/species.json")))
+    by_name = {}
+    for sid, nm in sorted(snames.items(), key=lambda kv: int(kv[0])):
+        by_name.setdefault(fsets.norm(nm), int(sid))
+    heir = b""
+    for t in json.load(open(os.path.join(DATA, "heirloom.json")))["teams"]:
+        ids = [by_name[fsets.norm(n)] for n in t["species"]]
+        assert len(ids) == 6, t["name"]
+        heir += struct.pack("<H6H", len(ids), *ids)
+    a_heir = pool.alloc_aligned(len(heir))
+    rom[a_heir:a_heir + len(heir)] = heir
     image, _ = fn.build(ROM_BASE, os.path.join(ROOT, "build/frontier/native.bin"), sets=ROM_BASE + a_sets, speech=ROM_BASE + a_speech,
-                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp)
+                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp, heirloom=ROM_BASE + a_heir)
     pool_len = len(image)
     a_nat = pool.alloc_aligned(len(image))
     # the entry stubs hold absolute addresses: relink at the final location (same size, only addresses change)
     image, _ = fn.build(ROM_BASE + a_nat, os.path.join(ROOT, "build/frontier/native.bin"), sets=ROM_BASE + a_sets, speech=ROM_BASE + a_speech,
-                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp)
+                        brains=ROM_BASE + a_brains, bspeech=ROM_BASE + a_bsp, heirloom=ROM_BASE + a_heir)
     assert len(image) <= pool_len
     rom[a_nat:a_nat + len(image)] = image
     base = ROM_BASE + a_nat
@@ -304,6 +317,8 @@ def build_scripts():
         goto_if 1 @fr_brain_lance
         compare_var_to_value $STREAK 48
         goto_if 1 @fr_brain_anabel
+        compare_var_to_value $STREAK 27
+        goto_if 1 @fr_cameo_silver
         copyvar 0x8000 $STREAK
         addvar 0x8000 1
         copyvar 0x8001 $MODE
@@ -322,8 +337,13 @@ def build_scripts():
         say "The tower holds up a mirror.{FB}It is you, a little to the left."
         gen:
         callnative @fr_gen
+        copyvar $TMP2 0x8009
         copyvar 0x8006 $TMP
         callnative @fr_speech
+        compare_var_to_value $TMP2 0
+        goto_if 1 no_loan
+        call @fr_heirloom_say
+        no_loan:
         random 12
         copyvar $TMP2 0x800D
         compare_var_to_value $MODE 1
@@ -410,6 +430,48 @@ def build_scripts():
         goto_if 1 @fr_won
         goto @fr_lost
         """)
+    hl = json.load(open(os.path.join(DATA, "heirloom.json")))["teams"]
+    hsay = []
+    for k in range(len(hl)):
+        hsay += [f"compare_var_to_value $TMP2 {k + 1}", f"goto_if 1 hl_{k}"]
+    hsay += ["return"]
+    for k, t in enumerate(hl):
+        hsay += [f"hl_{k}:", f'say "This team is on loan from an old friend: {t["name"]}."', "return"]
+    A("fr_heirloom_say", "\n".join(hsay))
+
+    # --- Silver, a visiting challenger at battle 28 (the fourth round's boss): his own six sets, a Brain-style fight on the normal floor arena
+    A("fr_cameo_silver", f"""
+        say "{sp["Silver"]["intro"]}"
+        setvar 0x8000 2
+        copyvar 0x8001 $MODE
+        subvar 0x8001 1
+        copyvar 0x8002 $SEED_LO
+        copyvar 0x8003 $SEED_HI
+        copyvar 0x8004 $STREAK
+        callnative @fr_gen_brain
+        setvar 0x8000 2
+        callnative @fr_brain_speech
+        compare_var_to_value $MODE 1
+        goto_if 1 singles
+        setvar 0x8000 {SHELL_SILVER[1]}
+        goto id_done
+        singles:
+        setvar 0x8000 {SHELL_SILVER[0]}
+        id_done:
+        copyvar 0x8001 $MODE
+        subvar 0x8001 1
+        callnative @fr_heal
+        callnative @fr_start
+        waitstate
+        specialvar 0x800D 0xB4
+        compare_var_to_value 0x800D 1
+        goto_if 1 won
+        goto @fr_lost
+        won:
+        say "{sp["Silver"]["after"]}"
+        goto @fr_won
+    """)
+
     for key, flag_s, flag_d, bp in (("silver", SEAL["SILVER_S"], SEAL["SILVER_D"], 10), ("gold", SEAL["GOLD_S"], SEAL["GOLD_D"], 20)):
         name = "Lance" if key == "silver" else "Anabel"
         A(f"fr_seal_{key}", f"""
@@ -726,11 +788,11 @@ def finalize(rom, src, pool):
         put(SHELL_S + i, tid, name, 0, 3)
     for i, (tid, name) in enumerate(ids["doubles"]):
         put(SHELL_D + i, tid, name, 1, 4)
-    for brain, (s, d) in (("Lance", SHELL_LANCE), ("Anabel", SHELL_ANABEL)):
+    for brain, (s, d) in (("Lance", SHELL_LANCE), ("Anabel", SHELL_ANABEL), ("Silver", SHELL_SILVER)):
         tid, name, *cls = ids["brains"][brain]
         put(s, tid, name, 0, 3, *cls)
         put(d, tid, name, 1, 4, *cls)
     # in-battle speeches: words 1 (the player won) and 2 (the player lost) of the first speech-table entry -> RAM buffers
     assert u32(src, SPEECH_ENTRY + 4) != 0 and u32(src, SPEECH_ENTRY + 8) != 0
     rom[SPEECH_ENTRY + 4:SPEECH_ENTRY + 12] = struct.pack("<II", SPEECH_BUF[1], SPEECH_BUF[2])
-    return {"table_at": f"{new:07X}", "literals_repointed": patched, "shells": len(ids["singles"]) + len(ids["doubles"]) + 4}
+    return {"table_at": f"{new:07X}", "literals_repointed": patched, "shells": len(ids["singles"]) + len(ids["doubles"]) + 6}

@@ -299,6 +299,12 @@ Built on top of M6; verified in the emulator on both editions.
 - Test notes: `frontier_m3_test.py` and `frontier_m4_e2e.py` now link the natives at `0x0203EC00` (the image is 2.8 KB). Driver: `untilmenu`.
 - Still not built: Weather Floors, Daily Challenge, Heirloom Sets, rival cameos, the chroma-stamp checklist / "Clean Spectrum".
 
+### 6.10 Cameos and Heirlooms (2026-10-22)
+
+- **Silver, a visiting challenger at battle 28** (streak 27, the fourth round's boss): the third Brain-style team (`data/frontier/brains.json` "Silver": Weavile, Mega Gengar, Alakazam, Crobat, Weezing, Feraligatr), shell slots 771/772 (donor class/pic of trainer 553, the rival), in-battle lines in `speech.json`, a script intro and an "after" line, no Seal. `fr_gen_brain`/`fr_brain_speech` take brain 0-2. He fights on the normal floor arena. Works in both editions (he is a canon character of the original). Dawn and Axel (Chapter 2 cast) were not added: they would make the translation edition depend on Chapter 2.
+- **Heirloom Sets:** 1 battle in 8 (seeded, inside `fr_gen_opponent`, never together with Shadow of the Past) the opponent plays a borrowed team: Falkner's flock, Bugsy's hive, Whitney's favourites or the Kimono Girls' Eevee line (`data/frontier/heirloom.json`, six species each, sets from the set table). `0x8009` carries the id out; the script says "This team is on loan from an old friend: ...". Checked over 80 generated battles: 10 heirloom teams (12.5%), all species on their list, four in doubles.
+- Not built: Weather Floors, Daily Challenge, the chroma-stamp checklist (the flawless wager covers it).
+
 ## 7. Party generation (sources, pipeline, tuning)
 
 ### 7.1 Principles

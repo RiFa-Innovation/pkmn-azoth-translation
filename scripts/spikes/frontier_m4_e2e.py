@@ -131,10 +131,10 @@ def main():
         return out
 
     if a.survey:
-        for n in (1, 5, 7, 8, 14, 15, 22, 30, 50):
+        for n in ([int(x) for x in os.environ["NS"].split(",")] if os.environ.get("NS") else (1, 5, 7, 8, 14, 15, 22, 30, 50)):
             for dbl in (0, 1):
                 run("gen", v0=n, v1=dbl, v2=a.seed & 0xFFFF, v3=a.seed >> 16)
-                print(f"battle {n:2d} {'doubles' if dbl else 'singles'}:")
+                print(f"battle {n:2d} {'doubles' if dbl else 'singles'} heirloom={vars_(9)[0]}:")
                 for t in team():
                     print("    ", t)
         play.stop()

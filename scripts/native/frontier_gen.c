@@ -3,6 +3,7 @@
  *   fr_gen_opponent   in : gSpecialVar 0x8000 = battle number n (1-based streak), 0x8001 = 1 for doubles, 0x8002/0x8003 = challenge seed (lo, hi),
  *                          0x8006/0x8007 = floor type theme (bitmask of type ids, low / high 16 bits; 0 = no theme),
  *                          0x8008 = 1 for "Shadow of the Past" (the team is built from the player's own species)
+ *                     out also: 0x8009 = heirloom team id 1-4 when this battle drew a borrowed team (1 in 8, seeded; never with Shadow), else 0
  *                     out: party block at FR_BLOCK (16-byte trainer party entries: u16 iv, u8 level, u8 pad, u16 species, u16 item, u16 moves[4]),
  *                          0x8004 = number of Pokemon, 0x8005 = a random number for the script (trainer identity), Result = 0
  *
@@ -21,6 +22,7 @@ struct Hdr { u16 total; u16 start[4]; u16 count[4]; u16 reserved; };
 struct Set { u16 species, item, moves[4], moves_d[4]; u8 spread, ability, tier, flags; };
 
 extern const u8 fr_sets[];
+extern const u8 fr_heirloom[];                   /* 4 teams x (u16 count, 6 x u16 species), data/frontier/heirloom.json */
 
 #define F_MEGA   1
 #define F_LEGEND 2
@@ -91,6 +93,7 @@ void fr_gen_opponent(void)
     u32 rs;
     u32 theme = (u32)VARS[6] | ((u32)VARS[7] << 16);
     u32 shadow = VARS[8] & 1;
+    u32 heir = 0;
 
     if (n == 0)
         n = 1;
@@ -111,6 +114,25 @@ void fr_gen_opponent(void)
     if (tier > 4)
         tier = 4;
 
+    if (!shadow && below(&rs, 8) == 0)
+        heir = 1 + below(&rs, 4);
+    VARS[9] = (u16)heir;
+    if (heir) {                                  /* Heirloom Set: a borrowed team of an iconic trainer */
+        const u16 *lst = (const u16 *)(fr_heirloom + (heir - 1) * 14);
+        u32 nlst = lst[0], t2;
+        for (t2 = 0; have < count && t2 < 60; t2++) {
+            u32 sp = lst[1 + below(&rs, nlst)], j, dup = 0;
+            const struct Set *s;
+            for (j = 0; j < have; j++)
+                if (team[j]->species == sp)
+                    dup = 1;
+            if (dup)
+                continue;
+            s = set_of(sets, h->total, sp, &rs);
+            if (s)
+                team[have++] = s;
+        }
+    }
     if (shadow) {                                /* Shadow of the Past: a set for each of the player's own species, in party order */
         u32 slot;
         for (slot = 0; slot < 6 && have < count; slot++) {
@@ -228,13 +250,13 @@ void fr_count_fainted(void)
 
 
 /* fr_gen_brain: the Brain's team from his six hand-built sets.
- *   in : 0x8000 = brain (0 Lance, 1 Anabel), 0x8001 = 1 for doubles, 0x8002/3 = seed, 0x8004 = battle number
+ *   in : 0x8000 = brain (0 Lance, 1 Anabel, 2 Silver), 0x8001 = 1 for doubles, 0x8002/3 = seed, 0x8004 = battle number
  *   out: the party block (3 or 4 Pokemon, Lv 50), 0x8004 = count. The Mega-holder (flag bit 0) is always on the team; the rest are a seeded draw. */
 extern const u8 fr_brains[];
 
 void fr_gen_brain(void)
 {
-    const struct Set *b = (const struct Set *)(fr_brains + (VARS[0] & 1) * 6 * sizeof(struct Set));
+    const struct Set *b = (const struct Set *)(fr_brains + (VARS[0] & 3) * 6 * sizeof(struct Set));
     u32 doubles = VARS[1] & 1;
     u32 count = doubles ? 4 : 3;
     u32 rs = ((u32)VARS[2] | ((u32)VARS[3] << 16)) ^ (VARS[4] * 0x9E3779B1u) ^ 0x3C6EF372u;
@@ -270,13 +292,13 @@ void fr_gen_brain(void)
     RESULT = 0;
 }
 
-/* fr_brain_speech: the Brain's in-battle lines. in: 0x8000 = brain. fr_bspeech = 4 ROM pointers (Lance defeat, Lance win, Anabel defeat, Anabel win)
+/* fr_brain_speech: the Brain's in-battle lines. in: 0x8000 = brain (0 Lance, 1 Anabel, 2 Silver). fr_bspeech = 6 ROM pointers (defeat, win for each)
  * -> 0x02022680 (the player won) and 0x02022700 (the player lost) */
 extern const u8 fr_bspeech[];
 
 void fr_brain_speech(void)
 {
-    const u32 *p = (const u32 *)fr_bspeech + (VARS[0] & 1) * 2;
+    const u32 *p = (const u32 *)fr_bspeech + (VARS[0] & 3) * 2;
     copy_text((volatile u8 *)0x02022680, (const u8 *)p[0]);
     copy_text((volatile u8 *)0x02022700, (const u8 *)p[1]);
     RESULT = 0;
