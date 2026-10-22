@@ -286,6 +286,19 @@ repeat inside one round. Speeches: 40 intro + 40 victory + 40 defeat lines, auth
   - Run (the "Run" entry in the battle menu) asks "Do you want to give up the contest and quit right now?", which is the engine's own tower-forfeit prompt; its Yes branch was not run.
 - Anabel now fights as class 24 (Leader) via a third value in `identities.json` brains entries, instead of the donor's Int'l Police.
 
+### 6.9 Polish pass (2026-10-22)
+
+Built on top of M6; verified in the emulator on both editions.
+
+- **Colour Rounds.** Each floor has a type theme (Red Fire/Fighting, Orange Rock/Ground, Yellow Electric/Normal, Green Grass/Bug/Flying, Blue Water/Ice/Steel, Indigo Psychic/Ghost/Dark, Violet Dragon/Fairy). `fr_theme` puts the mask in `0x8006/0x8007`; `fr_gen_opponent` rejects sets whose species has none of the types (types read from the base-stats table, +6/+7), and gives way after 120 draws so a thin tier cannot stall. Checked on all seven floors (21 of 21 opponents on theme). The floor announcement says the theme.
+- **Shadow of the Past** at battles 14 and 35 (streak 13 / 34): the team is built from the player's own species in party order (a set of that species; when the table has none, a set of a species sharing one of its types). Works in doubles. Line: "It is you, a little to the left."
+- **Wager Flags.** At the start of each round (Hue/Saturate, and again after "Keep climbing?"), with 1+ BP: stake 1 or 2 BP. `fr_won` counts fainted party members (`fr_count_fainted`, native entry 9) before the heal; a round with none pays twice the stake, otherwise the stake is lost. Vars `0x513A` STAKE, `0x513B` DIRTY (free in the original). Checked: stake 2 of 5 BP, clean round +4, dirty round +0.
+- **Streak banners** at every round end: 7 Spectrum, 14 Double, 21 Triple, 28 Fourfold, 35 Fivefold, 42 Sixfold, 49 Sevenfold, 56+ Beyond the Spectrum.
+- **Old Dowser** (hall, 6,15; his talk follows the Seals) and the **Reserved chair** (BG event on the empty cushion at 6,17; after a Gold Seal it reads "Reserved: for whoever finishes the song.").
+- **Rewrites.** Opponent speech is now per floor (4 intro / 4 defeat / 4 win lines for each of the 7 floors, `data/frontier/speech.json`, packed [kind][floor][line]; `fr_pick_speech` takes the floor in `0x8006`), receptionists Hue and Saturate have their own voices, Prisma, the records board, Lance and Anabel got a pass. All text is in `data/frontier/speech.json` and `scripts/frontier_build.py`.
+- Test notes: `frontier_m3_test.py` and `frontier_m4_e2e.py` now link the natives at `0x0203EC00` (the image is 2.8 KB). Driver: `untilmenu`.
+- Still not built: Weather Floors, Daily Challenge, Heirloom Sets, rival cameos, the chroma-stamp checklist / "Clean Spectrum".
+
 ## 7. Party generation (sources, pipeline, tuning)
 
 ### 7.1 Principles

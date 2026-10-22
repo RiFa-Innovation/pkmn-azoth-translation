@@ -1,6 +1,8 @@
 /* Spectrum Frontier opponent generator (docs/BATTLE_FRONTIER_SPEC.md 7.5). Freestanding Thumb code for the GBA, linked by scripts/frontier_native.py.
  *
- *   fr_gen_opponent   in : gSpecialVar 0x8000 = battle number n (1-based streak), 0x8001 = 1 for doubles, 0x8002/0x8003 = challenge seed (lo, hi)
+ *   fr_gen_opponent   in : gSpecialVar 0x8000 = battle number n (1-based streak), 0x8001 = 1 for doubles, 0x8002/0x8003 = challenge seed (lo, hi),
+ *                          0x8006/0x8007 = floor type theme (bitmask of type ids, low / high 16 bits; 0 = no theme),
+ *                          0x8008 = 1 for "Shadow of the Past" (the team is built from the player's own species)
  *                     out: party block at FR_BLOCK (16-byte trainer party entries: u16 iv, u8 level, u8 pad, u16 species, u16 item, u16 moves[4]),
  *                          0x8004 = number of Pokemon, 0x8005 = a random number for the script (trainer identity), Result = 0
  *
@@ -42,6 +44,39 @@ static u32 below(u32 *state, u32 n)   /* 0 .. n-1 without a division */
     return ((rnd(state) >> 16) * n) >> 16;
 }
 
+/* base stats table: 28 bytes per species, types at +6 / +7 (scripts/frontier_data.py) */
+static u32 has_type(u32 species, u32 mask)
+{
+    const volatile u8 *bs = (const volatile u8 *)(0x08000000 + 0x176DFBC + 28 * species);
+    return ((mask >> (bs[6] & 31)) & 1) | ((mask >> (bs[7] & 31)) & 1);
+}
+
+/* a set for this species (any tier, seeded pick); when the table has none, a set of a species that shares one of its types ("a little to the left") */
+static const struct Set *set_of(const struct Set *sets, u32 total, u32 species, u32 *state)
+{
+    const volatile u8 *bs = (const volatile u8 *)(0x08000000 + 0x176DFBC + 28 * species);
+    u32 mask = (1u << (bs[6] & 31)) | (1u << (bs[7] & 31));
+    u32 pass, i, c, k;
+
+    for (pass = 0; pass < 2; pass++) {
+        c = 0;
+        for (i = 0; i < total; i++)
+            if (!(sets[i].flags & F_BOSS) && (pass ? has_type(sets[i].species, mask) : sets[i].species == species))
+                c++;
+        if (!c)
+            continue;
+        k = below(state, c);
+        for (i = 0; i < total; i++) {
+            if (!(sets[i].flags & F_BOSS) && (pass ? has_type(sets[i].species, mask) : sets[i].species == species)) {
+                if (!k)
+                    return &sets[i];
+                k--;
+            }
+        }
+    }
+    return 0;
+}
+
 void fr_gen_opponent(void)
 {
     const struct Hdr *h = (const struct Hdr *)fr_sets;
@@ -54,6 +89,8 @@ void fr_gen_opponent(void)
     const struct Set *team[4];
     u32 have = 0, legends = 0, megas = 0;
     u32 rs;
+    u32 theme = (u32)VARS[6] | ((u32)VARS[7] << 16);
+    u32 shadow = VARS[8] & 1;
 
     if (n == 0)
         n = 1;
@@ -74,6 +111,19 @@ void fr_gen_opponent(void)
     if (tier > 4)
         tier = 4;
 
+    if (shadow) {                                /* Shadow of the Past: a set for each of the player's own species, in party order */
+        u32 slot;
+        for (slot = 0; slot < 6 && have < count; slot++) {
+            const volatile u8 *m = (const volatile u8 *)(0x02024284 + 100 * slot);
+            u32 sp = (u32)m[32] | ((u32)m[33] << 8);
+            const struct Set *s;
+            if (!sp)
+                continue;
+            s = set_of(sets, h->total, sp, &rs);
+            if (s)
+                team[have++] = s;
+        }
+    }
     for (tries = 0; have < count && tries < 200; tries++) {
         u32 t = tier;
         const struct Set *s;
@@ -84,6 +134,8 @@ void fr_gen_opponent(void)
         s = &sets[h->start[t - 1] + below(&rs, h->count[t - 1])];
         if (s->flags & F_BOSS)
             continue;
+        if (theme && tries < 120 && !has_type(s->species, theme))
+            continue;                            /* the floor's colour: soft, it gives way after 120 draws so a thin tier cannot stall */
         for (j = 0; j < have; j++) {
             if (team[j]->species == s->species || team[j]->item == s->item)
                 bad = 1;
@@ -143,18 +195,35 @@ static void copy_text(volatile u8 *dst, const u8 *src)
 
 void fr_pick_speech(void)
 {
-    const u16 *cnt = (const u16 *)fr_speech;
+    const u16 *hd = (const u16 *)fr_speech;           /* u16 floors, u16 lines per (kind, floor), u32 pad; then the pointers [kind][floor][line] */
     const u32 *ptr = (const u32 *)(fr_speech + 8);
+    u32 floors = hd[0], per = hd[1];
+    u32 floor = VARS[6];
     u32 r = VARS[5];
-    u32 off = 0, k;
+    u32 k;
 
+    if (floor >= floors)
+        floor = 0;
     for (k = 0; k < 3; k++) {
-        u32 n = cnt[k];
-        u32 idx = (((r >> (5 * k)) & 31) * n) >> 5;
-        copy_text((volatile u8 *)(0x02022600 + 0x80 * k), (const u8 *)ptr[off + idx]);
-        off += n;
+        u32 idx = (((r >> (5 * k)) & 31) * per) >> 5;
+        copy_text((volatile u8 *)(0x02022600 + 0x80 * k), (const u8 *)ptr[(k * floors + floor) * per + idx]);
     }
     RESULT = 0;
+}
+
+/* fr_count_fainted: how many of the party's Pokemon are at 0 HP (hidden, unpicked ones have no species and do not count) -> Result */
+void fr_count_fainted(void)
+{
+    u32 i, n = 0;
+
+    for (i = 0; i < 6; i++) {
+        const volatile u8 *m = (const volatile u8 *)(0x02024284 + 100 * i);
+        u32 sp = (u32)m[32] | ((u32)m[33] << 8);
+        u32 hp = (u32)m[0x56] | ((u32)m[0x57] << 8);
+        if (sp && !hp)
+            n++;
+    }
+    RESULT = n;
 }
 
 
