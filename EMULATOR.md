@@ -143,7 +143,12 @@ python3 scripts/play.py boot                          # bridge up, with RHT_LOAD
 python3 scripts/agent/run.py state                    # snapshot + options, no input
 python3 scripts/agent/run.py wild SPECIES LEVEL       # start a scripted wild battle (test helper)
 python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
+python3 scripts/agent/run.py play --until map:3.75 --route "8,14 tL A 10,18 tD w60"   # walk + fight + talk; stops on goal/anomaly
 ```
+
+`play` exits 0 on the goal, 2 on an anomaly (report, screenshot and state under `saves/agent/anomalies/`), 3 when the route ran out.
+Route tokens and `--until` forms: top of `scripts/agent/play_loop.py`. Boot the bridge, then press through the title screen to
+Continue before using any command (a fresh boot sits on the title screen).
 
 The key is read from `TYPESAFE_API_KEY` only; without it (or on a 401) every decision falls back to the heuristic.
 Decisions are logged to `saves/agent/decisions.jsonl` (gitignored).

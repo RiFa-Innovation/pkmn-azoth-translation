@@ -60,6 +60,7 @@ mGBA bridge ──► observe.py ──► options.py ──► decide.py ──
 | `observe.py` | phase detection; battle snapshot (`you`, `foe`, `party`, `kind`); `Dex` (species, moves and abilities from the ROM + `text/en/tables`) | built |
 | `options.py` | Gen 6 type chart, damage range, speed order, option builder, `context()` summary, heuristic baseline | built |
 | `decide.py` | Jev request, confidence gate, fallback, log record | built, not yet run with a real key |
+| `play_loop.py` | **M5 minimal:** `run.py play --until map:G.N\|flag:0x..\|var:0x..=V --route "x,y A tD w30 G.N"`: walks a route, plays battles through `run.battle`, presses A through dialogue, stops on the goal, a spent route, or an anomaly (report + screenshot + state in `saves/agent/anomalies/`) | built (hand-given route) |
 | `run.py` | menu driver (grid cursors, party menu), battle loop, replacements, `wild` test helper, CLI | built |
 
 ## 4. RAM and screen facts (the observer's contract)
@@ -133,7 +134,7 @@ offline from the logs.
 | **M2** | `eval.py` + about 30 scenario states; heuristic vs Jev table; tune `min_conf` and the option wording | a written result in section 12; go/no-go for Jev on D1/D2 |
 | **M3** | Battle completeness: D3 items (bag cursor + pocket layout spike), D4 catching, D5 move learning, D6 evolution, trainer-battle checks (no run option, multi-mon teams), an out-of-PP fallback (Struggle) | a trainer battle and a catch are played from start to finish unattended |
 | **M4** | Prompt decisions D8: read the active text printer and the multichoice menu from RAM; Yes/No as `noul` | a scripted Yes/No (e.g. Elm's or Nurse Joy's prompt) is answered from its text |
-| **M5** | Playtest integration: `run.py play --until MAP\|FLAG` combines `travel` + battles + prompts; freeze/softlock detector (script ctx stuck, no input effect for N s), automatic screenshot + state dump on anomaly, plus new-string capture for untranslated text | it drives from a mid-game save to the next story flag, or stops with a usable report |
+| **M5** (first cut built, see section 12) | Playtest integration: `run.py play --until MAP\|FLAG` combines `travel` + battles + prompts; freeze/softlock detector (script ctx stuck, no input effect for N s), automatic screenshot + state dump on anomaly, plus new-string capture for untranslated text | it drives from a mid-game save to the next story flag, or stops with a usable report |
 | **M6** | Escalation tier + D9 overworld goal selection | hard-case escalation is measured in M2-style tables; a goal loop runs for 30 minutes |
 | **M7** (optional) | D7 double battles | a double trainer battle is completed |
 
@@ -174,6 +175,18 @@ offline from the logs.
 - Jev endpoint reachable; a 401 falls back cleanly. No live decision yet (M1).
 
 ## 12. Results
+
+### M5, first cut (2026-10-23)
+
+- Verified **[V]** on a beta-26 save: route + NPC talk + door warp (`tD` on the warp tile) reaching `map:3.75`; a wild battle started
+  mid-run is played and the route resumes; an injected self-`goto` script is stopped as an anomaly after 8 actions with report,
+  screenshot and state.
+- Freeze detector = at most 3 distinct state signatures (callback2, controller, script ctx mode+pointer, map, position) over N
+  actions. An exact-repeat test missed a spinning script, whose pointer alternates between two values. Also flagged at once: script
+  ctx in native mode with a pointer below `0x08000100`, or in bytecode mode outside ROM/EWRAM.
+- Not done yet: choosing the route itself (M6: waypoints are hand-given), flags >= 0x900 as `--until` (their RAM home is
+  unverified), new-string capture, and a stall check inside `run.battle` (it relies on its own turn cap).
+- Bug found while testing: `goto` retried forever when the target tile itself refused the step (an NPC tile); now `nopath`.
 
 ### M1 (2026-10-23, `jev-1.14.0` via `jev-latest`, beta-26 build, beta-26 save)
 

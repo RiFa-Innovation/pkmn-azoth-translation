@@ -2,6 +2,7 @@
 
     python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--log FILE] [--dry]
     python3 scripts/agent/run.py state                  # print the current snapshot + options (no input)
+    python3 scripts/agent/run.py play --until map:G.N --route "x,y A w30"   # walk, fight, talk; see play_loop.py
     python3 scripts/agent/run.py wild SPECIES LEVEL     # start a scripted wild battle from the overworld (test helper)
 
 Needs the bridge running (scripts/play.py boot). Every decision is appended to the JSONL log (default
@@ -180,6 +181,9 @@ def start_wild(e, species, level):
 
 
 def main():
+    if sys.argv[1:2] == ["play"]:  # route + battles + dialogue + anomaly stop (play_loop.py)
+        import play_loop
+        sys.exit(play_loop.main(sys.argv[2:]))
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["battle", "state", "wild"])
     ap.add_argument("args", nargs="*", type=int)
