@@ -252,19 +252,22 @@ Build and verify **both** after any change: `python3 scripts/build_editions.py` 
 4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
 
-## Current state (2026-10-12, after beta-9)
+## Current state (2026-10-23, after beta-26 / river-v0.2.1)
 
-Open: #11 (~10 mid-block Chinese fragments), #24 (human proofreading pass,
-ongoing). Beta 7-9 closed the freeze on talking to placeholder-script NPCs
-(#17), the Sprout Tower top-floor softlock (#37; the fix re-places the two exit
-sages on every map load, so stuck saves repair themselves), the Ilex shrine
-crash (#19), the achievements fit (#2), Ilex/route-sign/Help-Tips Chinese and the
-double-battle stray text (#13, parked). Not yet checked in game: the new
-BracerPoints/price/¥ lines and the Wobbuffet line from beta-6.
+Releases: **beta-26** (translation + the Spectrum Frontier post-game, Latest) and **river-v0.2.1**
+(pre-release: Frontier + fan-made Chapter 2, Route 28, Mt. Silver, Red). Both built from `main` at
+`8d6fa0b` via `scripts/dist.py` (beta-26 fixed the Berry Pouch row overflow, #121, PLAYTEST 92; the
+regression test is `scripts/spikes/berry_list_stress.py`). The Frontier (spec `docs/BATTLE_FRONTIER_SPEC.md`) has
+Singles/Doubles, Brains Lance/Anabel/Silver, Seals, BP shop, records, Colour Rounds, wagers, Shadow of the
+Past, heirloom sets. Human-play balance is unverified.
 
-Ideas for next sessions: play further than the recorded progress and log
-findings as `PLAYTEST.md` rows 57+; sweep remaining Chinese by grepping a fresh
-dump of the built ROM for hanzi; check other fixed-width UI lists (menus,
-summary screens, Pokédex entries) for overflow the way Help Tips was swept
-(capture every entry, view the grid); keep the Reddit/Discord announcement
-drafts up to date (the user posts them).
+Open issues: #24 (human proofreading, ongoing); #120 (Whitney, new, untriaged); #99, #95, #63, #51
+(not reproduced); #101/#102/#103/#108 (Routes 31/37 and missing NPCs: identical in the original hack, need the
+reporter's save). Do not fix what can't be reproduced.
+
+Unmerged local branches: `fix/bg-event-stride-90`, `fix/leftover-species-lists`, `proofread/opening-chapter-24`.
+Unbuilt Frontier ideas: Weather Floors, Daily Challenge, chroma stamps, Dawn/Axel cameos.
+Unverified: Navel Rock scene on the new Lugia/Ho-Oh graphics slots, player Mega Evolution flow.
+
+Ideas for next sessions: triage #120; play further and log findings as `PLAYTEST.md` rows (latest 91+);
+check fixed-width UI lists for overflow; keep the Reddit/Discord announcement drafts up to date (the user posts them).
