@@ -5,6 +5,8 @@
 --until   map:G.N | flag:0xID (ids < 0x900 only; hack flags live elsewhere) | var:0xID=VALUE
 --route   space separated tokens, run in order (a token is repeated until it finishes; battles and dialogue interrupt it):
             x,y     walk there on the current map (BFS, re-planned each step; stepping onto a warp counts as arriving)
+            @G.N    travel to that map across warps and connections (navmap.py), re-planning after each hop
+            ^G.N    one hop toward it
             G.N     wait up to 2 s for that map, else stop "off route" (a blackout or an unexpected warp)
             A       press A (talk to the tile you face)
             tU tD tL tR   turn without walking
@@ -137,8 +139,90 @@ def goto(e, tx, ty, watch, budget=300):
     return "interrupted"
 
 
-def step_token(e, tok, watch):
+def push_dir(e, d, watch, base_map, taps=1):
+    """Tap direction d (a door or arrow warp fires on the push toward its exit); True once the map changed."""
+    for _ in range(taps):
+        rn.tap(e, play.DIRS[d], 20)
+        e.wait(40)
+        watch.tick(e)
+        if play.pos(e)[2:] != base_map or ob.phase(e) != "overworld":
+            return True
+    return False
+
+
+def hop(e, edge, watch):
+    """One map-to-map hop along a navmap edge. 'done' (map changed), 'interrupted' (battle/script), 'nopath'."""
+    kind, arg = edge
+    m0 = play.pos(e)[2:]
+    x, y = play.pos(e)[:2]
+    if kind == "warp":
+        for tx, ty in sorted(arg, key=lambda t: abs(t[0] - x) + abs(t[1] - y)):
+            r = "done" if (tx, ty) == (x, y) else goto(e, tx, ty, watch)
+            if r == "interrupted":
+                return r
+            if play.pos(e)[2:] != m0:
+                return "done"
+            if r == "done":
+                # arriving leaves you standing on the warp tile, and a plain warp fires on stepping *onto* it: step off and back
+                # (a door or arrow warp fires on the push toward its exit instead; the same two taps cover it)
+                for d in "DULR":
+                    if push_dir(e, d, watch, m0):
+                        return "done"
+                    if ob.phase(e) != "overworld" or script_active(e):
+                        return "interrupted"
+                    if play.pos(e)[:2] != (tx, ty):  # it stepped off: step back on
+                        play.walk(e, OPP[d], 1)
+                        e.wait(60)
+                        if play.pos(e)[2:] != m0:
+                            return "done"
+                        if play.pos(e)[:2] != (tx, ty):
+                            goto(e, tx, ty, watch)
+                    elif push_dir(e, d, watch, m0):  # blocked: the first tap only turned; a door/arrow warp fires on the second
+                        return "done"
+        return "nopath"
+    d = nav_dir[arg]
+    W, H, _ = play.grid(e)
+    mw, mh = W - 15, H - 14
+    edge_tiles = {"D": [(i, mh - 1) for i in range(mw)], "U": [(i, 0) for i in range(mw)],
+                  "L": [(0, j) for j in range(mh)], "R": [(mw - 1, j) for j in range(mh)]}[d]
+    tried = []
+    for tx, ty in sorted(edge_tiles, key=lambda t: abs(t[0] - x) + abs(t[1] - y)):
+        if any(abs(tx - a) + abs(ty - b) <= 3 for a, b in tried):
+            continue
+        r = goto(e, tx, ty, watch)
+        if r == "interrupted":
+            return r
+        if play.pos(e)[2:] != m0:
+            return "done"
+        if r == "done":
+            if push_dir(e, d, watch, m0, taps=3):
+                return "done"
+            if ob.phase(e) != "overworld" or script_active(e):
+                return "interrupted"
+        tried.append((tx, ty))
+        if len(tried) >= 12:
+            break
+    return "nopath"
+
+
+nav_dir = {1: "D", 2: "U", 3: "L", 4: "R"}
+OPP = {"D": "U", "U": "D", "L": "R", "R": "L"}
+
+
+def step_token(e, tok, watch, nav=None):
     """Run one route token; returns True when finished (False = call again after battles/dialogue)."""
+    if tok[0] in "@^":
+        tgt = tuple(map(int, tok[1:].split(".")))
+        cur = play.pos(e)[2:]
+        if cur == tgt:
+            return True
+        r = nav.route(cur, tgt)
+        if r is None:
+            raise Anomaly(f"no map route from {cur} to {tgt}")
+        res = hop(e, r[0][0], watch)
+        if res == "nopath":
+            raise Anomaly(f"could not leave map {cur} toward {r[0][1]} (edge {r[0][0][0]})")
+        return res == "done" and tok[0] == "^"
     if "," in tok:
         x, y = map(int, tok.split(","))
         r = goto(e, x, y, watch)
@@ -175,7 +259,8 @@ def dump(e, outdir, reason, watch, extra):
 
 
 def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/decisions.jsonl", max_actions=3000, stall=25,
-              outdir="saves/agent/anomalies"):
+              outdir="saves/agent/anomalies", nav=None, planner=None):
+    route = list(route)
     done = parse_until(until) if until else (lambda e: False)
     watch, idx, battles = Watch(stall), 0, 0
     os.makedirs(os.path.dirname(log), exist_ok=True)
@@ -184,16 +269,24 @@ def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/d
             if ob.phase(e) == "overworld" and not script_active(e) and done(e):
                 return 0, "goal reached", {"route_idx": idx, "battles": battles}
             if ob.phase(e) != "overworld":
-                rn.battle(e, dex, goal, min_conf, log)
+                try:
+                    rn.battle(e, dex, goal, min_conf, log)
+                except NotImplementedError as ex:  # double battles (D7): stop with a report instead of guessing
+                    raise Anomaly(f"unsupported battle: {ex}")
                 battles += 1
                 watch.reset()
                 continue
             if script_active(e):
                 advance_script(e, watch)
                 continue
+            if idx >= len(route) and planner:
+                new = planner(e)
+                if new is None:  # the planner is done: the target map was reached with nothing left to decide
+                    return 0, "target reached", {"route_idx": idx, "battles": battles}
+                route += new
             if idx >= len(route):
                 return 3, "route exhausted before the goal (a goal selector is M6)", {"route_idx": idx, "battles": battles}
-            if step_token(e, route[idx], watch):
+            if step_token(e, route[idx], watch, nav):
                 idx += 1
             watch.tick(e)
         raise Anomaly(f"max actions {max_actions} reached")
@@ -214,10 +307,21 @@ def main(argv):
     ap.add_argument("--min-conf", type=float, default=0.5)
     ap.add_argument("--log", default="saves/agent/decisions.jsonl")
     ap.add_argument("--max-actions", type=int, default=3000)
+    ap.add_argument("--target", help="G.N: travel there across maps, choosing each leg (heal or continue) with Jev")
+    ap.add_argument("--heal-map", help="G.N of a map with a healer; --heal-route = tokens that heal once inside it")
+    ap.add_argument("--heal-route", default="")
     ap.add_argument("--stall", type=int, default=25, help="actions without any state change before an anomaly")
     a = ap.parse_args(argv)
     e = Emu()
-    code, msg, info = play_loop(e, ob.Dex(), a.until, a.route.split(), a.goal, a.min_conf, a.log, a.max_actions, a.stall)
+    import navmap
+    import goals
+    dex, nav, planner = ob.Dex(), navmap.NavMap(), None
+    gn = lambda s: tuple(map(int, s.split(".")))
+    if a.target:
+        planner = goals.make_planner(nav, dex, gn(a.target), gn(a.heal_map) if a.heal_map else None, a.heal_route.split(),
+                                     a.min_conf, a.log)
+    code, msg, info = play_loop(e, dex, a.until, a.route.split(), a.goal, a.min_conf, a.log, a.max_actions, a.stall,
+                                nav=nav, planner=planner)
     print(json.dumps({"exit": code, "result": msg, **info}))
     return code
 

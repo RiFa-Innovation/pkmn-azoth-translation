@@ -61,6 +61,7 @@ mGBA bridge ──► observe.py ──► options.py ──► decide.py ──
 | `options.py` | Gen 6 type chart, damage range, speed order, option builder, `context()` summary, heuristic baseline | built |
 | `decide.py` | Jev request, confidence gate, fallback, log record | built, not yet run with a real key |
 | `play_loop.py` | **M5 minimal:** `run.py play --until map:G.N\|flag:0x..\|var:0x..=V --route "x,y A tD w30 G.N"`: walks a route, plays battles through `run.battle`, presses A through dialogue, stops on the goal, a spent route, or an anomaly (report + screenshot + state in `saves/agent/anomalies/`) | built (hand-given route) |
+| `navmap.py`, `goals.py` | **M6 partial:** map-level BFS over warps and edge connections from `build/hackdb-Mercury_EN.sqlite` (`@G.N` / `^G.N` route tokens), and D9 goal selection: `play --target G.N [--heal-map G.N --heal-route "..."]` asks Jev `continue` vs `heal` before each leg (`decide.choose`) | built, healer map hand-given |
 | `run.py` | menu driver (grid cursors, party menu), battle loop, replacements, `wild` test helper, CLI | built |
 
 ## 4. RAM and screen facts (the observer's contract)
@@ -135,7 +136,7 @@ offline from the logs.
 | **M3** | Battle completeness: D3 items (bag cursor + pocket layout spike), D4 catching, D5 move learning, D6 evolution, trainer-battle checks (no run option, multi-mon teams), an out-of-PP fallback (Struggle) | a trainer battle and a catch are played from start to finish unattended |
 | **M4** | Prompt decisions D8: read the active text printer and the multichoice menu from RAM; Yes/No as `noul` | a scripted Yes/No (e.g. Elm's or Nurse Joy's prompt) is answered from its text |
 | **M5** (first cut built, see section 12) | Playtest integration: `run.py play --until MAP\|FLAG` combines `travel` + battles + prompts; freeze/softlock detector (script ctx stuck, no input effect for N s), automatic screenshot + state dump on anomaly, plus new-string capture for untranslated text | it drives from a mid-game save to the next story flag, or stops with a usable report |
-| **M6** | Escalation tier + D9 overworld goal selection | hard-case escalation is measured in M2-style tables; a goal loop runs for 30 minutes |
+| **M6** (goal selection built, see section 12; escalation not) | Escalation tier + D9 overworld goal selection | hard-case escalation is measured in M2-style tables; a goal loop runs for 30 minutes |
 | **M7** (optional) | D7 double battles | a double trainer battle is completed |
 
 ## 9. Spikes (each answers one unknown)
@@ -175,6 +176,23 @@ offline from the logs.
 - Jev endpoint reachable; a 401 falls back cleanly. No live decision yet (M1).
 
 ## 12. Results
+
+### M6, goal selection (2026-10-23)
+
+- Built and verified **[V]** on the beta-26 save: connection hops (3.75 -> 3.76 -> 3.75), a door warp (3.75 -> 50.3), a two-map trip
+  to a stand-in healer, and the `continue` / `heal` decision. Healthy team: Jev `continue` @0.86 (437 tokens, 144 ms). Team at 7% HP
+  with a fainted member: heal chosen, travelled 3.78 -> 3.75 -> 50.3, then resumed.
+- Guard added after a test showed it: if a heal trip does not raise team HP, `heal` stops being offered (a wrong `--heal-route` would
+  otherwise repeat to the cap of 5).
+- Double battles now stop the loop as an anomaly with a report (they used to crash with a traceback); D7 is still open.
+- **Not done:** (1) the 30-minute unattended run; (2) the escalation tier (no larger-model key in this environment, so it could not be
+  tested; the `decide.choose` gate is where it would hook in); (3) finding healers automatically: nurse scripts do not call a `special 0`
+  in the dump, and the shared NPC scripts I checked were Cut trees, so the healer map and its route are passed by hand; (4) no
+  goal besides `continue`/`heal` (trainer hunting, grinding, story targets by flag).
+- Findings: a plain warp fires on stepping *onto* the tile and arrival leaves you standing on it, so leaving means stepping off and back
+  on (a door or arrow warp fires on the push toward its exit; the hop tries both). Map 1.90 is layered (the start tile is elevation 4,
+  the floor 3): `path_to` finds no way off it, which may be its elevation rule or a real barrier; unchecked. 52.2's corridor has a
+  double-battle trainer on the only way out of its entry tile.
 
 ### M5, first cut (2026-10-23)
 

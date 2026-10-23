@@ -146,7 +146,8 @@ python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
 python3 scripts/agent/run.py play --until map:3.75 --route "8,14 tL A 10,18 tD w60"   # walk + fight + talk; stops on goal/anomaly
 ```
 
-`play` exits 0 on the goal, 2 on an anomaly (report, screenshot and state under `saves/agent/anomalies/`), 3 when the route ran out.
+`play --target G.N [--heal-map G.N --heal-route "tokens"]` travels across maps (`@G.N` / `^G.N` tokens, `navmap.py`) and lets Jev choose
+`continue` vs `heal` before each leg. `play` exits 0 on the goal, 2 on an anomaly (report, screenshot and state under `saves/agent/anomalies/`), 3 when the route ran out.
 Route tokens and `--until` forms: top of `scripts/agent/play_loop.py`. Boot the bridge, then press through the title screen to
 Continue before using any command (a fresh boot sits on the title screen).
 
