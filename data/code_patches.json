@@ -208,12 +208,22 @@
   ]
  },
  "bag_list_buffer": {
-  "_doc": "Bag list string buffer (#121): LoadBagItemListBuffers allocates 27 bytes per entry, but this hack's entry string is a 14-byte prefix + the item name + terminator, so a 13-letter English name needs 28 bytes. Slot k's spill is overwritten by slot k+1; only the LAST slot spills past the block, and when 27*count is a multiple of 4 (28 entries) it clobbers the next heap block header, the bag never finishes loading (Shuckle's feed list with 'Maranga Berry' last, black screen + static). The Alloc size computation 'r0=7n; r0<<=2; r0-=n' (27n) becomes 'r0=7n; r0<<=2; r0+=8' (28n+8); the slot stride stays 27.",
+  "_doc": "Berry Pouch list string slots (#121). The pouch builds each row (14-byte prefix: berry number etc. + item name + terminator) into 27-byte slots: Alloc(27*n), fill stride 27, read stride 27. Chinese names fit; a 13-letter English name needs 28 bytes, so slot k spills one byte into slot k+1 (whose first byte then replaces k's terminator, so the row would run on into the next row's text) and the LAST slot spills past the block, which when 27*n is a multiple of 4 (28 berries) clobbers the next heap block header: black screen + static in Shuckle's feed list ('Maranga Berry' last). Slots become 32 bytes: the three x27 computations (r<<3 - r, <<2, - r) become r<<5 and the allocation is 32*n+8.",
   "patch": [
    {
-    "at": "13D1E0",
-    "orig": "401a",
-    "new": "0830"
+    "at": "13D1DA",
+    "orig": "c800401a8000401a",
+    "new": "4801c046c0460830"
+   },
+   {
+    "at": "13D21C",
+    "orig": "f500ac1ba400a41b",
+    "new": "f5007401c046c046"
+   },
+   {
+    "at": "13D3A6",
+    "orig": "c200121a9200121a",
+    "new": "4201c046c046c046"
    }
   ]
  }
