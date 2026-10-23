@@ -206,5 +206,15 @@
     "new": "c300e0d5e2d8d9d800dde200d500dcd5e0e000e3dafee7e8d5e8e9d9e7ad000000000000febbe200cfe2e3ebe200e7e9d8d8d9e2e0edfed5e4e4d9d5e6d9d8ab00cedcd900e7e0d5d600e4e9eeeee0d9fedde700e8dcd900dfd9edad00cedcdde700e6e9dde2fedde700e8e6ddd7dfedadffffffffffffffffff"
    }
   ]
+ },
+ "bag_list_buffer": {
+  "_doc": "Bag list string buffer (#121): LoadBagItemListBuffers allocates 27 bytes per entry, but this hack's entry string is a 14-byte prefix + the item name + terminator, so a 13-letter English name needs 28 bytes. Slot k's spill is overwritten by slot k+1; only the LAST slot spills past the block, and when 27*count is a multiple of 4 (28 entries) it clobbers the next heap block header, the bag never finishes loading (Shuckle's feed list with 'Maranga Berry' last, black screen + static). The Alloc size computation 'r0=7n; r0<<=2; r0-=n' (27n) becomes 'r0=7n; r0<<=2; r0+=8' (28n+8); the slot stride stays 27.",
+  "patch": [
+   {
+    "at": "13D1E0",
+    "orig": "401a",
+    "new": "0830"
+   }
+  ]
  }
 }
