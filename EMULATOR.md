@@ -131,3 +131,19 @@ scratch folder first. Playtest saves are backed up in `saves/` (gitignored).
 - **Loading a real save**: copy ROM + `.sav` to a scratch folder as
   `game.gba`/`game.sav` and boot with `RHT_LOAD_SAVE=1`. Save states are tied
   to one build; don't load a state made on another ROM.
+
+## Game agent (Jev) - added 2026-10-23
+
+`scripts/agent/` plays battles through the same bridge: it reads RAM, builds the legal options with precomputed facts
+(type multiplier, damage %, KO, turn order), asks Jev (or the heuristic fallback) to choose, presses the buttons and
+checks the cursor bytes. Spec and milestones: `docs/JEV_AGENT_SPEC.md`. Playtest tooling only; never shipped.
+
+```
+python3 scripts/play.py boot                          # bridge up, with RHT_LOAD_SAVE=1 on a scratch copy of a save
+python3 scripts/agent/run.py state                    # snapshot + options, no input
+python3 scripts/agent/run.py wild SPECIES LEVEL       # start a scripted wild battle (test helper)
+python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
+```
+
+The key is read from `TYPESAFE_API_KEY` only; without it (or on a 401) every decision falls back to the heuristic.
+Decisions are logged to `saves/agent/decisions.jsonl` (gitignored).
