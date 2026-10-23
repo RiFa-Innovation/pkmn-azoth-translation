@@ -136,6 +136,9 @@ def battle(e, dex, goal="win", min_conf=0.5, log=None, dry=False, max_turns=60):
         if ph == "choose_action":
             idle = 0
             state = ob.snapshot(e, dex)
+            if not state["you"]["level"] or not state["foe"]["level"]:  # battlers not loaded yet
+                e.wait(10)
+                continue
             opts = op.build(state)
             rec = dc.decide(state, opts, goal, min_conf)
             rec["turn"] = turns

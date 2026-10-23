@@ -35,11 +35,11 @@ never does arithmetic.
 | Question types | `choice` (criteria `{key: description\|null}`, up to 255 options), `noul` (yes/no probability), `score` (2..10 levels) |
 | Answer | `answers.<q>.{choice, probabilities, confidence}` / `noul` / `score`; `usage.{input_tokens, output_tokens}` |
 | Price | $0.042 per 1M input tokens, output free (vendor figure, 2026-10) |
-| Latency | "usually under 200 ms" (vendor figure) **[?]** |
+| Latency | "usually under 200 ms" (vendor figure); measured p50 200 ms, p95 254 ms, max 537 ms over 32 decisions **[V]** 2026-10-23 |
 | Limits | 80 req/s, 100k tok/s (adjusted dynamically); 429/529 should be retried with backoff |
 
-Cost: one battle decision is about 500-700 input tokens **[?]** (measure from `usage`), so roughly $0.00003 per decision,
-or about $0.30 for 10,000 decisions.
+Cost: one battle decision is 512-817 input tokens (median 762) and 26-81 output tokens **[V]** 2026-10-23, so roughly $0.00003 per
+decision, or about $0.30 for 10,000 decisions.
 
 Key handling: read only from the environment variable `TYPESAFE_API_KEY`. Never write it to logs, saves or the repo. The
 JSONL log records the request body without headers.
@@ -175,4 +175,12 @@ offline from the logs.
 
 ## 12. Results
 
-(Filled in by M1/M2.)
+### M1 (2026-10-23, `jev-1.14.0` via `jev-latest`, beta-26 build, beta-26 save)
+
+- 11 wild battles, 32 live decisions, no hangs, no failed actuations. Pin the model for M2 (`JEV_MODEL`): `jev-latest` resolved to 1.14.0.
+- Jev agreed with the heuristic on 14 of 32. Confidence gate (0.5) sent 15 decisions to the heuristic. Most disagreements are
+  Jev choosing `run` at 0.34-0.52 where the heuristic attacks; the high-confidence ones (0.58-0.8) were a nearly dead party
+  (2% HP) against Lv 45-55 foes, where running is defensible. Not yet judged against a reference: that is M2.
+- Fixed: `battle()` decided before the battlers were loaded (a save with an empty party or a slow load gave `#0` level 0 and a
+  forced `run`); it now waits.
+- Note: `playtest-2026-10-10.sav` has an empty party (a new-game save); use a release save copy for agent runs.
