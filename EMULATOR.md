@@ -131,3 +131,15 @@ scratch folder first. Playtest saves are backed up in `saves/` (gitignored).
 - **Loading a real save**: copy ROM + `.sav` to a scratch folder as
   `game.gba`/`game.sav` and boot with `RHT_LOAD_SAVE=1`. Save states are tied
   to one build; don't load a state made on another ROM.
+
+## Text sweep and dangling-pointer audit (added 2026-10-24)
+
+- `python3 scripts/textsweep.py render ROM DB [--n N] [--out DIR]` shows every dialogue string of a built ROM in the running game
+  (a `loadword; callstd 2; end` script injected into any idle overworld), screenshots each page, measures the ink against the box edge and
+  flags `edge`, `oddchar` (a decoded character outside the English set: stray hanzi lead bytes), `stuck`, `corrupt`. ROM is the one the
+  emulator runs, DB is `hackdb.py build --rom ROM`. It enumerates strings from the ROM's own scripts, never from the hackdb string table
+  (that follows the original layout). Strings with `{FD:..}` buffer placeholders are skipped. Boot a clean emulator first: a killed sweep
+  can leave overworld scripts stalled, and the tool refuses to start in that state.
+- `python3 scripts/audit_dangling.py BUILT_ROM` lists script `loadword` operands still pointing at the old address of a relocated string.
+- Decode with `mercury_text.decode`, not `decode_vanilla`, when hunting leftovers: the vanilla decoder reads hanzi byte pairs as Latin letters
+  and finds nothing.
