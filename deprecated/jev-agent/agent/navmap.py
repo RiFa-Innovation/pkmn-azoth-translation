@@ -8,7 +8,7 @@ import os
 import sqlite3
 from collections import deque
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))  # repo root
 DB = os.path.join(ROOT, "build/hackdb-Mercury_EN.sqlite")
 DIR_KEY = {1: "D", 2: "U", 3: "L", 4: "R"}
 

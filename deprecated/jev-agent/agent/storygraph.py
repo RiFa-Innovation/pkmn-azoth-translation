@@ -1,12 +1,12 @@
 """Generate the story-step table from the game's own data: var 0x5120 is the hack's master progress index; the Start menu shows
 objective text #value from a 75-entry table at 0x09FFF468 (function 0x09FF6878 reads VarGet(0x5120), bounds-checked at 74).
 
-    python3 scripts/agent/storygraph.py ROM [-o data/agent_story_steps.json]
+    python3 deprecated/jev-agent/agent/storygraph.py ROM [-o deprecated/jev-agent/data/agent_story_steps.json]
 
 For every value N that some script sets (`setvar 0x5120 N`) it records the objective text, the setter address, and the map events
 that reach that script (map, region name, event kind/idx, gate var and value). That is where the player must go and what must hold
 to advance to N. Needs build/hackdb-<rom stem>.sqlite (scripts/hackdb.py build --rom ROM). Draft data: verify a step in the emulator
-before trusting it (data/agent_goals.json carries the verified goals).
+before trusting it (deprecated/jev-agent/data/agent_goals.json carries the verified goals).
 """
 import json
 import os
@@ -14,8 +14,10 @@ import struct
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
-sys.path.insert(0, os.path.dirname(HERE))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
+ROOT = REPO
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 import hackdb  # noqa: E402
 import mercury_text as mt  # noqa: E402
@@ -53,7 +55,7 @@ def build(rom_path):
 
 if __name__ == "__main__":
     rom = sys.argv[1]
-    out = sys.argv[sys.argv.index("-o") + 1] if "-o" in sys.argv else os.path.join(ROOT, "data/agent_story_steps.json")
+    out = sys.argv[sys.argv.index("-o") + 1] if "-o" in sys.argv else os.path.join(PKG, "data/agent_story_steps.json")
     data = build(rom)
     json.dump(data, open(out, "w"), indent=1, ensure_ascii=False)
     for s in data:

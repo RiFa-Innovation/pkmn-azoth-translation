@@ -21,8 +21,10 @@ import struct
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
-sys.path.insert(0, os.path.dirname(HERE))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
+ROOT = REPO
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 import frontier_data as fd  # noqa: E402
 

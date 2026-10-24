@@ -1,6 +1,6 @@
 # Jev game agent: design and technical spec
 
-Status: **draft 1, 2026-10-23.** A battle prototype exists in `scripts/agent/` and is uncommitted; no Jev call has been made with a
+Status: **draft 1, 2026-10-23.** A battle prototype exists in `deprecated/jev-agent/agent/` and is uncommitted; no Jev call has been made with a
 real key yet. This is tooling for playtesting and is never shipped in the ROM or BPS. Read `EMULATOR.md` first: the agent
 drives the same headless mGBA bridge (`scripts/emu.py`, `scripts/play.py`).
 
@@ -123,7 +123,7 @@ offline from the logs.
 - **Metrics per policy:** win rate, turns to win, team HP lost, faints, invalid or failed actuations, latency p50/p95,
   cost per 100 decisions; per-tag agreement with a "reference" pick (the larger model, or hand labels for about 50
   states).
-- **Runner:** `scripts/agent/eval.py` loads each state, runs the battle K times per policy (RNG varies with the frame
+- **Runner:** `deprecated/jev-agent/agent/eval.py` loads each state, runs the battle K times per policy (RNG varies with the frame
   timing; record it), and writes a summary table + JSONL. Treat a policy as better only if it wins over enough runs.
 
 ## 8. Work breakdown (milestones)
@@ -182,7 +182,7 @@ offline from the logs.
 - **The game's own objective table is the story skeleton.** Var `0x5120` is the hack's master progress index; function `0x09FF6878` reads it
   (bounds-checked at 74) to pick the Start-menu objective line from a 75-entry table at `0x09FFF468` ("Find Mr. Pokemon past
   Cherrygrove.", ..., "Head to the top and face Lugia...", ..., "Challenge the Goldenrod Gym!"). `storygraph.py ROM` writes
-  `data/agent_story_steps.json`: per step, the objective text, the `setvar 0x5120 N` setter, and the map events that reach it (map, area
+  `deprecated/jev-agent/data/agent_story_steps.json`: per step, the objective text, the `setvar 0x5120 N` setter, and the map events that reach it (map, area
   name, tile, gate). Map area names come from the hack's region table at `0x08C2B0DC` (region = 143 + index). It is a draft:
   some rows are misparsed frame scripts, and a finer var (`0x5105`, plus local ones such as `0x5103`, `0x5176`, `0x51a5`) gates the
   triggers, so each step still needs one emulator pass.
@@ -201,9 +201,9 @@ offline from the logs.
 
 ### Route choice, goal book, scenes and titled saves (2026-10-24)
 
-- **Goal book** (`goalbook.py`, `data/agent_goals.json`): goals with `requires`, a live `done` condition (flag, var, party, map, all/any/not),
+- **Goal book** (`goalbook.py`, `deprecated/jev-agent/data/agent_goals.json`): goals with `requires`, a live `done` condition (flag, var, party, map, all/any/not),
   route tokens in `do`, and an optional `checkpoint` name. `quest.py` finds the first goal that is not done and whose requirements are, plays it,
-  re-checks it, journals it (`data/agent_journal.jsonl`) and writes the tracking doc `docs/AGENT_GOALS.md`. Because "done" is read from the
+  re-checks it, journals it (`deprecated/jev-agent/data/agent_journal.jsonl`) and writes the tracking doc `deprecated/jev-agent/docs/AGENT_GOALS.md`. Because "done" is read from the
   running game, any save can be loaded and the quest resumes at the right goal. A goal whose `done` still fails after its route is marked
   *blocked* with the reason: that is where a person (or a larger model) reasons about what the game needs, then edits the goal book.
 - **Reading game state [V]:** flags go through the game's own `checkflag` (a two-byte script; works for the hack's flags >= 0x900, where

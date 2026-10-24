@@ -1,10 +1,10 @@
 """Play single battles in the headless emulator: observe -> options -> decide (Jev or heuristic) -> press buttons.
 
-    python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--log FILE] [--dry]
-    python3 scripts/agent/run.py state                  # print the current snapshot + options (no input)
-    python3 scripts/agent/run.py play --until map:G.N --route "x,y A w30"   # walk, fight, talk; see play_loop.py
-    python3 scripts/agent/run.py heal                   # cheat: fully heal the team in RAM (HP, PP, status)
-    python3 scripts/agent/run.py wild SPECIES LEVEL     # start a scripted wild battle from the overworld (test helper)
+    python3 deprecated/jev-agent/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--log FILE] [--dry]
+    python3 deprecated/jev-agent/agent/run.py state                  # print the current snapshot + options (no input)
+    python3 deprecated/jev-agent/agent/run.py play --until map:G.N --route "x,y A w30"   # walk, fight, talk; see play_loop.py
+    python3 deprecated/jev-agent/agent/run.py heal                   # cheat: fully heal the team in RAM (HP, PP, status)
+    python3 deprecated/jev-agent/agent/run.py wild SPECIES LEVEL     # start a scripted wild battle from the overworld (test helper)
 
 Needs the bridge running (scripts/play.py boot). Every decision is appended to the JSONL log (default
 saves/agent/decisions.jsonl, gitignored with saves/) with the state, options, heuristic pick, Jev's answer and what was played.
@@ -18,8 +18,10 @@ import struct
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 from emu import Emu  # noqa: E402
 import observe as ob  # noqa: E402

@@ -19,3 +19,4 @@
 {"t": "2026-10-24T08:12:36", "kind": "done", "goal": "story_04_route30", "detail": "route finished; battles 0"}
 {"t": "2026-10-24T08:13:24", "kind": "idle", "reason": "all goals done"}
 {"t": "2026-10-24T08:13:58", "kind": "checkpoint", "goal": "story_04_route30", "detail": "/Users/river/Projects/rht/saves/agent/checkpoints/02-route30.sav + /Users/river/Projects/rht/saves/agent/checkpoints/02-route30.ss (written by hand after the quest crashed in the save step)"}
+{"t": "2026-10-24T08:27:35", "kind": "idle", "reason": "all goals done"}

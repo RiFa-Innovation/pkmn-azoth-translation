@@ -1,11 +1,11 @@
 """Run the goal book: find the first goal that is not done (live game state), play it, check it, journal it, checkpoint, repeat.
 
-    python3 scripts/agent/quest.py [--new-game] [--until GOAL_ID] [--starter NAME] [--cheat-heal] [--max-goals N] [--sav PATH]
+    python3 deprecated/jev-agent/agent/quest.py [--new-game] [--until GOAL_ID] [--starter NAME] [--cheat-heal] [--max-goals N] [--sav PATH]
 
 --new-game  boot-to-bedroom first (bootstrap.py), for a fresh boot with no save.
 Stops when all goals are done, at --until, when a goal's `do` finished but its `done` condition still fails (marked blocked and journaled,
 with the anomaly report if the loop raised one): that is where a person or a larger model reasons about what the game needs next, then
-edits data/agent_goals.json. Run `goalbook.py render` to refresh docs/AGENT_GOALS.md.
+edits deprecated/jev-agent/data/agent_goals.json. Run `goalbook.py render` to refresh deprecated/jev-agent/docs/AGENT_GOALS.md.
 """
 import argparse
 import json
@@ -13,8 +13,10 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 import bootstrap  # noqa: E402
 import decide as dc  # noqa: E402

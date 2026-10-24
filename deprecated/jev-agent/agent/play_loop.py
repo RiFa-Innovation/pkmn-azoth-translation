@@ -1,6 +1,6 @@
 """Minimal M5: walk a route, play battles through the agent, advance dialogue, stop on a goal or an anomaly.
 
-    python3 scripts/agent/run.py play --until map:1.90 --route "12,9 A w30" [--goal win] [--max-actions 3000]
+    python3 deprecated/jev-agent/agent/run.py play --until map:1.90 --route "12,9 A w30" [--goal win] [--max-actions 3000]
 
 --until   map:G.N | flag:0xID (ids < 0x900 only; hack flags live elsewhere) | var:0xID=VALUE
 --route   space separated tokens, run in order (a token is repeated until it finishes; battles and dialogue interrupt it):
@@ -25,9 +25,11 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
+ROOT = REPO
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 import observe as ob  # noqa: E402
 import play  # noqa: E402

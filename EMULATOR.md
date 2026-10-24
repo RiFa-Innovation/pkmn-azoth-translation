@@ -132,24 +132,24 @@ scratch folder first. Playtest saves are backed up in `saves/` (gitignored).
   `game.gba`/`game.sav` and boot with `RHT_LOAD_SAVE=1`. Save states are tied
   to one build; don't load a state made on another ROM.
 
-## Game agent (Jev) - added 2026-10-23
+## Game agent (Jev) - added 2026-10-23, **deprecated 2026-10-24** (archived in `deprecated/jev-agent/`, see its README)
 
-`scripts/agent/` plays battles through the same bridge: it reads RAM, builds the legal options with precomputed facts
+`deprecated/jev-agent/agent/` plays battles through the same bridge: it reads RAM, builds the legal options with precomputed facts
 (type multiplier, damage %, KO, turn order), asks Jev (or the heuristic fallback) to choose, presses the buttons and
-checks the cursor bytes. Spec and milestones: `docs/JEV_AGENT_SPEC.md`. Playtest tooling only; never shipped.
+checks the cursor bytes. Spec and milestones: `deprecated/jev-agent/docs/JEV_AGENT_SPEC.md`. Playtest tooling only; never shipped.
 
 ```
 python3 scripts/play.py boot                          # bridge up, with RHT_LOAD_SAVE=1 on a scratch copy of a save
-python3 scripts/agent/run.py state                    # snapshot + options, no input
-python3 scripts/agent/run.py wild SPECIES LEVEL       # start a scripted wild battle (test helper)
-python3 scripts/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
-python3 scripts/agent/run.py play --until map:3.75 --route "8,14 tL A 10,18 tD w60"   # walk + fight + talk; stops on goal/anomaly
+python3 deprecated/jev-agent/agent/run.py state                    # snapshot + options, no input
+python3 deprecated/jev-agent/agent/run.py wild SPECIES LEVEL       # start a scripted wild battle (test helper)
+python3 deprecated/jev-agent/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
+python3 deprecated/jev-agent/agent/run.py play --until map:3.75 --route "8,14 tL A 10,18 tD w60"   # walk + fight + talk; stops on goal/anomaly
 ```
 
 `run.py heal` fully heals the team in RAM (HP, PP, status; `!heal` as a route token, or `--cheat-heal` to offer it to the goal
 selector). `play --target G.N [--heal-map G.N --heal-route "tokens"]` travels across maps (`@G.N` / `^G.N` tokens, `navmap.py`) and lets Jev choose
 `continue` vs `heal` before each leg. `play` exits 0 on the goal, 2 on an anomaly (report, screenshot and state under `saves/agent/anomalies/`), 3 when the route ran out.
-Route tokens and `--until` forms: top of `scripts/agent/play_loop.py`. Boot the bridge, then press through the title screen to
+Route tokens and `--until` forms: top of `deprecated/jev-agent/agent/play_loop.py`. Boot the bridge, then press through the title screen to
 Continue before using any command (a fresh boot sits on the title screen).
 
 The key is read from `TYPESAFE_API_KEY` only; without it (or on a 401) every decision falls back to the heuristic.

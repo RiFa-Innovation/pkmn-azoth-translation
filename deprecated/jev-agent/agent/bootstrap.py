@@ -1,6 +1,6 @@
 """From a fresh boot (no save) to the first moment of control in the bedroom (map 42.4), using the settings an unattended run wants.
 
-    python3 scripts/agent/bootstrap.py [--settings fast]
+    python3 deprecated/jev-agent/agent/bootstrap.py [--settings fast]
 
 Steps verified 2026-10-24 on the beta-26 ROM: title (Start), New Game, name entry (scenes.act_naming keeps the default), disclaimer (Start on any page jumps to Settings), the Settings screen (Right = Text Speed Fast, Down + Right =
 Battle Scene Off, B closes), then the scripted prologue, which play_loop advances (it contains a scripted battle).
@@ -9,8 +9,10 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))  # repo root (this folder is deprecated/jev-agent/agent)
+PKG = os.path.dirname(HERE)  # deprecated/jev-agent
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(REPO, "scripts"))
 
 import observe as ob  # noqa: E402
 import play  # noqa: E402
