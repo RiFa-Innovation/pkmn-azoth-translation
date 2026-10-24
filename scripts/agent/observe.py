@@ -145,3 +145,16 @@ def snapshot(e, dex):
         raise NotImplementedError("double battles are not handled by the prototype")
     return {"kind": "trainer" if flags & 8 else "wild", "you": battler(e, dex, 0), "foe": battler(e, dex, 1),
             "party": party(e, dex)}
+
+
+STRING_VAR4 = 0x02021D18  # gStringVar4: the expanded text of the message box on screen (vanilla address, checked 2026-10-24)
+
+
+def message(e):
+    """The current message text, {FA}/{FB}/\\n codes kept; '' when the buffer holds nothing readable."""
+    import mercury_text as mt
+    b = e.read(STRING_VAR4, 400)
+    i = b.find(b"\xff")
+    if i <= 0:
+        return ""
+    return mt.decode_vanilla(b[:i + 1] + b"\xff", 0)[0]

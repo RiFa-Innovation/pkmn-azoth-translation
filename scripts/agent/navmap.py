@@ -27,6 +27,23 @@ class NavMap:
             if d in DIR_KEY:
                 self.conns.setdefault((g, n), []).append((d, (tg, tn)))
 
+    def add_live(self, e):
+        """Merge the current map's warps from RAM (maps the static dump misses, such as 42.3/42.4, have no DB rows)."""
+        import struct
+        import play
+        hdr = e.read(play.MAPHDR, 0x1C)
+        events = struct.unpack_from("<I", hdr, 4)[0]
+        ev = e.read(events, 20)
+        nwarp, wp = ev[1], struct.unpack_from("<I", ev, 8)[0]
+        cur = play.pos(e)[2:]
+        warps = {}
+        for i in range(nwarp):
+            wx, wy, _, _, mn, mg = struct.unpack("<hhBBBB", e.read(wp + 8 * i, 8))
+            if mg < 127:
+                warps.setdefault((mg, mn), []).append((wx, wy))
+        if warps:
+            self.warps[cur] = warps
+
     def neighbours(self, m):
         for dst, tiles in self.warps.get(m, {}).items():
             yield dst, ("warp", tiles)

@@ -32,6 +32,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 import observe as ob  # noqa: E402
 import play  # noqa: E402
 import run as rn  # noqa: E402
+import scenes  # noqa: E402
 
 CTX = 0x03000EB0
 VAR_BASE_RAM, VAR_BASE_ID = 0x2039374, 0x4000  # hack's var array (hackdb.py)
@@ -151,6 +152,17 @@ def push_dir(e, d, watch, base_map, taps=1):
     return False
 
 
+def exit_dirs(e, tx, ty):
+    """Directions to push on a warp tile, wall-facing first: a door or mat sits in a wall, so its exit is the blocked/off-map side."""
+    W, H, b = play.grid(e)
+    out = []
+    for d, (dx, dy) in play.DELTA.items():
+        X, Y = tx + dx + 7, ty + dy + 7
+        wall = not (0 <= X < W and 0 <= Y < H) or bool(b[X + W * Y] & 0x0C00)
+        out.append((not wall, "DULR".index(d), d))
+    return [d for _, _, d in sorted(out)]
+
+
 def hop(e, edge, watch):
     """One map-to-map hop along a navmap edge. 'done' (map changed), 'interrupted' (battle/script), 'nopath'."""
     kind, arg = edge
@@ -166,7 +178,7 @@ def hop(e, edge, watch):
             if r == "done":
                 # arriving leaves you standing on the warp tile, and a plain warp fires on stepping *onto* it: step off and back
                 # (a door or arrow warp fires on the push toward its exit instead; the same two taps cover it)
-                for d in "DULR":
+                for d in exit_dirs(e, tx, ty):
                     if push_dir(e, d, watch, m0):
                         return "done"
                     if ob.phase(e) != "overworld" or script_active(e):
@@ -221,6 +233,7 @@ def step_token(e, tok, watch, nav=None, dex=None):
         cur = play.pos(e)[2:]
         if cur == tgt:
             return True
+        nav.add_live(e)
         r = nav.route(cur, tgt)
         if r is None:
             raise Anomaly(f"no map route from {cur} to {tgt}")
@@ -264,7 +277,7 @@ def dump(e, outdir, reason, watch, extra):
 
 
 def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/decisions.jsonl", max_actions=3000, stall=25,
-              outdir="saves/agent/anomalies", nav=None, planner=None):
+              outdir="saves/agent/anomalies", nav=None, planner=None, starter=None):
     route = list(route)
     done = parse_until(until) if until else (lambda e: False)
     watch, idx, battles = Watch(stall), 0, 0
@@ -273,11 +286,16 @@ def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/d
         for _ in range(max_actions):
             if ob.phase(e) == "overworld" and not script_active(e) and done(e):
                 return 0, "goal reached", {"route_idx": idx, "battles": battles}
+            sc = scenes.handle(e, dex=dex, choice=starter, min_conf=min_conf, log=log)
+            if sc:
+                print(sc)
+                watch.reset()
+                continue
             if ob.phase(e) != "overworld":
                 try:
                     rn.battle(e, dex, goal, min_conf, log)
-                except NotImplementedError as ex:  # double battles (D7): stop with a report instead of guessing
-                    raise Anomaly(f"unsupported battle: {ex}")
+                except (NotImplementedError, RuntimeError) as ex:  # double battles (D7), unknown screens: stop with a report
+                    raise Anomaly(f"unsupported situation: {ex}")
                 battles += 1
                 watch.reset()
                 continue
@@ -290,7 +308,7 @@ def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/d
                     return 0, "target reached", {"route_idx": idx, "battles": battles}
                 route += new
             if idx >= len(route):
-                return 3, "route exhausted before the goal (a goal selector is M6)", {"route_idx": idx, "battles": battles}
+                return 3, "route finished", {"route_idx": idx, "battles": battles}
             if step_token(e, route[idx], watch, nav, dex):
                 idx += 1
             watch.tick(e)
@@ -316,18 +334,21 @@ def main(argv):
     ap.add_argument("--heal-map", help="G.N of a map with a healer; --heal-route = tokens that heal once inside it")
     ap.add_argument("--heal-route", default="")
     ap.add_argument("--cheat-heal", action="store_true", help="offer the instant RAM heal as a goal option (needs --target)")
+    ap.add_argument("--hackdb", default=None, help="hackdb sqlite of the ROM being played (default build/hackdb-Mercury_EN.sqlite; "
+                    "build one with scripts/hackdb.py build --rom ROM)")
+    ap.add_argument("--starter", choices=["chikorita", "totodile", "cyndaquil"], help="force the starter (default: Jev decides)")
     ap.add_argument("--stall", type=int, default=25, help="actions without any state change before an anomaly")
     a = ap.parse_args(argv)
     e = Emu()
     import navmap
     import goals
-    dex, nav, planner = ob.Dex(), navmap.NavMap(), None
+    dex, nav, planner = ob.Dex(), navmap.NavMap(a.hackdb or navmap.DB), None
     gn = lambda s: tuple(map(int, s.split(".")))
     if a.target:
         planner = goals.make_planner(nav, dex, gn(a.target), gn(a.heal_map) if a.heal_map else None, a.heal_route.split(),
                                      a.min_conf, a.log, cheat_heal=a.cheat_heal)
     code, msg, info = play_loop(e, dex, a.until, a.route.split(), a.goal, a.min_conf, a.log, a.max_actions, a.stall,
-                                nav=nav, planner=planner)
+                                nav=nav, planner=planner, starter=a.starter)
     print(json.dumps({"exit": code, "result": msg, **info}))
     return code
 

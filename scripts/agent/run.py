@@ -129,7 +129,7 @@ def report(state, rec, opt, log):
 def battle(e, dex, goal="win", min_conf=0.5, log=None, dry=False, max_turns=60):
     """Play until back on the overworld. Busy screens are advanced with A; foreign screens (summary from a move-learn
     prompt) are backed out with B; a party menu opened by the game is treated as a forced switch."""
-    turns, idle, picks = 0, 0, 0
+    turns, idle, picks, foreign = 0, 0, 0, 0
     while turns < max_turns and picks < 4:
         ph = ob.phase(e)
         if ph == "overworld":
@@ -162,8 +162,12 @@ def battle(e, dex, goal="win", min_conf=0.5, log=None, dry=False, max_turns=60):
                 if not forced_switch(e, dex, goal, min_conf, log, turns):
                     tap(e, "B", 30)
             else:
+                foreign += 1
+                if foreign > 40:
+                    raise RuntimeError(f"stuck on a non-battle screen (callback2 {cb:#x}); needs a scene handler")
                 tap(e, "B", 30)
             continue
+        foreign = 0
         picks = 0
         idle += 1
         if idle % 6 == 0:

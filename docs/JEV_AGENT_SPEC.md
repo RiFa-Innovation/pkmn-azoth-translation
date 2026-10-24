@@ -177,6 +177,31 @@ offline from the logs.
 
 ## 12. Results
 
+### Route choice, goal book, scenes and titled saves (2026-10-24)
+
+- **Goal book** (`goalbook.py`, `data/agent_goals.json`): goals with `requires`, a live `done` condition (flag, var, party, map, all/any/not),
+  route tokens in `do`, and an optional `checkpoint` name. `quest.py` finds the first goal that is not done and whose requirements are, plays it,
+  re-checks it, journals it (`data/agent_journal.jsonl`) and writes the tracking doc `docs/AGENT_GOALS.md`. Because "done" is read from the
+  running game, any save can be loaded and the quest resumes at the right goal. A goal whose `done` still fails after its route is marked
+  *blocked* with the reason: that is where a person (or a larger model) reasons about what the game needs, then edits the goal book.
+- **Reading game state [V]:** flags go through the game's own `checkflag` (a two-byte script; works for the hack's flags >= 0x900, where
+  `SaveBlock1+0xEE0` does not); hack vars are the array at `0x2039374`; the current message text is `gStringVar4` (`0x02021D18`,
+  vanilla encoding, `{FA}/{FB}` page codes), which answers spike S4 for story text. Caveat: `0x820` reads true in a new game with no
+  badge, so the vanilla badge flags are not the badge flags here (`badges` conditions are unreliable until the real ones are found).
+- **Scenes** (`scenes.py`): recognised screens get a decision instead of an A-spam. Done: name entry (Start, A keeps the default) and the
+  starter carousel on map 43.7 (`special 0x2f` polls: Right = Totodile, Left = Cyndaquil, A = the centred Chikorita, then Yes/No); Jev picks
+  from base stats and types (`--starter NAME` forces it for reproducible saves). Unknown non-battle screens used to be pressed with B
+  forever; they now stop the run as an anomaly.
+- **New game** (`bootstrap.py`): fresh boot -> title -> name -> disclaimer (A until it stops advancing, then Start) -> Settings (Text Speed Fast,
+  Battle Scene Off) -> the scripted prologue -> bedroom control. Verified from a bare boot.
+- **Titled saves** (`savegame.py`): the Start menu is a ring that remembers its cursor (index at `0x02002F97`); Save is index 3. Headless mGBA
+  writes the `.sav` only when one already exists at boot, so start from `savegame.blank_sav()` + `RHT_LOAD_SAVE=1`. A checkpoint is an
+  in-game save, the `.sav` copied to `saves/agent/checkpoints/NAME.sav` (gitignored), plus a state `NAME.ss`. **Verified:** the exported
+  `01-first-starter.sav` loads into the lab with a Lv 5 Totodile that Jev chose (0.72, 153 ms).
+- **Fixed on the way:** `path_to` kept the old elevation when crossing a 0-elevation tile, so layered maps (New Bark Town, map 1.90) looked
+  unreachable; standing on a 0 tile resets it. Warp exits are tried wall-side first (a door sits in a wall). The nav graph merges the
+  current map's warps from RAM because the static dump does not know maps like 42.3/42.4.
+
 ### Cheat heal (2026-10-24)
 
 - `cheats.heal_party` writes the party in RAM: HP to max, status cleared, PP to max (base PP from the ROM move table, PP-Up bits from the

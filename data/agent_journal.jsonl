@@ -1,0 +1,7 @@
+{"t": "2026-10-24T01:20:57", "kind": "new_game", "detail": "(5, 4, 42, 4)"}
+{"t": "2026-10-24T01:20:57", "kind": "start", "goal": "lyra_scene", "detail": "map (42, 4)"}
+{"t": "2026-10-24T01:21:02", "kind": "done", "goal": "lyra_scene", "detail": "route finished; battles 0"}
+{"t": "2026-10-24T01:21:02", "kind": "start", "goal": "first_starter", "detail": "map (43, 5)"}
+{"t": "2026-10-24T01:21:05", "kind": "done", "goal": "first_starter", "detail": "route finished; battles 0"}
+{"t": "2026-10-24T01:21:05", "kind": "checkpoint", "goal": "first_starter", "detail": "/Users/river/Projects/rht/saves/agent/checkpoints/01-first-starter.sav + /Users/river/Projects/rht/saves/agent/checkpoints/01-first-starter.ss"}
+{"t": "2026-10-24T01:21:05", "kind": "idle", "reason": "all goals done"}

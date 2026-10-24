@@ -1,0 +1,51 @@
+{
+ "goals": [
+  {
+   "id": "lyra_scene",
+   "title": "Meet Lyra at her house",
+   "chapter": 1,
+   "requires": [],
+   "done": {
+    "var": [
+     "0x5102",
+     ">=",
+     2
+    ]
+   },
+   "do": [
+    "@43.0",
+    "@3.66",
+    "@43.5",
+    "11,7",
+    "w30"
+   ],
+   "checkpoint": null,
+   "status": "verified",
+   "notes": "Coord trigger at (11,7), one step left of the door (var 0x5102 gates it; 0 -> 2). The nav hops handle the bedroom stairs, the door mat and the New Bark warp.",
+   "verified": "2026-10-24"
+  },
+  {
+   "id": "first_starter",
+   "title": "Receive the first Pokemon from Prof. Elm",
+   "chapter": 1,
+   "requires": [
+    "lyra_scene"
+   ],
+   "done": {
+    "party": 1
+   },
+   "do": [
+    "@3.66",
+    "@43.6",
+    "7,5",
+    "tU",
+    "A",
+    "w60"
+   ],
+   "checkpoint": "01-first-starter",
+   "status": "verified",
+   "notes": "Stand at (7,5) in the lab, face up, A opens the starter screen (map 43.7, a custom carousel: Right = Totodile, Left = Cyndaquil, A confirms the centred Chikorita, then Yes/No). scenes.py decides; run with --starter NAME to force it. The nickname prompt is answered with the default name.",
+   "verified": "2026-10-24"
+  }
+ ]
+}
