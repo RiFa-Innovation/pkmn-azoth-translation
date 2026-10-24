@@ -7,6 +7,7 @@
             x,y     walk there on the current map (BFS, re-planned each step; stepping onto a warp counts as arriving)
             @G.N    travel to that map across warps and connections (navmap.py), re-planning after each hop
             ^G.N    one hop toward it
+            !heal   cheat: restore the whole team in RAM (HP, PP, status); cheats.py
             G.N     wait up to 2 s for that map, else stop "off route" (a blackout or an unexpected warp)
             A       press A (talk to the tile you face)
             tU tD tL tR   turn without walking
@@ -209,8 +210,12 @@ nav_dir = {1: "D", 2: "U", 3: "L", 4: "R"}
 OPP = {"D": "U", "U": "D", "L": "R", "R": "L"}
 
 
-def step_token(e, tok, watch, nav=None):
+def step_token(e, tok, watch, nav=None, dex=None):
     """Run one route token; returns True when finished (False = call again after battles/dialogue)."""
+    if tok == "!heal":
+        import cheats
+        print(f"cheat heal: {cheats.heal_party(e, dex)} members changed")
+        return True
     if tok[0] in "@^":
         tgt = tuple(map(int, tok[1:].split(".")))
         cur = play.pos(e)[2:]
@@ -286,7 +291,7 @@ def play_loop(e, dex, until, route, goal="win", min_conf=0.5, log="saves/agent/d
                 route += new
             if idx >= len(route):
                 return 3, "route exhausted before the goal (a goal selector is M6)", {"route_idx": idx, "battles": battles}
-            if step_token(e, route[idx], watch, nav):
+            if step_token(e, route[idx], watch, nav, dex):
                 idx += 1
             watch.tick(e)
         raise Anomaly(f"max actions {max_actions} reached")
@@ -310,6 +315,7 @@ def main(argv):
     ap.add_argument("--target", help="G.N: travel there across maps, choosing each leg (heal or continue) with Jev")
     ap.add_argument("--heal-map", help="G.N of a map with a healer; --heal-route = tokens that heal once inside it")
     ap.add_argument("--heal-route", default="")
+    ap.add_argument("--cheat-heal", action="store_true", help="offer the instant RAM heal as a goal option (needs --target)")
     ap.add_argument("--stall", type=int, default=25, help="actions without any state change before an anomaly")
     a = ap.parse_args(argv)
     e = Emu()
@@ -319,7 +325,7 @@ def main(argv):
     gn = lambda s: tuple(map(int, s.split(".")))
     if a.target:
         planner = goals.make_planner(nav, dex, gn(a.target), gn(a.heal_map) if a.heal_map else None, a.heal_route.split(),
-                                     a.min_conf, a.log)
+                                     a.min_conf, a.log, cheat_heal=a.cheat_heal)
     code, msg, info = play_loop(e, dex, a.until, a.route.split(), a.goal, a.min_conf, a.log, a.max_actions, a.stall,
                                 nav=nav, planner=planner)
     print(json.dumps({"exit": code, "result": msg, **info}))

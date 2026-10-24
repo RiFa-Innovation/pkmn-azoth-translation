@@ -15,7 +15,7 @@ def team_facts(party):
             "team_hp_pct": round(100 * sum(m["hp"] for m in party) / tot), "lowest_hp_pct": min((m["hp_pct"] for m in party), default=0)}
 
 
-def make_planner(nav, dex, target, heal=None, heal_route=(), min_conf=0.5, log=None, max_heals=5):
+def make_planner(nav, dex, target, heal=None, heal_route=(), min_conf=0.5, log=None, max_heals=5, cheat_heal=False):
     """target = (g, n); heal = (g, n) of a map with a healer, heal_route = tokens that heal once inside it."""
     state = {"heals": 0, "last_hp": None, "broken": False}
 
@@ -33,14 +33,19 @@ def make_planner(nav, dex, target, heal=None, heal_route=(), min_conf=0.5, log=N
         to_heal = nav.hops(cur, heal) if heal else None
         if heal and to_heal is not None and state["heals"] < max_heals and not state["broken"]:
             opts["heal"] = f"Go to the healer first ({to_heal} map hops), then resume; team HP {facts['team_hp_pct']}%, {facts['fainted']} fainted"
+        if cheat_heal:
+            opts["cheat_heal"] = (f"Restore the whole team instantly with the playtest heal (no travel); team HP {facts['team_hp_pct']}%, "
+                                  f"{facts['fainted']} fainted")
         needs = facts["fainted"] > 0 or facts["team_hp_pct"] < 50 or facts["lowest_hp_pct"] < 20
-        heuristic = "heal" if "heal" in opts and needs else "continue"
+        heuristic = ("cheat_heal" if "cheat_heal" in opts else "heal" if "heal" in opts else "continue") if needs else "continue"
         ctx = {**facts, "hops_to_target": to_target, "hops_to_healer": to_heal, "heals_done": state["heals"]}
         rec = dc.choose(ctx, opts, dc.INSTRUCTIONS["goal"], heuristic, min_conf, "goal")
         if log:
             with open(log, "a") as f:
                 f.write(json.dumps(rec) + "\n")
         print(f"goal: {rec['action']} [{rec['source']}] {ctx}")
+        if rec["action"] == "cheat_heal":
+            return ["!heal"]
         if rec["action"] == "heal":
             state["heals"] += 1
             state["last_hp"] = facts["team_hp_pct"]

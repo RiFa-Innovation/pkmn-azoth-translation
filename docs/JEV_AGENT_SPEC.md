@@ -177,6 +177,17 @@ offline from the logs.
 
 ## 12. Results
 
+### Cheat heal (2026-10-24)
+
+- `cheats.heal_party` writes the party in RAM: HP to max, status cleared, PP to max (base PP from the ROM move table, PP-Up bits from the
+  growth substruct). The party structs carry no checksum in this hack (word at +0x1C is 0 on every member), so no rewrite is needed. **[V]**
+- Offered three ways: `run.py heal`, the `!heal` route token, and `play --target G.N --cheat-heal`, where `cheat_heal` is a goal option
+  next to `continue` and `heal`. It needs no healer map and no travel, which removes the healer-discovery blocker for unattended runs.
+- Verified: team at 7% HP with 1 PP and a fainted member -> `cheat_heal` (heuristic pick, Jev below the gate) -> 100% HP, PP 20/15/15/15 -> `continue`
+  (Jev @ high confidence) -> target reached; the revived Croconaw then fought a real wild battle normally.
+- Overworld only: in battle the live copy is `gBattleMons`, which it does not touch. Any run that uses it is a playtest, not a
+  fair-play benchmark; log records show the goal `cheat_heal`, so evals can exclude or count them.
+
 ### M6, goal selection (2026-10-23)
 
 - Built and verified **[V]** on the beta-26 save: connection hops (3.75 -> 3.76 -> 3.75), a door warp (3.75 -> 50.3), a two-map trip
