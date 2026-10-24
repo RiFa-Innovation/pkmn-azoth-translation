@@ -293,7 +293,7 @@ def path_to(e, tx, ty, blocked=()):
             # tile must match the elevation the player is on (jumps excepted)
             if zt not in (0, 15) and c[2] not in (0, 15) and zt != c[2] and not hop:
                 continue
-            nz = c[2] if zt in (0, 15) else zt
+            nz = c[2] if zt == 15 else zt  # standing on a 0 tile resets the object's elevation to 0 (ObjectEventUpdateElevation)
             st = (n[0], n[1], nz)
             if st not in prev:
                 prev[st] = (c, d * (1 + len(hop)))
