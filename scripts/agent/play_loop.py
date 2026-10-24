@@ -144,8 +144,8 @@ def goto(e, tx, ty, watch, budget=300):
 def push_dir(e, d, watch, base_map, taps=1):
     """Tap direction d (a door or arrow warp fires on the push toward its exit); True once the map changed."""
     for _ in range(taps):
-        rn.tap(e, play.DIRS[d], 20)
-        e.wait(40)
+        e.press(play.DIRS[d], hold=8, release=4)  # hold >= 6 frames starts a step; a 3-frame tap only turns
+        e.wait(50)
         watch.tick(e)
         if play.pos(e)[2:] != base_map or ob.phase(e) != "overworld":
             return True
@@ -200,7 +200,7 @@ def hop(e, edge, watch):
                   "L": [(0, j) for j in range(mh)], "R": [(mw - 1, j) for j in range(mh)]}[d]
     tried = []
     for tx, ty in sorted(edge_tiles, key=lambda t: abs(t[0] - x) + abs(t[1] - y)):
-        if any(abs(tx - a) + abs(ty - b) <= 3 for a, b in tried):
+        if any(abs(tx - a) + abs(ty - b) <= 1 for a, b in tried):
             continue
         r = goto(e, tx, ty, watch)
         if r == "interrupted":
@@ -213,7 +213,7 @@ def hop(e, edge, watch):
             if ob.phase(e) != "overworld" or script_active(e):
                 return "interrupted"
         tried.append((tx, ty))
-        if len(tried) >= 12:
+        if len(tried) >= 30:
             break
     return "nopath"
 

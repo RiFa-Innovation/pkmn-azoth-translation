@@ -177,6 +177,28 @@ offline from the logs.
 
 ## 12. Results
 
+### The story spine and the first real route-choice steps (2026-10-24)
+
+- **The game's own objective table is the story skeleton.** Var `0x5120` is the hack's master progress index; function `0x09FF6878` reads it
+  (bounds-checked at 74) to pick the Start-menu objective line from a 75-entry table at `0x09FFF468` ("Find Mr. Pokemon past
+  Cherrygrove.", ..., "Head to the top and face Lugia...", ..., "Challenge the Goldenrod Gym!"). `storygraph.py ROM` writes
+  `data/agent_story_steps.json`: per step, the objective text, the `setvar 0x5120 N` setter, and the map events that reach it (map, area
+  name, tile, gate). Map area names come from the hack's region table at `0x08C2B0DC` (region = 143 + index). It is a draft:
+  some rows are misparsed frame scripts, and a finer var (`0x5105`, plus local ones such as `0x5103`, `0x5176`, `0x51a5`) gates the
+  triggers, so each step still needs one emulator pass.
+- **The authoring loop that works:** run the quest; it stops at the first goal that fails with a report (screenshot, state, signatures);
+  read the report, ask hackdb (`var`, `flag`, `script`, `map`) what gates the stuck trigger, add or fix a goal, rerun. Two steps took about a
+  dozen calls each. Solved this way: New Bark's west exit bounces with "Shouldn't you tell Mom before you leave?" until a one-time
+  scene has run (var `0x5103` 0 -> 1); Mr. Pokemon's house (map 45.6) sets `0x5105` to 1 on arrival, which is what arms Route 30's
+  triggers; Route 30 then advances objective 3 -> 4. Goals `story_03_mr_pokemon` and `story_04_route30` are verified from the
+  starter checkpoint (`0x5120` = 4, `0x5105` = 2), checkpoint `02-route30` written.
+- **Fixed while doing it:** the edge-connection hop skipped the tile that worked because a nearby tile had failed (the neighbour map only
+  covers part of the edge); the warp push now holds the key 8 frames (3 only turns); Save is found by behaviour (see `savegame.py`);
+  the save prompt is polled for instead of read once.
+- **Not done:** only goals up to objective 4 exist (of 75). Decision types D3 (bag items), D4 (catching), D5 (move learning), D6
+  (evolution) and a general D8 (Yes/No and multichoice read from `gStringVar4`) are not built: no run has reached them yet, and each needs a
+  RAM spike when the screen first appears (callback address, cursor bytes). Only the name entry and the starter carousel have handlers.
+
 ### Route choice, goal book, scenes and titled saves (2026-10-24)
 
 - **Goal book** (`goalbook.py`, `data/agent_goals.json`): goals with `requires`, a live `done` condition (flag, var, party, map, all/any/not),

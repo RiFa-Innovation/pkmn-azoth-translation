@@ -5,3 +5,17 @@
 {"t": "2026-10-24T01:21:05", "kind": "done", "goal": "first_starter", "detail": "route finished; battles 0"}
 {"t": "2026-10-24T01:21:05", "kind": "checkpoint", "goal": "first_starter", "detail": "/Users/river/Projects/rht/saves/agent/checkpoints/01-first-starter.sav + /Users/river/Projects/rht/saves/agent/checkpoints/01-first-starter.ss"}
 {"t": "2026-10-24T01:21:05", "kind": "idle", "reason": "all goals done"}
+{"t": "2026-10-24T08:07:35", "kind": "start", "goal": "story_04_route30", "detail": "map (43, 6)"}
+{"t": "2026-10-24T08:07:38", "kind": "blocked", "goal": "story_04_route30", "reason": "anomaly: no progress over 25 actions (3 distinct states; cb2 0x80565b5, ctx mode 2 ptr 0x81a4e48, map 3.66 pos (5,10)) (report in saves/agent/anomalies/20261024-080738)"}
+{"t": "2026-10-24T08:09:59", "kind": "start", "goal": "story_04_route30", "detail": "map (3, 66)"}
+{"t": "2026-10-24T08:10:02", "kind": "blocked", "goal": "story_04_route30", "reason": "anomaly: could not leave map (3, 66) toward (3, 79) (edge conn) (report in saves/agent/anomalies/20261024-081002)"}
+{"t": "2026-10-24T08:10:39", "kind": "start", "goal": "story_04_route30", "detail": "map (3, 66)"}
+{"t": "2026-10-24T08:10:41", "kind": "blocked", "goal": "story_04_route30", "reason": "anomaly: could not leave map (3, 66) toward (3, 79) (edge conn) (report in saves/agent/anomalies/20261024-081041)"}
+{"t": "2026-10-24T08:11:15", "kind": "start", "goal": "story_04_route30", "detail": "map (3, 66)"}
+{"t": "2026-10-24T08:11:37", "kind": "blocked", "goal": "story_04_route30", "reason": "route finished"}
+{"t": "2026-10-24T08:12:12", "kind": "start", "goal": "story_03_mr_pokemon", "detail": "map (3, 82)"}
+{"t": "2026-10-24T08:12:14", "kind": "done", "goal": "story_03_mr_pokemon", "detail": "route finished; battles 0"}
+{"t": "2026-10-24T08:12:35", "kind": "start", "goal": "story_04_route30", "detail": "map (45, 6)"}
+{"t": "2026-10-24T08:12:36", "kind": "done", "goal": "story_04_route30", "detail": "route finished; battles 0"}
+{"t": "2026-10-24T08:13:24", "kind": "idle", "reason": "all goals done"}
+{"t": "2026-10-24T08:13:58", "kind": "checkpoint", "goal": "story_04_route30", "detail": "/Users/river/Projects/rht/saves/agent/checkpoints/02-route30.sav + /Users/river/Projects/rht/saves/agent/checkpoints/02-route30.ss (written by hand after the quest crashed in the save step)"}

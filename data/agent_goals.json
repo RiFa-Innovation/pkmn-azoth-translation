@@ -46,6 +46,53 @@
    "status": "verified",
    "notes": "Stand at (7,5) in the lab, face up, A opens the starter screen (map 43.7, a custom carousel: Right = Totodile, Left = Cyndaquil, A confirms the centred Chikorita, then Yes/No). scenes.py decides; run with --starter NAME to force it. The nickname prompt is answered with the default name.",
    "verified": "2026-10-24"
+  },
+  {
+   "id": "story_03_mr_pokemon",
+   "title": "Visit Mr. Pokemon's house",
+   "chapter": 1,
+   "requires": [
+    "first_starter"
+   ],
+   "done": {
+    "var": [
+     "0x5105",
+     ">=",
+     1
+    ]
+   },
+   "do": [
+    "@45.6",
+    "w90"
+   ],
+   "checkpoint": "02-mr-pokemon",
+   "status": "verified",
+   "notes": "Map 45.6, reached by a warp from Route 30. Three coord events at (3,6), (4,7), (2,7) gated by var 0x5105==0 fire on arrival and set 0x5105 to 1. Needs the town exit open (var 0x5103 = 1, set by the one-time 'tell Mom' bounce at New Bark's west edge).",
+   "verified": "2026-10-24"
+  },
+  {
+   "id": "story_04_route30",
+   "title": "Meet Mr. Pokemon's contact on Route 30",
+   "chapter": 1,
+   "requires": [
+    "story_03_mr_pokemon"
+   ],
+   "done": {
+    "var": [
+     "0x5120",
+     ">=",
+     4
+    ]
+   },
+   "do": [
+    "@3.82",
+    "24,8",
+    "w30"
+   ],
+   "checkpoint": "02-route30",
+   "status": "verified",
+   "notes": "Objective 3 -> 4. Coord events on Route 30 (3.82) at (24,8), (25,9), (26,8) gated by var 0x5105==1, so Mr. Pokemon's house must have been visited first.",
+   "verified": "2026-10-24"
   }
  ]
 }
