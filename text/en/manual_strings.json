@@ -718,5 +718,111 @@
   "refs": [
    "1D035D8"
   ]
+ },
+ "017E3E9": {
+  "zh": "……呼……",
+  "cap": 7,
+  "en": "……Phew……",
+  "refs": [
+   "01C4A74"
+  ]
+ },
+ "07B3F9C": {
+  "zh": "星～",
+  "cap": 4,
+  "en": "Star{F9:D3}",
+  "refs": [
+   "07B3A71",
+   "07B3A9E",
+   "07B3AC5",
+   "07B3AD3",
+   "07B3AE1",
+   "07B3AEF",
+   "07B3AFD",
+   "07B3B6F",
+   "07B3B99",
+   "07B3BA7",
+   "07B3BB5",
+   "07B3BC3",
+   "07B3BD1",
+   "07B3C43",
+   "07B3C5D",
+   "07B3C6B",
+   "07B3C79",
+   "07B3C87",
+   "07B3C95",
+   "07B3D07"
+  ]
+ },
+ "09E0E69": {
+  "zh": "好吧，\n那我就不献丑了。",
+  "cap": 22,
+  "en": "All right then,\nI won’t embarrass myself.",
+  "refs": [
+   "09E0E36"
+  ]
+ },
+ "0AFB84E": {
+  "zh": "床",
+  "cap": 3,
+  "en": "Bed",
+  "refs": [
+   "0AFB6A4"
+  ]
+ },
+ "0D535FF": {
+  "zh": "能",
+  "cap": 3,
+  "en": "Can",
+  "refs": [
+   "0D5340C"
+  ]
+ },
+ "0EC3345": {
+  "zh": "喂！",
+  "cap": 4,
+  "en": "Hey!",
+  "refs": [
+   "0EC3323"
+  ]
+ },
+ "0EC3391": {
+  "zh": "喂！",
+  "cap": 4,
+  "en": "Hey!",
+  "refs": [
+   "0EC336F"
+  ]
+ },
+ "0EC36E3": {
+  "zh": "“华丽大赛会场”\n华丽宝可梦齐聚一堂！",
+  "cap": 35,
+  "en": "“Contest Hall”\nStylish Pokémon gather here!",
+  "refs": [
+   "0EC3243"
+  ]
+ },
+ "0ED513A": {
+  "zh": "菲{F9:D3}",
+  "cap": 5,
+  "en": "Fi{F9:D3}"
+ },
+ "0F3BBBC": {
+  "zh": "爱",
+  "cap": 3,
+  "en": "Ai"
+ },
+ "0F46F4B": {
+  "zh": "诶？",
+  "cap": 4,
+  "en": "Eh?"
+ },
+ "017D28C": {
+  "zh": "这是一块金色珠!{FB}我无法给你我的一部分智慧，\n那我就分你我的一部分金块吧!",
+  "cap": 70,
+  "en": "Here’s a Nugget!{FB}I can’t share a part of my wisdom with you,\nso take a part of my gold instead!",
+  "refs": [
+   "0164DC4"
+  ]
  }
 }

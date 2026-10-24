@@ -604,13 +604,25 @@ def main():
             ro = int(r.split(":")[0], 16)
             pool.reserve(ro, ro + 4)
     report["free_before_reloc"] = pool.total()
+    moved = {}  # old pointer -> new pointer, for every relocated string
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
         a = pool.alloc(len(b))
         rom[a:a + len(b)] = b
         for r in strings[t]["refs"]:
             ro = int(r.split(":")[0], 16)
             rom[ro:ro + 4] = (0x08000000 + a).to_bytes(4, "little")
+        moved[0x08000000 + t] = 0x08000000 + a
         report["relocated"] += 1
+    # The dump's script scan desyncs on some scripts, so a `loadword` operand (0f 0x <ptr>) can be missing from `refs` and would keep
+    # pointing at the old address: the old Chinese, or whatever the pool put there next (#125). Repoint those too.
+    report["extra_repointed"] = []
+    for m in re.finditer(rb"\x0f[\x00-\x03]([\x00-\xff]{3})\x08", bytes(src)):
+        old = int.from_bytes(m.group(1) + b"\x08", "little")
+        if old in moved:
+            ro = m.start() + 2
+            if int.from_bytes(rom[ro:ro + 4], "little") == old:  # not already repointed through refs
+                rom[ro:ro + 4] = moved[old].to_bytes(4, "little")
+                report["extra_repointed"].append(f"{ro:07X} {old:#010x} -> {moved[old]:#010x}")
     # --- manual strings (text/en/manual_strings.json): unfindable by the scan
     manual = json.load(open("text/en/manual_strings.json", encoding="utf-8"))
     for addr, m in manual.items():
