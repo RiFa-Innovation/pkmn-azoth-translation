@@ -130,6 +130,11 @@ this string" in one call. Add what you learn with `hackdb.py note add`.
   garbage (`úú\n...`, `œY ...`) may start 1-3 bytes early, inside the preceding `applymovement`
   stream, so its "ref" is the operand. After adding manual entries, diff all `applymovement`/`goto`/`call`
   operands of the built ROM against the original (hackdb `cmds` on both ROMs). (#87, PLAYTEST 84)
+- **A relocated string can leave a script operand behind.** `insert.py` repoints only the refs the dump found; the dump's script scan
+  desyncs on some scripts, so a `loadword` operand (`0f 0x <ptr>`) can keep the OLD address, which then shows old Chinese or, once the
+  pool reuses the bytes, another string with a stray hanzi lead byte. `insert.py` now repoints any `0f 0x <old ptr>` whose target moved
+  (`extra_repointed` in the report); `scripts/audit_dangling.py` re-checks a build and `scripts/textsweep.py` renders every dialogue string
+  in the engine. Hunt leftovers with `mercury_text.decode` (the vanilla decoder hides hanzi). (#125, PLAYTEST 93)
 - **Free-space pool:** `0xFF` runs can be live data. `insert.py::referenced_ff`
   excludes referenced FF ranges; don't relocate into them.
 - **Mixed strings:** mostly-Latin text with a hanzi (names + one character) is
