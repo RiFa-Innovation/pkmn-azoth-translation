@@ -446,6 +446,37 @@ def tower_top_floor_softlock(rom, src, pool):
             "bytes": [len(body), len(body2)]}
 
 
+def whitney_badge_gate(rom, src, pool):
+    """Whitney hands out the badge only after the player walks over one tile.
+
+    After the Goldenrod Gym fight the player is warped back to (13,5), right
+    below Whitney (13,4). Her script (0x08AA4C64) answers "Waah!!" while the
+    story var 0x5151 is 1, and the only thing that clears it (and sets the flag
+    0x1557 the badge branch tests) is the coord event at (13,10) - one tile of a
+    room that is open on every side, so most players walk around it, talk to her
+    again, get "Waah!!" again and never see the badge (the task keeps reading
+    "Talk to Whitney"). The original Chinese ROM does the same.
+
+    Fix: the `goto_if` that sends var 0x5151 == 1 to the crying branch now goes
+    to a pooled script that does what the coord event does (var 0x5120 -> 0x49,
+    flag 0x1557, var 0x5151 -> 0) and then jumps into that same branch, which
+    now falls through to the badge. The coord event still works and saves that
+    are already stuck are repaired the next time they talk to her."""
+    CRY = 0x089E1568
+    slot = 0xAA4C6D + 7                                   # goto_if operand
+    assert src[0xAA4C6D:0xAA4C6D + 11] == bytes.fromhex("21" "5151" "0100" "0601") + CRY.to_bytes(4, "little"), \
+        "Whitney script bytes differ"
+    u16 = lambda v: v.to_bytes(2, "little")
+    body = (b"\x16" + u16(0x5120) + u16(0x49)               # setvar 0x5120 0x49
+            + b"\x29" + u16(0x1557)                         # setflag 0x1557
+            + b"\x16" + u16(0x5151) + u16(0)                # setvar 0x5151 0
+            + b"\x05" + CRY.to_bytes(4, "little"))          # goto the branch (now: badge)
+    at = pool.alloc_aligned(len(body))
+    rom[at:at + len(body)] = body
+    rom[slot:slot + 4] = (0x08000000 + at).to_bytes(4, "little")
+    return {"script": 0x08000000 + at, "bytes": len(body)}
+
+
 def main():
     base = open(BASE, "rb").read()
     src = open(PATCHED, "rb").read()
@@ -767,6 +798,7 @@ def main():
             rom[a:b] = base[a:b]
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
+    report["whitney_badge_gate"] = whitney_badge_gate(rom, src, pool)
     report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
     report["new_maps"] = mapedit.apply(rom, src, pool, edition.new_maps_path())
