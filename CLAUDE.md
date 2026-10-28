@@ -68,7 +68,9 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
 - **Spectrum Frontier reservations** (`scripts/frontier_build.py`, spec `docs/BATTLE_FRONTIER_SPEC.md`): hack vars `0x5121`-`0x5132`, flags `0x1388`-`0x13A7`,
   maps `58.5`-`58.9` (arenas), EWRAM `0x02022400`-`0x020227FF` (opponent party block `0x02022400`, speech buffers `0x02022600/680/700`; borrowed link buffers, the game is offline),
   **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
-  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text. `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
+  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text.
+  `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
+- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF`, multichoice list id 65 (the table is copied with one extra entry), SELECT+START hotkey in the overworld; only in `RHT_CHEATS=1` builds.
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +
@@ -242,6 +244,8 @@ EDITION tag; `scripts/dist.py --river V` sets it). Both editions carry the Front
 The Frontier's arenas are the *last* maps of group 58, so their ids follow whatever the edition already put there.
 Build and verify **both** after any change: `python3 scripts/build_editions.py` (clean-report check, BPS round trip, copies to
 `build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
+`RHT_CHEATS=1` adds the **Cheat Device** (`docs/CHEATS.md`) to either edition; it is an optional add-on released separately (`scripts/dist.py --cheats N`),
+never part of the numbered betas or River releases. `build_editions.py` builds all four variants (`translation-cheats`, `river-cheats` too).
 
 ## Release steps (only when asked)
 

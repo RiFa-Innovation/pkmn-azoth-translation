@@ -11,3 +11,7 @@ assert EDITION in ("translation", "river"), f"RHT_EDITION must be 'translation' 
 
 def new_maps_path():
     return "data/new_maps.json" if EDITION == "river" else "data/new_maps.translation.json"
+
+
+# The Cheat Device (docs/CHEATS.md) is an optional add-on: only builds made with RHT_CHEATS=1 carry it. Plain betas and River releases do not.
+CHEATS = os.environ.get("RHT_CHEATS") == "1"
