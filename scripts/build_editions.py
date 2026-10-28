@@ -2,7 +2,7 @@
 """Build the translation and/or River Edition ROMs + BPS into build/editions/, verifying each BPS against the clean FireRed ROM.
 
     python3 scripts/build_editions.py              # both
-    python3 scripts/build_editions.py river        # one of: translation, river
+    python3 scripts/build_editions.py river        # one of: translation, river, translation-cheats, river-cheats
 
 Each edition's insert.py run writes build/Mercury_EN.{gba,bps}; this copies them out under their own names so building one does not
 overwrite the other. build/Mercury_EN.* is left holding the last edition built (translation, when both). Not a release: dist.py packages those.
@@ -17,14 +17,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = ROOT / "roms" / "Pokemon - FireRed Version (USA, Europe).gba"
-NAMES = {"translation": "Pokemon Azoth English + Frontier", "river": "Pokemon River Azoth (Chapter 2 + Frontier)"}
+NAMES = {"translation": "Pokemon Azoth English + Frontier", "river": "Pokemon River Azoth (Chapter 2 + Frontier)",
+         "translation-cheats": "Pokemon Azoth English + Frontier + Cheats", "river-cheats": "Pokemon River Azoth (Chapter 2 + Frontier) + Cheats"}
 
 
 def build(edition):
     env = dict(os.environ)
     env.pop("RHT_EDITION", None)
-    if edition == "river":
+    env.pop("RHT_CHEATS", None)
+    if edition.startswith("river"):
         env["RHT_EDITION"] = "river"
+    if edition.endswith("-cheats"):
+        env["RHT_CHEATS"] = "1"
     out = subprocess.run([sys.executable, "scripts/insert.py"], cwd=ROOT, env=env, capture_output=True, text=True)
     if out.returncode:
         sys.exit(out.stdout + out.stderr)
@@ -45,10 +49,10 @@ def build(edition):
 
 
 def main():
-    want = sys.argv[1:] or ["river", "translation"]
+    want = sys.argv[1:] or ["river", "translation", "river-cheats", "translation-cheats"]
     for e in want:
         if e not in NAMES:
-            sys.exit(f"unknown edition {e!r}; use translation and/or river")
+            sys.exit(f"unknown edition {e!r}; use translation, river, translation-cheats and/or river-cheats")
     for e in want:
         build(e)
 

@@ -33,6 +33,7 @@ import sprtext  # noqa: E402
 import statusicons  # noqa: E402
 import typeicons  # noqa: E402
 import anchored  # noqa: E402
+import cheats_build  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
@@ -801,6 +802,8 @@ def main():
     report["whitney_badge_gate"] = whitney_badge_gate(rom, src, pool)
     report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
+    if edition.CHEATS:
+        report["cheats"] = cheats_build.apply(rom, src, pool)
     report["new_maps"] = mapedit.apply(rom, src, pool, edition.new_maps_path())
     report["free_after"] = pool.total()
 

@@ -1,0 +1,5 @@
+{
+ "_doc": "Level cap for the Cheat Device's 'Set To Level Cap': index = number of badges among flags badge_flag .. badge_flag+7 (0-8). Each value is the highest level on the next gym leader's first-battle team (trainer ids 66, 72, 111, 278, 83, 228, 375, 82; map 52.1 / 52.9 / 50.50 / 55.37 / 52.10 / 51.1 / 54.7 / 52.4). The leaders are taken in ascending level order, so the badge order does not matter; the last entry applies with all eight (the Elite Four's Lance, 59-64). Edit freely.",
+ "badge_flag": "0x820",
+ "caps": [9, 16, 23, 30, 37, 39, 44, 52, 64]
+}
