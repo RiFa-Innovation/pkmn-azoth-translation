@@ -161,19 +161,27 @@ Verified in the emulator on `dist/river-0.2.3/Pokemon River Azoth v0.2.3.{gba,sa
 Next: (1) read-watch the target record while a throw/lock happens to find its table; (2) watch the walker object's movement writes to see what drives it;
 (3) catch the post-battle reward code with a write-watch on the bag (Exp. Candy ids 536-540) while a battle ends.
 
-### 11.1 Probe results, second pass (same day)
+### 11.1 Quick Catch target model (M0a, resolved 2026-10-29)
 
-* **Species list**: `0x0203B72A` + 2*slot holds the species id of each visible Pokémon (three Starly = 449 / 0x1C1 in the test), next to the
-  state struct (`0x0203B730`-`0x0203B7E8`). Per-slot level / personality arrays were not identified by eye. [V for species; ? for the rest]
-* **The locked target is probably pre-loaded into `gEnemyParty[0]` (0x0202402C)**: before pressing A in Quick Catch, `gEnemyParty[0]` already
-  held the Lv 2 Sentret that the battle then started with (same personality `0x5D48E8AD`, level byte at +0x54, HP at +0x56 = 13/13). If it holds
-  for every lock/switch, the patrol can read the target's species, level, shininess and held item through the normal `GetMonData` calls and never
-  needs the hack's own record format. [V once; ? re-test with R/L switching targets]
-* The party struct at `0x02024284` is **not** a vanilla-checksummed struct (a checksum scan finds nothing), so read mons only through
-  `GetMonData` / `SetMonData`, as the Cheat Device's level cap already does. [V]
-* A single A press in Quick Catch started a **real wild battle** here (the throw does not always skip the battle): the lock / throw conditions
-  are part of what to read next.
-* `0x02023610` is a battle structure (a battle-mon record containing the species name), not the visible-Pokémon table.
+Found with `break_at` on `CreateMon` / `CreateMonWithNature` and a read of the throw function `0x09D53CB8` (the "lock hypothesis" that
+`gEnemyParty[0]` is pre-loaded was **wrong**: it is empty while aiming and is filled at throw time, then cleared).
 
-Next probes: (1) switch targets (R, L) and re-read `gEnemyParty[0]`; (2) find which code writes `gEnemyParty[0]` on lock (write-watch with a
-scratch battle-free run) to get the lock function; (3) the walker's movement writer; (4) the reward routine.
+* A visible wild Pokémon is just an **object event** (`gObjectEvents` at `0x02036E38`, 36-byte entries). Up to **three** live in the reserved local
+  ids **0xE0, 0xE1, 0xE2** (graphics id 193 placeholder, moveType 79). [V]
+* **Level = byte at object+29** (the throw function: `ldrb r5,[obj,#29]`; values outside 1..100 become 1). [V]
+* **Species**: `0x09D53424(obj, u16 *out)` returns a bool and the species. For the three slot objects it is `VarGet(0x50FB + localId)`, i.e. hack
+  vars **0x51DB / 0x51DC / 0x51DD** (for E0 / E1 / E2); other objects encode the species in the 16-bit graphics id (`obj[5] | obj[35]<<8`, bit
+  0x4000 set). `0x09D53040(obj)` is the "is a valid visible-Pokémon object" predicate. [V from disassembly; vars not yet read live]
+* **Quick Catch state struct** (pointer from the accessor `0x09D534B4`, lives around `0x0203B730`): `+6` index of the locked/aimed object, `+7`,
+  `+8`/`+9` map group/number the target belongs to, `+24` (u16) species of the aimed target, `+16`/`+17` throw timers. [V partly]
+* **Throw sequence** (`0x09D53CB8`): `0x09D53888` validates the aimed target -> level from `obj[29]` -> `0x09D6BA78(species, level, ...)` builds the
+  mon in `gEnemyParty[0]` -> ball animation -> catch roll (`0x09D0F5B0`) or the battle starts; then the object is removed and `gEnemyParty[0]` cleared.
+* So for the patrol: targets = the objects with local id 0xE0-0xE2 that pass `0x09D53040`; species and level are readable without any struct
+  decoding; the same `0x09D6BA78` can materialise a real `struct Pokemon` for shininess, held items and moves, and the object-removal path of
+  the throw (after `0x09D53DDC`) is the way to take a target off the map. The `CreateMonWithNature` hook (`0x09D09D58`) is the generic engine
+  hook (Unown letters etc.), not Quick Catch's.
+
+Still open from M0: (b) the walker, (c) the reward routine, (e) free EWRAM. Walker facts so far: object local id 0xFE, graphics id per species, flags 0x41.
+
+Next probes: (1) read vars 0x51DB-0x51DD live and confirm against the HUD species; (2) watch writes to the walker object's movement fields
+(+0x1C... / movementType) to find what drives it; (3) break/watch bag writes (Exp. Candy ids 536-540) across a won battle for the reward routine.
