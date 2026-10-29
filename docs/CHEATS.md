@@ -1,16 +1,21 @@
-# Cheat Device (optional add-on)
+# Cheat Device
 
-An optional extra for the English translation of **Pokémon Azoth** and for the River Edition: a small in-game menu of cheats.
-It is released separately ("+ Cheats" patches); the normal betas and River releases do not contain it.
+A small in-game menu of cheats for **Pokémon Azoth** (English translation).
+
+- **River Edition: built in from v0.4 on.** Nothing to install; press SELECT + START on the map. (River v0.3 and earlier do not have it; their "+ Cheats" patch is `cheats-v1`.)
+- **Translation: an optional add-on**, released separately as a "+ Cheats" patch; the numbered betas do not contain it.
 
 > This is only a **translation done with Claude** (plus fan-made additions by River). The hack, its name and its content belong to its
 > original authors. The Cheat Device is an unofficial add-on and is not part of the original game.
 
 ## Install
 
+**River Edition v0.4 or later: nothing to install**, the cheats are part of the River patch.
+
+For the translation, or for older River versions (v0.3 and earlier), use the add-on patch (`cheats-v1` has both; later add-ons are for the translation only):
 1. Pick the patch that matches the game you play:
    - `Pokemon-Azoth-English-Cheats-vN.bps`: the translation (what the numbered betas ship) plus the Spectrum Frontier, plus cheats.
-   - `Pokemon-Azoth-English-RIVER-EDITION-Cheats-vN.bps`: the River Edition (Chapter 2 + Frontier) plus cheats.
+   - `Pokemon-Azoth-English-RIVER-EDITION-Cheats-v1.bps`: River Edition v0.2.3 (Chapter 2 + Frontier) plus cheats (without the Partner Patrol).
 2. Apply it with any BPS patcher (Floating IPS, Rom Patcher JS, ...) to a clean **FireRed (USA, Europe) v1.0** ROM, CRC32 `DD88761C`. Do not patch a ROM that is already patched.
 3. Your existing saves keep working: the cheats' on/off switches are extra flags that are simply off in an old save. (Save states are tied to one build; make a normal in-game save.)
 
@@ -18,6 +23,10 @@ It is released separately ("+ Cheats" patches); the normal betas and River relea
 
 In the overworld (walking around, no text box or menu open) press **SELECT + START together**. On a keyboard in mGBA that is Backspace + Enter.
 The menu appears at the top left. Choose an entry with the D-pad and **A**; **B** closes the menu.
+
+| The menu | A switch asks first | Set To Level Cap |
+|---|---|---|
+| ![menu](img/cheats/1-menu.png) | ![switch](img/cheats/2-switch.png) | ![cap](img/cheats/3-level-cap.png) |
 
 ## What each entry does
 
@@ -33,7 +42,6 @@ Entries with an on/off switch show their current state when you pick them ("Shin
 | **99 Rare Candies** | no | Adds 99 Rare Candies to your bag (Training pocket). |
 | **Money +99999** | no | Adds ¥99,999. |
 | **Set To Level Cap** | no | Pick a party Pokémon; it is raised to the level cap for your current number of badges. It is never lowered. |
-| **Close** | no | Leaves the menu. |
 
 ### Level cap
 
@@ -53,7 +61,7 @@ Use the project's bug tracker (the link is in the release notes) and mention tha
 
 ## Technical notes (for contributors)
 
-Built only when `RHT_CHEATS=1` (`scripts/edition.py`); `python3 scripts/build_editions.py` builds all four variants and `python3 scripts/dist.py --cheats N`
+Built into every `RHT_EDITION=river` build, and into the translation only with `RHT_CHEATS=1` (`scripts/edition.py`); `python3 scripts/build_editions.py` builds the three variants and `python3 scripts/dist.py --cheats N`
 packages the add-on. Code: `scripts/native/cheats.s` (Thumb, linked into the free pool) and `scripts/cheats_build.py` (menu script, the 66th multichoice
 list, patches with byte assertions). Switch flags: `0x13A8` shiny, `0x13A9` candy, `0x13AA` heal, `0x13AB` repel; `0x13AC`-`0x13AF` are kept.
 

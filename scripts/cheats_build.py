@@ -35,7 +35,8 @@ CFLAGS_AS = ["arm-none-eabi-as", "-mcpu=arm7tdmi"]
 
 CAPS = json.load(open(os.path.join(ROOT, "data/cheats_levelcaps.json")))
 assert len(CAPS["caps"]) == 9 and all(0 < c <= 100 for c in CAPS["caps"])
-MENU = ["Shiny Boost", "Infinite Candy", "Heal After Fights", "Infinite Repel", "Heal Party Now", "99 Rare Candies", "Money +99999", "Set To Level Cap", "Close"]
+MENU = ["Shiny Boost", "Infinite Candy", "Heal After Fights", "Infinite Repel", "Heal Party Now", "99 Rare Candies", "Money +99999", "Set To Level Cap"]
+assert len(MENU) <= 8, "the game's GetMCWindowHeight draws a 1-row window for a multichoice list of 9 or more entries (B closes the menu, there is no Close entry)"
 
 
 def _build(base, out, script):
@@ -57,7 +58,7 @@ def _build(base, out, script):
 
 
 def _script(labels):
-    """The menu. Each switch asks with its current state; B / Close ends."""
+    """The menu. Each switch asks with its current state; B ends."""
     def toggle(name, flag, title):
         return f"""
         {name}:

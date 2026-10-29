@@ -13,5 +13,6 @@ def new_maps_path():
     return "data/new_maps.json" if EDITION == "river" else "data/new_maps.translation.json"
 
 
-# The Cheat Device (docs/CHEATS.md) is an optional add-on: only builds made with RHT_CHEATS=1 carry it. Plain betas and River releases do not.
-CHEATS = os.environ.get("RHT_CHEATS") == "1"
+# The Cheat Device (docs/CHEATS.md) is native to the River Edition (from v0.4 on: every River build has it). For the translation it stays an optional
+# add-on: only builds made with RHT_CHEATS=1 carry it, and the numbered betas do not.
+CHEATS = EDITION == "river" or os.environ.get("RHT_CHEATS") == "1"

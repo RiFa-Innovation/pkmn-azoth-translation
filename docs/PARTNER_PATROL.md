@@ -9,7 +9,7 @@ Your walking partner can now go out on its own, find the wild Pokémon in sight,
 
 ## What you need
 
-- **The River Edition v0.3 or later.** The patrol is built into every River build (also "River + Cheats"). The plain translation betas do not have it.
+- **The River Edition v0.3 or later.** The patrol is built into every River build. The translation betas do not have it.
 - **Quick Catch**, the hack's own overworld catching mode: standard button mode (L must not be mapped to A) and at least one Poké Ball in the bag.
 - **A Pokémon walking behind you.** The patrol sends *that* Pokémon (the one you see following you).
 - Wild Pokémon in sight (Quick Catch only shows the visible ones).
@@ -70,7 +70,7 @@ Hold **L and R** and press **SELECT** anywhere on the map. Two questions, rememb
 
 - It only works where Quick Catch works. With nobody walking behind you (surfing, on the bike) SELECT is ignored.
 - If the way to a target is blocked the partner gives up after a few tries ("couldn't get close") and walks back.
-- With the Cheat Device ("River + Cheats"), SELECT inside Quick Catch is the patrol; the cheat menu stays on SELECT + START outside it.
+- The River Edition also has the Cheat Device (from v0.4): inside Quick Catch SELECT is the patrol; the cheat menu stays on SELECT + START outside it.
 - Old saves work: the patrol's settings start on their defaults.
 - Please report problems with "River Edition v0.3" in the title, with your emulator and an in-game `.sav` from just before.
 
