@@ -10,8 +10,8 @@
  * M2: the win pays what a Quick Catch win pays (docs/PARTNER_PATROL_SPEC.md 13): one roll 0-99 -> 0-19 an Exp. Candy by the target's level (XS <20,
  * S <40, M <60, L <80, XL), 20-49 one of ten Berries, 50-99 EV Feathers (the hack's own function `0x09D2ADA5`), plus the species' held items
  * (item1 50% / item2 5%, always item1 when both are equal). Level-ups learn their moves and flag the partner for the engine's evolution check.
- * Extra script vars: 0x8000 new level (0 = none), 0x8001/0x8002 moves learned, 0x8003 moves skipped (full), 0x8008-0x800B reward slots A and B
- * (item id, quantity; quantity 0 = no room in the bag), 0x800C held item id (0 = none; quantity 1).
+ * Extra script vars (one fight): 0x8000 new level (0 = none), 0x8001/0x8002 moves learned, 0x8003 held item dropped (0 = none), 0x8008-0x800B reward
+ * slots A and B (item id, quantity; quantity 0 = no room in the bag). M4 sums these up over a whole patrol (see patrol_sum_step).
  */
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -27,11 +27,12 @@ typedef int s32;
 #define ENEMY     ((void *)0x0202402C)               /* gEnemyParty[0] */
 #define TASKS     0x03005090                         /* 40 bytes each, func at +0 */
 #define SPECIALS  ((volatile u16 *)0x020370B8)       /* script vars 0x8000.. */
-#define LASTTALKED (*(volatile u16 *)0x020370D2)
+#define LASTTALKED (*(volatile u16 *)0x020370D2)     /* var 0x800F */
+#define V800D     (*(volatile u16 *)0x020370D0)     /* gSpecialVar_Result. NOTE: SPECIALS[n] is only the script var 0x8000+n for n <= 11; 0x800C is gSpecialVar_Facing at 0x020370D4 and is never written */
 #define LEVELEDUP (*(volatile u8 *)0x03004FD4)       /* gLeveledUpInBattle: bit per party slot, read by the engine's post-battle evolution check */
 #define BERRIES   ((const volatile u16 *)(0x09DE4674 + 8)) /* ten berry item ids (0x85-0x8E) */
 /* The patrol's whole private state: one 512-byte block of the unused link receive buffer (0x02022200-0x020223FF; a write-watch over a full session of
- * menus, walking, a battle and a strike saw no other writer). Offsets 0 (active) and 8 (walker pointer) are read by patrol.s. */
+ * menus, walking, a battle and a strike saw no other writer). Offsets 0 (active), 8 (walker pointer) and 20 (task id) are read by patrol.s. */
 struct Patrol {
     u8 active;          /* +0  1 while the patrol owns the walker */
     u8 phase;           /* +1  PH_* */
@@ -47,16 +48,30 @@ struct Patrol {
     u8 fails;           /* +16 consecutive steps without progress */
     u8 level;           /* +17 target level */
     u16 species;        /* +18 target species */
-    u8 task;            /* +20 task id of patrol_task */
-    u8 pad[27];         /* +21 */
-    u8 grid[169];       /* +48 breadth-first search window (13 x 13): 0 unseen, 1-4 direction taken, 5 blocked, 6 start */
-    u8 queue[169];      /* +217 */
+    u8 task;            /* +20 task id of patrol_task (patrol.s checks it) */
+    u8 reason;          /* +21 why the patrol ended (R_*) */
+    u8 kills;           /* +22 targets beaten in this patrol */
+    u8 level_now;       /* +23 the partner's level after its last level-up (0 = none) */
+    u8 nmoves;          /* +24 moves learned (up to 6 listed) */
+    u8 nitems;          /* +25 distinct items found (up to 8 listed) */
+    u8 sum_i;           /* +26 summary iterator */
+    u8 pad;             /* +27 */
+    u16 exp_total;      /* +28 */
+    u16 total;          /* +30 frames since the patrol started */
+    u16 moves[6];       /* +32 */
+    u16 items[16];      /* +44 8 x (item id, quantity; bit 15 of the quantity = no room in the bag) */
+    u8 grid[169];       /* +76 breadth-first search window (13 x 13): 0 unseen, 1-4 direction taken, 5 blocked, 6 start */
+    u8 queue[169];      /* +245 */
 };
 #define P ((volatile struct Patrol *)0x02022200)
 #define SB1PTR (*(volatile u32 *)0x03005008)
 #define NEWKEYS (*(volatile u16 *)0x0300311E)         /* gMain.newKeys */
 #define KEY_B 0x0002
-enum { PH_START = 0, PH_WALK = 1, PH_STRIKE = 2, PH_RETURN = 3 };
+enum { PH_START = 0, PH_WALK = 1, PH_STRIKE = 2, PH_RETURN = 3, PH_COOL = 4 };
+enum { R_DONE = 1, R_HURT = 2, R_SHINY = 3, R_TOOHURT = 4, R_NOREACH = 5, R_RECALL = 6 };
+#define MAX_KILLS 10                                 /* targets per patrol */
+#define RADIUS 12                                    /* targets must be within this many tiles of the player */
+#define COOLDOWN 24                                  /* frames between two targets */
 #define WIN 13                                       /* window side; the walker is at the centre (6, 6) */
 #define TYPECHART 0x0824F050                         /* the hack's chart: {attacker, defender, 0/5/10/20} triples, 0xFF end, 0xFE 0xFE 0 = foresight marker */
 #define BASESTATS 0x0976DFBC                         /* 28 bytes per species: expYield +9, growth rate +19 */
@@ -90,6 +105,7 @@ typedef u32 (*fn_learn)(void *, u32);
 typedef u32 (*fn_task_create)(u32, u32);
 typedef u32 (*fn_coll)(void *, s32, s32, u32);
 typedef u32 (*fn_obj)(void *);
+typedef u32 (*fn_species)(void *, u16 *);
 typedef u32 (*fn_obj_set)(void *, u32);
 typedef void (*fn_move_to)(void *, s32, s32);
 
@@ -116,6 +132,7 @@ typedef void (*fn_move_to)(void *, s32, s32);
 #define MoveObjectToCoords ((fn_move_to)0x0805F725)  /* the engine's own teleport (setobjectxyperm) */
 #define FieldControlsLocked ((fn_v)0x08069959)
 #define ClearHeld         ((fn_obj)0x08063D35)
+#define QcSpeciesOf       ((fn_species)0x09D53425)   /* (object, u16 *species) -> nonzero for a valid visible Pokemon */
 #define UnlockControls    ((fn_v)0x0806994D)   /* sLockFieldControls = FALSE */
 
 extern const u8 patrol_script[];                     /* linker symbol: the result script */
@@ -246,7 +263,7 @@ static void drops(void *partner, u32 species, u32 level)
                 held = a;
         }
         if (held && AddBagItem(held, 1))
-            SPECIALS[12] = held;
+            SPECIALS[3] = held;
     }
 }
 
@@ -269,8 +286,6 @@ static u32 give_exp(void *partner, u32 slot, u32 exp)
         for (mv = TryLearnMove(partner, 1); mv && guard < 8; mv = TryLearnMove(partner, 0), guard++) {
             if (mv < 0xFFFE && learned < 2)
                 SPECIALS[1 + learned++] = mv;
-            else if (mv == 0xFFFF)
-                SPECIALS[3]++;
         }
     }
     SetMonData(partner, MON_EXP, &cur);
@@ -314,8 +329,8 @@ static void fight(u32 slot, u32 species, u32 level)
     SPECIALS[5] = 0;                                 /* 0x8005 */
     for (i = 0; i < 4; i++)
         SPECIALS[i] = 0;                             /* 0x8000-0x8003 */
-    for (i = 8; i < 13; i++)
-        SPECIALS[i] = 0;                             /* 0x8008-0x800C */
+    for (i = 8; i < 12; i++)
+        SPECIALS[i] = 0;                             /* 0x8008-0x800B */
 
     if (!hp || hp * 5 < maxhp * 2) {
         SPECIALS[4] = 4;
@@ -363,6 +378,9 @@ static void fight(u32 slot, u32 species, u32 level)
             }
         }
     }
+#ifdef FORCE_NOHURT                                   /* test builds only (RHT_PATROL_TEST=nohurt): fights cost no HP */
+    hp = get(partner, MON_HP);
+#endif
     SetMonData(partner, MON_HP, &hp);
     ZeroMonData(ENEMY);
 
@@ -463,12 +481,128 @@ static void abort_to_player(volatile u8 *w)          /* the walker is lost or st
     finish();
 }
 
-static void begin_script(u32 code)
+/* ------------------------------------------------------------------------------------------------------------------- the summary */
+
+static void add_item(u32 id, u32 qty)
 {
-    SPECIALS[4] = code;
+    u32 i, v = qty ? qty : 0x8000;
+    if (!id)
+        return;
+    for (i = 0; i < P->nitems; i++) {
+        if (P->items[2 * i] == id) {
+            if (!qty)
+                P->items[2 * i + 1] |= 0x8000;
+            else if ((P->items[2 * i + 1] & 0x7FFF) < 0x7FF0)
+                P->items[2 * i + 1] += qty;
+            return;
+        }
+    }
+    if (P->nitems < 8) {
+        P->items[2 * P->nitems] = id;
+        P->items[2 * P->nitems + 1] = v;
+        P->nitems++;
+    }
+}
+
+static void accumulate(void)                         /* one win: fight() left its results in the script vars */
+{
+    u32 i;
+    P->kills++;
+    if (P->exp_total + SPECIALS[5] < 0xFFF0)
+        P->exp_total += SPECIALS[5];
+    if (SPECIALS[0])
+        P->level_now = SPECIALS[0];
+    for (i = 1; i <= 2; i++)
+        if (SPECIALS[i] && P->nmoves < 6)
+            P->moves[P->nmoves++] = SPECIALS[i];
+    add_item(SPECIALS[8], SPECIALS[9]);
+    add_item(SPECIALS[10], SPECIALS[11]);
+    if (SPECIALS[3])
+        add_item(SPECIALS[3], 1);                    /* the held item the target dropped */
+}
+
+/* script: callnative, in a loop. 0x800D = 0 end, 1 header (0x8005 kills, 0x8001 EXP), 2 level (0x8002), 3 move (0x8003), 4 item (0x8008), 5 no room for item (0x8008) */
+u32 patrol_sum_step(void)
+{
+    u32 i;
+    for (i = P->sum_i; i < 16; i++) {
+        if (i == 0 && P->kills) {
+            SPECIALS[5] = P->kills;
+            SPECIALS[1] = P->exp_total;
+            V800D = 1;
+        } else if (i == 1 && P->level_now) {
+            SPECIALS[2] = P->level_now;
+            V800D = 2;
+        } else if (i >= 2 && i < 8 && (i - 2) < P->nmoves) {
+            SPECIALS[3] = P->moves[i - 2];
+            V800D = 3;
+        } else if (i >= 8 && (i - 8) < P->nitems) {
+            SPECIALS[8] = P->items[2 * (i - 8)];
+            SPECIALS[9] = P->items[2 * (i - 8) + 1] & 0x7FFF;
+            V800D = (P->items[2 * (i - 8) + 1] & 0x8000) && !(P->items[2 * (i - 8) + 1] & 0x7FFF) ? 5 : 4;
+        } else {
+            continue;
+        }
+        P->sum_i = i + 1;
+        return 0;
+    }
+    P->sum_i = 16;
+    V800D = 0;
+    return 0;
+}
+
+static void run_summary(u32 reason)
+{
+    P->sum_i = 0;
+    SPECIALS[4] = reason;
+    SPECIALS[5] = P->kills;
     SPECIALS[6] = P->slot;
     SPECIALS[7] = P->species;
     SetupScript(patrol_script);
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ the next target */
+
+/* the visible Pokemon (local ids 0xE0-0xE2, valid for Quick Catch) nearest to the walker and within RADIUS of the player; 1 = found */
+static int choose_target(volatile u8 *w)
+{
+    volatile u8 *pl = obj_at(0);
+    u32 i, best = 0xFFFF, found = 0;
+    for (i = 1; i < 16; i++) {
+        volatile u8 *o = obj_at(i);
+        u16 sp = 0;
+        u32 d;
+        if (!(o[0] & 1) || o[8] < 0xE0 || o[8] > 0xE2)
+            continue;
+        if (!QcSpeciesOf((void *)o, &sp) || !sp)
+            continue;
+        if (dist(ox(o), oy(o), ox(pl), oy(pl)) > RADIUS)
+            continue;
+        d = dist(ox(o), oy(o), ox(w), oy(w));
+        if (d < best) {
+            best = d;
+            found = i;
+            P->species = sp;
+        }
+    }
+    if (!found)
+        return 0;
+    {
+        volatile u8 *o = obj_at(found);
+        u32 lv = o[0x1D];
+        P->target = found;
+        P->target_local = o[8];
+        P->level = (lv < 1 || lv > 100) ? 1 : lv;
+    }
+    return 1;
+}
+
+static void stop_and_return(u32 reason)
+{
+    P->reason = reason;
+    P->phase = PH_RETURN;
+    P->timer = 0;
+    P->fails = 0;
 }
 
 void patrol_task(u32 id)
@@ -508,28 +642,30 @@ void patrol_task(u32 id)
     w = obj_at(P->walker);
     pl = obj_at(0);
     P->timer++;
-    if (P->timer > 1800 || P->steps > 90) {          /* 30 seconds or 90 steps: give up */
-        if (P->phase == PH_RETURN || !obj_alive(P->target, P->target_local))
-            abort_to_player(w);
-        else {
-            abort_to_player(w);
-            begin_script(5);
-        }
+    if (P->total < 0xFFF0)
+        P->total++;
+    if (P->phase != PH_RETURN && (P->timer > 1800 || P->steps > 400 || P->total > 7200)) {   /* too long: bring it home */
+        stop_and_return(P->kills ? R_DONE : R_NOREACH);
+    } else if (P->phase == PH_RETURN && (P->timer > 1800 || P->steps > 460)) {
+        abort_to_player(w);
         DestroyTask(id);
+        if (P->kills || P->reason == R_HURT || P->reason == R_NOREACH)
+            run_summary(P->reason);
         return;
     }
-    if (P->phase == PH_WALK && (NEWKEYS & KEY_B)) {     /* B recalls the partner */
-        P->phase = PH_RETURN;
-        P->timer = 0;
-        P->fails = 0;
-    }
+    if ((P->phase == PH_WALK || P->phase == PH_COOL) && (NEWKEYS & KEY_B))      /* B recalls the partner */
+        stop_and_return(R_RECALL);
     if (!walker_ready(w))
         return;
 
     if (P->phase == PH_WALK) {
-        if (!obj_alive(P->target, P->target_local)) {   /* the target left: come back */
-            P->phase = PH_RETURN;
-            P->timer = 0;
+        if (!obj_alive(P->target, P->target_local)) {   /* the target left: look for another one */
+            if (choose_target(w)) {
+                P->timer = 0;
+                P->fails = 0;
+            } else {
+                stop_and_return(P->kills ? R_DONE : R_NOREACH);
+            }
             return;
         }
         t = obj_at(P->target);
@@ -543,10 +679,8 @@ void patrol_task(u32 id)
         }
         dir = plan(w, ox(t), oy(t));
         if (!dir) {
-            if (++P->fails >= 3) {
-                abort_to_player(w);
-                begin_script(5);
-                DestroyTask(id);
+            if (++P->fails >= 3) {                   /* cannot get closer: give up on this one and go home */
+                stop_and_return(P->kills ? R_DONE : R_NOREACH);
             }
             return;
         }
@@ -559,25 +693,47 @@ void patrol_task(u32 id)
             return;
         }
         if (!obj_alive(P->target, P->target_local)) {
-            P->phase = PH_RETURN;
+            P->phase = PH_WALK;
             P->timer = 0;
             return;
         }
         fight(P->slot, P->species, P->level);
-        P->phase = PH_RETURN;
-        P->timer = 0;
         P->fails = 0;
-        if (SPECIALS[4] == 3) {                      /* a shiny: a real battle, the patrol ends here */
+        P->timer = 0;
+        if (SPECIALS[4] == 3) {                      /* a shiny: the summary so far, then a real battle; the patrol ends here */
             finish();
             DestroyTask(id);
-        }
-        SetupScript(patrol_script);                  /* shows the result; the task waits while it runs */
-        if (SPECIALS[4] == 3)
+            P->reason = R_SHINY;
+            run_summary(R_SHINY);
             return;
+        }
+        if (SPECIALS[4] == 1) {
+            accumulate();
+            LASTTALKED = P->target_local;            /* the win removes its target right away */
+            QcRemoveTarget();
+            if (P->kills >= MAX_KILLS)
+                stop_and_return(R_DONE);
+            else
+                P->phase = PH_COOL;
+        } else {
+            stop_and_return(R_HURT);                 /* retreated, or too hurt to start: the partner is done */
+        }
+    } else if (P->phase == PH_COOL) {
+        if (P->timer < COOLDOWN)
+            return;
+        if (choose_target(w)) {
+            P->phase = PH_WALK;
+            P->timer = 0;
+            P->fails = 0;
+        } else {
+            stop_and_return(R_DONE);
+        }
     } else {                                         /* PH_RETURN: back next to the player */
         if (dist(ox(w), oy(w), ox(pl), oy(pl)) <= 1) {
             finish();
             DestroyTask(id);
+            if (P->kills || P->reason == R_HURT || P->reason == R_NOREACH)
+                run_summary(P->reason);
             return;
         }
         dir = plan(w, ox(pl), oy(pl));
@@ -585,6 +741,8 @@ void patrol_task(u32 id)
             if (++P->fails >= 3) {
                 abort_to_player(w);
                 DestroyTask(id);
+                if (P->kills || P->reason == R_HURT || P->reason == R_NOREACH)
+                    run_summary(P->reason);
             }
             return;
         }
@@ -597,7 +755,7 @@ void patrol_task(u32 id)
 /* SELECT in Quick Catch (called by patrol.s): validate, close Quick Catch, start the walk. Returns 1 when the press was handled. */
 u32 patrol_select(void)
 {
-    u32 idx, walker, slot, task, level, species;
+    u32 idx, walker, slot, task, level, species, i;
     volatile u8 *sb1;
     void *partner;
 
@@ -628,16 +786,27 @@ u32 patrol_select(void)
     P->map_num = (s8)sb1[5];
     P->phase = PH_START;
     P->timer = 0;
+    P->total = 0;
     P->steps = 0;
     P->fails = 0;
+    P->reason = R_DONE;
+    P->kills = 0;
+    P->exp_total = 0;
+    P->level_now = 0;
+    P->nmoves = 0;
+    P->nitems = 0;
+    P->sum_i = 0;
+    for (i = 0; i < 6; i++)
+        P->moves[i] = 0;
+    for (i = 0; i < 16; i++)
+        P->items[i] = 0;
 
     task = task_of_quick_catch();
     if (task < 16)
         QcExit(task);
 
     if (get(partner, MON_HP) * 5 < get(partner, MON_MAXHP) * 2 || !get(partner, MON_HP)) {   /* too hurt: no walk at all */
-        fight(slot, species, level);
-        SetupScript(patrol_script);
+        run_summary(R_TOOHURT);
         return 1;
     }
     task = CreateTask((u32)patrol_task | 1, 80);

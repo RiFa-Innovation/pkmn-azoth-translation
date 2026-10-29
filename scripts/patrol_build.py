@@ -21,85 +21,63 @@ HOLD_LITERALS = (0x1D32424, 0x1D3367C)      # the follower code's ObjectEventSet
 CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", "-fno-strict-aliasing", "-fno-stack-protector", "-fno-pic",
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
-TEST_FLAGS = {"shiny": ["-DFORCE_SHINY"], "retreat": ["-DFORCE_RETREAT"], "held": ["-DFORCE_HELD"]}.get(os.environ.get("RHT_PATROL_TEST", ""), [])   # scratch ROMs for the shiny/retreat branches
+TEST_FLAGS = {"shiny": ["-DFORCE_SHINY"], "retreat": ["-DFORCE_RETREAT"], "held": ["-DFORCE_HELD"], "nohurt": ["-DFORCE_NOHURT"]}.get(os.environ.get("RHT_PATROL_TEST", ""), [])   # scratch ROMs for the shiny/retreat branches
 
 SCRIPT = """
     start:
-        compare_var_to_value 0x8004 1
-        goto_if 1 won
-        compare_var_to_value 0x8004 2
-        goto_if 1 retreat
+        callnative @patrol_sum_step
+        compare_var_to_value 0x800D 0
+        goto_if 1 after
+        compare_var_to_value 0x800D 1
+        goto_if 1 line_header
+        compare_var_to_value 0x800D 2
+        goto_if 1 line_level
+        compare_var_to_value 0x800D 3
+        goto_if 1 line_move
+        compare_var_to_value 0x800D 4
+        goto_if 1 line_item
+        compare_var_to_value 0x800D 5
+        goto_if 1 line_noroom
+        goto start
+    line_header:
+        bufferpartymonnick 0 0x8006
+        buffernumberstring 1 0x8005
+        buffernumberstring 2 0x8001
+        say "{FD:02} beat {FD:03} Pokémon and gained {FD:04} EXP!"
+        goto start
+    line_level:
+        bufferpartymonnick 0 0x8006
+        buffernumberstring 2 0x8002
+        say "{FD:02} grew to Lv. {FD:04}!"
+        goto start
+    line_move:
+        bufferpartymonnick 0 0x8006
+        buffermovename 1 0x8003
+        say "{FD:02} learned {FD:03}!"
+        goto start
+    line_item:
+        bufferitemname 1 0x8008
+        buffernumberstring 2 0x8009
+        say "Found {FD:03} x{FD:04}!"
+        goto start
+    line_noroom:
+        bufferitemname 1 0x8008
+        say "No room in the bag for {FD:03}!"
+        goto start
+    after:
         compare_var_to_value 0x8004 3
         goto_if 1 shiny
+        compare_var_to_value 0x8004 2
+        goto_if 1 worn_out
         compare_var_to_value 0x8004 4
         goto_if 1 hurt
         compare_var_to_value 0x8004 5
         goto_if 1 unreachable
         releaseall
         end
-    won:
+    worn_out:
         bufferpartymonnick 0 0x8006
-        bufferspeciesname 1 0x8007
-        buffernumberstring 2 0x8005
-        say "{FD:02} beat {FD:03}! It gained {FD:04} EXP."
-        compare_var_to_value 0x8000 0
-        goto_if 1 drop_a
-        buffernumberstring 2 0x8000
-        say "{FD:02} grew to Lv. {FD:04}!"
-        compare_var_to_value 0x8001 0
-        goto_if 1 drop_a
-        buffermovename 1 0x8001
-        say "{FD:02} learned {FD:03}!"
-        compare_var_to_value 0x8002 0
-        goto_if 1 drop_a
-        buffermovename 1 0x8002
-        say "{FD:02} learned {FD:03}!"
-    drop_a:
-        compare_var_to_value 0x8008 0
-        goto_if 1 drop_b
-        bufferitemname 1 0x8008
-        buffernumberstring 2 0x8009
-        compare_var_to_value 0x8009 0
-        goto_if 1 drop_a_full
-        say "Found {FD:03} x{FD:04}!"
-        goto drop_b
-    drop_a_full:
-        say "No room in the bag for {FD:03}!"
-        goto drop_b
-    drop_b:
-        compare_var_to_value 0x800A 0
-        goto_if 1 drop_c
-        bufferitemname 1 0x800A
-        buffernumberstring 2 0x800B
-        compare_var_to_value 0x800B 0
-        goto_if 1 drop_b_full
-        say "Found {FD:03} x{FD:04}!"
-        goto drop_c
-    drop_b_full:
-        say "No room in the bag for {FD:03}!"
-        goto drop_c
-    drop_c:
-        compare_var_to_value 0x800C 0
-        goto_if 1 won_done
-        bufferspeciesname 1 0x8007
-        bufferitemname 2 0x800C
-        say "The wild {FD:03} was holding {FD:04}!"
-    won_done:
-        callnative @patrol_remove
-        releaseall
-        end
-    retreat:
-        bufferpartymonnick 0 0x8006
-        bufferspeciesname 1 0x8007
-        say "{FD:02} was beaten up by {FD:03} and came back."
-        releaseall
-        end
-    shiny:
-        bufferpartymonnick 0 0x8006
-        bufferspeciesname 1 0x8007
-        say "Wait! This {FD:03} is shiny! {FD:02} holds it still for you."
-        dowildbattle
-        callnative @patrol_remove
+        say "{FD:02} is worn out and came back."
         releaseall
         end
     unreachable:
@@ -111,6 +89,14 @@ SCRIPT = """
     hurt:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is too hurt to fight. Heal up first."
+        releaseall
+        end
+    shiny:
+        bufferpartymonnick 0 0x8006
+        bufferspeciesname 1 0x8007
+        say "Wait! This {FD:03} is shiny! {FD:02} holds it still for you."
+        dowildbattle
+        callnative @patrol_remove
         releaseall
         end
 """
@@ -159,7 +145,7 @@ def apply(rom, src, pool):
     na = pool.alloc_aligned(len(image))
     syms = _build(ROM_BASE + na, path, 0, cur)[1]
     text = lambda b: ROM_BASE + _alloc(rom, pool, b)
-    ext = {"patrol_remove": syms["patrol_remove"] | 1}
+    ext = {"patrol_remove": syms["patrol_remove"] | 1, "patrol_sum_step": syms["patrol_sum_step"] | 1}
     size = len(scrasm.assemble(SCRIPT, 0, widths, _Any(), lambda b: 0))
     sa = pool.alloc_aligned(size)
     code = scrasm.assemble(SCRIPT, ROM_BASE + sa, widths, ext, text)

@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 5, 2026-10-29. Decisions recorded (section 9); M0-M3 built and verified (sections 12-14).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 6, 2026-10-29. Decisions recorded (section 9); M0-M4 built and verified (sections 12-15).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -272,8 +272,7 @@ through one by one so `MonTryLearningNewMove` (0x0803EA89) sees every level: mov
 moveset skips the move), then the partner's bit is set in `gLeveledUpInBattle` (0x03004FD4) so the engine's **own evolution check** runs after the next
 real battle. A bug caught while building this: the M1 EXP cap used the target's growth rate instead of the partner's (fixed).
 
-**Result vars**: `0x8000` new level, `0x8001`/`0x8002` learned moves, `0x8003` moves skipped, `0x8008`-`0x800B` reward slots A and B (id, quantity; 0 = no
-room), `0x800C` held item. The script says "Found X xN!", "No room in the bag for X!", "grew to Lv. N!", "learned M!" and "The wild X was holding Y!".
+**Result vars** (one fight; *corrected in section 15*): `0x8000` new level, `0x8001`/`0x8002` learned moves, `0x8003` held item dropped, `0x8008`-`0x800B` reward slots A and B (id, quantity; 0 = no room). The script says "Found X xN!", "No room in the bag for X!", "grew to Lv. N!", "learned M!" and "The wild X was holding Y!".
 
 Verified in mGBA (River v0.2.3 save, scratch copies): 14 strikes gave 11 wins with drops in the expected mix (6 Feather, 2 Exp. Candy XS, 4
 Berries, 0 held at 5%), level-ups to Lv 6-8 with Razor Leaf learned, "Found Aspear Berry" on screen; the held-item path forced with
@@ -314,3 +313,28 @@ target that is truly unreachable (the 3-fail abort and message 5), and timeouts;
 
 Known gaps: no target flash or sound, the return stops next to the player (not exactly behind), one target per press (M4), a map-change during the result
 script leaves nothing to clean up. Results are not yet visible in the walker's sprite (no attack animation beyond the hop).
+
+## 15. M4 built: the autonomous patrol (2026-10-29)
+
+One SELECT now sends the partner on a **patrol**: after each win it picks the next visible Pokémon (local ids 0xE0-0xE2 that pass the Quick Catch validity
+check `0x09D53425`, within 12 tiles of the player, nearest to the walker first), walks to it, fights it, removes it, waits 24 frames and goes on. The rewards are
+applied per kill as in M2; **one summary at the end** replaces the per-kill messages.
+
+* **Stop conditions** (each becomes a reason code and a walk back): no target left in range or the nearest ones cannot be reached (3 steps without progress),
+  the partner retreats or is too hurt to start a fight ("worn out"), 10 kills (`MAX_KILLS`), B (recall; works while walking or waiting), 30 s on one target / 400 steps / 120 s in
+  total, a map change (nothing in the new map is touched), a shiny (the summary so far, then a real battle).
+* **Summary** (shown when the partner is back next to the player; nothing is shown if there were no kills and no reason to say): "AAA beat 7 Pokémon and gained 127 EXP!", "AAA grew to Lv. 7!",
+  "AAA learned <move>!", one line per item found ("Found X xN!", or "No room in the bag for X!"), then the reason line ("is worn out and came back", "couldn't get close", "is too hurt").
+  The totals live in the same private block (`struct Patrol`: 76 + 338 = 414 of 512 bytes); a native step function (`patrol_sum_step`) feeds the script one line at a time.
+* **Bug fixed while building this (it affected M2 and M3)**: the script variables are not contiguous. `0x8000`-`0x800B` are at `0x020370B8`-`0x020370CE`, but **`0x800C` is
+  `gSpecialVar_Facing` at `0x020370D4`** and `0x800D` is `gSpecialVar_Result` at `0x020370D0` (read from the game's `gSpecialVars` table at `0x0815FD0C`). The held-item slot had been
+  written at "index 12" (the Result variable) and the script read `0x800C` (the player's facing, usually non-zero), which would have printed a bogus "was holding" line after wins. Now the held item
+  uses `0x8003`, the summary kind goes through the real Result variable, and nothing writes `0x800C`.
+* New test switch: `RHT_PATROL_TEST=nohurt` (fights cost no HP) to exercise long chains. All test switches: `shiny|retreat|held|nohurt`.
+
+Verified in mGBA (River v0.2.3 save, scratch copies): a chain of **7 kills in one press** (Lv 5 to 7, one move learned, 5 different items, ended by a lost fight), a chain of 2 and 4 ended the same way with
+the matching summaries ("AAA beat 2 Pokémon and gained 40 EXP!", item lines, "is worn out"), **B recall in the middle of a chain** (reason 6, walker back, summary without a reason line), and the earlier M3 paths
+(map change, stale flag, shiny, too hurt). Not reached in testing: the 10-kill cap and the "no target left" ending (both only add a reason code), a full bag in the middle of a chain.
+
+Known gaps: no on-screen status line while the patrol runs (the walker's movement is the feedback), no cooldown between presses, the 10-kill cap and 12-tile radius are constants in `patrol.c`
+(to tune after playing), the partner always ends next to the player rather than exactly behind it.
