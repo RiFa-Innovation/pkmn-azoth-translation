@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 3, 2026-10-29. Decisions recorded (section 9); M0 done; M1 (instant strike) built and verified, see section 12.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 4, 2026-10-29. Decisions recorded (section 9); M0 done; M1 (instant strike) and M2 (rewards, level-ups) built and verified, see sections 12-13.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -252,3 +252,32 @@ both work through the chain). All four editions build with clean reports and byt
 Known gaps (by design for M1): no abilities/items in the fight (never planned), no drops or held items (M2), level-ups do not learn moves or evolve (M2),
 no walking or animation (M3), one target per press (M4). The partner shown by the walker is matched by species, so two party members of the same
 species resolve to the first alive one. Test switches: `RHT_PATROL_TEST=shiny|retreat` build scratch ROMs for the two rare branches.
+
+## 13. M2 built: rewards and level-ups (2026-10-29)
+
+**The hack's own drop rule was found** (the Quick Catch reward chooser at `0x09D56058`-`0x09D563FC`), so the patrol copies it exactly instead of
+reimplementing it from the Help Tips: one roll 0-99 per win:
+
+| Roll | Reward |
+|---|---|
+| 0-19 (20%) | Exp. Candy by the **target's level**: XS (536) below 20, S (537) below 40, M (538) below 60, L (539) below 80, XL (540) from 80 |
+| 20-49 (30%) | one of ten Berries, `Random() % 10` into the table at `0x09DE4674 + 8` (items 133-142: Cheri to Sitrus) |
+| 50-99 (50%) | EV Feathers: the hack's own function `0x09D2ADA5(partner mon, defeated species, u16 out[6])`, which applies Power items, the doubling item and the Exp. Share party multiplier and calls `AddBagItem` per stat (the Feather ids come from the table `{57,58,59,62,60,61}` at `0x09DDF196`); `out[stat]` is the count, negative = no room |
+
+Plus the **species' held items** from the base stats (`item1` +12, `item2` +14): equal items are always dropped, otherwise 50% item1 and 5% item2
+(the engine's wild-hold odds). The Feathers ignore the EV switch, as the Help Tip says ("whatever the EV switch").
+
+**XP and level-ups**: `expYield * level / 7`, applied to the partner (growth rate of the *partner*, capped at level 100). Each gained level is stepped
+through one by one so `MonTryLearningNewMove` (0x0803EA89) sees every level: moves are learned when a slot is free (up to two are shown; a full
+moveset skips the move), then the partner's bit is set in `gLeveledUpInBattle` (0x03004FD4) so the engine's **own evolution check** runs after the next
+real battle. A bug caught while building this: the M1 EXP cap used the target's growth rate instead of the partner's (fixed).
+
+**Result vars**: `0x8000` new level, `0x8001`/`0x8002` learned moves, `0x8003` moves skipped, `0x8008`-`0x800B` reward slots A and B (id, quantity; 0 = no
+room), `0x800C` held item. The script says "Found X xN!", "No room in the bag for X!", "grew to Lv. N!", "learned M!" and "The wild X was holding Y!".
+
+Verified in mGBA (River v0.2.3 save, scratch copies): 14 strikes gave 11 wins with drops in the expected mix (6 Feather, 2 Exp. Candy XS, 4
+Berries, 0 held at 5%), level-ups to Lv 6-8 with Razor Leaf learned, "Found Aspear Berry" on screen; the held-item path forced with
+`RHT_PATROL_TEST=held` (Starly's rare item 450 landed in the bag slot). Not yet exercised live: the bag-full message, an evolution actually happening
+after the next battle, and a two-moves-at-one-level case.
+
+Test switches now: `RHT_PATROL_TEST=shiny|retreat|held`.

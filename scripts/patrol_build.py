@@ -20,7 +20,7 @@ PFI_LITERAL = 0x6CACC
 CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", "-fno-strict-aliasing", "-fno-stack-protector", "-fno-pic",
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
-TEST_FLAGS = {"shiny": ["-DFORCE_SHINY"], "retreat": ["-DFORCE_RETREAT"]}.get(os.environ.get("RHT_PATROL_TEST", ""), [])   # scratch ROMs for the shiny/retreat branches
+TEST_FLAGS = {"shiny": ["-DFORCE_SHINY"], "retreat": ["-DFORCE_RETREAT"], "held": ["-DFORCE_HELD"]}.get(os.environ.get("RHT_PATROL_TEST", ""), [])   # scratch ROMs for the shiny/retreat branches
 
 SCRIPT = """
     start:
@@ -39,6 +39,49 @@ SCRIPT = """
         bufferspeciesname 1 0x8007
         buffernumberstring 2 0x8005
         say "{FD:02} beat {FD:03}! It gained {FD:04} EXP."
+        compare_var_to_value 0x8000 0
+        goto_if 1 drop_a
+        buffernumberstring 2 0x8000
+        say "{FD:02} grew to Lv. {FD:04}!"
+        compare_var_to_value 0x8001 0
+        goto_if 1 drop_a
+        buffermovename 1 0x8001
+        say "{FD:02} learned {FD:03}!"
+        compare_var_to_value 0x8002 0
+        goto_if 1 drop_a
+        buffermovename 1 0x8002
+        say "{FD:02} learned {FD:03}!"
+    drop_a:
+        compare_var_to_value 0x8008 0
+        goto_if 1 drop_b
+        bufferitemname 1 0x8008
+        buffernumberstring 2 0x8009
+        compare_var_to_value 0x8009 0
+        goto_if 1 drop_a_full
+        say "Found {FD:03} x{FD:04}!"
+        goto drop_b
+    drop_a_full:
+        say "No room in the bag for {FD:03}!"
+        goto drop_b
+    drop_b:
+        compare_var_to_value 0x800A 0
+        goto_if 1 drop_c
+        bufferitemname 1 0x800A
+        buffernumberstring 2 0x800B
+        compare_var_to_value 0x800B 0
+        goto_if 1 drop_b_full
+        say "Found {FD:03} x{FD:04}!"
+        goto drop_c
+    drop_b_full:
+        say "No room in the bag for {FD:03}!"
+        goto drop_c
+    drop_c:
+        compare_var_to_value 0x800C 0
+        goto_if 1 won_done
+        bufferspeciesname 1 0x8007
+        bufferitemname 2 0x800C
+        say "The wild {FD:03} was holding {FD:04}!"
+    won_done:
         callnative @patrol_remove
         releaseall
         end
@@ -74,6 +117,7 @@ def _fix_scrasm_ops():
     o = scrasm.ops()
     o["bufferpartymonnick"] = (127, [("byte", 1), ("2byte", 1)])
     o["bufferspeciesname"] = (125, [("byte", 1), ("2byte", 1)])
+    o["buffermovename"] = (130, [("byte", 1), ("2byte", 1)])
 
 
 def _build(base, out, script, nxt):

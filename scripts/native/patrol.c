@@ -5,7 +5,13 @@
  *
  * Results in the script vars: 0x8004 = result (1 won, 2 retreated, 3 shiny -> real battle, 4 partner too hurt), 0x8005 = EXP gained,
  * 0x8006 = partner party slot, 0x8007 = target species. The fight ignores moves (River's rule): each side attacks with its best own type
- * (STAB) against the other's types, through the game's type chart, Scarlet/Violet style. M2 adds the drops.
+ * (STAB) against the other's types, through the game's type chart, Scarlet/Violet style.
+ *
+ * M2: the win pays what a Quick Catch win pays (docs/PARTNER_PATROL_SPEC.md 13): one roll 0-99 -> 0-19 an Exp. Candy by the target's level (XS <20,
+ * S <40, M <60, L <80, XL), 20-49 one of ten Berries, 50-99 EV Feathers (the hack's own function `0x09D2ADA5`), plus the species' held items
+ * (item1 50% / item2 5%, always item1 when both are equal). Level-ups learn their moves and flag the partner for the engine's evolution check.
+ * Extra script vars: 0x8000 new level (0 = none), 0x8001/0x8002 moves learned, 0x8003 moves skipped (full), 0x8008-0x800B reward slots A and B
+ * (item id, quantity; quantity 0 = no room in the bag), 0x800C held item id (0 = none; quantity 1).
  */
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -20,6 +26,8 @@ typedef int s32;
 #define TASKS     0x03005090                         /* 40 bytes each, func at +0 */
 #define SPECIALS  ((volatile u16 *)0x020370B8)       /* script vars 0x8000.. */
 #define LASTTALKED (*(volatile u16 *)0x020370D2)
+#define LEVELEDUP (*(volatile u8 *)0x03004FD4)       /* gLeveledUpInBattle: bit per party slot, read by the engine's post-battle evolution check */
+#define BERRIES   ((const volatile u16 *)(0x09DE4674 + 8)) /* ten berry item ids (0x85-0x8E) */
 #define SCRATCH   ((volatile u16 *)0x02022200)       /* borrowed link-buffer bytes: [0] local id of the target to remove */
 #define TYPECHART 0x0824F050                         /* the hack's chart: {attacker, defender, 0/5/10/20} triples, 0xFF end, 0xFE 0xFE 0 = foresight marker */
 #define BASESTATS 0x0976DFBC                         /* 28 bytes per species: expYield +9, growth rate +19 */
@@ -47,6 +55,9 @@ typedef u32 (*fn_v)(void);
 typedef void (*fn_task)(u32);
 typedef void (*fn_create)(u32, u32, u32, u32);
 typedef void (*fn_script)(const void *);
+typedef u32 (*fn_add)(u32, u32);
+typedef void (*fn_feather)(void *, u32, u16 *);
+typedef u32 (*fn_learn)(void *, u32);
 
 #define GetMonData        ((fn_getmon)0x0803FBE9)
 #define SetMonData        ((fn_setmon)0x0804037D)
@@ -58,6 +69,9 @@ typedef void (*fn_script)(const void *);
 #define QcCreateTarget    ((fn_create)0x09D6BA79)    /* species, level, 0, 1 -> gEnemyParty[0], as the throw does */
 #define QcRemoveTarget    ((fn_v)0x09D55F69)         /* removes the object whose local id is in LASTTALKED */
 #define SetupScript       ((fn_script)0x08069AE5)
+#define AddBagItem        ((fn_add)0x0809A085)
+#define Feathers          ((fn_feather)0x09D2ADA5)   /* (partner mon, defeated species, u16 out[6]) -> adds the Feathers, out[stat] = count (negative = no room) */
+#define TryLearnMove      ((fn_learn)0x0803EA89)
 #define ZeroMonData       ((fn_void_p)0x0803D995)
 
 extern const u8 patrol_script[];                     /* linker symbol: the result script */
@@ -139,9 +153,91 @@ u32 patrol_remove(void)                              /* script: callnative */
     return 0;
 }
 
+static u32 mod(u32 n, u32 d) { return n - udiv(n, d) * d; }
+
+static void reward(u32 slot_id, u32 id, u32 qty)       /* A = 8, B = 10 */
+{
+    SPECIALS[slot_id] = id;
+    SPECIALS[slot_id + 1] = qty;
+}
+
+/* the Quick Catch drop roll plus the species' held items */
+static void drops(void *partner, u32 species, u32 level)
+{
+    u32 roll = mod(Random(), 100), item = 0, used = 0, i;
+    u16 f[6];
+    const volatile u8 *bs = (const volatile u8 *)(BASESTATS + 28 * species);
+
+    if (roll < 20) {
+        item = level < 20 ? 536 : level < 40 ? 537 : level < 60 ? 538 : level < 80 ? 539 : 540;
+    } else if (roll < 50) {
+        item = BERRIES[mod(Random(), 10)];
+    }
+    if (item) {
+        reward(8, item, AddBagItem(item, 1) ? 1 : 0);
+    } else {
+        for (i = 0; i < 6; i++)
+            f[i] = 0;
+        Feathers(partner, species, f);
+        for (i = 0; i < 6 && used < 2; i++) {
+            if (f[i]) {
+                static const u16 ids[6] = {57, 58, 59, 62, 60, 61};   /* the hack's Feather table (0x09DDF196) */
+                reward(8 + 2 * used, ids[i], (f[i] & 0x8000) ? 0 : f[i]);
+                used++;
+            }
+        }
+    }
+    {
+        u32 a = bs[12] | (bs[13] << 8), b = bs[14] | (bs[15] << 8), held = 0;
+        if (a && a == b) {
+            held = a;
+        } else if (a || b) {
+            u32 r = mod(Random(), 100);
+#ifdef FORCE_HELD                                    /* test builds only (RHT_PATROL_TEST=held) */
+            r = 99;
+#endif
+            if (r >= 95)
+                held = b;
+            else if (r >= 45)
+                held = a;
+        }
+        if (held && AddBagItem(held, 1))
+            SPECIALS[12] = held;
+    }
+}
+
+/* raises the partner by `exp`, learning each level's moves; returns the new level (0 = unchanged) */
+static u32 give_exp(void *partner, u32 slot, u32 exp)
+{
+    const volatile u8 *bs = (const volatile u8 *)(BASESTATS + 28 * get(partner, MON_SPECIES));   /* the PARTNER's growth rate */
+    u32 growth = bs[19], old = get(partner, MON_LEVEL), cur = get(partner, MON_EXP), cap, now, lvl, learned = 0;
+    cap = *(volatile u32 *)(EXPTABLE + 4 * ((growth << 8) + 100));
+    cur = cur + exp > cap ? cap : cur + exp;
+    SetMonData(partner, MON_EXP, &cur);
+    CalculateMonStats(partner);
+    now = get(partner, MON_LEVEL);
+    if (now <= old)
+        return 0;
+    for (lvl = old + 1; lvl <= now; lvl++) {            /* the learnset is read at the Pokemon's level: step through each one */
+        u32 mv, guard = 0, e = *(volatile u32 *)(EXPTABLE + 4 * ((growth << 8) + lvl));
+        SetMonData(partner, MON_EXP, &e);
+        CalculateMonStats(partner);
+        for (mv = TryLearnMove(partner, 1); mv && guard < 8; mv = TryLearnMove(partner, 0), guard++) {
+            if (mv < 0xFFFE && learned < 2)
+                SPECIALS[1 + learned++] = mv;
+            else if (mv == 0xFFFF)
+                SPECIALS[3]++;
+        }
+    }
+    SetMonData(partner, MON_EXP, &cur);
+    CalculateMonStats(partner);
+    LEVELEDUP |= 1 << slot;
+    return now;
+}
+
 u32 patrol_select(void)
 {
-    u32 pm, em, idx, level, species, slot, i, walker, gfx, hp, maxhp, ehp, ehpmax, pspd, espd, pa, pd, ea, ed, rounds, exp, growth, task;
+    u32 pm, em, idx, level, species, slot, i, walker, gfx, hp, maxhp, ehp, ehpmax, pspd, espd, pa, pd, ea, ed, rounds, exp, task;
     void *partner;
     volatile u8 *obj;
     int won = 0, retreat = 0;
@@ -181,6 +277,10 @@ u32 patrol_select(void)
     SPECIALS[6] = slot;                              /* 0x8006 */
     SPECIALS[7] = species;                           /* 0x8007 */
     SPECIALS[5] = 0;                                 /* 0x8005 */
+    for (i = 0; i < 4; i++)
+        SPECIALS[i] = 0;                             /* 0x8000-0x8003 */
+    for (i = 8; i < 13; i++)
+        SPECIALS[i] = 0;                             /* 0x8008-0x800C */
 
     if (!hp || hp * 5 < maxhp * 2) {
         SPECIALS[4] = 4;
@@ -235,17 +335,13 @@ u32 patrol_select(void)
 
     if (won) {
         const volatile u8 *bs = (const volatile u8 *)(BASESTATS + 28 * species);
-        u32 cur = get(partner, MON_EXP), cap;
-        growth = bs[19];
         exp = udiv(bs[9] * level, 7);
         if (!exp)
             exp = 1;
-        cap = *(volatile u32 *)(EXPTABLE + 4 * ((growth << 8) + 100));
-        cur = cur + exp > cap ? cap : cur + exp;
-        SetMonData(partner, MON_EXP, &cur);
-        CalculateMonStats(partner);
         SPECIALS[5] = exp;
         SPECIALS[4] = 1;
+        SPECIALS[0] = give_exp(partner, slot, exp);
+        drops(partner, species, level);
     } else {
         SPECIALS[4] = 2;
     }
