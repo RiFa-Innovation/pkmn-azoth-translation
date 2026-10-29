@@ -9,6 +9,7 @@ _start:
 .equ GMAIN,       0x030030F0
 .equ QC_ACTIVE,   0x0203B743                    @ Quick Catch state struct (0x0203B730) + 0x13: 1 while the mode is on
 .equ SELECT,      0x04
+.equ LR_KEYS,     0x0300                        @ L | R
 
 @ gcc on ARMv4T calls function pointers through __call_via_rN (no blx)
 .macro callvia n
@@ -37,7 +38,18 @@ patrol_pfi:
     movs r3, #SELECT
     tst r2, r3
     beq 1f
-    ldr r1, =QC_ACTIVE
+    ldrh r2, [r1, #0x28]                        @ heldKeysRaw: L + R + SELECT anywhere in the overworld opens the settings
+    ldr r3, =LR_KEYS
+    ands r2, r3
+    cmp r2, r3
+    bne 3f
+    bl patrol_open_settings
+    cmp r0, #0
+    beq 1f
+    add sp, #4
+    movs r0, #1
+    pop {pc}
+3:  ldr r1, =QC_ACTIVE
     ldrb r1, [r1]
     cmp r1, #1
     bne 1f

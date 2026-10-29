@@ -65,6 +65,11 @@ SCRIPT = """
         say "No room in the bag for {FD:03}!"
         goto start
     after:
+        checkflag 0x13B3
+        goto_if 1 after_tip
+        setflag 0x13B3
+        say "Tip: press B while your partner is out to call it back. Hold L and R and press SELECT to change the Partner Patrol settings."
+    after_tip:
         compare_var_to_value 0x8004 3
         goto_if 1 shiny
         compare_var_to_value 0x8004 2
@@ -102,6 +107,63 @@ SCRIPT = """
 """
 
 
+SETTINGS = """
+    start:
+        checkflag 0x13B0
+        goto_if 1 is_off
+        ask "Partner Patrol is ON. Turn it OFF?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 turn_off
+        goto size
+    is_off:
+        ask "Partner Patrol is OFF. Turn it ON?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 turn_on
+        goto done
+    turn_off:
+        setflag 0x13B0
+        say "Partner Patrol is now OFF."
+        goto done
+    turn_on:
+        clearflag 0x13B0
+        say "Partner Patrol is now ON."
+    size:
+        checkflag 0x13B2
+        goto_if 1 is_long
+        checkflag 0x13B1
+        goto_if 1 is_short
+        ask "Patrol size: NORMAL (up to 10 Pokémon within 12 tiles). Make it LONG?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 make_long
+        goto done
+    is_long:
+        ask "Patrol size: LONG (up to 20 Pokémon within 16 tiles). Make it SHORT?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 make_short
+        goto done
+    is_short:
+        ask "Patrol size: SHORT (up to 4 Pokémon within 8 tiles). Make it NORMAL?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 make_normal
+        goto done
+    make_long:
+        setflag 0x13B2
+        say "Patrol size is now LONG."
+        goto done
+    make_short:
+        clearflag 0x13B2
+        setflag 0x13B1
+        say "Patrol size is now SHORT."
+        goto done
+    make_normal:
+        clearflag 0x13B1
+        say "Patrol size is now NORMAL."
+    done:
+        releaseall
+        end
+"""
+
+
 class _Any(dict):
     def __missing__(self, k):
         return 0
@@ -115,7 +177,7 @@ def _fix_scrasm_ops():
     o["buffermovename"] = (130, [("byte", 1), ("2byte", 1)])
 
 
-def _build(base, out, script, nxt):
+def _build(base, out, script, nxt, settings=0):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     objs = []
     for name, cmd in (("asm", ["arm-none-eabi-as", "-mcpu=arm7tdmi", os.path.join(ROOT, "scripts/native/patrol.s")]),
@@ -124,7 +186,7 @@ def _build(base, out, script, nxt):
         subprocess.check_call(cmd + ["-o", obj])
         objs.append(obj)
     elf = out + ".elf"
-    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=patrol_script={script:#x}", f"--defsym=patrol_next={nxt:#x}",
+    subprocess.check_call(["arm-none-eabi-ld", f"-Ttext={base:#x}", "-e", "_start", f"--defsym=patrol_script={script:#x}", f"--defsym=patrol_settings={settings:#x}", f"--defsym=patrol_next={nxt:#x}",
                            "-o", elf, *objs])
     subprocess.check_call(["arm-none-eabi-objcopy", "-O", "binary", elf, out])
     syms = {}
@@ -151,13 +213,18 @@ def apply(rom, src, pool):
     code = scrasm.assemble(SCRIPT, ROM_BASE + sa, widths, ext, text)
     assert len(code) == size
     rom[sa:sa + size] = code
-    image, syms = _build(ROM_BASE + na, path, ROM_BASE + sa, cur)
+    ssize = len(scrasm.assemble(SETTINGS, 0, widths, _Any(), lambda b: 0))
+    ta = pool.alloc_aligned(ssize)
+    scode = scrasm.assemble(SETTINGS, ROM_BASE + ta, widths, {}, text)
+    assert len(scode) == ssize
+    rom[ta:ta + ssize] = scode
+    image, syms = _build(ROM_BASE + na, path, ROM_BASE + sa, cur, ROM_BASE + ta)
     rom[na:na + len(image)] = image
     rom[PFI_LITERAL:PFI_LITERAL + 4] = (syms["patrol_pfi"] | 1).to_bytes(4, "little")
     for lit in HOLD_LITERALS:
         assert src[lit:lit + 4] == (0x08063CA5).to_bytes(4, "little"), f"patrol: unexpected follower literal at {lit:#x}"
         rom[lit:lit + 4] = (syms["patrol_hold_wrap"] | 1).to_bytes(4, "little")
-    return {"script": ROM_BASE + sa, "native": len(image), "wrapper": syms["patrol_pfi"] | 1, "next": cur}
+    return {"script": ROM_BASE + sa, "settings": ROM_BASE + ta, "native": len(image), "wrapper": syms["patrol_pfi"] | 1, "next": cur}
 
 
 def _alloc(rom, pool, b):

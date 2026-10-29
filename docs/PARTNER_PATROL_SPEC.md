@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 6, 2026-10-29. Decisions recorded (section 9); M0-M4 built and verified (sections 12-15).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 7, 2026-10-29. Decisions recorded (section 9); M0-M5 built (sections 12-16); the map sweep of M5 is NOT done (see 16).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -338,3 +338,25 @@ the matching summaries ("AAA beat 2 Pokémon and gained 40 EXP!", item lines, "i
 
 Known gaps: no on-screen status line while the patrol runs (the walker's movement is the feedback), no cooldown between presses, the 10-kill cap and 12-tile radius are constants in `patrol.c`
 (to tune after playing), the partner always ends next to the player rather than exactly behind it.
+
+## 16. M5 built: settings and polish (2026-10-29)
+
+* **Settings** (saved in the game as hack flags, so they survive saving and loading; an old save starts with the defaults): `L + R + SELECT` anywhere in the overworld opens a short dialogue
+  (the game's multichoice table is already extended by the Cheat Device, so the patrol uses yes/no prompts instead):
+  * **Partner Patrol ON/OFF** (flag `0x13B0`). Off: SELECT in Quick Catch is left to the game and no patrol starts.
+  * **Size** (flags `0x13B1` short, `0x13B2` long, none = normal): short = up to 4 Pokémon within 8 tiles, **normal = 10 within 12**, long = 20 within 16. Each "Make it ..." prompt cycles normal, long, short.
+  * SELECT in Quick Catch with nothing aimed opens the same dialogue (rare: Quick Catch does not open without visible Pokémon).
+* **One-time tip** (flag `0x13B3`), after the first patrol's summary: "Tip: press B while your partner is out to call it back. Hold L and R and press SELECT to change the Partner Patrol settings."
+  This is River-only text living in the patrol's own script, so the translation's Help Tips are untouched; there is no Help Tips page for the patrol.
+* **Text**: every patrol message is English in the patrol's own scripts (nothing Chinese is involved); long prompts scroll to a second page.
+* **Edge maps**: nothing is switched off by map. Water, caves and corridors are handled by the existing checks: no walker (surfing/biking) means SELECT is ignored; blocked terrain
+  means the search finds no way closer (3 tries, "couldn't get close", walker teleported next to the player if it was lost); the Frontier arenas have no visible Pokémon.
+* Flags `0x13B0`-`0x13B3` are in use (the reserved range is `0x13B0`-`0x13BF`).
+
+Verified in mGBA (scratch copies of the River v0.2.3 save): the settings dialogue (ON/OFF, size cycle; LONG persisted when reopened), the patrol being ignored when OFF and working again after
+turning it ON, the `L+R+SELECT` hotkey, and the tip appearing once (first patrol 12 messages including both tip pages, the second patrol none).
+
+**What is NOT done: the map sweep.** The plan was to warp to a set of maps with visible Pokémon, trigger a patrol on each and check that the game ends clean. An automated sweep over eight route maps
+(3.29, 3.30, 3.33, 3.34, 3.37, 3.38, 3.79, 3.85) never saw a visible Pokémon spawn from blind walking (70 steps each), including 3.79, where the manual tests had plenty. So the claim "no softlock
+found in a sweep" cannot be made. What exists is the extensive testing on 3.79 and the map-change test on 3.85. Next time: pick walkable grass tiles from the map's encounter metatiles (hackdb / `maprender.py`)
+before walking, or trigger the spawn by calling the hack's encounter path.

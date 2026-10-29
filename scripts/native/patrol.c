@@ -69,8 +69,11 @@ struct Patrol {
 #define KEY_B 0x0002
 enum { PH_START = 0, PH_WALK = 1, PH_STRIKE = 2, PH_RETURN = 3, PH_COOL = 4 };
 enum { R_DONE = 1, R_HURT = 2, R_SHINY = 3, R_TOOHURT = 4, R_NOREACH = 5, R_RECALL = 6 };
-#define MAX_KILLS 10                                 /* targets per patrol */
-#define RADIUS 12                                    /* targets must be within this many tiles of the player */
+/* Settings (saved as hack flags, set by the settings script): F_OFF disables the patrol; F_SHORT / F_LONG pick the size, neither = normal.
+ * normal: 10 targets within 12 tiles, short: 4 within 8, long: 20 within 16. */
+#define F_OFF   0x13B0
+#define F_SHORT 0x13B1
+#define F_LONG  0x13B2
 #define COOLDOWN 24                                  /* frames between two targets */
 #define WIN 13                                       /* window side; the walker is at the centre (6, 6) */
 #define TYPECHART 0x0824F050                         /* the hack's chart: {attacker, defender, 0/5/10/20} triples, 0xFF end, 0xFE 0xFE 0 = foresight marker */
@@ -106,6 +109,7 @@ typedef u32 (*fn_task_create)(u32, u32);
 typedef u32 (*fn_coll)(void *, s32, s32, u32);
 typedef u32 (*fn_obj)(void *);
 typedef u32 (*fn_species)(void *, u16 *);
+typedef u32 (*fn_flag)(u32);
 typedef u32 (*fn_obj_set)(void *, u32);
 typedef void (*fn_move_to)(void *, s32, s32);
 
@@ -132,10 +136,15 @@ typedef void (*fn_move_to)(void *, s32, s32);
 #define MoveObjectToCoords ((fn_move_to)0x0805F725)  /* the engine's own teleport (setobjectxyperm) */
 #define FieldControlsLocked ((fn_v)0x08069959)
 #define ClearHeld         ((fn_obj)0x08063D35)
+#define FlagGet           ((fn_flag)0x0806E6D1)
 #define QcSpeciesOf       ((fn_species)0x09D53425)   /* (object, u16 *species) -> nonzero for a valid visible Pokemon */
 #define UnlockControls    ((fn_v)0x0806994D)   /* sLockFieldControls = FALSE */
 
-extern const u8 patrol_script[];                     /* linker symbol: the result script */
+extern const u8 patrol_script[];                     /* linker symbol: the summary script */
+extern const u8 patrol_settings[];                   /* linker symbol: the settings script */
+
+static u32 max_kills(void) { return FlagGet(F_LONG) ? 20 : FlagGet(F_SHORT) ? 4 : 10; }
+static u32 radius(void) { return FlagGet(F_LONG) ? 16 : FlagGet(F_SHORT) ? 8 : 12; }
 
 static u32 get(void *mon, u32 f) { return GetMonData(mon, f, 0); }
 
@@ -576,7 +585,7 @@ static int choose_target(volatile u8 *w)
             continue;
         if (!QcSpeciesOf((void *)o, &sp) || !sp)
             continue;
-        if (dist(ox(o), oy(o), ox(pl), oy(pl)) > RADIUS)
+        if (dist(ox(o), oy(o), ox(pl), oy(pl)) > radius())
             continue;
         d = dist(ox(o), oy(o), ox(w), oy(w));
         if (d < best) {
@@ -644,7 +653,7 @@ void patrol_task(u32 id)
     P->timer++;
     if (P->total < 0xFFF0)
         P->total++;
-    if (P->phase != PH_RETURN && (P->timer > 1800 || P->steps > 400 || P->total > 7200)) {   /* too long: bring it home */
+    if (P->phase != PH_RETURN && (P->timer > 1800 || P->steps > 400 || P->total > 10800)) {   /* too long: bring it home */
         stop_and_return(P->kills ? R_DONE : R_NOREACH);
     } else if (P->phase == PH_RETURN && (P->timer > 1800 || P->steps > 460)) {
         abort_to_player(w);
@@ -711,7 +720,7 @@ void patrol_task(u32 id)
             accumulate();
             LASTTALKED = P->target_local;            /* the win removes its target right away */
             QcRemoveTarget();
-            if (P->kills >= MAX_KILLS)
+            if (P->kills >= max_kills())
                 stop_and_return(R_DONE);
             else
                 P->phase = PH_COOL;
@@ -752,6 +761,21 @@ void patrol_task(u32 id)
     }
 }
 
+/* L + R + SELECT (called by patrol.s): the settings, from anywhere in the overworld. Returns 1 when handled. */
+u32 patrol_open_settings(void)
+{
+    u32 task;
+    if (P->active)
+        return 0;
+    if (QC[0x13] == 1) {                             /* close Quick Catch first */
+        task = task_of_quick_catch();
+        if (task < 16)
+            QcExit(task);
+    }
+    SetupScript(patrol_settings);
+    return 1;
+}
+
 /* SELECT in Quick Catch (called by patrol.s): validate, close Quick Catch, start the walk. Returns 1 when the press was handled. */
 u32 patrol_select(void)
 {
@@ -759,7 +783,16 @@ u32 patrol_select(void)
     volatile u8 *sb1;
     void *partner;
 
-    if (P->active || !QcAimValid())
+    if (P->active)
+        return 0;
+    if (!QcAimValid()) {                             /* SELECT with nothing aimed: the settings */
+        task = task_of_quick_catch();
+        if (task < 16)
+            QcExit(task);
+        SetupScript(patrol_settings);
+        return 1;
+    }
+    if (FlagGet(F_OFF))                              /* switched off: leave SELECT to the game */
         return 0;
     idx = QC[6];
     walker = FOLLOWER[1];
