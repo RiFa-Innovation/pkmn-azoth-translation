@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 7, 2026-10-29. Decisions recorded (section 9); M0-M5 built (sections 12-16); the map sweep of M5 is NOT done (see 16).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 8, 2026-10-29. Decisions recorded (section 9); M0-M5 built and verified (sections 12-16), including the map sweep. M6 (release) is next.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -356,7 +356,11 @@ Known gaps: no on-screen status line while the patrol runs (the walker's movemen
 Verified in mGBA (scratch copies of the River v0.2.3 save): the settings dialogue (ON/OFF, size cycle; LONG persisted when reopened), the patrol being ignored when OFF and working again after
 turning it ON, the `L+R+SELECT` hotkey, and the tip appearing once (first patrol 12 messages including both tip pages, the second patrol none).
 
-**What is NOT done: the map sweep.** The plan was to warp to a set of maps with visible Pokémon, trigger a patrol on each and check that the game ends clean. An automated sweep over eight route maps
-(3.29, 3.30, 3.33, 3.34, 3.37, 3.38, 3.79, 3.85) never saw a visible Pokémon spawn from blind walking (70 steps each), including 3.79, where the manual tests had plenty. So the claim "no softlock
-found in a sweep" cannot be made. What exists is the extensive testing on 3.79 and the map-change test on 3.85. Next time: pick walkable grass tiles from the map's encounter metatiles (hackdb / `maprender.py`)
-before walking, or trigger the spawn by calling the hack's encounter path.
+**The map sweep (done, `scripts/patrol_sweep.py`)**: the first attempts (blind walking on eight group-3 maps 3.29-3.40) found no visible Pokémon because **those maps have no wild-encounter data at all**
+(the live wild table at `0x1E468B0` lists which maps do). The sweep that counts picks 26 maps from that table: group 3 routes (3.42-3.106), group 1 (1.39-1.124), cave floors of group 55 (55.17, 55.22, 55.26), 53.4, 53.9 and 48.3.
+For each map it warps onto a pair of adjacent land-encounter tiles (found from the tileset attribute words: encounter type 1), steps between them until a visible Pokémon spawns, boosts the partner's stats so that
+fights are won, opens Quick Catch and presses SELECT, and checks that the game ends clean: the patrol ended, no patrol task is left, the map is unchanged, the walker is present, the controls come back, and the player can move.
+
+Result (2026-10-29, River v0.2.3 save, current build): **25 of 26 maps ran a full patrol and all 25 passed every check**; 3.46 has no grass pair (nothing to test). Across the runs: kills of 0 (the partner lost the first fight or the target was unreachable) up to
+**10 (the kill cap, reached on 3.80 and one more map)**, the "couldn't get close" ending twice (reason 5, the unreachable path that had not been exercised before), 21 runs ended by a lost fight (reason 2), 2 by the cap or no target (reason 1), longest patrol 1,593
+frames, at most 53 steps. No softlock, no leftover task, no stray walker. Not covered by the sweep: water (surfing/biking: SELECT is ignored without a walker), Chapter 2 and Frontier maps, and a patrol interrupted by the player on every map (B recall and the map-change abort were tested by hand on 3.79 and 3.85).
