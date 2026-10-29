@@ -2,7 +2,7 @@
 """Build the translation and/or River Edition ROMs + BPS into build/editions/, verifying each BPS against the clean FireRed ROM.
 
     python3 scripts/build_editions.py              # both
-    python3 scripts/build_editions.py river        # one of: translation, river, translation-cheats, river-cheats
+    python3 scripts/build_editions.py river        # one of: translation, river, translation-cheats
 
 Each edition's insert.py run writes build/Mercury_EN.{gba,bps}; this copies them out under their own names so building one does not
 overwrite the other. build/Mercury_EN.* is left holding the last edition built (translation, when both). Not a release: dist.py packages those.
@@ -18,14 +18,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BASE = ROOT / "roms" / "Pokemon - FireRed Version (USA, Europe).gba"
 NAMES = {"translation": "Pokemon Azoth English + Frontier", "river": "Pokemon River Azoth (Chapter 2 + Frontier)",
-         "translation-cheats": "Pokemon Azoth English + Frontier + Cheats", "river-cheats": "Pokemon River Azoth (Chapter 2 + Frontier) + Cheats"}
+         "translation-cheats": "Pokemon Azoth English + Frontier + Cheats"}
 
 
 def build(edition):
     env = dict(os.environ)
     env.pop("RHT_EDITION", None)
     env.pop("RHT_CHEATS", None)
-    if edition.startswith("river"):
+    if edition.startswith("river"):          # the Cheat Device is native to the River Edition (scripts/edition.py)
         env["RHT_EDITION"] = "river"
     if edition.endswith("-cheats"):
         env["RHT_CHEATS"] = "1"
@@ -49,10 +49,10 @@ def build(edition):
 
 
 def main():
-    want = sys.argv[1:] or ["river", "translation", "river-cheats", "translation-cheats"]
+    want = sys.argv[1:] or ["river", "translation", "translation-cheats"]
     for e in want:
         if e not in NAMES:
-            sys.exit(f"unknown edition {e!r}; use translation, river, translation-cheats and/or river-cheats")
+            sys.exit(f"unknown edition {e!r}; use translation, river and/or translation-cheats (the River Edition has the Cheat Device built in)")
     for e in want:
         build(e)
 

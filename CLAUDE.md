@@ -70,7 +70,7 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
   **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
   the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text.
   `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
-- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF`, multichoice list id 65 (the table is copied with one extra entry), SELECT+START hotkey in the overworld; only in `RHT_CHEATS=1` builds.
+- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF`, multichoice list id 65 (the table is copied with one extra entry), SELECT+START hotkey in the overworld; in every River build, and in `RHT_CHEATS=1` translation builds.
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +
@@ -244,8 +244,9 @@ EDITION tag; `scripts/dist.py --river V` sets it). Both editions carry the Front
 The Frontier's arenas are the *last* maps of group 58, so their ids follow whatever the edition already put there.
 Build and verify **both** after any change: `python3 scripts/build_editions.py` (clean-report check, BPS round trip, copies to
 `build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
-`RHT_CHEATS=1` adds the **Cheat Device** (`docs/CHEATS.md`) to either edition; it is an optional add-on released separately (`scripts/dist.py --cheats N`),
-never part of the numbered betas or River releases. `build_editions.py` builds all four variants (`translation-cheats`, `river-cheats` too).
+The **Cheat Device** (`docs/CHEATS.md`) is **native to the River Edition** (decided 2026-10-29, first in v0.4): every `RHT_EDITION=river` build carries it (`scripts/edition.py`).
+For the translation it stays an optional add-on, built with `RHT_CHEATS=1` and released separately (`scripts/dist.py --cheats N`); the numbered betas never contain it.
+`build_editions.py` builds `river`, `translation` and `translation-cheats` (there is no separate river-cheats variant any more).
 The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`) is built into every `RHT_EDITION=river` build (not into the translation); SELECT in Quick Catch sends the walker at the aimed target. Patrol private RAM `0x02022200`-`0x020223FF` (struct Patrol in `scripts/native/patrol.c`), hack flags `0x13B0`-`0x13BF` reserved (`0x13B0` off, `0x13B1`/`0x13B2` size, `0x13B3` tip shown); `L+R+SELECT` opens its settings.
 
 ## Release steps (only when asked)

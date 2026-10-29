@@ -3,7 +3,7 @@
 
     python3 scripts/dist.py 19 [--save PATH] [--no-build]
     python3 scripts/dist.py --river 0.1 [--no-build]     # unofficial Chapter 2 build, no save included
-    python3 scripts/dist.py --cheats 1                   # the optional Cheat Device add-on: translation + River builds, dist/cheats-v1/
+    python3 scripts/dist.py --cheats 1                   # the optional Cheat Device add-on for the translation, dist/cheats-v1/ (River builds have it natively)
 
 Runs scripts/insert.py (unless --no-build), verifies the BPS by applying it to
 the clean base ROM and comparing byte-identical, then writes dist/beta-N/ with
@@ -35,13 +35,13 @@ def run(cmd):
 
 
 def package_cheats(version):
-    """dist/cheats-vV/: the translation and the River Edition built with RHT_CHEATS=1 (docs/CHEATS.md), each as .bps + .gba, no saves."""
+    """dist/cheats-vV/: the translation built with RHT_CHEATS=1 (docs/CHEATS.md) as .bps + .gba, no save. The River Edition has the Cheat Device built in."""
     import os
     out = ROOT / "dist" / f"cheats-v{version}"
     if out.exists():
         sys.exit(f"{out} already exists; not overwriting")
     out.mkdir(parents=True)
-    for edition, name in (("translation", f"Pokemon-Azoth-English-Cheats-v{version}"), ("river", f"Pokemon-Azoth-English-RIVER-EDITION-Cheats-v{version}")):
+    for edition, name in (("translation", f"Pokemon-Azoth-English-Cheats-v{version}"),):
         env = dict(os.environ, RHT_CHEATS="1")
         env.pop("RHT_EDITION", None)
         if edition == "river":
@@ -65,7 +65,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("beta", type=int, nargs="?", help="beta release number")
     ap.add_argument("--river", metavar="VERSION", help="package the River Edition (unofficial fan Chapter 2), e.g. 0.1")
-    ap.add_argument("--cheats", metavar="VERSION", help="package the optional Cheat Device add-on (translation + River builds), e.g. 1")
+    ap.add_argument("--cheats", metavar="VERSION", help="package the optional Cheat Device add-on for the translation, e.g. 2")
     ap.add_argument("--save", help=".sav to package (default: dist/Pokemon Azoth (English) - next.sav)")
     ap.add_argument("--no-build", action="store_true", help="skip scripts/insert.py (use the existing build/)")
     args = ap.parse_args()
