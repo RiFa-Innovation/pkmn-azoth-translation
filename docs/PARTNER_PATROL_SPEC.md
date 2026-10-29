@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 4, 2026-10-29. Decisions recorded (section 9); M0 done; M1 (instant strike) and M2 (rewards, level-ups) built and verified, see sections 12-13.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 5, 2026-10-29. Decisions recorded (section 9); M0-M3 built and verified (sections 12-14).** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -281,3 +281,36 @@ Berries, 0 held at 5%), level-ups to Lv 6-8 with Razor Leaf learned, "Found Aspe
 after the next battle, and a two-moves-at-one-level case.
 
 Test switches now: `RHT_PATROL_TEST=shiny|retreat|held`.
+
+## 14. M3 built: the visible strike (2026-10-29)
+
+SELECT in Quick Catch now closes Quick Catch and starts a **task** (`patrol_task`, `scripts/native/patrol.c`) that walks the partner to the target, makes it
+hop at the target, runs the fight and the rewards (sections 4-5), shows the result script and walks the partner back.
+
+**Memory rules (River, 2026-10-29: "be careful when writing to memory")**, and how they are met:
+* **One private block**: `struct Patrol` at `0x02022200`-`0x020223FF` (386 bytes used) in the unused link receive buffer. A write-watch over a full session of
+  menus, walking, a wild battle and a strike saw **no other writer**. It holds the state and the 13 x 13 search grid, so nothing big lives on the stack.
+* **Stack**: the deepest patrol call (`CreateMon` from the task) is at `sp = 0x3007CC8`, 32 bytes below Quick Catch's own throw; IWRAM data ends at
+  `0x03007480`, so about 2 KB of headroom remain.
+* **The walker is never written to directly**: only through the engine's own `ObjectEventSetHeldMovement`, `ObjectEventClearHeldMovement` and
+  `MoveObjectEventToMapCoords`. Object indices (target, walker) are checked against 0-15 and against local id / pointer before every use.
+* **Everything else written**: the script vars `0x8000`-`0x800C`, `LastTalked`, `gLeveledUpInBattle` (one bit), `gEnemyParty[0]` (created and zeroed outside battle),
+  the partner's `SetMonData`/`CalculateMonStats`, `AddBagItem`: all through engine functions.
+* **The follower code is silenced, not patched**: the two literals through which the hack's follower code calls `ObjectEventSetHeldMovement`
+  (`0x09D32424` idle each frame, `0x09D3367C` follow step) point at `patrol_hold_wrap`, which drops the call only for the walker, only while the flag in the block is set
+  **and** the task table shows a live `patrol_task`; a stale flag after a reset cannot freeze the walker (tested).
+* **Every exit clears the flag**: map change (touches nothing in the new map), the walker or its identity gone, 30 s / 90 steps, three steps without progress, a recall, a shiny, the
+  end of the return walk. After a stuck walk or a timeout the walker is placed behind the player with the engine's teleport.
+
+Flow and numbers: START (give the controls back: returning 1 from the SELECT hook makes the caller lock the player), WALK (a breadth-first search over
+the 13 x 13 window per step, `GetCollisionAtCoords` for each neighbour, goal = the reachable tile closest to the target), STRIKE (face the target, hop,
+then `fight()`), RETURN (same search toward the player until adjacent). The task waits whenever the field controls are locked (a message, a menu). **B recalls**
+the partner while it is walking. A shiny ends the patrol before the battle starts; "too hurt" refuses without any walk.
+
+Verified in mGBA (River v0.2.3 save, scratch copies): the partner walks 4-10 steps, hops and returns next to the player; the follower follows normally afterwards
+(8 moves); wins (16 EXP, drops, target removal call with the right local id), retreats, the too-hurt refusal, the B recall after 7 steps toward a far target, a
+warp to another map mid-walk (task destroyed, flag cleared), the stale flag, and the shiny path (forced build: patrol ended, task gone, real battle). Not covered: a
+target that is truly unreachable (the 3-fail abort and message 5), and timeouts; both follow the same abort code as the tested ones.
+
+Known gaps: no target flash or sound, the return stops next to the player (not exactly behind), one target per press (M4), a map-change during the result
+script leaves nothing to clean up. Results are not yet visible in the walker's sprite (no attack animation beyond the hop).

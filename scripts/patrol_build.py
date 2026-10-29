@@ -17,6 +17,7 @@ import scrasm  # noqa: E402
 
 ROM_BASE = 0x08000000
 PFI_LITERAL = 0x6CACC
+HOLD_LITERALS = (0x1D32424, 0x1D3367C)      # the follower code's ObjectEventSetHeldMovement literals (idle each frame, follow step)
 CFLAGS = ["-mcpu=arm7tdmi", "-mthumb", "-Os", "-ffreestanding", "-fno-builtin", "-fno-strict-aliasing", "-fno-stack-protector", "-fno-pic",
           "-fno-asynchronous-unwind-tables", "-fno-unwind-tables", "-fno-tree-loop-distribute-patterns", "-Wall", "-Wextra"]
 
@@ -32,6 +33,8 @@ SCRIPT = """
         goto_if 1 shiny
         compare_var_to_value 0x8004 4
         goto_if 1 hurt
+        compare_var_to_value 0x8004 5
+        goto_if 1 unreachable
         releaseall
         end
     won:
@@ -99,6 +102,12 @@ SCRIPT = """
         callnative @patrol_remove
         releaseall
         end
+    unreachable:
+        bufferpartymonnick 0 0x8006
+        bufferspeciesname 1 0x8007
+        say "{FD:02} couldn't get close to {FD:03}."
+        releaseall
+        end
     hurt:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is too hurt to fight. Heal up first."
@@ -159,6 +168,9 @@ def apply(rom, src, pool):
     image, syms = _build(ROM_BASE + na, path, ROM_BASE + sa, cur)
     rom[na:na + len(image)] = image
     rom[PFI_LITERAL:PFI_LITERAL + 4] = (syms["patrol_pfi"] | 1).to_bytes(4, "little")
+    for lit in HOLD_LITERALS:
+        assert src[lit:lit + 4] == (0x08063CA5).to_bytes(4, "little"), f"patrol: unexpected follower literal at {lit:#x}"
+        rom[lit:lit + 4] = (syms["patrol_hold_wrap"] | 1).to_bytes(4, "little")
     return {"script": ROM_BASE + sa, "native": len(image), "wrapper": syms["patrol_pfi"] | 1, "next": cur}
 
 

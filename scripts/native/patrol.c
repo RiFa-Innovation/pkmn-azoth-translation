@@ -16,6 +16,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
 typedef int s32;
 
 #define QC        ((volatile u8 *)0x0203B730)        /* Quick Catch state (var 0x51DE storage): +6 aimed object, +7 its local id, +0x13 active, +0x18 species */
@@ -28,7 +30,34 @@ typedef int s32;
 #define LASTTALKED (*(volatile u16 *)0x020370D2)
 #define LEVELEDUP (*(volatile u8 *)0x03004FD4)       /* gLeveledUpInBattle: bit per party slot, read by the engine's post-battle evolution check */
 #define BERRIES   ((const volatile u16 *)(0x09DE4674 + 8)) /* ten berry item ids (0x85-0x8E) */
-#define SCRATCH   ((volatile u16 *)0x02022200)       /* borrowed link-buffer bytes: [0] local id of the target to remove */
+/* The patrol's whole private state: one 512-byte block of the unused link receive buffer (0x02022200-0x020223FF; a write-watch over a full session of
+ * menus, walking, a battle and a strike saw no other writer). Offsets 0 (active) and 8 (walker pointer) are read by patrol.s. */
+struct Patrol {
+    u8 active;          /* +0  1 while the patrol owns the walker */
+    u8 phase;           /* +1  PH_* */
+    u8 walker;          /* +2  object index of the walker */
+    u8 target;          /* +3  object index of the target */
+    u8 target_local;    /* +4  its local id (identity check + removal) */
+    u8 slot;            /* +5  partner party slot */
+    s8 map_group;       /* +6  the map the patrol started on */
+    s8 map_num;         /* +7 */
+    u32 walker_ptr;     /* +8  address of the walker's object event */
+    u16 timer;          /* +12 frames in the current phase */
+    u16 steps;          /* +14 steps taken */
+    u8 fails;           /* +16 consecutive steps without progress */
+    u8 level;           /* +17 target level */
+    u16 species;        /* +18 target species */
+    u8 task;            /* +20 task id of patrol_task */
+    u8 pad[27];         /* +21 */
+    u8 grid[169];       /* +48 breadth-first search window (13 x 13): 0 unseen, 1-4 direction taken, 5 blocked, 6 start */
+    u8 queue[169];      /* +217 */
+};
+#define P ((volatile struct Patrol *)0x02022200)
+#define SB1PTR (*(volatile u32 *)0x03005008)
+#define NEWKEYS (*(volatile u16 *)0x0300311E)         /* gMain.newKeys */
+#define KEY_B 0x0002
+enum { PH_START = 0, PH_WALK = 1, PH_STRIKE = 2, PH_RETURN = 3 };
+#define WIN 13                                       /* window side; the walker is at the centre (6, 6) */
 #define TYPECHART 0x0824F050                         /* the hack's chart: {attacker, defender, 0/5/10/20} triples, 0xFF end, 0xFE 0xFE 0 = foresight marker */
 #define BASESTATS 0x0976DFBC                         /* 28 bytes per species: expYield +9, growth rate +19 */
 #define EXPTABLE  0x09E0B258                         /* [(growth << 8) + level] -> u32 */
@@ -58,6 +87,11 @@ typedef void (*fn_script)(const void *);
 typedef u32 (*fn_add)(u32, u32);
 typedef void (*fn_feather)(void *, u32, u16 *);
 typedef u32 (*fn_learn)(void *, u32);
+typedef u32 (*fn_task_create)(u32, u32);
+typedef u32 (*fn_coll)(void *, s32, s32, u32);
+typedef u32 (*fn_obj)(void *);
+typedef u32 (*fn_obj_set)(void *, u32);
+typedef void (*fn_move_to)(void *, s32, s32);
 
 #define GetMonData        ((fn_getmon)0x0803FBE9)
 #define SetMonData        ((fn_setmon)0x0804037D)
@@ -73,6 +107,16 @@ typedef u32 (*fn_learn)(void *, u32);
 #define Feathers          ((fn_feather)0x09D2ADA5)   /* (partner mon, defeated species, u16 out[6]) -> adds the Feathers, out[stat] = count (negative = no room) */
 #define TryLearnMove      ((fn_learn)0x0803EA89)
 #define ZeroMonData       ((fn_void_p)0x0803D995)
+#define CreateTask        ((fn_task_create)0x0807741D)
+#define DestroyTask       ((fn_task)0x08077509)
+#define GetCollisionAtCoords ((fn_coll)0x080636AD)   /* (object, x, y, direction) -> 0 when the step is free */
+#define SetHeldMovement   ((fn_obj_set)0x08063CA5)
+#define HeldMovementActive ((fn_obj)0x08063C89)
+#define ClearHeldIfFinished ((fn_obj)0x08063D7D)
+#define MoveObjectToCoords ((fn_move_to)0x0805F725)  /* the engine's own teleport (setobjectxyperm) */
+#define FieldControlsLocked ((fn_v)0x08069959)
+#define ClearHeld         ((fn_obj)0x08063D35)
+#define UnlockControls    ((fn_v)0x0806994D)   /* sLockFieldControls = FALSE */
 
 extern const u8 patrol_script[];                     /* linker symbol: the result script */
 
@@ -148,7 +192,7 @@ static u32 task_of_quick_catch(void)
 
 u32 patrol_remove(void)                              /* script: callnative */
 {
-    LASTTALKED = SCRATCH[0];
+    LASTTALKED = P->target_local;
     QcRemoveTarget();
     return 0;
 }
@@ -235,44 +279,35 @@ static u32 give_exp(void *partner, u32 slot, u32 exp)
     return now;
 }
 
-u32 patrol_select(void)
+/* ------------------------------------------------------------------------------------------------------------------------------------------ the fight */
+
+/* partner = the party member shown by the walker (first alive one), else the lead; returns the slot */
+static u32 find_partner(u32 walker)
 {
-    u32 pm, em, idx, level, species, slot, i, walker, gfx, hp, maxhp, ehp, ehpmax, pspd, espd, pa, pd, ea, ed, rounds, exp, task;
-    void *partner;
-    volatile u8 *obj;
-    int won = 0, retreat = 0;
-
-    if (!QcAimValid())
-        return 0;
-    idx = QC[6];
-    if (idx > 15)
-        return 0;
-    obj = (volatile u8 *)(OBJECTS + 36 * idx);
-    level = obj[0x1D];
-    if (level < 1 || level > 100)
-        level = 1;
-    species = *(volatile u16 *)(QC + 0x18);
-
-    /* the partner: the party member whose species is the walker's graphics id (first alive one), else the lead */
-    walker = FOLLOWER[1];
-    gfx = ((volatile u8 *)(OBJECTS + 36 * walker))[5] | (((volatile u8 *)(OBJECTS + 36 * walker))[35] << 8);
-    slot = 6;
+    u32 gfx = 0xFFFF, i;
+    if (walker < 16) {
+        volatile u8 *w = (volatile u8 *)(OBJECTS + 36 * walker);
+        gfx = w[5] | (w[35] << 8);
+    }
     for (i = 0; i < 6; i++) {
         void *m = (void *)(PARTY + 100 * i);
         if (!get(m, MON_SPECIES) || get(m, MON_IS_EGG))
             continue;
-        if (get(m, MON_SPECIES) == gfx && get(m, MON_HP)) {
-            slot = i;
-            break;
-        }
+        if (get(m, MON_SPECIES) == gfx && get(m, MON_HP))
+            return i;
     }
-    if (slot == 6)
-        slot = 0;
-    partner = (void *)(PARTY + 100 * slot);
+    return 0;
+}
+
+/* the whole strike: result code in 0x8004 (1 won, 2 retreated, 3 shiny, 4 too hurt) and the reward vars; the caller shows the script */
+static void fight(u32 slot, u32 species, u32 level)
+{
+    void *partner = (void *)(PARTY + 100 * slot);
+    u32 pm, em, hp, maxhp, ehp, pspd, espd, pa, pd, ea, ed, rounds, exp, i;
+    int won = 0, retreat = 0;
+
     hp = get(partner, MON_HP);
     maxhp = get(partner, MON_MAXHP);
-
-    SCRATCH[0] = QC[7];
     SPECIALS[4] = 0;                                 /* 0x8004 */
     SPECIALS[6] = slot;                              /* 0x8006 */
     SPECIALS[7] = species;                           /* 0x8007 */
@@ -284,7 +319,7 @@ u32 patrol_select(void)
 
     if (!hp || hp * 5 < maxhp * 2) {
         SPECIALS[4] = 4;
-        goto done;
+        return;
     }
 
     QcCreateTarget(species, level, 0, 1);
@@ -292,12 +327,12 @@ u32 patrol_select(void)
     if (1) {
 #else
     if (IsMonShiny(ENEMY, 0, 0)) {
-#endif                   /* leave it to the player: a real battle with this very Pokemon */
-        SPECIALS[4] = 3;
-        goto done;
+#endif
+        SPECIALS[4] = 3;                             /* leave it to the player: a real battle with this very Pokemon */
+        return;
     }
 
-    ehp = ehpmax = get(ENEMY, MON_MAXHP);
+    ehp = get(ENEMY, MON_MAXHP);
     pa = higher(get(partner, MON_ATK), get(partner, MON_SPATK));
     pd = get(partner, MON_ATK) >= get(partner, MON_SPATK) ? 0 : 1;
     ea = higher(get(ENEMY, MON_ATK), get(ENEMY, MON_SPATK));
@@ -328,8 +363,6 @@ u32 patrol_select(void)
             }
         }
     }
-    if (!won)
-        retreat = 1;
     SetMonData(partner, MON_HP, &hp);
     ZeroMonData(ENEMY);
 
@@ -345,11 +378,272 @@ u32 patrol_select(void)
     } else {
         SPECIALS[4] = 2;
     }
+}
 
-done:
+/* ------------------------------------------------------------------------------------------------------------------------------- walking */
+
+static volatile u8 *obj_at(u32 idx) { return (volatile u8 *)(OBJECTS + 36 * idx); }
+static s32 ox(volatile u8 *o) { return *(volatile s16 *)(o + 0x10); }
+static s32 oy(volatile u8 *o) { return *(volatile s16 *)(o + 0x12); }
+static u32 dist(s32 ax, s32 ay, s32 bx, s32 by) { return (ax > bx ? ax - bx : bx - ax) + (ay > by ? ay - by : by - ay); }
+static int obj_alive(u32 idx, u32 local) { volatile u8 *o; if (idx > 15) return 0; o = obj_at(idx); return (o[0] & 1) && o[8] == local; }
+
+static const s8 DX[5] = {0, 0, 0, -1, 1};            /* 1 south, 2 north, 3 west, 4 east */
+static const s8 DY[5] = {0, 1, -1, 0, 0};
+
+/* One step of a breadth-first search over the 13 x 13 window around the walker: the reachable cell closest to (gx, gy), then the first
+ * direction on the way there. Returns the direction (1-4), or 0 when the walker is already as close as it can get. */
+static u32 plan(volatile u8 *w, s32 gx, s32 gy)
+{
+    volatile u8 *grid = P->grid, *q = P->queue;
+    s32 wx = ox(w), wy = oy(w), c, head = 0, tail = 0, best, bestd;
+    u32 d;
+
+    for (c = 0; c < WIN * WIN; c++)
+        grid[c] = 0;
+    c = 6 * WIN + 6;
+    grid[c] = 6;
+    q[tail++] = c;
+    best = c;
+    bestd = dist(wx, wy, gx, gy);
+    while (head < tail) {
+        s32 cur = q[head++], cx = cur - udiv(cur, WIN) * WIN, cy = udiv(cur, WIN);
+        for (d = 1; d <= 4; d++) {
+            s32 nx = cx + DX[d], ny = cy + DY[d], n;
+            if (nx < 0 || ny < 0 || nx >= WIN || ny >= WIN)
+                continue;
+            n = ny * WIN + nx;
+            if (grid[n])
+                continue;
+            if (GetCollisionAtCoords((void *)w, wx + nx - 6, wy + ny - 6, d)) {
+                grid[n] = 5;
+                continue;
+            }
+            grid[n] = d;
+            q[tail++] = n;
+            if (dist(wx + nx - 6, wy + ny - 6, gx, gy) < (u32)bestd) {
+                bestd = dist(wx + nx - 6, wy + ny - 6, gx, gy);
+                best = n;
+            }
+        }
+    }
+    if (best == 6 * WIN + 6)
+        return 0;
+    for (d = 0; d < WIN * WIN; d++) {                /* walk back to the start, remembering the last direction taken */
+        u32 dir = grid[best];
+        s32 cx = best - udiv(best, WIN) * WIN, cy = udiv(best, WIN);
+        if (dir < 1 || dir > 4)
+            return 0;
+        cx -= DX[dir];
+        cy -= DY[dir];
+        if (cx == 6 && cy == 6)
+            return dir;
+        best = cy * WIN + cx;
+    }
+    return 0;
+}
+
+static int walker_ready(volatile u8 *w)
+{
+    if (!HeldMovementActive((void *)w))
+        return 1;
+    return ClearHeldIfFinished((void *)w) != 0;
+}
+
+static void finish(void)
+{
+    P->active = 0;                                   /* the follower logic owns the walker again */
+}
+
+static void abort_to_player(volatile u8 *w)          /* the walker is lost or stuck: put it where the follower logic expects it */
+{
+    volatile u8 *pl = obj_at(0);
+    ClearHeld((void *)w);
+    MoveObjectToCoords((void *)w, *(volatile s16 *)(pl + 0x14), *(volatile s16 *)(pl + 0x16));
+    finish();
+}
+
+static void begin_script(u32 code)
+{
+    SPECIALS[4] = code;
+    SPECIALS[6] = P->slot;
+    SPECIALS[7] = P->species;
+    SetupScript(patrol_script);
+}
+
+void patrol_task(u32 id)
+{
+    volatile u8 *w, *t, *pl;
+    u32 dir;
+
+    if (!P->active) {
+        DestroyTask(id);
+        return;
+    }
+    {
+        volatile u8 *sb1 = (volatile u8 *)SB1PTR;
+        if (!sb1 || (s8)sb1[4] != P->map_group || (s8)sb1[5] != P->map_num) {   /* left the map: its objects are rebuilt, touch nothing */
+            finish();
+            DestroyTask(id);
+            return;
+        }
+    }
+    if (P->walker > 15 || (obj_at(P->walker)[0] & 1) == 0 || obj_at(P->walker)[8] != 0xFE || (u32)obj_at(P->walker) != P->walker_ptr) {
+        finish();
+        DestroyTask(id);
+        return;
+    }
+    if (P->phase == PH_START) {                      /* returning 1 from the SELECT hook made the caller lock the player: give the controls back */
+        UnlockControls();
+        if (!P->timer)
+            ClearHeld((void *)obj_at(P->walker));    /* drop the follower's lingering idle action so our steps can be set */
+        if (++P->timer >= 2) {
+            P->phase = PH_WALK;
+            P->timer = 0;
+        }
+        return;
+    }
+    if (FieldControlsLocked())                       /* a script, menu or battle is running: wait */
+        return;
+    w = obj_at(P->walker);
+    pl = obj_at(0);
+    P->timer++;
+    if (P->timer > 1800 || P->steps > 90) {          /* 30 seconds or 90 steps: give up */
+        if (P->phase == PH_RETURN || !obj_alive(P->target, P->target_local))
+            abort_to_player(w);
+        else {
+            abort_to_player(w);
+            begin_script(5);
+        }
+        DestroyTask(id);
+        return;
+    }
+    if (P->phase == PH_WALK && (NEWKEYS & KEY_B)) {     /* B recalls the partner */
+        P->phase = PH_RETURN;
+        P->timer = 0;
+        P->fails = 0;
+    }
+    if (!walker_ready(w))
+        return;
+
+    if (P->phase == PH_WALK) {
+        if (!obj_alive(P->target, P->target_local)) {   /* the target left: come back */
+            P->phase = PH_RETURN;
+            P->timer = 0;
+            return;
+        }
+        t = obj_at(P->target);
+        if (dist(ox(w), oy(w), ox(t), oy(t)) == 1) {
+            u32 face = ox(t) > ox(w) ? 4 : ox(t) < ox(w) ? 3 : oy(t) > oy(w) ? 1 : 2;
+            SetHeldMovement((void *)w, face - 1);    /* face it, then strike */
+            P->phase = PH_STRIKE;
+            P->timer = 0;
+            P->fails = face;                         /* the direction, reused as scratch */
+            return;
+        }
+        dir = plan(w, ox(t), oy(t));
+        if (!dir) {
+            if (++P->fails >= 3) {
+                abort_to_player(w);
+                begin_script(5);
+                DestroyTask(id);
+            }
+            return;
+        }
+        P->fails = 0;
+        P->steps++;
+        SetHeldMovement((void *)w, 0x0F + dir);      /* MOVEMENT_ACTION_WALK_NORMAL_DOWN/UP/LEFT/RIGHT = 0x10-0x13 */
+    } else if (P->phase == PH_STRIKE) {
+        if (P->timer == 1) {                         /* faced it: the hit */
+            SetHeldMovement((void *)w, 0x51 + P->fails);   /* MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN/UP/LEFT/RIGHT = 0x52-0x55 */
+            return;
+        }
+        if (!obj_alive(P->target, P->target_local)) {
+            P->phase = PH_RETURN;
+            P->timer = 0;
+            return;
+        }
+        fight(P->slot, P->species, P->level);
+        P->phase = PH_RETURN;
+        P->timer = 0;
+        P->fails = 0;
+        if (SPECIALS[4] == 3) {                      /* a shiny: a real battle, the patrol ends here */
+            finish();
+            DestroyTask(id);
+        }
+        SetupScript(patrol_script);                  /* shows the result; the task waits while it runs */
+        if (SPECIALS[4] == 3)
+            return;
+    } else {                                         /* PH_RETURN: back next to the player */
+        if (dist(ox(w), oy(w), ox(pl), oy(pl)) <= 1) {
+            finish();
+            DestroyTask(id);
+            return;
+        }
+        dir = plan(w, ox(pl), oy(pl));
+        if (!dir) {
+            if (++P->fails >= 3) {
+                abort_to_player(w);
+                DestroyTask(id);
+            }
+            return;
+        }
+        P->fails = 0;
+        P->steps++;
+        SetHeldMovement((void *)w, 0x0F + dir);
+    }
+}
+
+/* SELECT in Quick Catch (called by patrol.s): validate, close Quick Catch, start the walk. Returns 1 when the press was handled. */
+u32 patrol_select(void)
+{
+    u32 idx, walker, slot, task, level, species;
+    volatile u8 *sb1;
+    void *partner;
+
+    if (P->active || !QcAimValid())
+        return 0;
+    idx = QC[6];
+    walker = FOLLOWER[1];
+    sb1 = (volatile u8 *)SB1PTR;
+    if (idx > 15 || walker > 15 || !sb1)
+        return 0;
+    level = obj_at(idx)[0x1D];
+    if (level < 1 || level > 100)
+        level = 1;
+    species = *(volatile u16 *)(QC + 0x18);
+    if (!FOLLOWER[0] || !obj_alive(walker, 0xFE))    /* nobody is walking behind the player */
+        return 0;
+    slot = find_partner(walker);
+    partner = (void *)(PARTY + 100 * slot);
+
+    P->walker = walker;
+    P->walker_ptr = OBJECTS + 36 * walker;
+    P->target = idx;
+    P->target_local = QC[7];
+    P->slot = slot;
+    P->species = species;
+    P->level = level;
+    P->map_group = (s8)sb1[4];
+    P->map_num = (s8)sb1[5];
+    P->phase = PH_START;
+    P->timer = 0;
+    P->steps = 0;
+    P->fails = 0;
+
     task = task_of_quick_catch();
     if (task < 16)
         QcExit(task);
-    SetupScript(patrol_script);
+
+    if (get(partner, MON_HP) * 5 < get(partner, MON_MAXHP) * 2 || !get(partner, MON_HP)) {   /* too hurt: no walk at all */
+        fight(slot, species, level);
+        SetupScript(patrol_script);
+        return 1;
+    }
+    task = CreateTask((u32)patrol_task | 1, 80);
+    if (task >= 16)
+        return 1;                                    /* no free task: Quick Catch is closed, nothing else happened */
+    P->task = task;
+    P->active = 1;                                   /* from here the follower logic leaves the walker alone */
     return 1;
 }

@@ -52,3 +52,44 @@ patrol_pfi:
     ldr r1, =patrol_next
     bx r1
 .ltorg
+
+@ The hack's follower code sets the walker's held movement through the ObjectEventSetHeldMovement literal (idle every frame, a step when the player
+@ moves). While the patrol owns the walker (struct Patrol at 0x02022200: +0 active, +8 walker pointer) those calls for the walker are dropped; every
+@ other object, and every call while no patrol runs, goes straight to the engine function.
+.equ PATROL,  0x02022200
+.equ GTASKS,  0x03005090
+.equ SetHeldMovement, 0x08063CA5
+.global patrol_hold_wrap
+.thumb_func
+patrol_hold_wrap:
+    push {r4}
+    ldr r2, =PATROL
+    ldrb r3, [r2]
+    cmp r3, #0
+    beq 9f
+    ldr r3, [r2, #8]
+    cmp r0, r3
+    bne 9f
+    ldrb r3, [r2, #20]                          @ the patrol task's id: it must be a live task running patrol_task, or the flag is stale
+    cmp r3, #15
+    bhi 9f
+    movs r4, #40
+    muls r3, r4
+    ldr r4, =GTASKS
+    adds r3, r3, r4
+    ldrb r4, [r3, #4]                           @ isActive
+    cmp r4, #0
+    beq 9f
+    ldr r4, [r3]                                @ func
+    ldr r3, =patrol_task
+    lsrs r4, r4, #1
+    lsrs r3, r3, #1
+    cmp r4, r3
+    bne 9f
+    pop {r4}
+    movs r0, #0
+    bx lr
+9:  pop {r4}
+    ldr r3, =SetHeldMovement
+    bx r3
+.ltorg
