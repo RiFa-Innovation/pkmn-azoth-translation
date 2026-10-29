@@ -160,3 +160,20 @@ Verified in the emulator on `dist/river-0.2.3/Pokemon River Azoth v0.2.3.{gba,sa
 
 Next: (1) read-watch the target record while a throw/lock happens to find its table; (2) watch the walker object's movement writes to see what drives it;
 (3) catch the post-battle reward code with a write-watch on the bag (Exp. Candy ids 536-540) while a battle ends.
+
+### 11.1 Probe results, second pass (same day)
+
+* **Species list**: `0x0203B72A` + 2*slot holds the species id of each visible Pokémon (three Starly = 449 / 0x1C1 in the test), next to the
+  state struct (`0x0203B730`-`0x0203B7E8`). Per-slot level / personality arrays were not identified by eye. [V for species; ? for the rest]
+* **The locked target is probably pre-loaded into `gEnemyParty[0]` (0x0202402C)**: before pressing A in Quick Catch, `gEnemyParty[0]` already
+  held the Lv 2 Sentret that the battle then started with (same personality `0x5D48E8AD`, level byte at +0x54, HP at +0x56 = 13/13). If it holds
+  for every lock/switch, the patrol can read the target's species, level, shininess and held item through the normal `GetMonData` calls and never
+  needs the hack's own record format. [V once; ? re-test with R/L switching targets]
+* The party struct at `0x02024284` is **not** a vanilla-checksummed struct (a checksum scan finds nothing), so read mons only through
+  `GetMonData` / `SetMonData`, as the Cheat Device's level cap already does. [V]
+* A single A press in Quick Catch started a **real wild battle** here (the throw does not always skip the battle): the lock / throw conditions
+  are part of what to read next.
+* `0x02023610` is a battle structure (a battle-mon record containing the species name), not the visible-Pokémon table.
+
+Next probes: (1) switch targets (R, L) and re-read `gEnemyParty[0]`; (2) find which code writes `gEnemyParty[0]` on lock (write-watch with a
+scratch battle-free run) to get the lock function; (3) the walker's movement writer; (4) the reward routine.
