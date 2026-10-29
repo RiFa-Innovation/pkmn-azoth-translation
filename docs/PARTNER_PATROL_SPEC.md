@@ -60,17 +60,18 @@ HUD while active: a one-line status in the Quick Catch HUD area ("Patrol: Crocon
 **Input**: inside Quick Catch mode, **SELECT = send / recall the partner** (L and R are taken; confirm SELECT is unused there in M0). The
 cheat menu (SELECT+START) is unrelated and untouched.
 
-## 4. The simulated fight (no battle screen)
+## 4. The simulated fight (no battle screen, **no moves**)
 
-Gen-3 damage, deliberately simplified:
+River's rule (2026-10-29): the fight ignores moves entirely and is decided by **types**, Scarlet/Violet style.
 
-* Wild mon built once with the engine (`CreateMon` into a scratch slot of `gEnemyParty`, species and level from the target [?: M0 finds where
-  the object stores them]) so its stats and moves are real. Partner uses its real stats and moves.
-* Each round: the faster mon acts first; partner picks the move with the best expected damage (power x STAB x type chart x accuracy) among
-  moves with PP; the wild mon uses its best damaging move. Damage = `((2L/5+2) * P * A/D) / 50 + 2`, x STAB, x type effectiveness (the hack's
-  own type chart), x random 85-100%, x critical (1/16, x2). Status moves, abilities, held items, weather: ignored in v1 [decision: keep simple
-  and predictable]. Max 6 rounds per target; a draw counts as a retreat (no rewards).
-* Partner faints -> patrol ends; nothing is lost beyond the fainted state (the normal rules apply afterwards).
+* Each side attacks with its **best own type** (STAB) against the other side's type pair, through the game's own type chart (`0x0824F050`, the
+  hack's chart with Fairy: `{attacker, defender, 0/5/10/20}` triples). Per attacking type the multiplier is the product over the defender's one or
+  two types (0 / 0.25 / 0.5 / 1 / 2 / 4); the better of the attacker's two types is used. No effect = 0 damage.
+* Damage = `((2L/5+2) * 90 * A / D) / 50 + 2` (power 60 with STAB x1.5 folded in), A and D = the higher of Atk/SpA against the matching Def/SpDef,
+  x random 85-100%, x the type multiplier. The faster side acts first; 12 rounds at most; the partner retreats under 40% HP; a draw or a loss is a
+  retreat (no XP). Abilities, items, weather, status, accuracy, crits: ignored.
+* Both Pokémon are real (`CreateMon` for the target), so stats, levels and types are exact.
+* Partner faints is impossible by design: it retreats with at least 1 HP.
 
 ## 5. Rewards and level-ups
 
@@ -130,6 +131,7 @@ Total: roughly 10-14 working sessions, with M1/M2 (instant version) usable on th
 * **Button: SELECT** inside Quick Catch (L = switch ball, R = toggle lock are taken).
 * **Cost: HP only** (no PP drain). No hard level-gap rule: the simulated fight itself makes higher-level targets far harder, which is the
   anti-abuse lever (tuned in M5). The patrol stops when the partner is below 40% HP.
+* **The fight ignores moves** and uses only types (Scarlet/Violet style), see section 4.
 * **No Pokédex changes** (no seen/caught credit).
 * **Shiny targets: never fought and never removed.** The patrol skips them and gives a cue so the player can catch them: an exclamation
   emote over the shiny and a line in the summary ("A shiny Rattata was left for you"). Exact cue chosen in M3.
@@ -235,8 +237,8 @@ How it works:
 * `patrol_select()`: validates the aimed target with the game's own check (`0x09D53889`), reads level (`obj+0x1D`) and species (`QC+0x18`),
   finds the partner as the party member whose species equals the walker's graphics id (else the lead), refuses below 40% HP, builds the target with the
   game's own creation call (`0x09D6BA79`), and **stops on a shiny**: the Pokémon is left alone and a real wild battle starts with that very Pokémon
-  (`dowildbattle`), so the player can catch it. Otherwise a stat-based fight runs (generic power 60 vs 40, higher of Atk/SpA, 85-100% roll, speed
-  order, partner retreats under 40% HP, no moves or types yet), XP = `expYield * level / 7` (capped at level 100) applied with `SetMonData` +
+  (`dowildbattle`), so the player can catch it. Otherwise a stat-based fight runs (typed hit, see section 4: best own type with STAB against the defender's types through the game's chart, higher of Atk/SpA, 85-100% roll, speed
+  order, partner retreats under 40% HP; verified: a Grass partner beat a Lv 2 Starly and retreated from Lv 3 ones), XP = `expYield * level / 7` (capped at level 100) applied with `SetMonData` +
   `CalculateMonStats`, the target is removed (`0x09D55F69` with its local id in `LastTalked`), Quick Catch is closed (`0x09D53E65` on its task) and
   `patrol_script` reports the result.
 * Result vars: `0x8004` 1 won / 2 retreated / 3 shiny / 4 too hurt, `0x8005` EXP, `0x8006` partner slot, `0x8007` target species.
@@ -247,6 +249,6 @@ the second), target removed, Quick Catch closed and reusable; the too-hurt refus
 with `RHT_PATROL_TEST=shiny`: "This Starly is shiny! ... holds it still for you", then the real battle); River + Cheats (cheat menu and strike
 both work through the chain). All four editions build with clean reports and byte-identical BPS round trips.
 
-Known gaps (by design for M1): no moves / type chart in the fight (M2), no drops or held items (M2), level-ups do not learn moves or evolve (M2),
+Known gaps (by design for M1): no abilities/items in the fight (never planned), no drops or held items (M2), level-ups do not learn moves or evolve (M2),
 no walking or animation (M3), one target per press (M4). The partner shown by the walker is matched by species, so two party members of the same
 species resolve to the first alive one. Test switches: `RHT_PATROL_TEST=shiny|retreat` build scratch ROMs for the two rare branches.

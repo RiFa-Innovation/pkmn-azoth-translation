@@ -4,7 +4,8 @@
  * fight, gets XP, the target is removed, the result script reports it. A shiny roll stops the patrol and starts a real wild battle instead.
  *
  * Results in the script vars: 0x8004 = result (1 won, 2 retreated, 3 shiny -> real battle, 4 partner too hurt), 0x8005 = EXP gained,
- * 0x8006 = partner party slot, 0x8007 = target species. M1 ignores moves and types (stat-based); M2 adds them and the drops.
+ * 0x8006 = partner party slot, 0x8007 = target species. The fight ignores moves (River's rule): each side attacks with its best own type
+ * (STAB) against the other's types, through the game's type chart, Scarlet/Violet style. M2 adds the drops.
  */
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -20,8 +21,11 @@ typedef int s32;
 #define SPECIALS  ((volatile u16 *)0x020370B8)       /* script vars 0x8000.. */
 #define LASTTALKED (*(volatile u16 *)0x020370D2)
 #define SCRATCH   ((volatile u16 *)0x02022200)       /* borrowed link-buffer bytes: [0] local id of the target to remove */
+#define TYPECHART 0x0824F050                         /* the hack's chart: {attacker, defender, 0/5/10/20} triples, 0xFF end, 0xFE 0xFE 0 = foresight marker */
 #define BASESTATS 0x0976DFBC                         /* 28 bytes per species: expYield +9, growth rate +19 */
 #define EXPTABLE  0x09E0B258                         /* [(growth << 8) + level] -> u32 */
+
+#define POWER     90                                 /* a typed hit: power 60 with STAB (x1.5) */
 
 #define MON_SPECIES 11
 #define MON_EXP     25
@@ -79,11 +83,42 @@ static u32 udiv(u32 n, u32 d)
 
 static u32 higher(u32 a, u32 b) { return a > b ? a : b; }
 
-/* Gen-3 damage with a generic move: ((2L/5+2) * P * A / D) / 50 + 2, random 85..100 % */
-static u32 damage(u32 level, u32 power, u32 a, u32 d)
+/* effectiveness of one attacking type against one defending type: 0 / 5 / 10 / 20 (10 = neutral; unknown types are neutral) */
+static u32 eff1(u32 atk, u32 def)
 {
-    u32 base = udiv(udiv((udiv(2 * level, 5) + 2) * power * a, d ? d : 1), 50) + 2;
-    return udiv(base * (85 + (Random() & 15)), 100);
+    const volatile u8 *p = (const volatile u8 *)TYPECHART;
+    for (; *p != 0xFF; p += 3)
+        if (p[0] == atk && p[1] == def)
+            return p[2];
+    return 10;
+}
+
+/* the better of the attacker's own types against the defender's type pair, in percent (100 = neutral, 0 = no effect, 400 = 4x) */
+static u32 type_mult(u32 species_a, u32 species_d)
+{
+    const volatile u8 *a = (const volatile u8 *)(BASESTATS + 28 * species_a);
+    const volatile u8 *d = (const volatile u8 *)(BASESTATS + 28 * species_d);
+    u32 best = 0, i;
+    for (i = 0; i < 2; i++) {
+        u32 m;
+        if (i && a[7] == a[6])
+            break;
+        m = eff1(a[6 + i], d[6]);
+        if (d[7] != d[6])
+            m *= eff1(a[6 + i], d[7]);
+        else
+            m *= 10;
+        if (m > best)
+            best = m;
+    }
+    return best;
+}
+
+/* Gen-3 damage for a typed hit (no move): ((2L/5+2) * P * A / D) / 50 + 2, STAB folded into P, random 85..100 %, then the type multiplier */
+static u32 damage(u32 level, u32 a, u32 d, u32 mult)
+{
+    u32 base = udiv(udiv((udiv(2 * level, 5) + 2) * POWER * a, d ? d : 1), 50) + 2;
+    return udiv(udiv(base * (85 + (Random() & 15)), 100) * mult, 100);
 }
 
 static u32 task_of_quick_catch(void)
@@ -106,7 +141,7 @@ u32 patrol_remove(void)                              /* script: callnative */
 
 u32 patrol_select(void)
 {
-    u32 idx, level, species, slot, i, walker, gfx, hp, maxhp, ehp, ehpmax, pspd, espd, pa, pd, ea, ed, rounds, exp, growth, task;
+    u32 pm, em, idx, level, species, slot, i, walker, gfx, hp, maxhp, ehp, ehpmax, pspd, espd, pa, pd, ea, ed, rounds, exp, growth, task;
     void *partner;
     volatile u8 *obj;
     int won = 0, retreat = 0;
@@ -167,6 +202,8 @@ u32 patrol_select(void)
     pd = get(partner, MON_ATK) >= get(partner, MON_SPATK) ? 0 : 1;
     ea = higher(get(ENEMY, MON_ATK), get(ENEMY, MON_SPATK));
     ed = get(ENEMY, MON_ATK) >= get(ENEMY, MON_SPATK) ? 0 : 1;
+    pm = type_mult(get(partner, MON_SPECIES), species);
+    em = type_mult(species, get(partner, MON_SPECIES));
     pspd = get(partner, MON_SPEED);
     espd = get(ENEMY, MON_SPEED);
 
@@ -178,13 +215,13 @@ u32 patrol_select(void)
         for (turn = 0; turn < 2 && !won && !retreat; turn++) {
             int partner_acts = (pspd >= espd) ? (turn == 0) : (turn == 1);
             if (partner_acts) {
-                u32 d = damage(get(partner, MON_LEVEL), 60, pa, pd ? get(ENEMY, MON_SPDEF) : get(ENEMY, MON_DEF));
+                u32 d = damage(get(partner, MON_LEVEL), pa, pd ? get(ENEMY, MON_SPDEF) : get(ENEMY, MON_DEF), pm);
                 if (d >= ehp)
                     won = 1;
                 else
                     ehp -= d;
             } else {
-                u32 d = damage(level, 40, ea, ed ? get(partner, MON_SPDEF) : get(partner, MON_DEF));
+                u32 d = damage(level, ea, ed ? get(partner, MON_SPDEF) : get(partner, MON_DEF), em);
                 hp = d >= hp ? 1 : hp - d;
                 if (hp * 5 < maxhp * 2)
                     retreat = 1;
