@@ -68,7 +68,7 @@ struct Patrol {
 #define NEWKEYS (*(volatile u16 *)0x0300311E)         /* gMain.newKeys */
 #define KEY_B 0x0002
 enum { PH_START = 0, PH_WALK = 1, PH_STRIKE = 2, PH_RETURN = 3, PH_COOL = 4 };
-enum { R_DONE = 1, R_HURT = 2, R_SHINY = 3, R_TOOHURT = 4, R_NOREACH = 5, R_RECALL = 6 };
+enum { R_DONE = 1, R_HURT = 2, R_SHINY = 3, R_TOOHURT = 4, R_NOREACH = 5, R_RECALL = 6, R_NOWALKER = 7 };
 /* Settings (saved as hack flags, set by the settings script): F_OFF disables the patrol; F_SHORT / F_LONG pick the size, neither = normal.
  * normal: 10 targets within 12 tiles, short: 4 within 8, long: 20 within 16. */
 #define F_OFF   0x13B0
@@ -614,6 +614,34 @@ static void stop_and_return(u32 reason)
     P->fails = 0;
 }
 
+void patrol_task(u32 id);
+
+/* Is `id` a live task running patrol_task? (The game wipes the whole task list whenever a battle or a full-screen menu starts.) */
+static int task_alive(u32 id)
+{
+    volatile u32 *t;
+    if (id > 15)
+        return 0;
+    t = (volatile u32 *)(TASKS + 40 * id);
+    return ((volatile u8 *)t)[4] && (t[0] >> 1) == (((u32)patrol_task | 1) >> 1);
+}
+
+/* Called by patrol.s on every free overworld frame. If a patrol is marked active but its task is gone, bring the task back: the patrol resumes after a
+ * menu or a battle, and a stale or garbage state ends itself on the task's first checks (map, walker identity). If no task can be made the flag is cleared,
+ * so the patrol and its settings hotkey can never stay locked out. */
+u32 patrol_watchdog(void)
+{
+    u32 task;
+    if (!P->active || task_alive(P->task))
+        return 0;
+    task = CreateTask((u32)patrol_task | 1, 80);
+    if (task < 16)
+        P->task = task;
+    else
+        P->active = 0;
+    return 0;
+}
+
 void patrol_task(u32 id)
 {
     volatile u8 *w, *t, *pl;
@@ -803,8 +831,19 @@ u32 patrol_select(void)
     if (level < 1 || level > 100)
         level = 1;
     species = *(volatile u16 *)(QC + 0x18);
-    if (!FOLLOWER[0] || !obj_alive(walker, 0xFE))    /* nobody is walking behind the player */
-        return 0;
+    if (!FOLLOWER[0] || !obj_alive(walker, 0xFE)) {  /* nobody is walking behind the player: say so (SELECT would otherwise do nothing visible) */
+        task = task_of_quick_catch();
+        if (task < 16)
+            QcExit(task);
+        P->slot = 0;
+        P->species = species;
+        P->kills = 0;
+        P->nmoves = 0;
+        P->nitems = 0;
+        P->level_now = 0;
+        run_summary(R_NOWALKER);
+        return 1;
+    }
     slot = find_partner(walker);
     partner = (void *)(PARTY + 100 * slot);
 
