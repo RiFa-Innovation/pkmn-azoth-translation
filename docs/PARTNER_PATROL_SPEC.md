@@ -1,6 +1,6 @@
 # Partner Patrol: design and milestones
 
-Status: **draft 2, 2026-10-29. Decisions recorded (section 9); M0 in progress.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
+Status: **draft 3, 2026-10-29. Decisions recorded (section 9); M0 done; M1 (instant strike) built and verified, see section 12.** Goal set by River: in Quick Catch mode, send the walking partner Pokémon out to fight the
 visible wild Pokémon on the map by itself, and collect the XP and drops. Target is the fully autonomous version ("Tier 3"), reached in
 steps that each stand on their own.
 
@@ -221,3 +221,32 @@ watchpoint across a Quick Catch + battle session in M1. Frontier keeps `0x020224
 
 **M0 status**: (a) target model, (b) walker control, (c) reward shape, (e) RAM are resolved enough to start M1. Still unknown and
 scheduled: the XP code path, the EV-switch variable and the Candy/Berry branches (M2), the held-item/shiny details of a materialised target (M1).
+
+## 12. M1 built: the instant strike (2026-10-29)
+
+Files: `scripts/native/patrol.s` (SELECT hook, `__call_via_rN` shims), `scripts/native/patrol.c` (the strike, in C), `scripts/patrol_build.py`
+(links into the free pool, result script, patches), called from `insert.py` **only when `RHT_EDITION=river`** (so both River variants carry it,
+the translation variants are byte-identical to before: `69e4e357...` and `ca3da9e8...`).
+
+How it works:
+* One patched literal, the `ProcessPlayerFieldInput` trampoline (`0x0806CACC`). The patrol wrapper reads `newKeys`; on SELECT while Quick
+  Catch is active (state byte `0x0203B743` = 1) it calls `patrol_select()`. Otherwise it jumps to the previous target, so it chains in front of the
+  Cheat Device's wrapper (River + Cheats). Side effect: with Quick Catch open, SELECT strikes; the cheat hotkey (SELECT+START) works outside it.
+* `patrol_select()`: validates the aimed target with the game's own check (`0x09D53889`), reads level (`obj+0x1D`) and species (`QC+0x18`),
+  finds the partner as the party member whose species equals the walker's graphics id (else the lead), refuses below 40% HP, builds the target with the
+  game's own creation call (`0x09D6BA79`), and **stops on a shiny**: the Pokémon is left alone and a real wild battle starts with that very Pokémon
+  (`dowildbattle`), so the player can catch it. Otherwise a stat-based fight runs (generic power 60 vs 40, higher of Atk/SpA, 85-100% roll, speed
+  order, partner retreats under 40% HP, no moves or types yet), XP = `expYield * level / 7` (capped at level 100) applied with `SetMonData` +
+  `CalculateMonStats`, the target is removed (`0x09D55F69` with its local id in `LastTalked`), Quick Catch is closed (`0x09D53E65` on its task) and
+  `patrol_script` reports the result.
+* Result vars: `0x8004` 1 won / 2 retreated / 3 shiny / 4 too hurt, `0x8005` EXP, `0x8006` partner slot, `0x8007` target species.
+* Scratch RAM: `0x02022200` (one halfword: the local id to remove).
+
+Verified in mGBA (River v0.2.3 save, scratch copy): the SELECT strike ("AAA beat Starly! It gained 16 EXP.", HP 20 -> 18, 24 EXP / HP 18 -> 16 on
+the second), target removed, Quick Catch closed and reusable; the too-hurt refusal at 6/20 HP; the retreat message; the shiny branch (forced
+with `RHT_PATROL_TEST=shiny`: "This Starly is shiny! ... holds it still for you", then the real battle); River + Cheats (cheat menu and strike
+both work through the chain). All four editions build with clean reports and byte-identical BPS round trips.
+
+Known gaps (by design for M1): no moves / type chart in the fight (M2), no drops or held items (M2), level-ups do not learn moves or evolve (M2),
+no walking or animation (M3), one target per press (M4). The partner shown by the walker is matched by species, so two party members of the same
+species resolve to the first alive one. Test switches: `RHT_PATROL_TEST=shiny|retreat` build scratch ROMs for the two rare branches.

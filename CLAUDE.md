@@ -246,6 +246,7 @@ Build and verify **both** after any change: `python3 scripts/build_editions.py` 
 `build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
 `RHT_CHEATS=1` adds the **Cheat Device** (`docs/CHEATS.md`) to either edition; it is an optional add-on released separately (`scripts/dist.py --cheats N`),
 never part of the numbered betas or River releases. `build_editions.py` builds all four variants (`translation-cheats`, `river-cheats` too).
+The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`) is built into every `RHT_EDITION=river` build (not into the translation); SELECT in Quick Catch sends the walker at the aimed target. Patrol scratch RAM `0x02022200`-`0x0202227F`, hack flags `0x13B0`-`0x13BF` reserved.
 
 ## Release steps (only when asked)
 
