@@ -24,6 +24,10 @@ For the translation, or for older River versions (v0.3 and earlier), use the add
 In the overworld (walking around, no text box or menu open) press **SELECT + START together**. On a keyboard in mGBA that is Backspace + Enter.
 The menu appears at the top left. Choose an entry with the D-pad and **A**; **B** closes the menu.
 
+| The menu | A switch asks first | Set To Level Cap |
+|---|---|---|
+| ![menu](img/cheats/1-menu.png) | ![switch](img/cheats/2-switch.png) | ![cap](img/cheats/3-level-cap.png) |
+
 ## What each entry does
 
 Entries with an on/off switch show their current state when you pick them ("Shiny Boost is OFF. Turn it ON?") and keep it in your save.
@@ -38,7 +42,6 @@ Entries with an on/off switch show their current state when you pick them ("Shin
 | **99 Rare Candies** | no | Adds 99 Rare Candies to your bag (Training pocket). |
 | **Money +99999** | no | Adds ¥99,999. |
 | **Set To Level Cap** | no | Pick a party Pokémon; it is raised to the level cap for your current number of badges. It is never lowered. |
-| **Close** | no | Leaves the menu. |
 
 ### Level cap
 
