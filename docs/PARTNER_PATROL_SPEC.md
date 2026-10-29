@@ -185,3 +185,39 @@ Still open from M0: (b) the walker, (c) the reward routine, (e) free EWRAM. Walk
 
 Next probes: (1) read vars 0x51DB-0x51DD live and confirm against the HUD species; (2) watch writes to the walker object's movement fields
 (+0x1C... / movementType) to find what drives it; (3) break/watch bag writes (Exp. Candy ids 536-540) across a won battle for the reward routine.
+
+### 11.2 Walker, rewards, RAM (M0b/c/e, 2026-10-29)
+
+**Species list confirmed**: hack vars live at `0x0203B374 + 2*(var-0x5000)` (workbench `knowledge/guides/memory.md`), so vars 0x51DB-0x51DD sit at
+`0x0203B72A/C/E`: exactly the three species words seen in the Quick Catch dump. [V]
+
+**Walker (M0b)** [V by breakpoints on `ObjectEventSetHeldMovement` while the player steps]
+* **Follower state struct at `0x0203B818`** (pointer literal at `0x09D32400`): `+0` active flag (1), `+1` the walker's index in `gObjectEvents`
+  (1 in the test), `+4` its local id (0xFE), later bytes hold its graphics/state. Live value: `01 01 00 00 fe 42 03 00 3a 00 12 00 ...`.
+* The walker's movementType is 0 (none): it is **driven by held movements issued by the hack's field-input code**. Every free frame the big
+  function at `0x09D320B0`-`0x09D32608` (the same function `ProcessPlayerFieldInput` jumps into) does, when no player action was handled and
+  state+0 is set: `ObjectEventClearHeldMovementIfFinished(walker)` then `ObjectEventSetHeldMovement(walker, 0xB6)` (0xB6 = idle/face action; call
+  site `0x09D32344`). Its steps come from `0x09D33533` inside the function `0x09D33342`-`0x09D337F0` (called from the player's step), which
+  issues the follow movement (e.g. action 0x11).
+* **Takeover plan**: the cheapest safe switch is a flag the patrol sets that makes those two sites do nothing for the walker (wrap the
+  `ObjectEventSetHeldMovement` thunk literal at `0x09D32424`, and the follow-step call, to skip when the patrol owns the walker), then the patrol
+  issues its own held movements and, on return, clears the flag and teleports the walker next to the player if it is far. Held movements only
+  (no `applymovement` chains), per #37.
+
+**Rewards (M0c)** [V partly]
+* A won battle ends the drop with `AddBagItem(item, qty)` called from `0x09D2AF14`, inside the function `0x09D2AE10`-`0x09D2AF4C`: it loops the
+  party (participants bitmask, alive, not an egg), computes the amount (`0x09D2ACD4`, times the Exp. Share multiplier `0x09D2A820`), picks the
+  feather from a 6-entry table at **0x09DDF196 = {57, 58, 59, 62, 60, 61}** (Health, Muscle, Resist, Swift, Genius, Clever; index = EV stat in the
+  order HP, Atk, Def, Spe, SpA, SpD), calls `AddBagItem`, and fills the text buffers for the "obtained" line. The test drop was a Muscle Wing (58) with the EV switch off.
+* It is entangled with battle state (participants, text buffers), so the plan is to **reimplement the drop from the documented rules** (Candy 20 /
+  Berries 30 / Feathers 50, non-stacking, EV switch, Exp. Share, Power items) using the same item ids and this feather table, and not to call it.
+  The Candy and Berry branches, the EV-switch variable and the Power-item rule are still to locate in M2 (they sit in the same neighbourhood,
+  `0x09D2A8xx`-`0x09D2B0xx`).
+* `Cmd_getexp` (0x08021A68) was not hit in the test, so the hack replaces it: XP is also applied elsewhere; M2 finds it to reuse its formula.
+
+**RAM (M0e)**: the link buffers are the safe borrow (as the Frontier does). Literal scan of the River ROM: no code refers to
+`0x02022200`-`0x020222FF` except a handful of odd constants, so **patrol state = `0x02022200`-`0x0202227F` (128 bytes)**; verify with a write
+watchpoint across a Quick Catch + battle session in M1. Frontier keeps `0x02022400`-`0x020227FF`.
+
+**M0 status**: (a) target model, (b) walker control, (c) reward shape, (e) RAM are resolved enough to start M1. Still unknown and
+scheduled: the XP code path, the EV-switch variable and the Candy/Berry branches (M2), the held-item/shiny details of a materialised target (M1).
