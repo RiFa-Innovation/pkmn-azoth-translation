@@ -34,6 +34,7 @@ import statusicons  # noqa: E402
 import typeicons  # noqa: E402
 import anchored  # noqa: E402
 import cheats_build  # noqa: E402
+import patrol_build  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
@@ -804,6 +805,8 @@ def main():
     naming_dispatch(rom, src, pool)
     if edition.CHEATS:
         report["cheats"] = cheats_build.apply(rom, src, pool)
+    if edition.EDITION == "river":          # Partner Patrol (docs/PARTNER_PATROL_SPEC.md): River Edition only, chained after the Cheat Device
+        report["patrol"] = patrol_build.apply(rom, src, pool)
     report["new_maps"] = mapedit.apply(rom, src, pool, edition.new_maps_path())
     report["free_after"] = pool.total()
 
