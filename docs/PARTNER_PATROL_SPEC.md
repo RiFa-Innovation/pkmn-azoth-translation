@@ -364,3 +364,19 @@ fights are won, opens Quick Catch and presses SELECT, and checks that the game e
 Result (2026-10-29, River v0.2.3 save, current build): **25 of 26 maps ran a full patrol and all 25 passed every check**; 3.46 has no grass pair (nothing to test). Across the runs: kills of 0 (the partner lost the first fight or the target was unreachable) up to
 **10 (the kill cap, reached on 3.80 and one more map)**, the "couldn't get close" ending twice (reason 5, the unreachable path that had not been exercised before), 21 runs ended by a lost fight (reason 2), 2 by the cap or no target (reason 1), longest patrol 1,593
 frames, at most 53 steps. No softlock, no leftover task, no stray walker. Not covered by the sweep: water (surfing/biking: SELECT is ignored without a walker), Chapter 2 and Frontier maps, and a patrol interrupted by the player on every map (B recall and the map-change abort were tested by hand on 3.79 and 3.85).
+
+## 17. Bug fix: the patrol could lock itself out (found in River v0.4, 2026-10-29)
+
+**Report (River):** a save in which the patrol could no longer be started and its settings could not be reached to unlock it.
+
+**Cause (reproduced):** the patrol runs as a game task, and the game wipes the whole task list when a battle starts (observed: the patrol's task slot became the dummy task while `struct Patrol.active` stayed 1).
+`patrol_select` and `patrol_open_settings` both refuse to act while `active` is set, so after such an interruption SELECT in Quick Catch did nothing and **L + R + SELECT showed the game's own
+"An item in the Bag can be registered to Select" message instead of the settings**. The flag lives in EWRAM (never saved), so a real reset cleared it, but a save state, or any reload that does not reboot the game, kept it. The wrapper that
+silences the follower code already checked that the task was alive; the two hotkey handlers did not.
+
+**Fix:** `patrol_watchdog()` runs on every free overworld frame (called first thing from `patrol_pfi`): if `active` is set and its task is not a live `patrol_task`, the task is re-created, so a patrol interrupted by a battle
+resumes, and a stale or garbage state ends itself at the task's first checks (map, walker identity); if no task can be created, `active` is cleared. Also new: pressing SELECT in Quick Catch with nobody walking behind you now says
+"Nobody is walking behind you. Put a Pokémon out to walk first, then try again." (reason code 7) instead of doing nothing.
+
+Verified from the reporter's own save (River v0.4, scratch copy): the fresh patrol works; a stale flag heals within 40 frames and the patrol works afterwards; the Start menu opened mid-patrol does not break it; a forced wild battle mid-patrol kills the task
+(confirmed) and after the battle the patrol state is clean, a full patrol runs and the settings hotkey opens the settings; the no-walker message shows. Lesson: any state that outlives its task needs the same liveness check wherever it is read.

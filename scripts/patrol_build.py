@@ -78,6 +78,12 @@ SCRIPT = """
         goto_if 1 hurt
         compare_var_to_value 0x8004 5
         goto_if 1 unreachable
+        compare_var_to_value 0x8004 7
+        goto_if 1 no_walker
+        releaseall
+        end
+    no_walker:
+        say "Nobody is walking behind you. Put a Pokémon out to walk first, then try again."
         releaseall
         end
     worn_out:

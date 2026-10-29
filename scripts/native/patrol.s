@@ -33,6 +33,7 @@ callvia 7
 .thumb_func
 patrol_pfi:
     push {r0, lr}
+    bl patrol_watchdog                          @ every free frame: re-create the patrol task if the game's ResetTasks killed it
     ldr r1, =GMAIN
     ldrh r2, [r1, #0x2E]                        @ newKeys
     movs r3, #SELECT
