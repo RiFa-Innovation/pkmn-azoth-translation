@@ -263,19 +263,24 @@ The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`
 4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
 
-## Current state (2026-10-12, after beta-9)
+## Current state (2026-10-30, after beta-30 / river-v0.5.2)
 
-Open: #11 (~10 mid-block Chinese fragments), #24 (human proofreading pass,
-ongoing). Beta 7-9 closed the freeze on talking to placeholder-script NPCs
-(#17), the Sprout Tower top-floor softlock (#37; the fix re-places the two exit
-sages on every map load, so stuck saves repair themselves), the Ilex shrine
-crash (#19), the achievements fit (#2), Ilex/route-sign/Help-Tips Chinese and the
-double-battle stray text (#13, parked). Not yet checked in game: the new
-BracerPoints/price/¥ lines and the Wobbuffet line from beta-6.
+Releases: **beta-30** (translation + the Spectrum Frontier, Latest) and **river-v0.5.2** (pre-release: Frontier +
+Chapter 2, Route 28, Mt. Silver, Red, Partner Patrol, Cheat Device). Beta 30 / v0.5.2 closed twelve Discord-reported
+issues (#146-#157, PLAYTEST 101-107): the PC box's second pointer table (`0x1CCE4xx` words the dump never lists), the 40
+one-hanzi "哔！" call-end strings, Pokédex description width/clipping (`insert.py` `DEX_DESC_*`, `code_patches.json`
+`dex_desc_y`), bag tabs, EV Adjustment labels and the Help Tips window (the window runs past the 240 px screen: usable
+width ~130 px, `{F8:xx}` icons now counted by `mercury_text.ctrl_px`). Shiny Boost now also covers wild Pokémon
+(fixed-personality creations; PLAYTEST 100, #139).
 
-Ideas for next sessions: play further than the recorded progress and log
-findings as `PLAYTEST.md` rows 57+; sweep remaining Chinese by grepping a fresh
-dump of the built ROM for hanzi; check other fixed-width UI lists (menus,
-summary screens, Pokédex entries) for overflow the way Help Tips was swept
-(capture every entry, view the grid); keep the Reddit/Discord announcement
-drafts up to date (the user posts them).
+Open issues: #24 (human proofreading, ongoing); #128, #103, #99, #95, #63, #51 (not reproduced, need the reporter's save);
+new Cheat Device reports #161-#164 (gpSP menu cut off, Shiny Boost reports, configurable shiny odds, SELECT+START vs EXP
+Share toggle) and #160 (README credits). Do not fix what can't be reproduced.
+
+Verification habits that paid off: drive the game with `scratchpad`-style scripts (script injection through `0x03000EB0`,
+`start()`+`tap()` helpers over `scripts/emu.py`), screenshot every screen you changed, and measure rates over hundreds of
+samples (load_state replays the RNG: vary the wait before each sample). `break_at`/`watch_read` currently never fire in the
+headless build; use static disassembly (`arm-none-eabi-objdump -Mforce-thumb`) to find the code behind a screen.
+
+Ideas for next sessions: consolidate the Cheat Device bindings (#161/#164 mention a pending consolidation); sweep other
+fixed-width UI lists for overflow; keep the Reddit/Discord announcement drafts up to date (the user posts them).
