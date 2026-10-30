@@ -44,6 +44,8 @@ DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
 MOVE_DESC_PX = 112  # move description box (summary / learn screen), 4 lines
 MOVE_DESC_TABLE, MOVE_DESC_COUNT = 0x1CC8EB0, 1273
 ITEM_DESC_PX = 176  # bag description box: starts after the item icon, ends before the arrow
+DEX_DESC_PX, DEX_DESC_LINES = 216, 4  # Pokedex INFO page: the block is centred in a 4-line box; 6 px glyphs, ~200 px before the frame (#151)
+DEX_DESC_REFS = (0x17D9000, 0x17EB000)  # the hack's per-species description table
 HELP_PX = 222
 MIN_FREE_RUN = 512
 NAMING_DISPATCH = "002813d0052811d2f0b5474680b488460006070e1204150c1b041e0c0a4cf22040010a4b00f00ef80949084700900948f7b51e0008ab1d780748084b01911700074c2047184700008c9903029d2b000873d90908b55eff0918270000b12b0008c55eff09"  # data/naming_dispatch.s (arm-none-eabi-as -mthumb; objcopy -O binary)
@@ -555,6 +557,8 @@ def main():
     # strings referenced from the hack's move-description table (CFRU, 0x1CC8EB0)
     move_desc = {int.from_bytes(src[MOVE_DESC_TABLE + 4 * i:MOVE_DESC_TABLE + 4 * i + 4], "little") - 0x08000000
                  for i in range(MOVE_DESC_COUNT)}
+    dex_desc = {t for t, v in strings.items()
+                if any(DEX_DESC_REFS[0] <= int(r.split(":")[0], 16) < DEX_DESC_REFS[1] for r in v["refs"])}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
     if json.load(open(edition.new_maps_path())).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
@@ -586,6 +590,8 @@ def main():
         if t in move_desc:  # summary / move-learn description box (4 lines)
             max_px, dialogue, single_line = MOVE_DESC_PX, False, False
         max_lines = None
+        if t in dex_desc:  # Pokedex INFO description: fill the box instead of the Chinese 12-hanzi block
+            max_px, dialogue, single_line, max_lines = DEX_DESC_PX, False, False, DEX_DESC_LINES
         if f"{t:07X}" in width_override:
             wo = width_override[f"{t:07X}"]
             max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
