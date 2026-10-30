@@ -50,7 +50,7 @@ For every Pokémon the partner beats (the same drop rule as a Quick Catch win):
 
 | What | How |
 |---|---|
-| **Experience** | The partner gains `base EXP yield x level / 7` (it alone). Level-ups teach the moves of that level. **Evolution is left to the game**: the partner is flagged and evolves after your next real battle, as if it had levelled up in one. |
+| **Experience** | The partner gains `base EXP yield x level / 7` (it alone). Level-ups teach the moves of that level. **Evolution is the game's own scene**: if the partner levelled up and can evolve, the usual "What? ... is evolving!" screen opens right after the report (B cancels, as always). |
 | **One drop** | 20%: an **Exp. Candy** (XS below Lv 20, S below 40, M below 60, L below 80, XL from 80, by the target's level). 30%: one of ten **Berries**. 50%: **EV Feathers**, with the hack's own rules (Power items, the doubling item, the Exp. Share multiplier; the EV switch does not matter). |
 | **Held items** | What the species can hold: the common item 50%, the rare one 5% (always, if both are the same). |
 

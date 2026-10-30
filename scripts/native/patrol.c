@@ -105,6 +105,7 @@ typedef void (*fn_script)(const void *);
 typedef u32 (*fn_add)(u32, u32);
 typedef void (*fn_feather)(void *, u32, u16 *);
 typedef u32 (*fn_learn)(void *, u32);
+typedef void (*fn_evo)(void *, u32, u32, u32);
 typedef u32 (*fn_task_create)(u32, u32);
 typedef u32 (*fn_coll)(void *, s32, s32, u32);
 typedef u32 (*fn_obj)(void *);
@@ -125,6 +126,10 @@ typedef void (*fn_move_to)(void *, s32, s32);
 #define SetupScript       ((fn_script)0x08069AE5)
 #define AddBagItem        ((fn_add)0x0809A085)
 #define Feathers          ((fn_feather)0x09D2ADA5)   /* (partner mon, defeated species, u16 out[6]) -> adds the Feathers, out[stat] = count (negative = no room) */
+#define GetEvolutionTarget ((fn_getmon)0x08042EC5)   /* (mon, mode 0, item 0) -> the species it evolves into now, 0 = none; the party menu's own rare-candy call */
+#define BeginEvolutionScene ((fn_evo)0x080CDDA9)     /* (mon, species, canStop, partyId): the engine's evolution scene, B cancels */
+#define GCB2_AFTEREVO     (*(volatile u32 *)0x0300537C)   /* where the scene returns to */
+#define CB2_ContinueScript 0x080568C5                /* CB2_ReturnToFieldContinueScript: back to the field and resume the running script */
 #define TryLearnMove      ((fn_learn)0x0803EA89)
 #define ZeroMonData       ((fn_void_p)0x0803D995)
 #define CreateTask        ((fn_task_create)0x0807741D)
@@ -220,6 +225,29 @@ u32 patrol_remove(void)                              /* script: callnative */
 {
     LASTTALKED = P->target_local;
     QcRemoveTarget();
+    return 0;
+}
+
+/* script: callnative after the summary. If the partner levelled up (the engine's own gLeveledUpInBattle bit) and can evolve now, start the engine's evolution
+ * scene (the player can cancel with B, as after a battle) and set 0x800D = 1 so the script waits; the scene returns to the field and the script goes on. The
+ * bit is cleared either way, so the post-battle check does not ask a second time. */
+u32 patrol_evolve(void)
+{
+    u32 slot = P->slot, species;
+    void *mon;
+    V800D = 0;
+    if (slot > 5 || !(LEVELEDUP & (1 << slot)))
+        return 0;
+    LEVELEDUP &= ~(1 << slot);
+    mon = (void *)(PARTY + 100 * slot);
+    if (!get(mon, MON_SPECIES) || get(mon, MON_IS_EGG))
+        return 0;
+    species = GetEvolutionTarget(mon, 0, 0) & 0xFFFF;
+    if (!species)
+        return 0;
+    GCB2_AFTEREVO = CB2_ContinueScript;
+    BeginEvolutionScene(mon, species, 1, slot);
+    V800D = 1;
     return 0;
 }
 

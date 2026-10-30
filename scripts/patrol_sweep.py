@@ -54,7 +54,7 @@ def main():
         e.write(0x03000EA8, b"\x00")
         e.wait(60)
 
-    free = lambda: e.read(0x03000F9C, 1)[0] == 0
+    free = lambda: e.read(0x03000F9C, 1)[0] == 0 and struct.unpack("<I", e.read(0x030030F4, 4))[0] == 0x080565B5     # field unlocked AND back on the overworld callback (an evolution scene is not)
     run(bytes([0x44]) + struct.pack("<HH", 4, 20) + bytes([0x02]))      # additem Poke Ball x20 (Quick Catch needs balls)
 
     def clear():

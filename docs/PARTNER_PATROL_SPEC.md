@@ -403,3 +403,11 @@ follower code (idle movement every frame, follow step when the player moves).
   follower state stayed untouched while the slot stayed inert.)
 * Full 26-map patrol sweep with the v0.2.3 save: 25 runs, 10-kill caps reached on 3.80 and 1.50, the rest ended by "worn out"/"couldn't get close", no patrol task left behind, controls back everywhere.
   The sweep's "player can move" check was fixed (Down+Up cancelled out; any single step now counts): the two earlier failures (3.86, 3.101) were that check, not the patrol.
+
+## 19. Evolution prompt (M6, unreleased)
+
+After the summary (every ending except the shiny one) the script runs `patrol_evolve`: if the engine's own `gLeveledUpInBattle` bit (`0x03004FD4`) is set for the partner's slot and `GetEvolutionTargetSpecies`
+(`0x08042EC4`, mode 0, the party menu's own call) names a species, it sets `gCB2_AfterEvolution` (`0x0300537C`) to `CB2_ReturnToFieldContinueScript` (`0x080568C5`) and calls
+`BeginEvolutionScene` (`0x080CDDA8`, canStop = 1); the script then `waitstate`s and resumes on the field. The bit is cleared either way, so the post-battle check does not ask twice.
+Verified in the emulator (a Charmander given by script, level byte 40, bit set, the real summary script): the scene opens ("What? Charmander is evolving!"), A evolves it, B cancels it, both return
+to the overworld with the script finished, the field unlocked and the walker respawned; sweep 3.80 / 1.50 / 3.84 / 3.42 clean. The sweep's `free()` now also requires the overworld callback.

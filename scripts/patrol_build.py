@@ -80,8 +80,7 @@ SCRIPT = """
         goto_if 1 unreachable
         compare_var_to_value 0x8004 7
         goto_if 1 no_walker
-        releaseall
-        end
+        goto finish
     no_walker:
         say "Nobody is walking behind you. Put a Pokémon out to walk first, then try again."
         releaseall
@@ -89,17 +88,24 @@ SCRIPT = """
     worn_out:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is worn out and came back."
-        releaseall
-        end
+        goto finish
     unreachable:
         bufferpartymonnick 0 0x8006
         bufferspeciesname 1 0x8007
         say "{FD:02} couldn't get close to {FD:03}."
-        releaseall
-        end
+        goto finish
     hurt:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is too hurt to fight. Heal up first."
+        goto finish
+    finish:
+        callnative @patrol_evolve
+        compare_var_to_value 0x800D 1
+        goto_if 1 evolving
+        releaseall
+        end
+    evolving:
+        waitstate
         releaseall
         end
     shiny:
@@ -213,7 +219,7 @@ def apply(rom, src, pool):
     na = pool.alloc_aligned(len(image))
     syms = _build(ROM_BASE + na, path, 0, cur)[1]
     text = lambda b: ROM_BASE + _alloc(rom, pool, b)
-    ext = {"patrol_remove": syms["patrol_remove"] | 1, "patrol_sum_step": syms["patrol_sum_step"] | 1}
+    ext = {"patrol_remove": syms["patrol_remove"] | 1, "patrol_sum_step": syms["patrol_sum_step"] | 1, "patrol_evolve": syms["patrol_evolve"] | 1}
     size = len(scrasm.assemble(SCRIPT, 0, widths, _Any(), lambda b: 0))
     sa = pool.alloc_aligned(size)
     code = scrasm.assemble(SCRIPT, ROM_BASE + sa, widths, ext, text)
