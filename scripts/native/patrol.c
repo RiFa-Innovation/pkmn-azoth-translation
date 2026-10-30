@@ -65,6 +65,8 @@ struct Patrol {
     u16 pend[6];        /* +414 moves the partner could not learn (its moveset was full), offered after the summary */
     u8 npend;           /* +426 */
     u8 pend_i;          /* +427 next one to offer */
+    u16 evo_gfx;        /* +428 the walker's graphics id and the partner's species before an evolution scene (0 = nothing to refresh) */
+    u16 evo_sp;         /* +430 */
 };
 #define P ((volatile struct Patrol *)0x02022200)
 #define SB1PTR (*(volatile u32 *)0x03005008)
@@ -244,6 +246,10 @@ u32 patrol_remove(void)                              /* script: callnative */
 /* script: callnative after the summary. If the partner levelled up (the engine's own gLeveledUpInBattle bit) and can evolve now, start the engine's evolution
  * scene (the player can cancel with B, as after a battle) and set 0x800D = 1 so the script waits; the scene returns to the field and the script goes on. The
  * bit is cleared either way, so the post-battle check does not ask a second time. */
+static void evo_done(void);
+static volatile u8 *obj_at(u32 idx);
+static int obj_alive(u32 idx, u32 local);
+
 u32 patrol_evolve(void)
 {
     u32 slot = P->slot, species;
@@ -258,7 +264,16 @@ u32 patrol_evolve(void)
     species = GetEvolutionTarget(mon, 0, 0) & 0xFFFF;
     if (!species)
         return 0;
-    GCB2_AFTEREVO = CB2_ContinueScript;
+    P->evo_gfx = 0;
+    if (FOLLOWER[0] && obj_alive(FOLLOWER[1], 0xFE)) {
+        volatile u8 *w = obj_at(FOLLOWER[1]);
+        u32 g = w[5] | (w[35] << 8);
+        if (g == (FOLLOWER[0x12] | (FOLLOWER[0x13] << 8))) {
+            P->evo_gfx = g;
+            P->evo_sp = get(mon, MON_SPECIES) & 0xFFFF;
+        }
+    }
+    GCB2_AFTEREVO = (u32)evo_done | 1;
     BeginEvolutionScene(mon, species, 1, slot);
     V800D = 1;
     return 0;
@@ -431,7 +446,7 @@ static u32 find_partner(u32 walker)
         void *m = (void *)(PARTY + 100 * i);
         if (!get(m, MON_SPECIES) || get(m, MON_IS_EGG))
             continue;
-        if (get(m, MON_SPECIES) == gfx && get(m, MON_HP))
+        if ((get(m, MON_SPECIES) == gfx || get(m, MON_SPECIES) + 256 == gfx) && get(m, MON_HP))   /* the hack's graphics ids sit 256 above the species */
             return i;
     }
     return 0;
@@ -535,6 +550,28 @@ static int near_player(volatile u8 *o, volatile u8 *pl, s32 mx, s32 up, s32 down
 }
 static u32 dist(s32 ax, s32 ay, s32 bx, s32 by) { return (ax > bx ? ax - bx : bx - ax) + (ay > by ? ay - by : by - ay); }
 static int obj_alive(u32 idx, u32 local) { volatile u8 *o; if (idx > 15) return 0; o = obj_at(idx); return (o[0] & 1) && o[8] == local; }
+
+/* back from the evolution scene, before the field is rebuilt: the hack draws the walker from the species kept in its follower state (+0x12) and in the
+ * object (+5, +35), and only refreshes them on a map change or a menu, so a partner that evolved kept its old sprite. Give the walker the new species when
+ * it still shows the old one; the field rebuild that follows spawns the sprite from the object. */
+static void evo_done(void)
+{
+    u32 slot = P->slot, sp, g;
+    volatile u8 *w;
+    if (P->evo_gfx && slot <= 5 && FOLLOWER[0] && obj_alive(FOLLOWER[1], 0xFE)) {
+        w = obj_at(FOLLOWER[1]);
+        sp = get((void *)(PARTY + 100 * slot), MON_SPECIES) & 0xFFFF;
+        g = sp + P->evo_gfx - P->evo_sp;                  /* the hack's graphics ids sit a fixed distance above the species numbers */
+        if (sp && sp != P->evo_sp && g < 0x800 && (w[5] | (w[35] << 8)) == P->evo_gfx) {
+            FOLLOWER[0x12] = g & 0xFF;
+            FOLLOWER[0x13] = g >> 8;
+            w[5] = g & 0xFF;
+            w[35] = g >> 8;
+        }
+    }
+    P->evo_gfx = 0;
+    ((void (*)(void))CB2_ContinueScript)();
+}
 
 static const s8 DX[5] = {0, 0, 0, -1, 1};            /* 1 south, 2 north, 3 west, 4 east */
 static const s8 DY[5] = {0, 1, -1, 0, 0};
