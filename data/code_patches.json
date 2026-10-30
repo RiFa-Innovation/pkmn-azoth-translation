@@ -226,5 +226,15 @@
     "new": "4201c046c046c046"
    }
   ]
+ },
+ "bag_use_label": {
+  "why": "Bag item menu: the vanilla English 'USE' (0x4161A0, slot 0 of the item-menu action table at 0x1DE3BEC) is all caps while Give/Toss/Cancel are mixed case (#140).",
+  "patch": [
+   {
+    "at": "4161A0",
+    "orig": "cfcdbfff",
+    "new": "cfe7d9ff"
+   }
+  ]
  }
 }
