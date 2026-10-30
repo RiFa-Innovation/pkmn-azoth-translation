@@ -236,5 +236,30 @@
     "new": "cfe7d9ff"
    }
   ]
+ },
+ "battle_status_pills": {
+  "why": "Battle HUD status pills (PSN/PAR/SLP/FRZ/BRN) are baked into the healthbox element sheet at 0xD11B84 (SpriteSheet entry 0x260260), 4 sets of 5 pills x 3 tiles, one per healthbox variant. The hack drew hanzi into them (issue #136). Same tile layout and palette indices as FireRed, so the vanilla English pills are copied back; the rest of the sheet (hack-recoloured bars) is kept.",
+  "vanilla": [
+   [
+    "0D11E64",
+    "0D12044",
+    "status pill set 1 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D124A4",
+    "0D12684",
+    "status pill set 2 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D12684",
+    "0D12864",
+    "status pill set 3 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D12864",
+    "0D12A44",
+    "status pill set 4 (PSN PAR SLP FRZ BRN)"
+   ]
+  ]
  }
 }
