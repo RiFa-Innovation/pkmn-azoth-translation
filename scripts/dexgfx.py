@@ -52,6 +52,58 @@ OBJ_EDITS = [
 ]
 
 
+def tab(block, text, selected):
+    """A detail-page tab label: the selected tab is black-on-white, the others dim pink."""
+    ink, shadow = (15, 1) if selected else (9, 6)
+    return dict(block=block, erase=(0, 0, len(block[0]) * 8, 13), colors={ink, shadow}, bg=lambda y: 7,
+                text=text, at=(None, 1), center=None, left=(len(block[0]) * 8 - 24) // 2, ink=ink, shadow=shadow)
+
+
+def tabs(rows, selected):
+    """rows: (top ids, bottom ids) per tab in order INFO, AREA, FORM."""
+    return [tab([list(top), list(bot)], name, i == selected)
+            for i, ((top, bot), name) in enumerate(zip(rows, ("INFO", "AREA", "FORM")))]
+
+
+# Pokédex entry pages: each page has its own tileset with its tab drawn "selected"
+INFO_EDITS = tabs([((3, 4, 5), (29, 30, 31)), ((6, 7, 8, 9), (32, 33, 34, 35)), ((21, 22, 23), (48, 49, 50))], 0)
+AREA_EDITS = tabs([((3, 4, 5), (30, 31, 32)), ((6, 7, 8, 9), (33, 34, 35, 36)), ((22, 23, 24), (49, 50, 51))], 1) + [
+    dict(block=sprite(77, 4, 1) + sprite(87, 4, 1), erase=(0, 0, 32, 13), colors={15, 3}, bg=lambda y: 1,
+         text="Time", at=(None, 1), center=None, left=4, ink=15, shadow=3)]    # 切换
+FORM_EDITS = tabs([((4, 5, 6), (30, 31, 32)), ((7, 8, 9, 10), (33, 34, 35, 36)), ((93, 94, 95), (101, 102, 103))], 2)
+
+# Search page (SELECT in the list): green tabs and orange/green label buttons. The buttons are 5 tiles
+# (40 px) and their bottom-right tile 190 is shared, so the text stays inside the first four columns.
+def btn(top, bot, text, fill, shadow, x1=33, center=None):
+    return dict(block=[list(top), list(bot)], erase=(6, 3, x1, 13), colors={3, shadow}, bg=lambda y: fill,
+                text=text, at=(None, 1), center=center, left=None if center else 6, ink=3, shadow=shadow,
+                tight=center is None)
+
+
+def stab(top, bot, text):
+    return dict(block=[list(top), list(bot)], erase=(9, 2, len(top) * 8 - 2, 13), colors={3, 9}, bg=lambda y: 8,
+                text=text, at=(None, 1), center=len(top) * 4, ink=3, shadow=9, tight=True)
+
+
+SEARCH_EDITS = [
+    stab((106, 107, 108, 109, 110, 111), (122, 148, 124, 125, 151, 127), "Search"),
+    stab((101, 102, 103, 104, 105, 111), (117, 153, 119, 120, 156, 127), "Switch"),
+    stab((74, 75, 76, 77, 78), (90, 158, 92, 93, 161), "Cancel"),
+
+    btn((42, 43, 44, 45, 46), (58, 172, 173, 61, 175), "Name", 10, 11, 37),
+    btn((180, 65, 66, 67, 68), (80, 187, 188, 189, 190), "Color", 10, 11),
+    btn((69, 70, 71, 72, 73), (194, 195, 196, 88, 190), "Type", 10, 11),
+    btn((37, 38, 39, 40, 41), (53, 204, 205, 56, 190), "Sort", 10, 11),
+    btn((231, 97, 98, 99, 235), (112, 220, 114, 115, 236), "OK", 8, 9, 36, 20),
+]
+
+# (LZ tileset, pointer slots, tile count, edits)
+PAGES = [(0x762ABC, [0x737E3C, 0x7388B4], 256, INFO_EDITS),
+         (0x762000, [0x73A564], 112, AREA_EDITS),
+         (0x7624D8, [0x739444], 128, FORM_EDITS),
+         (0x7617E0, [0x73AACC], 240, SEARCH_EDITS)]
+
+
 def get(t, k, x, y):
     b = t[k * 32 + y * 4 + x // 2]
     return (b >> 4) if x & 1 else b & 15
@@ -73,7 +125,7 @@ def store(t, block, img):
             put(t, block[y // 8][x // 8], x % 8, y % 8, c)
 
 
-def draw(img, text, x, y, ink, shadow):
+def draw(img, text, x, y, ink, shadow, tight=False):
     for ch in text:
         g = FONT.get(ch) or FONT["?"]
         for r, row in enumerate(g["rows"]):
@@ -82,7 +134,7 @@ def draw(img, text, x, y, ink, shadow):
                     img[y + r][x + i] = ink
                 elif p == "o":
                     img[y + r][x + i] = shadow
-        x += g["w"]
+        x += g["w"] - (1 if tight else 0)
 
 
 def redraw(old, edits=EDITS):
@@ -94,9 +146,9 @@ def redraw(old, edits=EDITS):
             for x in range(x0, x1):
                 if img[y][x] in e["colors"]:
                     img[y][x] = e["bg"](y)
-        width = sum((FONT.get(c) or FONT["?"])["w"] for c in e["text"])
+        width = sum((FONT.get(c) or FONT["?"])["w"] - (1 if e.get("tight") else 0) for c in e["text"])
         x = e["left"] if e.get("left") is not None else e["center"] - width // 2
-        draw(img, e["text"], x, e["at"][1], e["ink"], e["shadow"])
+        draw(img, e["text"], x, e["at"][1], e["ink"], e["shadow"], e.get("tight", False))
         store(t, e["block"], img)
     return bytes(t)
 
@@ -144,14 +196,15 @@ def popup(src, tiles):
 def build(src):
     """-> ([(lz_bytes, [pointer slots])], [(offset, orig, new)]): BG1 tileset, sidebar OBJ sheet, popup maps."""
     out, patches = [], []
-    for lz, ref, n, edits in ((LZ, REF, 208, EDITS), (OBJ_LZ, OBJ_REF, 256, OBJ_EDITS)):
-        assert struct.unpack_from("<I", src, ref)[0] == 0x08000000 + lz, "dex gfx ref moved"
+    for lz, refs, n, edits in [(LZ, [REF], 208, EDITS), (OBJ_LZ, [OBJ_REF], 256, OBJ_EDITS)] + PAGES:
+        for ref in refs:
+            assert struct.unpack_from("<I", src, ref)[0] == 0x08000000 + lz, "dex gfx ref moved"
         old = gfx.lz77_decompress(src, lz)
         assert old and len(old) == n * 32, "dex gfx blob changed"
         data = bytearray(redraw(old, edits))
         if lz == LZ:
             patches = popup(src, data)
-        out.append((gfx.lz77_compress(bytes(data)), [ref]))
+        out.append((gfx.lz77_compress(bytes(data)), refs))
     return out, patches
 
 
