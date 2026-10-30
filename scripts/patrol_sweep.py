@@ -62,6 +62,11 @@ def main():
             if free():
                 return True
             tap("B", w=60)
+        for k in range(40):                              # a wild battle (the move check walks over grass): run from it
+            if free():
+                return True
+            for b in ("A", "Down", "Right", "A", "B"):
+                tap(b, w=40)
         return free()
 
     def pos(i):
