@@ -276,5 +276,15 @@
     "new": "d1e8ff"
    }
   ]
+ },
+ "dex_desc_y": {
+  "why": "Pokedex INFO page: the description is printed by the caller at 0x8105F8E with y = 8 (movs r3,#8) in a window that is 3 Chinese lines tall; a 4th English line (14 px pitch) was clipped by ~2 px at the bottom (#151). y = 4 shows four full lines.",
+  "patch": [
+   {
+    "at": "105F8C",
+    "orig": "0823",
+    "new": "0423"
+   }
+  ]
  }
 }
