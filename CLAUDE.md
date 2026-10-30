@@ -245,7 +245,7 @@ The Frontier's arenas are the *last* maps of group 58, so their ids follow whate
 Build and verify **both** after any change: `python3 scripts/build_editions.py` (clean-report check, BPS round trip, copies to
 `build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
 The **Cheat Device** (`docs/CHEATS.md`) is **native to the River Edition** (decided 2026-10-29, first in v0.4): every `RHT_EDITION=river` build carries it (`scripts/edition.py`).
-For the translation it stays an optional add-on, built with `RHT_CHEATS=1` and released separately (`scripts/dist.py --cheats N`); the numbered betas never contain it.
+For the translation it is only a build option (`RHT_CHEATS=1`, `scripts/dist.py --cheats N`); the separate `cheats-v1` add-on release was **withdrawn** (2026-10-29: its 9-entry menu drew as one row; a multichoice list may have at most 8 entries) and no cheats-only release is planned. The numbered betas never contain the cheats.
 `build_editions.py` builds `river`, `translation` and `translation-cheats` (there is no separate river-cheats variant any more).
 The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`) is built into every `RHT_EDITION=river` build (not into the translation); SELECT in Quick Catch sends the walker at the aimed target. Patrol private RAM `0x02022200`-`0x020223FF` (struct Patrol in `scripts/native/patrol.c`), hack flags `0x13B0`-`0x13BF` reserved (`0x13B0` off, `0x13B1`/`0x13B2` size, `0x13B3` tip shown); `L+R+SELECT` opens its settings.
 

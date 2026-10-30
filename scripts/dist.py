@@ -3,7 +3,7 @@
 
     python3 scripts/dist.py 19 [--save PATH] [--no-build]
     python3 scripts/dist.py --river 0.1 [--no-build]     # unofficial Chapter 2 build, no save included
-    python3 scripts/dist.py --cheats 1                   # the optional Cheat Device add-on for the translation, dist/cheats-v1/ (River builds have it natively)
+    python3 scripts/dist.py --cheats 1                   # a translation build with the Cheat Device (NOT released since the cheats-v1 add-on was withdrawn; River builds have it natively)
 
 Runs scripts/insert.py (unless --no-build), verifies the BPS by applying it to
 the clean base ROM and comparing byte-identical, then writes dist/beta-N/ with

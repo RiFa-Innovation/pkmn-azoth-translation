@@ -2,22 +2,17 @@
 
 A small in-game menu of cheats for **Pokémon Azoth** (English translation).
 
-- **River Edition: built in from v0.4 on.** Nothing to install; press SELECT + START on the map. (River v0.3 and earlier do not have it; their "+ Cheats" patch is `cheats-v1`.)
-- **Translation: an optional add-on**, released separately as a "+ Cheats" patch; the numbered betas do not contain it.
+- **River Edition: built in from v0.4 on.** Nothing to install; press SELECT + START on the map. River v0.3 and earlier do not have it.
+- **Translation betas: no cheat patch is released.** An earlier separate "+ Cheats" add-on (`cheats-v1`) was withdrawn because its menu did not display properly (see below). Builders can still make a translation build with the menu using `RHT_CHEATS=1` (see the technical notes).
 
 > This is only a **translation done with Claude** (plus fan-made additions by River). The hack, its name and its content belong to its
 > original authors. The Cheat Device is an unofficial add-on and is not part of the original game.
 
 ## Install
 
-**River Edition v0.4 or later: nothing to install**, the cheats are part of the River patch.
+**River Edition v0.4 or later: nothing to install**, the cheats are part of the River patch. Your existing saves keep working: the cheats' on/off switches are extra flags that are simply off in an old save. (Save states are tied to one build; make a normal in-game save.)
 
-For the translation, or for older River versions (v0.3 and earlier), use the add-on patch (`cheats-v1` has both; later add-ons are for the translation only):
-1. Pick the patch that matches the game you play:
-   - `Pokemon-Azoth-English-Cheats-vN.bps`: the translation (what the numbered betas ship) plus the Spectrum Frontier, plus cheats.
-   - `Pokemon-Azoth-English-RIVER-EDITION-Cheats-v1.bps`: River Edition v0.2.3 (Chapter 2 + Frontier) plus cheats (without the Partner Patrol).
-2. Apply it with any BPS patcher (Floating IPS, Rom Patcher JS, ...) to a clean **FireRed (USA, Europe) v1.0** ROM, CRC32 `DD88761C`. Do not patch a ROM that is already patched.
-3. Your existing saves keep working: the cheats' on/off switches are extra flags that are simply off in an old save. (Save states are tied to one build; make a normal in-game save.)
+**Why the old add-on was withdrawn:** the game can only draw a menu window for lists of up to 8 entries; the add-on's menu had 9 and collapsed to one unreadable row. The menu now has 8 entries (B closes it) and `scripts/cheats_build.py` refuses to build a longer one.
 
 ## Open the menu
 
@@ -57,7 +52,7 @@ until its next level-up. If you find a cap that is wrong for your game, tell us 
 
 ## Report problems
 
-Use the project's bug tracker (the link is in the release notes) and mention that you use a "+ Cheats" patch.
+Use the project's bug tracker (the link is in the release notes) and say which River version you use.
 
 ## Technical notes (for contributors)
 
