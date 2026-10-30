@@ -58,7 +58,7 @@ IDLE -> PICK -> WALK -> STRIKE -> RESOLVE -> RETURN? -> PICK ... -> DONE
 HUD while active: a one-line status in the Quick Catch HUD area ("Patrol: Croconaw 62% HP, 3 down. B: recall").
 
 **Input**: inside Quick Catch mode, **SELECT = send / recall the partner** (L and R are taken; confirm SELECT is unused there in M0). The
-cheat menu (SELECT+START) is unrelated and untouched.
+cheat menu (SELECT+R) is unrelated and untouched.
 
 ## 4. The simulated fight (no battle screen, **no moves**)
 
@@ -233,7 +233,7 @@ the translation variants are byte-identical to before: `69e4e357...` and `ca3da9
 How it works:
 * One patched literal, the `ProcessPlayerFieldInput` trampoline (`0x0806CACC`). The patrol wrapper reads `newKeys`; on SELECT while Quick
   Catch is active (state byte `0x0203B743` = 1) it calls `patrol_select()`. Otherwise it jumps to the previous target, so it chains in front of the
-  Cheat Device's wrapper (River + Cheats). Side effect: with Quick Catch open, SELECT strikes; the cheat hotkey (SELECT+START) works outside it.
+  Cheat Device's wrapper (River + Cheats). Side effect: with Quick Catch open, SELECT strikes; the cheat hotkey (SELECT+R) works outside it.
 * `patrol_select()`: validates the aimed target with the game's own check (`0x09D53889`), reads level (`obj+0x1D`) and species (`QC+0x18`),
   finds the partner as the party member whose species equals the walker's graphics id (else the lead), refuses below 40% HP, builds the target with the
   game's own creation call (`0x09D6BA79`), and **stops on a shiny**: the Pokémon is left alone and a real wild battle starts with that very Pokémon
