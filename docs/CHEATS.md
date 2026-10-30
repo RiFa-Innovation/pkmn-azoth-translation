@@ -68,7 +68,7 @@ list, patches with byte assertions). Switch flags: `0x13A8` shiny, `0x13A9` cand
 | Feature | Hook |
 |---|---|
 | Menu hotkey and Infinite Repel | wrapper on the literal of the `ProcessPlayerFieldInput` trampoline (0x0806CACC): SELECT+START starts the menu script; every free frame it keeps var `0x4020` (repel steps) at 255 while the switch is on |
-| Shiny Boost | stub jumped to from the hack's `CreateBoxMon` (0x09D09BC8), player-OT branch; forces the personality's high half so `tid^sid^hi^lo < 8` and re-stores it; skipped for fixed personalities |
+| Shiny Boost | stub jumped to from the hack's `CreateBoxMon` (0x09D09BC8), player-OT branch; forces the personality's high half so `tid^sid^hi^lo < 8` and re-stores it. Wild encounters arrive with a *fixed* personality (the stub used to skip those, #139): for them it searches 2048 candidates for a shiny value that keeps `personality % 25` (nature), gender and ability slot (only bits 8-31 change) |
 | Infinite Candy | the `RemoveBagItem` literal of the Rare Candy flow (0x09D44884) -> `candy_wrap` |
 | Heal After Fights | both literals of `gBattleMainFunc = ReturnFromBattleToOverworld` (0x15A68, 0x15B2C) -> `heal_wrap` (`HealPlayerParty`) |
 | Set To Level Cap | `cap_apply` (called by `callnative`): badge count -> `caps[]`, EXP from the hack's experience table, `CalculateMonStats` |
