@@ -31,6 +31,7 @@ import mapedit  # noqa: E402
 import maptext  # noqa: E402
 import sprtext  # noqa: E402
 import statusicons  # noqa: E402
+import dexgfx  # noqa: E402
 import typeicons  # noqa: E402
 import anchored  # noqa: E402
 import cheats_build  # noqa: E402
@@ -769,6 +770,17 @@ def main():
     for r in refs:
         rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
     report["gfx"] += 1
+    # Pokedex list screen header + MENU/SEARCH labels (BG1 tileset, LZ77 relocated)
+    blobs, dex_maps = dexgfx.build(src)
+    for at, orig, new in dex_maps:
+        assert src[at:at + len(orig)] == orig
+        rom[at:at + len(new)] = new
+    for data, refs in blobs:
+        a = pool.alloc_aligned(len(data))
+        rom[a:a + len(data)] = data
+        for r in refs:
+            rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
+        report["gfx"] += 1
     # title logo (raw 8bpp BG): fits in the original tile area, so in place
     lt, lm = logo.build(src)
     assert len(lt) <= logo.MAX_TILES * 64
