@@ -116,6 +116,8 @@ heal_wrap:
 @ ---- shiny boost: inside the hack's CreateBoxMon (0x09D099F2), player-OT branch -------------------------------------------------------
 @ Entered from 0x09D09BC8 in place of "r3 = SaveBlock2->playerTrainerId". Frame: [sp+16] personality (already stored in the box mon),
 @ [sp+72] hasFixedPersonality. r5 = box mon. Out: r3 = OT id, resume at the `str r3, [sp, #20]`.
+@ A rolled personality gets a new high half. A fixed one (wild encounters, set natures) is searched for a shiny value that keeps the
+@ nature (personality % 25), the gender and the ability slot (low byte): only bits 8-31 move. (#139: wild Pokemon are created fixed.)
 .global shiny_stub
 .thumb_func
 shiny_stub:
@@ -126,10 +128,6 @@ shiny_stub:
     lsls r3, r3, #16
     orrs r3, r1                                 @ r3 = OT id (what the replaced code computed)
     push {r3}
-    add r0, sp, #76                             @ hasFixedPersonality (arg 5, +4 for the push)
-    ldrb r0, [r0]
-    cmp r0, #0
-    bne 9f
     ldr r0, =FLAG_SHINY
     bl flagget
     cmp r0, #0
@@ -148,14 +146,61 @@ shiny_stub:
     lsls r2, r2, #16
     lsrs r2, r2, #16
     eors r1, r2                                 @ r1 = tid ^ sid
-    eors r0, r1                                 @ r0 = rem ^ tid ^ sid
+    eors r0, r1                                 @ r0 = rem ^ tid ^ sid: high half = low half ^ r0
+    add r3, sp, #76                             @ hasFixedPersonality (arg 5, +4 for the push)
+    ldrb r3, [r3]
+    cmp r3, #0
+    bne 5f
     ldr r2, [sp, #20]                           @ personality (frame slot +16, +4 for the push)
     lsls r1, r2, #16
     lsrs r1, r1, #16                            @ r1 = low half (gender / ability slot stay as rolled)
     eors r0, r1                                 @ r0 = high half
     lsls r0, r0, #16
     orrs r0, r1
-    str r0, [sp, #20]
+    b 6f
+5:  push {r4-r7}                                @ fixed: personality at [sp, #36] now
+    movs r4, r0                                 @ r4 = xor mask
+    ldr r6, [sp, #36]
+    lsrs r0, r6, #16
+    movs r1, #11                                @ 65536 % 25
+    muls r0, r1
+    lsls r1, r6, #16
+    lsrs r1, r1, #16
+    adds r0, r0, r1
+    movs r1, #25
+    swi 6                                       @ Div: r1 = (hi * 11 + lo) % 25 = personality % 25
+    movs r7, r1                                 @ r7 = nature
+    lsls r6, r6, #24
+    lsrs r6, r6, #24                            @ r6 = low byte (gender, ability slot)
+    movs r5, #0                                 @ r5 = candidate 0..2047: second byte (bits 0-7) and remainder xor (bits 8-10)
+1:  lsls r3, r5, #24
+    lsrs r3, r3, #16
+    orrs r3, r6                                 @ r3 = low half
+    lsrs r2, r5, #8
+    eors r2, r4
+    eors r2, r3                                 @ r2 = high half
+    movs r0, #11
+    muls r0, r2
+    adds r0, r0, r3
+    movs r1, #25
+    swi 6
+    cmp r1, r7
+    beq 3f
+    adds r5, #1
+    lsrs r0, r5, #11
+    beq 1b
+    ldr r0, [sp, #36]                           @ none found: leave it alone
+    b 7f
+3:  lsls r3, r5, #24
+    lsrs r3, r3, #16
+    orrs r3, r6
+    lsrs r2, r5, #8
+    eors r2, r4
+    eors r2, r3
+    lsls r0, r2, #16
+    orrs r0, r3
+7:  pop {r4-r7}
+6:  str r0, [sp, #20]
     add r2, sp, #20
     movs r1, #0                                 @ MON_DATA_PERSONALITY
     adds r0, r5, #0
