@@ -261,5 +261,20 @@
     "status pill set 4 (PSN PAR SLP FRZ BRN)"
    ]
   ]
+ },
+ "dex_ht_wt": {
+  "why": "Pokedex entry page: the height/weight row labels are hanzi (高 / 重, 2 bytes + FF each, at 0x75C8B0 / 0x75C8B4, no pointer: the page's code indexes them). Replaced in place by Ht / Wt (same 3 bytes).",
+  "patch": [
+   {
+    "at": "75C8B0",
+    "orig": "0449ff",
+    "new": "c2e8ff"
+   },
+   {
+    "at": "75C8B4",
+    "orig": "10a9ff",
+    "new": "d1e8ff"
+   }
+  ]
  }
 }
