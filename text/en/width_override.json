@@ -1,7 +1,7 @@
 {
  "_doc": "Per-string window overrides {addr: {px, dialogue, lines}} for text drawn in a narrower box than its class implies (dialogue = 2-line box, lines 3+ scroll with {FA}). lines = max lines for a box that does not scroll; insert.py reports too_long instead of overflowing it.",
  "1DBB5DA": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "locked record description (sibling of 1DBAFFF; one-line English overflowed the Help Tips pane)"
@@ -2124,337 +2124,337 @@
   "note": "quest name (Tasks list column ~86px before the status label)"
  },
  "1DBAF22": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAEBD": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBADF0": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAE4C": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA049": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA0B7": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9F71": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9FD6": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9E97": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9EF6": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9D45": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9DAF": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DB9E20": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAD79": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBACF2": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAC86": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAC0B": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBABA2": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAABF": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAB25": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA9E4": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBAA4A": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA90B": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA96B": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA83B": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA8A3": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA687": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA6EF": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA758": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA7C0": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA5B4": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA610": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA4D3": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA545": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA3FD": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA462": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA333": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA392": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA25F": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA2CE": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA12D": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA18D": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBA1DF": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBB51E": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBB582": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBB3B1": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBB413": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
-  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer) and the game re-wraps at ~150px"
+  "note": "Help Tips system page body: 5 rows fit the box (a 6th prints over the footer); the window starts at x=103 so ~130px fit before the screen edge (#156)"
  },
  "1DBB44E": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB4AE": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB184": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB1F0": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB262": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB2D1": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB340": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB0B6": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
  },
  "1DBB11A": {
-  "px": 148,
+  "px": 130,
   "dialogue": false,
   "lines": 5,
   "note": "Help Tips system page body (EV Gain / Virtual Clock): 5 rows fit the box"
@@ -2466,34 +2466,184 @@
   "note": "locked achievement description"
  },
  "_doc_quests": "Quest-board detail pane (issue #41): 3 rows fit the box; the descriptions were condensed to wrap in 3 lines at 176 px (no scroll, extra rows would be drawn past the window).",
- "0EECB5D": {"px": 176, "dialogue": false, "lines": 3, "note": "Pokegear help page body (More about Flying): 3-line box, wrapped at 198 px the lines ran past the right edge (issue #65)"},
- "0EECEDA": {"px": 176, "dialogue": false, "lines": 3, "note": "Pokegear help page body (About the Quest Screen): same box as 0EECB5D (issue #65)"},
- "0E3B01A": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B064": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B0AC": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B0F7": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B154": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B1AD": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B1FD": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B252": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B2AD": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B307": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B35F": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B3AD": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B409": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B4E5": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B532": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B589": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B5E5": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B633": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B695": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B6EA": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B745": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B799": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B7E5": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B831": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B885": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B8DF": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B97A": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"},
- "0E3B9E4": {"px": 176, "dialogue": false, "lines": 3, "note": "quest board detail pane: 3 rows fit the box"}
+ "0EECB5D": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "Pokegear help page body (More about Flying): 3-line box, wrapped at 198 px the lines ran past the right edge (issue #65)"
+ },
+ "0EECEDA": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "Pokegear help page body (About the Quest Screen): same box as 0EECB5D (issue #65)"
+ },
+ "0E3B01A": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B064": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B0AC": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B0F7": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B154": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B1AD": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B1FD": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B252": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B2AD": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B307": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B35F": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B3AD": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B409": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B4E5": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B532": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B589": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B5E5": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B633": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B695": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B6EA": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B745": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B799": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B7E5": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B831": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B885": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B8DF": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B97A": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ },
+ "0E3B9E4": {
+  "px": 176,
+  "dialogue": false,
+  "lines": 3,
+  "note": "quest board detail pane: 3 rows fit the box"
+ }
 }

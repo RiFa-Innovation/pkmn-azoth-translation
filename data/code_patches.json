@@ -226,5 +226,65 @@
     "new": "4201c046c046c046"
    }
   ]
+ },
+ "bag_use_label": {
+  "why": "Bag item menu: the vanilla English 'USE' (0x4161A0, slot 0 of the item-menu action table at 0x1DE3BEC) is all caps while Give/Toss/Cancel are mixed case (#140).",
+  "patch": [
+   {
+    "at": "4161A0",
+    "orig": "cfcdbfff",
+    "new": "cfe7d9ff"
+   }
+  ]
+ },
+ "battle_status_pills": {
+  "why": "Battle HUD status pills (PSN/PAR/SLP/FRZ/BRN) are baked into the healthbox element sheet at 0xD11B84 (SpriteSheet entry 0x260260), 4 sets of 5 pills x 3 tiles, one per healthbox variant. The hack drew hanzi into them (issue #136). Same tile layout and palette indices as FireRed, so the vanilla English pills are copied back; the rest of the sheet (hack-recoloured bars) is kept.",
+  "vanilla": [
+   [
+    "0D11E64",
+    "0D12044",
+    "status pill set 1 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D124A4",
+    "0D12684",
+    "status pill set 2 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D12684",
+    "0D12864",
+    "status pill set 3 (PSN PAR SLP FRZ BRN)"
+   ],
+   [
+    "0D12864",
+    "0D12A44",
+    "status pill set 4 (PSN PAR SLP FRZ BRN)"
+   ]
+  ]
+ },
+ "dex_ht_wt": {
+  "why": "Pokedex entry page: the height/weight row labels are hanzi (高 / 重, 2 bytes + FF each, at 0x75C8B0 / 0x75C8B4, no pointer: the page's code indexes them). Replaced in place by Ht / Wt (same 3 bytes).",
+  "patch": [
+   {
+    "at": "75C8B0",
+    "orig": "0449ff",
+    "new": "c2e8ff"
+   },
+   {
+    "at": "75C8B4",
+    "orig": "10a9ff",
+    "new": "d1e8ff"
+   }
+  ]
+ },
+ "dex_desc_y": {
+  "why": "Pokedex INFO page: the description is printed by the caller at 0x8105F8E with y = 8 (movs r3,#8) in a window that is 3 Chinese lines tall; a 4th English line (14 px pitch) was clipped by ~2 px at the bottom (#151). y = 4 shows four full lines.",
+  "patch": [
+   {
+    "at": "105F8C",
+    "orig": "0823",
+    "new": "0423"
+   }
+  ]
  }
 }

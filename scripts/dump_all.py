@@ -177,9 +177,37 @@ def in_lz77(rom, r):
     return i >= 0 and blobs[i][0] <= r < blobs[i][1]
 
 
+_EVP = None
+
+
+def map_event_pointer_words(rom):
+    """File offsets of the four table pointers (objects, warps, coord, BG) of every
+    map's events header. They sit next to each other, so they look like an aligned
+    pointer table, and when one of them points at bytes that decode as a lone
+    hanzi it was dumped as a string and relocated: Route 31 and 3.89 lost every
+    NPC (their object table pointer led into English text)."""
+    global _EVP
+    if _EVP is None:
+        u32 = lambda o: int.from_bytes(rom[o:o + 4], "little")
+        rp = lambda o: (u32(o) - 0x08000000) if 0x08000000 <= u32(o) < 0x0A000000 else None
+        out, g = set(), 0
+        while g < 80 and (gp := rp(0xB3B100 + 4 * g)) is not None:
+            m = 0
+            while m < 500 and (mp := rp(gp + 4 * m)) is not None:
+                ev = rp(mp + 4) if mp + 8 <= len(rom) else None
+                if ev and ev + 0x14 <= len(rom) and rom[ev] <= 64:
+                    out.update(ev + k for k in (4, 8, 12, 16))
+                m += 1
+            g += 1
+        _EVP = out
+    return _EVP
+
+
 def ref_kind(rom, r, text=""):
     """Classify a pointer occurrence; None = untrusted."""
     hm = hack_map()
+    if r in map_event_pointer_words(rom):   # a map's object/warp/coord/BG table pointer
+        return None
     if hm.is_code(r):            # instruction bytes that merely look like a pointer
         return None
     if r < 0x200:                # sGFRomHeader: pointers to data tables (gDecorations

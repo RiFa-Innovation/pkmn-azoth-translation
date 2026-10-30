@@ -1,0 +1,1831 @@
+[
+ {
+  "step": 0,
+  "objective": "Mom seems to be waiting for you downstairs...",
+  "setters": []
+ },
+ {
+  "step": 1,
+  "objective": "Go check out the professor’s lab!",
+  "setters": [
+   {
+    "setter": "0x089ced7b",
+    "reached_from": [
+     {
+      "map": "43.0",
+      "area": "New Bark Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5100==0",
+      "entry": "0x089c0a2e"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "objective": "Choose your starter partner.",
+  "setters": [
+   {
+    "setter": "0x089c5d86",
+    "reached_from": [
+     {
+      "map": "43.6",
+      "area": "New Bark Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5101==2",
+      "entry": "0x089c5c69"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "objective": "Find Mr. Pokémon past Cherrygrove.",
+  "setters": []
+ },
+ {
+  "step": 4,
+  "objective": "Something seems to be happening at the lab?",
+  "setters": [
+   {
+    "setter": "0x089cedcd",
+    "reached_from": [
+     {
+      "map": "3.82",
+      "area": "Route 30",
+      "event": "coord#0",
+      "tile": [
+       24,
+       8
+      ],
+      "gate": "var 0x5105==1",
+      "entry": "0x089ca0d8"
+     },
+     {
+      "map": "3.82",
+      "area": "Route 30",
+      "event": "coord#1",
+      "tile": [
+       25,
+       9
+      ],
+      "gate": "var 0x5105==1",
+      "entry": "0x089ca0d8"
+     },
+     {
+      "map": "3.82",
+      "area": "Route 30",
+      "event": "coord#2",
+      "tile": [
+       26,
+       8
+      ],
+      "gate": "var 0x5105==1",
+      "entry": "0x089ca0d8"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "objective": "Go home and say goodbye to Mom.",
+  "setters": [
+   {
+    "setter": "0x089eb678",
+    "reached_from": [
+     {
+      "map": "45.8",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x4099==0",
+      "entry": "0x089cca67"
+     }
+    ],
+    "n_entries": 1
+   },
+   {
+    "setter": "0x089cad88",
+    "reached_from": [
+     {
+      "map": "43.6",
+      "area": "New Bark Town",
+      "event": "coord#6",
+      "tile": [
+       5,
+       13
+      ],
+      "gate": "var 0x5105==3",
+      "entry": "0x089cb56e"
+     },
+     {
+      "map": "43.6",
+      "area": "New Bark Town",
+      "event": "coord#7",
+      "tile": [
+       3,
+       13
+      ],
+      "gate": "var 0x5105==3",
+      "entry": "0x089cb55b"
+     },
+     {
+      "map": "43.6",
+      "area": "New Bark Town",
+      "event": "coord#8",
+      "tile": [
+       4,
+       12
+      ],
+      "gate": "var 0x5105==3",
+      "entry": "0x089ca8ac"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 6,
+  "objective": "Go through Route 31 to Violet City!",
+  "setters": [
+   {
+    "setter": "0x089c1199",
+    "reached_from": [
+     {
+      "map": "43.0",
+      "area": "New Bark Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5100==0",
+      "entry": "0x089c0a2e"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 7,
+  "objective": "Look around the area.",
+  "setters": []
+ },
+ {
+  "step": 8,
+  "objective": "Go check out Sprout Tower!",
+  "setters": [
+   {
+    "setter": "0x08eecc12",
+    "reached_from": [
+     {
+      "map": "44.1",
+      "area": "Route 31",
+      "event": "coord#0",
+      "tile": [
+       6,
+       5
+      ],
+      "gate": "var 0x5105==6",
+      "entry": "0x089cd11e"
+     },
+     {
+      "map": "44.1",
+      "area": "Route 31",
+      "event": "coord#1",
+      "tile": [
+       6,
+       6
+      ],
+      "gate": "var 0x5105==6",
+      "entry": "0x08f5147b"
+     },
+     {
+      "map": "44.1",
+      "area": "Route 31",
+      "event": "coord#2",
+      "tile": [
+       6,
+       7
+      ],
+      "gate": "var 0x5105==6",
+      "entry": "0x08f51485"
+     }
+    ],
+    "n_entries": 3
+   },
+   {
+    "setter": "0x089d4558",
+    "reached_from": [
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#0",
+      "tile": [
+       53,
+       59
+      ],
+      "gate": "var 0x5105==7",
+      "entry": "0x089ce1f0"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#3",
+      "tile": [
+       53,
+       60
+      ],
+      "gate": "var 0x5105==7",
+      "entry": "0x089ce788"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#4",
+      "tile": [
+       53,
+       61
+      ],
+      "gate": "var 0x5105==7",
+      "entry": "0x089ce79b"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#5",
+      "tile": [
+       53,
+       62
+      ],
+      "gate": "var 0x5105==7",
+      "entry": "0x089ce7af"
+     }
+    ],
+    "n_entries": 4
+   }
+  ]
+ },
+ {
+  "step": 9,
+  "objective": "Challenge the Violet City Gym.",
+  "setters": [
+   {
+    "setter": "0x089d457b",
+    "reached_from": [
+     {
+      "map": "1.90",
+      "area": "",
+      "event": "obj#6",
+      "tile": [
+       7,
+       4
+      ],
+      "gate": "local 7",
+      "entry": "0x08ee8bd1"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 10,
+  "objective": "Go to the shop and meet the professor’s aide.",
+  "setters": [
+   {
+    "setter": "0x089d459c",
+    "reached_from": [
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#6",
+      "tile": [
+       33,
+       45
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#7",
+      "tile": [
+       34,
+       46
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#8",
+      "tile": [
+       35,
+       45
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#1",
+      "tile": [
+       2,
+       10
+      ],
+      "gate": "local 2",
+      "entry": "0x089d0c85"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#2",
+      "tile": [
+       3,
+       9
+      ],
+      "gate": "local 3",
+      "entry": "0x089d0c85"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#3",
+      "tile": [
+       3,
+       10
+      ],
+      "gate": "local 4",
+      "entry": "0x089d0c85"
+     }
+    ],
+    "n_entries": 8
+   },
+   {
+    "setter": "0x089d45a8",
+    "reached_from": [
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#6",
+      "tile": [
+       33,
+       45
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#7",
+      "tile": [
+       34,
+       46
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "3.68",
+      "area": "Violet City",
+      "event": "coord#8",
+      "tile": [
+       35,
+       45
+      ],
+      "gate": "var 0x5105==11",
+      "entry": "0x089d0c7c"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#1",
+      "tile": [
+       2,
+       10
+      ],
+      "gate": "local 2",
+      "entry": "0x089d0c85"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#2",
+      "tile": [
+       3,
+       9
+      ],
+      "gate": "local 3",
+      "entry": "0x089d0c85"
+     },
+     {
+      "map": "56.21",
+      "area": "Nameless Ruins",
+      "event": "obj#3",
+      "tile": [
+       3,
+       10
+      ],
+      "gate": "local 4",
+      "entry": "0x089d0c85"
+     }
+    ],
+    "n_entries": 8
+   }
+  ]
+ },
+ {
+  "step": 11,
+  "objective": "Head to Azalea Town!",
+  "setters": [
+   {
+    "setter": "0x089d45ae",
+    "reached_from": [
+     {
+      "map": "46.3",
+      "area": "Violet City",
+      "event": "obj#4",
+      "tile": [
+       5,
+       8
+      ],
+      "gate": "local 5",
+      "entry": "0x089d1050"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 12,
+  "objective": "Go check out the Slowpoke Well.",
+  "setters": [
+   {
+    "setter": "0x08aa9749",
+    "reached_from": [
+     {
+      "map": "47.2",
+      "area": "Azalea Town",
+      "event": "obj#0",
+      "tile": [
+       4,
+       5
+      ],
+      "gate": "local 1",
+      "entry": "0x089ebaad"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 13,
+  "objective": "Challenge the Azalea Town Gym.",
+  "setters": [
+   {
+    "setter": "0x08ab6fc0",
+    "reached_from": [
+     {
+      "map": "3.69",
+      "area": "Azalea Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x517b==2",
+      "entry": "0x08aaec70"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 14,
+  "objective": "Go through Ilex Forest to Goldenrod City!",
+  "setters": [
+   {
+    "setter": "0x08aa97c2",
+    "reached_from": [
+     {
+      "map": "52.9",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x4099==0",
+      "entry": "0x08aa2610"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 15,
+  "objective": "Ask around town for information.",
+  "setters": [
+   {
+    "setter": "0x08aa9743",
+    "reached_from": [
+     {
+      "map": "3.69",
+      "area": "Azalea Town",
+      "event": "coord#0",
+      "tile": [
+       40,
+       12
+      ],
+      "gate": "var 0x5176==0",
+      "entry": "0x08aa8035"
+     },
+     {
+      "map": "3.69",
+      "area": "Azalea Town",
+      "event": "coord#1",
+      "tile": [
+       40,
+       13
+      ],
+      "gate": "var 0x5176==0",
+      "entry": "0x08aa792b"
+     }
+    ],
+    "n_entries": 2
+   }
+  ]
+ },
+ {
+  "step": 16,
+  "objective": "Drive Team Rocket out of the Slowpoke Well!",
+  "setters": [
+   {
+    "setter": "0x08aae00a",
+    "reached_from": [
+     {
+      "map": "1.95",
+      "area": "",
+      "event": "coord#0",
+      "tile": [
+       13,
+       6
+      ],
+      "gate": "var 0x5176==1",
+      "entry": "0x08aade7c"
+     },
+     {
+      "map": "1.95",
+      "area": "",
+      "event": "coord#1",
+      "tile": [
+       14,
+       7
+      ],
+      "gate": "var 0x5176==1",
+      "entry": "0x08aa8061"
+     },
+     {
+      "map": "1.95",
+      "area": "",
+      "event": "coord#2",
+      "tile": [
+       15,
+       6
+      ],
+      "gate": "var 0x5176==1",
+      "entry": "0x08aade90"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 17,
+  "objective": "Explore the depths of the Slowpoke Well.",
+  "setters": []
+ },
+ {
+  "step": 18,
+  "objective": "Go check out the Radio Tower.",
+  "setters": []
+ },
+ {
+  "step": 19,
+  "objective": "Go check out the Radio Tower.",
+  "setters": [
+   {
+    "setter": "0x08af11f2",
+    "reached_from": [
+     {
+      "map": "3.75",
+      "area": "Goldenrod City",
+      "event": "coord#0",
+      "tile": [
+       25,
+       47
+      ],
+      "gate": "var 0x5186==0",
+      "entry": "0x08aae413"
+     },
+     {
+      "map": "3.75",
+      "area": "Goldenrod City",
+      "event": "coord#1",
+      "tile": [
+       26,
+       47
+      ],
+      "gate": "var 0x5186==0",
+      "entry": "0x08ab80d4"
+     },
+     {
+      "map": "3.75",
+      "area": "Goldenrod City",
+      "event": "coord#2",
+      "tile": [
+       27,
+       47
+      ],
+      "gate": "var 0x5186==0",
+      "entry": "0x08aae425"
+     },
+     {
+      "map": "3.75",
+      "area": "Goldenrod City",
+      "event": "coord#3",
+      "tile": [
+       28,
+       47
+      ],
+      "gate": "var 0x5186==0",
+      "entry": "0x08aae758"
+     }
+    ],
+    "n_entries": 4
+   }
+  ]
+ },
+ {
+  "step": 20,
+  "objective": "Head to Ecruteak City!",
+  "setters": [
+   {
+    "setter": "0x08a68d59",
+    "reached_from": [
+     {
+      "map": "3.85",
+      "area": "Route 36",
+      "event": "obj#7",
+      "tile": [
+       45,
+       19
+      ],
+      "gate": "local 8",
+      "entry": "0x089d27f7"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 21,
+  "objective": "Go check out Violet City.",
+  "setters": [
+   {
+    "setter": "0x08af4c1a",
+    "reached_from": [
+     {
+      "map": "3.85",
+      "area": "Route 36",
+      "event": "coord#1",
+      "tile": [
+       37,
+       14
+      ],
+      "gate": "var 0x5186==3",
+      "entry": "0x08ed3088"
+     }
+    ],
+    "n_entries": 1
+   },
+   {
+    "setter": "0x08af4bd5",
+    "reached_from": [
+     {
+      "map": "3.85",
+      "area": "Route 36",
+      "event": "coord#0",
+      "tile": [
+       36,
+       14
+      ],
+      "gate": "var 0x5186==3",
+      "entry": "0x08ed23b0"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 22,
+  "objective": "Head to the top of Sprout Tower!",
+  "setters": [
+   {
+    "setter": "0x08af4f9a",
+    "reached_from": [
+     {
+      "map": "1.90",
+      "area": "",
+      "event": "coord#1",
+      "tile": [
+       9,
+       11
+      ],
+      "gate": "var 0x5120==21",
+      "entry": "0x08af4c90"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 23,
+  "objective": "Go check out the Ecruteak City library.",
+  "setters": [
+   {
+    "setter": "0x0897d485",
+    "reached_from": [
+     {
+      "map": "52.2",
+      "area": "",
+      "event": "coord#0",
+      "tile": [
+       12,
+       22
+      ],
+      "gate": "var 0x5120==22",
+      "entry": "0x0897d438"
+     }
+    ],
+    "n_entries": 1
+   },
+   {
+    "setter": "0x08af8622",
+    "reached_from": [
+     {
+      "map": "52.2",
+      "area": "",
+      "event": "coord#0",
+      "tile": [
+       12,
+       22
+      ],
+      "gate": "var 0x5120==22",
+      "entry": "0x0897d438"
+     }
+    ],
+    "n_entries": 1
+   },
+   {
+    "setter": "0x087275c1",
+    "reached_from": [
+     {
+      "map": "52.2",
+      "area": "",
+      "event": "mscript#5",
+      "tile": null,
+      "gate": "ON_RESUME",
+      "entry": "0x08727574"
+     },
+     {
+      "map": "56.32",
+      "area": "Route 40",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x7b06==1288",
+      "entry": "0x08727574"
+     }
+    ],
+    "n_entries": 2
+   }
+  ]
+ },
+ {
+  "step": 24,
+  "objective": "Go check out the Burned Tower.",
+  "setters": [
+   {
+    "setter": "0x08af59fa",
+    "reached_from": [
+     {
+      "map": "52.5",
+      "area": "Ecruteak City",
+      "event": "coord#0",
+      "tile": [
+       2,
+       30
+      ],
+      "gate": "var 0x5120==23",
+      "entry": "0x08af53f1"
+     },
+     {
+      "map": "52.5",
+      "area": "Ecruteak City",
+      "event": "coord#1",
+      "tile": [
+       3,
+       31
+      ],
+      "gate": "var 0x5120==23",
+      "entry": "0x08af5ecf"
+     }
+    ],
+    "n_entries": 2
+   }
+  ]
+ },
+ {
+  "step": 25,
+  "objective": "Help Anabel find her missing friends!",
+  "setters": [
+   {
+    "setter": "0x08af5681",
+    "reached_from": [
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#10",
+      "tile": [
+       47,
+       34
+      ],
+      "gate": "var 0x5139==4",
+      "entry": "0x08af5681"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 26,
+  "objective": "Go check out the MooMoo Farm.",
+  "setters": [
+   {
+    "setter": "0x08af5677",
+    "reached_from": [
+     {
+      "map": "3.95",
+      "area": "Route 40",
+      "event": "obj#11",
+      "tile": [
+       20,
+       20
+      ],
+      "gate": "local 12",
+      "entry": "0x08af5677"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 27,
+  "objective": "Go check out the Olivine City Lighthouse.",
+  "setters": [
+   {
+    "setter": "0x08af865a",
+    "reached_from": [
+     {
+      "map": "3.93",
+      "area": "Route 39",
+      "event": "coord#0",
+      "tile": [
+       24,
+       8
+      ],
+      "gate": "var 0x5120==26",
+      "entry": "0x08af5e76"
+     },
+     {
+      "map": "3.93",
+      "area": "Route 39",
+      "event": "coord#1",
+      "tile": [
+       24,
+       9
+      ],
+      "gate": "var 0x5120==26",
+      "entry": "0x08af5e64"
+     },
+     {
+      "map": "3.93",
+      "area": "Route 39",
+      "event": "coord#2",
+      "tile": [
+       24,
+       10
+      ],
+      "gate": "var 0x5120==26",
+      "entry": "0x08af5e89"
+     }
+    ],
+    "n_entries": 3
+   },
+   {
+    "setter": "0x08ec1ad3",
+    "reached_from": [
+     {
+      "map": "49.17",
+      "area": "Olivine City",
+      "event": "coord#0",
+      "tile": [
+       2,
+       8
+      ],
+      "gate": "var 0x5139==3",
+      "entry": "0x08ab04f5"
+     },
+     {
+      "map": "49.17",
+      "area": "Olivine City",
+      "event": "coord#1",
+      "tile": [
+       3,
+       7
+      ],
+      "gate": "var 0x5139==3",
+      "entry": "0x08ab676c"
+     },
+     {
+      "map": "49.17",
+      "area": "Olivine City",
+      "event": "coord#2",
+      "tile": [
+       4,
+       8
+      ],
+      "gate": "var 0x5139==3",
+      "entry": "0x08ab0508"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 28,
+  "objective": "Enjoy the summer festival in Ecruteak City!",
+  "setters": [
+   {
+    "setter": "0x08f5cd06",
+    "reached_from": [
+     {
+      "map": "48.2",
+      "area": "Bellchime Trail",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5139==1",
+      "entry": "0x08aafdec"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 29,
+  "objective": "Head to Mahogany Town!",
+  "setters": [
+   {
+    "setter": "0x08f5ccf9",
+    "reached_from": [
+     {
+      "map": "55.47",
+      "area": "",
+      "event": "mscript#4",
+      "tile": null,
+      "gate": "ON_WARP_INTO_MAP_TABLE var 0x4099==0",
+      "entry": "0x08f3962a"
+     },
+     {
+      "map": "55.47",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x4099==0",
+      "entry": "0x08f3962a"
+     }
+    ],
+    "n_entries": 2
+   }
+  ]
+ },
+ {
+  "step": 30,
+  "objective": "Find the Mahogany Town Gym Leader.",
+  "setters": [
+   {
+    "setter": "0x08f5ddb1",
+    "reached_from": [
+     {
+      "map": "3.74",
+      "area": "Mahogany Town",
+      "event": "coord#2",
+      "tile": [
+       10,
+       20
+      ],
+      "gate": "var 0x51a5==0",
+      "entry": "0x08d56547"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 31,
+  "objective": "Challenge the Mahogany Gym!",
+  "setters": [
+   {
+    "setter": "0x08f5e73d",
+    "reached_from": [
+     {
+      "map": "55.13",
+      "area": "",
+      "event": "coord#0",
+      "tile": [
+       21,
+       21
+      ],
+      "gate": "var 0x51a5==1",
+      "entry": "0x08af69c7"
+     },
+     {
+      "map": "55.13",
+      "area": "",
+      "event": "coord#1",
+      "tile": [
+       22,
+       22
+      ],
+      "gate": "var 0x51a5==1",
+      "entry": "0x08aface4"
+     },
+     {
+      "map": "55.13",
+      "area": "",
+      "event": "coord#2",
+      "tile": [
+       23,
+       21
+      ],
+      "gate": "var 0x51a5==1",
+      "entry": "0x08af63a3"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 32,
+  "objective": "Search Mahogany Town for the suspicious man in black.",
+  "setters": [
+   {
+    "setter": "0x08f5e9dd",
+    "reached_from": [
+     {
+      "map": "3.74",
+      "area": "Mahogany Town",
+      "event": "coord#3",
+      "tile": [
+       15,
+       18
+      ],
+      "gate": "var 0x51a5==3",
+      "entry": "0x08af7ad3"
+     },
+     {
+      "map": "3.74",
+      "area": "Mahogany Town",
+      "event": "coord#4",
+      "tile": [
+       16,
+       18
+      ],
+      "gate": "var 0x51a5==3",
+      "entry": "0x08af956f"
+     },
+     {
+      "map": "3.74",
+      "area": "Mahogany Town",
+      "event": "coord#5",
+      "tile": [
+       17,
+       18
+      ],
+      "gate": "var 0x51a5==3",
+      "entry": "0x08af7845"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 33,
+  "objective": "Head to Cianwood City!",
+  "setters": []
+ },
+ {
+  "step": 34,
+  "objective": "Head to Olivine City!",
+  "setters": [
+   {
+    "setter": "0x08f5eba5",
+    "reached_from": [
+     {
+      "map": "3.74",
+      "area": "Mahogany Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51a5==5",
+      "entry": "0x08f5eba2"
+     },
+     {
+      "map": "55.35",
+      "area": "",
+      "event": "mscript#4",
+      "tile": null,
+      "gate": "ON_WARP_INTO_MAP_TABLE var 0x51a5==5",
+      "entry": "0x08f5eba2"
+     },
+     {
+      "map": "55.35",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51a5==5",
+      "entry": "0x08f5eba2"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 35,
+  "objective": "Go to the restaurant and meet up with Prof. Elm.",
+  "setters": [
+   {
+    "setter": "0x08ec1aaa",
+    "reached_from": [
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#4",
+      "tile": [
+       23,
+       31
+      ],
+      "gate": "var 0x5139==2",
+      "entry": "0x08aafaec"
+     },
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#5",
+      "tile": [
+       24,
+       31
+      ],
+      "gate": "var 0x5139==2",
+      "entry": "0x08aaf9bd"
+     },
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#6",
+      "tile": [
+       25,
+       31
+      ],
+      "gate": "var 0x5139==2",
+      "entry": "0x08aaf946"
+     },
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#7",
+      "tile": [
+       26,
+       31
+      ],
+      "gate": "var 0x5139==2",
+      "entry": "0x08aafb12"
+     },
+     {
+      "map": "3.72",
+      "area": "Olivine City",
+      "event": "coord#8",
+      "tile": [
+       27,
+       31
+      ],
+      "gate": "var 0x5139==2",
+      "entry": "0x08aafaff"
+     }
+    ],
+    "n_entries": 5
+   }
+  ]
+ },
+ {
+  "step": 36,
+  "objective": "Head to Cianwood City.",
+  "setters": [
+   {
+    "setter": "0x08ec912a",
+    "reached_from": [
+     {
+      "map": "49.15",
+      "area": "Glitter Lighthouse",
+      "event": "obj#0",
+      "tile": [
+       9,
+       11
+      ],
+      "gate": "local 1",
+      "entry": "0x089f2b30"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 37,
+  "objective": "Go to Cliff Town with Sange.",
+  "setters": [
+   {
+    "setter": "0x08ec917e",
+    "reached_from": [
+     {
+      "map": "56.24",
+      "area": "Cliff Edge Gate",
+      "event": "coord#0",
+      "tile": [
+       7,
+       27
+      ],
+      "gate": "var 0x51a4==0",
+      "entry": "0x08f41fe8"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 38,
+  "objective": "Take a look around Cliff Town.",
+  "setters": [
+   {
+    "setter": "0x08ec923d",
+    "reached_from": [
+     {
+      "map": "56.27",
+      "area": "Cliffside Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51a4==2",
+      "entry": "0x08f4050b"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 39,
+  "objective": "Return to Cianwood City!",
+  "setters": [
+   {
+    "setter": "0x08ec9419",
+    "reached_from": [
+     {
+      "map": "56.27",
+      "area": "Cliffside Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51a4==2",
+      "entry": "0x08f4050b"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 40,
+  "objective": "Return to the Olivine City Lighthouse!",
+  "setters": [
+   {
+    "setter": "0x08ec926d",
+    "reached_from": [
+     {
+      "map": "49.4",
+      "area": "Cianwood City",
+      "event": "obj#3",
+      "tile": [
+       6,
+       3
+      ],
+      "gate": "local 4",
+      "entry": "0x089da635"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 41,
+  "objective": "Investigate the Lighthouse with Lyra.",
+  "setters": [
+   {
+    "setter": "0x08ece844",
+    "reached_from": [
+     {
+      "map": "49.12",
+      "area": "Glitter Lighthouse",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5139==7",
+      "entry": "0x08d58011"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 42,
+  "objective": "Head to the top of the Lighthouse and stop Team Rocket!",
+  "setters": [
+   {
+    "setter": "0x087ba616",
+    "reached_from": [
+     {
+      "map": "49.14",
+      "area": "Glitter Lighthouse",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5139==8",
+      "entry": "0x08ecb3ef"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 43,
+  "objective": "Challenge the Olivine Gym!",
+  "setters": []
+ },
+ {
+  "step": 44,
+  "objective": "Cross the Ice Path and challenge the Blackthorn Gym!",
+  "setters": [
+   {
+    "setter": "0x087ba634",
+    "reached_from": [
+     {
+      "map": "51.1",
+      "area": "Olivine City",
+      "event": "obj#11",
+      "tile": [
+       5,
+       3
+      ],
+      "gate": "local 12",
+      "entry": "0x08aaa5a2"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 45,
+  "objective": "Go to the Dragon’s Den!",
+  "setters": [
+   {
+    "setter": "0x087ba63e",
+    "reached_from": [
+     {
+      "map": "54.7",
+      "area": "Blackthorn City",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x4099==0",
+      "entry": "0x08eddbf0"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 46,
+  "objective": "Head deep into the Dragon’s Den!",
+  "setters": [
+   {
+    "setter": "0x087ba653",
+    "reached_from": [
+     {
+      "map": "54.3",
+      "area": "Dragon’s Den",
+      "event": "obj#2",
+      "tile": [
+       5,
+       9
+      ],
+      "gate": "local 3",
+      "entry": "0x087ba7ab"
+     },
+     {
+      "map": "54.3",
+      "area": "Dragon’s Den",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51bd==0",
+      "entry": "0x08f3b6a1"
+     }
+    ],
+    "n_entries": 2
+   }
+  ]
+ },
+ {
+  "step": 47,
+  "objective": "Return to the Ecruteak City library.",
+  "setters": [
+   {
+    "setter": "0x087ba65d",
+    "reached_from": [
+     {
+      "map": "54.9",
+      "area": "Dragon’s Den",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51d5==0",
+      "entry": "0x087b428a"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 48,
+  "objective": "Go check out the Lake of Rage!",
+  "setters": [
+   {
+    "setter": "0x087baa09",
+    "reached_from": [
+     {
+      "map": "52.5",
+      "area": "Ecruteak City",
+      "event": "obj#17",
+      "tile": [
+       34,
+       15
+      ],
+      "gate": "local 18",
+      "entry": "0x087baa09"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 49,
+  "objective": "Investigate the suspicious gift shop in Mahogany Town.",
+  "setters": [
+   {
+    "setter": "0x087bb446",
+    "reached_from": [
+     {
+      "map": "3.100",
+      "area": "Lake of Rage",
+      "event": "obj#0",
+      "tile": [
+       42,
+       43
+      ],
+      "gate": "local 1",
+      "entry": "0x08aaacfb"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 50,
+  "objective": "Investigate the Team Rocket base with Lance.",
+  "setters": [
+   {
+    "setter": "0x087bb455",
+    "reached_from": [
+     {
+      "map": "53.2",
+      "area": "Mahogany Town",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x5144==1",
+      "entry": "0x08aab215"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 51,
+  "objective": "Defeat the Electrode at the Team Rocket base!",
+  "setters": []
+ },
+ {
+  "step": 52,
+  "objective": "Head to the Radio Tower in Goldenrod City!",
+  "setters": []
+ },
+ {
+  "step": 53,
+  "objective": "Go to the underground warehouse and rescue the Director!",
+  "setters": []
+ },
+ {
+  "step": 54,
+  "objective": "Free the Radio Tower from Team Rocket!",
+  "setters": []
+ },
+ {
+  "step": 55,
+  "objective": "Head to the Whirl Islands and stop Archer!",
+  "setters": []
+ },
+ {
+  "step": 56,
+  "objective": "Where is this...?",
+  "setters": []
+ },
+ {
+  "step": 57,
+  "objective": "Go to Ecruteak City and meet up with Morty.",
+  "setters": []
+ },
+ {
+  "step": 58,
+  "objective": "Go through the connecting cave to the unopened fourth chamber of{FA}the ruins.",
+  "setters": []
+ },
+ {
+  "step": 59,
+  "objective": "Bring the Clear Bell back to the Ecruteak Dance Theater.",
+  "setters": [
+   {
+    "setter": "0x08a68c4c",
+    "reached_from": [
+     {
+      "map": "1.57",
+      "area": "",
+      "event": "obj#1",
+      "tile": [
+       7,
+       6
+      ],
+      "gate": "local 2",
+      "entry": "0x08a68c4c"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 60,
+  "objective": "Challenge the Ecruteak Gym!",
+  "setters": []
+ },
+ {
+  "step": 61,
+  "objective": "Follow Sange.",
+  "setters": []
+ },
+ {
+  "step": 62,
+  "objective": "Go to the top of the Bell Tower and call back Ho-Oh.",
+  "setters": []
+ },
+ {
+  "step": 63,
+  "objective": "Challenge and catch Ho-Oh!",
+  "setters": [
+   {
+    "setter": "0x087bd9bb",
+    "reached_from": [
+     {
+      "map": "52.17",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51c8==0",
+      "entry": "0x08ed530d"
+     },
+     {
+      "map": "52.19",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51c8==0",
+      "entry": "0x08ed530d"
+     },
+     {
+      "map": "55.27",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x51c8==0",
+      "entry": "0x08ed530d"
+     }
+    ],
+    "n_entries": 3
+   }
+  ]
+ },
+ {
+  "step": 64,
+  "objective": "Ride Ho-Oh and chase after Lugia!",
+  "setters": []
+ },
+ {
+  "step": 65,
+  "objective": "Head to the top and face Lugia in the final battle!",
+  "setters": []
+ },
+ {
+  "step": 66,
+  "objective": "",
+  "setters": [
+   {
+    "setter": "0x087bd7f1",
+    "reached_from": [
+     {
+      "map": "56.58",
+      "area": "",
+      "event": "mscript#2",
+      "tile": null,
+      "gate": "ON_FRAME_TABLE var 0x4099==0",
+      "entry": "0x08f41968"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 67,
+  "objective": "Mom seems to have something to tell you...",
+  "setters": []
+ },
+ {
+  "step": 68,
+  "objective": "Go to the lab and see Prof. Elm!",
+  "setters": []
+ },
+ {
+  "step": 69,
+  "objective": "Set out from New Bark Town and challenge the League!",
+  "setters": []
+ },
+ {
+  "step": 70,
+  "objective": "Mom seems to need you for something.",
+  "setters": []
+ },
+ {
+  "step": 71,
+  "objective": "Go to the lab and see Prof. Elm!",
+  "setters": [
+   {
+    "setter": "0x08a6858f",
+    "reached_from": [
+     {
+      "map": "43.0",
+      "area": "New Bark Town",
+      "event": "obj#0",
+      "tile": [
+       5,
+       6
+      ],
+      "gate": "local 1",
+      "entry": "0x08a68500"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 72,
+  "objective": "Challenge the Goldenrod Gym!",
+  "setters": [
+   {
+    "setter": "0x08a69609",
+    "reached_from": [
+     {
+      "map": "50.23",
+      "area": "Goldenrod City",
+      "event": "obj#2",
+      "tile": [
+       15,
+       14
+      ],
+      "gate": "local 3",
+      "entry": "0x08aa38af"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 73,
+  "objective": "Talk to Whitney again, then check out the flower shop.",
+  "setters": [
+   {
+    "setter": "0x08a68d4f",
+    "reached_from": [
+     {
+      "map": "50.28",
+      "area": "Goldenrod City",
+      "event": "coord#1",
+      "tile": [
+       13,
+       10
+      ],
+      "gate": "var 0x5151==1",
+      "entry": "0x08a68d4f"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ },
+ {
+  "step": 74,
+  "objective": "Talk to Whitney again, then check out the flower shop.",
+  "setters": [
+   {
+    "setter": "0x08a69613",
+    "reached_from": [
+     {
+      "map": "50.28",
+      "area": "Goldenrod City",
+      "event": "obj#0",
+      "tile": [
+       13,
+       4
+      ],
+      "gate": "local 1",
+      "entry": "0x08aa4c64"
+     }
+    ],
+    "n_entries": 1
+   }
+  ]
+ }
+]

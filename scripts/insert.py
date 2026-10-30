@@ -31,8 +31,11 @@ import mapedit  # noqa: E402
 import maptext  # noqa: E402
 import sprtext  # noqa: E402
 import statusicons  # noqa: E402
+import dexgfx  # noqa: E402
 import typeicons  # noqa: E402
 import anchored  # noqa: E402
+import cheats_build  # noqa: E402
+import patrol_build  # noqa: E402
 
 BASE = "roms/Pokemon - FireRed Version (USA, Europe).gba"
 PATCHED = "roms/Pokemon Mercury 1.3.3 (patched).gba"
@@ -41,6 +44,8 @@ DIALOGUE_PX = 198  # 204 collided with the {FA}/{FB} arrow
 MOVE_DESC_PX = 112  # move description box (summary / learn screen), 4 lines
 MOVE_DESC_TABLE, MOVE_DESC_COUNT = 0x1CC8EB0, 1273
 ITEM_DESC_PX = 176  # bag description box: starts after the item icon, ends before the arrow
+DEX_DESC_PX, DEX_DESC_LINES = 216, 4  # Pokedex INFO page: the block is centred in a 4-line box; 6 px glyphs, ~200 px before the frame (#151)
+DEX_DESC_REFS = (0x17D9000, 0x17EB000)  # the hack's per-species description table
 HELP_PX = 222
 MIN_FREE_RUN = 512
 NAMING_DISPATCH = "002813d0052811d2f0b5474680b488460006070e1204150c1b041e0c0a4cf22040010a4b00f00ef80949084700900948f7b51e0008ab1d780748084b01911700074c2047184700008c9903029d2b000873d90908b55eff0918270000b12b0008c55eff09"  # data/naming_dispatch.s (arm-none-eabi-as -mthumb; objcopy -O binary)
@@ -446,6 +451,37 @@ def tower_top_floor_softlock(rom, src, pool):
             "bytes": [len(body), len(body2)]}
 
 
+def whitney_badge_gate(rom, src, pool):
+    """Whitney hands out the badge only after the player walks over one tile.
+
+    After the Goldenrod Gym fight the player is warped back to (13,5), right
+    below Whitney (13,4). Her script (0x08AA4C64) answers "Waah!!" while the
+    story var 0x5151 is 1, and the only thing that clears it (and sets the flag
+    0x1557 the badge branch tests) is the coord event at (13,10) - one tile of a
+    room that is open on every side, so most players walk around it, talk to her
+    again, get "Waah!!" again and never see the badge (the task keeps reading
+    "Talk to Whitney"). The original Chinese ROM does the same.
+
+    Fix: the `goto_if` that sends var 0x5151 == 1 to the crying branch now goes
+    to a pooled script that does what the coord event does (var 0x5120 -> 0x49,
+    flag 0x1557, var 0x5151 -> 0) and then jumps into that same branch, which
+    now falls through to the badge. The coord event still works and saves that
+    are already stuck are repaired the next time they talk to her."""
+    CRY = 0x089E1568
+    slot = 0xAA4C6D + 7                                   # goto_if operand
+    assert src[0xAA4C6D:0xAA4C6D + 11] == bytes.fromhex("21" "5151" "0100" "0601") + CRY.to_bytes(4, "little"), \
+        "Whitney script bytes differ"
+    u16 = lambda v: v.to_bytes(2, "little")
+    body = (b"\x16" + u16(0x5120) + u16(0x49)               # setvar 0x5120 0x49
+            + b"\x29" + u16(0x1557)                         # setflag 0x1557
+            + b"\x16" + u16(0x5151) + u16(0)                # setvar 0x5151 0
+            + b"\x05" + CRY.to_bytes(4, "little"))          # goto the branch (now: badge)
+    at = pool.alloc_aligned(len(body))
+    rom[at:at + len(body)] = body
+    rom[slot:slot + 4] = (0x08000000 + at).to_bytes(4, "little")
+    return {"script": 0x08000000 + at, "bytes": len(body)}
+
+
 def main():
     base = open(BASE, "rb").read()
     src = open(PATCHED, "rb").read()
@@ -521,6 +557,8 @@ def main():
     # strings referenced from the hack's move-description table (CFRU, 0x1CC8EB0)
     move_desc = {int.from_bytes(src[MOVE_DESC_TABLE + 4 * i:MOVE_DESC_TABLE + 4 * i + 4], "little") - 0x08000000
                  for i in range(MOVE_DESC_COUNT)}
+    dex_desc = {t for t, v in strings.items()
+                if any(DEX_DESC_REFS[0] <= int(r.split(":")[0], 16) < DEX_DESC_REFS[1] for r in v["refs"])}
     dialogue_addrs = layout.dialogue_set(strings)
     pool = FreePool(src)
     if json.load(open(edition.new_maps_path())).get("frontier"):      # one 31 KB run for the Spectrum Frontier's moved trainer table (scripts/frontier_build.py)
@@ -552,6 +590,8 @@ def main():
         if t in move_desc:  # summary / move-learn description box (4 lines)
             max_px, dialogue, single_line = MOVE_DESC_PX, False, False
         max_lines = None
+        if t in dex_desc:  # Pokedex INFO description: fill the box instead of the Chinese 12-hanzi block
+            max_px, dialogue, single_line, max_lines = DEX_DESC_PX, False, False, DEX_DESC_LINES
         if f"{t:07X}" in width_override:
             wo = width_override[f"{t:07X}"]
             max_px, dialogue, single_line = wo["px"], wo.get("dialogue", dialogue), False
@@ -604,13 +644,25 @@ def main():
             ro = int(r.split(":")[0], 16)
             pool.reserve(ro, ro + 4)
     report["free_before_reloc"] = pool.total()
+    moved = {}  # old pointer -> new pointer, for every relocated string
     for t, b in sorted(pending, key=lambda x: -len(x[1])):
         a = pool.alloc(len(b))
         rom[a:a + len(b)] = b
         for r in strings[t]["refs"]:
             ro = int(r.split(":")[0], 16)
             rom[ro:ro + 4] = (0x08000000 + a).to_bytes(4, "little")
+        moved[0x08000000 + t] = 0x08000000 + a
         report["relocated"] += 1
+    # The dump's script scan desyncs on some scripts, so a `loadword` operand (0f 0x <ptr>) can be missing from `refs` and would keep
+    # pointing at the old address: the old Chinese, or whatever the pool put there next (#125). Repoint those too.
+    report["extra_repointed"] = []
+    for m in re.finditer(rb"\x0f[\x00-\x03]([\x00-\xff]{3})\x08", bytes(src)):
+        old = int.from_bytes(m.group(1) + b"\x08", "little")
+        if old in moved:
+            ro = m.start() + 2
+            if int.from_bytes(rom[ro:ro + 4], "little") == old:  # not already repointed through refs
+                rom[ro:ro + 4] = moved[old].to_bytes(4, "little")
+                report["extra_repointed"].append(f"{ro:07X} {old:#010x} -> {moved[old]:#010x}")
     # --- manual strings (text/en/manual_strings.json): unfindable by the scan
     manual = json.load(open("text/en/manual_strings.json", encoding="utf-8"))
     for addr, m in manual.items():
@@ -724,6 +776,17 @@ def main():
     for r in refs:
         rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
     report["gfx"] += 1
+    # Pokedex list screen header + MENU/SEARCH labels (BG1 tileset, LZ77 relocated)
+    blobs, dex_maps = dexgfx.build(src)
+    for at, orig, new in dex_maps:
+        assert src[at:at + len(orig)] == orig
+        rom[at:at + len(new)] = new
+    for data, refs in blobs:
+        a = pool.alloc_aligned(len(data))
+        rom[a:a + len(data)] = data
+        for r in refs:
+            rom[r:r + 4] = (0x08000000 + a).to_bytes(4, "little")
+        report["gfx"] += 1
     # title logo (raw 8bpp BG): fits in the original tile area, so in place
     lt, lm = logo.build(src)
     assert len(lt) <= logo.MAX_TILES * 64
@@ -755,8 +818,13 @@ def main():
             rom[a:b] = base[a:b]
     report["null_object_scripts"] = null_placeholder_scripts(rom, src)
     report["tower_top_floor"] = tower_top_floor_softlock(rom, src, pool)
+    report["whitney_badge_gate"] = whitney_badge_gate(rom, src, pool)
     report["sendout_pairs"] = sendout_offset_pairs(rom, src, pool)
     naming_dispatch(rom, src, pool)
+    if edition.CHEATS:
+        report["cheats"] = cheats_build.apply(rom, src, pool)
+    if edition.EDITION == "river":          # Partner Patrol (docs/PARTNER_PATROL_SPEC.md): River Edition only, chained after the Cheat Device
+        report["patrol"] = patrol_build.apply(rom, src, pool)
     report["new_maps"] = mapedit.apply(rom, src, pool, edition.new_maps_path())
     report["free_after"] = pool.total()
 

@@ -16,6 +16,56 @@
    "0AA1024"
   ]
  },
+ "E37BD4": {
+  "zh": "10倍",
+  "cap": 5,
+  "en": "10x"
+ },
+ "E37BCF": {
+  "zh": "30倍",
+  "cap": 5,
+  "en": "30x"
+ },
+ "E37BCA": {
+  "zh": "60倍",
+  "cap": 5,
+  "en": "60x"
+ },
+ "EB3255": {
+  "zh": "汉语拼音排序",
+  "cap": 13,
+  "en": "A to Z Mode",
+  "refs": [
+   "451FD4",
+   "45208C"
+  ]
+ },
+ "EB3291": {
+  "zh": "根据属性排序",
+  "cap": 13,
+  "en": "Type Mode",
+  "refs": [
+   "451FDC",
+   "452094"
+  ]
+ },
+ "EB3272": {
+  "zh": "关闭宝可梦图鉴",
+  "cap": 15,
+  "en": "Close Pokédex",
+  "refs": [
+   "451FFC",
+   "4520B4"
+  ]
+ },
+ "75C898": {
+  "zh": "搜索中,请稍等。",
+  "cap": 16,
+  "en": "Searching, please wait.",
+  "refs": [
+   "735F74"
+  ]
+ },
  "E37728": {
   "zh": "退出设置",
   "cap": 9,
@@ -718,5 +768,705 @@
   "refs": [
    "1D035D8"
   ]
+ },
+ "017E3E9": {
+  "zh": "……呼……",
+  "cap": 7,
+  "en": "……Phew……",
+  "refs": [
+   "01C4A74"
+  ]
+ },
+ "07B3F9C": {
+  "zh": "星～",
+  "cap": 4,
+  "en": "Star{F9:D3}",
+  "refs": [
+   "07B3A71",
+   "07B3A9E",
+   "07B3AC5",
+   "07B3AD3",
+   "07B3AE1",
+   "07B3AEF",
+   "07B3AFD",
+   "07B3B6F",
+   "07B3B99",
+   "07B3BA7",
+   "07B3BB5",
+   "07B3BC3",
+   "07B3BD1",
+   "07B3C43",
+   "07B3C5D",
+   "07B3C6B",
+   "07B3C79",
+   "07B3C87",
+   "07B3C95",
+   "07B3D07"
+  ]
+ },
+ "09E0E69": {
+  "zh": "好吧，\n那我就不献丑了。",
+  "cap": 22,
+  "en": "All right then,\nI won’t embarrass myself.",
+  "refs": [
+   "09E0E36"
+  ]
+ },
+ "0AFB84E": {
+  "zh": "床",
+  "cap": 3,
+  "en": "Bed",
+  "refs": [
+   "0AFB6A4"
+  ]
+ },
+ "0D535FF": {
+  "zh": "能",
+  "cap": 3,
+  "en": "Can",
+  "refs": [
+   "0D5340C"
+  ]
+ },
+ "0EC3345": {
+  "zh": "喂！",
+  "cap": 4,
+  "en": "Hey!",
+  "refs": [
+   "0EC3323"
+  ]
+ },
+ "0EC3391": {
+  "zh": "喂！",
+  "cap": 4,
+  "en": "Hey!",
+  "refs": [
+   "0EC336F"
+  ]
+ },
+ "0EC36E3": {
+  "zh": "“华丽大赛会场”\n华丽宝可梦齐聚一堂！",
+  "cap": 35,
+  "en": "“Contest Hall”\nStylish Pokémon gather here!",
+  "refs": [
+   "0EC3243"
+  ]
+ },
+ "0ED513A": {
+  "zh": "菲{F9:D3}",
+  "cap": 5,
+  "en": "Fi{F9:D3}"
+ },
+ "0F3BBBC": {
+  "zh": "爱",
+  "cap": 3,
+  "en": "Ai"
+ },
+ "0F46F4B": {
+  "zh": "诶？",
+  "cap": 4,
+  "en": "Eh?"
+ },
+ "017D28C": {
+  "zh": "这是一块金色珠!{FB}我无法给你我的一部分智慧，\n那我就分你我的一部分金块吧!",
+  "cap": 70,
+  "en": "Here’s a Nugget!{FB}I can’t share a part of my wisdom with you,\nso take a part of my gold instead!",
+  "refs": [
+   "0164DC4"
+  ]
+ },
+ "041825C": {
+  "zh": "选择了{F7:00}。",
+  "cap": 10,
+  "en": "Chose {F7:00}.",
+  "ref_en": "{F7:00} is selected.",
+  "refs": [
+   "1CCE4EC",
+   "1CCE584"
+  ]
+ },
+ "04182DF": {
+  "zh": "再见，{F7:00}！",
+  "cap": 9,
+  "en": "Bye, {F7:00}!",
+  "ref_en": "Bye-bye, {F7:00}!",
+  "refs": [
+   "1CCE524"
+  ]
+ },
+ "0418433": {
+  "zh": "正带着{F7:00}。",
+  "cap": 10,
+  "en": "Held: {F7:00}.",
+  "ref_en": "{F7:00} is now held.",
+  "refs": [
+   "1CCE5AC"
+  ]
+ },
+ "0418443": {
+  "zh": "更改为{F7:00}。",
+  "cap": 10,
+  "en": "To {F7:00}.",
+  "ref_en": "Changed to {F7:00}.",
+  "refs": [
+   "1CCE5B4"
+  ]
+ },
+ "07B36C9": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "07B3429",
+   "07B343D"
+  ]
+ },
+ "07B69B6": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "07B6938",
+   "07B694C"
+  ]
+ },
+ "09CA1DC": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09CA121",
+   "09CA135",
+   "09CA152"
+  ]
+ },
+ "09CCBD2": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09CC049",
+   "09CC05D",
+   "09CC07A"
+  ]
+ },
+ "09D1045": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09D0CB9",
+   "09D0CCD",
+   "09D0CEA"
+  ]
+ },
+ "09E4F2B": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E4E9E",
+   "09E4F4F",
+   "09E4F63",
+   "09E4FD7",
+   "09E4FEE"
+  ]
+ },
+ "09E5779": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E5554",
+   "09E556B"
+  ]
+ },
+ "09E5881": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E57E7",
+   "09E57FB"
+  ]
+ },
+ "09E597F": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E58EF",
+   "09E5903"
+  ]
+ },
+ "09E5A2B": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E59ED",
+   "09E5A01"
+  ]
+ },
+ "09E8C65": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E861C",
+   "09E8633"
+  ]
+ },
+ "09E8D54": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E8C8A",
+   "09E8C9E"
+  ]
+ },
+ "09E92FB": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E9115",
+   "09E912C"
+  ]
+ },
+ "09E9422": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E9369",
+   "09E937D"
+  ]
+ },
+ "09E9961": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E978E",
+   "09E97A5"
+  ]
+ },
+ "09E9A67": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09E99CF",
+   "09E99E3"
+  ]
+ },
+ "09EB8A9": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "09EB527",
+   "09EB53E"
+  ]
+ },
+ "0AAD488": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0AAC5B6",
+   "0AAC5CA"
+  ]
+ },
+ "0AB9B50": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0AB83CC",
+   "0AB83E0"
+  ]
+ },
+ "0AFC2D7": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0AFBAFD",
+   "0AFBB11"
+  ]
+ },
+ "0D57282": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0D56F21",
+   "0D56F38"
+  ]
+ },
+ "0ECB65C": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0ECB19E",
+   "0ECB1B2"
+  ]
+ },
+ "0ECBD59": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0ECB747",
+   "0ECB75B"
+  ]
+ },
+ "0ECEABE": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0ECB8E3",
+   "0ECB8F7"
+  ]
+ },
+ "0ECFF5B": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0ECC392",
+   "0ECC3A6"
+  ]
+ },
+ "0EED355": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0EED1BB",
+   "0EED1CF"
+  ]
+ },
+ "0F517A1": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F5170A",
+   "0F5171E"
+  ]
+ },
+ "0F56701": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F56672",
+   "0F56686"
+  ]
+ },
+ "0F567FB": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F56755",
+   "0F56769"
+  ]
+ },
+ "0F568F4": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F5684F",
+   "0F56863"
+  ]
+ },
+ "0F569E9": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F56948",
+   "0F5695C"
+  ]
+ },
+ "0F5739E": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F570DF",
+   "0F570F3"
+  ]
+ },
+ "0F5745E": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F573B0",
+   "0F573C4"
+  ]
+ },
+ "0F576EA": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F57627",
+   "0F5763B"
+  ]
+ },
+ "0F577C9": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F5773E",
+   "0F57752"
+  ]
+ },
+ "0F578C2": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F5781D",
+   "0F57831"
+  ]
+ },
+ "0F579A0": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F57916",
+   "0F5792A"
+  ]
+ },
+ "0F57A75": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "0F579F4",
+   "0F57A08"
+  ]
+ },
+ "1DA756E": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "1CD4516",
+   "1CD452A",
+   "1CD7648"
+  ]
+ },
+ "1DAA24F": {
+  "zh": "哔！",
+  "cap": 4,
+  "en": "Click!",
+  "refs": [
+   "1CD5CED",
+   "1CD5D01"
+  ]
+ },
+ "075D300": {
+  "zh": "清晨",
+  "cap": 8,
+  "en": "Morning",
+  "refs": []
+ },
+ "1D9A731": {
+  "zh": "携带道具",
+  "cap": 9,
+  "en": "Held Item",
+  "refs": [
+   "1DE3B00"
+  ]
+ },
+ "1D9A74C": {
+  "zh": "其他道具",
+  "cap": 9,
+  "en": "Misc Item",
+  "refs": [
+   "1DE3B0C"
+  ]
+ },
+ "1D9A75E": {
+  "zh": "精灵球",
+  "cap": 7,
+  "en": "Balls",
+  "refs": [
+   "1DE3B14"
+  ],
+  "ref_en": "Balls"
+ },
+ "1D9BC6E": {
+  "zh": "合计",
+  "cap": 5,
+  "en": "Tot.",
+  "ref_en": "Tot.",
+  "refs": [
+   "1D2593C"
+  ]
+ },
+ "1D9BC73": {
+  "zh": "剩余",
+  "cap": 5,
+  "en": "Rem.",
+  "ref_en": "Rem.",
+  "refs": [
+   "1D25948"
+  ]
+ },
+ "1D9BC7D": {
+  "zh": "当前",
+  "cap": 5,
+  "en": "Cur.",
+  "ref_en": "Cur.",
+  "refs": [
+   "1D25960"
+  ]
+ },
+ "1D9BC82": {
+  "zh": "目标",
+  "cap": 5,
+  "en": "Tgt.",
+  "ref_en": "Tgt.",
+  "refs": [
+   "1D25964"
+  ]
+ },
+ "1D9BC87": {
+  "zh": "分配",
+  "cap": 5,
+  "en": "Allo.",
+  "ref_en": "Allo.",
+  "refs": [
+   "1D25968"
+  ]
+ },
+ "1D9BC8C": {
+  "zh": "体力",
+  "cap": 5,
+  "en": "HP",
+  "ref_en": "HP",
+  "refs": [
+   "1DDF09C"
+  ]
+ },
+ "1D9BC91": {
+  "zh": "攻击",
+  "cap": 5,
+  "en": "Atk",
+  "ref_en": "Atk",
+  "refs": [
+   "1DDF0A0"
+  ]
+ },
+ "1D9BC96": {
+  "zh": "防御",
+  "cap": 5,
+  "en": "Def",
+  "ref_en": "Def",
+  "refs": [
+   "1DDF0A4"
+  ]
+ },
+ "1D9BC9B": {
+  "zh": "特攻",
+  "cap": 5,
+  "en": "SpA",
+  "ref_en": "SpA",
+  "refs": [
+   "1DDF0A8"
+  ]
+ },
+ "1D9BCA0": {
+  "zh": "特防",
+  "cap": 5,
+  "en": "SpD",
+  "ref_en": "SpD",
+  "refs": [
+   "1DDF0AC"
+  ]
+ },
+ "1D9BCA5": {
+  "zh": "速度",
+  "cap": 5,
+  "en": "Spe",
+  "ref_en": "Spe",
+  "refs": [
+   "1DDF0B0"
+  ]
+ },
+ "1D9BCB3": {
+  "zh": "努力药",
+  "cap": 7,
+  "en": "Vitamins",
+  "ref_en": "Vitamins",
+  "refs": [
+   "1DDF0B4"
+  ]
+ },
+ "1D9BCC4": {
+  "zh": "道具充足",
+  "cap": 9,
+  "en": "Enough",
+  "ref_en": "Enough",
+  "refs": [
+   "1D25974"
+  ]
+ },
+ "1D9BCCD": {
+  "zh": "道具不足",
+  "cap": 9,
+  "en": "Not Enough",
+  "ref_en": "Not Enough",
+  "refs": [
+   "1D25994"
+  ]
+ },
+ "1D9BCD6": {
+  "zh": "超过上限",
+  "cap": 9,
+  "en": "Over Limit",
+  "ref_en": "Over Limit",
+  "refs": [
+   "1D25990"
+  ]
+ },
+ "1D9BCE6": {
+  "zh": "{F8:00}确定",
+  "cap": 7,
+  "en": "{F8:00} OK",
+  "ref_en": "{F8:00} OK",
+  "refs": [
+   "1D2597C"
+  ]
+ },
+ "1D9BD2D": {
+  "zh": "所需道具不足，无法调整。\n请检查对应能力的药、羽毛和树果。",
+  "cap": 54,
+  "en": "EV Items not sufficient,\nplease check again!",
+  "ref_en": "EV Items not sufficient,\nplease check again!",
+  "refs": [
+   "1D26214"
+  ]
+ },
+ "04184C9": {
+  "zh": "BAG",
+  "cap": 4,
+  "en": "Bag",
+  "refs": []
  }
 }

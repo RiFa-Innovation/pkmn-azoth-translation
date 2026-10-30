@@ -209,9 +209,17 @@ def encode_en(text):
     return b"".join(b for b, _ in tokenize(text)) + b"\xFF"
 
 
+KEY_ICON_PX = {0x02: 15, 0x03: 15, 0x04: 24, 0x05: 24}   # L, R, START, SELECT; the rest (A, B, D-pad) are ~9 px
+
+
 def ctrl_px(b):
     # FD placeholders expand at runtime: budget a 7-char (42 px) name
-    return 42 if b[0] == 0xFD else 0
+    if b[0] == 0xFD:
+        return 42
+    # {F8:xx} button icons are drawn as pictures, not glyphs (#156: lines with icons ran past the Help Tips pane)
+    if b[0] == 0xF8 and len(b) > 1:
+        return KEY_ICON_PX.get(b[1], 9)
+    return 0
 
 
 def wrap_en(text, widths, max_px, dialogue):

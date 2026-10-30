@@ -131,3 +131,38 @@ scratch folder first. Playtest saves are backed up in `saves/` (gitignored).
 - **Loading a real save**: copy ROM + `.sav` to a scratch folder as
   `game.gba`/`game.sav` and boot with `RHT_LOAD_SAVE=1`. Save states are tied
   to one build; don't load a state made on another ROM.
+
+## Game agent (Jev) - added 2026-10-23, **deprecated 2026-10-24** (archived in `deprecated/jev-agent/`, see its README)
+
+`deprecated/jev-agent/agent/` plays battles through the same bridge: it reads RAM, builds the legal options with precomputed facts
+(type multiplier, damage %, KO, turn order), asks Jev (or the heuristic fallback) to choose, presses the buttons and
+checks the cursor bytes. Spec and milestones: `deprecated/jev-agent/docs/JEV_AGENT_SPEC.md`. Playtest tooling only; never shipped.
+
+```
+python3 scripts/play.py boot                          # bridge up, with RHT_LOAD_SAVE=1 on a scratch copy of a save
+python3 deprecated/jev-agent/agent/run.py state                    # snapshot + options, no input
+python3 deprecated/jev-agent/agent/run.py wild SPECIES LEVEL       # start a scripted wild battle (test helper)
+python3 deprecated/jev-agent/agent/run.py battle [--goal win|flee] [--min-conf 0.5] [--dry]
+python3 deprecated/jev-agent/agent/run.py play --until map:3.75 --route "8,14 tL A 10,18 tD w60"   # walk + fight + talk; stops on goal/anomaly
+```
+
+`run.py heal` fully heals the team in RAM (HP, PP, status; `!heal` as a route token, or `--cheat-heal` to offer it to the goal
+selector). `play --target G.N [--heal-map G.N --heal-route "tokens"]` travels across maps (`@G.N` / `^G.N` tokens, `navmap.py`) and lets Jev choose
+`continue` vs `heal` before each leg. `play` exits 0 on the goal, 2 on an anomaly (report, screenshot and state under `saves/agent/anomalies/`), 3 when the route ran out.
+Route tokens and `--until` forms: top of `deprecated/jev-agent/agent/play_loop.py`. Boot the bridge, then press through the title screen to
+Continue before using any command (a fresh boot sits on the title screen).
+
+The key is read from `TYPESAFE_API_KEY` only; without it (or on a 401) every decision falls back to the heuristic.
+Decisions are logged to `saves/agent/decisions.jsonl` (gitignored).
+
+## Text sweep and dangling-pointer audit (added 2026-10-24)
+
+- `python3 scripts/textsweep.py render ROM DB [--n N] [--out DIR]` shows every dialogue string of a built ROM in the running game
+  (a `loadword; callstd 2; end` script injected into any idle overworld), screenshots each page, measures the ink against the box edge and
+  flags `edge`, `oddchar` (a decoded character outside the English set: stray hanzi lead bytes), `stuck`, `corrupt`. ROM is the one the
+  emulator runs, DB is `hackdb.py build --rom ROM`. It enumerates strings from the ROM's own scripts, never from the hackdb string table
+  (that follows the original layout). Strings with `{FD:..}` buffer placeholders are skipped. Boot a clean emulator first: a killed sweep
+  can leave overworld scripts stalled, and the tool refuses to start in that state.
+- `python3 scripts/audit_dangling.py BUILT_ROM` lists script `loadword` operands still pointing at the old address of a relocated string.
+- Decode with `mercury_text.decode`, not `decode_vanilla`, when hunting leftovers: the vanilla decoder reads hanzi byte pairs as Latin letters
+  and finds nothing.

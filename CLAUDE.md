@@ -68,7 +68,9 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
 - **Spectrum Frontier reservations** (`scripts/frontier_build.py`, spec `docs/BATTLE_FRONTIER_SPEC.md`): hack vars `0x5121`-`0x5132`, flags `0x1388`-`0x13A7`,
   maps `58.5`-`58.9` (arenas), EWRAM `0x02022400`-`0x020227FF` (opponent party block `0x02022400`, speech buffers `0x02022600/680/700`; borrowed link buffers, the game is offline),
   **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
-  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text. `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
+  the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text.
+  `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
+- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF`, multichoice list id 65 (the table is copied with one extra entry), SELECT+START hotkey in the overworld; in every River build, and in `RHT_CHEATS=1` translation builds.
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +
@@ -130,6 +132,11 @@ this string" in one call. Add what you learn with `hackdb.py note add`.
   garbage (`úú\n...`, `œY ...`) may start 1-3 bytes early, inside the preceding `applymovement`
   stream, so its "ref" is the operand. After adding manual entries, diff all `applymovement`/`goto`/`call`
   operands of the built ROM against the original (hackdb `cmds` on both ROMs). (#87, PLAYTEST 84)
+- **A relocated string can leave a script operand behind.** `insert.py` repoints only the refs the dump found; the dump's script scan
+  desyncs on some scripts, so a `loadword` operand (`0f 0x <ptr>`) can keep the OLD address, which then shows old Chinese or, once the
+  pool reuses the bytes, another string with a stray hanzi lead byte. `insert.py` now repoints any `0f 0x <old ptr>` whose target moved
+  (`extra_repointed` in the report); `scripts/audit_dangling.py` re-checks a build and `scripts/textsweep.py` renders every dialogue string
+  in the engine. Hunt leftovers with `mercury_text.decode` (the vanilla decoder hides hanzi). (#125, PLAYTEST 93)
 - **Free-space pool:** `0xFF` runs can be live data. `insert.py::referenced_ff`
   excludes referenced FF ranges; don't relocate into them.
 - **Mixed strings:** mostly-Latin text with a hanzi (names + one character) is
@@ -237,6 +244,10 @@ EDITION tag; `scripts/dist.py --river V` sets it). Both editions carry the Front
 The Frontier's arenas are the *last* maps of group 58, so their ids follow whatever the edition already put there.
 Build and verify **both** after any change: `python3 scripts/build_editions.py` (clean-report check, BPS round trip, copies to
 `build/editions/<name>.{gba,bps}`; `build/Mercury_EN.*` is left holding the last edition built). Plain `insert.py` builds the translation.
+The **Cheat Device** (`docs/CHEATS.md`) is **native to the River Edition** (decided 2026-10-29, first in v0.4): every `RHT_EDITION=river` build carries it (`scripts/edition.py`).
+For the translation it is only a build option (`RHT_CHEATS=1`, `scripts/dist.py --cheats N`); the separate `cheats-v1` add-on release was **withdrawn** (2026-10-29: its 9-entry menu drew as one row; a multichoice list may have at most 8 entries) and no cheats-only release is planned. The numbered betas never contain the cheats.
+`build_editions.py` builds `river`, `translation` and `translation-cheats` (there is no separate river-cheats variant any more).
+The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`) is built into every `RHT_EDITION=river` build (not into the translation); SELECT in Quick Catch sends the walker at the aimed target. Patrol private RAM `0x02022200`-`0x020223FF` (struct Patrol in `scripts/native/patrol.c`), hack flags `0x13B0`-`0x13BF` reserved (`0x13B0` off, `0x13B1`/`0x13B2` size, `0x13B3` tip shown); `L+R+SELECT` opens its settings.
 
 ## Release steps (only when asked)
 
