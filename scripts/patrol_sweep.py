@@ -54,7 +54,7 @@ def main():
         e.write(0x03000EA8, b"\x00")
         e.wait(60)
 
-    free = lambda: e.read(0x03000F9C, 1)[0] == 0
+    free = lambda: e.read(0x03000F9C, 1)[0] == 0 and struct.unpack("<I", e.read(0x030030F4, 4))[0] == 0x080565B5     # field unlocked AND back on the overworld callback (an evolution scene is not)
     run(bytes([0x44]) + struct.pack("<HH", 4, 20) + bytes([0x02]))      # additem Poke Ball x20 (Quick Catch needs balls)
 
     def clear():
@@ -62,6 +62,11 @@ def main():
             if free():
                 return True
             tap("B", w=60)
+        for k in range(40):                              # a wild battle (the move check walks over grass): run from it
+            if free():
+                return True
+            for b in ("A", "Down", "Right", "A", "B"):
+                tap(b, w=40)
         return free()
 
     def pos(i):
@@ -106,7 +111,7 @@ def main():
             clear()
             warp(g, n, 5, 5)
             if mapnow() != (g, n):
-                results[key] = "warp failed"
+                results[key] = f"warp failed (cb2 {struct.unpack('<I', e.read(0x030030F4, 4))[0]:#x}, ctx {e.read(0x03000EB0, 2).hex()}, locked {e.read(0x03000F9C, 1)[0]}, map {mapnow()})"
                 print(key, results[key], flush=True)
                 continue
             pairs, size = grass_pairs()

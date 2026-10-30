@@ -403,3 +403,30 @@ follower code (idle movement every frame, follow step when the player moves).
   follower state stayed untouched while the slot stayed inert.)
 * Full 26-map patrol sweep with the v0.2.3 save: 25 runs, 10-kill caps reached on 3.80 and 1.50, the rest ended by "worn out"/"couldn't get close", no patrol task left behind, controls back everywhere.
   The sweep's "player can move" check was fixed (Down+Up cancelled out; any single step now counts): the two earlier failures (3.86, 3.101) were that check, not the patrol.
+
+## 19. Evolution prompt (M6, River v0.5)
+
+After the summary (every ending except the shiny one) the script runs `patrol_evolve`: if the engine's own `gLeveledUpInBattle` bit (`0x03004FD4`) is set for the partner's slot and `GetEvolutionTargetSpecies`
+(`0x08042EC4`, mode 0, the party menu's own call) names a species, it sets `gCB2_AfterEvolution` (`0x0300537C`) to `CB2_ReturnToFieldContinueScript` (`0x080568C5`) and calls
+`BeginEvolutionScene` (`0x080CDDA8`, canStop = 1); the script then `waitstate`s and resumes on the field. The bit is cleared either way, so the post-battle check does not ask twice.
+Verified in the emulator (a Charmander given by script, level byte 40, bit set, the real summary script): the scene opens ("What? Charmander is evolving!"), A evolves it, B cancels it, both return
+to the overworld with the script finished, the field unlocked and the walker respawned; sweep 3.80 / 1.50 / 3.84 / 3.42 clean. The sweep's `free()` now also requires the overworld callback.
+
+## 20. Learn-move prompt (M7, River v0.5)
+
+`give_exp` used to skip a level-up move when the moveset was full (`TryLearnMove` returns 0xFFFF and leaves the move in `gMoveToLearn`, `0x02024022`). It now records it (`P->pend[6]`, `npend`, `pend_i`, +414..+427 of the block).
+After the summary, before the evolution step, the script loops: `patrol_learn_next` (skips moves already known; 0x800D = 1, move in 0x8003) -> `ask` -> `patrol_learn_open`
+(`ShowSelectMovePokemonSummaryScreen` `0x08134739`: party, slot, last index, callback = `CB2_ReturnToFieldContinueScript` `0x080568C5`, new move on the stack; `waitstate`) ->
+`patrol_learn_apply`: the chosen slot is the engine's own `GetMoveSlotToReplace()` byte `0x0203B16E` (0-3, 4 = cancelled), applied as the party menu does it: `RemoveMonPPBonus` `0x08041065`, `SetMonMoveSlot` `0x0803E965`.
+B on the screen = slot 4 -> "Stop trying to teach X?" (Yes: `patrol_learn_skip`; No: the screen again).
+Verified in the emulator (a Charmander given by script with Tackle/Ember/Growl/Scratch, Flamethrower pending, the real summary script): the question, the Known Moves screen with the new move at the bottom,
+A on slot 0 -> "1, 2 and... Poof! ... forgot Tackle. And... learned Flamethrower!"; a second run lists Flamethrower in slot 0 (written); B -> slot 4, "Stop trying to teach..." -> Yes -> pend_i advances, script ends;
+sweep 3.80 / 1.50 / 3.84 / 3.42 / 3.82 clean (one harness warp flake in a longer chain, not reproduced; the sweep now prints cb2/ctx/lock on a failed warp).
+
+### 20.1 Sprite after evolution (v0.5)
+
+The hack draws the walker from the species kept in its follower state (`0x0203B818 + 0x12`, u16) and in the walker object (`+5` low byte, `+35` high byte); the graphics id is the species + 256 (Chikorita 152 -> 408). Both are refreshed
+only on a map change or a menu, so an evolved partner kept its old sprite. `patrol_evolve` remembers the walker's graphics id and the old species (`P->evo_gfx`, `P->evo_sp`, +428/+430) and hands the scene a return callback (`evo_done`)
+that, before `CB2_ReturnToFieldContinueScript` rebuilds the field, writes `species + (gfx - old species)` into those three places when the walker still shows the old sprite. A B-cancelled evolution changes nothing (same species).
+`find_partner` now also accepts `gfx == species + 256` (it only matched `gfx == species`, so it fell back to the lead). Verified: the evolved walker's graphics id goes 408 -> 409 on the field; sweep clean.
+Reported and not reproduced: the partner sometimes drawn one tile away from its real tile (a sprite-vs-coordinates check after 4 patrols, patrols started mid-step, and an evolution found no drift).

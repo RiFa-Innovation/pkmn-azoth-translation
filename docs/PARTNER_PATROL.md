@@ -1,4 +1,4 @@
-# Partner Patrol (River Edition v0.3+)
+# Partner Patrol (River Edition v0.3+; new moves and evolution prompts from v0.5)
 
 Your walking partner can now go out on its own, find the wild Pokémon in sight, battle them for you and bring back the experience and the drops.
 
@@ -50,12 +50,18 @@ For every Pokémon the partner beats (the same drop rule as a Quick Catch win):
 
 | What | How |
 |---|---|
-| **Experience** | The partner gains `base EXP yield x level / 7` (it alone). Level-ups teach the moves of that level. **Evolution is left to the game**: the partner is flagged and evolves after your next real battle, as if it had levelled up in one. |
+| **Experience** | The partner gains `base EXP yield x level / 7` (it alone). Level-ups teach the moves of that level; when its four moves are full, the partner **asks you** after the report (see "New moves" below). **Evolution is the game's own scene**: if the partner levelled up and can evolve, the usual "What? ... is evolving!" screen opens right after the report (B cancels, as always). |
 | **One drop** | 20%: an **Exp. Candy** (XS below Lv 20, S below 40, M below 60, L below 80, XL from 80, by the target's level). 30%: one of ten **Berries**. 50%: **EV Feathers**, with the hack's own rules (Power items, the doubling item, the Exp. Share multiplier; the EV switch does not matter). |
 | **Held items** | What the species can hold: the common item 50%, the rare one 5% (always, if both are the same). |
 
 At the end the partner reports everything in one go: how many Pokémon it beat and the total EXP, any level-up and new moves, then each item found ("Found Muscle Wing x3!"),
 or "No room in the bag for X!" when the bag is full. The very first time, a short tip explains B and the settings.
+
+## New moves and evolution
+
+After the report the game asks about each move the partner could not learn because it already knows four: *"Charmander wants to learn Flamethrower, but it already knows four moves. Make it forget a move?"*
+Yes opens the game's own **Known Moves** screen: pick the move to forget (the new one is listed at the bottom), or press **B** to back out ("Stop trying to teach ...?": Yes gives up, No picks again).
+Then, if the partner can evolve, the usual evolution screen follows (B cancels), and the walking sprite switches to the new species right away. Both use the game's own screens and routines; nothing is learned or evolved without your answer, except moves that fit in a free slot.
 
 ## Settings
 

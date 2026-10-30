@@ -80,8 +80,7 @@ SCRIPT = """
         goto_if 1 unreachable
         compare_var_to_value 0x8004 7
         goto_if 1 no_walker
-        releaseall
-        end
+        goto finish
     no_walker:
         say "Nobody is walking behind you. Put a Pokémon out to walk first, then try again."
         releaseall
@@ -89,17 +88,60 @@ SCRIPT = """
     worn_out:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is worn out and came back."
-        releaseall
-        end
+        goto finish
     unreachable:
         bufferpartymonnick 0 0x8006
         bufferspeciesname 1 0x8007
         say "{FD:02} couldn't get close to {FD:03}."
-        releaseall
-        end
+        goto finish
     hurt:
         bufferpartymonnick 0 0x8006
         say "{FD:02} is too hurt to fight. Heal up first."
+        goto finish
+    finish:
+        callnative @patrol_learn_next
+        compare_var_to_value 0x800D 1
+        goto_if 1 learn_ask
+        goto evolve
+    learn_ask:
+        bufferpartymonnick 0 0x8006
+        buffermovename 1 0x8003
+        ask "{FD:02} wants to learn {FD:03}, but it already knows four moves. Make it forget a move?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 learn_pick
+        goto learn_giveup
+    learn_pick:
+        callnative @patrol_learn_open
+        waitstate
+        callnative @patrol_learn_apply
+        compare_var_to_value 0x800D 1
+        goto_if 1 learn_done
+        bufferpartymonnick 0 0x8006
+        buffermovename 1 0x8003
+        ask "Stop trying to teach {FD:03}?"
+        compare_var_to_value 0x800D 1
+        goto_if 1 learn_giveup
+        goto learn_pick
+    learn_done:
+        bufferpartymonnick 0 0x8006
+        buffermovename 1 0x8002
+        buffermovename 2 0x8003
+        say "1, 2 and... Poof! {FD:02} forgot {FD:03}. And... {FD:02} learned {FD:04}!"
+        goto finish
+    learn_giveup:
+        bufferpartymonnick 0 0x8006
+        buffermovename 1 0x8003
+        say "{FD:02} did not learn {FD:03}."
+        callnative @patrol_learn_skip
+        goto finish
+    evolve:
+        callnative @patrol_evolve
+        compare_var_to_value 0x800D 1
+        goto_if 1 evolving
+        releaseall
+        end
+    evolving:
+        waitstate
         releaseall
         end
     shiny:
@@ -213,7 +255,9 @@ def apply(rom, src, pool):
     na = pool.alloc_aligned(len(image))
     syms = _build(ROM_BASE + na, path, 0, cur)[1]
     text = lambda b: ROM_BASE + _alloc(rom, pool, b)
-    ext = {"patrol_remove": syms["patrol_remove"] | 1, "patrol_sum_step": syms["patrol_sum_step"] | 1}
+    ext = {"patrol_remove": syms["patrol_remove"] | 1, "patrol_sum_step": syms["patrol_sum_step"] | 1, "patrol_evolve": syms["patrol_evolve"] | 1,
+           "patrol_learn_next": syms["patrol_learn_next"] | 1, "patrol_learn_open": syms["patrol_learn_open"] | 1,
+           "patrol_learn_apply": syms["patrol_learn_apply"] | 1, "patrol_learn_skip": syms["patrol_learn_skip"] | 1}
     size = len(scrasm.assemble(SCRIPT, 0, widths, _Any(), lambda b: 0))
     sa = pool.alloc_aligned(size)
     code = scrasm.assemble(SCRIPT, ROM_BASE + sa, widths, ext, text)

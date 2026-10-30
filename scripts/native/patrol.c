@@ -62,6 +62,11 @@ struct Patrol {
     u16 items[16];      /* +44 8 x (item id, quantity; bit 15 of the quantity = no room in the bag) */
     u8 grid[169];       /* +76 breadth-first search window (13 x 13): 0 unseen, 1-4 direction taken, 5 blocked, 6 start */
     u8 queue[169];      /* +245 */
+    u16 pend[6];        /* +414 moves the partner could not learn (its moveset was full), offered after the summary */
+    u8 npend;           /* +426 */
+    u8 pend_i;          /* +427 next one to offer */
+    u16 evo_gfx;        /* +428 the walker's graphics id and the partner's species before an evolution scene (0 = nothing to refresh) */
+    u16 evo_sp;         /* +430 */
 };
 #define P ((volatile struct Patrol *)0x02022200)
 #define SB1PTR (*(volatile u32 *)0x03005008)
@@ -105,6 +110,10 @@ typedef void (*fn_script)(const void *);
 typedef u32 (*fn_add)(u32, u32);
 typedef void (*fn_feather)(void *, u32, u16 *);
 typedef u32 (*fn_learn)(void *, u32);
+typedef void (*fn_evo)(void *, u32, u32, u32);
+typedef void (*fn_selmove)(void *, u32, u32, u32, u32);
+typedef void (*fn_ppbonus)(void *, u32);
+typedef void (*fn_setslot)(void *, u32, u32);
 typedef u32 (*fn_task_create)(u32, u32);
 typedef u32 (*fn_coll)(void *, s32, s32, u32);
 typedef u32 (*fn_obj)(void *);
@@ -125,6 +134,17 @@ typedef void (*fn_move_to)(void *, s32, s32);
 #define SetupScript       ((fn_script)0x08069AE5)
 #define AddBagItem        ((fn_add)0x0809A085)
 #define Feathers          ((fn_feather)0x09D2ADA5)   /* (partner mon, defeated species, u16 out[6]) -> adds the Feathers, out[stat] = count (negative = no room) */
+#define GetEvolutionTarget ((fn_getmon)0x08042EC5)   /* (mon, mode 0, item 0) -> the species it evolves into now, 0 = none; the party menu's own rare-candy call */
+#define BeginEvolutionScene ((fn_evo)0x080CDDA9)     /* (mon, species, canStop, partyId): the engine's evolution scene, B cancels */
+#define GCB2_AFTEREVO     (*(volatile u32 *)0x0300537C)   /* where the scene returns to */
+#define CB2_ContinueScript 0x080568C5                /* CB2_ReturnToFieldContinueScript: back to the field and resume the running script */
+#define ShowSelectMove    ((fn_selmove)0x08134739)   /* ShowSelectMovePokemonSummaryScreen(party, slot, last party index, callback, new move): the "which move to forget" screen */
+#define MOVESLOT          (*(volatile u8 *)0x0203B16E)    /* what GetMoveSlotToReplace() (0x08138B2C) returns: the chosen slot 0-3, 4 = cancelled */
+#define GMOVETOLEARN      (*(volatile u16 *)0x02024022)   /* gMoveToLearn: set by the engine when a level-up move finds the moveset full */
+#define PARTYCOUNT        (*(volatile u8 *)0x02024029)
+#define RemoveMonPPBonus  ((fn_ppbonus)0x08041065)
+#define SetMonMoveSlot    ((fn_setslot)0x0803E965)   /* (mon, move, slot): the move and its full PP */
+#define MON_MOVE1         13
 #define TryLearnMove      ((fn_learn)0x0803EA89)
 #define ZeroMonData       ((fn_void_p)0x0803D995)
 #define CreateTask        ((fn_task_create)0x0807741D)
@@ -223,6 +243,102 @@ u32 patrol_remove(void)                              /* script: callnative */
     return 0;
 }
 
+/* script: callnative after the summary. If the partner levelled up (the engine's own gLeveledUpInBattle bit) and can evolve now, start the engine's evolution
+ * scene (the player can cancel with B, as after a battle) and set 0x800D = 1 so the script waits; the scene returns to the field and the script goes on. The
+ * bit is cleared either way, so the post-battle check does not ask a second time. */
+static void evo_done(void);
+static volatile u8 *obj_at(u32 idx);
+static int obj_alive(u32 idx, u32 local);
+
+u32 patrol_evolve(void)
+{
+    u32 slot = P->slot, species;
+    void *mon;
+    V800D = 0;
+    if (slot > 5 || !(LEVELEDUP & (1 << slot)))
+        return 0;
+    LEVELEDUP &= ~(1 << slot);
+    mon = (void *)(PARTY + 100 * slot);
+    if (!get(mon, MON_SPECIES) || get(mon, MON_IS_EGG))
+        return 0;
+    species = GetEvolutionTarget(mon, 0, 0) & 0xFFFF;
+    if (!species)
+        return 0;
+    P->evo_gfx = 0;
+    if (FOLLOWER[0] && obj_alive(FOLLOWER[1], 0xFE)) {
+        volatile u8 *w = obj_at(FOLLOWER[1]);
+        u32 g = w[5] | (w[35] << 8);
+        if (g == (FOLLOWER[0x12] | (FOLLOWER[0x13] << 8))) {
+            P->evo_gfx = g;
+            P->evo_sp = get(mon, MON_SPECIES) & 0xFFFF;
+        }
+    }
+    GCB2_AFTEREVO = (u32)evo_done | 1;
+    BeginEvolutionScene(mon, species, 1, slot);
+    V800D = 1;
+    return 0;
+}
+
+/* script, after the summary: the next move the partner could not learn. 0x800D = 1 with the move in 0x8003 (and the slot in 0x8006), 0 = none left. */
+u32 patrol_learn_next(void)
+{
+    u32 slot = P->slot;
+    V800D = 0;
+    if (slot > 5)
+        return 0;
+    while (P->pend_i < P->npend) {
+        void *mon = (void *)(PARTY + 100 * slot);
+        u32 mv = P->pend[P->pend_i], i, known = 0, full = 1;
+        for (i = 0; i < 4; i++) {
+            u32 m = get(mon, MON_MOVE1 + i);
+            known |= m == mv;
+            full &= m != 0;
+        }
+        if (!known && full) {
+            SPECIALS[3] = mv;
+            SPECIALS[6] = slot;
+            V800D = 1;
+            return 0;
+        }
+        P->pend_i++;
+    }
+    return 0;
+}
+
+/* script: open the engine's "which move should be forgotten" screen; it returns to the field and the script goes on (waitstate) */
+u32 patrol_learn_open(void)
+{
+    MOVESLOT = 4;                                    /* "nothing chosen" (what the engine itself reads as cancelled) until the screen says otherwise */
+    ShowSelectMove((void *)PARTY, P->slot, PARTYCOUNT ? PARTYCOUNT - 1 : 0, CB2_ContinueScript, P->pend[P->pend_i]);
+    V800D = 1;
+    return 0;
+}
+
+/* script, after the screen: 0x800D = 1 if a move was replaced (old move in 0x8002, new in 0x8003), 0 if the player backed out */
+u32 patrol_learn_apply(void)
+{
+    u32 sel = MOVESLOT, old, mv = P->pend[P->pend_i];
+    void *mon = (void *)(PARTY + 100 * P->slot);
+    V800D = 0;
+    if (sel >= 4 || P->slot > 5 || P->pend_i >= P->npend)
+        return 0;
+    old = get(mon, MON_MOVE1 + sel);
+    RemoveMonPPBonus(mon, sel);
+    SetMonMoveSlot(mon, mv, sel);
+    SPECIALS[2] = old;
+    SPECIALS[3] = mv;
+    P->pend_i++;
+    V800D = 1;
+    return 0;
+}
+
+u32 patrol_learn_skip(void)                          /* script: the player gave up on this move */
+{
+    if (P->pend_i < P->npend)
+        P->pend_i++;
+    return 0;
+}
+
 static u32 mod(u32 n, u32 d) { return n - udiv(n, d) * d; }
 
 static void reward(u32 slot_id, u32 id, u32 qty)       /* A = 8, B = 10 */
@@ -277,6 +393,17 @@ static void drops(void *partner, u32 species, u32 level)
 }
 
 /* raises the partner by `exp`, learning each level's moves; returns the new level (0 = unchanged) */
+static void note_missed(u32 move)                    /* the engine reports 0xFFFF and leaves the move in gMoveToLearn: remember it, the player is asked after the summary */
+{
+    u32 i;
+    if (!move || P->npend >= 6)
+        return;
+    for (i = 0; i < P->npend; i++)
+        if (P->pend[i] == move)
+            return;
+    P->pend[P->npend++] = move;
+}
+
 static u32 give_exp(void *partner, u32 slot, u32 exp)
 {
     const volatile u8 *bs = (const volatile u8 *)(BASESTATS + 28 * get(partner, MON_SPECIES));   /* the PARTNER's growth rate */
@@ -295,6 +422,8 @@ static u32 give_exp(void *partner, u32 slot, u32 exp)
         for (mv = TryLearnMove(partner, 1); mv && guard < 8; mv = TryLearnMove(partner, 0), guard++) {
             if (mv < 0xFFFE && learned < 2)
                 SPECIALS[1 + learned++] = mv;
+            else if (mv == 0xFFFF)
+                note_missed(GMOVETOLEARN);
         }
     }
     SetMonData(partner, MON_EXP, &cur);
@@ -317,7 +446,7 @@ static u32 find_partner(u32 walker)
         void *m = (void *)(PARTY + 100 * i);
         if (!get(m, MON_SPECIES) || get(m, MON_IS_EGG))
             continue;
-        if (get(m, MON_SPECIES) == gfx && get(m, MON_HP))
+        if ((get(m, MON_SPECIES) == gfx || get(m, MON_SPECIES) + 256 == gfx) && get(m, MON_HP))   /* the hack's graphics ids sit 256 above the species */
             return i;
     }
     return 0;
@@ -421,6 +550,28 @@ static int near_player(volatile u8 *o, volatile u8 *pl, s32 mx, s32 up, s32 down
 }
 static u32 dist(s32 ax, s32 ay, s32 bx, s32 by) { return (ax > bx ? ax - bx : bx - ax) + (ay > by ? ay - by : by - ay); }
 static int obj_alive(u32 idx, u32 local) { volatile u8 *o; if (idx > 15) return 0; o = obj_at(idx); return (o[0] & 1) && o[8] == local; }
+
+/* back from the evolution scene, before the field is rebuilt: the hack draws the walker from the species kept in its follower state (+0x12) and in the
+ * object (+5, +35), and only refreshes them on a map change or a menu, so a partner that evolved kept its old sprite. Give the walker the new species when
+ * it still shows the old one; the field rebuild that follows spawns the sprite from the object. */
+static void evo_done(void)
+{
+    u32 slot = P->slot, sp, g;
+    volatile u8 *w;
+    if (P->evo_gfx && slot <= 5 && FOLLOWER[0] && obj_alive(FOLLOWER[1], 0xFE)) {
+        w = obj_at(FOLLOWER[1]);
+        sp = get((void *)(PARTY + 100 * slot), MON_SPECIES) & 0xFFFF;
+        g = sp + P->evo_gfx - P->evo_sp;                  /* the hack's graphics ids sit a fixed distance above the species numbers */
+        if (sp && sp != P->evo_sp && g < 0x800 && (w[5] | (w[35] << 8)) == P->evo_gfx) {
+            FOLLOWER[0x12] = g & 0xFF;
+            FOLLOWER[0x13] = g >> 8;
+            w[5] = g & 0xFF;
+            w[35] = g >> 8;
+        }
+    }
+    P->evo_gfx = 0;
+    ((void (*)(void))CB2_ContinueScript)();
+}
 
 static const s8 DX[5] = {0, 0, 0, -1, 1};            /* 1 south, 2 north, 3 west, 4 east */
 static const s8 DY[5] = {0, 1, -1, 0, 0};
@@ -570,6 +721,7 @@ u32 patrol_sum_step(void)
 static void run_summary(u32 reason)
 {
     P->sum_i = 0;
+    P->pend_i = 0;
     SPECIALS[4] = reason;
     SPECIALS[5] = P->kills;
     SPECIALS[6] = P->slot;
@@ -870,7 +1022,7 @@ u32 patrol_select(void)
         P->slot = 0;
         P->species = species;
         P->kills = 0;
-        P->nmoves = 0;
+        P->nmoves = P->npend = P->pend_i = 0;
         P->nitems = 0;
         P->level_now = 0;
         run_summary(R_NOWALKER);
@@ -897,7 +1049,7 @@ u32 patrol_select(void)
     P->kills = 0;
     P->exp_total = 0;
     P->level_now = 0;
-    P->nmoves = 0;
+    P->nmoves = P->npend = P->pend_i = 0;
     P->nitems = 0;
     P->sum_i = 0;
     for (i = 0; i < 6; i++)
