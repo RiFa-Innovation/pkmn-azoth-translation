@@ -106,7 +106,7 @@ def main():
             clear()
             warp(g, n, 5, 5)
             if mapnow() != (g, n):
-                results[key] = "warp failed"
+                results[key] = f"warp failed (cb2 {struct.unpack('<I', e.read(0x030030F4, 4))[0]:#x}, ctx {e.read(0x03000EB0, 2).hex()}, locked {e.read(0x03000F9C, 1)[0]}, map {mapnow()})"
                 print(key, results[key], flush=True)
                 continue
             pairs, size = grass_pairs()
