@@ -412,6 +412,13 @@ static void fight(u32 slot, u32 species, u32 level)
 static volatile u8 *obj_at(u32 idx) { return (volatile u8 *)(OBJECTS + 36 * idx); }
 static s32 ox(volatile u8 *o) { return *(volatile s16 *)(o + 0x10); }
 static s32 oy(volatile u8 *o) { return *(volatile s16 *)(o + 0x12); }
+/* the engine deletes any object that scrolls out of the camera window (about -9..+10 tiles across, -7..+9 down from the player), so the partner and its
+ * targets must stay well inside it: a deleted walker leaves the follower state pointing at a slot the next template NPC takes over */
+static int near_player(volatile u8 *o, volatile u8 *pl, s32 mx, s32 up, s32 down)
+{
+    s32 dx = ox(o) - ox(pl), dy = oy(o) - oy(pl);
+    return dx >= -mx && dx <= mx && dy >= -up && dy <= down;
+}
 static u32 dist(s32 ax, s32 ay, s32 bx, s32 by) { return (ax > bx ? ax - bx : bx - ax) + (ay > by ? ay - by : by - ay); }
 static int obj_alive(u32 idx, u32 local) { volatile u8 *o; if (idx > 15) return 0; o = obj_at(idx); return (o[0] & 1) && o[8] == local; }
 
@@ -585,7 +592,7 @@ static int choose_target(volatile u8 *w)
             continue;
         if (!QcSpeciesOf((void *)o, &sp) || !sp)
             continue;
-        if (dist(ox(o), oy(o), ox(pl), oy(pl)) > radius())
+        if (dist(ox(o), oy(o), ox(pl), oy(pl)) > radius() || !near_player(o, pl, 7, 5, 6))
             continue;
         d = dist(ox(o), oy(o), ox(w), oy(w));
         if (d < best) {
@@ -626,12 +633,30 @@ static int task_alive(u32 id)
     return ((volatile u8 *)t)[4] && (t[0] >> 1) == (((u32)patrol_task | 1) >> 1);
 }
 
+/* The hack's follower state names the walker by object index. If that object is gone (the engine deleted it offscreen, a map change rebuilt the objects) the
+ * hack's follower code would keep driving whatever NPC now sits in the slot. Every free frame: the index must be a live object with local id 0xFE; else
+ * find the walker again. The hack's own state stays untouched otherwise (its map-load code respawns the walker while the follower is marked active);
+ * patrol_hold_wrap (patrol.s) drops the follower's movements for any slot that is not a live walker, so a stale index never moves an NPC. */
+static void partner_guard(void)
+{
+    u32 i;
+    if (!FOLLOWER[0] || obj_alive(FOLLOWER[1], 0xFE))
+        return;
+    for (i = 1; i < 16; i++) {
+        if (obj_alive(i, 0xFE)) {
+            FOLLOWER[1] = i;
+            return;
+        }
+    }
+}
+
 /* Called by patrol.s on every free overworld frame. If a patrol is marked active but its task is gone, bring the task back: the patrol resumes after a
  * menu or a battle, and a stale or garbage state ends itself on the task's first checks (map, walker identity). If no task can be made the flag is cleared,
  * so the patrol and its settings hotkey can never stay locked out. */
 u32 patrol_watchdog(void)
 {
     u32 task;
+    partner_guard();
     if (!P->active || task_alive(P->task))
         return 0;
     task = CreateTask((u32)patrol_task | 1, 80);
@@ -678,6 +703,13 @@ void patrol_task(u32 id)
         return;
     w = obj_at(P->walker);
     pl = obj_at(0);
+    if (P->phase != PH_RETURN && !near_player(w, pl, 8, 6, 7)) {   /* about to be deleted by the engine: bring it home now */
+        abort_to_player(w);
+        DestroyTask(id);
+        if (P->kills)
+            run_summary(R_DONE);
+        return;
+    }
     P->timer++;
     if (P->total < 0xFFF0)
         P->total++;

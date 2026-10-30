@@ -380,3 +380,26 @@ resumes, and a stale or garbage state ends itself at the task's first checks (ma
 
 Verified from the reporter's own save (River v0.4, scratch copy): the fresh patrol works; a stale flag heals within 40 frames and the patrol works afterwards; the Start menu opened mid-patrol does not break it; a forced wild battle mid-patrol kills the task
 (confirmed) and after the battle the patrol state is clean, a full patrol runs and the settings hotkey opens the settings; the no-walker message shows. Lesson: any state that outlives its task needs the same liveness check wherever it is read.
+
+## 18. Partner integrity guard (post v0.4.1)
+
+**Bug (reported by River):** the partner went offscreen, and later a moving NPC chased the player as if it were the partner.
+**Cause (reproduced):** while the camera scrolls the engine deletes every object whose current and initial coordinates are both outside the camera window
+(about -9..+10 tiles across, -7..+9 down from the player). A walker that strays that far (a long patrol, or a lagging follower) is freed, but the hack's follower
+state (`0x0203B818`: `+0` active, `+1` object index) keeps pointing at its slot. The next template NPC spawned into that slot is then driven by the hack's
+follower code (idle movement every frame, follow step when the player moves).
+**Fix, three layers (none writes to memory the hack owns, except repairing the index):**
+1. `patrol_hold_wrap` (patrol.s) also drops the follower's `SetHeldMovement` when the follower index names an object that is not live with local id `0xFE`.
+2. `partner_guard()` (patrol.c, every free frame): a dead index is re-pointed to a live `0xFE` object if one exists. The active flag is left alone: the hack's own
+   map-load code respawns the walker while it is set (checked: after a warp the walker is object 1 again).
+3. The patrol keeps the walker and its targets inside the keep-alive window (targets within 7 across / 5 up / 6 down of the player; the walker is brought home at 8 / 6 / 7).
+**Verified:** walker pushed 30 tiles away + camera scroll: object deleted, follower state untouched, no NPC moved; map reload respawns the walker; sweep on
+3.42 / 3.80 / 1.39 / 55.17 / 3.90 with the v0.2.3 save: 5/5 clean (3.80: 10 kills).
+
+**Intensive test results (2026-10-29):**
+* A/B with the walker's slot relabelled as an NPC (`scripts/partner_guard_test.py`, 220 random taps, battles fled): v0.4.1 moved the slot 180-195 times (the reported chase, reproduced);
+  the guard build 0 times in 4 seeds (up to 6 battles, a route connection crossing, and a genuine slot reuse by a wandering NPC). A map reload respawns the walker every time.
+* 25 map reloads + 15 forced-offscreen injections: no duplicate walkers, no missing walker after a reload. (The hack itself pulls a far walker back; a deletion was only caught once, and the
+  follower state stayed untouched while the slot stayed inert.)
+* Full 26-map patrol sweep with the v0.2.3 save: 25 runs, 10-kill caps reached on 3.80 and 1.50, the rest ended by "worn out"/"couldn't get close", no patrol task left behind, controls back everywhere.
+  The sweep's "player can move" check was fixed (Down+Up cancelled out; any single step now counts): the two earlier failures (3.86, 3.101) were that check, not the patrol.

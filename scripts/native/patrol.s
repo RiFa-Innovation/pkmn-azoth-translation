@@ -71,12 +71,30 @@ patrol_pfi:
 @ other object, and every call while no patrol runs, goes straight to the engine function.
 .equ PATROL,  0x02022200
 .equ GTASKS,  0x03005090
+.equ FOLLOWER, 0x0203B818
+.equ OBJECTS, 0x02036E38
 .equ SetHeldMovement, 0x08063CA5
 .global patrol_hold_wrap
 .thumb_func
 patrol_hold_wrap:
     push {r4}
-    ldr r2, =PATROL
+    ldr r2, =FOLLOWER                           @ the hack's follower state: +1 = the walker's object index. If that slot is not a live object with local id 0xFE
+    ldrb r3, [r2, #1]                           @ (the engine deleted the walker and a template NPC took the slot) the call is dropped: a stale index never moves an NPC
+    cmp r3, #15
+    bhi 4f
+    movs r4, #36
+    muls r3, r4
+    ldr r4, =OBJECTS
+    adds r3, r3, r4
+    cmp r0, r3
+    bne 4f
+    ldrb r4, [r3]
+    lsls r4, r4, #31
+    beq 8f
+    ldrb r4, [r3, #8]
+    cmp r4, #0xFE
+    bne 8f
+4:  ldr r2, =PATROL
     ldrb r3, [r2]
     cmp r3, #0
     beq 9f
@@ -100,6 +118,9 @@ patrol_hold_wrap:
     cmp r4, r3
     bne 9f
     pop {r4}
+    movs r0, #0
+    bx lr
+8:  pop {r4}
     movs r0, #0
     bx lr
 9:  pop {r4}
