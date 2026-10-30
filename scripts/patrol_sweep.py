@@ -153,12 +153,14 @@ def main():
                     break
                 tap("A" if k % 2 == 0 else "B", w=50)
             tasks = [i for i in range(16) if e.read(0x03005090 + 40 * i + 4, 1)[0] and (struct.unpack("<I", e.read(0x03005090 + 40 * i, 4))[0] >> 20) == 0x082]
-            p0 = pos(0)
-            for k in ("Down", "Up", "Left"):
+            moved = False
+            for k in ("Down", "Up", "Left", "Right", "Up", "Down"):    # any single step that changes the position counts (Down+Up alone cancel out)
+                p0 = pos(0)
                 tap(k, w=30, hold=14)
+                moved = moved or pos(0) != p0
             st = state()
             results[key] = dict(patrol_ended=ended, patrol_task_left=bool(tasks), same_map=mapnow() == (g, n), walker_present=e.read(0x02036E5C + 8, 1)[0] == 0xFE,
-                                controls_back=back, player_moves=pos(0) != p0, kills=st["kills"], reason=st["reason"], steps=st["steps"])
+                                controls_back=back, player_moves=moved, kills=st["kills"], reason=st["reason"], steps=st["steps"])
         except Exception as ex:      # noqa: BLE001
             results[key] = f"exception: {ex}"
         print(key, results[key], flush=True)
