@@ -263,22 +263,24 @@ The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`
 4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
 
-## Current state (2026-10-23, after beta-26 / river-v0.2.1)
+## Current state (2026-10-30, after beta-30 / river-v0.5.2)
 
-Releases: **beta-26** (translation + the Spectrum Frontier post-game, Latest) and **river-v0.2.1**
-(pre-release: Frontier + fan-made Chapter 2, Route 28, Mt. Silver, Red). Both built from `main` at
-`8d6fa0b` via `scripts/dist.py` (beta-26 fixed the Berry Pouch row overflow, #121, PLAYTEST 92; the
-regression test is `scripts/spikes/berry_list_stress.py`). The Frontier (spec `docs/BATTLE_FRONTIER_SPEC.md`) has
-Singles/Doubles, Brains Lance/Anabel/Silver, Seals, BP shop, records, Colour Rounds, wagers, Shadow of the
-Past, heirloom sets. Human-play balance is unverified.
+Releases: **beta-30** (translation + the Spectrum Frontier, Latest) and **river-v0.5.2** (pre-release: Frontier +
+Chapter 2, Route 28, Mt. Silver, Red, Partner Patrol, Cheat Device). Beta 30 / v0.5.2 closed twelve Discord-reported
+issues (#146-#157, PLAYTEST 101-107): the PC box's second pointer table (`0x1CCE4xx` words the dump never lists), the 40
+one-hanzi "哔！" call-end strings, Pokédex description width/clipping (`insert.py` `DEX_DESC_*`, `code_patches.json`
+`dex_desc_y`), bag tabs, EV Adjustment labels and the Help Tips window (the window runs past the 240 px screen: usable
+width ~130 px, `{F8:xx}` icons now counted by `mercury_text.ctrl_px`). Shiny Boost now also covers wild Pokémon
+(fixed-personality creations; PLAYTEST 100, #139).
 
-Open issues: #24 (human proofreading, ongoing); #120 (Whitney, new, untriaged); #99, #95, #63, #51
-(not reproduced); #101/#102/#103/#108 (Routes 31/37 and missing NPCs: identical in the original hack, need the
-reporter's save). Do not fix what can't be reproduced.
+Open issues: #24 (human proofreading, ongoing); #128, #103, #99, #95, #63, #51 (not reproduced, need the reporter's save);
+new Cheat Device reports #161-#164 (gpSP menu cut off, Shiny Boost reports, configurable shiny odds, SELECT+START vs EXP
+Share toggle) and #160 (README credits). Do not fix what can't be reproduced.
 
-Unmerged local branches: `fix/bg-event-stride-90`, `fix/leftover-species-lists`, `proofread/opening-chapter-24`.
-Unbuilt Frontier ideas: Weather Floors, Daily Challenge, chroma stamps, Dawn/Axel cameos.
-Unverified: Navel Rock scene on the new Lugia/Ho-Oh graphics slots, player Mega Evolution flow.
+Verification habits that paid off: drive the game with `scratchpad`-style scripts (script injection through `0x03000EB0`,
+`start()`+`tap()` helpers over `scripts/emu.py`), screenshot every screen you changed, and measure rates over hundreds of
+samples (load_state replays the RNG: vary the wait before each sample). `break_at`/`watch_read` currently never fire in the
+headless build; use static disassembly (`arm-none-eabi-objdump -Mforce-thumb`) to find the code behind a screen.
 
-Ideas for next sessions: triage #120; play further and log findings as `PLAYTEST.md` rows (latest 91+);
-check fixed-width UI lists for overflow; keep the Reddit/Discord announcement drafts up to date (the user posts them).
+Ideas for next sessions: consolidate the Cheat Device bindings (#161/#164 mention a pending consolidation); sweep other
+fixed-width UI lists for overflow; keep the Reddit/Discord announcement drafts up to date (the user posts them).
