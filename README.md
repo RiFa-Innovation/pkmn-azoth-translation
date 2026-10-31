@@ -159,6 +159,27 @@ in the game it happened are very welcome. Want to revise the dialogue? The
 [review sheet](docs/dialogue-review.csv) (Chinese, English and context side
 by side) are made for that.
 
+## Thanks to the testers and reporters
+
+This translation was shaped by people who played it, broke it and told us how. Thank you!
+
+**GitHub issue reporters:** GhostofPink, athy-lab, ivansaiyaman, sibot-to, Loudelderberry.
+
+**Discord, bug reports and test saves:** tempanonaccountdonotban (Sprout Tower softlock and crashes),
+qi_li_meng_zhong_ren_c_u (inaccessible overworld spawn, Johto Mines ladder, the evolution event),
+boredom0836 (Summer Festival freeze), refni (starter freeze), oofpayer (Goldenrod quest, empty Route 31,
+Ledian crash), blind_dachi (Shiny Boost), ponz.gpttrading (cheat menu on gpSP), slimmshaun, lewis__,
+and **ebnh666**, who reported the twelve issues fixed in beta 30.
+
+**Discord, helped others and contributed:** sibot_tv, lsirtalks_26492, slowpokefan and eonduolatias (offered to
+proofread the Chinese), mr.sampson (tested the cheat build).
+
+**Also played, discussed and tested:** wafflehousehotep, shinyashgreninja, thealternatedestroyer, elcabro7505,
+asce09435, long1049, masterpoucine, amilo222, _baz.b, ingles92_67585, dcuoriazu, kustard0957, jovial_beagle_02444,
+kamarirhodes, lil_tahiat, brukhonenko, akumaa., pepe_lefrog, idantorbati1525.
+
+If you helped and are missing, tell us and we will add you.
+
 ## FAQ
 
 **What is it called, Azoth or Mercury?** **Azoth**. The Chinese title is
