@@ -7905,6 +7905,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "01754B9": {
+   "zh": "不！",
+   "cap": 4,
+   "refs": [
+    "016138B:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "01754BD": {
    "zh": "哦，不！\n我把电梯的钥匙给弄丢了！",
    "cap": 31,
@@ -8199,6 +8208,15 @@
    "cap": 33,
    "refs": [
     "0161796:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0175A5B": {
+   "zh": "啊！",
+   "cap": 4,
+   "refs": [
+    "016179A:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -10690,6 +10708,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "017A132": {
+   "zh": "呼！",
+   "cap": 4,
+   "refs": [
+    "0163465:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "017A138": {
    "zh": "我被控制了。",
    "cap": 12,
@@ -10726,6 +10753,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "017A190": {
+   "zh": "哈？",
+   "cap": 4,
+   "refs": [
+    "0163493:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "017A194": {
    "zh": "我恢复了理智。",
    "cap": 14,
@@ -10740,6 +10776,15 @@
    "cap": 10,
    "refs": [
     "01634A6:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "017A1B7": {
+   "zh": "哇！",
+   "cap": 4,
+   "refs": [
+    "01634AA:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -18344,6 +18389,16 @@
    "untrusted": 0,
    "suspect": false
   },
+  "0187254": {
+   "zh": "呼！",
+   "cap": 4,
+   "refs": [
+    "01AB22B:trainerbattle",
+    "01AB252:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "018725A": {
    "zh": "我可以把你从这儿撞飞！",
    "cap": 22,
@@ -18634,9 +18689,10 @@
    "zh": "呃！",
    "cap": 4,
    "refs": [
+    "01AB361:trainerbattle",
     "01AB388:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0187677": {
@@ -19143,9 +19199,10 @@
    "zh": "哟！",
    "cap": 4,
    "refs": [
+    "01AB7CD:trainerbattle",
     "01AB7F4:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "0187F61": {
@@ -19364,6 +19421,16 @@
    "cap": 30,
    "refs": [
     "01AB97B:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0188383": {
+   "zh": "铛！",
+   "cap": 4,
+   "refs": [
+    "01AB97F:trainerbattle",
+    "01AB9A6:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -21558,6 +21625,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "018B3C2": {
+   "zh": "……嗯？",
+   "cap": 6,
+   "refs": [
+    "0168B20:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "018B3C8": {
    "zh": "听着，\n你没有看见任何珍贵的宝可梦，是吧？",
    "cap": 39,
@@ -22086,9 +22162,10 @@
    "zh": "嗯……",
    "cap": 5,
    "refs": [
-    "01AC721:trainerbattle"
+    "01AC721:trainerbattle",
+    "01AC748:aligned"
    ],
-   "untrusted": 1,
+   "untrusted": 0,
    "suspect": false
   },
   "018BEA0": {
@@ -23832,6 +23909,15 @@
    "cap": 16,
    "refs": [
     "0169FAE:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "018F7D6": {
+   "zh": "哇！",
+   "cap": 4,
+   "refs": [
+    "0169FB2:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -27365,6 +27451,15 @@
    "cap": 41,
    "refs": [
     "016CAFB:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "0196E95": {
+   "zh": "铛！",
+   "cap": 4,
+   "refs": [
+    "016CAFF:trainerbattle"
    ],
    "untrusted": 0,
    "suspect": false
@@ -109138,6 +109233,15 @@
    "untrusted": 0,
    "suspect": false
   },
+  "09E27D1": {
+   "zh": "咣！",
+   "cap": 4,
+   "refs": [
+    "09E2791:trainerbattle"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
   "09E27D7": {
    "zh": "我的宝可梦\n是从外国抓到并培育大的。{FA}是我漫长航海生涯的伙伴！",
    "cap": 59,
@@ -115077,6 +115181,15 @@
    "cap": 54,
    "refs": [
     "09F3F44:aligned"
+   ],
+   "untrusted": 0,
+   "suspect": false
+  },
+  "09F3F8E": {
+   "zh": "哈……",
+   "cap": 5,
+   "refs": [
+    "09F3F48:aligned"
    ],
    "untrusted": 0,
    "suspect": false
@@ -129679,6 +129792,15 @@
     "0AE3BAA:loadpointer"
    ],
    "untrusted": 0,
+   "suspect": false
+  },
+  "0AE6357": {
+   "zh": "……啊？",
+   "cap": 6,
+   "refs": [
+    "0AE6368:aligned"
+   ],
+   "untrusted": 1,
    "suspect": false
   },
   "0AE649A": {

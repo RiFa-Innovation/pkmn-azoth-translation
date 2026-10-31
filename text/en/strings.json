@@ -5483,7 +5483,7 @@
 "传说到了晚上，喇叭芽之塔里会\n出现妖怪，希望有人可以查证\n这则都市传说的真伪。": "They say a ghost appears in Sprout Tower at night. Could someone check?",
 "喇叭芽之塔的妖怪": "The Sprout Tower Ghost",
 "马上就要考试了，\n希望有人可以来训练家学校\n与我一起复习宝可梦知识！": "Exams are coming up. Study Pokémon with me at the Trainer School?",
-"迈向训练师的第一步": "The First Step to Becoming a Trainer",
+"迈向训练师的第一步": "The Trainer’s First Step",
 "我的红色碎片不够了！\n请有意帮忙的训练家前往\n精灵中心旁与我交谈。": "I need more Red Shards! Trainers willing to help, meet me by the Pokémon Center.",
 "红色碎片告急": "Red Shards!",
 "我是在喇叭芽之塔修行的\n一名僧侣，现在急需一只\n喇叭芽与我一起修炼。": "I'm a sage training in Sprout Tower.\nI urgently need a Bellsprout\nto train with me.",
@@ -5495,7 +5495,7 @@
 "我想亲手培育一只绿毛虫，\n并让它进化。各位如果抓到\n它的话，能否将它让给我呢？": "I want to raise and evolve a Caterpie. If you catch one, give it to me?",
 "要进化的绿毛虫": "Caterpie Grows",
 "黑暗穴南部近期出现了异常狂暴\n的宝可梦，有兴趣的训练家可到\n吉野市精灵中心向我了解详情。": "Fierce Pokémon in south Dark Cave. Ask me at Cherrygrove's Pokémon Center.",
-"黑暗洞穴的狂暴宝可梦": "The Fierce Pokémon of Dark Cave",
+"黑暗洞穴的狂暴宝可梦": "Fierce Pokémon in Dark Cave",
 "我和我的大牙狸遇到了\n非常非常大的困难，在此\n恳求各位来若叶镇帮助我！": "My Bidoof and I have a very big problem! Please come help me in New Bark Town!",
 "大牙狸少女的烦恼": "A Girl's Bidoof Troubles",
 "制服狂暴宝可梦": "Calm a Rampage",
@@ -14062,5 +14062,12 @@
 "e了。": null,
 "变( ": null,
 "啊               秘传学习机02": null,
-"块           苹果居": null
+"块           苹果居": null,
+"呼！": "Whew!",
+"哈？": "Huh?",
+"哇！": "Whoa!",
+"铛！": "Clang!",
+"……嗯？": "……Hm?",
+"咣！": "Bang!",
+"哈……": "Ha……"
 }

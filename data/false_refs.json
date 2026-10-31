@@ -1,0 +1,4 @@
+{
+ "_doc": "Word locations the dump took for a pointer but that are text bytes of another string (the ref sits inside a decoded string's span). They are never repointed: insert.py drops them from every string's refs. key = ROM offset of the word.",
+ "1DBA980": "bytes fe 05 af 08 inside the Help Tips 'Mom Bank' page 2 text read as a pointer to 0AF05FE (a duplicate of the real 0AF05FF string); repointing wrote 09 0a 2c 08 into the English text (#170, #176, PLAYTEST 116)"
+}
