@@ -76,7 +76,7 @@ Hold **L and R** and press **SELECT** anywhere on the map. Two questions, rememb
 
 - It only works where Quick Catch works. With nobody walking behind you (surfing, on the bike) SELECT is ignored.
 - If the way to a target is blocked the partner gives up after a few tries ("couldn't get close") and walks back.
-- The River Edition also has the Cheat Device (from v0.4): inside Quick Catch SELECT is the patrol; the cheat menu stays on SELECT + START outside it.
+- The River Edition also has the Cheat Device (from v0.4): inside Quick Catch SELECT is the patrol; the cheat menu is on SELECT + R outside it.
 - Old saves work: the patrol's settings start on their defaults.
 - Please report problems with "River Edition v0.3" in the title, with your emulator and an in-game `.sav` from just before.
 

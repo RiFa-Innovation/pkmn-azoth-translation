@@ -2,7 +2,7 @@
 
 A small in-game menu of cheats for **Pokémon Azoth** (English translation).
 
-- **River Edition: built in from v0.4 on.** Nothing to install; press SELECT + START on the map. River v0.3 and earlier do not have it.
+- **River Edition: built in from v0.4 on.** Nothing to install; press SELECT + R on the map (v0.5.1 and earlier: SELECT + START, which clashed with the Exp. Share toggle, #164). River v0.3 and earlier do not have it.
 - **Translation betas: no cheat patch is released.** An earlier separate "+ Cheats" add-on (`cheats-v1`) was withdrawn because its menu did not display properly (see below). Builders can still make a translation build with the menu using `RHT_CHEATS=1` (see the technical notes).
 
 > This is only a **translation done with Claude** (plus fan-made additions by River). The hack, its name and its content belong to its
@@ -16,7 +16,7 @@ A small in-game menu of cheats for **Pokémon Azoth** (English translation).
 
 ## Open the menu
 
-In the overworld (walking around, no text box or menu open) press **SELECT + START together**. On a keyboard in mGBA that is Backspace + Enter.
+In the overworld (walking around, no text box or menu open) press **SELECT + R together**. On a keyboard in mGBA that is Backspace + S (default bindings). Holding L turns it into the Patrol settings (L + R + SELECT), so release L first.
 The menu appears at the top left. Choose an entry with the D-pad and **A**; **B** closes the menu.
 
 | The menu | A switch asks first | Set To Level Cap |
@@ -29,7 +29,7 @@ Entries with an on/off switch show their current state when you pick them ("Shin
 
 | Entry | Switch | What it does |
 |---|---|---|
-| **Shiny Boost** | yes | Pokémon created under your trainer ID (wild encounters, gifts, eggs) are shiny 1 time in 16 instead of 1 in 8192. Trainer Pokémon are not affected. |
+| **Shiny Boost** | yes | Pokémon created under your trainer ID (wild encounters, gifts, eggs) are shiny more often than the natural 1 in 8192. Picking the entry opens a list: **Off**, **1 in 16** (the default), 1 in 64, 1 in 256, 1 in 1024, 1 in 4096, 1 in 2 or **Always**. Trainer Pokémon are not affected. |
 | **Infinite Candy** | yes | Rare Candies are not used up. Selling and tossing still work normally. |
 | **Heal After Fights** | yes | Your whole party (HP, PP, status) is healed when a battle ends: win, lose, flee or catch. |
 | **Infinite Repel** | yes | Repel never runs out. It behaves like a normal Repel, so wild Pokémon stronger than your lead can still appear. |
@@ -57,17 +57,17 @@ Use the project's bug tracker (the link is in the release notes) and say which R
 ## Technical notes (for contributors)
 
 Built into every `RHT_EDITION=river` build, and into the translation only with `RHT_CHEATS=1` (`scripts/edition.py`); `python3 scripts/build_editions.py` builds the three variants and `python3 scripts/dist.py --cheats N`
-packages the add-on. Code: `scripts/native/cheats.s` (Thumb, linked into the free pool) and `scripts/cheats_build.py` (menu script, the 66th multichoice
-list, patches with byte assertions). Switch flags: `0x13A8` shiny, `0x13A9` candy, `0x13AA` heal, `0x13AB` repel; `0x13AC`-`0x13AF` are kept.
+packages the add-on. Code: `scripts/native/cheats.s` (Thumb, linked into the free pool) and `scripts/cheats_build.py` (menu script, the 66th and 67th multichoice
+lists (menu and Shiny Boost odds), patches with byte assertions). Switch flags: `0x13A8` shiny, `0x13A9` candy, `0x13AA` heal, `0x13AB` repel; `0x13AC`-`0x13AE` the Shiny Boost odds index (0 = 1 in 16, 1 = 1 in 64, 2 = 1 in 256, 3 = 1 in 1024, 4 = 1 in 4096, 5 = 1 in 2, 6 = always); `0x13AF` is kept.
 
 | Feature | Hook |
 |---|---|
-| Menu hotkey and Infinite Repel | wrapper on the literal of the `ProcessPlayerFieldInput` trampoline (0x0806CACC): SELECT+START starts the menu script; every free frame it keeps var `0x4020` (repel steps) at 255 while the switch is on |
+| Menu hotkey and Infinite Repel | wrapper on the literal of the `ProcessPlayerFieldInput` trampoline (0x0806CACC): SELECT+R (L not held) starts the menu script; every free frame it keeps var `0x4020` (repel steps) at 255 while the switch is on |
 | Shiny Boost | stub jumped to from the hack's `CreateBoxMon` (0x09D09BC8), player-OT branch; forces the personality's high half so `tid^sid^hi^lo < 8` and re-stores it. Wild encounters arrive with a *fixed* personality (the stub used to skip those, #139): for them it searches 2048 candidates for a shiny value that keeps `personality % 25` (nature), gender and ability slot (only bits 8-31 change) |
 | Infinite Candy | the `RemoveBagItem` literal of the Rare Candy flow (0x09D44884) -> `candy_wrap` |
 | Heal After Fights | both literals of `gBattleMainFunc = ReturnFromBattleToOverworld` (0x15A68, 0x15B2C) -> `heal_wrap` (`HealPlayerParty`) |
 | Set To Level Cap | `cap_apply` (called by `callnative`): badge count -> `caps[]`, EXP from the hack's experience table, `CalculateMonStats` |
-| Menu | `multichoice` list id 65: the vanilla table copied with one more entry, its two literals (0x9CB58, 0x9CFD4) repointed |
+| Menu | `multichoice` list ids 65 (menu) and 66 (Shiny Boost odds): the vanilla table copied with two more entries, its two literals (0x9CB58, 0x9CFD4) repointed |
 
 Verified in mGBA on a translation save and a River save: menu opens; switches toggle and show their state; 222/4000 shiny creations with the switch on vs
 1/4000 off; Rare Candy stays at x99 after use; HP 1 -> 77 after fleeing a wild battle; repel var held at 255 while walking; Heal Party Now; money gift;

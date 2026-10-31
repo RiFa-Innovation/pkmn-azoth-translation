@@ -70,7 +70,7 @@ Test with `scripts/mapdrive.py` (scratch ROM + save copy), render with `scripts/
   **trainer table moved** (743 -> 775 slots: shell slots 743-774, so the old table's bytes at 0x23EAC8 are dead; code that indexes trainers by id still works because its 25 literal words were repointed),
   the first entry of the orphaned Battle Tower speech table (0x1DEC3A0) now points at RAM text.
   `reserve()` must run at the start of `insert.py`: the 31 KB run does not exist later.
-- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF`, multichoice list id 65 (the table is copied with one extra entry), SELECT+START hotkey in the overworld; in every River build, and in `RHT_CHEATS=1` translation builds.
+- **Cheat Device** (`scripts/cheats_build.py`, `docs/CHEATS.md`): flags `0x13A8`-`0x13AF` (`0x13AC`-`0x13AE` = Shiny Boost odds index), multichoice list ids 65-66 (the table is copied with two extra entries), SELECT+R hotkey in the overworld (SELECT+START is the hack's own Exp. Share toggle); in every River build, and in `RHT_CHEATS=1` translation builds.
 - Facts that cost time: the game loads a map's layout through `gMapLayouts` (`0xA66440`, by the header's layout id), not
   the header's pointer; the live wild table is `0x1E468B0` (the one at `0xCF915C` is stale); land encounters need a
   metatile with encounter type 1 in its attribute word; a warp event on a plain tile does nothing (use a coord event +

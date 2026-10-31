@@ -1,6 +1,6 @@
 @ Cheat Device natives (scripts/cheats_build.py). Thumb, linked into the free pool; every hook jumps in from a patched literal or a
 @ patched instruction pair and jumps back out, so the replaced game code never has to be copied.
-@ Defined by the linker (--defsym): cheat_script (menu script), FLAG_SHINY, FLAG_CANDY, FLAG_HEAL, FLAG_REPEL, SHINY_MASK.
+@ Defined by the linker (--defsym): cheat_script (menu script), FLAG_SHINY, FLAG_SHINY_B0..B2 (rate index), FLAG_CANDY, FLAG_HEAL, FLAG_REPEL.
 .syntax unified
 .thumb
 .global _start
@@ -27,7 +27,8 @@ _start:
 .equ ProcessPlayerFieldInput,   0x09D320B1            @ the hack's own implementation (the trampoline at 0x0806CAC8 loads it from a literal we replace)
 .equ ReturnFromBattleToOverworld, 0x08015B59
 .equ CreateBoxMon_resume, 0x09D09BC5            @ str r3, [sp, #20] ; b -> store the OT id
-.equ CHEAT_KEYS, 0x0C                           @ SELECT | START
+.equ CHEAT_KEYS, 0x104                          @ SELECT | R (SELECT+START is the hack's own Exp. Share toggle, #164)
+.equ KEY_L, 0x200
 
 @ r3 = function (Thumb address) ; bl here to call it with lr preserved by the caller
 callr3:
@@ -41,7 +42,7 @@ flagget:
     pop {pc}
 .ltorg
 
-@ ---- hotkey: SELECT + START anywhere in the overworld opens the menu ----------------------------------------------------------------------
+@ ---- hotkey: SELECT + R anywhere in the overworld opens the menu ----------------------------------------------------------------------
 @ Replaces the literal in the ProcessPlayerFieldInput trampoline (r0 = struct FieldInput *).
 .global pfi_wrap
 .thumb_func
@@ -59,7 +60,10 @@ pfi_wrap:
     ldr r1, =GMAIN
     ldrh r2, [r1, #0x2C]                        @ heldKeys
     ldrh r3, [r1, #0x2E]                        @ newKeys
-    movs r1, #CHEAT_KEYS
+    ldr r1, =KEY_L                              @ with L held SELECT+R belongs to the Patrol settings (L+R+SELECT)
+    tst r2, r1
+    bne 1f
+    ldr r1, =CHEAT_KEYS
     ands r2, r1
     cmp r2, r1
     bne 1f
@@ -134,8 +138,26 @@ shiny_stub:
     beq 9f
     ldr r3, =Random
     bl callr3
-    ldr r1, =SHINY_MASK
-    ands r0, r1
+    push {r4, r5}                               @ r5 (the box mon) is restored below
+    movs r4, r0                                 @ r4 = the roll
+    ldr r0, =FLAG_SHINY_B0                      @ rate index 0..6 = three flags (0 = 1 in 16, what the switch alone always meant)
+    bl flagget
+    movs r5, r0
+    ldr r0, =FLAG_SHINY_B1
+    bl flagget
+    lsls r0, r0, #1
+    adds r5, r5, r0
+    ldr r0, =FLAG_SHINY_B2
+    bl flagget
+    lsls r0, r0, #2
+    adds r5, r5, r0
+    lsls r5, r5, #1
+    ldr r1, =shiny_masks
+    ldrh r1, [r1, r5]                           @ r1 = mask: shiny when (roll & mask) == 0
+    ands r4, r1
+    adds r0, r4, #0
+    pop {r4, r5}
+    cmp r0, #0
     bne 9f                                      @ not this time
     ldr r3, =Random
     bl callr3
@@ -210,6 +232,9 @@ shiny_stub:
     ldr r2, =CreateBoxMon_resume
     bx r2
 .ltorg
+.align 2
+shiny_masks:                                    @ 1 in 16, 64, 256, 1024, 4096, 2, always; the last slot is unused
+    .hword 15, 63, 255, 1023, 4095, 1, 0, 15
 
 @ ---- Set To Level Cap: the party slot is in var 0x8004; raises it to caps[badges] (caps from data/cheats_levelcaps.json) --------------
 @ Result in var 0x800D: 0 = raised, 1 = already at or above the cap.
