@@ -281,6 +281,11 @@ def ref_kind(rom, r, text=""):
 SCRIPT_KINDS = ("loadpointer", "message", "trainerbattle")
 
 
+def trainerbattle_operand(rom, r):
+    """r is the intro/defeat/post word of a `trainerbattle` (5C type ...) command."""
+    return any(r >= b and rom[r - b] == 0x5C and rom[r - b + 1] <= 9 for b in (6, 10, 14))
+
+
 def is_script_ref(r):
     return r.split(":")[1] in SCRIPT_KINDS
 
@@ -323,12 +328,14 @@ def scan_strings(rom, base):
         if ARROWS & set(s):  # arrow glyphs (signs): only from script refs, data decodes to them too
             trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
         if (short or mixed) and not (single or is_textlike(s)):  # 喂，{FD:01}！ / 果然翁：So~Nan~Su！: script text only
-            trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS]
+            # (a trainerbattle operand next to another pointer classifies as "aligned": still script text, #177)
+            trusted = [(r, k) for r, k in trusted if k in SCRIPT_KINDS or (short and trainerbattle_operand(rom, r))]
         if single:  # one-hanzi labels (开/关/中…): only from inside a pointer table,
             # or a vanilla data word aimed at a vanilla text symbol (the decomp
             # says so: e.g. sMultichoiceList_YesNo {gText_Yes, NULL} entries)
             trusted = [(r, k) for r, k in trusted
-                       if r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4)
+                       if (s[-1:] in "！？…" and (trainerbattle_operand(rom, r) or k == "trainerbattle"))   # a defeat line such as 呼！ (#177)
+                       or r % 4 == 0 and (is_ptr(rom, r - 4) or is_ptr(rom, r + 4)
                                           or (_FR().kind(r) == "data" and vanilla_text_symbol(t)))]
         # A word left exactly as in vanilla FR cannot point at text the hack put
         # into space that was free (FF) in vanilla: it is code/data that merely

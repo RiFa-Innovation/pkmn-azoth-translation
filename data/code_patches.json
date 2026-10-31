@@ -188,13 +188,40 @@
   ]
  },
  "money_symbol_vanilla": {
-  "why": "Money sign: FireRed draws the Pokédollar at character 0xB7 (charmap '¥'), and the hack kept the character - the Mart's price list and the trainer card print it - but it redrew the glyph in its Latin font as the kanji 円, so English text shows 円 next to prices. Restore FireRed's glyph in the font the game uses. The blob holds two copies of the font: 0x1F5EC0 is the edited one the game draws with, 0x1F9EC0 is already vanilla. Larger Latin letters in this font sit one row higher than FireRed's, so the restored glyph is a touch taller than the hack's own letters - that is FireRed's own shape, which is what the report asked for.",
+  "why": "Money sign: FireRed draws the Pokédollar at character 0xB7 (charmap '¥'), and the hack kept the character - the Mart's price list and the trainer card print it - but it redrew the glyph in its Latin font as the kanji 円, so English text shows 円 next to prices. Restore FireRed's glyph in the font the game uses. The blob holds two copies of the font: 0x1F5EC0 is the edited one the game draws with, 0x1F9EC0 is already vanilla. Larger Latin letters in this font sit one row higher than FireRed's, so the restored glyph is a touch taller than the hack's own letters - that is FireRed's own shape, which is what the report asked for. The Mart still showed the kanji (#171, #179): its prices and money box use FONT_SMALL (0x1EAF00 + 0xB7*32), restored too, plus the Normal/Male/Female glyph tables (0x1FF300/0x20F618/0x21F930 + 0xB7*64). gText_PokedollarVar1 (0x41697A, the Mart's price list and money box) is '{amount}¥' in the hack: restored to FireRed's '¥{amount}'.",
   "vanilla": [
    [
     "01F5EC0",
     "01F5F00",
     "sFontMaleLatinGlyphs 0xB7"
+   ],
+   [
+    "02020C0",
+    "0202100",
+    "sFontNormalLatinGlyphs 0xB7 (the Mart's price list and money box, #171, #179)"
+   ],
+   [
+    "02123D8",
+    "0212418",
+    "sFontMaleLatinGlyphs-sized copy of 0xB7"
+   ],
+   [
+    "02226F0",
+    "0222730",
+    "sFontFemaleLatinGlyphs-sized copy of 0xB7"
+   ],
+   [
+    "01EC5E0",
+    "01EC600",
+    "sFontSmallLatinGlyphs 0xB7 (the Mart prices and money box are drawn in the small font, #171, #179)"
    ]
+  ],
+  "patch": [
+   {
+    "at": "41697A",
+    "orig": "fd02b7ff",
+    "new": "b7fd02ff"
+   }
   ]
  },
  "unown_page_12": {
@@ -284,6 +311,41 @@
     "at": "105F8C",
     "orig": "0823",
     "new": "0423"
+   }
+  ]
+ },
+ "trainer_card_pokemon": {
+  "why": "Trainer card label above the party: the hack's slot was 7 bytes (3 hanzi + FF) and held 'PKMN' (#173, #181); 'Pokémon' needs 8. The label is drawn from the anchor literal 0xDFD5A4 (base 0xE40480) + 17, and the string before it (the play-time '{hours}:{minutes}') is 8 bytes in English, so the byte at +16 is free: the label moves to +16 (adds r6,#17 -> #16 at 0xDFD492).",
+  "patch": [
+   {
+    "at": "DFD492",
+    "orig": "1136",
+    "new": "1036"
+   },
+   {
+    "at": "E40490",
+    "orig": "ff016307d70966ff",
+    "new": "cae3df1be1e3e2ff"
+   }
+  ]
+ },
+ "box_give_prompt": {
+  "why": "Box 'Move Items' prompt: vanilla all-caps 'GIVE to a POKéMON?' (0x4183DD) next to mixed-case UI text (#172, #180). Same length.",
+  "patch": [
+   {
+    "at": "4183DD",
+    "orig": "c1c3d0bf00e8e300d500cac9c51bc7c9c8acff",
+    "new": "c1ddead900e8e300d500cae3df1be1e3e2acff"
+   }
+  ]
+ },
+ "dex_form_label": {
+  "why": "Pokedex FORM page: the 'A 切换' label above the first form picture is a 32x16 OBJ sprite (tile 256 of the page's sprite sheet, raw 4bpp at 0x760CE0, A icon in x<11 and two hanzi in x>=11), not BG tiles or text (#167, #175). The hanzi are replaced by 'Swap' in the 6 px font, the A icon kept.",
+  "patch": [
+   {
+    "at": "760CE0",
+    "orig": "00000000000000000000000000000000001011110011211100111212001112120000000000000000000000000000210002002110211011212120212221002100000000000000000000000000000000211111022121121211211022212110021100000000000000000000000010112100211222001111210021212100212121000011221200111212001211110020222200000000000000000000000000000000210021212100111202002112000022210000002200000000000000000000000021101221221022210210022112211211202220220000000000000000000000001111110222212202101202002122110222002202000000000000000000000000",
+    "new": "00000000000000000000000000000000001011110011211100111212001112120000000000000000000000000000112102102212211002202110020021201121000000000000000000000000000000000200000002000000210021112100212200000000000000000000000000000000000000000000000021111102122122210011221200111212001211110020222200000000000000000000000000000000210022122100001002100010002011210000222200000000000000000000000021212111212111222121110212122211202202220000000000000000000000001121002112210021101111221121220222210000002100000022000000000000"
    }
   ]
  }

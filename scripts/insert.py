@@ -539,6 +539,9 @@ def main():
             v["refs"] = [r for r in v["refs"] if r not in anc]
             v["untrusted"] += len(anc)
             v["anchored"] = True
+    false_refs = {k for k in json.load(open("data/false_refs.json")) if not k.startswith("_")}
+    for v in strings.values():     # words inside another string's bytes that merely look like a pointer
+        v["refs"] = [r for r in v["refs"] if r.split(":")[0] not in false_refs]
     report["anchor_kept"] = []
     starts = sorted(strings)
     contains_other = set()
