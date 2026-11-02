@@ -254,6 +254,31 @@
    }
   ]
  },
+ "bag_pocket_frames": {
+  "why": "Bag backpack picture (#193): the extended bag picks the highlighted quarter as pocket & 3 (anim table 0x1DE3ADC, frames TL 0x00, TR 0x40, BL 0x80, BR 0xC0), so Balls (pocket 10) showed bottom-left. Swapping the frames of anims 2 and 3 gives All/Misc top-left, Key Items top-right, Balls bottom-right.",
+  "patch": [
+   {
+    "at": "1DE3BCC",
+    "orig": "c0000000ffff000080000000ffff0000",
+    "new": "80000000ffff0000c0000000ffff0000"
+   }
+  ]
+ },
+ "bag_balls_tab_x": {
+  "why": "Bag pocket name (#190): the extended bag prints the header at x = 16, minus 6 unless the pocket is 10 (Balls), so Balls sat 6 px right of every other tab (an indent for the 3-hanzi original). `movs r2,#16` at 0x9D434AE becomes `movs r2,#10` and `subs r2,#6` at 0x9D434B4 becomes `subs r2,#0`: every pocket uses x = 10.",
+  "patch": [
+   {
+    "at": "1D434AE",
+    "orig": "1022",
+    "new": "0a22"
+   },
+   {
+    "at": "1D434B4",
+    "orig": "063a",
+    "new": "003a"
+   }
+  ]
+ },
  "bag_use_label": {
   "why": "Bag item menu: the vanilla English 'USE' (0x4161A0, slot 0 of the item-menu action table at 0x1DE3BEC) is all caps while Give/Toss/Cancel are mixed case (#140).",
   "patch": [
