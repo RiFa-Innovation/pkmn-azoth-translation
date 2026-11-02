@@ -81,13 +81,14 @@ def btn(top, bot, text, fill, shadow, x1=33, center=None):
 
 
 def stab(top, bot, text):
+    # left-aligned at the x a centred "Cancel" gets in its 5-tile tab, so all three tabs line up (#185, #187)
     return dict(block=[list(top), list(bot)], erase=(9, 2, len(top) * 8 - 2, 13), colors={3, 9}, bg=lambda y: 8,
-                text=text, at=(None, 1), center=len(top) * 4, ink=3, shadow=9, tight=True)
+                text=text, at=(None, 1), center=None, left=6, ink=3, shadow=9, tight=True)
 
 
 SEARCH_EDITS = [
     stab((106, 107, 108, 109, 110, 111), (122, 148, 124, 125, 151, 127), "Search"),
-    stab((101, 102, 103, 104, 105, 111), (117, 153, 119, 120, 156, 127), "Switch"),
+    stab((101, 102, 103, 104, 105, 111), (117, 153, 119, 120, 156, 127), "Sort"),
     stab((74, 75, 76, 77, 78), (90, 158, 92, 93, 161), "Cancel"),
 
     btn((42, 43, 44, 45, 46), (58, 172, 173, 61, 175), "Name", 10, 11, 37),
