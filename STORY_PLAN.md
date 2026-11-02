@@ -57,7 +57,7 @@ and a closing image that pays off Sange, Archer, Lugia/Ho-Oh, the Kimono Girls' 
 
 ## 3. Beat sheet (14 beats)
 
-Stage var **`0x5108` = `CH2_STAGE`** (0 = not started). All beats gate on Champion flag `0x14DB` and the
+Stage var **`0x51B0` = `CH2_STAGE`** (0 = not started). All beats gate on Champion flag `0x14DB` and the
 Ashida scene flag `0x14DA`. "Flag" names are in section 6.
 
 | # | Beat | Maps | Cast | Stage after | Cost |
@@ -195,7 +195,7 @@ Beats 4-8 can run in any order after 3 (open middle), except 8 needs 5 and 6 nee
 ## 6. Technical plan
 
 ### Flags and variables (add to `CLAUDE.md` when built)
-Variable `0x5108` = `CH2_STAGE` (checked: unused by any script; **VERIFY** it is inside the hack's variable array).
+Variable `0x51B0` = `CH2_STAGE` (checked: unused by any script; **VERIFY** it is inside the hack's variable array).
 Flags (80 free in `0x1338`-`0x1387`; used: `0x1338`-`0x133F` items, `0x1340` Red beaten):
 `0x1341 CH2_START`, `0x1342 NODE_A_FOUND`, `0x1343 LANCE_CLEARED`, `0x1344 SILVER_JOINS`, `0x1345 ELDER_KNOWS`,
 `0x1346 NODE_B_DOWN`, `0x1347 PRIESTESS_PAGE`, `0x1348 SONG_LEARNED`, `0x1349 GIOVANNI_SEEN`, `0x134A NODE_A_DOWN`,
@@ -246,7 +246,7 @@ mechanic; Sange's page; Silver's choice; Lance's identity.
 ## 9. Before building: things to verify
 
 - Radio Tower interior is enterable after Chapter 1 and its flags (beat 2).
-- `0x5108` lies inside the hack's variable array and no native code touches it.
+- `0x51B0` lies inside the hack's variable array and no native code touches it.
 - Navel Rock's vanilla script and the Vermilion ferry run unchanged (beat 13).
 - Ecruteak theatre/library maps for the sealed document (beat 6); where the existing "seal" scene lives.
 - A trainer holding Mega Stone `533` actually Mega Evolves in a test battle (existing trainers hold it, so expected).
@@ -318,7 +318,7 @@ summariser, and the atlas/map pages did not load, so treat details as approximat
 | Trainer Mega Evolution | **Works only if the trainer has a Key Stone (item `353`) in their item list** *and* a party Pokémon holding the generic Mega Stone `533`. Tested: a Lv 90 Alakazam, Diancie, Latias, Kangaskhan and Audino each showed "X's Mega Stone is reacting to Kenji's Key Stone!" and Mega Evolved. A Mega Stone alone, with AI flags 1 or 7, or with the unlock flag set, did nothing. The existing Lance entry has `353` in his items, which matches. **Archer's trainer entry needs `items: [353]`.** |
 | Mega unlock logic | Static: the code at `0x09D47084` loops the `0x1DE3D04` table and calls `FlagGet` on the flag paired with each party species. Not UI-tested for the player (the test save has no Key Stone). |
 | Real Mega forms of the 23 "unlockable" species | **Only 4 exist**: Kangaskhan (id 878), Latias (907), Audino (917), Diancie (918). All four render distinct battle sprites and animate. The remaining 19 have no Mega species. |
-| Variable `0x5108` | Safe: lives at RAM `0x203B584`, inside the range other story variables use; set and read back, neighbours untouched. |
+| Variable `0x51B0` | Safe: lives at RAM `0x203B584`, inside the range other story variables use; set and read back, neighbours untouched. |
 | Navel Rock | Ferry check exists at Vermilion (`3.5`, `3.71` coord events test item `0x172`). The Navel Rock maps (`2.0`, `2.36`, `2.43`-`2.46`, `2.54`, `2.55`) contain **no objects**: vanilla Lugia/Ho-Oh are not there, so the epilogue must add its own scene objects. |
 | Finale location | `55.16` (27x80 cave) has a Lugia object at `(17,16)` and a roomy top chamber; no waterfall tile is visible in the layout. Use the top chamber as the arena. `55.14` and `55.15` are the vanilla-style Whirl Islands floors. |
 | Sange/Priestess scene | The Ecruteak archive (`52.5`, bookshelf events) already carries Priestess text; the second-page scene can be added there. |
@@ -332,7 +332,7 @@ Mega trainer) gets `items: [353]`; Navel Rock needs new objects for Lugia/Ho-Oh;
 - **Tooling:** `scripts/scrasm.py` gained `move <local> <step...>` (applymovement + waitmovement with named steps from the
   decomp, e.g. `walk_down face_left`), and `once FLAG ... endonce` (body runs a single time). Existing: `say`, `trainer`,
   `warp`, labels, any opcode by name.
-- **Beat 1 built:** a coord trigger at `(5,11)` in Elm's lab (`43.6`), gated by var `0x5108 == 0` and flag `0x14DA` (Ashida
+- **Beat 1 built:** a coord trigger at `(5,11)` in Elm's lab (`43.6`), gated by var `0x51B0 == 0` and flag `0x14DA` (Ashida
   scene seen). Elm turns, explains the returned signal, sets `CH2_START` (`0x1341`) and `CH2_STAGE = 1`. Verified in the
   emulator (scene plays, var set, no retrigger). Dialogue is a draft for the owner to rewrite.
 

@@ -33,6 +33,7 @@ LAYOUT_TABLE = 0xA66440     # gMapLayouts: pointer per layout id (id 1 first); t
                             # the header's layout id, NOT by the header's layout pointer
 FREE_LAYOUT_IDS = list(range(52, 78))   # ids no map header uses (checked with hackdb), pointer slots reusable
 ROM_BASE = 0x08000000
+ALT_EVENTS = (0x1E06680, 0x1E06800)   # post-game event variants: rows of {events, scripts, cond, fn}
 FILL = 0xF7F7F7F7
 HEADER = 28
 SPARE = (58,)
@@ -304,6 +305,17 @@ def apply(rom, src, pool, spec_path="data/new_maps.json"):
         # events structs may be shared between maps; build_events always copies, so only this header is repointed
         new_ev = build_events(rom, pool, ev, item)
         rom[h + 4:h + 8] = struct.pack("<I", ROM_BASE + new_ev)
+        # the hack keeps post-game variants of some maps' events (table of 16-byte rows {events, scripts, cond, fn}); a
+        # post-Champion save loads those instead of the header's, so the same events must go into every variant of this
+        # map (found by its warp list), or a scene gated on being Champion never fires (#196)
+        for row in range(ALT_EVENTS[0], ALT_EVENTS[1], 16):
+            aev = u32(src, row) - ROM_BASE
+            if aev == ev or not 0 <= aev < len(src) - 20 or not 0x09E00000 <= u32(src, row) < 0x09F00000:
+                continue
+            if src[aev + 1] and src[ev + 1] == src[aev + 1] and \
+                    bytes(src[u32(src, aev + 4 + 4) - ROM_BASE:][:8 * src[aev + 1]]) == bytes(src[u32(src, ev + 4 + 4) - ROM_BASE:][:8 * src[ev + 1]]):
+                rom[row:row + 4] = struct.pack("<I", ROM_BASE + build_events(rom, pool, aev, item))
+                report["alt_events"] = report.get("alt_events", 0) + 1
     tile_cache = {}
     layouts = build_layouts(rom, src, pool, spec.get("layouts", {}))
     for gs, maps in spec.get("groups", {}).items():
