@@ -182,3 +182,4 @@ emulated frames, so the GIF always matches the inputs, and plays back at game sp
 another; `saves/.emu.rom` records which). States are per build: translation ones are `saves/states/NAME.ss`, other editions' are
 `saves/states/<edition>/NAME.ss`, and a clip without `--state` starts at the title screen. Make one with `play.py save NAME [EDITION]` (e.g. after
 `play.py go "ROUTE"` on the River ROM; `go ... NAME` only saves translation states).
+`clip.py` retries once with a freshly booted bridge if the bridge drops mid-clip (seen once as `Connection reset by peer` right after a cold boot).
