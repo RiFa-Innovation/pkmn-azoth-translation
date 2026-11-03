@@ -2,7 +2,8 @@
 
     python3 scripts/play.py boot [ROM]          # start mgba-headless (background)
     python3 scripts/play.py stop
-    python3 scripts/play.py load NAME           # saves/states/NAME.ss
+    python3 scripts/play.py load NAME [EDITION] # saves/states/NAME.ss (EDITION other than translation: saves/states/EDITION/)
+    python3 scripts/play.py save NAME [EDITION] # save the running game as a state (states only load on the build that made them)
     python3 scripts/play.py go "SEQ" [NAME]     # run SEQ, grid -> saves/shots/last.png,
                                                 # optionally save state NAME
     python3 scripts/play.py where               # map, position, ASCII map around player
@@ -50,6 +51,10 @@ def pos(e):
     oid = e.read(AVATAR + 5, 1)[0]
     x, y = struct.unpack("<hh", e.read(OBJ + 0x24 * oid + 0x10, 4))
     return x - 7, y - 7, grp, num
+
+
+def states_dir(edition="translation"):
+    return STATES if edition == "translation" else os.path.join(STATES, edition)
 
 
 def boot(rom):
@@ -184,8 +189,15 @@ def main():
         return
     e = Emu()
     if cmd == "load":
-        e.load_state(os.path.abspath(f"{STATES}/{a[1]}.ss"))
+        e.load_state(os.path.abspath(f"{states_dir(*a[2:3])}/{a[1]}.ss"))
         e.wait(5)
+    elif cmd == "save":
+        d = states_dir(*a[2:3])
+        os.makedirs(d, exist_ok=True)
+        e.save_state(os.path.abspath(f"{d}/{a[1]}.ss"))
+        e.screenshot(os.path.abspath(f"{d}/{a[1]}.png"))
+        print(f"saved {d}/{a[1]}.ss")
+        return
     elif cmd == "go":
         go(e, a[1], a[2] if len(a) > 2 else None)
     elif cmd == "shot":

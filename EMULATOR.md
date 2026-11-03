@@ -178,3 +178,7 @@ frame inside its own frame callback (`record_start {dir, every}` / `record_stop`
 emulated frames, so the GIF always matches the inputs, and plays back at game speed (59.7275 / every fps).
 `clip.py` uses a spin-wait `wait()`, trims still stretches (`--idle`), and steps scale/frame rate down to fit `--max-mb`.
 `advance_frames` hangs on this headless build; do not rely on it. The Discord bot calls `clip.py` via `RHT_DIR`.
+`clip.py` boots the bridge itself when it is down (`--edition translation|river` picks the ROM and restarts the bridge if it is running
+another; `saves/.emu.rom` records which). States are per build: translation ones are `saves/states/NAME.ss`, other editions' are
+`saves/states/<edition>/NAME.ss`, and a clip without `--state` starts at the title screen. Make one with `play.py save NAME [EDITION]` (e.g. after
+`play.py go "ROUTE"` on the River ROM; `go ... NAME` only saves translation states).

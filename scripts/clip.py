@@ -2,12 +2,15 @@
 
     python3 scripts/clip.py --route "A A U3 R2 A" --out clip.gif [--state NAME]
 
-Needs the bridge up (`python3 scripts/play.py boot`). The core free-runs ~80x faster than real time, so the
+The core free-runs ~80x faster than real time, so the
 bridge itself screenshots every Nth *emulated* frame (`record_start`/`record_stop` in bridge.lua); the GIF is
 then played back at game speed (59.7275 fps / EVERY). Sync with the inputs holds by construction: shots and
 button presses are both counted in emulated frames, never wall-clock time.
 
-    --state NAME   load saves/states/NAME.ss first, so every clip starts from the same moment
+    --edition E    translation (default) or river: which ROM to run. Boots the bridge if it is down, and restarts
+                   it when it is running a different ROM (a fresh boot sits on the title screen)
+    --state NAME   load a saved state first, so every clip starts from the same moment. States only load on the
+                   build that made them: translation uses saves/states/NAME.ss, other editions saves/states/E/NAME.ss
     --route SEQ    play.py route tokens (see its docstring)
     --every N      sample every N frames (default 4, ~15 fps)
     --lead/--tail  frames of footage kept before the first and after the last input (default 20 / 60)
@@ -24,12 +27,18 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 sys.path.insert(0, os.path.dirname(__file__))
 import play  # noqa: E402
 from emu import Emu  # noqa: E402
 
 GBA_FPS = 59.7275
+ROMS = {
+    "translation": "build/Mercury_EN.gba",
+    "river": "build/editions/Pokemon River Azoth (Chapter 2 + Frontier).gba",
+}
+ROMFILE = "saves/.emu.rom"  # which ROM the bridge we booted is running
 
 
 class FastEmu(Emu):
@@ -39,6 +48,31 @@ class FastEmu(Emu):
         end = self.frame() + frames
         while self.frame() < end:
             pass
+
+
+def connect(edition, explicit):
+    """The bridge, booted on the edition's ROM if it is down or (when an edition was asked for) running another."""
+    rom = os.path.abspath(ROMS[edition])
+    if not os.path.exists(rom):
+        sys.exit(f"clip: no ROM for edition {edition!r} at {ROMS[edition]}; build it first")
+    cur = open(ROMFILE).read().strip() if os.path.exists(ROMFILE) else None
+    try:
+        e = FastEmu()
+        if not explicit or cur == rom:
+            return e
+        e.s.close()
+    except OSError:
+        pass
+    play.stop()
+    time.sleep(1)
+    play.boot(rom)
+    try:
+        e = FastEmu()
+    except OSError:
+        sys.exit("clip: could not start the emulator bridge (is utilities/mgba built? see EMULATOR.md)")
+    open(ROMFILE, "w").write(rom)
+    e.wait(120)  # past the boot logo
+    return e
 
 
 def trim_idle(frames, shots, every, idle_s):
@@ -74,6 +108,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--route", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--edition", choices=sorted(ROMS))
     ap.add_argument("--state")
     ap.add_argument("--every", type=int, default=4)
     ap.add_argument("--lead", type=int, default=20)
@@ -84,14 +119,14 @@ def main():
     if not shutil.which("ffmpeg"):
         sys.exit("clip: ffmpeg not found")
     out = os.path.abspath(a.out)
-    try:
-        e = FastEmu()
-    except OSError:
-        sys.exit("clip: bridge not reachable on 127.0.0.1:8765. Start it with: python3 scripts/play.py boot")
+    edition = a.edition or "translation"
+    e = connect(edition, a.edition is not None)
     if a.state:
-        st = os.path.abspath(f"{play.STATES}/{a.state}.ss")
+        st = os.path.abspath(os.path.join(play.states_dir(edition), f"{a.state}.ss"))
         if not os.path.exists(st):
-            sys.exit(f"clip: no saved state {a.state!r} in {play.STATES}")
+            have = sorted(f[:-3] for f in os.listdir(play.states_dir(edition)) if f.endswith(".ss")) if os.path.isdir(play.states_dir(edition)) else []
+            sys.exit(f"clip: no saved state {a.state!r} for the {edition} edition (have: {', '.join(have) or 'none'}). "
+                     "Omit --state to start from the title screen.")
         e.load_state(st)
         e.wait(5)
 
