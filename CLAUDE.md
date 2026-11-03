@@ -272,6 +272,24 @@ Latest change (2026-11-02): `scripts/clip.py` records frame-exact GIFs of a rout
 `shoot=False` so a route can run without screenshots. Same PR (#198) fixes Chapter 2 on Champion saves (var `0x51B0`, post-game
 event variants in `mapedit.py`) and the Mega menu text (PLAYTEST 125-126).
 
+## Recipes and states for every delivered feature
+
+Every feature or fix that changes something a player can see ships with a clip recipe (`docs/CLIP_RECIPES.md`, shape and tokens
+described there; the Discord bot reads that table, so keep its columns):
+
+1. **Before the PR is done**, add one table row: recipe name, state name (`NAME`, plain; the edition is `river` or translation), a route of
+   10 tokens or fewer (menus use `Down*n`, never `D<n>`), and one line saying what it shows, with the issue numbers.
+2. **Save the start state** right before the thing happens, on the build that carries the change:
+   `python3 scripts/play.py save NAME river` (or without `river` for the translation). Use a save that reaches the feature (a Champion
+   save for Chapter 2 and post-game content, not only the early test save).
+3. **Record it once** with `python3 scripts/clip.py --edition river --state NAME --route "..." --out x.gif`, watch it, fix the route, and
+   mark the row `Verified YYYY-MM-DD`. A recipe that was never recorded stays marked as a guess.
+4. **At each release**, re-save every state on the release build (states only load on the build that made them) and re-record any row
+   whose route changed. Put the release's recipes in the release notes only as text/GIFs, never the states.
+
+States are save snapshots with the game's memory in them: they stay local like `saves/` and `dist/` (see Ground rules), are never
+committed or attached to a release, and are not shared except as the GIFs recorded from them.
+
 ## Release steps (only when asked)
 
 1. Merge the PR (CI green). `git checkout main && git pull`.
@@ -285,6 +303,7 @@ event variants in `mapedit.py`) and the Mega menu text (PLAYTEST 125-126).
    `pkmn-azoth-translation` repo URLs.
 4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
+6. Re-save the release's states and record the new recipes (see "Recipes and states for every delivered feature"); attach GIFs, not states, wherever the release is announced.
 
 ## Current state (2026-10-30, after beta-30 / river-v0.5.2)
 
