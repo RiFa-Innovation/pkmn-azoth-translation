@@ -38,7 +38,7 @@ ROMS = {
     "translation": "build/Mercury_EN.gba",
     "river": "build/editions/Pokemon River Azoth (Chapter 2 + Frontier).gba",
 }
-ROMFILE = "saves/.emu.rom"  # which ROM the bridge we booted is running
+ROMFILE = play.ROMFILE
 
 
 class FastEmu(Emu):
@@ -70,7 +70,6 @@ def connect(edition, explicit):
         e = FastEmu()
     except OSError:
         sys.exit("clip: could not start the emulator bridge (is utilities/mgba built? see EMULATOR.md)")
-    open(ROMFILE, "w").write(rom)
     e.wait(120)  # past the boot logo
     return e
 

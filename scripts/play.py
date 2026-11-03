@@ -14,6 +14,8 @@ SEQ tokens (space separated):
     U3 D1 L2 R4                 walk N tiles, closed loop on the RAM position
     tU tD tL tR                 turn/face without walking (tap)
     w60                         wait 60 frames (no screenshot)
+    Select+R                    several buttons pressed together
+    Down*2                      step a menu cursor (D2 would WALK two tiles, which never moves in a menu)
     A*5                         repeat a token 5 times
 Every token except waits takes a screenshot into the grid.
 
@@ -34,6 +36,7 @@ from emu import Emu  # noqa: E402
 STATES = "saves/states"
 SHOTS = "saves/shots"
 PIDFILE = "saves/.emu.pid"
+ROMFILE = "saves/.emu.rom"  # which ROM the bridge we booted is running (clip.py restarts it for another edition)
 SB1, MAPHDR, OBJ, VMAP, AVATAR = 0x03005008, 0x02036DFC, 0x02036E38, 0x03005040, 0x02037078
 DIRS = {"U": "Up", "D": "Down", "L": "Left", "R": "Right"}
 DELTA = {"U": (0, -1), "D": (0, 1), "L": (-1, 0), "R": (1, 0)}
@@ -64,6 +67,7 @@ def boot(rom):
                          cwd=lua, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                          start_new_session=True)
     open(PIDFILE, "w").write(str(p.pid))
+    open(ROMFILE, "w").write(rom)
     for _ in range(80):
         try:
             Emu().info()
@@ -156,7 +160,7 @@ def go(e, seq, name=None, shoot=True):
             e.press(DIRS[t[1]], hold=2, release=8)
             e.wait(4)
         else:
-            e.press(t, hold=3, release=6)
+            e.press(*t.split("+"), hold=3, release=6)  # Select+R presses both together
             e.wait(20)
         if not shoot:
             continue
