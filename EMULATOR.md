@@ -173,7 +173,8 @@ Decisions are logged to `saves/agent/decisions.jsonl` (gitignored).
 Needs the bridge up (`play.py boot`). The core free-runs ~80x faster than real time (about 4,800 fps), so a client polling
 for frames cannot sample evenly (`Emu.wait` overshoots by ~100 frames). The bridge therefore screenshots every Nth emulated
 frame inside its own frame callback (`record_start {dir, every}` / `record_stop`, local patch marked `rht:` in
-`utilities/mcp-mgba/lua/bridge.lua`; original kept as `bridge.lua.orig`). Shots and button presses are both counted in
+`utilities/mcp-mgba/lua/bridge.lua`; original kept as `bridge.lua.orig`; the change is saved in git as
+`scripts/patches/bridge-record.patch`, apply with `patch -p1 < scripts/patches/bridge-record.patch` from the repo root and restart the bridge). Shots and button presses are both counted in
 emulated frames, so the GIF always matches the inputs, and plays back at game speed (59.7275 / every fps).
 `clip.py` uses a spin-wait `wait()`, trims still stretches (`--idle`), and steps scale/frame rate down to fit `--max-mb`.
 `advance_frames` hangs on this headless build; do not rely on it. The Discord bot calls `clip.py` via `RHT_DIR`.

@@ -1,0 +1,53 @@
+--- a/utilities/mcp-mgba/lua/bridge.lua
++++ b/utilities/mcp-mgba/lua/bridge.lua
+@@ -295,8 +295,30 @@
+     BREAK_IDS[#BREAK_IDS + 1] = id
+     return id
+ end
++
++-- rht: frame-exact recording. The core free-runs far faster than real time (~80x), so a client polling
++-- for frames cannot sample evenly. Sampling here, inside the frame callback, is exact by construction.
++-- record_start {dir (absolute, must exist), every (frames, default 4), max (shots, default 3000)}
++-- record_stop -> {frames = {game frame numbers of f<N>.png in dir}, truncated}
++local rec = nil
+ 
++local function cmd_record_start(p)
++    if not p.dir then error("record_start needs an absolute dir") end
++    local start = emu:currentFrame()
++    rec = { dir = p.dir, every = math.max(1, p.every or 4), max = p.max or 3000, start = start, frames = {}, truncated = false }
++    return { start = start }
++end
++
++local function cmd_record_stop()
++    if not rec then error("not recording") end
++    local r = rec
++    rec = nil
++    return { frames = r.frames, truncated = r.truncated }
++end
++
+ local HANDLERS = {
++    record_start   = cmd_record_start,
++    record_stop    = cmd_record_stop,
+     ping           = cmd_ping,
+     get_info       = cmd_get_info,
+     read8          = cmd_read8,
+@@ -409,6 +431,19 @@
+         active.hold_remaining = active.hold_remaining - 1
+     end
+ 
++    -- rht: sample this frame if recording (after input is applied, so the shot shows its effect).
++    if rec then
++        local f = emu:currentFrame()
++        if (f - rec.start) % rec.every == 0 then
++            if #rec.frames >= rec.max then
++                rec.truncated = true
++            else
++                emu:screenshot(string.format("%s/f%d.png", rec.dir, f))
++                rec.frames[#rec.frames + 1] = f
++            end
++        end
++    end
++
+     -- poll() flushes the socket's internal event queue. Without it, accept()
+     -- and hasdata() see stale state and never observe new I/O.
+     server:poll()

@@ -266,7 +266,7 @@ Then rebuild before trusting any ROM or database: `python3 scripts/insert.py` (t
 
 Not in git (set up per machine): `roms/`, `saves/`, `dist/`, `scratchpad/`, `art/`, and the emulator bridge patch in
 `utilities/mcp-mgba/lua/bridge.lua` (`rht:` markers, original kept as `bridge.lua.orig`). `scripts/clip.py` (GIF clips for Discord, see
-`EMULATOR.md`) needs that patch; if `record_start` is missing from the bridge, reapply it before recording.
+`EMULATOR.md`) needs that patch; if `record_start` is missing from the bridge, reapply it: `patch -p1 < scripts/patches/bridge-record.patch` from the repo root, then restart the bridge (it applies on top of the bridge's other local `rht:` changes such as `watch_read`, not on the stock upstream file).
 
 Latest change (2026-11-02): `scripts/clip.py` records frame-exact GIFs of a route (`--state`, `--route`, `--out`); `play.go` takes
 `shoot=False` so a route can run without screenshots. Same PR (#198) fixes Chapter 2 on Champion saves (var `0x51B0`, post-game
