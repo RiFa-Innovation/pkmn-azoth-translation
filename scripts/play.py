@@ -132,7 +132,7 @@ def where(e):
     return "\n".join(out)
 
 
-def go(e, seq, name=None):
+def go(e, seq, name=None, shoot=True):
     from PIL import Image
     os.makedirs(SHOTS, exist_ok=True)
     shots = []
@@ -153,6 +153,8 @@ def go(e, seq, name=None):
         else:
             e.press(t, hold=3, release=6)
             e.wait(20)
+        if not shoot:
+            continue
         p = f"{SHOTS}/_{len(shots)}.png"
         e.screenshot(os.path.abspath(p))
         shots.append(Image.open(p).convert("RGB"))

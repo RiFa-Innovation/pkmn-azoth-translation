@@ -34,7 +34,7 @@ It contains everything in the latest beta translation **plus** the River content
 - **This is v0.1, written without a late-game save to test against.** Triggers may be missed, characters may overlap, and the Radio Tower lobby and the Vermilion ferry to Navel Rock are **untested in a real run**.
 - Several characters use stand-in sprites chosen by eye (Archer, Ashida, Tamao, Looker, Lance and others); Anabel's colours need checking.
 - After the Ecruteak performance the theatre shows **four** dancers (one place is left empty on purpose); other scenes there may be affected.
-- Story progress is stored in new flags and variable `0x5108`; the scenes run in a fixed order.
+- Story progress is stored in new flags and variable `0x51B0`; the scenes run in a fixed order.
 - **Open reports I could not reproduce without a save**: empty Routes 31 and 37 and a missing Goldenrod quest NPC (#101-#103), the post-League task/lab error (#99), a stuck overworld Pokémon (#95), the Ruins of Alph scene (#63) and the Shadow Lugia lockout (#51). Saves from just before each are welcome.
 - All earlier beta known issues still apply (a few Pokédex words baked into graphics, Chinese Mercury Home gift names).
 
