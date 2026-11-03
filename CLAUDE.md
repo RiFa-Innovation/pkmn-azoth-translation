@@ -250,6 +250,28 @@ For the translation it is only a build option (`RHT_CHEATS=1`, `scripts/dist.py 
 `build_editions.py` builds `river`, `translation` and `translation-cheats` (there is no separate river-cheats variant any more).
 The **Partner Patrol** (`docs/PARTNER_PATROL_SPEC.md`, `scripts/patrol_build.py`) is built into every `RHT_EDITION=river` build (not into the translation); SELECT in Quick Catch sends the walker at the aimed target. Patrol private RAM `0x02022200`-`0x020223FF` (struct Patrol in `scripts/native/patrol.c`), hack flags `0x13B0`-`0x13BF` reserved (`0x13B0` off, `0x13B1`/`0x13B2` size, `0x13B3` tip shown); `L+R+SELECT` opens its settings.
 
+## Getting new work (agents: start every session here)
+
+Work lands on `main` through PRs; releases are GitHub Releases (BPS only). Nothing else carries the newest fixes, so sync first:
+
+```
+git fetch origin && git checkout main && git pull        # merged work
+gh pr list; gh pr checkout N                             # work still in an open PR (e.g. #198)
+gh issue list --state open; gh release list              # what is reported, what shipped
+```
+
+Then rebuild before trusting any ROM or database: `python3 scripts/insert.py` (translation) or `RHT_EDITION=river python3 scripts/insert.py`,
+`python3 scripts/hackdb.py build --rom build/Mercury_EN.gba` (it writes `build/hackdb-<rom name>.sqlite`; copy it over
+`build/hackdb.sqlite` to query it). Read the newest `PLAYTEST.md` rows and `git log -10` to see what changed and how it was verified.
+
+Not in git (set up per machine): `roms/`, `saves/`, `dist/`, `scratchpad/`, `art/`, and the emulator bridge patch in
+`utilities/mcp-mgba/lua/bridge.lua` (`rht:` markers, original kept as `bridge.lua.orig`). `scripts/clip.py` (GIF clips for Discord, see
+`EMULATOR.md`) needs that patch; if `record_start` is missing from the bridge, reapply it before recording.
+
+Latest change (2026-11-02): `scripts/clip.py` records frame-exact GIFs of a route (`--state`, `--route`, `--out`); `play.go` takes
+`shoot=False` so a route can run without screenshots. Same PR (#198) fixes Chapter 2 on Champion saves (var `0x51B0`, post-game
+event variants in `mapedit.py`) and the Mega menu text (PLAYTEST 125-126).
+
 ## Release steps (only when asked)
 
 1. Merge the PR (CI green). `git checkout main && git pull`.
