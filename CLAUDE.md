@@ -287,6 +287,20 @@ described there; the Discord bot reads that table, so keep its columns):
 4. **At each release**, re-save every state on the release build (states only load on the build that made them) and re-record any row
    whose route changed. Put the release's recipes in the release notes only as text/GIFs, never the states.
 
+### Recording and verifying recipes
+
+- The Discord bot reads `docs/CLIP_RECIPES.md` and offers a recipe only when its state file exists in `saves/states/<edition>/` **and** the row says
+  `**Verified YYYY-MM-DD**`. Keep the table's shape (Recipe | `edition/state` (notes) | `route` | Shows). Unverified or missing recipes show up as
+  "Not ready"; the bot never improvises a route.
+- Record with `python3 scripts/clip.py --edition river --state NAME --route "..." --out x.gif` (it boots or restarts the emulator and retries once if the
+  bridge drops), then **look at the GIF**. Add the Verified mark only after seeing the feature on screen: a saved state does not prove the route.
+- Menu steps are `Down*n` / `Up*n`; `D2` is a walk token and does nothing in a menu. `Select+R` presses both buttons together.
+- The Start menu is a left-to-right ring that does not wrap (Pokédex, Pokémon, Bag, Pokégear, Save, Task, Trainer Card, Option, Pass Time, Help Tips). The
+  cursor starts where the state last left it: begin with `Up*9` and then `Down*k`, or `Down*9` from the first entry to reach the end.
+- States only load on the build that made them: re-save every state after each River ROM rebuild.
+- Prefer states that sit just before the feature; long routes make long clips (Mom Bank is 19 s because of 26 Down presses).
+- The running bot loads code at start: restart it after pulling a change to its rules.
+
 States are save snapshots with the game's memory in them: they stay local like `saves/` and `dist/` (see Ground rules), are never
 committed or attached to a release, and are not shared except as the GIFs recorded from them.
 
