@@ -26,10 +26,11 @@ swallowed, so every route opens with a wait or a repeated `Start`. States for ev
 | Dex search tabs, type names | `river/dex-start` (overworld, Dex owned) | `w30 Start w30 Up*9 A w60 Select w40 Down*2 A w40 R` | Search / Sort / Cancel tabs and the type dropdown (#185, #187) |
 | Trainer Card | `river/card-start` (overworld) | `w30 Start w30 Up*9 Down*6 A w60` | Trainer Card page (#167-#182) |
 | Poké Mart (¥) | `river/mart-start` (facing the clerk) | `w30 A w40 A w40 Down w30 Down w30` | ¥ glyph in the price list |
-| Mom Bank help page | `river/mombank-start` (any overworld) | `w30 Start w30 Down*9 A w80 Down*26 Right w60` | Mom's Bank is a Help Tips > System page (entry 27/28, has 2 pages): Start menu item 9 is Help Tips. Path verified 2026-11-03 |
+| Mom Bank help page | `river/mombank-start` (any overworld) | `w30 Start w30 Down*9 A w80 Down*26 Right w60` | Mom's Bank is a Help Tips > System page (entry 27/28, has 2 pages): Start menu item 9 is Help Tips. Path verified 2026-11-03 **Verified 2026-11-02**: 19 s, 850 KB; scrolls to 27/28 and shows the page (2/2). Long because of the 26 Down presses; a state saved with Help Tips open near the bottom would be shorter. |
 | Frontier battle | `river/frontier-start` (31.3 at (15,5) facing up at the doubles counter, Saturate) | `w30 A*7 w60 A Down A Down A Down A w100` | desk talk, Yes, then the 4-Pokémon picker (A on the same Pokémon twice is refused, so Down between picks). Verified up to the picker 2026-11-03; the arena and fight are not recorded |
 
 Notes:
 - `Select+R` is a real token (both buttons pressed together). If the Cheat Device does not open, the hotkey may need a different hold; adjust in `play.go`.
+- The Discord bot only offers a recipe whose row says `Verified <date>` and whose state exists, so a wrong route or stale state is never posted. Add the mark after you record it and watch the GIF.
 - Keep clips short: `--idle 1.0` already trims still stretches; add `--max-mb 9` for Discord's limit.
 - Record each state's recipe once, watch the GIF, then correct the route here. Mark verified rows with the date.

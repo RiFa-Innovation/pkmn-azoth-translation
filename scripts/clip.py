@@ -50,15 +50,16 @@ class FastEmu(Emu):
             pass
 
 
-def connect(edition, explicit):
-    """The bridge, booted on the edition's ROM if it is down or (when an edition was asked for) running another."""
+def connect(edition, explicit, fresh=False):
+    """The bridge, booted on the edition's ROM if it is down or (when an edition was asked for) running another.
+    fresh=True always restarts it (used to retry after the bridge died mid-clip)."""
     rom = os.path.abspath(ROMS[edition])
     if not os.path.exists(rom):
         sys.exit(f"clip: no ROM for edition {edition!r} at {ROMS[edition]}; build it first")
     cur = open(ROMFILE).read().strip() if os.path.exists(ROMFILE) else None
     try:
         e = FastEmu()
-        if not explicit or cur == rom:
+        if not fresh and (not explicit or cur == rom):
             return e
         e.s.close()
     except OSError:
@@ -119,7 +120,17 @@ def main():
         sys.exit("clip: ffmpeg not found")
     out = os.path.abspath(a.out)
     edition = a.edition or "translation"
-    e = connect(edition, a.edition is not None)
+    for attempt in (1, 2):
+        try:
+            return record(a, edition, out, fresh=attempt == 2)
+        except (ConnectionError, TimeoutError) as ex:
+            if attempt == 2:
+                sys.exit(f"clip: lost the emulator bridge twice ({ex})")
+            print(f"clip: the bridge dropped ({ex}); restarting it and retrying once", file=sys.stderr)
+
+
+def record(a, edition, out, fresh):
+    e = connect(edition, a.edition is not None, fresh)
     if a.state:
         st = os.path.abspath(os.path.join(play.states_dir(edition), f"{a.state}.ss"))
         if not os.path.exists(st):
@@ -161,6 +172,8 @@ def main():
             except Exception:
                 pass
         shutil.rmtree(shots_dir, ignore_errors=True)
+
+
 
 
 if __name__ == "__main__":
