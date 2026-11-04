@@ -112,6 +112,12 @@ def build_events(rom, pool, ev_off, add):
         for idx, ed in edits.get(kind, {}).items():
             assert len(old[int(idx)]) == sz, (kind, idx, ev_off, ptrs, counts, len(old[int(idx)]))
             old[int(idx)] = _edit(kind, old[int(idx)], ed)
+        # `edit_at` finds entries by "x,y" instead of list index: post-game variants of a map keep the same tiles but not the same order
+        for xy, ed in add.get("edit_at", {}).get(kind, {}).items():
+            ex, ey = (int(v) for v in xy.split(","))
+            for k, e in enumerate(old):
+                if struct.unpack_from("<hh", e, 0) == (ex, ey):
+                    old[k] = _edit(kind, e, ed)
         keep = [k for k in range(len(old)) if k not in add.get("remove", {}).get(kind, [])]
         if len(keep) != len(old):
             counts[i] -= len(old) - len(keep)
@@ -120,7 +126,7 @@ def build_events(rom, pool, ev_off, add):
         blob = b"".join(old + new)
         counts[i] += len(new)
         assert counts[i] < 256, f"too many {kind}"
-        if blob and (new or edits.get(kind) or add.get("remap") or add.get("remove", {}).get(kind)):
+        if blob and (new or edits.get(kind) or add.get("edit_at", {}).get(kind) or add.get("remap") or add.get("remove", {}).get(kind)):
             a = pool.alloc_aligned(len(blob))
             rom[a:a + len(blob)] = blob
             out_ptrs.append(ROM_BASE + a)
@@ -150,7 +156,7 @@ def _resolve_scripts(spec, scripts):
             for e in ev.get(key, []):
                 if isinstance(e.get("script"), str):
                     e["script"] = scripts[e["script"]]
-            for e in ev.get("edit", {}).get(key, {}).values():
+            for e in (*ev.get("edit", {}).get(key, {}).values(), *ev.get("edit_at", {}).get(key, {}).values()):
                 if isinstance(e.get("script"), str):
                     e["script"] = scripts[e["script"]]
     for m in spec.get("append_events", []):
