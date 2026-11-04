@@ -2,6 +2,9 @@
  "frontier": true,
  "_doc": "New maps/events for scripts/mapedit.py. Flag 0x14DB = became Champion (Mom's Ashida scene checks it). 55.1 = the Route 26 gate: west door (1,6) leads to Route 28 / Mt. Silver.",
  "scripts": {
+  "newbark_pass": {
+   "asm": "releaseall\nend"
+  },
   "silver_gate_pass": {
    "asm": "checkflag 0x14db\ngoto_if 1 pass\ngoto 0x087BE5AF\npass:\nreleaseall\nend"
   },
@@ -421,6 +424,7 @@
   ]
  },
  "append_events": [
+  {"map": "3.66", "edit_at": {"coords": {"12,8": {"script": "newbark_pass"}}}},
   {
    "map": "55.1",
    "edit": {
