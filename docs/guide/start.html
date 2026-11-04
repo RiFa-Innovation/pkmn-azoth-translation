@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Start here · River Azoth Guide</title>
+<meta name="description" content="Pick an edition, patch a clean FireRed ROM, learn the extra controls and keep your saves safe.">
+<link rel="stylesheet" href="guide.css"><script src="guide.js" defer></script></head>
+<body data-title="Start here" data-kicker="Setup" data-lede="Pick an edition, patch a clean FireRed ROM, learn the extra controls and keep your saves safe.">
+<main class="wrap">
+<h2>Two editions</h2>
+<div class="tw"><table><tr><th></th><th>Translation (beta line)</th><th>River Edition</th></tr>
+<tr><td><b>What it is</b></td><td>The original hack, translated. Latest: beta 33.</td><td>The translation plus fan-made content. Latest: v0.5.9 (pre-release).</td></tr>
+<tr><td><b>After the League</b></td><td>Mom's Ashida scene and the Mystic Ticket, then the hack's story stops.</td><td>A 13-beat Chapter 2, see the <a href="river.html#ch2">River Edition page</a>.</td></tr>
+<tr><td><b>Route 28, Mt. Silver, Red</b></td><td>No</td><td>Yes</td></tr>
+<tr><td><b>Spectrum Frontier</b></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><b>Partner Patrol</b></td><td>No</td><td>Yes</td></tr>
+<tr><td><b>Cheat Device</b></td><td>No</td><td>Yes, since v0.4</td></tr></table></div>
+<p>If you want the original game as authored, take the translation. If you have finished the League and want more to do, take the River Edition. In-game saves move freely between them and between versions.</p>
+
+<h2>Patching</h2>
+<ol><li>Get your own clean <b>Pokémon FireRed (USA) v1.0</b> ROM. CRC32 must be <code>DD88761C</code> (the common &ldquo;Squirrels&rdquo; #1636 dump).</li>
+<li>Download the <code>.bps</code> from the project's GitHub Releases and apply it with a BPS patcher (Flips, Rom Patcher JS and similar).</li>
+<li>Play in mGBA (the reference emulator) or another accurate emulator. gpSP is not supported: its Cheat Device menu is cut off (issue #161).</li></ol>
+<div class="box warn"><b class="lab">Warning</b><p>The patch applies to the clean FireRed ROM only. It will not apply to the Chinese hack, and a River patch will not apply on top of a beta.</p></div>
+<div class="box tip"><b class="lab">Saves and save states</b><p>In-game saves carry over between every beta and River version. <b>Save states do not.</b> Use the in-game save before you update.</p></div>
+<p>This site distributes no ROMs and links to none. The patch is free and stays free.</p>
+
+<h2>Controls the game never explains</h2>
+<div class="tw"><table><tr><th>Input</th><th>Where</th><th>What it does</th></tr>
+<tr><td><kbd>L</kbd></td><td>Overworld</td><td>Quick Catch, the hack's own catch mode. Aim at a visible wild Pokémon. Needs standard button mode (L must not be mapped to A) and a Poké Ball.</td></tr>
+<tr><td><kbd>SELECT</kbd></td><td>Inside Quick Catch</td><td>River only: sends your walking partner at the aimed Pokémon (Partner Patrol).</td></tr>
+<tr><td><kbd>B</kbd></td><td>During a patrol</td><td>Calls the partner back.</td></tr>
+<tr><td><kbd>SELECT</kbd> + <kbd>R</kbd></td><td>Overworld, no menu open</td><td>River only: opens the Cheat Device. Versions up to 0.5.1 used SELECT + START.</td></tr>
+<tr><td><kbd>L</kbd> + <kbd>R</kbd> + <kbd>SELECT</kbd></td><td>Overworld</td><td>River only: Partner Patrol settings.</td></tr>
+<tr><td><kbd>SELECT</kbd> + <kbd>START</kbd></td><td>Overworld</td><td>The hack's own Exp. Share toggle.</td></tr></table></div>
+<div class="box tip"><b class="lab">mGBA keyboard</b><p>With default bindings, SELECT + R is <kbd>Backspace</kbd> + <kbd>S</kbd>. Release L first; L + R + SELECT is the Patrol menu.</p></div>
+<h3>The Start menu</h3>
+<p>Pokédex, Pokémon, Bag, Pokégear, Save, Task, Trainer Card, Option, Pass Time, Help Tips. The ring does not wrap around. Help Tips explains the hack's own systems and is worth one read.</p>
+
+<h2>Starting a new game</h2>
+<ol><li>Press A through the naming screen (Start confirms), the disclaimer pages and Settings. B closes Settings.</li>
+<li>Go down the bedroom stairs, talk to Mom downstairs, and leave through the door mat into New Bark Town.</li>
+<li>Lyra's scene is in her house. Walk in and step left of the door to start it.</li>
+<li>Elm's lab is next. Walking up from the door starts his scene; afterwards stand at the table, face up and press A to choose a starter. All three starters work.</li></ol>
+<div class="box warn"><b class="lab">How verified this is</b><p>These steps come from the author's new-game test (2026-10-12, then-current build).</p></div>
+
+<h2>Reporting problems</h2>
+<p>Use the project's GitHub issues. Put your version in the title (for example &ldquo;River Edition v0.5.9&rdquo;), name your emulator or device, say where it happened and what you pressed, and attach a screenshot. For crashes, attach your in-game <code>.sav</code> from just before. Dialogue proofreading is still open (issue #24).</p>
+</main></body></html>
