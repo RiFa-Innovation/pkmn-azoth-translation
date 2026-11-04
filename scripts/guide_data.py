@@ -214,18 +214,55 @@ def map_labels(rom, db_path):
     human = {k: v for k, v in j("data/map_names.json").items() if not k.startswith("_")}
     for tgt, text in db.execute("select target, text from notes where target like 'map:%'"):
         human.setdefault(tgt[4:], re.split(r"\s+[(\u2014-]\s*|\s*;", text)[0])
-    rows = db.execute("select g, n, region from maps").fetchall()
+    rows = db.execute("select g, n, region, mtype from maps").fetchall()
+    info = {f"{g}.{n}": (r, mt_) for g, n, r, mt_ in rows}
+    warps = {}
+    for g, n, data in db.execute("select g, n, data from events where kind='warp'"):
+        try:
+            d = json.loads(data)
+            warps.setdefault(f"{g}.{n}", []).append(f"{d['tg']}.{d['tn']}")
+        except (ValueError, KeyError):
+            pass
+    # Indoor maps (type 8) show no area popup, so their region field can be leftover vanilla data (Cianwood Gym says "Pallet Town").
+    # Name those after the nearest outdoor map their doors lead to.
+    kanto = {"Pallet Town", "Viridian City", "Pewter City", "Cerulean City", "Lavender Town", "Vermilion City", "Celadon City",
+             "Fuchsia City", "Cinnabar Island", "Saffron City", "Indigo Plateau"}
+
+    def outdoor(m):
+        seen, todo = {m}, [m]
+        while todo:
+            nxt = []
+            for x in todo:
+                for y in warps.get(x, ()):
+                    if y in seen or y not in info:
+                        continue
+                    seen.add(y)
+                    if info[y][1] in (1, 2, 3):
+                        return y
+                    nxt.append(y)
+            todo = nxt
+        return None
+
     count = {}
-    for g, n, r in rows:
+    for g, n, r, mt_ in rows:
         count[r] = count.get(r, 0) + 1
     out = {}
-    for g, n, r in rows:
-        nm = human.get(f"{g}.{n}")
+    for g, n, r, mt_ in rows:
+        m = f"{g}.{n}"
+        nm = human.get(m)
         if nm:
-            out[f"{g}.{n}"] = re.sub(r"\s*\(outdoors\)", "", nm)
+            out[m] = re.sub(r"\s*\(outdoors\)", "", nm)
             continue
         nm = reg.get(r, f"Area {r}")
-        out[f"{g}.{n}"] = nm if count[r] == 1 else f"{nm} ({g}.{n})"
+        if mt_ == 8 and nm in kanto:
+            o = outdoor(m)
+            if o and reg.get(info[o][0]) and reg.get(info[o][0]) != nm:
+                out[m] = f"{reg[info[o][0]]}, indoors ({m})"
+                continue
+        if nm in kanto and g not in range(1, 15) and g != 3:
+            out[m] = f"Building ({m})"   # a hack-built interior carrying a vanilla town name: say nothing wrong
+            continue
+        out[m] = nm if count[r] == 1 else f"{nm} ({m})"
     return out
 
 
@@ -234,8 +271,18 @@ def item_sources(rom, db_path, mapname, sp, trainers):
     additem scripts, shop stock, wild held items and trainer held items."""
     out = {}
 
+    rules = [(re.compile(r["re"], re.I | re.S), r["label"]) for r in j("data/guide_gift_labels.json")["rules"]]
+
+    def label_for(note):
+        for rx, lab in rules:
+            m = rx.search(note)
+            if m:
+                return m.expand(lab)
+        return ""
+
     def add(item, kind, where, qty=1, note=""):
-        row = [kind, where, qty] + ([0, note] if note else [])
+        lab = label_for(note) if note else ""
+        row = [kind, where, qty] + ([0, note, lab] if note else [])
         lst = out.setdefault(item, [])
         if row not in lst:
             lst.append(row)
@@ -271,27 +318,56 @@ def item_sources(rom, db_path, mapname, sp, trainers):
                 cmds_of[blk] = db.execute("select addr, name, args from cmds where blk=? order by addr", (blk,)).fetchall()
             return cmds_of[blk]
 
-        strings = {a: e for a, e in db.execute("select addr, en from strings")}
+        text_cache = {}
 
-        def note_of(blk, upto):
-            """English text of the last message loaded before `upto` in this block (what the NPC says)."""
-            msg = None
+        def string_at(ptr):
+            """English text at a script operand (decoded from the ROM: the dump's table is keyed by the original addresses)."""
+            if ptr not in text_cache:
+                t = text_at(rom, ptr) if BASE <= ptr < BASE + len(rom) else ""
+                text_cache[ptr] = t if t and not re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", t) else ""
+            return text_cache[ptr]
+
+        def clean_msg(t):
+            t = re.sub(r"\{[^}]*\}", " ", t)
+            return re.sub(r"\s+", " ", t).strip()
+
+        def lines_in(blk, lo, hi):
+            out_ = []
             for addr, name, args in block(blk):
-                if addr >= upto:
-                    break
+                if addr < lo or addr >= hi:
+                    continue
                 if name in ("loadword", "loadpointer"):
-                    a = args.split()
                     try:
-                        txt = strings.get(int(a[-1], 0) - BASE)
+                        txt = string_at(int(args.split()[-1], 0))
                     except (ValueError, IndexError):
                         txt = None
                     if txt:
-                        msg = txt
-            if not msg:
-                return ""
-            msg = re.sub(r"\{[^}]*\}", " ", msg)
-            msg = re.sub(r"\s+", " ", msg).strip()
-            return msg[:110] + ("..." if len(msg) > 110 else "")
+                        txt = clean_msg(txt)
+                        if len(txt) > 3 and txt not in out_:
+                            out_.append(txt)
+            return out_
+
+        GENERIC = re.compile(r"^(?:you |\w+ )?(?:received|obtained|got|found|put away|put the)\b|\bin the bag\b|\bBAG\b|^(?:thank you|thanks)[.!…]*$", re.I)
+
+        def note_of(blk, upto):
+            """What the NPC says around the give: up to two lines before it (walking back through callers if the block has none),
+            skipping the generic 'You received ...' line, plus one line right after it."""
+            before = [t for t in lines_in(blk, 0, upto) if not GENERIC.search(t)]
+            depth, frontier, seen_ = 0, [blk], {blk}
+            while not before and depth < 4:
+                nxt = []
+                for b_ in frontier:
+                    for pb in rev.get(b_, ()):
+                        if pb in seen_:
+                            continue
+                        seen_.add(pb)
+                        before += [t for t in lines_in(pb, 0, 1 << 40) if not GENERIC.search(t)][-2:]
+                        nxt.append(pb)
+                frontier, depth = nxt, depth + 1
+            after = [t for t in lines_in(blk, upto, 1 << 40) if not GENERIC.search(t)]
+            picks = before[-2:] + after[:1]
+            msg = " / ".join(x[:150] for x in picks)
+            return msg[:320]
 
         def const(a):
             try:
@@ -341,11 +417,11 @@ def item_sources(rom, db_path, mapname, sp, trainers):
                 kind = "Found" if args == "1" else "Received"
                 if isinstance(v0, int):
                     w = where(blk)
-                    add(v0, kind, w, v1, "" if w else note_of(blk, addr))
+                    add(v0, kind, w, v1, note_of(blk, addr) if kind == "Received" else "")
                 else:
                     for item, src_blk in trace(blk, addr, v0[1]):
                         w = where(src_blk)
-                        add(item, kind, w, v1, "" if w else note_of(src_blk, 1 << 40) or note_of(blk, addr))
+                        add(item, kind, w, v1, (note_of(src_blk, 1 << 40) or note_of(blk, addr)) if kind == "Received" else "")
                 v0, v1 = None, 1
         # hidden items (bg event kind 7): item at +8, quantity at +11
         for g, n, off, x, y, data in db.execute("select g, n, addr, x, y, data from events where kind='bg'"):
@@ -358,7 +434,7 @@ def item_sources(rom, db_path, mapname, sp, trainers):
         for addr, args, blk in db.execute("select addr, args, blk from cmds where name='additem'"):
             a = args.split()
             try:
-                add(int(a[0], 0), "Script reward", where(blk), int(a[1], 0))
+                add(int(a[0], 0), "Script reward", where(blk), int(a[1], 0), note_of(blk, addr))
             except (IndexError, ValueError):
                 pass
         for addr, args, blk in db.execute("select addr, args, blk from cmds where name='pokemart'"):
