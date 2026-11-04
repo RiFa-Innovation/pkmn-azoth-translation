@@ -1,0 +1,861 @@
+{
+ "_doc": "Plain-English labels for gifts and rewards, applied by scripts/guide_data.py to the NPC text found around each give. First rule whose regex matches (case-insensitive) wins; \\1, \\2 are filled from groups. Only wording the text itself supports belongs here. Anything unmatched keeps the NPC's own words on the page.",
+ "rules": [
+  {
+   "re": "Quest complete: <([^>]+)>",
+   "label": "Reward for finishing the quest “\\1”"
+  },
+  {
+   "re": "Quest accepted: <([^>]+)>",
+   "label": "Handed over when you accept the quest “\\1”"
+  },
+  {
+   "re": "BP\\. Buy it\\?",
+   "label": "Bought with Battle Points from the clerk in the Spectrum Frontier hall"
+  },
+  {
+   "re": "All 5 digits matched",
+   "label": "Goldenrod lottery: grand prize (all 5 digits match)"
+  },
+  {
+   "re": "You matched (\\d+) digits?! Please accept the (\\w+) prize",
+   "label": "Goldenrod lottery: \\1 digit(s) matched, \\2 prize"
+  },
+  {
+   "re": "you won (\\w+) prize",
+   "label": "Goldenrod prize draw: \\1 prize (you choose a souvenir)"
+  },
+  {
+   "re": "Dear customer",
+   "label": "Goldenrod prize draw: you choose a souvenir"
+  },
+  {
+   "re": "It.s a trash can",
+   "label": "Search the trash cans in this area (random find)"
+  },
+  {
+   "re": "There.s an? (?:Apricorn|Berry|fruit) tree!\\W*It.s an? ([A-Za-z ]+?)!",
+   "label": "Pick it from the \\1 tree here"
+  },
+  {
+   "re": "Future Champion",
+   "label": "Free gift from the Gym guide just inside the Gym"
+  },
+  {
+   "re": "Give me an? (Red|Blue|Yellow|Green) Shard.{0,30}Berry Set (\\w)",
+   "label": "Trade a \\1 Shard for Berry Set \\2"
+  },
+  {
+   "re": "found the (Red|Blue|Yellow|Green) Shard",
+   "label": "Reward for bringing the \\1 Shard (a Berry Set)"
+  },
+  {
+   "re": "Xatu foresaw",
+   "label": "Xatu's prediction at the Ruins of Alph gives a random item"
+  },
+  {
+   "re": "wants to give|seems to want to give|wants to thank|expresses its thanks|wants to apologize|wants to give a present|happily shook|gave a ",
+   "label": "A Pokémon here hands you an item when you talk to it"
+  },
+  {
+   "re": "of (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)",
+   "label": "A visitor who only stands here on \\1: talk to them for the gift"
+  },
+  {
+   "re": "Berry Powder",
+   "label": "Berry Powder medicine counter"
+  },
+  {
+   "re": "redeem this item",
+   "label": "Bracer Points shop in the Bracer Guild (spend Bracer Points)"
+  },
+  {
+   "re": "Enjoy it!",
+   "label": "Bought from the Rage Candy Bar vendor"
+  },
+  {
+   "re": "Thanks for your business|Thank you for your purchase|can.t buy anything without money|don.t have enough money",
+   "label": "Bought at the snack stall"
+  },
+  {
+   "re": "Big Malasada",
+   "label": "Big Malasada stall"
+  },
+  {
+   "re": "Do you want the (Helix|Dome|Old Amber)",
+   "label": "One of the fossils offered here (you may take one)"
+  },
+  {
+   "re": "Do you want to trade for a Link Cable",
+   "label": "Trade one Red, Green, Blue and Yellow Shard to Mr. Pokémon for a Link Cable"
+  },
+  {
+   "re": "collecting all the Kanto Badges",
+   "label": "Reward for collecting all the Kanto Badges"
+  },
+  {
+   "re": "(?:With|Now that you have) the (\\w+?) ?badge",
+   "label": "Gym leader's reward after you win the \\1 Badge"
+  },
+  {
+   "re": "birthday present your mom sent",
+   "label": "Package from Mom, delivered by a courier (birthday present)"
+  },
+  {
+   "re": "package your mom sent you",
+   "label": "Package from Mom, delivered by a courier"
+  },
+  {
+   "re": "secret prototype Master Ball",
+   "label": "Given by the company president at Glitter Lighthouse"
+  },
+  {
+   "re": "Oak: and \\. Take these with you",
+   "label": "Prof. Oak hands you Poké Balls for catching Pokémon"
+  },
+  {
+   "re": "How is your Pokédex shaping up",
+   "label": "Prof. Oak checks your Pokédex and gives more Poké Balls"
+  },
+  {
+   "re": "defeated all the Trainers here",
+   "label": "Prize for beating every Trainer in this building"
+  },
+  {
+   "re": "Kyu lost",
+   "label": "Prize for beating Kyu in Goldenrod City"
+  },
+  {
+   "re": "Gantetsu",
+   "label": "Gantetsu, the ball maker in Azalea Town"
+  },
+  {
+   "re": "girl who lost this doll is sad",
+   "label": "Reward from the man in Vermilion City who returns a lost Clefairy doll"
+  },
+  {
+   "re": "Lyra /.{0,10}Hmm… that’s about it|Lyra /.{0,10}Hm\\.\\.\\. that’s about it",
+   "label": "Lyra's catching tutorial: she gives you Poké Balls"
+  },
+  {
+   "re": "inches! You have a rare appreciation",
+   "label": "Route 12 fisherman: reward when you show him a big catch"
+  },
+  {
+   "re": "There are only two of us here",
+   "label": "Thank-you gift from Prof. Elm's lab assistants for helping the lab"
+  },
+  {
+   "re": "Those goons were nothing but bad trouble",
+   "label": "Reward for helping a man in Violet City who was bothered by goons"
+  },
+  {
+   "re": "^Drink up!$",
+   "label": "Free Moomoo Milk from the farm on Route 39"
+  },
+  {
+   "re": "picking up medicine for that Karate King",
+   "label": "Cianwood pharmacy: the ingredients the Karate King ordered"
+  },
+  {
+   "re": "Here is your Berry juice",
+   "label": "Berry Juice stand in Goldenrod City"
+  },
+  {
+   "re": "This is the Pokémon I’m proudest of",
+   "label": "Bonus gift from the trainer in Goldenrod City who shows you their proudest Pokémon"
+  },
+  {
+   "re": "believe it… Anyway, thank you for your help",
+   "label": "Reward for the Violet City ghost-rumour request"
+  },
+  {
+   "re": "Commander Kamado",
+   "label": "Researcher at Mt. Mortar: reward for helping with his Pokédex research"
+  },
+  {
+   "re": "not giving you a refund",
+   "label": "Ecruteak swindler: gives these back after you beat him"
+  },
+  {
+   "re": "Little Strawberry",
+   "label": "Thank-you from a student in Violet City"
+  },
+  {
+   "re": "Thank you for delivering my letter",
+   "label": "Route 35: thanks for delivering a letter"
+  },
+  {
+   "re": "final piece of the puzzle",
+   "label": "Cianwood: the Black Belt's finished protein drink"
+  },
+  {
+   "re": "president of the Pokémon Fan Club",
+   "label": "Pokémon Fan Club president in Vermilion City, after you listen to him"
+  },
+  {
+   "re": "matched 2 digits, so please accept the 3rd prize",
+   "label": "Goldenrod lottery: 2 digits matched, 3rd prize"
+  },
+  {
+   "re": "Clefairy used Present!",
+   "label": "Interact with the Clefairy in Goldenrod City: it uses Present and drops an item"
+  },
+  {
+   "re": "Clefairy used Pay Day!",
+   "label": "Interact with the Clefairy in Goldenrod City: it uses Pay Day and drops an item"
+  },
+  {
+   "re": "pile of discarded cargo",
+   "label": "A Vigoroth in Olivine City brings you something it found in discarded cargo"
+  },
+  {
+   "re": "a Love Ball\\? Come to think of it",
+   "label": "Prof. Elm, after you show him a Love Ball"
+  },
+  {
+   "re": "Pokémon Clefairy produced",
+   "label": "New Bark Town: reward for the Moon Stone Clefairy produced"
+  },
+  {
+   "re": "love rare rocks and gems",
+   "label": "Cherrygrove City: a rock collector's thanks (delivery from Bill)"
+  },
+  {
+   "re": "Those… Those are shards",
+   "label": "Goldenrod City shard collector: trade shards for evolution stones"
+  },
+  {
+   "re": "Here, here! This is for you! Please take it!",
+   "label": "Given by someone on Route 36"
+  },
+  {
+   "re": "loyal to Trainers and good at barking|really popular Pokémon|sea Pokémon with a red ball|round, dark body and leaves|licks with a long tongue",
+   "label": "Route 25: Bill's grandfather describes a Pokémon; show him the right one for the stone"
+  },
+  {
+   "re": "handed Jasmine the SecretPotion",
+   "label": "Olivine Lighthouse: after Jasmine gets the Secret Potion, Amphy gives you an item"
+  },
+  {
+   "re": "something fell from Amphy",
+   "label": "Olivine Lighthouse: Amphy gives you a Plate after the Secret Potion"
+  },
+  {
+   "re": "giant Slowpoke vanished",
+   "label": "Slowpoke Well: the giant Slowpoke vanishes and drops these"
+  },
+  {
+   "re": "giant Bellsprout vanished",
+   "label": "Bellsprout Tower: the giant Bellsprout vanishes and drops these"
+  },
+  {
+   "re": "You’re finally here! I think you’ll be glad",
+   "label": "Given by a person on Route 34"
+  },
+  {
+   "re": "Thanks for helping me find my father",
+   "label": "Reward for helping Pauline find her father"
+  },
+  {
+   "re": "The show is finally over",
+   "label": "Thanks from the performer you helped after the show"
+  },
+  {
+   "re": "struck gold",
+   "label": "Prospector on Bellchime Trail"
+  },
+  {
+   "re": "genuine Berry Juice",
+   "label": "Route 31: thanks for Berry Juice (the man also hands over a Gold Bead)"
+  },
+  {
+   "re": "I never expected to see you again here",
+   "label": "Ecruteak: thank-you gift from a woman you helped"
+  },
+  {
+   "re": "It’s been ages since we had a visitor",
+   "label": "Old man on Route 2"
+  },
+  {
+   "re": "What a wonderful battle",
+   "label": "Route 25: prize after a battle"
+  },
+  {
+   "re": "five contest Trainers",
+   "label": "Prize for beating the five contest Trainers"
+  },
+  {
+   "re": "voice sounded so familiar",
+   "label": "Quest reward in Pallet Town (a lost Pokémon story)"
+  },
+  {
+   "re": "Thanks for your hard work\\. Take this as a token",
+   "label": "Route 40: reward for helping out"
+  },
+  {
+   "re": "sorry to keep you waiting, here you go",
+   "label": "National Park: contest prize"
+  },
+  {
+   "re": "rarest treasure in Ecruteak",
+   "label": "Ecruteak: a sightseeing guide shows you a treasure and gives you a Pretty Wing"
+  },
+  {
+   "re": "Thanks for dealing with the strange tree",
+   "label": "Goldenrod: reward for dealing with the strange tree on Route 36"
+  },
+  {
+   "re": "yellow cross! That’s it",
+   "label": "Route 29: reward for the star-pattern puzzle"
+  },
+  {
+   "re": "Did you know\\? Pokémon eat Berries",
+   "label": "Route 31: a Berry fan shares some"
+  },
+  {
+   "re": "scaring me! Waaaaaaah",
+   "label": "Whirl Islands: reward for scaring off a Pokémon for a frightened child"
+  },
+  {
+   "re": "This is the Fast Ball",
+   "label": "Azalea Town: thanks for bringing a Fast Ball"
+  },
+  {
+   "re": "Lyra /.{0,10}Oh, and one more thing",
+   "label": "Lyra gives you an Exp. Share on Route 29"
+  },
+  {
+   "re": "one of Prof\\. Oak’s Aides",
+   "label": "Prof. Oak's Aide on Route 15: Pokédex reward"
+  },
+  {
+   "re": "slipped into my teacher voice",
+   "label": "National Park: a teacher gives you a Quick Claw"
+  },
+  {
+   "re": "heading out on your journey",
+   "label": "New Bark Town: a girl gives you a Soothe Bell"
+  },
+  {
+   "re": "Shellder on its tail",
+   "label": "Slowpoke Well: reward after the Slowpoke calms down"
+  },
+  {
+   "re": "Butterfree traded with",
+   "label": "Route 34: a Butterfree swaps items with you"
+  },
+  {
+   "re": "Kris /|Ethan /",
+   "label": "Union Cave: thanks from the other Trainer you guide to the exit"
+  },
+  {
+   "re": "Iga Style",
+   "label": "Mahogany Town: reward after the mix-up over the Iga Style book"
+  },
+  {
+   "re": "never been found in the Johto region",
+   "label": "Prof. Elm, after you show him a Pokémon not found in Johto"
+  },
+  {
+   "re": "Everstone\\. My grandson|licks with a long tongue",
+   "label": "Route 25: Bill's grandfather"
+  },
+  {
+   "re": "Thank you for delivering my food",
+   "label": "Olivine City: thanks for delivering food"
+  },
+  {
+   "re": "girl in the white dress was a Pokémon",
+   "label": "Olivine City: thanks for the girl-in-white investigation"
+  },
+  {
+   "re": "^Here, this is for you!$",
+   "label": "Given by a person on Route 50"
+  },
+  {
+   "re": "trained in Violet City",
+   "label": "Route 32: a Trainer who liked your team"
+  },
+  {
+   "re": "Black Glasses, I didn’t notice",
+   "label": "Dark Cave: man wearing Black Glasses"
+  },
+  {
+   "re": "Froslass: Fro",
+   "label": "Mt. Mortar: a Froslass hands you an item"
+  },
+  {
+   "re": "horror story I’ve treasured",
+   "label": "Celadon City: reward for listening to a horror story"
+  },
+  {
+   "re": "This is charcoal I made",
+   "label": "Azalea Town: the charcoal maker's thanks"
+  },
+  {
+   "re": "Mom respects your choice",
+   "label": "Mom's parting gifts in your house"
+  },
+  {
+   "re": "elevator over there is broken",
+   "label": "Saffron City: thanks for dealing with the broken elevator"
+  },
+  {
+   "re": "Another energetic day today",
+   "label": "Goldenrod City: a dancer gives you a Shell Bell"
+  },
+  {
+   "re": "tiny Chansey",
+   "label": "Route 14: reward for showing a tiny Chansey"
+  },
+  {
+   "re": "Farfetch.d traded with a Leek",
+   "label": "Azalea Town: a Farfetch'd swaps for your Leek"
+  },
+  {
+   "re": "worrying that, because it looks different",
+   "label": "Slowpoke Well: thanks from the Galarian Slowpoke's keeper"
+  },
+  {
+   "re": "Have you picked up any Apricorns|charm of Apricorns",
+   "label": "Route 32: Apricorn fan"
+  },
+  {
+   "re": "contest-exclusive Poké Balls",
+   "label": "Route 35: contest Poké Balls"
+  },
+  {
+   "re": "done receiving customers|don’t drip your tears",
+   "label": "Gantetsu, the ball maker in Azalea Town"
+  },
+  {
+   "re": "great cool aura",
+   "label": "Goldenrod City: a stranger gives you a Red Scarf"
+  },
+  {
+   "re": "disguised with paint",
+   "label": "Olivine City: thanks for exposing the painted disguise"
+  },
+  {
+   "re": "flat-out busted",
+   "label": "Celadon City: a broke gambler gives you his Coin Case"
+  },
+  {
+   "re": "Grand! I like your style",
+   "label": "The Fishing Guru rewards you with a rod"
+  },
+  {
+   "re": "Fishing Guru",
+   "label": "The Fishing Guru gives you a rod"
+  },
+  {
+   "re": "Fishing Guru’s younger brother",
+   "label": "The Fishing Guru's younger brother gives you a rod"
+  },
+  {
+   "re": "Lyra /.{0,10}Ah\\.\\.\\.! I almost forgot",
+   "label": "Lyra gives you the Festival Pass"
+  },
+  {
+   "re": "strange tree is growing on Route 36",
+   "label": "Goldenrod City: you get the Squirt Bottle"
+  },
+  {
+   "re": "Bead Mail",
+   "label": "Goldenrod City: wish-card exchange"
+  },
+  {
+   "re": "driving him away",
+   "label": "Buried Tower: thanks for driving off the strange man"
+  },
+  {
+   "re": "developed jointly with Blueberry Academy",
+   "label": "Pallet Town: a scientist rewards you with the Synchronizer"
+  },
+  {
+   "re": "Did Jigglypuff drop something",
+   "label": "Goldenrod City: find a doll dropped near the sleeping Jigglypuff"
+  },
+  {
+   "re": "Welcome to the Goldenrod Game Corner",
+   "label": "Goldenrod Game Corner: exchange for a doll"
+  },
+  {
+   "re": "show me your strength as a Trainer",
+   "label": "Gym leader Roark: reward before the battle"
+  },
+  {
+   "re": "Cascadebadge",
+   "label": "Gym leader's reward after you win the Cascade Badge"
+  },
+  {
+   "re": "Marshbadge",
+   "label": "Gym leader's reward after you win the Marsh Badge"
+  },
+  {
+   "re": "Rainbowbadge",
+   "label": "Gym leader's reward after you win the Rainbow Badge"
+  },
+  {
+   "re": "Earthbadge",
+   "label": "Gym leader's reward after you win the Earth Badge"
+  },
+  {
+   "re": "Thunderbadge",
+   "label": "Gym leader's reward after you win the Thunder Badge"
+  },
+  {
+   "re": "Volcanobadge",
+   "label": "Gym leader's reward after you win the Volcano Badge"
+  },
+  {
+   "re": "Everyone ran away when I roared",
+   "label": "Route 32: a roaring Trainer gives you a TM"
+  },
+  {
+   "re": "stuffing my mouth with seeds",
+   "label": "Goldenrod City: a seed-loving man gives you a TM"
+  },
+  {
+   "re": "complete the Pokédex\\? Then you must have battled",
+   "label": "Route 34: given when you are working on the Pokédex"
+  },
+  {
+   "re": "fierce look",
+   "label": "Goldenrod City shop: a clerk offers a TM for your fierce-looking Pokémon"
+  },
+  {
+   "re": "Thank you for the lighthouse thing",
+   "label": "Olivine City: a Trainer repays you for the lighthouse favour (TM)"
+  },
+  {
+   "re": "very close to you",
+   "label": "Goldenrod City shop: a clerk offers a TM for your close Pokémon"
+  },
+  {
+   "re": "TM27 is a move called Return",
+   "label": "Route 12: a Trainer explains Return and hands you the TM"
+  },
+  {
+   "re": "return the TM I stole",
+   "label": "Team Rocket Grunt returns a stolen TM after you beat him"
+  },
+  {
+   "re": "Don’t say a word! You wanted this",
+   "label": "Saffron City: given when you walk in"
+  },
+  {
+   "re": "secret base, where",
+   "label": "Route 43: thanks for helping clear out the Team Rocket hide-out"
+  },
+  {
+   "re": "bond strong enough to overcome anything",
+   "label": "Route 27: a Trainer tests you before the Pokémon League"
+  },
+  {
+   "re": "A TM, Technical Machine, contains",
+   "label": "Pewter City: a TM from a bystander"
+  },
+  {
+   "re": "Tectonix|can of Lemonade in front of the grave",
+   "label": "Route 37 grave: reward for leaving Lemonade at the grave"
+  },
+  {
+   "re": "I still have that thing I wanted you to have",
+   "label": "Route 37: a repeat visit to the grave's keeper"
+  },
+  {
+   "re": "Everyone’s a bit crazy",
+   "label": "Goldenrod City: given by a worker"
+  },
+  {
+   "re": "It reads like a letter with writing",
+   "label": "Route 31: a drunk man reads you a letter from his friend"
+  },
+  {
+   "re": "secret savings",
+   "label": "Violet City: reward after the teacher mix-up"
+  },
+  {
+   "re": "Captain: Whew",
+   "label": "S.S. Anne: the Captain thanks you for curing his seasickness"
+  },
+  {
+   "re": "Cianwood City’s Gym Badge",
+   "label": "Cianwood City: HM given with the Gym Badge"
+  },
+  {
+   "re": "secret retreat",
+   "label": "Route 16: a woman in a secret retreat"
+  },
+  {
+   "re": "graceful as dancing",
+   "label": "Ecruteak Dance Theater: a dancer thanks you for your battle"
+  },
+  {
+   "re": "hasn’t smiled like that in a very long time",
+   "label": "Ecruteak: Tamao thanks you"
+  },
+  {
+   "re": "first person to reach the Secret House",
+   "label": "Safari Zone: the Secret House prize"
+  },
+  {
+   "re": "important documents weren’t taken",
+   "label": "Mt. Mortar: a Scientist you rescued"
+  },
+  {
+   "re": "Warden popped in his teeth",
+   "label": "Fuchsia City: the Safari Warden gives you something with his teeth restored"
+  },
+  {
+   "re": "thank you for finding Senior Yuri",
+   "label": "Route 39: Anabel thanks you for finding Senior Yuri"
+  },
+  {
+   "re": "Ember Spa",
+   "label": "Route 51: the Ember Spa's builder"
+  },
+  {
+   "re": "cleared away that tree",
+   "label": "Route 36: thanks for clearing the tree in the way"
+  },
+  {
+   "re": "Prof\\. Elm said you would be coming",
+   "label": "Mr. Pokémon's house on Route 31: the egg for Prof. Elm"
+  },
+  {
+   "re": "Mr\\. Fuji",
+   "label": "Lavender Town: Mr. Fuji"
+  },
+  {
+   "re": "sipping tea indoors",
+   "label": "Ecruteak City: a tea house offers you tea"
+  },
+  {
+   "re": "Prof\\. Elm /",
+   "label": "Prof. Elm explains Mega Evolution and gives you the Key Stone and a Mega Stone"
+  },
+  {
+   "re": "Did you find the last two Unown",
+   "label": "Ruins of Alph: the researchers' reward for the Unown"
+  },
+  {
+   "re": "chunk of Amber contains Pokémon Dna",
+   "label": "Pewter City: a scientist shares his Old Amber"
+  },
+  {
+   "re": "give me your name and phone number",
+   "label": "Goldenrod City: a bike shop lends you the Bike"
+  },
+  {
+   "re": "Guide Gent /",
+   "label": "Cherrygrove City: the Guide Gent's thanks"
+  },
+  {
+   "re": "Grandpa asked you to run an errand",
+   "label": "Pallet Town: thanks for running an errand"
+  },
+  {
+   "re": "urge to battle with someone you’ve tangled",
+   "label": "Vermilion City: given by a man who loves rematches"
+  },
+  {
+   "re": "Bill’s and got him to show me his rare",
+   "label": "Given by a friend who visited Bill and wants to share the Sound Recorder"
+  },
+  {
+   "re": "had my coffee",
+   "label": "Viridian City: a man hands you the Teachy TV"
+  },
+  {
+   "re": "found my true self again",
+   "label": "Pallet Town: a Trainer's thanks for helping him find his true self"
+  },
+  {
+   "re": "Medicine\\? Your Pokémon",
+   "label": "Cianwood City pharmacy: the Secret Potion"
+  },
+  {
+   "re": "You shouldn’t spend all your money on drinks",
+   "label": "Celadon City: a tea shop"
+  },
+  {
+   "re": "Our neighbor Prof\\. Elm is looking for you",
+   "label": "Mom gives you your Pokégear and Bag at home"
+  },
+  {
+   "re": "finally reached that brightest summit",
+   "label": "Mom's post-League scene: the Mystic Ticket"
+  },
+  {
+   "re": "You mean this ruby",
+   "label": "Goldenrod City: someone hands over a ruby when you ask about it"
+  },
+  {
+   "re": "I found this sapphire",
+   "label": "Goldenrod City: a mall visitor who found a sapphire hands it over"
+  },
+  {
+   "re": "With this Badge, obedient Pokémon up to Lv\\. 20",
+   "label": "Falkner's reward after you win the Zephyr Badge"
+  },
+  {
+   "re": "That.s the key I dropped",
+   "label": "Ecruteak City: thanks for finding the lost key"
+  },
+  {
+   "re": "To apologize, I’ll give you this",
+   "label": "Clair gives you a TM as an apology"
+  },
+  {
+   "re": "The man ran off with the Wooper",
+   "label": "Olivine City: reward after the Wooper theft"
+  },
+  {
+   "re": "we confirm through training whether people and Pokémon",
+   "label": "Sprout Tower: the elder's reward"
+  },
+  {
+   "re": "So he went to another Pokémon Center",
+   "label": "Goldenrod City: reward for helping a visiting Trainer"
+  },
+  {
+   "re": "fleeting dream",
+   "label": "Olivine City: reward after the old man's tale"
+  },
+  {
+   "re": "Is it still alive\\? ... ",
+   "label": "Azalea Town: reward after checking on a sleeping Pokémon"
+  },
+  {
+   "re": "Hive Badge",
+   "label": "Bugsy's reward after you win the Hive Badge"
+  },
+  {
+   "re": "unprecedented party",
+   "label": "Olivine City: thanks after the party"
+  },
+  {
+   "re": "As your senior in life",
+   "label": "Gym leader's reward and a parting gift"
+  },
+  {
+   "re": "helping me find that charm",
+   "label": "Pallet Town: a friend's thanks for finding the charm"
+  },
+  {
+   "re": "Standing here feels like standing on top",
+   "label": "Route 50: a Trainer shouts from the top and gives you a TM"
+  },
+  {
+   "re": "really found an Everstone",
+   "label": "New Bark Town: thanks for finding the Everstone"
+  },
+  {
+   "re": "Not all Steel Pokémon are that scary",
+   "label": "Violet City: a student's thanks"
+  },
+  {
+   "re": "Thanks for helping me find the Vigoroth",
+   "label": "Goldenrod City: reward for finding the Vigoroth"
+  },
+  {
+   "re": "cow can give tasty milk again",
+   "label": "Route 39: reward for the Miltank help"
+  },
+  {
+   "re": "Thank you so much\\. Here’s your reward!",
+   "label": "Cherrygrove City: a quest reward"
+  },
+  {
+   "re": "give up this Pokémon\\?",
+   "label": "Sprout Tower: the old man's Bellsprout"
+  },
+  {
+   "re": "Victreebel has calmed down",
+   "label": "Sprout Tower: thanks after Victreebel calms down"
+  },
+  {
+   "re": "What, you called me mister",
+   "label": "Route 40: a delivery-person mix-up reward"
+  },
+  {
+   "re": "late-night TV legend",
+   "label": "Olivine City: the late-night TV legend reward"
+  },
+  {
+   "re": "green Zubat",
+   "label": "Goldenrod City: reward after the lucky green Zubat"
+  },
+  {
+   "re": "give Skitty a nickname",
+   "label": "Goldenrod City: the Skitty you meet"
+  },
+  {
+   "re": "You helped me find Totodile",
+   "label": "Ecruteak City: thanks for finding Totodile"
+  },
+  {
+   "re": "red Pokémon that appears in the Ice Path",
+   "label": "Mahogany Town: reward for describing the red Pokémon"
+  },
+  {
+   "re": "Judging by your look, you must be a Trainer who just arrived",
+   "label": "Goldenrod Pokémon Center: the town map"
+  },
+  {
+   "re": "fossil I once dug up in the Underground Path",
+   "label": "Roark gives you a fossil after you beat him"
+  },
+  {
+   "re": "Olivine’s ocean view",
+   "label": "Route 40: a Trainer on vacation"
+  },
+  {
+   "re": "Power Weight /|Power surging",
+   "label": "Cianwood City: a fighter who trains here gives you Power items"
+  },
+  {
+   "re": "all five colors of Glass Whistle",
+   "label": "Blackthorn City: reward for the five Glass Whistles"
+  },
+  {
+   "re": "memorized everything about status conditions",
+   "label": "Violet City: a student's thanks"
+  },
+  {
+   "re": "prop used in the show just now",
+   "label": "Performance prop: reward after you save the show"
+  },
+  {
+   "re": "his handwriting",
+   "label": "Goldenrod City: thanks for delivering a letter"
+  },
+  {
+   "re": "So that Pokémon was Gible",
+   "label": "Blackthorn City: reward after identifying the Gible"
+  },
+  {
+   "re": "Trainer Card…",
+   "label": "Mom's parting gifts"
+  },
+  {
+   "re": "Oak, a Pokémon researcher",
+   "label": "Prof. Oak gives you the Pokédex on Route 31"
+  },
+  {
+   "re": "Yes, really suits this hat",
+   "label": "New Bark Town: the Running Shoes"
+  },
+  {
+   "re": "told the lady about what happened in Ilex Forest",
+   "label": "Goldenrod City: charm maker's reward for the Ilex Forest story"
+  },
+  {
+   "re": "Someone asked me to give it to you",
+   "label": "Cherrygrove City: delivery with the GB Sounds"
+  }
+ ]
+}

@@ -168,7 +168,7 @@
 
   /* ---------- Items ---------- */
   const SRC_ORDER = ["Found", "Hidden (Itemfinder)", "Received", "Script reward", "Shop", "Battle Points shop", "Partner Patrol and Quick Catch drops", "Held by wild Pokémon", "Held by trainers"];
-  const SRC_NOTE = { "Found": "Item ball or hidden on the ground", "Received": "Given to you by a script or NPC", "Script reward": "Reward from a quest or event script", "Shop": "Poké Mart stock", "Battle Points shop": "Spectrum Frontier BP clerk", "Hidden (Itemfinder)": "Hidden on the ground; the Itemfinder shows where", "Partner Patrol and Quick Catch drops": "Dropped when your partner or a Quick Catch beats a wild Pokémon", "Held by wild Pokémon": "Chance that a wild one carries it", "Held by trainers": "Carried by these trainers' Pokémon" };
+  const SRC_NOTE = { "Found": "Item ball or hidden on the ground", "Received": "Given to you by an NPC or event (what happens is described for each)", "Script reward": "Reward from a quest or event script", "Shop": "Poké Mart stock", "Battle Points shop": "Spectrum Frontier BP clerk", "Hidden (Itemfinder)": "Hidden on the ground; the Itemfinder shows where", "Partner Patrol and Quick Catch drops": "Dropped when your partner or a Quick Catch beats a wild Pokémon", "Held by wild Pokémon": "Chance that a wild one carries it", "Held by trainers": "Carried by these trainers' Pokémon" };
   async function items() {
     const [I, X, M, D] = await Promise.all([load("items"), load("misc"), load("moves"), load("species")]);
     TYPES = D.types;
@@ -202,7 +202,7 @@
       card.append(el("h4", {}, "Where to get it"));
       if (!groups.length) card.append(el("p", {}, "Nothing in the ROM's scripts, shops, hidden-item list, wild or trainer held items or the River drops hands this out. It is most likely an unused entry in the item table, or something given by native code that the scan cannot see."));
       groups.forEach(([k, rows]) => card.append(el("div", {}, el("h4", {}, k + " ", el("small", { style: "font-weight:400;color:var(--muted)" }, SRC_NOTE[k])),
-        el("ul", {}, rows.slice(0, 40).map(r => el("li", {}, (r[1].length ? r[1].join(" or ") : "location not determined") + (r[2] > 1 && k !== "Shop" ? " ×" + r[2] : "") + (r[3] ? " · " + r[3] + " BP" : ""), r[4] ? el("small", { style: "display:block;color:var(--muted)" }, "Nearby text: \u201c" + r[4] + "\u201d") : null))))));
+        el("ul", {}, rows.slice(0, 40).map(r => el("li", {}, r[5] ? el("b", {}, r[5]) : null, (r[5] ? el("span", { style: "color:var(--muted)" }, " \u00b7 ") : ""), (r[1].length ? r[1].join(" or ") : "place not determined") + (r[2] > 1 && k !== "Shop" ? " \u00d7" + r[2] : "") + (r[3] ? " \u00b7 " + r[3] + " BP" : ""), r[4] ? el("small", { style: "display:block;color:var(--muted)" }, (r[5] ? "The scene: " : "In this scene: ") + "\u201c" + r[4] + "\u201d") : null))))));
       detail.append(card);
       if (detail.scrollIntoView) detail.scrollIntoView({ block: "nearest" });
     }
