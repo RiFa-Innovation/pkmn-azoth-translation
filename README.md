@@ -20,6 +20,8 @@ Upgrade (CFRU) engine. No other English patch for this hack exists.
 > polished and play-tested; see [Issues](../../issues) and
 > [`PLAYTEST.md`](PLAYTEST.md).
 
+**[Player's guide →](docs/guide/index.html)** · setup, Johto route sheet, every trainer team, Pokédex, moves, items and wild encounters, plus the River Edition's Chapter 2, Mt. Silver and the Spectrum Frontier (served on GitHub Pages once enabled).
+
 ## 🐞 Found a bug? Report it here
 
 **[Open an issue →](../../issues/new/choose)** · [Known issues](../../issues?q=is%3Aissue+is%3Aopen+label%3Abug)
