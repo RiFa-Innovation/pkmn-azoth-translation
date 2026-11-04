@@ -234,8 +234,8 @@ def item_sources(rom, db_path, mapname, sp, trainers):
     additem scripts, shop stock, wild held items and trainer held items."""
     out = {}
 
-    def add(item, kind, where, qty=1):
-        row = [kind, where, qty]
+    def add(item, kind, where, qty=1, note=""):
+        row = [kind, where, qty] + ([0, note] if note else [])
         lst = out.setdefault(item, [])
         if row not in lst:
             lst.append(row)
@@ -264,6 +264,66 @@ def item_sources(rom, db_path, mapname, sp, trainers):
             ms = maps_of(blk)
             return [mapname.get(m, m) for m in ms] if len(ms) <= 2 else []
 
+        cmds_of = {}
+
+        def block(blk):
+            if blk not in cmds_of:
+                cmds_of[blk] = db.execute("select addr, name, args from cmds where blk=? order by addr", (blk,)).fetchall()
+            return cmds_of[blk]
+
+        strings = {a: e for a, e in db.execute("select addr, en from strings")}
+
+        def note_of(blk, upto):
+            """English text of the last message loaded before `upto` in this block (what the NPC says)."""
+            msg = None
+            for addr, name, args in block(blk):
+                if addr >= upto:
+                    break
+                if name in ("loadword", "loadpointer"):
+                    a = args.split()
+                    try:
+                        txt = strings.get(int(a[-1], 0) - BASE)
+                    except (ValueError, IndexError):
+                        txt = None
+                    if txt:
+                        msg = txt
+            if not msg:
+                return ""
+            msg = re.sub(r"\{[^}]*\}", " ", msg)
+            msg = re.sub(r"\s+", " ", msg).strip()
+            return msg[:110] + ("..." if len(msg) > 110 else "")
+
+        def const(a):
+            try:
+                v = int(a, 0)
+            except ValueError:
+                return None
+            return v if 0 < v < 0x8000 else None
+
+        def trace(blk, upto, var, depth=0, seen=None):
+            """constants assigned to `var` before `upto` in blk, walking back through predecessor blocks."""
+            seen = seen if seen is not None else set()
+            last = None
+            for addr, name, args in block(blk):
+                if addr >= upto:
+                    break
+                a = args.split()
+                if name in ("setvar", "setorcopyvar") and len(a) == 2 and a[0] == var:
+                    last = const(a[1]) if a[1][:2] != "0x" or int(a[1], 0) < 0x8000 else ("var", a[1])
+                elif name in ("setorcopyvar", "copyvar") and len(a) == 2 and a[0] == var:
+                    last = None
+            if isinstance(last, int):
+                return [(last, blk)]
+            if isinstance(last, tuple) or depth >= 5:
+                return []
+            res = []
+            for pb in rev.get(blk, ()):
+                if (pb, var) in seen:
+                    continue
+                seen.add((pb, var))
+                res += trace(pb, 1 << 40, var, depth + 1, seen)
+            return res
+
         rows = db.execute("select addr, name, args, blk from cmds where blk in "
                           "(select blk from cmds where name='callstd' and args in ('0','1')) order by blk, addr").fetchall()
         cur, v0, v1 = None, None, 1
@@ -272,17 +332,29 @@ def item_sources(rom, db_path, mapname, sp, trainers):
                 cur, v0, v1 = blk, None, 1
             a = args.split()
             if name == "setorcopyvar" and len(a) == 2:
-                try:
-                    val = int(a[1], 0)
-                except ValueError:
-                    val = None
+                val = const(a[1])
                 if a[0] == "0x8000":
-                    v0 = val if val is not None and val < 0x8000 else None
+                    v0 = val if val is not None else ("var", a[1])
                 elif a[0] == "0x8001":
-                    v1 = val if val is not None and val < 0x8000 else 1
+                    v1 = val if val is not None else 1
             elif name == "callstd" and v0:
-                add(v0, "Found" if args == "1" else "Received", where(blk), v1)
+                kind = "Found" if args == "1" else "Received"
+                if isinstance(v0, int):
+                    w = where(blk)
+                    add(v0, kind, w, v1, "" if w else note_of(blk, addr))
+                else:
+                    for item, src_blk in trace(blk, addr, v0[1]):
+                        w = where(src_blk)
+                        add(item, kind, w, v1, "" if w else note_of(src_blk, 1 << 40) or note_of(blk, addr))
                 v0, v1 = None, 1
+        # hidden items (bg event kind 7): item at +8, quantity at +11
+        for g, n, off, x, y, data in db.execute("select g, n, addr, x, y, data from events where kind='bg'"):
+            if '"kind": 7' not in data:
+                continue
+            o = off if off < len(rom) else off - BASE
+            item, _, qty = struct.unpack_from("<HBB", rom, o + 8)
+            if item:
+                add(item, "Hidden (Itemfinder)", [f"{mapname.get(f'{g}.{n}', f'{g}.{n}')} at ({x}, {y})"], qty or 1)
         for addr, args, blk in db.execute("select addr, args, blk from cmds where name='additem'"):
             a = args.split()
             try:
@@ -350,6 +422,15 @@ def main():
     for e in j("data/frontier/shop.json")["items"]:
         if e["item"] in by_name:
             src.setdefault(by_name[e["item"]], []).append(["Battle Points shop", ["Spectrum Frontier hall"], e.get("qty", 1), e["price"]])
+    # River Edition drops (Partner Patrol and Quick Catch wins): Exp. Candies by the target's level, EV Feathers, Berries
+    candy = {"Exp. Candy XS": "target below Lv 20", "Exp. Candy S": "target Lv 20-39", "Exp. Candy M": "target Lv 40-59",
+             "Exp. Candy L": "target Lv 60-79", "Exp. Candy XL": "target Lv 80 or higher"}
+    for nm, why in candy.items():
+        if nm in by_name:
+            src.setdefault(by_name[nm], []).append(["Partner Patrol and Quick Catch drops", ["River Edition: 20% drop, " + why], 1])
+    for nm in ("Health Wing", "Muscle Wing", "Resist Wing", "Genius Wing", "Clever Wing", "Swift Wing"):
+        if nm in by_name:
+            src.setdefault(by_name[nm], []).append(["Partner Patrol and Quick Catch drops", ["River Edition: 50% drop (EV Feathers, the hack's own rules)"], 1])
     for i, rows in src.items():
         if i in it:
             it[i]["src"] = rows

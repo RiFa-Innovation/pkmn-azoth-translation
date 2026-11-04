@@ -167,8 +167,8 @@
   }
 
   /* ---------- Items ---------- */
-  const SRC_ORDER = ["Found", "Received", "Script reward", "Shop", "Battle Points shop", "Held by wild Pokémon", "Held by trainers"];
-  const SRC_NOTE = { "Found": "Item ball or hidden on the ground", "Received": "Given to you by a script or NPC", "Script reward": "Reward from a quest or event script", "Shop": "Poké Mart stock", "Battle Points shop": "Spectrum Frontier BP clerk", "Held by wild Pokémon": "Chance that a wild one carries it", "Held by trainers": "Carried by these trainers' Pokémon" };
+  const SRC_ORDER = ["Found", "Hidden (Itemfinder)", "Received", "Script reward", "Shop", "Battle Points shop", "Partner Patrol and Quick Catch drops", "Held by wild Pokémon", "Held by trainers"];
+  const SRC_NOTE = { "Found": "Item ball or hidden on the ground", "Received": "Given to you by a script or NPC", "Script reward": "Reward from a quest or event script", "Shop": "Poké Mart stock", "Battle Points shop": "Spectrum Frontier BP clerk", "Hidden (Itemfinder)": "Hidden on the ground; the Itemfinder shows where", "Partner Patrol and Quick Catch drops": "Dropped when your partner or a Quick Catch beats a wild Pokémon", "Held by wild Pokémon": "Chance that a wild one carries it", "Held by trainers": "Carried by these trainers' Pokémon" };
   async function items() {
     const [I, X, M, D] = await Promise.all([load("items"), load("misc"), load("moves"), load("species")]);
     TYPES = D.types;
@@ -191,7 +191,7 @@
       const rows = list.filter(i => (!pf.value || i.pocket === +pf.value) && (!sf.value || (sf.value === "none" ? !i.kinds.length : i.kinds.includes(sf.value))) && (!t || blob(i).includes(t)));
       cnt.textContent = rows.length + " of " + list.length;
       tbody.replaceChildren(...rows.slice(0, 800).map(i => el("tr", {}, el("td", {}, el("a", { href: "#" + i.id }, i.name + (i.move ? " (" + i.move + ")" : ""))), el("td", {}, P[i.pocket] || "-"), el("td", { class: "num" }, i.price ? "¥" + i.price : "-"),
-        el("td", {}, i.kinds.length ? i.kinds.map(k => k.replace("Held by ", "Held: ").replace("Battle Points shop", "BP shop")).join(", ") : "-"), el("td", {}, i.desc))));
+        el("td", {}, i.kinds.length ? i.kinds.map(k => k.replace("Held by ", "Held: ").replace("Battle Points shop", "BP shop").replace("Partner Patrol and Quick Catch drops", "Patrol drop").replace("Hidden (Itemfinder)", "Hidden")).join(", ") : "-"), el("td", {}, i.desc))));
     }
     function show() {
       const id = +location.hash.slice(1); detail.replaceChildren();
@@ -200,9 +200,9 @@
       if (i.mv) card.append(el("h4", {}, "Teaches " + i.mv.name), el("div", { class: "mon" }, ty(i.mv.type), el("span", {}, SPLIT[i.mv.split] + " · Power " + (i.mv.power || "-") + " · Acc " + (i.mv.acc || "-") + " · PP " + i.mv.pp)), el("p", {}, i.mv.desc), el("p", {}, el("a", { href: "moves.html#" + i.mv.id }, "Move page and learners")));
       const groups = SRC_ORDER.map(k => [k, (i.src || []).filter(r => r[0] === k)]).filter(g => g[1].length);
       card.append(el("h4", {}, "Where to get it"));
-      if (!groups.length) card.append(el("p", {}, "No source was found in the ROM's scripts, shops or held-item tables. It may be a gift made by native code, a Frontier prize or an unused item."));
+      if (!groups.length) card.append(el("p", {}, "Nothing in the ROM's scripts, shops, hidden-item list, wild or trainer held items or the River drops hands this out. It is most likely an unused entry in the item table, or something given by native code that the scan cannot see."));
       groups.forEach(([k, rows]) => card.append(el("div", {}, el("h4", {}, k + " ", el("small", { style: "font-weight:400;color:var(--muted)" }, SRC_NOTE[k])),
-        el("ul", {}, rows.slice(0, 40).map(r => el("li", {}, (r[1].length ? r[1].join(" or ") : "location not determined") + (r[2] > 1 && k !== "Shop" ? " ×" + r[2] : "") + (r[3] ? " · " + r[3] + " BP" : "")))))));
+        el("ul", {}, rows.slice(0, 40).map(r => el("li", {}, (r[1].length ? r[1].join(" or ") : "location not determined") + (r[2] > 1 && k !== "Shop" ? " ×" + r[2] : "") + (r[3] ? " · " + r[3] + " BP" : ""), r[4] ? el("small", { style: "display:block;color:var(--muted)" }, "Nearby text: \u201c" + r[4] + "\u201d") : null))))));
       detail.append(card);
       if (detail.scrollIntoView) detail.scrollIntoView({ block: "nearest" });
     }
