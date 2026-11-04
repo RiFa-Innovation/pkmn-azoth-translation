@@ -190,17 +190,18 @@ def land_encounter_layout(rom, src, pool, lay_ptr, cache):
         struct.pack_into("<I", blob, 20, ROM_BASE + ta)
         rom[ts_new:ts_new + 24] = blob
         cache[key] = ROM_BASE + ts_new
-    new_lay = pool.alloc_aligned(24)
-    blob = bytearray(src[lo:lo + 24])
+    new_lay = pool.alloc_aligned(28)
+    blob = bytearray(src[lo:lo + 28])       # the hack's layout struct is 28 bytes: +24 = border width/height (see build_layouts)
     struct.pack_into("<I", blob, 20, cache[key])
-    rom[new_lay:new_lay + 24] = blob
+    rom[new_lay:new_lay + 28] = blob
     return ROM_BASE + new_lay
 
 
 def build_layouts(rom, src, pool, layouts):
     """New layouts cut out of an existing one: {"name": {"from": "G.N", "crop": [x, y, w, h],
     "patch": [{"x", "y", "block"}]}}. The tilesets and border are shared with the source; only the
-    block data (w*h*2 bytes) and a 24-byte layout struct are new. Returns name -> (address, layout id)."""
+    block data (w*h*2 bytes) and a 28-byte layout struct are new (the last 4 bytes hold the border width/height, copied
+    from the source: with 24 bytes the game read the pool's next bytes as a huge border and drew ROM garbage at every map edge, #195). Returns name -> (address, layout id)."""
     out = {}
     for name, L in layouts.items():
         g, n = (int(x) for x in L["from"].split("."))
@@ -214,8 +215,8 @@ def build_layouts(rom, src, pool, layouts):
         blob = b"".join(struct.pack(f"<{cw}H", *row) for row in blocks)
         ba = pool.alloc_aligned(len(blob))
         rom[ba:ba + len(blob)] = blob
-        la = pool.alloc_aligned(24)
-        rom[la:la + 24] = struct.pack("<IIIIII", cw, ch, border, ROM_BASE + ba, pri, sec)
+        la = pool.alloc_aligned(28)
+        rom[la:la + 28] = struct.pack("<IIIIII", cw, ch, border, ROM_BASE + ba, pri, sec) + bytes(src[lo + 24:lo + 28])
         lid = FREE_LAYOUT_IDS.pop(0)
         rom[LAYOUT_TABLE + 4 * (lid - 1):LAYOUT_TABLE + 4 * lid] = struct.pack("<I", ROM_BASE + la)
         out[name] = (ROM_BASE + la, lid)
