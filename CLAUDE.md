@@ -317,7 +317,7 @@ committed or attached to a release, and are not shared except as the GIFs record
    `pkmn-azoth-translation` repo URLs.
 4. `gh release create beta-N dist/beta-N/Pokemon-Azoth-English-beta-N.bps --target main --title "Beta N: ..." --notes-file ...`
 5. File/close tracking issues for fixes that had none, add `fixed-in-release`.
-6. Re-save the release's states and record the new recipes (see "Recipes and states for every delivered feature"); attach GIFs, not states, wherever the release is announced.
+6. Re-save the release's states (`python3 scripts/build_editions.py`, then `python3 scripts/resave_states.py saves/<a Champion save>.sav`) and record the new recipes (see "Recipes and states for every delivered feature"); look at every clip. Attach GIFs, not states, wherever the release is announced.
 
 ## Current state (2026-10-30, after beta-30 / river-v0.5.2)
 
