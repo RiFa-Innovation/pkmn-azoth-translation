@@ -106,6 +106,11 @@ def main():
     for _ in range(4):
         tap("B", 50)
 
+    # Mt. Silver 1F, south-east corner of the floor (the border below and beside the map is what #195 was about)
+    mapdrive.warp(e, 58, 1, 30, 20)
+    e.wait(60)
+    save("mtsilver-edge")
+
     # Partner Patrol: Ultra Balls, flags, full HP, then step on grass until three wild Pokemon are visible
     pairs = grass_pairs_on(e, 3, 80)
     mapdrive.run_script(e, bytes([0x44]) + struct.pack("<HH", 2, 30) + bytes([0x02]))
