@@ -83,7 +83,7 @@ def species_table(rom, names, abil):
                 o += 3
         out[s] = {"id": s, "name": names[str(s)], "stats": [hp, atk, df, spe, spa, spd],
                   "types": [t1] if t1 == t2 else [t1, t2], "abil": [a for a in dict.fromkeys(e[22:24]) if a],
-                  "catch": e[8], "exp": e[9], "gender": e[18], "egg": [x for x in dict.fromkeys(e[20:22]) if x],
+                  "catch": e[8], "exp": e[9], "held": [u16(e, 12), u16(e, 14)], "gender": e[16], "egg": [x for x in dict.fromkeys(e[20:22]) if x],
                   "evos": evos, "learn": learn}
     return out
 
@@ -229,6 +229,101 @@ def map_labels(rom, db_path):
     return out
 
 
+def item_sources(rom, db_path, mapname, sp, trainers):
+    """item id -> list of [kind, where, qty]: ground pickups and gifts (callstd 1 / 0 with 0x8000 set before it),
+    additem scripts, shop stock, wild held items and trainer held items."""
+    out = {}
+
+    def add(item, kind, where, qty=1):
+        row = [kind, where, qty]
+        lst = out.setdefault(item, [])
+        if row not in lst:
+            lst.append(row)
+
+    if os.path.exists(db_path):
+        db = sqlite3.connect(db_path)
+        rev = {}
+        for src, dst in db.execute("select src_blk, dst from edges"):
+            rev.setdefault(dst, set()).add(src)
+        ent = {}
+        for addr, g, n in db.execute("select addr, g, n from entries"):
+            ent.setdefault(addr - BASE, set()).add(f"{g}.{n}")
+
+        def maps_of(blk):
+            seen, todo, res = set(), [blk], set()
+            while todo:
+                b = todo.pop()
+                if b in seen:
+                    continue
+                seen.add(b)
+                todo.extend(rev.get(b, ()))
+                res |= ent.get(b, set())
+            return sorted(res)
+
+        def where(blk):
+            ms = maps_of(blk)
+            return [mapname.get(m, m) for m in ms] if len(ms) <= 2 else []
+
+        rows = db.execute("select addr, name, args, blk from cmds where blk in "
+                          "(select blk from cmds where name='callstd' and args in ('0','1')) order by blk, addr").fetchall()
+        cur, v0, v1 = None, None, 1
+        for addr, name, args, blk in rows:
+            if blk != cur:
+                cur, v0, v1 = blk, None, 1
+            a = args.split()
+            if name == "setorcopyvar" and len(a) == 2:
+                try:
+                    val = int(a[1], 0)
+                except ValueError:
+                    val = None
+                if a[0] == "0x8000":
+                    v0 = val if val is not None and val < 0x8000 else None
+                elif a[0] == "0x8001":
+                    v1 = val if val is not None and val < 0x8000 else 1
+            elif name == "callstd" and v0:
+                add(v0, "Found" if args == "1" else "Received", where(blk), v1)
+                v0, v1 = None, 1
+        for addr, args, blk in db.execute("select addr, args, blk from cmds where name='additem'"):
+            a = args.split()
+            try:
+                add(int(a[0], 0), "Script reward", where(blk), int(a[1], 0))
+            except (IndexError, ValueError):
+                pass
+        for addr, args, blk in db.execute("select addr, args, blk from cmds where name='pokemart'"):
+            p = int(args.split()[0], 0) - BASE
+            items = []
+            while 0 <= p < len(rom) - 2 and len(items) < 40:
+                v = u16(rom, p)
+                if v == 0:
+                    break
+                items.append(v)
+                p += 2
+            w = where(blk)
+            for it in items:
+                add(it, "Shop", w)
+    names = {s_["id"]: s_["name"] for s_ in sp.values()}
+    wild = {}
+    for s_ in sp.values():
+        a, b = s_["held"]
+        for it, pct in ((a, 50), (b, 5)):
+            if it:
+                wild.setdefault(it, {})[s_["name"]] = 100 if a == b else max(pct, wild.get(it, {}).get(s_["name"], 0))
+    for it, d in wild.items():
+        lst = sorted(d.items())
+        txt = ", ".join(f"{n} ({p}%)" for n, p in lst[:10]) + (f" and {len(lst) - 10} more" if len(lst) > 10 else "")
+        out.setdefault(it, []).append(["Held by wild Pokémon", [txt], 1])
+    held = {}
+    for t in trainers.values():
+        for m in t["party"]:
+            if m["item"]:
+                held.setdefault(m["item"], set()).add(t["name"] if t["name"] != "???" else "a rival")
+    for it, ts in held.items():
+        ts = sorted(ts)
+        txt = ", ".join(ts[:8]) + (f" and {len(ts) - 8} more" if len(ts) > 8 else "")
+        out.setdefault(it, []).append(["Held by trainers", [txt], 1])
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("rom", nargs="?", default=os.path.join(ROOT, "build/Mercury_EN.gba"))
@@ -250,6 +345,14 @@ def main():
     for tid, t in tr.items():
         ms = places.get(tid, [])
         t["where"] = [mapname.get(m, m) for m in ms] if len(ms) <= 2 else []
+    src = item_sources(rom, os.path.join(ROOT, "build/hackdb-" + os.path.basename(a.rom).rsplit(".", 1)[0] + ".sqlite"), mapname, sp, tr)
+    by_name = {v["name"]: k for k, v in it.items()}
+    for e in j("data/frontier/shop.json")["items"]:
+        if e["item"] in by_name:
+            src.setdefault(by_name[e["item"]], []).append(["Battle Points shop", ["Spectrum Frontier hall"], e.get("qty", 1), e["price"]])
+    for i, rows in src.items():
+        if i in it:
+            it[i]["src"] = rows
     json.dump({"species": sp, "types": TYPES, "abilities": names["abilities"]}, open(f"{a.out}/species.json", "w"), separators=(",", ":"))
     json.dump(mv, open(f"{a.out}/moves.json", "w"), separators=(",", ":"))
     json.dump(it, open(f"{a.out}/items.json", "w"), separators=(",", ":"))

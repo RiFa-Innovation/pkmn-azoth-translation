@@ -167,26 +167,47 @@
   }
 
   /* ---------- Items ---------- */
+  const SRC_ORDER = ["Found", "Received", "Script reward", "Shop", "Battle Points shop", "Held by wild Pokémon", "Held by trainers"];
+  const SRC_NOTE = { "Found": "Item ball or hidden on the ground", "Received": "Given to you by a script or NPC", "Script reward": "Reward from a quest or event script", "Shop": "Poké Mart stock", "Battle Points shop": "Spectrum Frontier BP clerk", "Held by wild Pokémon": "Chance that a wild one carries it", "Held by trainers": "Carried by these trainers' Pokémon" };
   async function items() {
-    const [I, X, M] = await Promise.all([load("items"), load("misc"), load("moves")]);
+    const [I, X, M, D] = await Promise.all([load("items"), load("misc"), load("moves"), load("species")]);
+    TYPES = D.types;
     const tm = X.tm, P = X.pockets;
     const list = Object.values(I).map(i => {
       const m = /^TM(\d+)$/.exec(i.name) || /^HM(\d+)$/.exec(i.name);
-      let note = "";
-      if (m) { const n = +m[1] + (i.name[0] === "H" ? 120 : 0); const mv = M[tm[n - 1]]; if (mv) note = mv.name; }
-      return { ...i, move: note };
+      let mv = null;
+      if (m) { const n = +m[1] + (i.name[0] === "H" ? 120 : 0); mv = M[tm[n - 1]] || null; }
+      const kinds = [...new Set((i.src || []).map(r => r[0]))];
+      return { ...i, mv, move: mv ? mv.name : "", kinds };
     });
-    const q = el("input", { type: "search", placeholder: "Item or description", "aria-label": "Search items" });
+    const q = el("input", { type: "search", placeholder: "Item, description or location", "aria-label": "Search items" });
     const pf = el("select", { "aria-label": "Pocket" }, el("option", { value: "" }, "All pockets"), Object.entries(P).map(([k, n]) => el("option", { value: k }, n)));
-    const cnt = el("span", { class: "count" }), tbody = el("tbody");
-    $("#view").append(el("div", { class: "tools" }, q, pf, cnt), el("div", { class: "tw" }, el("table", {}, el("thead", {}, el("tr", {}, ["Item", "Pocket", "Price", "Description"].map((n, i) => el("th", i === 2 ? { class: "num" } : {}, n)))), tbody)));
+    const sf = el("select", { "aria-label": "Source" }, el("option", { value: "" }, "Any source"), el("option", { value: "none" }, "No known source"), SRC_ORDER.map(k => el("option", { value: k }, k)));
+    const cnt = el("span", { class: "count" }), tbody = el("tbody"), detail = el("div");
+    $("#view").append(el("div", { class: "tools" }, q, pf, sf, cnt), detail, el("div", { class: "tw" }, el("table", {}, el("thead", {}, el("tr", {}, ["Item", "Pocket", "Buy", "Where to get it", "Description"].map((n, i) => el("th", i === 2 ? { class: "num" } : {}, n)))), tbody)));
+    const blob = i => (i.name + " " + i.move + " " + i.desc + " " + (i.src || []).map(r => r[1].join(" ")).join(" ")).toLowerCase();
     function draw() {
       const t = q.value.trim().toLowerCase();
-      const rows = list.filter(i => (!pf.value || i.pocket === +pf.value) && (!t || (i.name + " " + i.move + " " + i.desc).toLowerCase().includes(t)));
+      const rows = list.filter(i => (!pf.value || i.pocket === +pf.value) && (!sf.value || (sf.value === "none" ? !i.kinds.length : i.kinds.includes(sf.value))) && (!t || blob(i).includes(t)));
       cnt.textContent = rows.length + " of " + list.length;
-      tbody.replaceChildren(...rows.slice(0, 600).map(i => el("tr", {}, el("td", {}, i.name + (i.move ? " (" + i.move + ")" : "")), el("td", {}, P[i.pocket] || "-"), el("td", { class: "num" }, i.price ? "¥" + i.price : "-"), el("td", {}, i.desc))));
+      tbody.replaceChildren(...rows.slice(0, 800).map(i => el("tr", {}, el("td", {}, el("a", { href: "#" + i.id }, i.name + (i.move ? " (" + i.move + ")" : ""))), el("td", {}, P[i.pocket] || "-"), el("td", { class: "num" }, i.price ? "¥" + i.price : "-"),
+        el("td", {}, i.kinds.length ? i.kinds.map(k => k.replace("Held by ", "Held: ").replace("Battle Points shop", "BP shop")).join(", ") : "-"), el("td", {}, i.desc))));
     }
-    q.oninput = pf.onchange = draw; draw();
+    function show() {
+      const id = +location.hash.slice(1); detail.replaceChildren();
+      const i = list.find(x => x.id === id); if (!i) return;
+      const card = el("div", { class: "battle" }, el("h3", { style: "margin:0" }, i.name), el("div", { class: "sub" }, (P[i.pocket] || "Item") + " · item " + i.id + " · " + (i.price ? "buy ¥" + i.price + ", sell ¥" + Math.floor(i.price / 2) : "not sold in shops")), el("p", {}, i.desc));
+      if (i.mv) card.append(el("h4", {}, "Teaches " + i.mv.name), el("div", { class: "mon" }, ty(i.mv.type), el("span", {}, SPLIT[i.mv.split] + " · Power " + (i.mv.power || "-") + " · Acc " + (i.mv.acc || "-") + " · PP " + i.mv.pp)), el("p", {}, i.mv.desc), el("p", {}, el("a", { href: "moves.html#" + i.mv.id }, "Move page and learners")));
+      const groups = SRC_ORDER.map(k => [k, (i.src || []).filter(r => r[0] === k)]).filter(g => g[1].length);
+      card.append(el("h4", {}, "Where to get it"));
+      if (!groups.length) card.append(el("p", {}, "No source was found in the ROM's scripts, shops or held-item tables. It may be a gift made by native code, a Frontier prize or an unused item."));
+      groups.forEach(([k, rows]) => card.append(el("div", {}, el("h4", {}, k + " ", el("small", { style: "font-weight:400;color:var(--muted)" }, SRC_NOTE[k])),
+        el("ul", {}, rows.slice(0, 40).map(r => el("li", {}, (r[1].length ? r[1].join(" or ") : "location not determined") + (r[2] > 1 && k !== "Shop" ? " ×" + r[2] : "") + (r[3] ? " · " + r[3] + " BP" : "")))))));
+      detail.append(card);
+      if (detail.scrollIntoView) detail.scrollIntoView({ block: "nearest" });
+    }
+    q.oninput = pf.onchange = sf.onchange = draw;
+    addEventListener("hashchange", show); draw(); show();
   }
 
   /* ---------- Wild locations ---------- */
